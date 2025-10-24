@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Poppins-Medium.ttf">
+            <string>Poppins-Medium</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Home View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="HomeViewController" id="Y6W-OH-hqX" customClass="HomeViewController" customModule="DesynatDealer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home Screen" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ocs-nk-VPM">
+                                <rect key="frame" x="142.66666666666666" y="439.66666666666669" width="108" height="22.666666666666686"/>
+                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Ocs-nk-VPM" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="Kb7-9C-hiS"/>
+                            <constraint firstItem="Ocs-nk-VPM" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="i8W-W7-SiC"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1329" y="-46"/>
+        </scene>
+        <!--Shows View Controller-->
+        <scene sceneID="tV1-QO-Ujw">
+            <objects>
+                <viewController storyboardIdentifier="ShowsViewController" id="zIL-18-em9" customClass="ShowsViewController" customModule="DesynatDealer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Wjb-An-eUH">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shows Screen" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SJQ-6e-2Tz">
+                                <rect key="frame" x="140.66666666666666" y="439.66666666666669" width="112" height="22.666666666666686"/>
+                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="q5d-Qr-XyS"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="SJQ-6e-2Tz" firstAttribute="centerX" secondItem="q5d-Qr-XyS" secondAttribute="centerX" id="I3k-36-Iu7"/>
+                            <constraint firstItem="SJQ-6e-2Tz" firstAttribute="centerY" secondItem="q5d-Qr-XyS" secondAttribute="centerY" id="aF8-Hg-hVI"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N1a-at-889" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="347" y="-54"/>
+        </scene>
+        <!--Tab BarVC-->
+        <scene sceneID="ye0-0n-tBv">
+            <objects>
+                <viewController storyboardIdentifier="TabBarVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="m5S-9C-Dsd" customClass="TabBarVC" customModule="DesynatUser" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FMq-tc-JoM">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I44-CT-PoY">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lineTabbar" translatesAutoresizingMaskIntoConstraints="NO" id="o5Q-Vp-Nfe">
+                                <rect key="frame" x="0.0" y="694" width="393" height="95"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="95" id="oqP-O3-suk"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7s6-jy-3q0" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
+                                <rect key="frame" x="16" y="723" width="361" height="61"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="64o-UG-Ogi">
+                                        <rect key="frame" x="0.0" y="0.0" width="361" height="61"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fv1-XA-daf">
+                                                <rect key="frame" x="0.0" y="0.0" width="48.333333333333336" height="61"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" image="homeUnselected"/>
+                                                <state key="selected" image="homeSelected"/>
+                                                <connections>
+                                                    <action selector="tabBarAction:" destination="m5S-9C-Dsd" eventType="touchUpInside" id="dRm-tp-sS6"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="1" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jds-Ha-Wxh">
+                                                <rect key="frame" x="78.333333333333329" y="0.0" width="48" height="61"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" image="productsUnselected"/>
+                                                <state key="selected" image="productsSelected"/>
+                                                <connections>
+                                                    <action selector="tabBarAction:" destination="m5S-9C-Dsd" eventType="touchUpInside" id="HBf-ey-xLd"/>
+                                                </connections>
+                                            </button>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nep-Cx-KIv">
+                                                <rect key="frame" x="156.33333333333334" y="0.0" width="48.333333333333343" height="61"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            </view>
+                                            <button opaque="NO" tag="3" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rdL-Ww-LNs">
+                                                <rect key="frame" x="234.66666666666663" y="0.0" width="48" height="61"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" image="ordersUnselected"/>
+                                                <state key="selected" image="ordersSelected"/>
+                                                <connections>
+                                                    <action selector="tabBarAction:" destination="m5S-9C-Dsd" eventType="touchUpInside" id="mwz-pf-dtK"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="4" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YY6-S8-EPh">
+                                                <rect key="frame" x="312.66666666666669" y="0.0" width="48.333333333333314" height="61"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" image="paymentsUnselected"/>
+                                                <state key="selected" image="paymentsSelected"/>
+                                                <connections>
+                                                    <action selector="tabBarAction:" destination="m5S-9C-Dsd" eventType="touchUpInside" id="NyX-mU-Ad7"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="64o-UG-Ogi" secondAttribute="bottom" id="5L2-oj-oI1"/>
+                                    <constraint firstAttribute="trailing" secondItem="64o-UG-Ogi" secondAttribute="trailing" id="CPd-J5-pp7"/>
+                                    <constraint firstItem="64o-UG-Ogi" firstAttribute="leading" secondItem="7s6-jy-3q0" secondAttribute="leading" id="S0k-NZ-czO"/>
+                                    <constraint firstItem="64o-UG-Ogi" firstAttribute="top" secondItem="7s6-jy-3q0" secondAttribute="top" id="VFj-Zv-yOf"/>
+                                    <constraint firstAttribute="height" constant="61" id="djM-eF-z9t"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <button opaque="NO" tag="2" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XYH-pq-AdE">
+                                <rect key="frame" x="170.66666666666666" y="718.33333333333337" width="52" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="8NK-rK-nOg"/>
+                                    <constraint firstAttribute="width" secondItem="XYH-pq-AdE" secondAttribute="height" id="CPj-Wk-EHq"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="show"/>
+                                <state key="selected" image="myoredrs_selected"/>
+                                <connections>
+                                    <action selector="tabBarAction:" destination="m5S-9C-Dsd" eventType="touchUpInside" id="R5c-xl-9Aw"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ARY-B1-usX"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="I44-CT-PoY" firstAttribute="leading" secondItem="ARY-B1-usX" secondAttribute="leading" id="0dW-wS-f3n"/>
+                            <constraint firstItem="ARY-B1-usX" firstAttribute="bottom" secondItem="o5Q-Vp-Nfe" secondAttribute="bottom" constant="-5" id="6Cn-LH-eub"/>
+                            <constraint firstAttribute="bottom" secondItem="I44-CT-PoY" secondAttribute="bottom" id="FMF-OH-fNu"/>
+                            <constraint firstItem="o5Q-Vp-Nfe" firstAttribute="trailing" secondItem="ARY-B1-usX" secondAttribute="trailing" id="O4i-Ww-E1S"/>
+                            <constraint firstItem="ARY-B1-usX" firstAttribute="trailing" secondItem="7s6-jy-3q0" secondAttribute="trailing" constant="16" id="OM2-Dj-rG9"/>
+                            <constraint firstItem="ARY-B1-usX" firstAttribute="trailing" secondItem="I44-CT-PoY" secondAttribute="trailing" id="PM2-Ng-RZn"/>
+                            <constraint firstItem="7s6-jy-3q0" firstAttribute="leading" secondItem="ARY-B1-usX" secondAttribute="leading" constant="16" id="Qhm-ga-eI2"/>
+                            <constraint firstItem="7s6-jy-3q0" firstAttribute="bottom" secondItem="ARY-B1-usX" secondAttribute="bottom" id="Sm1-5S-sxI"/>
+                            <constraint firstItem="I44-CT-PoY" firstAttribute="top" secondItem="FMq-tc-JoM" secondAttribute="top" id="Yyy-Ah-bST"/>
+                            <constraint firstItem="o5Q-Vp-Nfe" firstAttribute="leading" secondItem="ARY-B1-usX" secondAttribute="leading" id="e7f-8f-CHr"/>
+                            <constraint firstItem="XYH-pq-AdE" firstAttribute="centerX" secondItem="64o-UG-Ogi" secondAttribute="centerX" id="fJl-hw-8oG"/>
+                            <constraint firstItem="XYH-pq-AdE" firstAttribute="centerY" secondItem="Nep-Cx-KIv" secondAttribute="centerY" multiplier="0.7" id="fj4-KT-Km3"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="containerView" destination="I44-CT-PoY" id="a1q-pV-SdF"/>
+                        <outletCollection property="tabButtons" destination="jds-Ha-Wxh" collectionClass="NSMutableArray" id="vV1-cU-kGB"/>
+                        <outletCollection property="tabButtons" destination="rdL-Ww-LNs" collectionClass="NSMutableArray" id="2Lg-6c-a28"/>
+                        <outletCollection property="tabButtons" destination="YY6-S8-EPh" collectionClass="NSMutableArray" id="VOm-Ap-ofb"/>
+                        <outletCollection property="tabButtons" destination="XYH-pq-AdE" collectionClass="NSMutableArray" id="nCw-9d-2ao"/>
+                        <outletCollection property="tabButtons" destination="fv1-XA-daf" collectionClass="NSMutableArray" id="Vwf-E6-Mdj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N3L-Pz-jHb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="254" y="-756"/>
+        </scene>
+        <!--Products View Controller-->
+        <scene sceneID="486-A3-6dX">
+            <objects>
+                <viewController storyboardIdentifier="ProductsViewController" id="YMa-Yn-v0P" customClass="ProductsViewController" customModule="DesynatDealer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YeG-5W-t2H">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Products Screen" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ye2-JR-w8K">
+                                <rect key="frame" x="131" y="439.66666666666669" width="131" height="22.666666666666686"/>
+                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="5lu-NT-Kxp"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Ye2-JR-w8K" firstAttribute="centerX" secondItem="5lu-NT-Kxp" secondAttribute="centerX" id="LSX-8G-dfb"/>
+                            <constraint firstItem="Ye2-JR-w8K" firstAttribute="centerY" secondItem="5lu-NT-Kxp" secondAttribute="centerY" id="l8l-vf-mH0"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ydz-ig-L5W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-489" y="-46"/>
+        </scene>
+        <!--Orders View Controller-->
+        <scene sceneID="Yds-rn-Bw2">
+            <objects>
+                <viewController storyboardIdentifier="OrdersViewController" id="Rsm-a9-ejD" customClass="OrdersViewController" customModule="DesynatDealer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Yud-d0-5ds">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Orders Screen" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xZa-li-cfq">
+                                <rect key="frame" x="139.66666666666666" y="439.66666666666669" width="114" height="22.666666666666686"/>
+                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="HaX-ty-CYu"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="xZa-li-cfq" firstAttribute="centerY" secondItem="HaX-ty-CYu" secondAttribute="centerY" id="3SG-tZ-rjH"/>
+                            <constraint firstItem="xZa-li-cfq" firstAttribute="centerX" secondItem="HaX-ty-CYu" secondAttribute="centerX" id="LM6-Fv-vMD"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ffa-gh-unw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1030" y="-54"/>
+        </scene>
+        <!--Payments View Controller-->
+        <scene sceneID="vGl-tQ-0hI">
+            <objects>
+                <viewController storyboardIdentifier="PaymentsViewController" id="Bo0-Rn-e2p" customClass="PaymentsViewController" customModule="DesynatDealer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6vf-An-su3">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payments Screen" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N00-IG-pnJ">
+                                <rect key="frame" x="126" y="439.66666666666669" width="141" height="22.666666666666686"/>
+                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="8qt-PP-OcK"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="N00-IG-pnJ" firstAttribute="centerY" secondItem="8qt-PP-OcK" secondAttribute="centerY" id="kxT-1n-Gwk"/>
+                            <constraint firstItem="N00-IG-pnJ" firstAttribute="centerX" secondItem="8qt-PP-OcK" secondAttribute="centerX" id="q0b-M3-yWH"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iCD-5e-YWE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1727" y="-54"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="homeSelected" width="52" height="44"/>
+        <image name="homeUnselected" width="52" height="44"/>
+        <image name="lineTabbar" width="375" height="79"/>
+        <image name="myoredrs_selected" width="24" height="22"/>
+        <image name="ordersSelected" width="52" height="44"/>
+        <image name="ordersUnselected" width="52" height="44"/>
+        <image name="paymentsSelected" width="60" height="44"/>
+        <image name="paymentsUnselected" width="60" height="44"/>
+        <image name="productsSelected" width="53.333332061767578" height="44"/>
+        <image name="productsUnselected" width="53" height="44"/>
+        <image name="show" width="52.666667938232422" height="52.666667938232422"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
