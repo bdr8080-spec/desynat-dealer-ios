@@ -10,6 +10,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="DMSans-Medium.ttf">
+            <string>DMSans-Medium</string>
+        </array>
         <array key="Poppins-Bold.ttf">
             <string>Poppins-Bold</string>
         </array>
@@ -468,8 +471,43 @@ experience the app in your preferred language.</string>
                                                                     <constraint firstAttribute="width" secondItem="3JZ-sJ-rKH" secondAttribute="height" id="py4-s3-JGi"/>
                                                                 </constraints>
                                                             </imageView>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zjp-jV-fhd">
+                                                                <rect key="frame" x="55" y="10" width="50" height="30"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+91" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Izl-Wk-rgO">
+                                                                        <rect key="frame" x="0.0" y="7" width="25" height="16.333333333333332"/>
+                                                                        <fontDescription key="fontDescription" name="DMSans-Medium" family="DM Sans" pointSize="14"/>
+                                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="country" translatesAutoresizingMaskIntoConstraints="NO" id="IYQ-bW-1pF">
+                                                                        <rect key="frame" x="30" y="0.0" width="20" height="30"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="20" id="Nqx-rR-aa6"/>
+                                                                            <constraint firstAttribute="height" constant="30" id="Ygk-bX-V8f"/>
+                                                                        </constraints>
+                                                                    </imageView>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pxE-wX-cTr">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="30"/>
+                                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                    </button>
+                                                                </subviews>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <constraints>
+                                                                    <constraint firstItem="IYQ-bW-1pF" firstAttribute="centerY" secondItem="Izl-Wk-rgO" secondAttribute="centerY" id="2of-sU-7ng"/>
+                                                                    <constraint firstItem="IYQ-bW-1pF" firstAttribute="leading" secondItem="Izl-Wk-rgO" secondAttribute="trailing" constant="5" id="3Zd-cE-6ec"/>
+                                                                    <constraint firstItem="Izl-Wk-rgO" firstAttribute="centerY" secondItem="zjp-jV-fhd" secondAttribute="centerY" id="7sS-kz-8fR"/>
+                                                                    <constraint firstItem="pxE-wX-cTr" firstAttribute="top" secondItem="zjp-jV-fhd" secondAttribute="top" id="8VV-MB-9RE"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="pxE-wX-cTr" secondAttribute="bottom" id="9fD-yz-yYA"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="IYQ-bW-1pF" secondAttribute="trailing" id="HJw-8D-R2a"/>
+                                                                    <constraint firstItem="Izl-Wk-rgO" firstAttribute="leading" secondItem="zjp-jV-fhd" secondAttribute="leading" id="NK9-9c-y3b"/>
+                                                                    <constraint firstAttribute="width" constant="50" id="Tl4-YJ-Jc8"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="pxE-wX-cTr" secondAttribute="trailing" id="lma-dy-5i2"/>
+                                                                    <constraint firstItem="pxE-wX-cTr" firstAttribute="leading" secondItem="zjp-jV-fhd" secondAttribute="leading" id="oRN-vW-G1t"/>
+                                                                </constraints>
+                                                            </view>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Mobile Number or Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GBh-3y-iFe">
-                                                                <rect key="frame" x="55" y="5" width="278" height="40"/>
+                                                                <rect key="frame" x="120" y="5" width="213" height="40"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
@@ -479,10 +517,12 @@ experience the app in your preferred language.</string>
                                                             <constraint firstItem="GBh-3y-iFe" firstAttribute="top" secondItem="00t-FR-HGS" secondAttribute="top" constant="5" id="0W8-nY-Hb5"/>
                                                             <constraint firstAttribute="trailing" secondItem="GBh-3y-iFe" secondAttribute="trailing" constant="20" id="9Vq-k0-6WZ"/>
                                                             <constraint firstItem="3JZ-sJ-rKH" firstAttribute="top" secondItem="00t-FR-HGS" secondAttribute="top" constant="14" id="CTR-UX-iAK"/>
+                                                            <constraint firstItem="zjp-jV-fhd" firstAttribute="centerY" secondItem="00t-FR-HGS" secondAttribute="centerY" id="EBJ-2V-Dh6"/>
+                                                            <constraint firstItem="GBh-3y-iFe" firstAttribute="leading" secondItem="zjp-jV-fhd" secondAttribute="trailing" constant="15" id="FAw-Ea-X19"/>
                                                             <constraint firstItem="3JZ-sJ-rKH" firstAttribute="leading" secondItem="00t-FR-HGS" secondAttribute="leading" constant="18" id="Fz2-3R-wqa"/>
                                                             <constraint firstItem="3JZ-sJ-rKH" firstAttribute="centerY" secondItem="00t-FR-HGS" secondAttribute="centerY" id="KwW-PW-eZ3"/>
                                                             <constraint firstAttribute="bottom" secondItem="GBh-3y-iFe" secondAttribute="bottom" constant="5" id="NLP-eh-kIL"/>
-                                                            <constraint firstItem="GBh-3y-iFe" firstAttribute="leading" secondItem="3JZ-sJ-rKH" secondAttribute="trailing" constant="15" id="gm6-zf-Ggf"/>
+                                                            <constraint firstItem="zjp-jV-fhd" firstAttribute="leading" secondItem="3JZ-sJ-rKH" secondAttribute="trailing" constant="15" id="sFh-ie-twM"/>
                                                         </constraints>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -718,7 +758,11 @@ experience the app in your preferred language.</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="emailMobileImageView" destination="3JZ-sJ-rKH" id="k0w-Bw-7QL"/>
+                        <outlet property="emailTextField" destination="GBh-3y-iFe" id="OGs-md-Qq0"/>
+                        <outlet property="txtFieldLeading" destination="FAw-Ea-X19" id="cht-D0-XmF"/>
                         <outlet property="txtPassword" destination="9s4-R1-Uqd" id="09f-6z-JrF"/>
+                        <outlet property="viewCountryCode" destination="zjp-jV-fhd" id="e0z-Gp-WRG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dBQ-EZ-53I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1187,6 +1231,9 @@ experience the app in your preferred language.</string>
                                                                 <rect key="frame" x="116.66666666666666" y="20" width="120" height="120"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="plain"/>
+                                                                <connections>
+                                                                    <action selector="uploadProfilePicDidTapped:" destination="8eR-fP-u5v" eventType="touchUpInside" id="2kO-lp-bNN"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1523,7 +1570,6 @@ experience the app in your preferred language.</string>
                                                                         <state key="selected" image="eye_open"/>
                                                                         <connections>
                                                                             <action selector="btnTapConfirmPasswordEye:" destination="8eR-fP-u5v" eventType="touchUpInside" id="806-8V-cYB"/>
-                                                                            <action selector="btnTapEye:" destination="7kr-ow-iSp" eventType="touchUpInside" id="pF6-mZ-OiW"/>
                                                                         </connections>
                                                                     </button>
                                                                 </subviews>
@@ -1575,6 +1621,10 @@ experience the app in your preferred language.</string>
                                                                         </constraints>
                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                         <state key="normal" image="unslectedCheckbox"/>
+                                                                        <state key="selected" image="selectedCheckBox"/>
+                                                                        <connections>
+                                                                            <action selector="agreeToTerms:" destination="8eR-fP-u5v" eventType="touchUpInside" id="2yY-iZ-7ND"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  I accept the" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SUg-di-lAi">
                                                                         <rect key="frame" x="20" y="0.0" width="91" height="18"/>
@@ -1639,6 +1689,9 @@ experience the app in your preferred language.</string>
                                                                                 </fragment>
                                                                             </attributedString>
                                                                         </state>
+                                                                        <connections>
+                                                                            <action selector="termsAndConditionAction:" destination="8eR-fP-u5v" eventType="touchUpInside" id="3CI-CD-3Gm"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="and" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i4p-0J-ToE">
                                                                         <rect key="frame" x="228" y="0.0" width="28" height="18"/>
@@ -1703,6 +1756,9 @@ experience the app in your preferred language.</string>
                                                                                 </fragment>
                                                                             </attributedString>
                                                                         </state>
+                                                                        <connections>
+                                                                            <action selector="policiesAction:" destination="8eR-fP-u5v" eventType="touchUpInside" id="Sqh-MC-Ksq"/>
+                                                                        </connections>
                                                                     </button>
                                                                 </subviews>
                                                             </stackView>
@@ -1838,6 +1894,11 @@ experience the app in your preferred language.</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="emailTextField" destination="3BA-0Y-g0z" id="vhU-71-bwY"/>
+                        <outlet property="firstNameTextField" destination="3Cq-K7-tcI" id="vfr-VI-zDC"/>
+                        <outlet property="lastNameTextField" destination="gyo-0p-gb8" id="zTA-fQ-YMN"/>
+                        <outlet property="mobileTextField" destination="YQH-yH-Lcq" id="gyU-Vs-VTo"/>
+                        <outlet property="profilePicImageView" destination="xOl-wF-fh7" id="Rpj-o9-w33"/>
                         <outlet property="txtConfirmPassword" destination="b1m-68-d5Y" id="LmF-Av-o1o"/>
                         <outlet property="txtCreatePassword" destination="ge6-wQ-xQl" id="cnH-1V-EDi"/>
                     </connections>
@@ -2239,9 +2300,11 @@ send an OTP to verify that it’s you</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="emailAddressTextField" destination="I1g-X5-FsU" id="GHg-kG-MJx"/>
                         <outlet property="emailView" destination="mcg-gK-Z6f" id="RqW-nl-5rF"/>
                         <outlet property="imgEmail" destination="Sd2-Hg-O2V" id="M3E-Ua-ivU"/>
                         <outlet property="imgMobile" destination="aW2-f6-Bck" id="Dla-sR-BiO"/>
+                        <outlet property="mobileTextField" destination="tMU-eA-IYh" id="TDJ-1H-aT1"/>
                         <outlet property="mobileView" destination="9O7-ux-rzu" id="ws5-nV-nTb"/>
                     </connections>
                 </viewController>
@@ -2983,7 +3046,7 @@ miss out</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jhy-3I-D8c">
-                                <rect key="frame" x="0.0" y="118" width="393.33333333333331" height="40"/>
+                                <rect key="frame" x="0.0" y="118" width="393" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WCK-n0-ehj">
                                         <rect key="frame" x="24" y="0.0" width="40" height="40"/>
@@ -3003,7 +3066,7 @@ miss out</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Store Information" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7HC-oz-f9e">
-                                        <rect key="frame" x="74.000000000000014" y="8.6666666666666732" width="245.33333333333337" height="22.666666666666671"/>
+                                        <rect key="frame" x="74" y="8.6666666666666732" width="245" height="22.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -3020,22 +3083,22 @@ miss out</string>
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kJV-eB-afe">
-                                <rect key="frame" x="0.0" y="178" width="393.33333333333331" height="606"/>
+                                <rect key="frame" x="0.0" y="178" width="393" height="606"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rxc-AP-tF9">
-                                        <rect key="frame" x="0.0" y="0.0" width="393.33333333333331" height="1007.3333333333334"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="1007.3333333333334"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="c3F-H1-NEX">
-                                                <rect key="frame" x="20" y="0.0" width="353.33333333333331" height="1007.3333333333334"/>
+                                                <rect key="frame" x="20" y="0.0" width="353" height="1007.3333333333334"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="step3" translatesAutoresizingMaskIntoConstraints="NO" id="cgX-0Z-iGQ">
-                                                        <rect key="frame" x="0.0" y="0.0" width="353.33333333333331" height="8"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="353" height="8"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="8" id="tiA-cX-ooN"/>
                                                         </constraints>
                                                     </imageView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4xO-Ei-B2K">
-                                                        <rect key="frame" x="0.0" y="28" width="353.33333333333331" height="163.33333333333334"/>
+                                                        <rect key="frame" x="0.0" y="28" width="353" height="163.33333333333334"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadStore" translatesAutoresizingMaskIntoConstraints="NO" id="QdV-FB-SPN" customClass="CustomImageView" customModule="DesynatDealer" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="19.999999999999993" width="352.66666666666669" height="123.33333333333331"/>
@@ -3053,6 +3116,9 @@ miss out</string>
                                                                 <rect key="frame" x="0.0" y="19.999999999999993" width="352.66666666666669" height="123.33333333333331"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="plain"/>
+                                                                <connections>
+                                                                    <action selector="uploadStoreImageDidTapped:" destination="ZNY-hb-lWn" eventType="touchUpInside" id="lO2-Ar-4RS"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -3068,19 +3134,19 @@ miss out</string>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XdM-t6-5Ye">
-                                                        <rect key="frame" x="0.0" y="211.33333333333331" width="353.33333333333331" height="75"/>
+                                                        <rect key="frame" x="0.0" y="211.33333333333331" width="353" height="75"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Store Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s7y-7m-bOz">
-                                                                <rect key="frame" x="0.0" y="0.0" width="353.33333333333331" height="20"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="353" height="20"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="12"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wra-nd-u6k" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="25" width="353.33333333333331" height="50"/>
+                                                                <rect key="frame" x="0.0" y="25" width="353" height="50"/>
                                                                 <subviews>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Store name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mVD-E7-BNZ">
-                                                                        <rect key="frame" x="20" y="5" width="313.33333333333331" height="40"/>
+                                                                        <rect key="frame" x="20" y="5" width="313" height="40"/>
                                                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                         <textInputTraits key="textInputTraits"/>
                                                                     </textField>
@@ -3118,24 +3184,24 @@ miss out</string>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wbm-sL-vPI">
-                                                        <rect key="frame" x="0.0" y="306.33333333333331" width="353.33333333333331" height="75"/>
+                                                        <rect key="frame" x="0.0" y="306.33333333333331" width="353" height="75"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Store Address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DCX-Yg-rN9">
-                                                                <rect key="frame" x="0.0" y="0.0" width="353.33333333333331" height="20"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="353" height="20"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="12"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kik-sq-D0r" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="25" width="353.33333333333331" height="50"/>
+                                                                <rect key="frame" x="0.0" y="25" width="353" height="50"/>
                                                                 <subviews>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Store address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t3a-UT-0e0">
-                                                                        <rect key="frame" x="20" y="5.0000000000000568" width="276.33333333333331" height="40"/>
+                                                                        <rect key="frame" x="20" y="5.0000000000000568" width="276" height="40"/>
                                                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                         <textInputTraits key="textInputTraits"/>
                                                                     </textField>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l9E-34-LKv">
-                                                                        <rect key="frame" x="316.33333333333331" y="12.666666666666686" width="25" height="25"/>
+                                                                        <rect key="frame" x="316" y="12.666666666666686" width="25" height="25"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" secondItem="l9E-34-LKv" secondAttribute="height" id="ePa-dc-eKi"/>
                                                                             <constraint firstAttribute="height" constant="25" id="fb7-7P-of3"/>
@@ -3182,19 +3248,19 @@ miss out</string>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yB4-P4-inh">
-                                                        <rect key="frame" x="0.0" y="401.33333333333337" width="353.33333333333331" height="75"/>
+                                                        <rect key="frame" x="0.0" y="401.33333333333337" width="353" height="75"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address Line 1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WXb-3f-9s4">
-                                                                <rect key="frame" x="0.0" y="0.0" width="353.33333333333331" height="20"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="353" height="20"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="12"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OXO-a3-1lx" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="25" width="353.33333333333331" height="50"/>
+                                                                <rect key="frame" x="0.0" y="25" width="353" height="50"/>
                                                                 <subviews>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter House no., flat no..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rQj-a9-Mzp">
-                                                                        <rect key="frame" x="20" y="5" width="313.33333333333331" height="40"/>
+                                                                        <rect key="frame" x="20" y="5" width="313" height="40"/>
                                                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                         <textInputTraits key="textInputTraits"/>
                                                                     </textField>
@@ -3232,19 +3298,19 @@ miss out</string>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ev2-dM-xf5">
-                                                        <rect key="frame" x="0.0" y="496.33333333333337" width="353.33333333333331" height="75"/>
+                                                        <rect key="frame" x="0.0" y="496.33333333333337" width="353" height="75"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address Line 2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bG4-ur-ss3">
-                                                                <rect key="frame" x="0.0" y="0.0" width="353.33333333333331" height="20"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="353" height="20"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="12"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lq3-4k-UaW" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="25" width="353.33333333333331" height="50"/>
+                                                                <rect key="frame" x="0.0" y="25" width="353" height="50"/>
                                                                 <subviews>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Street Name, Block, Apartment, Flat Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c0w-7S-Z6z">
-                                                                        <rect key="frame" x="20" y="5" width="313.33333333333331" height="40"/>
+                                                                        <rect key="frame" x="20" y="5" width="313" height="40"/>
                                                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                         <textInputTraits key="textInputTraits"/>
                                                                     </textField>
@@ -3282,19 +3348,19 @@ miss out</string>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Ms-vC-z10">
-                                                        <rect key="frame" x="0.0" y="591.33333333333337" width="353.33333333333331" height="75"/>
+                                                        <rect key="frame" x="0.0" y="591.33333333333337" width="353" height="75"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Store Phone Number" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hhm-bc-hmg">
-                                                                <rect key="frame" x="0.0" y="0.0" width="353.33333333333331" height="20"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="353" height="20"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="12"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GUs-B9-vBG" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="25" width="353.33333333333331" height="50"/>
+                                                                <rect key="frame" x="0.0" y="25" width="353" height="50"/>
                                                                 <subviews>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Store Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hlh-lz-cXg">
-                                                                        <rect key="frame" x="20" y="5" width="313.33333333333331" height="40"/>
+                                                                        <rect key="frame" x="20" y="5" width="313" height="40"/>
                                                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                         <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                                                     </textField>
@@ -3332,19 +3398,19 @@ miss out</string>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RrP-Aj-Fsj">
-                                                        <rect key="frame" x="0.0" y="686.33333333333337" width="353.33333333333331" height="75"/>
+                                                        <rect key="frame" x="0.0" y="686.33333333333337" width="353" height="75"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Store mail Id" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZaV-Tc-boO">
-                                                                <rect key="frame" x="0.0" y="0.0" width="353.33333333333331" height="20"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="353" height="20"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="12"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9S2-5x-IB3" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="25" width="353.33333333333331" height="50"/>
+                                                                <rect key="frame" x="0.0" y="25" width="353" height="50"/>
                                                                 <subviews>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Store mail Id" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zbf-7M-FFp">
-                                                                        <rect key="frame" x="20" y="5" width="313.33333333333331" height="40"/>
+                                                                        <rect key="frame" x="20" y="5" width="313" height="40"/>
                                                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                         <textInputTraits key="textInputTraits"/>
                                                                     </textField>
@@ -3382,27 +3448,25 @@ miss out</string>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GZg-dS-p01">
-                                                        <rect key="frame" x="0.0" y="781.33333333333337" width="353.33333333333331" height="147"/>
+                                                        <rect key="frame" x="0.0" y="781.33333333333337" width="353" height="147"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bio" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QvW-o6-XZj">
-                                                                <rect key="frame" x="0.0" y="0.0" width="353.33333333333331" height="17"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="353" height="17"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="12"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v1x-v5-EAp" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="22" width="353.33333333333331" height="125"/>
+                                                                <rect key="frame" x="0.0" y="22" width="353" height="125"/>
                                                                 <subviews>
                                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="LWe-8Y-fgd">
-                                                                        <rect key="frame" x="20" y="5" width="313.33333333333331" height="115"/>
+                                                                        <rect key="frame" x="20" y="5" width="313" height="115"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                         <color key="textColor" systemColor="labelColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                         <userDefinedRuntimeAttributes>
-                                                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholderTextView">
-                                                                                <mutableString key="value">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
-                                                                            </userDefinedRuntimeAttribute>
+                                                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholderTextView" value="Enter Bio"/>
                                                                         </userDefinedRuntimeAttributes>
                                                                     </textView>
                                                                 </subviews>
@@ -3439,17 +3503,17 @@ miss out</string>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U2B-6A-JID">
-                                                        <rect key="frame" x="0.0" y="948.33333333333326" width="353.33333333333331" height="1"/>
+                                                        <rect key="frame" x="0.0" y="948.33333333333326" width="353" height="1"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="1" id="YpG-YF-wOC"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sRf-us-0ic">
-                                                        <rect key="frame" x="0.0" y="969.33333333333326" width="353.33333333333331" height="38"/>
+                                                        <rect key="frame" x="0.0" y="969.33333333333326" width="353" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pK4-wF-NAI" customClass="CustomButton" customModule="DesynatDealer" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="353.33333333333331" height="38"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="353" height="38"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="38" id="Q7x-Cz-PJR"/>
@@ -3518,6 +3582,16 @@ miss out</string>
                             <constraint firstItem="Jhy-3I-D8c" firstAttribute="top" secondItem="znf-NN-N2t" secondAttribute="top" id="hRl-BF-Qff"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="addressLineOneTextField" destination="rQj-a9-Mzp" id="oaK-rw-5ky"/>
+                        <outlet property="addressLineTwoTextField" destination="c0w-7S-Z6z" id="mEf-Rk-oIK"/>
+                        <outlet property="bioTextView" destination="LWe-8Y-fgd" id="f7i-9L-tef"/>
+                        <outlet property="storeAddressTextField" destination="t3a-UT-0e0" id="aXi-gg-sZU"/>
+                        <outlet property="storeMailIDTextField" destination="zbf-7M-FFp" id="5Uy-gM-nSc"/>
+                        <outlet property="storeNameTextField" destination="mVD-E7-BNZ" id="G12-es-VbD"/>
+                        <outlet property="storePhoneNumberTextField" destination="Hlh-lz-cXg" id="6TL-eZ-wMl"/>
+                        <outlet property="uploadStoreImageView" destination="QdV-FB-SPN" id="fcW-YL-BsZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7gr-lz-r84" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -3939,6 +4013,9 @@ you for your patience. Team Desynat App</string>
                                                                                         <rect key="frame" x="0.0" y="0.0" width="166.66666666666666" height="120"/>
                                                                                         <state key="normal" title="Button"/>
                                                                                         <buttonConfiguration key="configuration" style="plain"/>
+                                                                                        <connections>
+                                                                                            <action selector="ownerDocumentImageDidTapped:" destination="Ls5-vN-DGh" eventType="touchUpInside" id="2dr-Rx-7j1"/>
+                                                                                        </connections>
                                                                                     </button>
                                                                                 </subviews>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -3990,6 +4067,9 @@ you for your patience. Team Desynat App</string>
                                                                                         <rect key="frame" x="0.0" y="0.0" width="166.66666666666666" height="120"/>
                                                                                         <state key="normal" title="Button"/>
                                                                                         <buttonConfiguration key="configuration" style="plain"/>
+                                                                                        <connections>
+                                                                                            <action selector="ownerDocumentImageDidTapped:" destination="Ls5-vN-DGh" eventType="touchUpInside" id="krH-b1-zgY"/>
+                                                                                        </connections>
                                                                                     </button>
                                                                                 </subviews>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -4066,6 +4146,9 @@ you for your patience. Team Desynat App</string>
                                                                                         <rect key="frame" x="0.0" y="0.0" width="166.66666666666666" height="120"/>
                                                                                         <state key="normal" title="Button"/>
                                                                                         <buttonConfiguration key="configuration" style="plain"/>
+                                                                                        <connections>
+                                                                                            <action selector="storeDocumentDidTapped:" destination="Ls5-vN-DGh" eventType="touchUpInside" id="HC4-Ag-p7I"/>
+                                                                                        </connections>
                                                                                     </button>
                                                                                 </subviews>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -4114,6 +4197,9 @@ you for your patience. Team Desynat App</string>
                                                                                         <rect key="frame" x="0.0" y="0.0" width="166.66666666666666" height="120"/>
                                                                                         <state key="normal" title="Button"/>
                                                                                         <buttonConfiguration key="configuration" style="plain"/>
+                                                                                        <connections>
+                                                                                            <action selector="storeDocumentDidTapped:" destination="Ls5-vN-DGh" eventType="touchUpInside" id="uJf-Av-47K"/>
+                                                                                        </connections>
                                                                                     </button>
                                                                                 </subviews>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -4198,6 +4284,9 @@ you for your patience. Team Desynat App</string>
                                                                                 <rect key="frame" x="0.0" y="0.0" width="166.66666666666666" height="45"/>
                                                                                 <state key="normal" title="Button"/>
                                                                                 <buttonConfiguration key="configuration" style="plain"/>
+                                                                                <connections>
+                                                                                    <action selector="personalDidTappd:" destination="Ls5-vN-DGh" eventType="touchUpInside" id="BSM-I3-zTi"/>
+                                                                                </connections>
                                                                             </button>
                                                                         </subviews>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -4235,6 +4324,9 @@ you for your patience. Team Desynat App</string>
                                                                                 <rect key="frame" x="0.0" y="0.0" width="166.66666666666666" height="45"/>
                                                                                 <state key="normal" title="Button"/>
                                                                                 <buttonConfiguration key="configuration" style="plain"/>
+                                                                                <connections>
+                                                                                    <action selector="businessDidTapped:" destination="Ls5-vN-DGh" eventType="touchUpInside" id="dXg-d5-t8C"/>
+                                                                                </connections>
                                                                             </button>
                                                                         </subviews>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -4475,7 +4567,7 @@ you for your patience. Team Desynat App</string>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadProof" translatesAutoresizingMaskIntoConstraints="NO" id="JA6-wP-5gi" customClass="CustomImageView" customModule="DesynatDealer" customModuleProvider="target">
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadProof" translatesAutoresizingMaskIntoConstraints="NO" id="JA6-wP-5gi" customClass="CustomImageView" customModule="DesynatDealer" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="17" width="353" height="141"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="JA6-wP-5gi" secondAttribute="height" multiplier="343:137" id="8rc-PZ-X1K"/>
@@ -4485,12 +4577,18 @@ you for your patience. Team Desynat App</string>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                                         <real key="value" value="0.0"/>
                                                                     </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="12"/>
+                                                                    </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </imageView>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8FZ-TB-Ap6">
                                                                 <rect key="frame" x="0.0" y="17" width="353" height="141"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="plain"/>
+                                                                <connections>
+                                                                    <action selector="accountHolderImageDidTapped:" destination="Ls5-vN-DGh" eventType="touchUpInside" id="aw5-GP-XKT"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -4582,6 +4680,19 @@ you for your patience. Team Desynat App</string>
                             <constraint firstItem="8G4-Md-q0O" firstAttribute="top" secondItem="VFV-ee-oWH" secondAttribute="top" id="zRK-kZ-jTR"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="accountHolderImageView" destination="JA6-wP-5gi" id="bga-Vp-Qge"/>
+                        <outlet property="accountHolderTextField" destination="PR0-jG-Ahr" id="Xsk-Og-htB"/>
+                        <outlet property="bankNameTextField" destination="ujG-0Y-leS" id="Ex1-5v-NQH"/>
+                        <outlet property="businessAccountImage" destination="Yy0-Ii-PQn" id="eeC-N1-7FZ"/>
+                        <outlet property="ibanTextField" destination="GMP-kO-9F7" id="5pR-AM-qaN"/>
+                        <outlet property="onwerDocImage1" destination="cI2-mK-TBi" id="oe9-bs-FOA"/>
+                        <outlet property="onwerDocImage2" destination="xhs-bf-dlH" id="sTR-Li-UFK"/>
+                        <outlet property="personalAccountImage" destination="414-ln-KrZ" id="gqg-RW-3HI"/>
+                        <outlet property="storeDocImage1" destination="Wbt-g7-mSi" id="esV-bC-iKA"/>
+                        <outlet property="storeDocImage2" destination="XZR-ir-s66" id="UG8-kF-5LE"/>
+                        <outlet property="swiftTextField" destination="MMo-zc-9rA" id="kh9-fI-8nJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kLF-Nu-1WQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -4597,7 +4708,7 @@ you for your patience. Team Desynat App</string>
         <image name="done" width="90" height="89.666664123535156"/>
         <image name="email" width="22" height="22"/>
         <image name="eyeClose" width="22" height="16.666666030883789"/>
-        <image name="eye_open" width="24" height="24"/>
+        <image name="eye_open" width="128" height="128"/>
         <image name="forwardBack" width="56" height="56"/>
         <image name="forwardNext" width="56" height="56"/>
         <image name="leftVector" width="9.6666669845581055" height="17.666666030883789"/>
@@ -4610,6 +4721,7 @@ you for your patience. Team Desynat App</string>
         <image name="radioSelected" width="20" height="20"/>
         <image name="radioUnselected" width="20" height="20"/>
         <image name="search" width="20" height="20"/>
+        <image name="selectedCheckBox" width="128" height="128"/>
         <image name="step1" width="343" height="12"/>
         <image name="step2" width="343" height="12"/>
         <image name="step3" width="343" height="12"/>

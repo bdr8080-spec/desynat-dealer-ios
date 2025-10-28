@@ -7,7 +7,10 @@
 
 import UIKit
 import GoogleMaps
+import IQKeyboardManagerSwift
 import GooglePlaces
+import UserNotifications
+
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        IQKeyboardManager.shared.enableAutoToolbar = true
+        IQKeyboardManager.shared.isEnabled = true
+        UNUserNotificationCenter.current().delegate = self
         GMSServices.provideAPIKey("AIzaSyBlCfJlRuxElolt6l-4erdJPR9ySUB8Jwk")    // Our google map API
         GMSPlacesClient.provideAPIKey("AIzaSyAekJV3oxQlPy_OWHCxPYfFw5CnrD-Wzkg")
         return true
@@ -41,3 +47,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    // Called when permission is granted and app successfully registers with APNs
+        func application(_ application: UIApplication,
+                         didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+            let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
+            let token = tokenParts.joined()
+            print("📱 Device Token: \(token)")
+        }
+
+        // Called if registration fails
+        func application(_ application: UIApplication,
+                         didFailToRegisterForRemoteNotificationsWithError error: Error) {
+            print("❌ Failed to register for remote notifications: \(error.localizedDescription)")
+        }
+
+        // Handle notifications when app is in foreground
+        func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                    willPresent notification: UNNotification,
+                                    withCompletionHandler completionHandler:
+                                    @escaping (UNNotificationPresentationOptions) -> Void) {
+            completionHandler([.banner, .sound, .badge])
+        }
+
+        // Handle notification tap
+        func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                    didReceive response: UNNotificationResponse,
+                                    withCompletionHandler completionHandler: @escaping () -> Void) {
+            let userInfo = response.notification.request.content.userInfo
+            print("🟢 Notification tapped with info: \(userInfo)")
+            completionHandler()
+        }
+}
+
+
+//com.Avora-User-ios
+//com.Rakhi.DesynatDealer

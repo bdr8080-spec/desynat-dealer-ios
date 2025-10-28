@@ -30,7 +30,7 @@ class LocationViewController: UIViewController, UITextFieldDelegate {
     var city = ""
     var state = ""
     var addressId = ""
-//    lazy private var viewModel = LocationVM(hostVC: self)
+    lazy private var viewModel = LocationViewModel(hostVC: self)
     
     override func viewDidLoad() {
         super.viewDidLoad()

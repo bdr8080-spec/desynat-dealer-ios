@@ -8,108 +8,80 @@
 import Foundation
 import CoreLocation
 
-class LocationManager:NSObject, CLLocationManagerDelegate {
+class LocationManager: NSObject, CLLocationManagerDelegate {
     
     private let locationManager = CLLocationManager()
-    open var location:CLLocationCoordinate2D?
-    open var currentLocation = ""
-    open var callBackGetCurrentLoc:((_ location:CLLocationCoordinate2D, _ add:String?)->())?
-    open var country = ""
-    open var getPickCity = ""
+    static let sharedInstance = LocationManager()
     
-    static var sharedInstance = LocationManager()
+    var location: CLLocationCoordinate2D?
+    var currentLocation = ""
+    var callBackGetCurrentLoc: ((_ location: CLLocationCoordinate2D, _ add: String?) -> ())?
+    var country = ""
+    var getPickCity = ""
+    
+    private override init() {
+        super.init()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    }
+    
+    // Allow setting external delegate
+    func setDelegate(_ delegate: CLLocationManagerDelegate) {
+        locationManager.delegate = delegate
+    }
+    
+    func requestAuthorization() {
+        locationManager.requestWhenInUseAuthorization()
+    }
     
     func startUpdatingLocation() {
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestAlwaysAuthorization()
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
+        if #available(iOS 14.0, *) {
+            switch locationManager.authorizationStatus {
+            case .notDetermined:
+                locationManager.requestWhenInUseAuthorization()
+            case .authorizedWhenInUse, .authorizedAlways:
+                locationManager.startUpdatingLocation()
+            case .denied, .restricted:
+                print("❌ Location permission denied")
+            @unknown default:
+                break
+            }
+        } else {
+            switch CLLocationManager.authorizationStatus() {
+            case .notDetermined:
+                locationManager.requestWhenInUseAuthorization()
+            case .authorizedWhenInUse, .authorizedAlways:
+                locationManager.startUpdatingLocation()
+            default:
+                break
+            }
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let loc = locations.first?.coordinate {
-            self.location = CLLocationCoordinate2D(latitude: loc.latitude,
-                                                   longitude: loc.longitude)
+        guard let loc = locations.first else { return }
+        self.location = loc.coordinate
+        reverseGeocodeCoordinate(loc.coordinate) { address in
+            self.currentLocation = address
+            self.callBackGetCurrentLoc?(loc.coordinate, address)
         }
-        printInConsole("latitude \(String(describing: locations.first)),longitude \(String(describing: locations.first))")
-        
-        if let location {
-            self.reverseGeocodeCoordinate(location) { add in
-                self.currentLocation = add
-                self.callBackGetCurrentLoc?(location, self.currentLocation)
-            }
-        }
-        locationManager.stopUpdatingLocation()
+        manager.stopUpdatingLocation()
     }
     
-    public func reverseGeocodeCoordinate(_ coordinate: CLLocationCoordinate2D, completion:@escaping(_ address:String) -> Void) {
-        
-        let ceo: CLGeocoder = CLGeocoder()
-        let loc: CLLocation = CLLocation(latitude:coordinate.latitude, longitude: coordinate.longitude)
-        ceo.reverseGeocodeLocation(loc, completionHandler:
-                                    {(placemarks, error) in
-            if (error != nil) {
-                print("reverse geodcode fail: \(error!.localizedDescription)")
+    public func reverseGeocodeCoordinate(_ coordinate: CLLocationCoordinate2D, completion: @escaping (_ address: String) -> Void) {
+        let ceo = CLGeocoder()
+        let loc = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        ceo.reverseGeocodeLocation(loc) { placemarks, error in
+            guard error == nil, let pm = placemarks?.first else {
+                completion("")
+                return
             }
-            guard let pm = placemarks as? [CLPlacemark] else {return}
-            if pm.count > 0 {
-                let pm = placemarks![0]
-                var addressString : String = ""
-                if pm.name != nil {
-                    addressString = addressString + pm.name! + ", "
-                }
-                if pm.subLocality != nil {
-                    addressString = addressString + pm.subLocality! + ", "
-                }
-//                if pm.thoroughfare != nil {
-//                    addressString = addressString + pm.thoroughfare! + ", "
-//                }
-                if pm.locality != nil {
-                    addressString = addressString + pm.locality! + " "
-                }
-                if pm.country != nil {
-                    addressString = addressString + pm.country! + ", "
-                }
-                if pm.postalCode != nil {
-                    addressString = addressString + pm.postalCode! + " "
-                }
-                self.country = pm.country ?? ""
-                completion(addressString)
-                self.getPickCity = pm.locality ?? ""
-                
-                print("subLocality\(pm.subLocality ?? "")")
-                print("pm.thoroughfare\(pm.thoroughfare ?? "")")
-                print("pm.locality\(pm.locality ?? "")")
-                print("pm.country\(pm.country ?? "")")
-                print("pm.postalCode\(pm.postalCode ?? "")")
-                print("pm.name\(pm.name)")
-                print("pm.subThoroughfare\(pm.subThoroughfare ?? "")")
-                print("pm.administrativeArea\(pm.administrativeArea ?? "")")
-                print("pm.subAdministrativeArea\(pm.subAdministrativeArea ?? "")")
-                
-            }
-        })
+            var addressString = ""
+            if let name = pm.name { addressString += name + ", " }
+            if let locality = pm.locality { addressString += locality + ", " }
+            if let country = pm.country { addressString += country }
+            completion(addressString)
+            self.country = pm.country ?? ""
+            self.getPickCity = pm.locality ?? ""
+        }
     }
-    
-//    func getCurrentLocationCode() -> ADCountry {
-//        var countryCode = (Locale.current as NSLocale).object(forKey: .countryCode) as? String ?? "US"
-//        
-//        var CallingCodes = { () -> [[String: String]] in
-//            let resourceBundle = Bundle(for: ADCountryPicker.classForCoder())
-//            guard let path = resourceBundle.path(forResource: "CallingCodes", ofType: "plist") else { return [] }
-//            return NSArray(contentsOfFile: path) as! [[String: String]]
-//        }()
-//        
-//        let locale = Locale.current
-//        let displayName = (locale as NSLocale).displayName(forKey: NSLocale.Key.countryCode, value: countryCode)
-//        let countryData = CallingCodes.filter { $0["code"] == countryCode }
-//        let country: ADCountry
-//        
-//        if countryData.count > 0, let dialCode = countryData[0]["dial_code"] {
-//            return ADCountry(name: displayName!, code: countryCode, dialCode: dialCode)
-//        } else {
-//            return ADCountry(name: displayName!, code: countryCode)
-//        }
-//    }
 }

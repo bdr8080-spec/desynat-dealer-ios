@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import UserNotifications
 
 class NotificationPermissionViewController: UIViewController {
-
+    
     var onPermissionCompletion: (() -> Void)?
     
     override func viewDidLoad() {
@@ -16,18 +17,31 @@ class NotificationPermissionViewController: UIViewController {
     }
     
     @IBAction func allowDidTapped(_ sender: Any) {
-        self.dismiss(animated: true) { [weak self] in
-                self?.onPermissionCompletion?()
-            }
+        requestNotificationPermission()
     }
     
+    @IBAction func denyDidTapped(_ sender: Any) {
+        self.dismiss(animated: true) { [weak self] in
+            self?.onPermissionCompletion?()
+        }
+    }
     
-     @IBAction func denyDidTapped(_ sender: Any) {
-         self.dismiss(animated: true) { [weak self] in
-                 self?.onPermissionCompletion?()
-             }
-     }
+    private func requestNotificationPermission() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+            DispatchQueue.main.async {
+                if granted {
+                    print("Permission granted")
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+                self.navigateBack()
+            }
+        }
+    }
     
-
-
+    func navigateBack() {
+        self.dismiss(animated: true) { [weak self] in
+            self?.onPermissionCompletion?()
+        }
+    }
+    
 }

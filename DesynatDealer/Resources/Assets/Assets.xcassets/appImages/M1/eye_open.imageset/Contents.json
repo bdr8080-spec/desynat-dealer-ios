@@ -1,19 +1,8 @@
 {
   "images" : [
     {
-      "filename" : "input_field_ic.png",
-      "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "filename" : "input_field_ic@2x.png",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "input_field_ic@3x.png",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "filename" : "view.png",
+      "idiom" : "universal"
     }
   ],
   "info" : {

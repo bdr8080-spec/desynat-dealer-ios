@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		493DB73D2EAA6261008098A8 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 493DB73C2EAA6261008098A8 /* Alamofire */; };
+		49DBE47C2EB082D500DE95E8 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 49DBE47B2EB082D500DE95E8 /* IQKeyboardManagerSwift */; };
 		CF670A9299A5979395DF398F /* Pods_DesynatDealer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40FCC5FE2116BF815C4B1BFB /* Pods_DesynatDealer.framework */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +47,7 @@
 			files = (
 				493DB73D2EAA6261008098A8 /* Alamofire in Frameworks */,
 				CF670A9299A5979395DF398F /* Pods_DesynatDealer.framework in Frameworks */,
+				49DBE47C2EB082D500DE95E8 /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +114,7 @@
 			packageProductDependencies = (
 				493DB73C2EAA6261008098A8 /* Alamofire */,
 				493DB73E2EAA6261008098A8 /* AlamofireDynamic */,
+				49DBE47B2EB082D500DE95E8 /* IQKeyboardManagerSwift */,
 			);
 			productName = DesynatDealer;
 			productReference = 493DB5C32EAA6210008098A8 /* DesynatDealer.app */;
@@ -143,6 +146,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				493DB73B2EAA6261008098A8 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				49DBE47A2EB082D500DE95E8 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 493DB5C42EAA6210008098A8 /* Products */;
@@ -248,15 +252,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = DesynatDealer/DesynatDealer.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2V6DSNQKA9;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 6QKUQGN93F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DesynatDealer/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -264,6 +272,8 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Rakhi.DesynatDealer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Avora Provisioning New";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -276,15 +286,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = DesynatDealer/DesynatDealer.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2V6DSNQKA9;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 6QKUQGN93F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DesynatDealer/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -292,6 +306,8 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Rakhi.DesynatDealer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Avora Provisioning New";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -451,6 +467,14 @@
 				minimumVersion = 5.10.2;
 			};
 		};
+		49DBE47A2EB082D500DE95E8 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -463,6 +487,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 493DB73B2EAA6261008098A8 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = AlamofireDynamic;
+		};
+		49DBE47B2EB082D500DE95E8 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 49DBE47A2EB082D500DE95E8 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
