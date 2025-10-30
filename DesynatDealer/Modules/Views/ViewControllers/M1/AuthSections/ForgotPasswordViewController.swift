@@ -15,8 +15,11 @@ class ForgotPasswordViewController: UIViewController {
     @IBOutlet weak var imgMobile: UIImageView!
     @IBOutlet weak var mobileView: UIView!
     @IBOutlet weak var emailView: UIView!
+    @IBOutlet weak var txtCountryCode: UITextField!
+    var countryCode = ""
+    var accountType = 0
     
-    var mobileIsSelected: Bool = true
+    var mobileIsSelected: Bool? = nil
     private lazy var viewModel = ForgotPasswordViewModel(hostVC: self)
     
     override func viewDidLoad() {
@@ -26,11 +29,8 @@ class ForgotPasswordViewController: UIViewController {
     }
     
     @IBAction func continueDidTapped(_ sender: Any) {
-        if viewModel.validFields(mobileIsSelected: mobileIsSelected) {
-            //            viewModel.loginApi()
-            let vc = OTPViewController.instantiate(fromAppStoryboard: .Main)
-            vc.comingReason = .forgotPassword
-            self.navigationController?.pushViewController(vc, animated: true)
+        if viewModel.validFields(mobileIsSelected: mobileIsSelected ?? false) {
+            viewModel.forgotPasswordApi(isMobileSelected:mobileIsSelected ?? false)
         }
     }
     
@@ -44,6 +44,7 @@ class ForgotPasswordViewController: UIViewController {
         mobileView.isHidden = false
         emailView.isHidden = true
         mobileIsSelected = true
+        accountType = 0
     }
     
     @IBAction func emailDidTapped(_ sender: Any) {
@@ -52,7 +53,20 @@ class ForgotPasswordViewController: UIViewController {
         mobileView.isHidden = true
         emailView.isHidden = false
         mobileIsSelected = false
+        accountType = 1
     }
+    
+    @IBAction func btnTapCountryCode(_ sender: UIButton) {
+        CommonUtils.openPicker(controller: self) { _ , _, callingCode in
+            self.setUpCountryCode(code: callingCode)
+            self.countryCode = callingCode
+        }
+    }
+    
+    func setUpCountryCode(code:String)  {
+        self.txtCountryCode.text = code
+    }
+    
 }
 
 extension ForgotPasswordViewController: UITextFieldDelegate {

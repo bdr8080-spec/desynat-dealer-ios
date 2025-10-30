@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 class ForgotPasswordViewModel: NSObject {
-    
     private var hostVC: ForgotPasswordViewController
     
     init(hostVC: ForgotPasswordViewController) {
@@ -41,6 +40,33 @@ class ForgotPasswordViewModel: NSObject {
         
         hostVC.view.endEditing(true)
         return errorMessage == .none
+    }
+    
+    //Mark:->ForgotPasswordApi
+    func forgotPasswordApi(isMobileSelected:Bool){
+        var param: [String:Any] = [:]
+        
+        if isMobileSelected {
+            param = [
+                APIKeys.type:hostVC.accountType,
+                APIKeys.countryCode:hostVC.countryCode,
+                APIKeys.mobile:hostVC.mobileTextField.text ?? "",
+            ]
+        }else {
+            
+            param = [
+                APIKeys.type:hostVC.accountType,
+                APIKeys.email:hostVC.emailAddressTextField.text ?? ""
+            ]
+        }
+        
+        WebService.sharedInstance.forgotPasswordService(withParams:param) { user in
+            let vc = OTPViewController.instantiate(fromAppStoryboard: .Main)
+            vc.comingReason = .forgotPassword
+            vc.type = 1
+            vc.userId = user.id ?? 0
+            self.hostVC.navigationController?.pushViewController(vc, animated: true)
+        }
     }
 
 }

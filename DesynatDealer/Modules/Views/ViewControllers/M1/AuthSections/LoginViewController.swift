@@ -8,14 +8,13 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-
+    private lazy var viewModel = LoginViewModel(loginHostVC: self)
     @IBOutlet weak var emailMobileImageView: UIImageView!
     @IBOutlet weak var txtFieldLeading: NSLayoutConstraint!
     @IBOutlet weak var viewCountryCode: UIView!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
-    
-    private lazy var viewModel = LoginViewModel(loginHostVC: self)
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,8 +28,7 @@ class LoginViewController: UIViewController {
 
     @IBAction func loginDidTapped(_ sender: Any) {
         if viewModel.validFields() {
-//            viewModel.loginApi()
-            kSharedSceneDelegate.navigateToDealerHomeVc()
+            viewModel.loginApi()
         }
     }
     

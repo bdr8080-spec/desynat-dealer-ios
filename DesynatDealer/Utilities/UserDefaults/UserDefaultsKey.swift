@@ -13,6 +13,7 @@ enum UserDefaultsKey : String {
     case deviceToken
     case accessToken
     case sessionToken
+    case user
 }
 
 extension UserDefaults {

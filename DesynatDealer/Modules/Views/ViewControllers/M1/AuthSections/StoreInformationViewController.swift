@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import SDWebImage
 
 class StoreInformationViewController: UIViewController {
-
+    private lazy var viewModel = StoreInformationViewModel(hostVC:self)
     @IBOutlet weak var uploadStoreImageView: CustomImageView!
     @IBOutlet weak var storeNameTextField: UITextField!
     @IBOutlet weak var storeAddressTextField: UITextField!
@@ -18,8 +19,9 @@ class StoreInformationViewController: UIViewController {
     @IBOutlet weak var storeMailIDTextField: UITextField!
     @IBOutlet weak var bioTextView: UITextView!
     
-    lazy private var viewModel = StoreInformationViewModel(hostVC: self)
     var selectedStoreInformationImage: UIImage?
+    var userId = 0
+    var profileImage = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,22 +35,38 @@ class StoreInformationViewController: UIViewController {
     
     @IBAction func continueDidTapped(_ sender: Any) {
         if viewModel.validFields() {
-            let vc = UploadDocumnetViewController.instantiate(fromAppStoryboard: .Main)
-            self.navigationController?.pushViewController(vc, animated: true)
+            viewModel.storeInformationApi()
         }
     }
     
     @IBAction func addressDidTapped(_ sender: Any) {
         let vc = LocationViewController.instantiate(fromAppStoryboard: .Main)
+        vc.locationCallBack = { address,locality,lat,long in
+            self.storeAddressTextField.text = address
+        }
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func uploadStoreImageDidTapped(_ sender: Any) {
-        ImagePickerManager().pickImage(self) { [weak self] image, fileName, url in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.uploadStoreImageView.image = image
-                self.selectedStoreInformationImage = image
+//        ImagePickerManager().pickImage(self) { [weak self] image, fileName, url in
+//            guard let self = self else { return }
+//            DispatchQueue.main.async {
+//                self.uploadStoreImageView.image = image
+//                self.selectedStoreInformationImage = image
+//            }
+       // }
+        
+        ImagePickerHelper.shared.showPickerController {  image , imageName in
+            if let image = image {
+                WebService.sharedInstance.uploadImage(withParams: image) { imageURL in
+                    self.profileImage = imageURL.url ?? ""
+                    self.selectedStoreInformationImage = image
+                    print("image url--.\(self.profileImage)")
+                    if let url = URL(string: imageURL.url ?? "") {
+                        self.uploadStoreImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                        self.uploadStoreImageView.sd_setImage(with: url,placeholderImage: UIImage(named: "user_ic"))
+                    }
+                }
             }
         }
     }

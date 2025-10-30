@@ -8,7 +8,7 @@
 import UIKit
 
 class OTPViewController: UIViewController {
-
+    private lazy var viewModel = OTPViewModel(hostVC:self)
     // MARK: - Outlets
     @IBOutlet weak var stepTwoImageView: CustomImageView!
     @IBOutlet weak var view1: UIView!
@@ -26,6 +26,9 @@ class OTPViewController: UIViewController {
     @IBOutlet weak var timerView: UIView!
     @IBOutlet weak var resendView: UIView!
     @IBOutlet weak var labelTimer: UILabel!
+    var userId = 0
+    var otpDigits = ""
+    var type = 0
     
     // MARK: - Variables
     var remainingTime = 30
@@ -41,7 +44,7 @@ class OTPViewController: UIViewController {
         textField1.becomeFirstResponder()
     }
     
-
+    
     @IBAction func backDidTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -50,11 +53,9 @@ class OTPViewController: UIViewController {
         guard validation() else { return }
         switch comingReason {
         case .signup:
-            let vc = StoreInformationViewController.instantiate(fromAppStoryboard: .Main)
-            self.navigationController?.pushViewController(vc, animated: true)
+            viewModel.otpVerificationAPi()
         case .forgotPassword:
-            let vc = ResetPasswordViewController.instantiate(fromAppStoryboard: .Main)
-            self.navigationController?.pushViewController(vc, animated: true)
+            viewModel.otpVerificationAPi()
         }
     }
     
@@ -124,8 +125,7 @@ extension OTPViewController: UITextFieldDelegate {
             case textField3: textField4.becomeFirstResponder()
             case textField4: textField5.becomeFirstResponder()
             case textField5: textField6.becomeFirstResponder()
-            case textField6:
-                textField6.resignFirstResponder()
+            case textField6: textField6.resignFirstResponder()
             default: break
             }
         } else {
@@ -170,6 +170,8 @@ extension OTPViewController {
             showAlert(msg: "Please enter a valid 6-digit OTP.")
             return false
         }
+        
+        otpDigits = String.getString(textField1.text) + String.getString(textField2.text) + String.getString(textField3.text) + String.getString(textField4.text) + String.getString(textField5.text) + String.getString(textField6.text)
         
         print("Entered OTP: \(otpText)")
         return true

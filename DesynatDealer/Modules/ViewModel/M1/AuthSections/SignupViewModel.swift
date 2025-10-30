@@ -86,4 +86,30 @@ class SignupViewModel: NSObject {
         hostVC.view.endEditing(true)
         return errorMessage == .none
     }
+    
+    //Mark:->SignUpAPi
+    func signUpApi(){
+        let params:[String:Any] = [
+            APIKeys.profilePic:hostVC.profileImage,
+            APIKeys.firstName:hostVC.firstNameTextField.text ?? "",
+            APIKeys.countryCode:hostVC.countryCode,
+            APIKeys.lastName:hostVC.lastNameTextField.text ?? "",
+            APIKeys.mobile:hostVC.mobileTextField.text ?? "",
+            APIKeys.email:hostVC.emailTextField.text ?? "",
+            APIKeys.password:hostVC.txtCreatePassword.text ?? "",
+            APIKeys.confirmPassword:hostVC.txtConfirmPassword.text ?? "",
+            APIKeys.acceptTerms:"1",
+            APIKeys.deviceType:"1",
+            APIKeys.deviceToken:""
+        ]
+        
+        WebService.sharedInstance.signUpService(withParams:params) { user in
+            let vc = OTPViewController.instantiate(fromAppStoryboard: .Main)
+            vc.comingReason = .signup
+            vc.userId = user.id ?? 0
+            vc.type = 0
+            self.hostVC.navigationController?.pushViewController(vc, animated: true)
+
+        }
+    }
 }

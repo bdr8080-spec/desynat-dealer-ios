@@ -6,9 +6,9 @@
 //
 
 import UIKit
+import SDWebImage
 
 class SignupViewController: UIViewController {
-    
     @IBOutlet weak var profilePicImageView: CustomImageView!
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var txtCreatePassword: UITextField!
@@ -16,10 +16,13 @@ class SignupViewController: UIViewController {
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var mobileTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var txtCountryCode: UITextField!
     
     var isTermsAccepted: Bool = false
     var selectedImage: UIImage?
     lazy private var viewModel = SignupViewModel(hostVC: self)
+    var profileImage = ""
+    var countryCode = "+91"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,9 +32,7 @@ class SignupViewController: UIViewController {
     
     @IBAction func conitnueDidTapped(_ sender: Any) {
         if viewModel.validFields() {
-            let vc = OTPViewController.instantiate(fromAppStoryboard: .Main)
-            vc.comingReason = .signup
-            self.navigationController?.pushViewController(vc, animated: true)
+            viewModel.signUpApi()
         }
     }
     
@@ -55,12 +56,37 @@ class SignupViewController: UIViewController {
         txtConfirmPassword.isSecureTextEntry.toggle()
     }
     
+    
+    @IBAction func btnTapCountryCode(_ sender: UIButton) {
+        CommonUtils.openPicker(controller: self) { _ , _, callingCode in
+            self.setUpCountryCode(code: callingCode)
+            self.countryCode = callingCode
+        }
+    }
+    
+    func setUpCountryCode(code:String)  {
+        self.txtCountryCode.text = code
+    }
+    
     @IBAction func uploadProfilePicDidTapped(_ sender: Any) {
-        ImagePickerManager().pickImage(self) { [weak self] image, fileName, url in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.profilePicImageView.image = image
-                self.selectedImage = image
+//        ImagePickerManager().pickImage(self) { [weak self] image, fileName, url in
+//            guard let self = self else { return }
+//            DispatchQueue.main.async {
+//                self.profilePicImageView.image = image
+//                self.selectedImage = image
+//            }
+//        }
+        ImagePickerHelper.shared.showPickerController {  image , imageName in
+            if let image = image {
+                WebService.sharedInstance.uploadImage(withParams: image) { imageURL in
+                    self.profileImage = imageURL.url ?? ""
+                    self.selectedImage = image
+                    print("image url--.\(self.profileImage)")
+                    if let url = URL(string: imageURL.url ?? "") {
+                        self.profilePicImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                        self.profilePicImageView.sd_setImage(with: url,placeholderImage: UIImage(named: "user_ic"))
+                    }
+                }
             }
         }
     }

@@ -38,7 +38,7 @@ extension NetworkError : LocalizedError {
         case .noResponseData:
             return NSLocalizedString(AlertConstant.noResponse.value().localiz(), comment: "")
         case .invalidResponse(let err):
-            return NSLocalizedString(err?.msg ?? AlertConstant.wentWrong.value().localiz(), comment: "")
+            return NSLocalizedString(err?.message ?? AlertConstant.wentWrong.value().localiz(), comment: "")
         case .sessionExpired:
             return NSLocalizedString(AlertConstant.sessionExpired.value().localiz(), comment: "")
         case .noStatusCode:
@@ -61,12 +61,12 @@ struct BaseResponse<T: Decodable>: Decodable {
     var data: T
     var code:HTTPStatusCode?
     var success: Bool?
-    var msg: String?
+    var message: String?
     
     enum CodingKeys: String, CodingKey {
         case data
         case success
-        case msg
+        case message
     }
 }
 
@@ -74,17 +74,18 @@ struct ErrorResponse: Decodable {
     var code:HTTPStatusCode?
     var detail:[ErrorDetailResponse]?
     var error: String?
-    var msg: String?
+    var message: String?
     
     enum CodingKeys: String, CodingKey {
-        case code, error, msg
+        case code, error, message
         case detail = "details"
     }
 }
 
 struct ErrorDetailResponse: Decodable {
-    var msg:String?
+    var message:String?
 }
+
 
 enum HTTPStatusCode: Int, Decodable {
     case NoNetwork                = 00

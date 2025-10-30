@@ -17,11 +17,11 @@ class SelectLanguageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let vc = LocationPermissionViewController.instantiate(fromAppStoryboard: .Main)
-                vc.onPermissionCompletion = { [weak self] in
-                    self?.showNotificationPermission()
-                }
-                self.present(vc, animated: true)
+//        let vc = LocationPermissionViewController.instantiate(fromAppStoryboard: .Main)
+//        vc.onPermissionCompletion = { [weak self] in
+//            self?.showNotificationPermission()
+//        }
+//        self.present(vc, animated: true)
     }
     
     private func showNotificationPermission() {

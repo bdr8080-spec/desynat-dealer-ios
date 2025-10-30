@@ -59,4 +59,33 @@ class UploadDocumentViewModel: NSObject {
         hostVC.view.endEditing(true)
         return errorMessage == .none
     }
+    
+    //Mark:->UploadDocumentApi
+    func uploadDocumentApi(){
+        let owenerDocument:[String] = [
+            hostVC.imageOwnerDoc1,hostVC.imageOwnerDoc2
+        ]
+        
+        let storeDocument:[String] = [
+            hostVC.imageStoreDoc1,hostVC.imageStoreDoc2
+        ]
+        
+        
+        let param:[String:Any] = [
+            APIKeys.userId:hostVC.userId,
+            APIKeys.ownerDocument:owenerDocument,
+            APIKeys.storeDocument:storeDocument,
+            APIKeys.accountType:hostVC.accountType,
+            APIKeys.iban:hostVC.ibanTextField.text ?? "",
+            APIKeys.swift:hostVC.swiftTextField.text ?? "",
+            APIKeys.bankName:hostVC.bankNameTextField.text ?? "",
+            APIKeys.accountHolderName:hostVC.accountHolderTextField.text ?? "",
+            APIKeys.uploadProof:hostVC.imageAccountHolderDoc
+        ]
+        WebService.sharedInstance.uploadDocumentService(withParams:param) { user in
+            let vc = AccountCreationDoneViewController.instantiate(fromAppStoryboard: .Main)
+            self.hostVC.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
 }

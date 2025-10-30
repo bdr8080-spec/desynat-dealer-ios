@@ -56,4 +56,26 @@ class StoreInformationViewModel: NSObject {
             hostVC.view.endEditing(true)
             return errorMessage == .none
         }
+    
+    
+    //Mark:->storeInformationApi
+    func storeInformationApi(){
+        let param:[String:Any] = [
+            APIKeys.userId:hostVC.userId,
+            APIKeys.storeImage:hostVC.profileImage,
+            APIKeys.storeName:hostVC.storeNameTextField.text ?? "",
+            APIKeys.storeAddress:hostVC.storeAddressTextField.text ?? "",
+            APIKeys.addressLine1:hostVC.addressLineOneTextField.text ?? "",
+            APIKeys.addressLine2:hostVC.addressLineTwoTextField.text ?? "",
+            APIKeys.storePhone:hostVC.storePhoneNumberTextField.text ?? "",
+            APIKeys.storeMailID:hostVC.storeMailIDTextField.text ?? "",
+            APIKeys.bio:hostVC.bioTextView.text ?? ""
+        ]
+        WebService.sharedInstance.storeInformationService(withParams:param) { user in
+            let vc = UploadDocumnetViewController.instantiate(fromAppStoryboard: .Main)
+            vc.userId = user.sellerID ?? ""
+            self.hostVC.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
 }

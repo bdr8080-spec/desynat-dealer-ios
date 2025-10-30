@@ -1,8 +1,8 @@
 import Foundation
 
 enum BaseURL {
-    static let development  = "http://157.241.19.182:5001/api/v1/"
-    static let release      = "http://157.241.19.182:5001/api/v1/"
+    static let development  = "http://157.241.119.72"
+    static let release      = "http://157.241.119.72"
     
     static func value() -> String {
         switch BuildConfiguration.shared.environment {
@@ -17,6 +17,14 @@ enum BaseURL {
 enum NetworkEndPoint: String {
     
     case register                     = "user-registration/basic-registration"
+    case uploadImage                  = "/api/upload"
+    case createAccount                = "/api/seller/create_account"
+    case otpVerification              = "/api/seller/verify_otp"
+    case storeInformation             = "/api/seller/store_information"
+    case uploadDocument               = "/api/seller/store_document_and_bank_details"
+    case login                        = "/api/seller/login"
+    case createPassword               = "/api/seller/create_password"
+    case forgotPassword               = "/api/seller/forgot_password"
     
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"
