@@ -10,6 +10,7 @@ import GoogleMaps
 import IQKeyboardManagerSwift
 import GooglePlaces
 import UserNotifications
+import DropDown
 
 
 @main
@@ -18,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var forOpenFilePickerView = ""
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        LocationManager.sharedInstance.startUpdatingLocation()
         IQKeyboardManager.shared.enableAutoToolbar = true
         IQKeyboardManager.shared.isEnabled = true
         UNUserNotificationCenter.current().delegate = self
@@ -41,6 +42,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
+    func dropDown(dataSource:[String] , anchorView:UIView , completion: @escaping (  _ index: Int ,  _ item: String) -> ()) -> Void {
+        let dropDown = DropDown()
+        dropDown.anchorView = anchorView
+        dropDown.dataSource = dataSource
+        dropDown.backgroundColor = UIColor.white
+        dropDown.textColor = .black
+        dropDown.direction = .bottom
+        dropDown.selectionBackgroundColor = UIColor.white
+        dropDown.selectedTextColor = .black
+        dropDown.bottomOffset = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
+        dropDown.dismissMode = .automatic
+        dropDown.show()
+        dropDown.selectionAction = {(index: Int, item: String) in
+            print("Selected item: \(item) at index: \(index)")
+            completion(index,item)
+            
+        }
+    }
 
 }
 

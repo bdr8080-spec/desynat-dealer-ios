@@ -83,7 +83,8 @@ class UploadDocumentViewModel: NSObject {
             APIKeys.uploadProof:hostVC.imageAccountHolderDoc
         ]
         WebService.sharedInstance.uploadDocumentService(withParams:param) { user in
-            let vc = AccountCreationDoneViewController.instantiate(fromAppStoryboard: .Main)
+            let vc = SummaryViewController.instantiate(fromAppStoryboard: .Main)
+            vc.userId = user.userID ?? ""
             self.hostVC.navigationController?.pushViewController(vc, animated: true)
         }
     }

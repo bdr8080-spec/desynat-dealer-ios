@@ -46,7 +46,29 @@ extension WebService {
                     }
                     return
                 }
-               // kSharedUserDefaults.saveValue(Key: .accessToken, value: String.getString(user.access_token))
+                kSharedUserDefaults.saveValue(Key: .accessToken, value: String.getString(user.accessToken))
+                print(user)
+                kSharedUserDefaults.saveModelFor(key:.user, value: user)
+                CommonUtils.showToast(message: message ?? "")
+                completion(user)
+            }
+        }
+    }
+    
+    func resendOtpService(withParams dictParams: Dictionary<String, Any>,
+                      completion:@escaping (_ user:User)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.resendOtp), requestMethod: .post, requestParams: dictParams,encoding: JSONEncoding.default,requestModel:User.self) { result, code in
+            
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                kSharedUserDefaults.saveValue(Key: .accessToken, value: String.getString(user.accessToken))
                 print(user)
                 kSharedUserDefaults.saveModelFor(key:.user, value: user)
                 CommonUtils.showToast(message: message ?? "")
@@ -78,9 +100,53 @@ extension WebService {
     }
     
     func uploadDocumentService(withParams dictParams: Dictionary<String, Any>,
-                      completion:@escaping (_ user:UploadDocumentModel)-> Void) {
+                               completion:@escaping (_ user:UploadDocumentModel)-> Void) {
         CommonUtils.showHud(show: true)
         NetworkManager.shared.request(withAPI:.endpoint(.uploadDocument), requestMethod: .post, requestParams: dictParams,encoding: JSONEncoding.default,requestModel:UploadDocumentModel.self) { result, code in
+            
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                // kSharedUserDefaults.saveValue(Key: .accessToken, value: String.getString(user.access_token))
+                print(user)
+                //kSharedUserDefaults.saveModelFor(key:.user, value: user)
+                CommonUtils.showToast(message: message ?? "")
+                completion(user)
+            }
+        }
+    }
+    
+    func summaryService(withParams dictParams: Dictionary<String, Any>,
+                      completion:@escaping (_ user:SummaryModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.summary), requestMethod: .post, requestParams: dictParams,encoding: JSONEncoding.default,requestModel:SummaryModel.self) { result, code in
+            
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+               // kSharedUserDefaults.saveValue(Key: .accessToken, value: String.getString(user.access_token))
+                print(user)
+              //  kSharedUserDefaults.saveModelFor(key:.user, value: user)
+                CommonUtils.showToast(message: message ?? "")
+                completion(user)
+            }
+        }
+    }
+    
+    func submitSummaryService(withParams dictParams: Dictionary<String, Any>,
+                      completion:@escaping (_ user:User)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.submitSummary), requestMethod: .post, requestParams: dictParams,encoding: JSONEncoding.default,requestModel:User.self) { result, code in
             
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
@@ -98,6 +164,7 @@ extension WebService {
             }
         }
     }
+    
     
     func loginService(withParams dictParams: Dictionary<String, Any>,
                       completion:@escaping (_ user:User)-> Void) {
@@ -165,5 +232,46 @@ extension WebService {
         }
     }
     
+    func logoutService(completion:@escaping (_ user:EmptyModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.logout), requestMethod: .get,requestModel:EmptyModel.self) { result, code in
+            
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+               // kSharedUserDefaults.saveValue(Key: .accessToken, value: String.getString(user.access_token))
+                print(user)
+                //kSharedUserDefaults.saveModelFor(key:.user, value: user)
+                CommonUtils.showToast(message: message ?? "")
+                completion(user)
+            }
+        }
+    }
+    
+    func countryListService(completion:@escaping (_ user:[CountryModel])-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.logout), requestMethod: .get,requestModel:[CountryModel].self) { result, code in
+            
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+               // kSharedUserDefaults.saveValue(Key: .accessToken, value: String.getString(user.access_token))
+                print(user)
+                //kSharedUserDefaults.saveModelFor(key:.user, value: user)
+                CommonUtils.showToast(message: message ?? "")
+                completion(user)
+            }
+        }
+    }
     
 }

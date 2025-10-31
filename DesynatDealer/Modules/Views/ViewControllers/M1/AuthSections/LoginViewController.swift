@@ -14,8 +14,10 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var viewCountryCode: UIView!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
+    @IBOutlet weak var txtCountryCode: UILabel!
+    var countryCode = ""
+    var type = 0
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         txtPassword.isSecureTextEntry = true
@@ -51,6 +53,17 @@ class LoginViewController: UIViewController {
         sender.isSelected.toggle()
         txtPassword.isSecureTextEntry.toggle()
     }
+    
+    @IBAction func btnTapCountryCode(_ sender: UIButton) {
+        CommonUtils.openPicker(controller: self) { _ , _, callingCode in
+            self.setUpCountryCode(code: callingCode)
+            self.countryCode = callingCode
+        }
+    }
+    
+    func setUpCountryCode(code:String)  {
+        self.txtCountryCode.text = code
+    }
 }
 
 extension LoginViewController: UITextFieldDelegate {
@@ -70,11 +83,14 @@ extension LoginViewController: UITextFieldDelegate {
                 emailMobileImageView.image = UIImage(named: "email")
                 self.txtFieldLeading.constant = -55
                 validation = StringValidation(string: currentText, characterCount: 55, validation: .emailId)
+                self.type = 1
+                self.countryCode = ""
             } else {
                 self.viewCountryCode.isHidden = false
                 emailMobileImageView.image = UIImage(named: "phone")
                 self.txtFieldLeading.constant = 12
                 validation = StringValidation(string: currentText, characterCount: 15, validation: .mobileNo)
+                self.type = 0
             }
     
             if let data = validation {

@@ -29,6 +29,8 @@ class OTPViewController: UIViewController {
     var userId = 0
     var otpDigits = ""
     var type = 0
+    var emailMobileType = 0
+    var email = ""
     
     // MARK: - Variables
     var remainingTime = 30
@@ -60,7 +62,7 @@ class OTPViewController: UIViewController {
     }
     
     @IBAction func buttonResend(_ sender: UIButton) {
-        startTimer()
+        viewModel.resendOtpApi()
     }
     
     func initialSetUp() {

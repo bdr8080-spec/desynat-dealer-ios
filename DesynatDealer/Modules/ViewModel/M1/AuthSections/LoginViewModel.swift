@@ -54,8 +54,10 @@ class LoginViewModel: NSObject {
     
     func loginApi() {
         let params: [String:Any] = [
-            APIKeys.emailMobile: loginHostVC.emailTextField.text ?? "",
-            APIKeys.password: loginHostVC.txtPassword.text ?? ""
+            APIKeys.countryCode:loginHostVC.countryCode,
+            APIKeys.emailMobile:loginHostVC.emailTextField.text ?? "",
+            APIKeys.password: loginHostVC.txtPassword.text ?? "",
+            APIKeys.type:loginHostVC.type
         ]
         WebService.sharedInstance.loginService(withParams: params) { (response) in
             kSharedSceneDelegate.navigateToDealerHomeVc()

@@ -10,6 +10,7 @@ import UIKit
 
 class StoreInformationViewModel: NSObject {
     private var hostVC: StoreInformationViewController
+    var countryList:[CountryModel] = []
     
     init(hostVC: StoreInformationViewController) {
         self.hostVC = hostVC
@@ -64,6 +65,7 @@ class StoreInformationViewModel: NSObject {
             APIKeys.userId:hostVC.userId,
             APIKeys.storeImage:hostVC.profileImage,
             APIKeys.storeName:hostVC.storeNameTextField.text ?? "",
+            APIKeys.country:hostVC.countryId,
             APIKeys.storeAddress:hostVC.storeAddressTextField.text ?? "",
             APIKeys.addressLine1:hostVC.addressLineOneTextField.text ?? "",
             APIKeys.addressLine2:hostVC.addressLineTwoTextField.text ?? "",
@@ -75,6 +77,12 @@ class StoreInformationViewModel: NSObject {
             let vc = UploadDocumnetViewController.instantiate(fromAppStoryboard: .Main)
             vc.userId = user.sellerID ?? ""
             self.hostVC.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    func countryListApi(){
+        WebService.sharedInstance.countryListService { list in
+            self.countryList = list
         }
     }
     

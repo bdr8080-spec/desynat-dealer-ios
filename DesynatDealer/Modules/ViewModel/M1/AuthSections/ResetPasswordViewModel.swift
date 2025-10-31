@@ -44,24 +44,22 @@ class ResetPasswordViewModel: NSObject {
             return errorMessage == .none
         }
     
-//    func ResetPassApi() {
-//        let params: [String: Any] = [
-//            APIKeys.userId: hostVC.id,
-//            APIKeys.password: hostVC.txtNewPass.text ?? ""
-//        ]
-//        
-//        WebService.sharedInstance.forgotResetPass(withParams: params) { user in
-//            switch self.hostVC.hasCome {
-//            case .agentResetPass:
-//                kSharedSceneDelegate.navigateToAgentLoginVc()
-//            case .landlordResetPass:
-//                kSharedSceneDelegate.navigateToLandLordLoginVc()
-//            case .none:
-//                break
-//            }
-//            
-//        }
-//    }
+    func ResetPassApi() {
+        let params: [String: Any] = [
+            APIKeys.userId: hostVC.id,
+            APIKeys.password: hostVC.txtCreatePassword.text ?? "",
+            APIKeys.confirmPassword:hostVC.txtConfirmPassword.text ?? ""
+        ]
+        
+        WebService.sharedInstance.createPasswordService(withParams: params) { user in
+            let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
+            vc.comingReason = .passwordUpdated
+            vc.callBackDismiss = {
+                self.hostVC.navigationController?.popToViewController(ofClass: LoginViewController.self, animated: true)
+            }
+            self.hostVC.navigationController?.present(vc, animated: true)
+        }
+    }
 }
 
 extension ResetPasswordViewController: UITextFieldDelegate {

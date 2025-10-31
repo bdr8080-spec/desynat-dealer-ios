@@ -16,7 +16,8 @@ class SelectLanguageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        LocationManager.sharedInstance.startUpdatingLocation()
+        
 //        let vc = LocationPermissionViewController.instantiate(fromAppStoryboard: .Main)
 //        vc.onPermissionCompletion = { [weak self] in
 //            self?.showNotificationPermission()

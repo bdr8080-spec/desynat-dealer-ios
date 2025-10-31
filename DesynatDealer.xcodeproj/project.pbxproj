@@ -12,11 +12,7 @@
 		6B38D0D52EB3473B00C41192 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B38D0422EB3473B00C41192 /* AppDelegate.swift */; };
 		6B38D0D62EB3473B00C41192 /* NavigationSceneExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B38D0432EB3473B00C41192 /* NavigationSceneExt.swift */; };
 		6B38D0D72EB3473B00C41192 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B38D0442EB3473B00C41192 /* SceneDelegate.swift */; };
-		6B38D0D82EB3473B00C41192 /* CallingLeadFunnel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B38D0462EB3473B00C41192 /* CallingLeadFunnel.swift */; };
-		6B38D0D92EB3473B00C41192 /* CRMModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B38D0472EB3473B00C41192 /* CRMModel.swift */; };
-		6B38D0DA2EB3473B00C41192 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B38D0482EB3473B00C41192 /* Order.swift */; };
 		6B38D0DB2EB3473B00C41192 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B38D0492EB3473B00C41192 /* SignUpModel.swift */; };
-		6B38D0DC2EB3473B00C41192 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B38D04A2EB3473B00C41192 /* UserModel.swift */; };
 		6B38D0DD2EB3473B00C41192 /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B38D04C2EB3473B00C41192 /* ForgotPasswordViewModel.swift */; };
 		6B38D0DE2EB3473B00C41192 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B38D04D2EB3473B00C41192 /* LocationViewModel.swift */; };
 		6B38D0DF2EB3473B00C41192 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B38D04E2EB3473B00C41192 /* LoginViewModel.swift */; };
@@ -82,7 +78,6 @@
 		6B38D11B2EB3473B00C41192 /* NetworkURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B38D0BF2EB3473B00C41192 /* NetworkURL.swift */; };
 		6B38D11C2EB3473B00C41192 /* SocialLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B38D0C12EB3473B00C41192 /* SocialLoginManager.swift */; };
 		6B38D11D2EB3473B00C41192 /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B38D0C32EB3473B00C41192 /* UserDefaultsKey.swift */; };
-		6B38D11E2EB3473B00C41192 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B38D0C52EB3473B00C41192 /* GlobalVariables.swift */; };
 		6B38D11F2EB3473B00C41192 /* StringConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B38D0C62EB3473B00C41192 /* StringConstant.swift */; };
 		6B38D1212EB3473B00C41192 /* AuthenticationWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B38D0CA2EB3473B00C41192 /* AuthenticationWebService.swift */; };
 		6B38D1222EB3473B00C41192 /* CRMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B38D0CB2EB3473B00C41192 /* CRMService.swift */; };
@@ -571,6 +566,9 @@
 		6B38D4D12EB3657F00C41192 /* ADCountryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B38D1432EB3657E00C41192 /* ADCountryPicker.swift */; };
 		6B38D4D22EB3657F00C41192 /* ADCountry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B38D1422EB3657E00C41192 /* ADCountry.swift */; };
 		6B38D4D42EB36FCD00C41192 /* OTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B38D4D32EB36FCD00C41192 /* OTPViewModel.swift */; };
+		6B645F582EB4953500451A5A /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B645F572EB4953500451A5A /* SummaryViewController.swift */; };
+		6B645F5A2EB4955B00451A5A /* SummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B645F592EB4955B00451A5A /* SummaryViewModel.swift */; };
+		6B645F5C2EB4C84300451A5A /* GlobalVariables 2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B645F5B2EB4C84300451A5A /* GlobalVariables 2.swift */; };
 		CF670A9299A5979395DF398F /* Pods_DesynatDealer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40FCC5FE2116BF815C4B1BFB /* Pods_DesynatDealer.framework */; };
 /* End PBXBuildFile section */
 
@@ -582,11 +580,7 @@
 		6B38D0422EB3473B00C41192 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6B38D0432EB3473B00C41192 /* NavigationSceneExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationSceneExt.swift; sourceTree = "<group>"; };
 		6B38D0442EB3473B00C41192 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		6B38D0462EB3473B00C41192 /* CallingLeadFunnel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallingLeadFunnel.swift; sourceTree = "<group>"; };
-		6B38D0472EB3473B00C41192 /* CRMModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRMModel.swift; sourceTree = "<group>"; };
-		6B38D0482EB3473B00C41192 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		6B38D0492EB3473B00C41192 /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
-		6B38D04A2EB3473B00C41192 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		6B38D04C2EB3473B00C41192 /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 		6B38D04D2EB3473B00C41192 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		6B38D04E2EB3473B00C41192 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -676,7 +670,6 @@
 		6B38D0BF2EB3473B00C41192 /* NetworkURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkURL.swift; sourceTree = "<group>"; };
 		6B38D0C12EB3473B00C41192 /* SocialLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginManager.swift; sourceTree = "<group>"; };
 		6B38D0C32EB3473B00C41192 /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
-		6B38D0C52EB3473B00C41192 /* GlobalVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
 		6B38D0C62EB3473B00C41192 /* StringConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstant.swift; sourceTree = "<group>"; };
 		6B38D0CA2EB3473B00C41192 /* AuthenticationWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationWebService.swift; sourceTree = "<group>"; };
 		6B38D0CB2EB3473B00C41192 /* CRMService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRMService.swift; sourceTree = "<group>"; };
@@ -1143,6 +1136,9 @@
 		6B38D3082EB3657E00C41192 /* ZM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ZM.png; sourceTree = "<group>"; };
 		6B38D3092EB3657E00C41192 /* ZW.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ZW.png; sourceTree = "<group>"; };
 		6B38D4D32EB36FCD00C41192 /* OTPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPViewModel.swift; sourceTree = "<group>"; };
+		6B645F572EB4953500451A5A /* SummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewController.swift; sourceTree = "<group>"; };
+		6B645F592EB4955B00451A5A /* SummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewModel.swift; sourceTree = "<group>"; };
+		6B645F5B2EB4C84300451A5A /* GlobalVariables 2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GlobalVariables 2.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1190,11 +1186,7 @@
 		6B38D04B2EB3473B00C41192 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
-				6B38D0462EB3473B00C41192 /* CallingLeadFunnel.swift */,
-				6B38D0472EB3473B00C41192 /* CRMModel.swift */,
-				6B38D0482EB3473B00C41192 /* Order.swift */,
 				6B38D0492EB3473B00C41192 /* SignUpModel.swift */,
-				6B38D04A2EB3473B00C41192 /* UserModel.swift */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -1210,6 +1202,7 @@
 				6B38D0512EB3473B00C41192 /* StoreInformationViewModel.swift */,
 				6B38D0522EB3473B00C41192 /* UploadDocumentViewModel.swift */,
 				6B38D4D32EB36FCD00C41192 /* OTPViewModel.swift */,
+				6B645F592EB4955B00451A5A /* SummaryViewModel.swift */,
 			);
 			path = AuthSections;
 			sourceTree = "<group>";
@@ -1259,6 +1252,7 @@
 				6B38D0682EB3473B00C41192 /* StoreInformationViewController.swift */,
 				6B38D0692EB3473B00C41192 /* UploadDocumnetViewController.swift */,
 				6B38D06A2EB3473B00C41192 /* WelcomeScreenViewController.swift */,
+				6B645F572EB4953500451A5A /* SummaryViewController.swift */,
 			);
 			path = AuthSections;
 			sourceTree = "<group>";
@@ -1533,7 +1527,7 @@
 		6B38D0C72EB3473B00C41192 /* UtilAndConstants */ = {
 			isa = PBXGroup;
 			children = (
-				6B38D0C52EB3473B00C41192 /* GlobalVariables.swift */,
+				6B645F5B2EB4C84300451A5A /* GlobalVariables 2.swift */,
 				6B38D0C62EB3473B00C41192 /* StringConstant.swift */,
 			);
 			path = UtilAndConstants;
@@ -2098,7 +2092,6 @@
 			name = DesynatDealer;
 			packageProductDependencies = (
 				493DB73C2EAA6261008098A8 /* Alamofire */,
-				493DB73E2EAA6261008098A8 /* AlamofireDynamic */,
 				49DBE47B2EB082D500DE95E8 /* IQKeyboardManagerSwift */,
 			);
 			productName = DesynatDealer;
@@ -2705,12 +2698,9 @@
 				6B38D0D52EB3473B00C41192 /* AppDelegate.swift in Sources */,
 				6B38D0D62EB3473B00C41192 /* NavigationSceneExt.swift in Sources */,
 				6B38D0D72EB3473B00C41192 /* SceneDelegate.swift in Sources */,
-				6B38D0D82EB3473B00C41192 /* CallingLeadFunnel.swift in Sources */,
-				6B38D0D92EB3473B00C41192 /* CRMModel.swift in Sources */,
 				6B38D4D42EB36FCD00C41192 /* OTPViewModel.swift in Sources */,
-				6B38D0DA2EB3473B00C41192 /* Order.swift in Sources */,
+				6B645F582EB4953500451A5A /* SummaryViewController.swift in Sources */,
 				6B38D0DB2EB3473B00C41192 /* SignUpModel.swift in Sources */,
-				6B38D0DC2EB3473B00C41192 /* UserModel.swift in Sources */,
 				6B38D0DD2EB3473B00C41192 /* ForgotPasswordViewModel.swift in Sources */,
 				6B38D0DE2EB3473B00C41192 /* LocationViewModel.swift in Sources */,
 				6B38D0DF2EB3473B00C41192 /* LoginViewModel.swift in Sources */,
@@ -2723,6 +2713,7 @@
 				6B38D0E62EB3473B00C41192 /* ForgotPasswordViewController.swift in Sources */,
 				6B38D0E72EB3473B00C41192 /* LocationPermissionViewController.swift in Sources */,
 				6B38D0E82EB3473B00C41192 /* LocationViewController.swift in Sources */,
+				6B645F5C2EB4C84300451A5A /* GlobalVariables 2.swift in Sources */,
 				6B38D0E92EB3473B00C41192 /* LoginViewController.swift in Sources */,
 				6B38D0EA2EB3473B00C41192 /* MediaPermissionViewController.swift in Sources */,
 				6B38D0EB2EB3473B00C41192 /* NotificationPermissionViewController.swift in Sources */,
@@ -2733,6 +2724,7 @@
 				6B38D0F02EB3473B00C41192 /* SignupViewController.swift in Sources */,
 				6B38D0F12EB3473B00C41192 /* StoreInformationViewController.swift in Sources */,
 				6B38D0F22EB3473B00C41192 /* UploadDocumnetViewController.swift in Sources */,
+				6B645F5A2EB4955B00451A5A /* SummaryViewModel.swift in Sources */,
 				6B38D0F32EB3473B00C41192 /* WelcomeScreenViewController.swift in Sources */,
 				6B38D0F42EB3473B00C41192 /* HomeViewController.swift in Sources */,
 				6B38D0F52EB3473B00C41192 /* OrdersViewController.swift in Sources */,
@@ -2778,7 +2770,6 @@
 				6B38D4D12EB3657F00C41192 /* ADCountryPicker.swift in Sources */,
 				6B38D4D22EB3657F00C41192 /* ADCountry.swift in Sources */,
 				6B38D11D2EB3473B00C41192 /* UserDefaultsKey.swift in Sources */,
-				6B38D11E2EB3473B00C41192 /* GlobalVariables.swift in Sources */,
 				6B38D11F2EB3473B00C41192 /* StringConstant.swift in Sources */,
 				6B38D1212EB3473B00C41192 /* AuthenticationWebService.swift in Sources */,
 				6B38D1222EB3473B00C41192 /* CRMService.swift in Sources */,
@@ -2818,6 +2809,11 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 6QKUQGN93F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DesynatDealer/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "this app needs to take picture";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = Allow;
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = Allow;
+				INFOPLIST_KEY_NSLocationUsageDescription = Allow;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = Allow;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -2829,10 +2825,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Rakhi.DesynatDealer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.DesynatDealer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Avora Provisioning New";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Desynat Dealer";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2853,6 +2849,11 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 6QKUQGN93F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DesynatDealer/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "this app needs to take picture";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = Allow;
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = Allow;
+				INFOPLIST_KEY_NSLocationUsageDescription = Allow;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = Allow;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -2864,10 +2865,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Rakhi.DesynatDealer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.DesynatDealer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Avora Provisioning New";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Desynat Dealer";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3042,11 +3043,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 493DB73B2EAA6261008098A8 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
-		};
-		493DB73E2EAA6261008098A8 /* AlamofireDynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 493DB73B2EAA6261008098A8 /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = AlamofireDynamic;
 		};
 		49DBE47B2EB082D500DE95E8 /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -29,8 +29,22 @@ class OTPViewModel:NSObject{
                 self.hostVC.navigationController?.pushViewController(vc, animated: true)
             }else{
                 let vc = ResetPasswordViewController.instantiate(fromAppStoryboard: .Main)
+                vc.id = user.id ?? 0
                 self.hostVC.navigationController?.pushViewController(vc, animated: true)
             }
         }
     }
+    
+    //Mark:->ResendOtpAPi
+    func resendOtpApi(){
+        var param:[String:Any] = [
+            APIKeys.emailMobile:hostVC.email,
+            APIKeys.type:hostVC.emailMobileType
+        ]
+        
+        WebService.sharedInstance.resendOtpService(withParams:param) { user in
+            self.hostVC.startTimer()
+        }
+    }
+    
 }

@@ -12,8 +12,15 @@ import Foundation
 enum UserDefaultsKey : String {
     case deviceToken
     case accessToken
-    case sessionToken
+    case userLocation
     case user
+    case isSkip
+    case documents
+    case address
+    case selectedLanguage
+    case defaultLanguge
+    case language
+    case sessionToken
 }
 
 extension UserDefaults {
@@ -64,6 +71,22 @@ extension UserDefaults {
     func clearData(key:UserDefaultsKey) {
         self.removeObject(forKey: key.rawValue)
         self.synchronize()
+    }
+    
+    func getModelFor<T:Decodable>(key:UserDefaultsKey,
+                                  model:T.Type,
+                                  completion:@escaping(_ result:Result<T, UserDefaulError>) -> Void) {
+        if let data = self.object(forKey: key.rawValue) as? Data {
+            do {
+                let response = try JSONDecoder().decode(model, from: data)
+                completion(.success(response))
+            } catch let err {
+                printInConsole("Error Fetching model from user default\n\(err)")
+                completion(.failure(.errorDecodingData))
+            }
+        } else {
+            completion(.failure(.noDataFound))
+        }
     }
 }
 

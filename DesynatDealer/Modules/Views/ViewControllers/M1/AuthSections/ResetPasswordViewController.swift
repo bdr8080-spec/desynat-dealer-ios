@@ -8,11 +8,10 @@
 import UIKit
 
 class ResetPasswordViewController: UIViewController {
-    
+    lazy private var viewModel = ResetPasswordViewModel(hostVC: self)
     @IBOutlet weak var txtCreatePassword: UITextField!
     @IBOutlet weak var txtConfirmPassword: UITextField!
-    
-    lazy private var viewModel = ResetPasswordViewModel(hostVC: self)
+    var id = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,15 +22,8 @@ class ResetPasswordViewController: UIViewController {
     
     @IBAction func doneDidTapped(_ sender: Any) {
         if viewModel.validFields() {
-//            viewModel.ResetPassApi()
-            let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
-            vc.comingReason = .passwordUpdated
-            vc.callBackDismiss = {
-                self.navigationController?.popToViewController(ofClass: LoginViewController.self, animated: true)
-            }
-            self.navigationController?.present(vc, animated: true)
+            viewModel.ResetPassApi()
         }
-       
     }
     
     @IBAction func backDidTapped(_ sender: Any) {

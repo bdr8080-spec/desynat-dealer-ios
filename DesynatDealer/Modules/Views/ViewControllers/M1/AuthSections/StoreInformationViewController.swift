@@ -18,15 +18,18 @@ class StoreInformationViewController: UIViewController {
     @IBOutlet weak var storePhoneNumberTextField: UITextField!
     @IBOutlet weak var storeMailIDTextField: UITextField!
     @IBOutlet weak var bioTextView: UITextView!
+    @IBOutlet weak var txtCountry: UITextField!
     
     var selectedStoreInformationImage: UIImage?
     var userId = 0
     var profileImage = ""
+    var countryId = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         storePhoneNumberTextField.delegate = self
         storeMailIDTextField.delegate = self
+        viewModel.countryListApi()
     }
     
     @IBAction func backDidTapped(_ sender: Any) {
@@ -45,6 +48,15 @@ class StoreInformationViewController: UIViewController {
             self.storeAddressTextField.text = address
         }
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func btnTapCountry(_ sender: UIButton) {
+        let countryNames = viewModel.countryList.map { $0.name ?? ""}
+        kSharedAppDelegate.dropDown(dataSource:countryNames, anchorView:sender) { index, item in
+            self.txtCountry.text = item
+            let selectedCountryId = self.viewModel.countryList[index]
+            self.countryId = selectedCountryId.id ?? 0
+        }
     }
     
     @IBAction func uploadStoreImageDidTapped(_ sender: Any) {

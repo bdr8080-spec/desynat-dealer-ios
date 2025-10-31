@@ -33,28 +33,36 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         locationManager.requestWhenInUseAuthorization()
     }
     
+//    func startUpdatingLocation() {
+//        if #available(iOS 14.0, *) {
+//            switch locationManager.authorizationStatus {
+//            case .notDetermined:
+//                locationManager.requestWhenInUseAuthorization()
+//            case .authorizedWhenInUse, .authorizedAlways:
+//                locationManager.startUpdatingLocation()
+//            case .denied, .restricted:
+//                print("❌ Location permission denied")
+//            @unknown default:
+//                break
+//            }
+//        } else {
+//            switch CLLocationManager.authorizationStatus() {
+//            case .notDetermined:
+//                locationManager.requestWhenInUseAuthorization()
+//            case .authorizedWhenInUse, .authorizedAlways:
+//                locationManager.startUpdatingLocation()
+//            default:
+//                break
+//            }
+//        }
+//    }
+    
     func startUpdatingLocation() {
-        if #available(iOS 14.0, *) {
-            switch locationManager.authorizationStatus {
-            case .notDetermined:
-                locationManager.requestWhenInUseAuthorization()
-            case .authorizedWhenInUse, .authorizedAlways:
-                locationManager.startUpdatingLocation()
-            case .denied, .restricted:
-                print("❌ Location permission denied")
-            @unknown default:
-                break
-            }
-        } else {
-            switch CLLocationManager.authorizationStatus() {
-            case .notDetermined:
-                locationManager.requestWhenInUseAuthorization()
-            case .authorizedWhenInUse, .authorizedAlways:
-                locationManager.startUpdatingLocation()
-            default:
-                break
-            }
-        }
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
