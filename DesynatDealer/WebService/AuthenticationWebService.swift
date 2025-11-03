@@ -255,7 +255,7 @@ extension WebService {
     
     func countryListService(completion:@escaping (_ user:[CountryModel])-> Void) {
         CommonUtils.showHud(show: true)
-        NetworkManager.shared.request(withAPI:.endpoint(.logout), requestMethod: .get,requestModel:[CountryModel].self) { result, code in
+        NetworkManager.shared.request(withAPI:.endpoint(.country), requestMethod: .get,requestModel:[CountryModel].self) { result, code in
             
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in

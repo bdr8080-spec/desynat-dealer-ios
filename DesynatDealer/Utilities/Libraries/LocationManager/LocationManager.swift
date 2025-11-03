@@ -92,4 +92,25 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
             self.getPickCity = pm.locality ?? ""
         }
     }
+    
+    func getCurrentLocationCode() -> ADCountry {
+        var countryCode = (Locale.current as NSLocale).object(forKey: .countryCode) as? String ?? "US"
+        
+        var CallingCodes = { () -> [[String: String]] in
+            let resourceBundle = Bundle(for: ADCountryPicker.classForCoder())
+            guard let path = resourceBundle.path(forResource: "CallingCodes", ofType: "plist") else { return [] }
+            return NSArray(contentsOfFile: path) as! [[String: String]]
+        }()
+        
+        let locale = Locale.current
+        let displayName = (locale as NSLocale).displayName(forKey: NSLocale.Key.countryCode, value: countryCode)
+        let countryData = CallingCodes.filter { $0["code"] == countryCode }
+        let country: ADCountry
+        
+        if countryData.count > 0, let dialCode = countryData[0]["dial_code"] {
+            return ADCountry(name: displayName!, code: countryCode, dialCode: dialCode)
+        } else {
+            return ADCountry(name: displayName!, code: countryCode)
+        }
+    }
 }

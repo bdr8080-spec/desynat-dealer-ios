@@ -8,11 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		493DB73D2EAA6261008098A8 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 493DB73C2EAA6261008098A8 /* Alamofire */; };
+		49B2EB432EB88B8E00EDC254 /* UploadImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B2EB422EB88B8E00EDC254 /* UploadImageModel.swift */; };
+		49B2EB452EB88B9A00EDC254 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B2EB442EB88B9A00EDC254 /* UserDataModel.swift */; };
+		49B2EB472EB88BA800EDC254 /* StoreInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B2EB462EB88BA800EDC254 /* StoreInfoModel.swift */; };
+		49B2EB492EB88BB500EDC254 /* UploadDocumentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B2EB482EB88BB500EDC254 /* UploadDocumentModel.swift */; };
+		49B2EB4B2EB88BC100EDC254 /* SummaryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B2EB4A2EB88BC100EDC254 /* SummaryModel.swift */; };
+		49B2EB4F2EB88C5000EDC254 /* CountryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B2EB4E2EB88C5000EDC254 /* CountryModel.swift */; };
+		49B2EB512EB88C5500EDC254 /* EmptyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B2EB502EB88C5500EDC254 /* EmptyModel.swift */; };
+		49B2EB532EB88C5C00EDC254 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B2EB522EB88C5C00EDC254 /* SignUpModel.swift */; };
 		49DBE47C2EB082D500DE95E8 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 49DBE47B2EB082D500DE95E8 /* IQKeyboardManagerSwift */; };
 		6B38D0D52EB3473B00C41192 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B38D0422EB3473B00C41192 /* AppDelegate.swift */; };
 		6B38D0D62EB3473B00C41192 /* NavigationSceneExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B38D0432EB3473B00C41192 /* NavigationSceneExt.swift */; };
 		6B38D0D72EB3473B00C41192 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B38D0442EB3473B00C41192 /* SceneDelegate.swift */; };
-		6B38D0DB2EB3473B00C41192 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B38D0492EB3473B00C41192 /* SignUpModel.swift */; };
 		6B38D0DD2EB3473B00C41192 /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B38D04C2EB3473B00C41192 /* ForgotPasswordViewModel.swift */; };
 		6B38D0DE2EB3473B00C41192 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B38D04D2EB3473B00C41192 /* LocationViewModel.swift */; };
 		6B38D0DF2EB3473B00C41192 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B38D04E2EB3473B00C41192 /* LoginViewModel.swift */; };
@@ -576,11 +583,18 @@
 		37A18E94AB484303BB2FD370 /* Pods-DesynatDealer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesynatDealer.debug.xcconfig"; path = "Target Support Files/Pods-DesynatDealer/Pods-DesynatDealer.debug.xcconfig"; sourceTree = "<group>"; };
 		40FCC5FE2116BF815C4B1BFB /* Pods_DesynatDealer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesynatDealer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		493DB5C32EAA6210008098A8 /* DesynatDealer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DesynatDealer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		49B2EB422EB88B8E00EDC254 /* UploadImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImageModel.swift; sourceTree = "<group>"; };
+		49B2EB442EB88B9A00EDC254 /* UserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
+		49B2EB462EB88BA800EDC254 /* StoreInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreInfoModel.swift; sourceTree = "<group>"; };
+		49B2EB482EB88BB500EDC254 /* UploadDocumentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadDocumentModel.swift; sourceTree = "<group>"; };
+		49B2EB4A2EB88BC100EDC254 /* SummaryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryModel.swift; sourceTree = "<group>"; };
+		49B2EB4E2EB88C5000EDC254 /* CountryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryModel.swift; sourceTree = "<group>"; };
+		49B2EB502EB88C5500EDC254 /* EmptyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyModel.swift; sourceTree = "<group>"; };
+		49B2EB522EB88C5C00EDC254 /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
 		5BC36C5D491E36EA6BD78D08 /* Pods-DesynatDealer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesynatDealer.release.xcconfig"; path = "Target Support Files/Pods-DesynatDealer/Pods-DesynatDealer.release.xcconfig"; sourceTree = "<group>"; };
 		6B38D0422EB3473B00C41192 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6B38D0432EB3473B00C41192 /* NavigationSceneExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationSceneExt.swift; sourceTree = "<group>"; };
 		6B38D0442EB3473B00C41192 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		6B38D0492EB3473B00C41192 /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
 		6B38D04C2EB3473B00C41192 /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 		6B38D04D2EB3473B00C41192 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		6B38D04E2EB3473B00C41192 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -1173,6 +1187,21 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		49B2EB412EB88B7800EDC254 /* AuthDataModel */ = {
+			isa = PBXGroup;
+			children = (
+				49B2EB522EB88C5C00EDC254 /* SignUpModel.swift */,
+				49B2EB502EB88C5500EDC254 /* EmptyModel.swift */,
+				49B2EB4E2EB88C5000EDC254 /* CountryModel.swift */,
+				49B2EB4A2EB88BC100EDC254 /* SummaryModel.swift */,
+				49B2EB482EB88BB500EDC254 /* UploadDocumentModel.swift */,
+				49B2EB462EB88BA800EDC254 /* StoreInfoModel.swift */,
+				49B2EB442EB88B9A00EDC254 /* UserDataModel.swift */,
+				49B2EB422EB88B8E00EDC254 /* UploadImageModel.swift */,
+			);
+			path = AuthDataModel;
+			sourceTree = "<group>";
+		};
 		6B38D0452EB3473B00C41192 /* AppLifeCycle */ = {
 			isa = PBXGroup;
 			children = (
@@ -1186,7 +1215,7 @@
 		6B38D04B2EB3473B00C41192 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
-				6B38D0492EB3473B00C41192 /* SignUpModel.swift */,
+				49B2EB412EB88B7800EDC254 /* AuthDataModel */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -1355,13 +1384,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		6B38D0802EB3473B00C41192 /* Modules */ = {
+		6B38D0802EB3473B00C41192 /* SourceCode */ = {
 			isa = PBXGroup;
 			children = (
 				6B38D0552EB3473B00C41192 /* ViewModel */,
 				6B38D07F2EB3473B00C41192 /* Views */,
+				6B38D04B2EB3473B00C41192 /* DataModel */,
 			);
-			path = Modules;
+			path = SourceCode;
 			sourceTree = "<group>";
 		};
 		6B38D0822EB3473B00C41192 /* Assets */ = {
@@ -1565,8 +1595,7 @@
 			isa = PBXGroup;
 			children = (
 				6B38D0452EB3473B00C41192 /* AppLifeCycle */,
-				6B38D04B2EB3473B00C41192 /* DataModel */,
-				6B38D0802EB3473B00C41192 /* Modules */,
+				6B38D0802EB3473B00C41192 /* SourceCode */,
 				6B38D0972EB3473B00C41192 /* Resources */,
 				6B38D0C82EB3473B00C41192 /* Utilities */,
 				6B38D0D12EB3473B00C41192 /* WebService */,
@@ -2700,12 +2729,12 @@
 				6B38D0D72EB3473B00C41192 /* SceneDelegate.swift in Sources */,
 				6B38D4D42EB36FCD00C41192 /* OTPViewModel.swift in Sources */,
 				6B645F582EB4953500451A5A /* SummaryViewController.swift in Sources */,
-				6B38D0DB2EB3473B00C41192 /* SignUpModel.swift in Sources */,
 				6B38D0DD2EB3473B00C41192 /* ForgotPasswordViewModel.swift in Sources */,
 				6B38D0DE2EB3473B00C41192 /* LocationViewModel.swift in Sources */,
 				6B38D0DF2EB3473B00C41192 /* LoginViewModel.swift in Sources */,
 				6B38D0E02EB3473B00C41192 /* ResetPasswordViewModel.swift in Sources */,
 				6B38D0E12EB3473B00C41192 /* SignupViewModel.swift in Sources */,
+				49B2EB512EB88C5500EDC254 /* EmptyModel.swift in Sources */,
 				6B38D0E22EB3473B00C41192 /* StoreInformationViewModel.swift in Sources */,
 				6B38D0E32EB3473B00C41192 /* UploadDocumentViewModel.swift in Sources */,
 				6B38D0E42EB3473B00C41192 /* AccountCreationDoneViewController.swift in Sources */,
@@ -2718,10 +2747,13 @@
 				6B38D0EA2EB3473B00C41192 /* MediaPermissionViewController.swift in Sources */,
 				6B38D0EB2EB3473B00C41192 /* NotificationPermissionViewController.swift in Sources */,
 				6B38D0EC2EB3473B00C41192 /* OTPViewController.swift in Sources */,
+				49B2EB472EB88BA800EDC254 /* StoreInfoModel.swift in Sources */,
 				6B38D0ED2EB3473B00C41192 /* RegisterationSuccessViewController.swift in Sources */,
 				6B38D0EE2EB3473B00C41192 /* ResetPasswordViewController.swift in Sources */,
+				49B2EB4F2EB88C5000EDC254 /* CountryModel.swift in Sources */,
 				6B38D0EF2EB3473B00C41192 /* SelectLanguageViewController.swift in Sources */,
 				6B38D0F02EB3473B00C41192 /* SignupViewController.swift in Sources */,
+				49B2EB4B2EB88BC100EDC254 /* SummaryModel.swift in Sources */,
 				6B38D0F12EB3473B00C41192 /* StoreInformationViewController.swift in Sources */,
 				6B38D0F22EB3473B00C41192 /* UploadDocumnetViewController.swift in Sources */,
 				6B645F5A2EB4955B00451A5A /* SummaryViewModel.swift in Sources */,
@@ -2729,6 +2761,7 @@
 				6B38D0F42EB3473B00C41192 /* HomeViewController.swift in Sources */,
 				6B38D0F52EB3473B00C41192 /* OrdersViewController.swift in Sources */,
 				6B38D0F62EB3473B00C41192 /* PaymentsViewController.swift in Sources */,
+				49B2EB432EB88B8E00EDC254 /* UploadImageModel.swift in Sources */,
 				6B38D0F72EB3473B00C41192 /* ProductsViewController.swift in Sources */,
 				6B38D0F82EB3473B00C41192 /* ShowsViewController.swift in Sources */,
 				6B38D0F92EB3473B00C41192 /* TabBarVC.swift in Sources */,
@@ -2744,14 +2777,17 @@
 				6B38D1032EB3473B00C41192 /* StringExtensions.swift in Sources */,
 				6B38D1042EB3473B00C41192 /* StringValidation.swift in Sources */,
 				6B38D1052EB3473B00C41192 /* TableViewExtension.swift in Sources */,
+				49B2EB492EB88BB500EDC254 /* UploadDocumentModel.swift in Sources */,
 				6B38D1062EB3473B00C41192 /* UITextViewExtension.swift in Sources */,
 				6B38D1072EB3473B00C41192 /* UIViewController.swift in Sources */,
+				49B2EB532EB88C5C00EDC254 /* SignUpModel.swift in Sources */,
 				6B38D1082EB3473B00C41192 /* AppConfig.swift in Sources */,
 				6B38D1092EB3473B00C41192 /* LocationManager.swift in Sources */,
 				6B38D10A2EB3473B00C41192 /* CapsuleSegmentControl.swift in Sources */,
 				6B38D10B2EB3473B00C41192 /* CommonUtils.swift in Sources */,
 				6B38D10C2EB3473B00C41192 /* CurveView.swift in Sources */,
 				6B38D10D2EB3473B00C41192 /* CustomBlurView.swift in Sources */,
+				49B2EB452EB88B9A00EDC254 /* UserDataModel.swift in Sources */,
 				6B38D10E2EB3473B00C41192 /* CustomButton.swift in Sources */,
 				6B38D10F2EB3473B00C41192 /* CustomImageView.swift in Sources */,
 				6B38D1102EB3473B00C41192 /* CustomPickerView.swift in Sources */,
@@ -2809,6 +2845,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 6QKUQGN93F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DesynatDealer/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Desynat Dealer";
 				INFOPLIST_KEY_NSCameraUsageDescription = "this app needs to take picture";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = Allow;
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = Allow;
@@ -2849,6 +2886,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 6QKUQGN93F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DesynatDealer/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Desynat Dealer";
 				INFOPLIST_KEY_NSCameraUsageDescription = "this app needs to take picture";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = Allow;
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = Allow;

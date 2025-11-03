@@ -181,7 +181,7 @@ class CommonUtils {
         return String.getString(value)
     }
     static func showToast(message: String) {
-        FTIndicator.showNotification(withTitle: "TLP APP", message: message.count>0 ? message: "Message")
+        FTIndicator.showNotification(withTitle: Bundle.main.ApplicationName ?? "", message: message.count>0 ? message: "Message")
     }
     
     //MARK: Date Utilities

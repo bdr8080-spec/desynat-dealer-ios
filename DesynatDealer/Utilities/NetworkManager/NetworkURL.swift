@@ -1,5 +1,7 @@
 import Foundation
 
+let kIsAppInstalled = "isAppInstalled"
+
 enum BaseURL {
     static let development  = "http://157.241.119.72"
     static let release      = "http://157.241.119.72"

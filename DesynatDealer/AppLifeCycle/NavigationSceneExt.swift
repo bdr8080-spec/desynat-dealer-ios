@@ -9,8 +9,18 @@ import Foundation
 import UIKit                 
 
 extension SceneDelegate {
-   
-//    /// Navigate to Login Vc
+    
+    public func navigateToWelcomeScreen() {
+        let vc = WelcomeScreenViewController.instantiate(fromAppStoryboard: .Main)
+        navigateTo(vc: vc)
+    }
+    
+    public func navigateToSelectLanguage() {
+        let vc = SelectLanguageViewController.instantiate(fromAppStoryboard:.Main)
+        navigateTo(vc: vc)
+    }
+    
+  // Navigate to Login Vc
     public func navigateToLoginVC() {
         navigateTo(vc: LoginViewController.instantiate(fromAppStoryboard: .Main))
     }
@@ -23,7 +33,6 @@ extension SceneDelegate {
 
     func logoutUser() {
         kSharedUserDefaults.clearAllData(except: [.deviceToken,.userLocation,.selectedLanguage,.defaultLanguge,.language])
-        //UserDefaults.standard.setValue("Yes", forKey: "isAppInstalled")
         Global.shared.user = nil
         self.navigateToLoginVC()
     }

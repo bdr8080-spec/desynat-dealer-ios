@@ -25,6 +25,10 @@ enum UserDefaultsKey : String {
 
 extension UserDefaults {
     
+    func isAppInstalled() -> Bool {
+        return self.bool(forKey: kIsAppInstalled)
+    }
+    
     func saveValue<T>(Key: UserDefaultsKey, value:T) {
         self.set(value, forKey: Key.rawValue)
         self.synchronize()
