@@ -1,6 +1,6 @@
 import Foundation
 
-let kIsAppInstalled = "isAppInstalled"
+let kisOnBoardingChecked = "isOnBoardingChecked"
 
 enum BaseURL {
     static let development  = "http://157.241.119.72"

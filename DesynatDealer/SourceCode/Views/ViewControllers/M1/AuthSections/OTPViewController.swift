@@ -33,7 +33,7 @@ class OTPViewController: UIViewController {
     var email = ""
     
     // MARK: - Variables
-    var remainingTime = 30
+    var remainingTime = 90
     var otpTimer: Timer?
     var comingReason: ComingReasonAtOTPScreen = .forgotPassword
     
@@ -62,6 +62,7 @@ class OTPViewController: UIViewController {
     }
     
     @IBAction func buttonResend(_ sender: UIButton) {
+        startTimer()
         viewModel.resendOtpApi()
     }
     
@@ -76,10 +77,10 @@ class OTPViewController: UIViewController {
     
     // MARK: - Timer Handling
     func startTimer() {
-        remainingTime = 30
+        remainingTime = 90
         resendView.isHidden = true
         timerView.isHidden = false
-        labelTimer.text = "00:30 Sec"
+        labelTimer.text = "00:90 Sec"
         
         otpTimer?.invalidate()
         otpTimer = Timer.scheduledTimer(timeInterval: 1.0,
@@ -169,7 +170,7 @@ extension OTPViewController {
         let otpText = [textField1, textField2, textField3, textField4, textField5, textField6].compactMap { $0?.text }.joined()
         
         if otpText.count < 6 {
-            showAlert(msg: "Please enter a valid 6-digit OTP.")
+            showAlert(msg: "Please enter 6-digit otp")
             return false
         }
         

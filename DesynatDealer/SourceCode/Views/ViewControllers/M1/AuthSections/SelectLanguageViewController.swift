@@ -14,15 +14,17 @@ class SelectLanguageViewController: UIViewController {
     @IBOutlet weak var imgArabic: UIImageView!
     @IBOutlet weak var imgEnglish: UIImageView!
     
+    var comingFirstTime: Bool = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         LocationManager.sharedInstance.startUpdatingLocation()
-        
-//        let vc = LocationPermissionViewController.instantiate(fromAppStoryboard: .Main)
-//        vc.onPermissionCompletion = { [weak self] in
-//            self?.showNotificationPermission()
-//        }
-//        self.present(vc, animated: true)
+        let isOnBoardingChecked = UserDefaults.standard.string(forKey:"isOnBoardingChecked")
+        if isOnBoardingChecked == "true" {
+            comingFirstTime = false
+        } else {
+            comingFirstTime = true
+        }
     }
     
     private func showNotificationPermission() {
@@ -57,9 +59,12 @@ class SelectLanguageViewController: UIViewController {
     }
     
     @IBAction func btnTapContinue(_ sender: Any) {
-        let vc = WelcomeScreenViewController.instantiate(fromAppStoryboard: .Main)
-        self.navigationController?.pushViewController(vc, animated: true)
-        UserDefaults.standard.setValue("true", forKey: "isAppInstall")
+        if comingFirstTime {
+            let vc = WelcomeScreenViewController.instantiate(fromAppStoryboard: .Main)
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            kSharedSceneDelegate.navigateToLoginVC()
+        }
     }
 
 }

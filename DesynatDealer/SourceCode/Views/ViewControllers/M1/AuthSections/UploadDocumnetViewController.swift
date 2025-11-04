@@ -39,6 +39,10 @@ class UploadDocumnetViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ibanTextField.delegate = self
+        swiftTextField.delegate = self
+        bankNameTextField.delegate = self
+        accountHolderTextField.delegate = self
     }
     
     @IBAction func backDidTapped(_ sender: Any) {
@@ -184,4 +188,56 @@ class UploadDocumnetViewController: UIViewController {
         }
     }
     
+}
+
+extension UploadDocumnetViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+
+        if string.isEmpty {
+            return true
+        }
+
+        let currentText = textField.text ?? ""
+        let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
+
+        if textField == bankNameTextField {
+            if currentText.isEmpty && string == " " {
+                return false
+            }
+            let allowedCharacterSet = CharacterSet.letters.union(.whitespaces)
+            return string.rangeOfCharacter(from: allowedCharacterSet.inverted) == nil
+        }
+
+        if textField == accountHolderTextField {
+            if currentText.isEmpty && string == " " {
+                return false
+            }
+            let allowedCharacterSet = CharacterSet.letters.union(.whitespaces)
+            return string.rangeOfCharacter(from: allowedCharacterSet.inverted) == nil
+        }
+
+        if textField == ibanTextField {
+            if string == " " {
+                return false
+            }
+            if newText.count > 20 {
+                return false
+            }
+            return true
+        }
+
+        if textField == swiftTextField {
+            if string == " " {
+                return false
+            }
+            return true
+        }
+
+        if newText.trimmingCharacters(in: .whitespaces).isEmpty && !newText.isEmpty {
+            return false
+        }
+
+        return true
+    }
 }

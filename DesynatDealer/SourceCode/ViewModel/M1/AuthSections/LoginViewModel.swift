@@ -11,6 +11,7 @@ import UIKit
 class LoginViewModel: NSObject {
     
     private var loginHostVC: LoginViewController
+    var countryList:[CountryModel] = []
     
     init(loginHostVC: LoginViewController) {
         self.loginHostVC = loginHostVC
@@ -60,8 +61,27 @@ class LoginViewModel: NSObject {
             APIKeys.type:loginHostVC.type
         ]
         WebService.sharedInstance.loginService(withParams: params) { (response) in
-            kSharedSceneDelegate.navigateToDealerHomeVc()
-            UserDefaults.standard.setValue("Yes", forKey:"isLogin")
+            if response.storeInformation == "0" {
+                kSharedSceneDelegate.navigateToStoreInfo(userId: response.id ?? 0)
+                return
+            } else if response.bankInformation == "0" {
+                kSharedSceneDelegate.navigateToBankInfo(userId: "\(response.id ?? 0)")
+            } else if response.adminVerify == "0" {
+                kSharedSceneDelegate.navigateToViewDetailsVC(userId: "\(response.id ?? 0)")
+            } else if response.adminVerify == "1" {
+                kSharedSceneDelegate.navigateToLoginVC()
+                CommonUtils.showToast(message: "Your account registration is under review")
+            } else if response.adminVerify == "2" {
+                UserDefaults.standard.setValue("Yes", forKey:"isLogin")
+                kSharedSceneDelegate.navigateToDealerHomeVc()
+            }
+        }
+    }
+    
+    
+    func countryListApi(){
+        WebService.sharedInstance.countryListService { list in
+            self.countryList = list
         }
     }
 }

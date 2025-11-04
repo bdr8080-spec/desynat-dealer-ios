@@ -19,17 +19,21 @@ class StoreInformationViewController: UIViewController {
     @IBOutlet weak var storeMailIDTextField: UITextField!
     @IBOutlet weak var bioTextView: UITextView!
     @IBOutlet weak var txtCountry: UITextField!
+    @IBOutlet weak var txtCountryCode: UITextField!
     
-    var selectedStoreInformationImage: UIImage?
     var userId = 0
-    var profileImage = ""
+    var selectedStoreInformationImage = ""
     var countryId = 0
+    var lat: Double = 0.0
+    var long: Double = 0.0
+    var countryCode: String = "+965"
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        txtCountryCode.text = countryCode
         storePhoneNumberTextField.delegate = self
         storeMailIDTextField.delegate = self
-//        viewModel.countryListApi()
+        viewModel.countryListApi()
     }
     
     @IBAction func backDidTapped(_ sender: Any) {
@@ -43,44 +47,126 @@ class StoreInformationViewController: UIViewController {
     }
     
     @IBAction func addressDidTapped(_ sender: Any) {
+//        let vc = LocationViewController.instantiate(fromAppStoryboard: .Main)
+//
+//        vc.locationCallBack = { [weak self] address, locality, city, state, country, pincode, lat, long in
+//            guard let self = self else { return }
+//            let safeAddress = address.isEmpty ? "" : address
+//            let safeLocality = locality.isEmpty ? "" : locality
+//            let safeCity = city.isEmpty ? "" : city
+//            let safeState = state.isEmpty ? "" : state
+//            let safeCountry = country.isEmpty ? "" : country
+//            let safePincode = pincode.isEmpty ? "" : pincode
+//
+//            let lineTwoData = [safeCity, safeState]
+//                .filter { !$0.isEmpty }
+//                .joined(separator: ", ")
+//                + (safePincode.isEmpty ? "" : " - \(safePincode)")
+//
+//            self.storeAddressTextField.text = safeAddress
+//
+//            if safeLocality.isEmpty {
+//                // If locality (line 1) is empty → use city/state/pincode data
+//                self.addressLineOneTextField.text = lineTwoData
+//                self.addressLineTwoTextField.text = ""
+//            } else {
+//                // Otherwise show proper structured data
+//                self.addressLineOneTextField.text = safeLocality
+//                self.addressLineTwoTextField.text = lineTwoData
+//            }
+//            self.lat = lat
+//            self.long = long
+//        }
+        
+        
+        
         
         let vc = LocationViewController.instantiate(fromAppStoryboard: .Main)
-                
-                vc.locationCallBack = { [weak self] address, locality, city, state, country, pincode, lat, long in
-                    guard let self = self else { return }
-                    
-                    // ✅ Assign properly structured fields
-                    self.storeAddressTextField.text = address
-                    self.addressLineOneTextField.text = locality
-                    self.addressLineTwoTextField.text = "\(city), \(state) - \(pincode)"
-                    self.txtCountry.text = country
-                }
-                
-                self.navigationController?.pushViewController(vc, animated: true)
-    }
+           
+           vc.locationCallBack = { [weak self] address, locality, city, state, country, pincode, lat, long in
+               guard let self = self else { return }
+               
+               // ✅ Safely unwrap each value with fallbacks
+               let safeAddress = address.isEmpty ? "" : address
+               let safeLocality = locality.isEmpty ? "" : locality
+               let safeCity = city.isEmpty ? "" : city
+               let safeState = state.isEmpty ? "" : state
+               let safeCountry = country.isEmpty ? "" : country
+               let safePincode = pincode.isEmpty ? "" : pincode
+               
+               // ✅ Assign values properly to all fields
+               self.storeAddressTextField.text = safeAddress
+               self.addressLineOneTextField.text = safeLocality
+//               self.addressLineTwoTextField.text = "\(safeCity), \(safeState) - \(safePincode)"
+               var components: [String] = []
+
+               if !safeCity.isEmpty {
+                   components.append(safeCity)
+               }
+               if !safeState.isEmpty {
+                   components.append(safeState)
+               }
+
+               var address = components.joined(separator: ", ")
+
+               if !safePincode.isEmpty {
+                   address += " - \(safePincode)"
+               }
+
+               self.addressLineTwoTextField.text = address
+
+//               self.txtCountry.text = safeCountry
+               
+               self.lat = lat
+               self.long = long
+           }
+           
+           self.navigationController?.pushViewController(vc, animated: true)
+
+        }
+
     
-//    @IBAction func btnTapCountry(_ sender: UIButton) {
-//        let countryNames = viewModel.countryList.map { $0.name ?? ""}
-//        kSharedAppDelegate.dropDown(dataSource:countryNames, anchorView:sender) { index, item in
-//            self.txtCountry.text = item
-//            let selectedCountryId = self.viewModel.countryList[index]
-//            self.countryId = selectedCountryId.id ?? 0
-//        }
-//    }
+    @IBAction func btnTapCountry(_ sender: UIButton) {
+        let countryNames = viewModel.countryList.map { $0.name ?? ""}
+        kSharedAppDelegate.dropDown(dataSource:countryNames, anchorView:sender) { index, item in
+            self.txtCountry.text = item
+            let selectedCountryId = self.viewModel.countryList[index]
+            self.countryId = selectedCountryId.id ?? 0
+        }
+    }
     
     @IBAction func uploadStoreImageDidTapped(_ sender: Any) {
         ImagePickerHelper.shared.showPickerController {  image , imageName in
             if let image = image {
                 WebService.sharedInstance.uploadImage(withParams: image) { imageURL in
-                    self.profileImage = imageURL.url ?? ""
-                    self.selectedStoreInformationImage = image
-                    print("image url--.\(self.profileImage)")
+                    self.selectedStoreInformationImage = imageURL.url ?? ""
                     if let url = URL(string: imageURL.url ?? "") {
                         self.uploadStoreImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
                         self.uploadStoreImageView.sd_setImage(with: url,placeholderImage: UIImage(named: "user_ic"))
                     }
                 }
             }
+        }
+    }
+    
+    @IBAction func btnTapCountryCode(_ sender: UIButton) {
+//        CommonUtils.openPicker(controller: self) { _ , _, callingCode in
+//            self.setUpCountryCode(code: callingCode)
+//            self.countryCode = callingCode
+//        }
+        
+        let countryNames = viewModel.countryList.map { country -> String in
+            let name = country.name ?? ""
+            let dialCode = country.dialCode ?? ""
+            let flag = country.flag ?? "🇰🇼"
+            return "\(flag)  \(name) (\(dialCode))"
+        }
+
+        kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
+            let selectedCountry = self.viewModel.countryList[index]
+            let code = selectedCountry.dialCode ?? "+965"
+            self.txtCountryCode.text = code
+            self.countryCode = code
         }
     }
     

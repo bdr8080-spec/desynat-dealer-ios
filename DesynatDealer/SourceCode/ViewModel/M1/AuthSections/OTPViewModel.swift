@@ -37,7 +37,7 @@ class OTPViewModel:NSObject{
     
     //Mark:->ResendOtpAPi
     func resendOtpApi(){
-        var param:[String:Any] = [
+        let param:[String:Any] = [
             APIKeys.emailMobile:hostVC.email,
             APIKeys.type:hostVC.emailMobileType
         ]

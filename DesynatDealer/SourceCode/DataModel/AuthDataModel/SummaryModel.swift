@@ -97,7 +97,7 @@ struct SellerBankDetails: Codable {
 struct StoreInfo: Codable {
     let id, sellerID: Int?
     let storeImage: String?
-    let storeName, country, storeAddress: String?
+    let storeName, country, storeAddress, countryCode: String?
     let addressLine1, addressLine2, storePhone, storeMailID: String?
     let bio: String?
     let latitude: String? // JSON key: "let" (reserved word in Swift)
@@ -120,5 +120,6 @@ struct StoreInfo: Codable {
         case long
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+        case countryCode = "country_code"
     }
 }

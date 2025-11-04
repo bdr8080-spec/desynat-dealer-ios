@@ -9,14 +9,20 @@ import UIKit
 
 class AccountCreationDoneViewController: UIViewController {
 
+    @IBOutlet weak var logoutView: UIView!
+    
+    var comingFromAppWithoutVerified:Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+//        logoutView.isHidden = comingFromAppWithoutVerified
     }
     
     @IBAction func logoutDidTapped(_ sender: Any) {
-       // self.navigationController?.popToViewController(ofClass: LoginViewController.self, animated: true)
         logoutApi()
     }
+
+    
 }
 
 extension AccountCreationDoneViewController{

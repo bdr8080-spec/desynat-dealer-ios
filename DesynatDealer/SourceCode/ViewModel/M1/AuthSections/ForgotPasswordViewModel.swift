@@ -9,7 +9,9 @@ import Foundation
 import UIKit
 
 class ForgotPasswordViewModel: NSObject {
+    
     private var hostVC: ForgotPasswordViewController
+    var countryList:[CountryModel] = []
     
     init(hostVC: ForgotPasswordViewController) {
         self.hostVC = hostVC
@@ -68,6 +70,13 @@ class ForgotPasswordViewModel: NSObject {
             vc.email = user.email ?? ""
             vc.emailMobileType = 1
             self.hostVC.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    
+    func countryListApi(){
+        WebService.sharedInstance.countryListService { list in
+            self.countryList = list
         }
     }
 

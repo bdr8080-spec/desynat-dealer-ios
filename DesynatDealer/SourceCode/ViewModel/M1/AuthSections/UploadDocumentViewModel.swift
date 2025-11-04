@@ -32,10 +32,10 @@ class UploadDocumentViewModel: NSObject {
             errorMessage = .UploadStoreDoc1
         } else if hostVC.selectedStoreDoc2 == nil {
             errorMessage = .UploadStoreDoc2
-        } else if iban.isEmpty {
-            errorMessage = .EnterIBAN
-        } else if swiftCode.isEmpty {
-            errorMessage = .EnterSWIFT
+//        } else if iban.isEmpty {
+//            errorMessage = .EnterIBAN
+//        } else if swiftCode.isEmpty {
+//            errorMessage = .EnterSWIFT
         } else if bankName.isEmpty {
             errorMessage = .EnterBankName
         } else if accountHolder.isEmpty {

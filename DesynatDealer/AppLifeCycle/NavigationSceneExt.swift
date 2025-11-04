@@ -24,17 +24,37 @@ extension SceneDelegate {
     public func navigateToLoginVC() {
         navigateTo(vc: LoginViewController.instantiate(fromAppStoryboard: .Main))
     }
+    
+    
+    public func navigateToViewDetailsVC(userId: String) {
+        let vc = SummaryViewController.instantiate(fromAppStoryboard: .Main)
+        vc.userId = userId
+        navigateTo(vc: vc)
+    }
 
     // Navigate to Home Vc
     public func navigateToDealerHomeVc() {
         let vc = TabBarVC.instantiate(fromAppStoryboard: .Home)
         navigateTo(vc: vc)
     }
+    
+    public func navigateToStoreInfo(userId: Int) {
+        let vc = StoreInformationViewController.instantiate(fromAppStoryboard: .Main)
+        vc.userId = userId
+        self.navigateTo(vc: vc)
+    }
+    
+    public func navigateToBankInfo(userId: String) {
+        let vc = UploadDocumnetViewController.instantiate(fromAppStoryboard: .Main)
+        vc.userId = userId
+        self.navigateTo(vc: vc)
+    }
 
     func logoutUser() {
         kSharedUserDefaults.clearAllData(except: [.deviceToken,.userLocation,.selectedLanguage,.defaultLanguge,.language])
         Global.shared.user = nil
         self.navigateToLoginVC()
+        UserDefaults.standard.setValue("true", forKey: "isOnBoardingChecked")
     }
 
 //    ///Pass custom vc to make it root controller

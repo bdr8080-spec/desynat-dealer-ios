@@ -25,8 +25,8 @@ enum UserDefaultsKey : String {
 
 extension UserDefaults {
     
-    func isAppInstalled() -> Bool {
-        return self.bool(forKey: kIsAppInstalled)
+    func isOnBoardingChecked() -> Bool {
+        return self.bool(forKey: kisOnBoardingChecked)
     }
     
     func saveValue<T>(Key: UserDefaultsKey, value:T) {

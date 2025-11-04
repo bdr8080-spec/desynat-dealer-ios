@@ -10,6 +10,7 @@ import UIKit
 
 class SignupViewModel: NSObject {
     private var hostVC: SignupViewController
+    var countryList:[CountryModel] = []
     
     init(hostVC: SignupViewController) {
         self.hostVC = hostVC
@@ -112,6 +113,13 @@ class SignupViewModel: NSObject {
             vc.emailMobileType = 1
             self.hostVC.navigationController?.pushViewController(vc, animated: true)
 
+        }
+    }
+    
+
+    func countryListApi(){
+        WebService.sharedInstance.countryListService { list in
+            self.countryList = list
         }
     }
 }

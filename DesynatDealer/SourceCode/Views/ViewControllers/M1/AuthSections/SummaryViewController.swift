@@ -8,7 +8,7 @@
 import UIKit
 
 class SummaryViewController: UIViewController {
-    private lazy var viewModel =  SummaryViewModel(hostVC:self)
+    
     @IBOutlet weak var imgPersonalInfo: CustomImageView!
     @IBOutlet weak var lblFullName: UILabel!
     @IBOutlet weak var lblPhoneNumber: UILabel!
@@ -29,11 +29,15 @@ class SummaryViewController: UIViewController {
     @IBOutlet weak var lblBankName: UILabel!
     @IBOutlet weak var lblAccountHolderName: UILabel!
     @IBOutlet weak var imgProofOfAccount: CustomImageView!
+    @IBOutlet weak var swiftView: UIView!
+    @IBOutlet weak var ibanView: UIView!
+    
     var userId = ""
+    private lazy var viewModel =  SummaryViewModel(hostVC:self)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.getSummaryApi(userId:self.userId)
+        viewModel.getSummaryApi(userId: self.userId)
     }
     
     @IBAction func btnTapBack(_ sender: UIButton) {

@@ -16,7 +16,7 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func btnTapLogout(_ sender: UIButton) {
-        kSharedSceneDelegate.navigateToLoginVC()
+        kSharedSceneDelegate.navigateToSelectLanguage()
         UserDefaults.standard.setValue("No", forKey:"isLogin")
     }
    

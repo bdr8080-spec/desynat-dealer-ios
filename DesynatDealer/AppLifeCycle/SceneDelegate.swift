@@ -14,19 +14,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         let islogin = UserDefaults.standard.string(forKey:"isLogin")
-        let isAppInstalled = UserDefaults.standard.string(forKey:"isAppInstall")
         
-//        if islogin == "Yes"{
-//            kSharedSceneDelegate.navigateToDealerHomeVc()
-//        }else{
-//            if isAppInstalled == "true"{
-//                kSharedSceneDelegate.navigateToWelcomeScreen()
-//             }else if isAppInstalled == "false"{
-//                 kSharedSceneDelegate.navigateToLoginVC()
-//             } else{
-//                 kSharedSceneDelegate.navigateToSelectLanguage()
-//             }
-//        }
+        if islogin == "Yes"{
+            kSharedSceneDelegate.navigateToDealerHomeVc()
+        }else{
+            kSharedSceneDelegate.navigateToSelectLanguage()
+        }
         
         guard let _ = (scene as? UIWindowScene) else { return }
     }

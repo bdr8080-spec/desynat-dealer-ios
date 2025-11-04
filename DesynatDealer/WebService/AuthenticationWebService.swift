@@ -27,7 +27,7 @@ extension WebService {
                 //kSharedUserDefaults.saveValue(Key: .accessToken, value: String.getString(user.access_token))
                // kSharedUserDefaults.saveModelFor(key: .user, value: user)
               //  Global.shared.user = user
-                CommonUtils.showToast(message: message ?? "")
+                CommonUtils.showToast(message: message ?? "OTP sent succesfully")
                 completion(user)
             }
         }
@@ -49,7 +49,7 @@ extension WebService {
                 kSharedUserDefaults.saveValue(Key: .accessToken, value: String.getString(user.accessToken))
                 print(user)
                 kSharedUserDefaults.saveModelFor(key:.user, value: user)
-                CommonUtils.showToast(message: message ?? "")
+                CommonUtils.showToast(message: "OTP verify succesfully")
                 completion(user)
             }
         }
@@ -71,7 +71,7 @@ extension WebService {
                 kSharedUserDefaults.saveValue(Key: .accessToken, value: String.getString(user.accessToken))
                 print(user)
                 kSharedUserDefaults.saveModelFor(key:.user, value: user)
-                CommonUtils.showToast(message: message ?? "")
+                CommonUtils.showToast(message: "OTP resent succesfully")
                 completion(user)
             }
         }
@@ -93,7 +93,7 @@ extension WebService {
                // kSharedUserDefaults.saveValue(Key: .accessToken, value: String.getString(user.access_token))
                 print(user)
                 //kSharedUserDefaults.saveModelFor(key:.user, value: user)
-                CommonUtils.showToast(message: message ?? "")
+                CommonUtils.showToast(message: message ?? "Bank Store information Save succesfully")
                 completion(user)
             }
         }
@@ -115,7 +115,7 @@ extension WebService {
                 // kSharedUserDefaults.saveValue(Key: .accessToken, value: String.getString(user.access_token))
                 print(user)
                 //kSharedUserDefaults.saveModelFor(key:.user, value: user)
-                CommonUtils.showToast(message: message ?? "")
+                CommonUtils.showToast(message: message ?? "Documents and bank details save succesfully")
                 completion(user)
             }
         }
@@ -179,8 +179,7 @@ extension WebService {
                     }
                     return
                 }
-               // kSharedUserDefaults.saveValue(Key: .accessToken, value: String.getString(user.access_token))
-                print(user)
+                kSharedUserDefaults.saveValue(Key: .accessToken, value: String.getString(user.accessToken))
                 kSharedUserDefaults.saveModelFor(key:.user, value: user)
                 CommonUtils.showToast(message: message ?? "")
                 completion(user)
@@ -265,10 +264,6 @@ extension WebService {
                     }
                     return
                 }
-               // kSharedUserDefaults.saveValue(Key: .accessToken, value: String.getString(user.access_token))
-                print(user)
-                //kSharedUserDefaults.saveModelFor(key:.user, value: user)
-                CommonUtils.showToast(message: message ?? "")
                 completion(user)
             }
         }

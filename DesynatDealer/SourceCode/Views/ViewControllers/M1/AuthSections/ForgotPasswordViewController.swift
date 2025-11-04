@@ -16,16 +16,18 @@ class ForgotPasswordViewController: UIViewController {
     @IBOutlet weak var mobileView: UIView!
     @IBOutlet weak var emailView: UIView!
     @IBOutlet weak var txtCountryCode: UITextField!
-    var countryCode = ""
-    var accountType = 0
     
+    var accountType = 0
+    var countryCode: String = "+965"
     var mobileIsSelected: Bool? = nil
     private lazy var viewModel = ForgotPasswordViewModel(hostVC: self)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        txtCountryCode.text = countryCode
         mobileTextField.delegate = self
         emailAddressTextField.delegate = self
+        viewModel.countryListApi()
     }
     
     @IBAction func continueDidTapped(_ sender: Any) {
@@ -57,15 +59,29 @@ class ForgotPasswordViewController: UIViewController {
     }
     
     @IBAction func btnTapCountryCode(_ sender: UIButton) {
-        CommonUtils.openPicker(controller: self) { _ , _, callingCode in
-            self.setUpCountryCode(code: callingCode)
-            self.countryCode = callingCode
+//        CommonUtils.openPicker(controller: self) { _ , _, callingCode in
+//            self.setUpCountryCode(code: callingCode)
+//            self.countryCode = callingCode
+//        }
+        
+        let countryNames = viewModel.countryList.map { country -> String in
+            let name = country.name ?? ""
+            let dialCode = country.dialCode ?? ""
+            let flag = country.flag ?? "🇰🇼"
+            return "\(flag)  \(name) (\(dialCode))"
+        }
+
+        kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
+            let selectedCountry = self.viewModel.countryList[index]
+            let code = selectedCountry.dialCode ?? "+965"
+            self.txtCountryCode.text = code
+            self.countryCode = code
         }
     }
     
-    func setUpCountryCode(code:String)  {
-        self.txtCountryCode.text = code
-    }
+//    func setUpCountryCode(code:String)  {
+//        self.txtCountryCode.text = code
+//    }
     
 }
 
