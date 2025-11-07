@@ -41,6 +41,43 @@ extension UIViewController {
             }
         }
     
+    public func showConfirmationAlert(
+        msg: String,
+        completion: (() -> Void)? = nil
+    ) {
+        // Prevent multiple alerts
+        guard !UIViewController.isAlertVisible else { return }
+        UIViewController.isAlertVisible = true
+
+        DispatchQueue.main.async {
+            let alert = UIAlertController(
+                title: Bundle.main.ApplicationName ?? "",
+                message: msg,
+                preferredStyle: .alert
+            )
+
+            // Yes Action
+            let yesButton = UIAlertAction(title: "Yes", style: .default) { _ in
+                UIViewController.isAlertVisible = false
+                completion?()
+            }
+
+            // Cancel Action (red color)
+            let cancelButton = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+                UIViewController.isAlertVisible = false
+            }
+
+            // Apply red color to Cancel button text
+            cancelButton.setValue(UIColor.red, forKey: "titleTextColor")
+
+            alert.addAction(yesButton)
+            alert.addAction(cancelButton)
+
+            self.present(alert, animated: true)
+        }
+    }
+
+    
     static func convertPDFToImages(pdfURL: URL) -> [UIImage]? {
         guard let pdfDocument = PDFDocument(url: pdfURL) else {
             return nil
@@ -271,7 +308,7 @@ extension UIViewController {
 //    func backControllerOne() {
 //        guard let nav = self.navigationController else { return }
 //        let viewControllers = nav.viewControllers
-//        
+//
 //        if viewControllers.count >= 2 {
 //            nav.popToViewController(viewControllers[viewControllers.count - 2], animated: true)
 //        } else {

@@ -19,5 +19,6 @@ pod 'GooglePlaces'
     pod 'JXPageControl'
     pod 'ScalingCarousel'
     pod 'RangeSeekSlider'
+    pod 'MyFatoorah'
 
 end

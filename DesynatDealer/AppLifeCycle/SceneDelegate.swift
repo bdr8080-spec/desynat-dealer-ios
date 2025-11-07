@@ -14,13 +14,41 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         let islogin = UserDefaults.standard.string(forKey:"isLogin")
-        
         if islogin == "Yes"{
             kSharedSceneDelegate.navigateToDealerHomeVc()
-        }else{
+//            if let savedUser: User = kSharedUserDefaults.retrieveModelFor(key: .user, model: User.self) {
+//                if savedUser.subcriptionPlanCheck == "1" {
+//                    //UserDefaults.standard.setValue("Yes", forKey:"isLogin")
+//                    kSharedSceneDelegate.navigateToDealerHomeVc()
+//                } else {
+//                    kSharedSceneDelegate.navigateToSubscriptionView(userId: "\(savedUser.id ?? 0)")
+//                }
+//            }
+        } else {
             kSharedSceneDelegate.navigateToSelectLanguage()
         }
-        
+//        if let savedUser: User = kSharedUserDefaults.retrieveModelFor(key: .user, model: User.self) {
+//            if savedUser.subcriptionPlanCheck == "1" {
+//                UserDefaults.standard.setValue("Yes", forKey:"isLogin")
+//                kSharedSceneDelegate.navigateToDealerHomeVc()
+//            } else {
+//                kSharedSceneDelegate.navigateToSubscriptionView(userId: "\(savedUser.id ?? 0)")
+//            }
+//        } else {
+//
+//        }
+//        if islogin == "Yes"{
+//            if savedUser.subcriptionPlanCheck == "1" {
+//                UserDefaults.standard.setValue("Yes", forKey:"isLogin")
+//                kSharedSceneDelegate.navigateToDealerHomeVc()
+//            } else {
+//                kSharedSceneDelegate.navigateToSubscriptionView(userId: "\(response.id ?? 0)")
+//            }
+////            kSharedSceneDelegate.navigateToDealerHomeVc()
+//        }else{
+//            kSharedSceneDelegate.navigateToSelectLanguage()
+//        }
+//
         guard let _ = (scene as? UIWindowScene) else { return }
     }
 

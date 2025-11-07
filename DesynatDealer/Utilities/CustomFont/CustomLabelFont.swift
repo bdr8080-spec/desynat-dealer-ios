@@ -74,6 +74,7 @@ class CustomLabelFont: UILabel {
                 case .medium: return "Poppins-Medium"
                 case .semibold: return "Poppins-SemiBold"
                 case .bold: return "Poppins-Bold"
+                case .light: return "Poppins-Light"
                 default: return "Poppins-Regular"
                 }
             }

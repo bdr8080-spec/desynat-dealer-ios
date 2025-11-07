@@ -30,7 +30,9 @@ class RegisterationSuccessViewController: UIViewController {
             descriptionLabel.text = "Password Reset\nsuccessfully!"
         case .accountCreated:
             descriptionLabel.text = "Thank you for sinning up\nwith DESYNAT"
-        }
+        case .planPurchased:
+                descriptionLabel.text = "Plan purchased successfully!"
+            }
     }
 
 }
@@ -38,4 +40,5 @@ class RegisterationSuccessViewController: UIViewController {
 enum ComingReasonAtRegisterationSuccess {
     case passwordUpdated
     case accountCreated
+    case planPurchased
 }

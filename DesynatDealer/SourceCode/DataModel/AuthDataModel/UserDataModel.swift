@@ -27,6 +27,7 @@ struct User: Codable {
     let createdAt: String?
     let updatedAt: String?
     let accessToken:String?
+    let subcriptionPlanCheck: String?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -48,5 +49,6 @@ struct User: Codable {
         case createdAt = "created_at"
         case updatedAt = "updated_at"
         case accessToken = "accessToken"
+        case subcriptionPlanCheck = "subcription_plan_check"
     }
 }

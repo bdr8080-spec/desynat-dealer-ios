@@ -6,7 +6,7 @@
 ////
 //
 import Foundation
-import UIKit                 
+import UIKit
 
 extension SceneDelegate {
     
@@ -49,12 +49,19 @@ extension SceneDelegate {
         vc.userId = userId
         self.navigateTo(vc: vc)
     }
+    
+    public func navigateToSubscriptionView(userId: String) {
+        let vc = SubscriptionVC.instantiate(fromAppStoryboard: .Main)
+        vc.userId = userId
+        self.navigateTo(vc: vc)
+    }
 
     func logoutUser() {
         kSharedUserDefaults.clearAllData(except: [.deviceToken,.userLocation,.selectedLanguage,.defaultLanguge,.language])
         Global.shared.user = nil
         self.navigateToLoginVC()
         UserDefaults.standard.setValue("true", forKey: "isOnBoardingChecked")
+        UserDefaults.standard.set("no", forKey: "login")
     }
 
 //    ///Pass custom vc to make it root controller

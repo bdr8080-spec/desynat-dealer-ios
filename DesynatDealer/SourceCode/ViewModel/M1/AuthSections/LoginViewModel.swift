@@ -73,7 +73,11 @@ class LoginViewModel: NSObject {
                 CommonUtils.showToast(message: "Your account registration is under review")
             } else if response.adminVerify == "2" {
                 UserDefaults.standard.setValue("Yes", forKey:"isLogin")
-                kSharedSceneDelegate.navigateToDealerHomeVc()
+                if response.subcriptionPlanCheck == "1" {
+                    kSharedSceneDelegate.navigateToDealerHomeVc()
+                } else {
+                    kSharedSceneDelegate.navigateToSubscriptionView(userId: "\(response.id ?? 0)")
+                }
             }
         }
     }

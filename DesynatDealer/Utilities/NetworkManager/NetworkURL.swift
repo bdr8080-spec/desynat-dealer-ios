@@ -32,6 +32,9 @@ enum NetworkEndPoint: String {
     case logout                       = "/api/seller/logout"
     case country                      = "/api/country"
     case resendOtp                    = "/api/seller/resend_otp"
+    case getPlans                     = "/api/seller/all-plans"
+    case purchasePlan                 = "/api/seller/create-subcription-plan-buy"
+    case subcriptionPlan                 = "/api/seller/payment-subcription-plan"
     
     
     func withBaseURL() -> String {
