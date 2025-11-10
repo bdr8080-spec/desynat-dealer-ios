@@ -33,7 +33,7 @@ class SubscriptionVC: UIViewController {
   
 }
 
-extension SubscriptionVC: UICollectionViewDelegate, UICollectionViewDataSource {
+extension SubscriptionVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.plansList?.count ?? 0
     }
@@ -41,7 +41,7 @@ extension SubscriptionVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SubscriptionCollectionCell", for: indexPath) as! SubscriptionCollectionCell
         let data = viewModel.plansList?[indexPath.row]
-        viewModel.payAmt = Double(data?.price ?? 0)
+        
         cell.configData(data: data)
         cell.delegate = self
         return cell
@@ -58,6 +58,12 @@ extension SubscriptionVC: SubscriptionCollectionCellDelegate {
     func didTapContinue(for plan: GetPlansSubscriptionModel) {
         // Call your purchase plan API here
         print("User tapped continue for plan ID: \(plan.id ?? 0)")
+        viewModel.payAmt = Double(plan.price ?? 0)
+        if let duration = plan.duration, let type = plan.durationType {
+            viewModel.durationOfPlan = "for \(duration) \(type == 1 ? "Month" : "Years")"
+        } else {
+            viewModel.durationOfPlan = "N/A"
+        }
         viewModel.purchasePlan(planID: plan.id ?? 0)
     }
 }

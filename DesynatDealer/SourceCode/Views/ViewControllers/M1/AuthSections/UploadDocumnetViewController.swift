@@ -47,6 +47,8 @@ class UploadDocumnetViewController: UIViewController {
     
     @IBAction func backDidTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
+        print(self.navigationController)
+        print("back tapped===>")
     }
     
     @IBAction func submitDidTapped(_ sender: Any) {

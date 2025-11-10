@@ -38,8 +38,8 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func forgotPasswordDidTapped(_ sender: Any) {
-//        let vc = ForgotPasswordViewController.instantiate(fromAppStoryboard: .Main)
-//        self.navigationController?.pushViewController(vc, animated: true)
+        let vc = ForgotPasswordViewController.instantiate(fromAppStoryboard: .Main)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func signupDidTapped(_ sender: Any) {

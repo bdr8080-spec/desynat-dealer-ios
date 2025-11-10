@@ -68,7 +68,9 @@ class ForgotPasswordViewModel: NSObject {
             vc.type = 1
             vc.userId = user.id ?? 0
             vc.email = user.email ?? ""
-            vc.emailMobileType = 1
+            vc.emailMobileType = self.hostVC.accountType
+            vc.phoneNumber = self.hostVC.mobileTextField.text?.trimmed() ?? ""
+            vc.countryCode = self.hostVC.countryCode
             self.hostVC.navigationController?.pushViewController(vc, animated: true)
         }
     }

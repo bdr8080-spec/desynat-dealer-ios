@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -21,16 +21,16 @@
                         <rect key="frame" x="2" y="2" width="300" height="486"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Rg-wU-iQP" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
-                                <rect key="frame" x="5" y="5" width="290" height="476"/>
+                                <rect key="frame" x="20" y="5" width="260" height="476"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ndd-iY-FKe">
-                                        <rect key="frame" x="0.0" y="0.0" width="290" height="56"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="260" height="56"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btnGradient" translatesAutoresizingMaskIntoConstraints="NO" id="MGr-o0-nek">
-                                                <rect key="frame" x="0.0" y="0.0" width="290" height="56"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="260" height="56"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Plus Package" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RHj-1L-EMG" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="290" height="56"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="260" height="56"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -52,10 +52,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HUP-Jr-LFL" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="56" width="290" height="84"/>
+                                        <rect key="frame" x="0.0" y="56" width="260" height="84"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="KD 100.00 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IpD-ea-Xop" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
-                                                <rect key="frame" x="88.666666666666686" y="17" width="113" height="26.333333333333329"/>
+                                                <rect key="frame" x="73.666666666666686" y="17" width="113" height="26.333333333333329"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                                 <color key="textColor" red="0.43137254901960786" green="0.27058823529411763" blue="0.15294117647058825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -64,7 +64,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="for 22 Days" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cJg-uG-j2P" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
-                                                <rect key="frame" x="103.66666666666669" y="48.333333333333329" width="83" height="20"/>
+                                                <rect key="frame" x="88.666666666666686" y="48.333333333333329" width="83" height="20"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <color key="textColor" red="0.43137254901960786" green="0.27058823529411763" blue="0.15294117647058825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -103,11 +103,11 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Y5b-D7-qQK" customClass="TableViewDynamicHeight" customModule="DesynatDealer" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="169" width="250" height="229"/>
+                                        <rect key="frame" x="20" y="169" width="220" height="229"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Owj-i2-8Na">
-                                        <rect key="frame" x="20" y="418" width="250" height="38"/>
+                                        <rect key="frame" x="20" y="418" width="220" height="38"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="38" id="I1t-Hz-ro2"/>
                                         </constraints>
@@ -163,10 +163,10 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="9Rg-wU-iQP" firstAttribute="leading" secondItem="7Ue-59-wpI" secondAttribute="leading" constant="5" id="2RV-mV-zjw"/>
+                            <constraint firstItem="9Rg-wU-iQP" firstAttribute="leading" secondItem="7Ue-59-wpI" secondAttribute="leading" constant="20" id="2RV-mV-zjw"/>
                             <constraint firstAttribute="bottom" secondItem="9Rg-wU-iQP" secondAttribute="bottom" constant="5" id="aX5-r6-six"/>
                             <constraint firstItem="9Rg-wU-iQP" firstAttribute="top" secondItem="7Ue-59-wpI" secondAttribute="top" constant="5" id="hf7-zp-KMg"/>
-                            <constraint firstAttribute="trailing" secondItem="9Rg-wU-iQP" secondAttribute="trailing" constant="5" id="t9S-49-i7M"/>
+                            <constraint firstAttribute="trailing" secondItem="9Rg-wU-iQP" secondAttribute="trailing" constant="20" id="t9S-49-i7M"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -198,10 +198,10 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray2Color">
-            <color red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

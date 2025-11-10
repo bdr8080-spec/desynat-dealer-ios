@@ -26,12 +26,16 @@ class OTPViewController: UIViewController {
     @IBOutlet weak var timerView: UIView!
     @IBOutlet weak var resendView: UIView!
     @IBOutlet weak var labelTimer: UILabel!
+    @IBOutlet weak var phoneNumberLabel: UILabel!
+    
+    
     var userId = 0
     var otpDigits = ""
     var type = 0
     var emailMobileType = 0
     var email = ""
-    
+    var phoneNumber = ""
+    var countryCode = ""
     // MARK: - Variables
     var remainingTime = 90
     var otpTimer: Timer?
@@ -72,6 +76,12 @@ class OTPViewController: UIViewController {
             stepTwoImageView.isHidden = false
         default:
             stepTwoImageView.isHidden = true
+        }
+        
+        if emailMobileType == 0 {
+            phoneNumberLabel.text = "\(countryCode)\(phoneNumber)"
+        } else {
+            phoneNumberLabel.text = email
         }
     }
     

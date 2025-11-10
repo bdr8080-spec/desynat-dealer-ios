@@ -62,12 +62,22 @@ class LoginViewModel: NSObject {
         ]
         WebService.sharedInstance.loginService(withParams: params) { (response) in
             if response.storeInformation == "0" {
-                kSharedSceneDelegate.navigateToStoreInfo(userId: response.id ?? 0)
+//                kSharedSceneDelegate.navigateToStoreInfo(userId: response.id ?? 0)
+                
+                let vc = StoreInformationViewController.instantiate(fromAppStoryboard: .Main)
+                vc.userId = response.id ?? 0
+                self.loginHostVC.navigationController?.pushViewController(vc, animated: true)
                 return
             } else if response.bankInformation == "0" {
-                kSharedSceneDelegate.navigateToBankInfo(userId: "\(response.id ?? 0)")
+//                kSharedSceneDelegate.navigateToBankInfo(userId: "\(response.id ?? 0)")
+                let vc = UploadDocumnetViewController.instantiate(fromAppStoryboard: .Main)
+                vc.userId = "\(response.id ?? 0)"
+                self.loginHostVC.navigationController?.pushViewController(vc, animated: true)
             } else if response.adminVerify == "0" {
-                kSharedSceneDelegate.navigateToViewDetailsVC(userId: "\(response.id ?? 0)")
+//                kSharedSceneDelegate.navigateToViewDetailsVC(userId: "\(response.id ?? 0)")
+                let vc = SummaryViewController.instantiate(fromAppStoryboard: .Main)
+                vc.userId = "\(response.id ?? 0)"
+                self.loginHostVC.navigationController?.pushViewController(vc, animated: true)
             } else if response.adminVerify == "1" {
                 kSharedSceneDelegate.navigateToLoginVC()
                 CommonUtils.showToast(message: "Your account registration is under review")
@@ -78,6 +88,11 @@ class LoginViewModel: NSObject {
                 } else {
                     kSharedSceneDelegate.navigateToSubscriptionView(userId: "\(response.id ?? 0)")
                 }
+            } else if response.adminVerify == "4"{
+//                kSharedSceneDelegate.navigateToBankInfo(userId: "\(response.id ?? 0)")
+                let vc = UploadDocumnetViewController.instantiate(fromAppStoryboard: .Main)
+                vc.userId = "\(response.id ?? 0)"
+                self.loginHostVC.navigationController?.pushViewController(vc, animated: true)
             }
         }
     }

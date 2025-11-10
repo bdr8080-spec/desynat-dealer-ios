@@ -19,7 +19,7 @@ class ForgotPasswordViewController: UIViewController {
     
     var accountType = 0
     var countryCode: String = "+965"
-    var mobileIsSelected: Bool? = nil
+    var mobileIsSelected: Bool? = true
     private lazy var viewModel = ForgotPasswordViewModel(hostVC: self)
     
     override func viewDidLoad() {

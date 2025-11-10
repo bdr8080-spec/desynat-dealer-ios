@@ -12,8 +12,9 @@ struct GetPlansSubscriptionModel: Codable {
     let id, countryID: Int?
     let planNameEnglish, planNameArabic: String?
     let duration, durationType, noOfVideos, noOfProducts: Int?
-    let noOfHighlights, noOfEmployee, stories, price: Int?
+    let noOfHighlights, noOfEmployee, stories: Int?
     let commission, commissionPercentage, status: Int?
+    let price: Double?
     let createdAt, updatedAt: String?
 
     enum CodingKeys: String, CodingKey {

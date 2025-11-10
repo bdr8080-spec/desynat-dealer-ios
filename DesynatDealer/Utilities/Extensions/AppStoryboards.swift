@@ -10,6 +10,7 @@ import UIKit
 enum AppStoryboard : String {
     case Main
     case Home
+    case Profile
 }
 
 extension AppStoryboard {

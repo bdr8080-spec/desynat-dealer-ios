@@ -137,7 +137,7 @@ extension WebService {
                // kSharedUserDefaults.saveValue(Key: .accessToken, value: String.getString(user.access_token))
                 print(user)
               //  kSharedUserDefaults.saveModelFor(key:.user, value: user)
-                CommonUtils.showToast(message: message ?? "")
+//                CommonUtils.showToast(message: message ?? "")
                 completion(user)
             }
         }
@@ -203,7 +203,7 @@ extension WebService {
                // kSharedUserDefaults.saveValue(Key: .accessToken, value: String.getString(user.access_token))
                 print(user)
                 kSharedUserDefaults.saveModelFor(key:.user, value: user)
-                CommonUtils.showToast(message: message ?? "")
+                CommonUtils.showToast(message: "OTP sent succesfully")
                 completion(user)
             }
         }
@@ -212,7 +212,7 @@ extension WebService {
     func createPasswordService(withParams dictParams: Dictionary<String, Any>,
                       completion:@escaping (_ user:User)-> Void) {
         CommonUtils.showHud(show: true)
-        NetworkManager.shared.request(withAPI:.endpoint(.createAccount), requestMethod: .post, requestParams: dictParams,encoding: JSONEncoding.default,requestModel:User.self) { result, code in
+        NetworkManager.shared.request(withAPI:.endpoint(.createPassword), requestMethod: .post, requestParams: dictParams,encoding: JSONEncoding.default,requestModel:User.self) { result, code in
             
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in

@@ -16,13 +16,16 @@ class PaymentMethodVC: UIViewController {
     @IBOutlet weak var viewPayment: MFPaymentCardView!
     
     var payAmount: Double = 0.0
-    //var selectedPaymentMethod: PaymentMethod?
     var getFatoorahResponse: MFPaymentStatusResponse?
     var transactionIds: String?
+    var durationOfPlan: String? = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewCreditCard.isHidden = true
+//        viewCreditCard.isHidden = true
+        cardPay()
+        lblMonth.text = durationOfPlan
+        lblTotalAmt.text = "AED \(payAmount)"
     }
     
     @IBAction func btnBack(_ sender: Any) {
@@ -30,59 +33,102 @@ class PaymentMethodVC: UIViewController {
     }
     
     @IBAction func btnSelectPaymentMethod(_ sender: Any) {
-        viewCreditCard.isHidden = false
-        cardPay()
+//        viewCreditCard.isHidden = false
+        
     }
     
     @IBAction func btnPay(_ sender: Any) {
-        let invoiceValue = Decimal(payAmount)
         
-        let request = MFExecutePaymentRequest(invoiceValue: invoiceValue)
-        
-//        request.customerReference = self.orderId
-//        
-//        guard let supplierIDString = self.supplierId,
-//              let supplierCode = Int(supplierIDString) else {
-//            self.showAlert(msg: "Invalid supplier ID.")
-//            return
+//        let invoiceValue = Decimal(payAmount)
+//        let request = MFExecutePaymentRequest(invoiceValue: invoiceValue)
+//        viewPayment.pay(request, .english) { [weak self] response, invoiceId in
+//            guard let self = self else { return }
+//            
+//            switch response {
+//            case .success(let paymentStatus):
+//                print("Payment successful with invoiceId: \(invoiceId ?? "N/A")")
+//                
+//                let transactionID = paymentStatus.invoiceTransactions?.first?.transactionID ?? ""
+//                let paymentGateway = paymentStatus.invoiceTransactions?.first?.paymentGateway ?? "card"
+//                
+//                completePlanPurchase(transactionId: transactionIds ?? "", paymentStatus: 1, onlineTransactionId: transactionID)
+//                
+//                DispatchQueue.main.async {
+//                    let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
+//                    vc.comingReason = .planPurchased
+//                    vc.callBackDismiss = {
+//                        kSharedSceneDelegate.navigateToDealerHomeVc()
+//                    }
+//                    self.present(vc, animated: true)
+//                }
+//            case .failure(let error):
+//                print("Payment Error: \(error.errorDescription)")
+//                let errorMessage = error.errorDescription
+//                completePlanPurchase(transactionId: transactionIds ?? "", paymentStatus: 2, onlineTransactionId: "")
+////                if errorMessage == "User clicked cancel button" {
+//                    self.showAlert(msg: "Payment Cancelled")
+//                    self.navigationController?.popViewController(animated: true)
+//            }
 //        }
-//
-//        let supplier = MFSupplier(
-//            supplierCode: supplierCode, invoiceShare: invoiceValue
-//        )
-//        request.suppliers = [supplier]
         
-        viewPayment.pay(request, .english) { [weak self] response, invoiceId in
-            guard let self = self else { return }
-            
-            switch response {
-            case .success(let paymentStatus):
-                print("Payment successful with invoiceId: \(invoiceId ?? "N/A")")
-                
-                let transactionID = paymentStatus.invoiceTransactions?.first?.transactionID ?? ""
-                let paymentGateway = paymentStatus.invoiceTransactions?.first?.paymentGateway ?? "card"
-                
-                completePlanPurchase(transactionId: transactionIds ?? "", paymentStatus: 1, onlineTransactionId: transactionID)
-                
-                DispatchQueue.main.async {
-                    let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
-                    vc.comingReason = .planPurchased
-                    vc.callBackDismiss = {
-                        kSharedSceneDelegate.navigateToDealerHomeVc()
+        
+        // create request in advance (no harm)
+            let invoiceValue = Decimal(payAmount)
+            let request = MFExecutePaymentRequest(invoiceValue: invoiceValue)
+
+            // Validate card fields first using the SDK's validate() method
+            viewPayment.validate { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case .success(_):
+                    // Validation passed — proceed with payment
+//                    DispatchQueue.main.async {
+//                        self.startLoading() // optional: show spinner
+//                    }
+
+                    self.viewPayment.pay(request, .english) { [weak self] response, invoiceId in
+                        guard let self = self else { return }
+
+                        switch response {
+                        case .success(let paymentStatus):
+                            print("Payment successful with invoiceId: \(invoiceId ?? "N/A")")
+
+                            let transactionID = paymentStatus.invoiceTransactions?.first?.transactionID ?? ""
+                            completePlanPurchase(transactionId: self.transactionIds ?? "",
+                                                 paymentStatus: 1,
+                                                 onlineTransactionId: transactionID)
+
+                            DispatchQueue.main.async {
+//                                self.stopLoading()
+                                let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
+                                vc.comingReason = .planPurchased
+                                vc.callBackDismiss = {
+                                    kSharedSceneDelegate.navigateToDealerHomeVc()
+                                }
+                                self.present(vc, animated: true)
+                            }
+
+                        case .failure(let error):
+                            print("Payment Error: \(error.errorDescription)")
+                            completePlanPurchase(transactionId: self.transactionIds ?? "",
+                                                 paymentStatus: 2,
+                                                 onlineTransactionId: "")
+                            DispatchQueue.main.async {
+//                                self.stopLoading()
+                                self.showAlert(msg: "Payment Cancelled")
+                                self.navigationController?.popViewController(animated: true)
+                            }
+                        }
                     }
-                    self.present(vc, animated: true)
+
+                case .failure(let failError):
+                    // Validation failed — show toast / alert
+                    DispatchQueue.main.async {
+                        // Customize message based on failError if needed
+                        self.showAlert(msg: "Please enter valid card details") // your toast method
+                    }
                 }
-                
-                
-                // customerrefence - orderif  or supplier id
-//                self.checkOutOrder(transactionId: transactionID, paymentMethod: paymentGateway)
-//                self.orderPlaced(with: paymentStatus)
-                
-            case .failure(let error):
-                print("Payment Error: \(error.errorDescription)")
-                self.showAlert(msg: "Payment Failed: \(error.errorDescription)")
             }
-        }
     }
     
     

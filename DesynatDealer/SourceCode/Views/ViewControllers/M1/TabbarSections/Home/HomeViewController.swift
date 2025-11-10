@@ -123,12 +123,6 @@ class HomeViewController: UIViewController {
         // Optional: smooth animation
         lineChartView.animate(xAxisDuration: 1.0, yAxisDuration: 1.0)
     }
-
-
-    @IBAction func btnTapLogout(_ sender: UIButton) {
-        kSharedSceneDelegate.navigateToSelectLanguage()
-        UserDefaults.standard.setValue("No", forKey:"isLogin")
-    }
     
     @IBAction func btnDesynatShowDesign(_ sender: Any) {
     }
@@ -140,6 +134,8 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func btnProfile(_ sender: Any) {
+        let vc = ProfileViewController.instantiate(fromAppStoryboard: .Profile)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func btnTapToggle(_ sender: Any) {

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -102,7 +102,7 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ObD-4s-UcQ">
-                                <rect key="frame" x="0.0" y="129" width="393" height="1427"/>
+                                <rect key="frame" x="0.0" y="129" width="393" height="1393"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rhg-6g-69W">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="1439"/>
@@ -149,7 +149,7 @@
                                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="tXa-xC-hE2">
                                                                         <rect key="frame" x="0.0" y="25" width="361" height="38"/>
                                                                         <subviews>
-                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qw4-o5-9AL" customClass="CustomView" customModule="DesynatAdmin" customModuleProvider="target">
+                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qw4-o5-9AL" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="173" height="38"/>
                                                                                 <subviews>
                                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="From   //  //" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sy9-EL-TcD">
@@ -187,7 +187,7 @@
                                                                                     </userDefinedRuntimeAttribute>
                                                                                 </userDefinedRuntimeAttributes>
                                                                             </view>
-                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TbR-UL-0sr" customClass="CustomView" customModule="DesynatAdmin" customModuleProvider="target">
+                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TbR-UL-0sr" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
                                                                                 <rect key="frame" x="188" y="0.0" width="173" height="38"/>
                                                                                 <subviews>
                                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="To   //  //" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LLU-FC-zP3">
@@ -1094,7 +1094,7 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="3UR-mp-mLg">
                                                                 <rect key="frame" x="16" y="50.333333333333258" width="361" height="40"/>
                                                                 <subviews>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RaL-CO-qtg" customClass="CustomView" customModule="DesynatAdmin" customModuleProvider="target">
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RaL-CO-qtg" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="173" height="40"/>
                                                                         <subviews>
                                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="From   //  //" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NX9-8G-iAe">
@@ -1132,7 +1132,7 @@
                                                                             </userDefinedRuntimeAttribute>
                                                                         </userDefinedRuntimeAttributes>
                                                                     </view>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ljW-1m-cjs" customClass="CustomView" customModule="DesynatAdmin" customModuleProvider="target">
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ljW-1m-cjs" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
                                                                         <rect key="frame" x="188" y="0.0" width="173" height="40"/>
                                                                         <subviews>
                                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="To   //  //" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wr9-2Q-h65">
@@ -1342,7 +1342,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shows Screen" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SJQ-6e-2Tz">
-                                <rect key="frame" x="140.66666666666666" y="427.33333333333331" width="112" height="22.666666666666686"/>
+                                <rect key="frame" x="140.66666666666666" y="439.66666666666669" width="112" height="22.666666666666686"/>
                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -1373,13 +1373,13 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lineTabbar" translatesAutoresizingMaskIntoConstraints="NO" id="o5Q-Vp-Nfe">
-                                <rect key="frame" x="0.0" y="728" width="393" height="95"/>
+                                <rect key="frame" x="0.0" y="694" width="393" height="95"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="95" id="oqP-O3-suk"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7s6-jy-3q0" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
-                                <rect key="frame" x="16" y="757" width="361" height="61"/>
+                                <rect key="frame" x="16" y="723" width="361" height="61"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="64o-UG-Ogi">
                                         <rect key="frame" x="0.0" y="0.0" width="361" height="61"/>
@@ -1442,7 +1442,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" tag="2" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XYH-pq-AdE">
-                                <rect key="frame" x="170.66666666666666" y="752.33333333333337" width="52" height="52"/>
+                                <rect key="frame" x="170.66666666666666" y="718.33333333333337" width="52" height="52"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="8NK-rK-nOg"/>
                                     <constraint firstAttribute="width" secondItem="XYH-pq-AdE" secondAttribute="height" id="CPj-Wk-EHq"/>
@@ -1494,7 +1494,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Products Screen" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ye2-JR-w8K">
-                                <rect key="frame" x="131" y="427.33333333333331" width="131" height="22.666666666666686"/>
+                                <rect key="frame" x="131" y="439.66666666666669" width="131" height="22.666666666666686"/>
                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -1521,7 +1521,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Orders Screen" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xZa-li-cfq">
-                                <rect key="frame" x="139.66666666666666" y="427.33333333333331" width="114" height="22.666666666666686"/>
+                                <rect key="frame" x="139.66666666666666" y="439.66666666666669" width="114" height="22.666666666666686"/>
                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -1548,32 +1548,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payments Screen" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uTk-9R-eWs">
-                                <rect key="frame" x="126" y="427.33333333333331" width="141" height="22.666666666666686"/>
+                                <rect key="frame" x="126" y="439.66666666666669" width="141" height="22.666666666666686"/>
                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9zG-cb-sZl">
-                                <rect key="frame" x="146.66666666666666" y="245.66666666666663" width="100" height="35"/>
-                                <color key="backgroundColor" red="0.43137254899999999" green="0.27058823529999998" blue="0.1529411765" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="eDT-uo-nhQ"/>
-                                    <constraint firstAttribute="width" constant="100" id="g32-3Q-jb7"/>
-                                </constraints>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Logout"/>
-                                <connections>
-                                    <action selector="logoutDidTapped:" destination="gcf-1V-Hgh" eventType="touchUpInside" id="ISi-gF-eUq"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="jNc-1S-6zL"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="uTk-9R-eWs" firstAttribute="centerX" secondItem="jNc-1S-6zL" secondAttribute="centerX" id="Ehy-vN-4lG"/>
-                            <constraint firstItem="9zG-cb-sZl" firstAttribute="centerY" secondItem="jNc-1S-6zL" secondAttribute="centerY" multiplier="0.6" id="cL3-rL-KYR"/>
-                            <constraint firstItem="9zG-cb-sZl" firstAttribute="centerX" secondItem="jNc-1S-6zL" secondAttribute="centerX" id="jJS-Vw-gzN"/>
                             <constraint firstItem="uTk-9R-eWs" firstAttribute="centerY" secondItem="jNc-1S-6zL" secondAttribute="centerY" id="tI9-gG-Bu2"/>
                         </constraints>
                     </view>

@@ -576,6 +576,12 @@
 		6B645F582EB4953500451A5A /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B645F572EB4953500451A5A /* SummaryViewController.swift */; };
 		6B645F5A2EB4955B00451A5A /* SummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B645F592EB4955B00451A5A /* SummaryViewModel.swift */; };
 		6B645F5C2EB4C84300451A5A /* GlobalVariables 2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B645F5B2EB4C84300451A5A /* GlobalVariables 2.swift */; };
+		7A54F9F02EC1D2170027710A /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A54F9EF2EC1D2170027710A /* Profile.storyboard */; };
+		7A54F9F32EC1D27C0027710A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A54F9F22EC1D27C0027710A /* ProfileViewController.swift */; };
+		7A54F9F62EC1DB360027710A /* SideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A54F9F42EC1DB360027710A /* SideMenuTableViewCell.swift */; };
+		7A54F9F72EC1DB360027710A /* SideMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A54F9F52EC1DB360027710A /* SideMenuTableViewCell.xib */; };
+		7A54F9F92EC1DBD70027710A /* SideMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A54F9F82EC1DBD70027710A /* SideMenuModel.swift */; };
+		7A54F9FB2EC1DC030027710A /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A54F9FA2EC1DC030027710A /* ProfileViewModel.swift */; };
 		CF670A9299A5979395DF398F /* Pods_DesynatDealer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40FCC5FE2116BF815C4B1BFB /* Pods_DesynatDealer.framework */; };
 		D10E16C42EBCDE5700557B4D /* CustomButtonFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10E16C02EBCDE5700557B4D /* CustomButtonFont.swift */; };
 		D10E16C52EBCDE5700557B4D /* CustomLabelFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10E16C12EBCDE5700557B4D /* CustomLabelFont.swift */; };
@@ -1165,6 +1171,12 @@
 		6B645F572EB4953500451A5A /* SummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewController.swift; sourceTree = "<group>"; };
 		6B645F592EB4955B00451A5A /* SummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewModel.swift; sourceTree = "<group>"; };
 		6B645F5B2EB4C84300451A5A /* GlobalVariables 2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GlobalVariables 2.swift"; sourceTree = "<group>"; };
+		7A54F9EF2EC1D2170027710A /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		7A54F9F22EC1D27C0027710A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		7A54F9F42EC1DB360027710A /* SideMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewCell.swift; sourceTree = "<group>"; };
+		7A54F9F52EC1DB360027710A /* SideMenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SideMenuTableViewCell.xib; sourceTree = "<group>"; };
+		7A54F9F82EC1DBD70027710A /* SideMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuModel.swift; sourceTree = "<group>"; };
+		7A54F9FA2EC1DC030027710A /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		D10E16C02EBCDE5700557B4D /* CustomButtonFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonFont.swift; sourceTree = "<group>"; };
 		D10E16C12EBCDE5700557B4D /* CustomLabelFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabelFont.swift; sourceTree = "<group>"; };
 		D10E16C22EBCDE5700557B4D /* CustomTextfiledFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextfiledFont.swift; sourceTree = "<group>"; };
@@ -1283,6 +1295,7 @@
 				6B38D0562EB3473B00C41192 /* Home.storyboard */,
 				6B38D0582EB3473B00C41192 /* LaunchScreen.storyboard */,
 				6B38D0592EB3473B00C41192 /* Main.storyboard */,
+				7A54F9EF2EC1D2170027710A /* Profile.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -2110,6 +2123,16 @@
 			path = CountryPicker;
 			sourceTree = "<group>";
 		};
+		7A54F9F12EC1D25D0027710A /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				7A54F9FA2EC1DC030027710A /* ProfileViewModel.swift */,
+				7A54F9F82EC1DBD70027710A /* SideMenuModel.swift */,
+				7A54F9F22EC1D27C0027710A /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		8ED1EEFFED0C7ED5B650FE4D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -2140,6 +2163,7 @@
 		D19666992EBCD07500193688 /* M2 */ = {
 			isa = PBXGroup;
 			children = (
+				7A54F9F12EC1D25D0027710A /* Profile */,
 				D1F88C0A2EBE1F0E0027A47C /* Payment */,
 				D1F88AA42EBDBD930027A47C /* Subscription */,
 				D196669A2EBCD07C00193688 /* Cell */,
@@ -2150,6 +2174,8 @@
 		D196669A2EBCD07C00193688 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				7A54F9F42EC1DB360027710A /* SideMenuTableViewCell.swift */,
+				7A54F9F52EC1DB360027710A /* SideMenuTableViewCell.xib */,
 				D1F88AA02EBDB5B90027A47C /* SubscriptionDataTableCell.swift */,
 				D1F88AA12EBDB5B90027A47C /* SubscriptionDataTableCell.xib */,
 				D1F88C112EBE25AC0027A47C /* SubscriptionCollectionCell.swift */,
@@ -2529,6 +2555,7 @@
 				6B38D4172EB3657F00C41192 /* Brunei.png in Resources */,
 				6B38D4182EB3657F00C41192 /* BS.png in Resources */,
 				6B38D4192EB3657F00C41192 /* NZ.png in Resources */,
+				7A54F9F02EC1D2170027710A /* Profile.storyboard in Resources */,
 				6B38D41A2EB3657F00C41192 /* IS.png in Resources */,
 				6B38D41B2EB3657F00C41192 /* Montenegro.png in Resources */,
 				6B38D41C2EB3657F00C41192 /* UG.png in Resources */,
@@ -2687,6 +2714,7 @@
 				6B38D4B42EB3657F00C41192 /* Vatican-City.png in Resources */,
 				6B38D4B52EB3657F00C41192 /* MD.png in Resources */,
 				6B38D4B62EB3657F00C41192 /* CD.png in Resources */,
+				7A54F9F72EC1DB360027710A /* SideMenuTableViewCell.xib in Resources */,
 				6B38D4B72EB3657F00C41192 /* Malawi.png in Resources */,
 				6B38D4B82EB3657F00C41192 /* Lithuania.png in Resources */,
 				6B38D4B92EB3657F00C41192 /* Netherlands.png in Resources */,
@@ -2740,9 +2768,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-DesynatDealer/Pods-DesynatDealer-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-DesynatDealer/Pods-DesynatDealer-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2757,9 +2789,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-DesynatDealer/Pods-DesynatDealer-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-DesynatDealer/Pods-DesynatDealer-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2798,8 +2834,10 @@
 				6B38D0D52EB3473B00C41192 /* AppDelegate.swift in Sources */,
 				6B38D0D62EB3473B00C41192 /* NavigationSceneExt.swift in Sources */,
 				6B38D0D72EB3473B00C41192 /* SceneDelegate.swift in Sources */,
+				7A54F9FB2EC1DC030027710A /* ProfileViewModel.swift in Sources */,
 				6B38D4D42EB36FCD00C41192 /* OTPViewModel.swift in Sources */,
 				D10E16C42EBCDE5700557B4D /* CustomButtonFont.swift in Sources */,
+				7A54F9F62EC1DB360027710A /* SideMenuTableViewCell.swift in Sources */,
 				D10E16C52EBCDE5700557B4D /* CustomLabelFont.swift in Sources */,
 				D10E16C62EBCDE5700557B4D /* CustomTextfiledFont.swift in Sources */,
 				6B645F582EB4953500451A5A /* SummaryViewController.swift in Sources */,
@@ -2817,6 +2855,7 @@
 				6B38D0E52EB3473B00C41192 /* AddAddreeViewController.swift in Sources */,
 				6B38D0E62EB3473B00C41192 /* ForgotPasswordViewController.swift in Sources */,
 				6B38D0E72EB3473B00C41192 /* LocationPermissionViewController.swift in Sources */,
+				7A54F9F32EC1D27C0027710A /* ProfileViewController.swift in Sources */,
 				6B38D0E82EB3473B00C41192 /* LocationViewController.swift in Sources */,
 				6B645F5C2EB4C84300451A5A /* GlobalVariables 2.swift in Sources */,
 				6B38D0E92EB3473B00C41192 /* LoginViewController.swift in Sources */,
@@ -2854,6 +2893,7 @@
 				6B38D1012EB3473B00C41192 /* DataTypeConversion.swift in Sources */,
 				6B38D1022EB3473B00C41192 /* String.swift in Sources */,
 				6B38D1032EB3473B00C41192 /* StringExtensions.swift in Sources */,
+				7A54F9F92EC1DBD70027710A /* SideMenuModel.swift in Sources */,
 				6B38D1042EB3473B00C41192 /* StringValidation.swift in Sources */,
 				6B38D1052EB3473B00C41192 /* TableViewExtension.swift in Sources */,
 				49B2EB492EB88BB500EDC254 /* UploadDocumentModel.swift in Sources */,
@@ -2945,7 +2985,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.DesynatDealer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Desynat Dealer";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Desynat Dealer Provisioning New";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2986,7 +3026,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.DesynatDealer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Desynat Dealer";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Desynat Dealer Provisioning New";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

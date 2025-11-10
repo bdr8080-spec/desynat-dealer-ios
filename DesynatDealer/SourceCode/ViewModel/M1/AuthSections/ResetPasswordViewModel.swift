@@ -26,9 +26,10 @@ class ResetPasswordViewModel: NSObject {
             // Validate create password
             if createPassword.isEmpty {
                 errorMessage = .EnterNewPassword
-            } else if !createPassword.isValidPassword() {
-                errorMessage = .InvalidPasswordFormat
             }
+//        else if !createPassword.isValidPassword() {
+//                errorMessage = .InvalidPasswordFormat
+//            }
             // Validate confirm password
             else if confirmPassword.isEmpty {
                 errorMessage = .EnterConfirmPassword
@@ -46,7 +47,7 @@ class ResetPasswordViewModel: NSObject {
     
     func ResetPassApi() {
         let params: [String: Any] = [
-            APIKeys.userId: hostVC.id,
+            APIKeys.id: hostVC.id,
             APIKeys.password: hostVC.txtCreatePassword.text ?? "",
             APIKeys.confirmPassword:hostVC.txtConfirmPassword.text ?? ""
         ]
