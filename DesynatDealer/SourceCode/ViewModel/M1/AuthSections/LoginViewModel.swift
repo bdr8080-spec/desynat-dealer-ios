@@ -40,9 +40,10 @@ class LoginViewModel: NSObject {
         if errorMessage == .none {
             if password.isEmpty {
                 errorMessage = .EnterPassword
-            } else if !password.isValidPassword() {
-                errorMessage = .InvalidPasswordFormat
             }
+//            else if !password.isValidPassword() {
+//                errorMessage = .InvalidPasswordFormat
+//            }
         }
         
         if errorMessage != .none {
@@ -69,12 +70,10 @@ class LoginViewModel: NSObject {
                 self.loginHostVC.navigationController?.pushViewController(vc, animated: true)
                 return
             } else if response.bankInformation == "0" {
-//                kSharedSceneDelegate.navigateToBankInfo(userId: "\(response.id ?? 0)")
                 let vc = UploadDocumnetViewController.instantiate(fromAppStoryboard: .Main)
                 vc.userId = "\(response.id ?? 0)"
                 self.loginHostVC.navigationController?.pushViewController(vc, animated: true)
             } else if response.adminVerify == "0" {
-//                kSharedSceneDelegate.navigateToViewDetailsVC(userId: "\(response.id ?? 0)")
                 let vc = SummaryViewController.instantiate(fromAppStoryboard: .Main)
                 vc.userId = "\(response.id ?? 0)"
                 self.loginHostVC.navigationController?.pushViewController(vc, animated: true)
@@ -89,7 +88,6 @@ class LoginViewModel: NSObject {
                     kSharedSceneDelegate.navigateToSubscriptionView(userId: "\(response.id ?? 0)")
                 }
             } else if response.adminVerify == "4"{
-//                kSharedSceneDelegate.navigateToBankInfo(userId: "\(response.id ?? 0)")
                 let vc = UploadDocumnetViewController.instantiate(fromAppStoryboard: .Main)
                 vc.userId = "\(response.id ?? 0)"
                 self.loginHostVC.navigationController?.pushViewController(vc, animated: true)

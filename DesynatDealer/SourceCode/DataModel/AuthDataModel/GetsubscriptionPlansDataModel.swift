@@ -40,14 +40,14 @@ struct GetPlansSubscriptionModel: Codable {
 struct PurchasePlanDataModel: Codable {
     let transactionID: String?
     let sellerID: Int?
-    let planID, status, paymentStatus, planStartDate: String?
+    let status, paymentStatus, planStartDate: String?
     let planEndDate, paymentMethod, updatedAt, createdAt: String?
     let id: Int?
 
     enum CodingKeys: String, CodingKey {
         case transactionID = "transaction_id"
         case sellerID = "seller_id"
-        case planID = "plan_id"
+//        case planID = "plan_id"
         case status
         case paymentStatus = "payment_status"
         case planStartDate = "plan_start_date"

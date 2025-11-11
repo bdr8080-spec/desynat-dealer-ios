@@ -137,7 +137,11 @@ class PaymentMethodVC: UIViewController {
 extension PaymentMethodVC {
     func completePlanPurchase(transactionId: String, paymentStatus:Int, onlineTransactionId: String) {
         let params: [String: Any] = ["transaction_id": transactionId, "payment_status": paymentStatus, "online_transaction_id": onlineTransactionId]
-        WebService.sharedInstance.purchasePlansListService(param: params) { result in
+//        WebService.sharedInstance.purchasePlansListService(param: params) { result in
+//            
+//        }
+        
+        WebService.sharedInstance.completePurchasePlansListService(param: params) { result in
             
         }
     }

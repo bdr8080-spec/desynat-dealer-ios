@@ -39,7 +39,6 @@ class SubscriptionPlaneViewModel: NSObject {
     }
 
     //Complete Paymnet Call api
-    
     func completePlanPurchase(transactionId: String, paymentStatus:Int, onlineTransactionId: String) {
         let params: [String: Any] = ["transaction_id": transactionId, "payment_status": paymentStatus, "online_transaction_id": onlineTransactionId]
         WebService.sharedInstance.purchasePlansListService(param: params) { result in

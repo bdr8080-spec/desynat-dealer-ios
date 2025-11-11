@@ -21,7 +21,6 @@ struct APIKeys {
     static let userId              = "user_id"
     static let otp                 = "otp"
     static let type                = "type"
-//    static let id = "id"
     
     //storeInfo
     static let storeImage          = "store_image"
