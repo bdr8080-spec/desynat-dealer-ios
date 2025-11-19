@@ -9,21 +9,68 @@ import UIKit
 
 class ProductsViewController: UIViewController {
 
-    override func viewDidLoad() {
+  
+  @IBOutlet weak var allTitleLabel: UILabel!
+  @IBOutlet weak var allBottomLabel: UILabel!
+  @IBOutlet weak var activeTitleLabel: UILabel!
+  @IBOutlet weak var activeBottomLabel: UILabel!
+  @IBOutlet weak var inactiveLabel: UILabel!
+  @IBOutlet weak var inactiveBottomLabel: UILabel!
+  @IBOutlet weak var productTableView: UITableView! {
+    didSet {
+      productTableView.registerCellFromNib(cellID: "ProductManagementTableViewCell")
+    }
+  }
+  
+  override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+  
+  @IBAction func allDidTapped(_ sender: Any) {
+    allTitleLabel.textColor = UIColor.darkBrown
+    allBottomLabel.backgroundColor = UIColor.darkBrown
+    activeTitleLabel.textColor = UIColor(named: "#B3B3B3")
+    activeBottomLabel.backgroundColor = UIColor(named: "#B3B3B3")
+    inactiveLabel.textColor = UIColor(named: "#B3B3B3")
+    inactiveBottomLabel.backgroundColor = UIColor(named: "#B3B3B3")
+  }
+  
+  @IBAction func activeDidTapped(_ sender: Any) {
+    allTitleLabel.textColor = UIColor(named: "#B3B3B3")
+    allBottomLabel.backgroundColor = UIColor(named: "#B3B3B3")
+    activeTitleLabel.textColor = UIColor.darkBrown
+    activeBottomLabel.backgroundColor = UIColor.darkBrown
+    inactiveLabel.textColor = UIColor(named: "#B3B3B3")
+    inactiveBottomLabel.backgroundColor = UIColor(named: "#B3B3B3")
+  }
+  
+  @IBAction func InactiveDidTapped(_ sender: Any) {
+    allTitleLabel.textColor = UIColor(named: "#B3B3B3")
+    allBottomLabel.backgroundColor = UIColor(named: "#B3B3B3")
+    activeTitleLabel.textColor = UIColor(named: "#B3B3B3")
+    activeBottomLabel.backgroundColor = UIColor(named: "#B3B3B3")
+    inactiveLabel.textColor = UIColor.darkBrown
+    inactiveBottomLabel.backgroundColor = UIColor.darkBrown
+  }
+  
+  
+}
+extension ProductsViewController: UITableViewDelegate, UITableViewDataSource {
+  
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return 2
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: "ProductManagementTableViewCell", for: indexPath) as! ProductManagementTableViewCell
+    return cell
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let nextVC = ProductDetailViewController.instantiate(fromAppStoryboard: .Product)
+    self.navigationController?.pushViewController(nextVC, animated: true)
+  }
+  
+  
 }
