@@ -64,15 +64,6 @@
                                             <action selector="btnNotification:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="ZJg-vn-fW9"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Desynat" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3TC-J1-7O1" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
-                                        <rect key="frame" x="64" y="67" width="92" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
-                                        </userDefinedRuntimeAttributes>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WSI-JB-hz8">
                                         <rect key="frame" x="240" y="62" width="40" height="40"/>
                                         <constraints>
@@ -85,6 +76,13 @@
                                             <action selector="btnChat:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="qrt-Zx-q2d"/>
                                         </connections>
                                     </button>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="desynatTitle" translatesAutoresizingMaskIntoConstraints="NO" id="zU4-iY-7zz">
+                                        <rect key="frame" x="55" y="68" width="116" height="28"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="116" id="QeQ-HD-6zX"/>
+                                            <constraint firstAttribute="height" constant="28" id="sFW-lh-m8H"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.96862745098039216" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -92,13 +90,13 @@
                                     <constraint firstItem="FSG-62-Plw" firstAttribute="leading" secondItem="6yq-d1-uO2" secondAttribute="trailing" constant="10" id="8TJ-ch-jcu"/>
                                     <constraint firstItem="WSI-JB-hz8" firstAttribute="centerY" secondItem="6yq-d1-uO2" secondAttribute="centerY" id="J77-Hq-lxc"/>
                                     <constraint firstItem="6yq-d1-uO2" firstAttribute="leading" secondItem="WSI-JB-hz8" secondAttribute="trailing" constant="5" id="M0z-yR-d8E"/>
+                                    <constraint firstItem="zU4-iY-7zz" firstAttribute="leading" secondItem="zgv-8y-BXH" secondAttribute="trailing" constant="1" id="Q5S-CD-3of"/>
                                     <constraint firstItem="6yq-d1-uO2" firstAttribute="centerY" secondItem="FSG-62-Plw" secondAttribute="centerY" id="Q8G-8J-c5m"/>
-                                    <constraint firstItem="3TC-J1-7O1" firstAttribute="leading" secondItem="zgv-8y-BXH" secondAttribute="trailing" constant="10" id="Ykc-fz-e9l"/>
                                     <constraint firstItem="zgv-8y-BXH" firstAttribute="leading" secondItem="r9S-L1-3tf" secondAttribute="leading" constant="16" id="Zoe-Gf-jQi"/>
                                     <constraint firstAttribute="trailing" secondItem="FSG-62-Plw" secondAttribute="trailing" constant="18" id="eqM-O6-2Mn"/>
                                     <constraint firstAttribute="bottom" secondItem="zgv-8y-BXH" secondAttribute="bottom" constant="28" id="mAt-l8-MOS"/>
-                                    <constraint firstItem="3TC-J1-7O1" firstAttribute="centerY" secondItem="zgv-8y-BXH" secondAttribute="centerY" id="tP3-Fd-z6I"/>
                                     <constraint firstAttribute="height" constant="129" id="vi0-2s-8eP"/>
+                                    <constraint firstItem="zU4-iY-7zz" firstAttribute="centerY" secondItem="zgv-8y-BXH" secondAttribute="centerY" id="xNY-Kd-V7B"/>
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ObD-4s-UcQ">
@@ -156,6 +154,11 @@
                                                                                         <rect key="frame" x="12" y="0.0" width="117" height="38"/>
                                                                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                                         <textInputTraits key="textInputTraits"/>
+                                                                                        <userDefinedRuntimeAttributes>
+                                                                                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                                                                <color key="value" systemColor="labelColor"/>
+                                                                                            </userDefinedRuntimeAttribute>
+                                                                                        </userDefinedRuntimeAttributes>
                                                                                     </textField>
                                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendar" translatesAutoresizingMaskIntoConstraints="NO" id="hXW-6k-DJU">
                                                                                         <rect key="frame" x="141" y="8" width="22" height="22"/>
@@ -165,7 +168,7 @@
                                                                                         </constraints>
                                                                                     </imageView>
                                                                                 </subviews>
-                                                                                <color key="backgroundColor" red="1" green="0.96862745100000003" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <constraints>
                                                                                     <constraint firstItem="sy9-EL-TcD" firstAttribute="top" secondItem="qw4-o5-9AL" secondAttribute="top" id="7vR-dv-Oa7"/>
                                                                                     <constraint firstAttribute="height" constant="38" id="MWN-89-2gi"/>
@@ -194,6 +197,11 @@
                                                                                         <rect key="frame" x="12" y="0.0" width="117" height="38"/>
                                                                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                                         <textInputTraits key="textInputTraits"/>
+                                                                                        <userDefinedRuntimeAttributes>
+                                                                                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                                                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                            </userDefinedRuntimeAttribute>
+                                                                                        </userDefinedRuntimeAttributes>
                                                                                     </textField>
                                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendar" translatesAutoresizingMaskIntoConstraints="NO" id="7Yd-aP-YUC">
                                                                                         <rect key="frame" x="141" y="8" width="22" height="22"/>
@@ -203,7 +211,7 @@
                                                                                         </constraints>
                                                                                     </imageView>
                                                                                 </subviews>
-                                                                                <color key="backgroundColor" red="1" green="0.96862745100000003" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="bottom" secondItem="LLU-FC-zP3" secondAttribute="bottom" id="5CY-uC-ZBe"/>
                                                                                     <constraint firstItem="LLU-FC-zP3" firstAttribute="leading" secondItem="TbR-UL-0sr" secondAttribute="leading" constant="12" id="GQn-3Q-TuB"/>
@@ -1101,6 +1109,11 @@
                                                                                 <rect key="frame" x="12" y="0.0" width="117" height="40"/>
                                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                                 <textInputTraits key="textInputTraits"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                                                        <color key="value" systemColor="labelColor"/>
+                                                                                    </userDefinedRuntimeAttribute>
+                                                                                </userDefinedRuntimeAttributes>
                                                                             </textField>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendar" translatesAutoresizingMaskIntoConstraints="NO" id="H2i-Y9-aEa">
                                                                                 <rect key="frame" x="141" y="9" width="22" height="22"/>
@@ -1139,6 +1152,11 @@
                                                                                 <rect key="frame" x="12" y="0.0" width="117" height="40"/>
                                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                                 <textInputTraits key="textInputTraits"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                                                        <color key="value" systemColor="labelColor"/>
+                                                                                    </userDefinedRuntimeAttribute>
+                                                                                </userDefinedRuntimeAttributes>
                                                                             </textField>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendar" translatesAutoresizingMaskIntoConstraints="NO" id="tq0-Nm-spL">
                                                                                 <rect key="frame" x="141" y="9" width="22" height="22"/>
@@ -1331,7 +1349,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1147" y="208"/>
+            <point key="canvasLocation" x="-1147.3282442748091" y="207.74647887323945"/>
         </scene>
         <!--Shows View Controller-->
         <scene sceneID="tV1-QO-Ujw">
@@ -1570,6 +1588,7 @@
     <resources>
         <image name="calendar" width="22" height="22"/>
         <image name="chat" width="24" height="24"/>
+        <image name="desynatTitle" width="117" height="28"/>
         <image name="homeSelected" width="52" height="44"/>
         <image name="homeUnselected" width="52" height="44"/>
         <image name="lineTabbar" width="375" height="79"/>
@@ -1590,6 +1609,9 @@
         <image name="show" width="52.666667938232422" height="52.666667938232422"/>
         <image name="staff" width="40" height="40"/>
         <image name="toggle_on" width="40" height="22"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

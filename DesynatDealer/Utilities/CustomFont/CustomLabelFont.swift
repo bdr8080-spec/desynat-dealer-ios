@@ -128,3 +128,20 @@ extension UIFont {
         return .regular
     }
 }
+
+extension UITextField {
+
+    @IBInspectable var placeholderColor: UIColor? {
+        get {
+            return self.attributedPlaceholder?.attribute(.foregroundColor, at: 0, effectiveRange: nil) as? UIColor
+        }
+        set {
+            guard let newValue = newValue else { return }
+            let placeholderText = self.placeholder ?? ""
+            self.attributedPlaceholder = NSAttributedString(
+                string: placeholderText,
+                attributes: [.foregroundColor: newValue]
+            )
+        }
+    }
+}
