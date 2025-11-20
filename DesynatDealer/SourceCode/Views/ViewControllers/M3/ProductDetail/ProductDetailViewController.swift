@@ -70,7 +70,13 @@ class ProductDetailViewController: UIViewController {
         let indexPath = IndexPath(item: page, section: 0)
         productImageCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
-    
+  
+  @IBAction func editDidTapped(_ sender: Any) {
+    let nextVC = AddNewProductViewController.instantiate(fromAppStoryboard: .Product)
+    nextVC.comingReason = .forEditProduct
+    self.navigationController?.pushViewController(nextVC, animated: true)
+  }
+  
 }
 
 extension ProductDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {

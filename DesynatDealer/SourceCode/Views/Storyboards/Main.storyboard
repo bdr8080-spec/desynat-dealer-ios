@@ -3683,7 +3683,7 @@ tempor</string>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Credit/ Debit Card" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tmn-eS-Fgr" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
-                                                        <rect key="frame" x="94" y="14.333333333333345" width="130" height="19.666666666666671"/>
+                                                        <rect key="frame" x="94" y="14.333333333333345" width="130" height="19.666666666666664"/>
                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>

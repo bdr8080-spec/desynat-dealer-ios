@@ -55,6 +55,17 @@ class ProductsViewController: UIViewController {
   }
   
   
+  @IBAction func addDidTapped(_ sender: Any) {
+    let nextVC = AddNewProductViewController.instantiate(fromAppStoryboard: .Product)
+    nextVC.comingReason = .forAddingProduct
+    self.navigationController?.pushViewController(nextVC, animated: true)
+  }
+  
+  @IBAction func filterDidTapped(_ sender: Any) {
+    let nextVC = ProductManagementFilterViewController.instantiate(fromAppStoryboard: .Product)
+    self.navigationController?.present(nextVC, animated: true)
+  }
+  
 }
 extension ProductsViewController: UITableViewDelegate, UITableViewDataSource {
   

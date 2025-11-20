@@ -1521,7 +1521,7 @@
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y5U-40-45Q" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y5U-40-45Q" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
                                 <rect key="frame" x="20" y="160.66666666666666" width="353" height="36"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search" translatesAutoresizingMaskIntoConstraints="NO" id="sGz-NC-kJP">
@@ -1550,6 +1550,9 @@
                                         </constraints>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" image="filter"/>
+                                        <connections>
+                                            <action selector="filterDidTapped:" destination="YMa-Yn-v0P" eventType="touchUpInside" id="2Vv-Ee-7Ef"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1735,6 +1738,9 @@
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="plus"/>
+                                <connections>
+                                    <action selector="addDidTapped:" destination="YMa-Yn-v0P" eventType="touchUpInside" id="fjE-vR-ANn"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="5lu-NT-Kxp"/>
