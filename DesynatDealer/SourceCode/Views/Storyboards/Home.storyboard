@@ -1332,6 +1332,7 @@
                         <outlet property="btnToggle" destination="nFc-JF-RYs" id="wgt-xV-1vh"/>
                         <outlet property="btnTotalCustomerVisits" destination="RzL-zZ-eRD" id="Ai1-Oe-Gmk"/>
                         <outlet property="btnTotalOrderConversion" destination="p9Y-Ri-g7D" id="Hdb-ej-xua"/>
+                        <outlet property="busyOnOffLabel" destination="Ng8-cD-gdo" id="0FF-ct-ULW"/>
                         <outlet property="lblActiveProducts" destination="qbR-Ju-9WG" id="C4f-5U-JO9"/>
                         <outlet property="lblActiveStaff" destination="KX1-O4-kKJ" id="zri-Id-5Up"/>
                         <outlet property="lblCancelledOrders" destination="sds-sK-aT6" id="FDe-L4-Msm"/>
@@ -1730,6 +1731,12 @@
                                     <outlet property="delegate" destination="YMa-Yn-v0P" id="8J6-48-Mlo"/>
                                 </connections>
                             </tableView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Result found " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uSq-Yh-a1Q">
+                                <rect key="frame" x="131.33333333333337" y="489" width="130.66666666666663" height="22.666666666666686"/>
+                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6eb-Gs-oCC">
                                 <rect key="frame" x="309" y="644" width="60" height="60"/>
                                 <constraints>
@@ -1748,6 +1755,7 @@
                         <constraints>
                             <constraint firstItem="y5U-40-45Q" firstAttribute="top" secondItem="Ye2-JR-w8K" secondAttribute="bottom" constant="20" id="4fW-Rb-MaA"/>
                             <constraint firstItem="WlB-rp-b63" firstAttribute="top" secondItem="Z7o-LL-eh3" secondAttribute="bottom" constant="20" id="5yd-b7-yIr"/>
+                            <constraint firstItem="uSq-Yh-a1Q" firstAttribute="centerY" secondItem="WlB-rp-b63" secondAttribute="centerY" id="6Y0-IS-yfa"/>
                             <constraint firstItem="Z7o-LL-eh3" firstAttribute="top" secondItem="y5U-40-45Q" secondAttribute="bottom" constant="25" id="9rh-UU-90t"/>
                             <constraint firstItem="5lu-NT-Kxp" firstAttribute="bottom" secondItem="6eb-Gs-oCC" secondAttribute="bottom" constant="80" id="Ig3-BS-evk"/>
                             <constraint firstItem="Ye2-JR-w8K" firstAttribute="centerX" secondItem="5lu-NT-Kxp" secondAttribute="centerX" id="LSX-8G-dfb"/>
@@ -1758,6 +1766,7 @@
                             <constraint firstItem="nAg-wR-Se7" firstAttribute="bottom" secondItem="Z7o-LL-eh3" secondAttribute="bottom" id="WVU-KB-dkK"/>
                             <constraint firstItem="5lu-NT-Kxp" firstAttribute="bottom" secondItem="WlB-rp-b63" secondAttribute="bottom" constant="60" id="d8i-wc-GAb"/>
                             <constraint firstItem="Z7o-LL-eh3" firstAttribute="leading" secondItem="y5U-40-45Q" secondAttribute="leading" id="hAY-1a-m1O"/>
+                            <constraint firstItem="uSq-Yh-a1Q" firstAttribute="centerX" secondItem="WlB-rp-b63" secondAttribute="centerX" id="kzZ-vp-Rhr"/>
                             <constraint firstItem="WlB-rp-b63" firstAttribute="trailing" secondItem="y5U-40-45Q" secondAttribute="trailing" id="mBY-T7-ALk"/>
                             <constraint firstItem="y5U-40-45Q" firstAttribute="leading" secondItem="5lu-NT-Kxp" secondAttribute="leading" constant="20" id="sfj-gb-WnR"/>
                             <constraint firstItem="WlB-rp-b63" firstAttribute="leading" secondItem="y5U-40-45Q" secondAttribute="leading" id="u9Z-Qd-Myb"/>
@@ -1772,6 +1781,7 @@
                         <outlet property="allTitleLabel" destination="dVt-8A-cZ2" id="eY6-xS-nub"/>
                         <outlet property="inactiveBottomLabel" destination="cNQ-CW-Xjt" id="zNd-x8-7dd"/>
                         <outlet property="inactiveLabel" destination="zbc-kT-N5d" id="dcV-oP-6i9"/>
+                        <outlet property="noResultFoundLabel" destination="uSq-Yh-a1Q" id="T0U-ne-heZ"/>
                         <outlet property="productTableView" destination="WlB-rp-b63" id="7y0-fe-nNR"/>
                     </connections>
                 </viewController>
@@ -1874,7 +1884,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

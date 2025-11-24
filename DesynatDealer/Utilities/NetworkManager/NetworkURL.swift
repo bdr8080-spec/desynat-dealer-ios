@@ -36,6 +36,16 @@ enum NetworkEndPoint: String {
     case purchasePlan                 = "/api/seller/create-subcription-plan-buy"
     case subcriptionPlan                 = "/api/seller/payment-subcription-plan"
     
+  // M3
+  case updateStoreStatus                 = "/api/seller/store_on_off"
+  case getCategoryList                   = "/api/seller/category"
+  case getSubCategoryList                   = "/api/seller/sub-category"
+  case getBrandsList                   = "/api/seller/all-brand"
+  case getColorsList                   = "/api/seller/all-color"
+  case getSizesList                   = "/api/seller/all-size"
+  case addProduct                   = "/api/seller/add-product"
+  case getProductsList                  = "/api/seller/all-product"
+  case productsActiveStatus                  = "/api/seller/product-status-active-inactive"
     
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"

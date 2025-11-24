@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 
 struct StringValidation {
     let string: String
@@ -69,3 +70,22 @@ struct StringValidation {
     }
 }
 
+extension UIColor {
+    convenience init?(hex: String) {
+        var hexFormatted = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+
+        if hexFormatted.hasPrefix("#") {
+            hexFormatted.remove(at: hexFormatted.startIndex)
+        }
+
+        guard hexFormatted.count == 6,
+              let rgbValue = UInt64(hexFormatted, radix: 16) else { return nil }
+
+        self.init(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255,
+            alpha: 1.0
+        )
+    }
+}

@@ -58,28 +58,13 @@ class UploadDocumnetViewController: UIViewController {
     }
     
     @IBAction func ownerDocumentImageDidTapped(_ sender: UIButton) {
-//        ImagePickerManager().pickImage(self) { [weak self] image, fileName, url in
-//            guard let self = self else { return }
-//            DispatchQueue.main.async {
-//                if sender.tag == 0 {
-//                    self.onwerDocImage1.image = image
-//                    self.selectedOwnerDoc1 = image
-//                } else {
-//                    self.onwerDocImage2.image = image
-//                    self.selectedOwnerDoc2 = image
-//                }
-//            }
-//        }
-        
         let tag = sender.tag
-        
         if tag == 0 {
             ImagePickerHelper.shared.showPickerController {  image , imageName in
                 if let image = image {
                     WebService.sharedInstance.uploadImage(withParams: image) { imageURL in
                         self.imageOwnerDoc1 = imageURL.url ?? ""
                         self.selectedOwnerDoc1 = image
-                        print("image url--.\(self.imageOwnerDoc1)")
                         if let url = URL(string: imageURL.url ?? "") {
                             self.onwerDocImage1.sd_imageIndicator = SDWebImageActivityIndicator.gray
                             self.onwerDocImage1.sd_setImage(with: url,placeholderImage: UIImage(named: "user_ic"))
@@ -93,7 +78,6 @@ class UploadDocumnetViewController: UIViewController {
                     WebService.sharedInstance.uploadImage(withParams: image) { imageURL in
                         self.imageOwnerDoc2 = imageURL.url ?? ""
                         self.selectedOwnerDoc2 = image
-                        print("image url--.\(self.imageOwnerDoc2)")
                         if let url = URL(string: imageURL.url ?? "") {
                             self.onwerDocImage2.sd_imageIndicator = SDWebImageActivityIndicator.gray
                             self.onwerDocImage2.sd_setImage(with: url,placeholderImage: UIImage(named: "user_ic"))

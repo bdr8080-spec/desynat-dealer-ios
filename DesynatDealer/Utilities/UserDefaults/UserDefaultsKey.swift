@@ -21,6 +21,7 @@ enum UserDefaultsKey : String {
     case defaultLanguge
     case language
     case sessionToken
+  case storeAvailabilityStatus
 }
 
 extension UserDefaults {

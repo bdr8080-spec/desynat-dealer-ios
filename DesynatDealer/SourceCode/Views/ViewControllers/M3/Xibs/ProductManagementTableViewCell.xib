@@ -29,8 +29,8 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ToM-8d-rQQ" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="423" height="163"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Levis Men Cotton Shirt" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lTx-1I-MkL">
-                                <rect key="frame" x="8" y="10" width="131.33333333333334" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In Stock" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lTx-1I-MkL">
+                                <rect key="frame" x="8" y="10" width="46.666666666666664" height="17"/>
                                 <color key="backgroundColor" red="1" green="0.98039215690000003" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                 <color key="textColor" name="darkBrown"/>
@@ -132,6 +132,9 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="toggle_on"/>
+                                <connections>
+                                    <action selector="statusDidTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="pUc-lT-zRl"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Active" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eOL-zQ-c5z">
                                 <rect key="frame" x="373.33333333333331" y="41" width="34.666666666666686" height="14.333333333333336"/>
@@ -209,7 +212,18 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="addedOnDateLaebl" destination="13E-p5-cGP" id="DtH-P8-FgC"/>
                 <outlet property="colorsCollectionView" destination="1kD-zC-OAh" id="gao-dL-b4j"/>
+                <outlet property="descriptionLabel" destination="1cx-2R-VO3" id="c03-sG-ubO"/>
+                <outlet property="dirscountPriceLabel" destination="KEx-aF-6Ru" id="U8M-go-bNa"/>
+                <outlet property="discuntPercentageLabel" destination="h6R-Ev-AkZ" id="Bcg-2L-bVZ"/>
+                <outlet property="orifinalPriceLabel" destination="PRP-yz-odA" id="CpD-NM-HcZ"/>
+                <outlet property="productImageView" destination="4Eh-bS-1wv" id="0nH-XZ-reF"/>
+                <outlet property="productNameLabel" destination="2a0-Nh-K48" id="5aO-Ro-vlR"/>
+                <outlet property="ratingLabel" destination="Lt2-Tg-InF" id="Jwp-8v-HSB"/>
+                <outlet property="statusButton" destination="XhL-qy-w0U" id="1DL-AL-XeH"/>
+                <outlet property="statusLabel" destination="eOL-zQ-c5z" id="Qnz-Kk-eA3"/>
+                <outlet property="stockLabel" destination="lTx-1I-MkL" id="RnS-ux-i4x"/>
             </connections>
             <point key="canvasLocation" x="320" y="25"/>
         </tableViewCell>

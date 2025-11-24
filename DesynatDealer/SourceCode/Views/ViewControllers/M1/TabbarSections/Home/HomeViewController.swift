@@ -40,16 +40,16 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var btnTotalCustomerVisits: UIButton!
     
     @IBOutlet weak var viewChart: UIView!
-    
-    
+  @IBOutlet weak var busyOnOffLabel: CustomLabelFont!
+  
     
     let datePicker = UIDatePicker()
     private var activeTextField: UITextField?
-    var isToggleOn: Bool = false
+//    var isToggleOn: Bool = false
     var dateButtons: [UIButton] { [btnToday, btnThisWeek, btnThisMonth]}
     var statsButtons: [UIButton] { [btnTotalOrderConversion, btnTotalCustomerVisits]}
     var lineChartView = LineChartView()
-    
+  private lazy var viewModel = HomeViewModel(hostVC: self)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +57,19 @@ class HomeViewController: UIViewController {
         setUpButtons()
         setUpChart()
     }
+  
+  override func viewWillAppear(_ animated: Bool) {
+      super.viewWillAppear(animated)
+
+      let savedStatus = UserDefaults.standard.getIntFor(key: .storeAvailabilityStatus) ?? 0
+
+      btnToggle.setImage(
+          UIImage(named: savedStatus == 1 ? "toggle_on" : "toggle_off"),
+          for: .normal
+      )
+    busyOnOffLabel.text = savedStatus == 1 ? "Busy/On" : "Busy/Off"
+  }
+
     
     private func setUpButtons() {
         btnToggle.setImage(UIImage(named: "toggle_off"), for: .normal)
@@ -139,9 +152,22 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func btnTapToggle(_ sender: Any) {
-        isToggleOn.toggle() // switch state
-        let imageName = isToggleOn ? "toggle_on" : "toggle_off"
-        btnToggle.setImage(UIImage(named: imageName), for: .normal)
+        viewModel.statusUpdateAPI { [weak self] success in
+          guard let self = self else { return }
+          if success {
+            if let status = viewModel.storeAvailabilityModel?.storeAvailability {
+              if status == 1 {
+                busyOnOffLabel.text = "Busy/On"
+                btnToggle.setImage(UIImage(named: "toggle_on"), for: .normal)
+                CommonUtils.showToast(message: "Store has been activated Successfully")
+              } else {
+                busyOnOffLabel.text = "Busy/Off"
+                btnToggle.setImage(UIImage(named: "toggle_off"), for: .normal)
+                CommonUtils.showToast(message: "Store has been Deactivated Successfully")
+              }
+            }
+          }
+        }
     }
     
     @IBAction func btnSelectDate(_ sender: UIButton) {

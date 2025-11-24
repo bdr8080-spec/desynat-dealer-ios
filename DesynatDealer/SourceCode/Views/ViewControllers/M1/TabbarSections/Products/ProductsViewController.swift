@@ -8,8 +8,8 @@
 import UIKit
 
 class ProductsViewController: UIViewController {
-
   
+  @IBOutlet weak var noResultFoundLabel: UILabel!
   @IBOutlet weak var allTitleLabel: UILabel!
   @IBOutlet weak var allBottomLabel: UILabel!
   @IBOutlet weak var activeTitleLabel: UILabel!
@@ -22,36 +22,31 @@ class ProductsViewController: UIViewController {
     }
   }
   
+  var selectedTab: ProductTabType = .all
+  private lazy var viewModel = ProductsViewModel(hostVC: self)
+  
   override func viewDidLoad() {
-        super.viewDidLoad()
-
-    }
+    super.viewDidLoad()
+  }
   
   @IBAction func allDidTapped(_ sender: Any) {
-    allTitleLabel.textColor = UIColor.darkBrown
-    allBottomLabel.backgroundColor = UIColor.darkBrown
-    activeTitleLabel.textColor = UIColor(named: "#B3B3B3")
-    activeBottomLabel.backgroundColor = UIColor(named: "#B3B3B3")
-    inactiveLabel.textColor = UIColor(named: "#B3B3B3")
-    inactiveBottomLabel.backgroundColor = UIColor(named: "#B3B3B3")
+    selectedTab = .all
+    updateTabUI()
+    viewModel.getAllProducts(type: selectedTab.rawValue)
   }
   
   @IBAction func activeDidTapped(_ sender: Any) {
-    allTitleLabel.textColor = UIColor(named: "#B3B3B3")
-    allBottomLabel.backgroundColor = UIColor(named: "#B3B3B3")
-    activeTitleLabel.textColor = UIColor.darkBrown
-    activeBottomLabel.backgroundColor = UIColor.darkBrown
-    inactiveLabel.textColor = UIColor(named: "#B3B3B3")
-    inactiveBottomLabel.backgroundColor = UIColor(named: "#B3B3B3")
+    selectedTab = .active
+    updateTabUI()
+    viewModel.getAllProducts(type: selectedTab.rawValue)
+    
   }
   
   @IBAction func InactiveDidTapped(_ sender: Any) {
-    allTitleLabel.textColor = UIColor(named: "#B3B3B3")
-    allBottomLabel.backgroundColor = UIColor(named: "#B3B3B3")
-    activeTitleLabel.textColor = UIColor(named: "#B3B3B3")
-    activeBottomLabel.backgroundColor = UIColor(named: "#B3B3B3")
-    inactiveLabel.textColor = UIColor.darkBrown
-    inactiveBottomLabel.backgroundColor = UIColor.darkBrown
+    selectedTab = .inactive
+    updateTabUI()
+    viewModel.getAllProducts(type: selectedTab.rawValue)
+    
   }
   
   
@@ -66,15 +61,69 @@ class ProductsViewController: UIViewController {
     self.navigationController?.present(nextVC, animated: true)
   }
   
+  func toggleStatus(product: ProductsList) {
+    
+    let newStatus = product.productActiveStatus == 1 ? "0" : "1"
+    
+    let params: [String: Any] = [
+      "product_id": product.id ?? 0
+    ]
+    
+    viewModel.updateActiveStatus(param: params) { [weak self] success in
+      guard let self else { return }
+      
+      if success {
+        self.viewModel.getAllProducts(type: selectedTab.rawValue)
+      }
+    }
+  }
+  
+  
+  func updateTabUI() {
+    allTitleLabel.textColor = selectedTab == .all ? .darkBrown : UIColor(named: "#B3B3B3")
+    allBottomLabel.backgroundColor = selectedTab == .all ? .darkBrown : UIColor(named: "#B3B3B3")
+    
+    activeTitleLabel.textColor = selectedTab == .active ? .darkBrown : UIColor(named: "#B3B3B3")
+    activeBottomLabel.backgroundColor = selectedTab == .active ? .darkBrown : UIColor(named: "#B3B3B3")
+    
+    inactiveLabel.textColor = selectedTab == .inactive ? .darkBrown : UIColor(named: "#B3B3B3")
+    inactiveBottomLabel.backgroundColor = selectedTab == .inactive ? .darkBrown : UIColor(named: "#B3B3B3")
+  }
+  
+  func getProductByTab(_ index: Int) -> ProductsList {
+    switch selectedTab {
+    case .all:
+      return viewModel.productsListData!.allProductData![index]
+    case .active:
+      return viewModel.productsListData!.activeProduct![index]
+    case .inactive:
+      return viewModel.productsListData!.inactiveProduct![index]
+    }
+  }
+  
+  
+  
 }
 extension ProductsViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 2
+    switch selectedTab {
+    case .all:
+      return viewModel.productsListData?.allProductData?.count ?? 0
+    case .active:
+      return viewModel.productsListData?.activeProduct?.count ?? 0
+    case .inactive:
+      return viewModel.productsListData?.inactiveProduct?.count ?? 0
+    }
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "ProductManagementTableViewCell", for: indexPath) as! ProductManagementTableViewCell
+    let product = getProductByTab(indexPath.row)
+    cell.configData(data: product)
+    cell.onStatusToggle = { [weak self] in
+      self?.toggleStatus(product: product)
+    }
     return cell
   }
   
@@ -83,5 +132,10 @@ extension ProductsViewController: UITableViewDelegate, UITableViewDataSource {
     self.navigationController?.pushViewController(nextVC, animated: true)
   }
   
-  
+}
+
+enum ProductTabType: String {
+  case all = "0"
+  case active = "1"
+  case inactive = "2"
 }

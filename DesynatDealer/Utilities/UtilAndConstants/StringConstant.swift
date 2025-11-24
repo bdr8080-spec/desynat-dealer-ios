@@ -69,6 +69,22 @@ enum AlertConstant: String {
     case EnterAccountHolder         = "Please enter account holder name"
     case EnterStorePhoneNumber      = "Please enter store phone number"
     case EnterCountry               = "Please choose Country"
+  
+  
+    case selectCategory             = "Please choose category"
+    case selectSubCategory             = "Please select sub-category"
+    case selectBrand             = "Please select brand"
+  case otherBrandEnEmpty      = "Please enter other brand name (EN)"
+  case otherBrandArEmpty      = "Please enter other brand name (AR)"
+  case productNameEnEmpty      = "Please enter product name (EN)"
+  case productNameArEmpty      = "Please enter product name (AR)"
+  case descriptionEnEmpty      = "Please enter product description (EN)"
+  case descriptionArEmpty      = "Please enter product description (AR)"
+  case minQuantity      = "Please set min. cart quantity"
+  case maxQuantity      = "Please set max. cart quantity"
+  case returnDays      = "Please enter total days of returning"
+  case exchangeDays      = "Please enter total days of exchangeable"
+  case sizeChartUpload      = "Please upload size chart"
 
 func value() -> String {
     return self.rawValue
