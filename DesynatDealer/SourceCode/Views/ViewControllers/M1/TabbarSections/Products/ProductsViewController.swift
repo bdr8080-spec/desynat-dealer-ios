@@ -61,23 +61,37 @@ class ProductsViewController: UIViewController {
     self.navigationController?.present(nextVC, animated: true)
   }
   
-  func toggleStatus(product: ProductsList) {
-    
-    let newStatus = product.productActiveStatus == 1 ? "0" : "1"
-    
+    func toggleStatus(product: ProductsList, index: Int) {
     let params: [String: Any] = [
       "product_id": product.id ?? 0
     ]
-    
     viewModel.updateActiveStatus(param: params) { [weak self] success in
       guard let self else { return }
-      
       if success {
-        self.viewModel.getAllProducts(type: selectedTab.rawValue)
+          let newStatus = product.productActiveStatus == 1 ? 0 : 1
+          updateStatusLocally(at: index)
+          productTableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
       }
     }
   }
   
+    func updateStatusLocally(at index: Int) {
+        switch selectedTab {
+        case .all:
+            viewModel.productsListData?.allProductData?[index].productActiveStatus =
+                (viewModel.productsListData?.allProductData?[index].productActiveStatus == 1 ? 0 : 1)
+
+        case .active:
+            viewModel.productsListData?.activeProduct?[index].productActiveStatus =
+                (viewModel.productsListData?.activeProduct?[index].productActiveStatus == 1 ? 0 : 1)
+
+        case .inactive:
+            viewModel.productsListData?.inactiveProduct?[index].productActiveStatus =
+                (viewModel.productsListData?.inactiveProduct?[index].productActiveStatus == 1 ? 0 : 1)
+        }
+    }
+
+
   
   func updateTabUI() {
     allTitleLabel.textColor = selectedTab == .all ? .darkBrown : UIColor(named: "#B3B3B3")
@@ -121,14 +135,16 @@ extension ProductsViewController: UITableViewDelegate, UITableViewDataSource {
     let cell = tableView.dequeueReusableCell(withIdentifier: "ProductManagementTableViewCell", for: indexPath) as! ProductManagementTableViewCell
     let product = getProductByTab(indexPath.row)
     cell.configData(data: product)
-    cell.onStatusToggle = { [weak self] in
-      self?.toggleStatus(product: product)
-    }
+      cell.onStatusToggle = { [weak self] in
+          self?.toggleStatus(product: product, index: indexPath.row)
+      }
+
     return cell
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let nextVC = ProductDetailViewController.instantiate(fromAppStoryboard: .Product)
+      nextVC.productId = getProductByTab(indexPath.row).id ?? 0
     self.navigationController?.pushViewController(nextVC, animated: true)
   }
   

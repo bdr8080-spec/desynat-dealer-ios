@@ -9,6 +9,38 @@ import UIKit
 
 class ProductDetailViewController: UIViewController {
     
+    @IBOutlet weak var cashOnDeliveryLabel: UILabel!
+    @IBOutlet weak var readyToShipLabel: UILabel!
+    @IBOutlet weak var customizableLabel: UILabel!
+    @IBOutlet weak var affiliatedLabel: UILabel!
+    @IBOutlet weak var ratingReviewALlowedLabel: UILabel!
+    @IBOutlet weak var exchnageAllowedLAbel: UILabel!
+    @IBOutlet weak var returnAllowedLAbel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var skuThresholderLabel: UILabel!
+    @IBOutlet weak var skuLabel: UILabel!
+    @IBOutlet weak var totalStocksLabel: UILabel!
+    @IBOutlet weak var shoulderView: UIStackView!
+    @IBOutlet weak var hipView: UIStackView!
+    @IBOutlet weak var waistView: UIStackView!
+    @IBOutlet weak var bustView: UIStackView!
+    @IBOutlet weak var sleeveLenghtLabel: UILabel!
+    @IBOutlet weak var lengthLabel: UILabel!
+    @IBOutlet weak var waistLabel: UILabel!
+    @IBOutlet weak var shoulderLabel: UILabel!
+    @IBOutlet weak var hipLabel: UILabel!
+    @IBOutlet weak var bustLabel: UILabel!
+    @IBOutlet weak var actualPriceLAbel: CustomLabelFont!
+    @IBOutlet weak var discountPriceALbel: UILabel!
+    @IBOutlet weak var finalPriceLabel: UILabel!
+    @IBOutlet weak var ratingCountLabel: UILabel!
+    @IBOutlet weak var brandCategoryLabel: UILabel!
+    @IBOutlet weak var descriptionLAbel: UILabel!
+    @IBOutlet weak var addedOnLabel: UILabel!
+    @IBOutlet weak var productNameLabel: UILabel!
+    @IBOutlet weak var totalBoughtsCountLabel: UILabel!
+    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var statusButton: UIButton!
     @IBOutlet weak var ratingTableViewHeightConstriant: NSLayoutConstraint!
     @IBOutlet weak var specificationTableViewHieghtConstraint: NSLayoutConstraint!
     @IBOutlet weak var imagesPageController: UIPageControl!
@@ -46,6 +78,7 @@ class ProductDetailViewController: UIViewController {
     private var selectedColourIndex = 0
     private var selectedSizeIndex = 0
     private var speifcationArray = ["Type 1- Feature", "Type 2- Feature", "Type 3- Feature"]
+    var productId: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,7 +109,10 @@ class ProductDetailViewController: UIViewController {
     nextVC.comingReason = .forEditProduct
     self.navigationController?.pushViewController(nextVC, animated: true)
   }
-  
+    
+    @IBAction func deleteDidTapped(_ sender: Any) {
+    }
+    
 }
 
 extension ProductDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {

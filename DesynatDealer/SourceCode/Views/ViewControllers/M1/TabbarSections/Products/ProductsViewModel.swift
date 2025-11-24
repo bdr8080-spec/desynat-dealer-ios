@@ -58,8 +58,7 @@ class ProductsViewModel {
   }
   
   func updateActiveStatus(param: [String: Any], completion: @escaping (Bool) -> Void) {
-      WebService.sharedInstance.updateProductActiveStatus(param: param){ [weak self] response in
-          guard let self = self else { return }
+      WebService.sharedInstance.updateProductActiveStatus(param: param){ response in
           completion(true)
       }
   }

@@ -10,8 +10,8 @@ import Foundation
 // MARK: - ProductsListDataModel
 struct ProductsListDataModel: Codable {
     let allProductCount, activeProductCount, inactiveProductCount: Int?
-    let allProductData, activeProduct: [ProductsList]?
-    let inactiveProduct: [ProductsList]?
+    var allProductData, activeProduct: [ProductsList]?
+    var inactiveProduct: [ProductsList]?
 
     enum CodingKeys: String, CodingKey {
         case allProductCount = "all_product_count"
@@ -33,7 +33,7 @@ struct ProductsList: Codable {
     let exchangableDays, reviewRating, affiliatedProduct, customizedProduct: String?
     let readyToShip, cashOnDelivery: String?
     let uploadSizeChart: String?
-    let productActiveStatus: Int?
+    var productActiveStatus: Int?
     let createdAt, updatedAt, stock: String?
     let category: Category?
     let subcategory, brand: Brand?
