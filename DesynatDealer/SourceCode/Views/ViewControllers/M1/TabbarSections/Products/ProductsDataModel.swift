@@ -36,7 +36,8 @@ struct ProductsList: Codable {
     var productActiveStatus: Int?
     let createdAt, updatedAt, stock: String?
     let category: Category?
-    let subcategory, brand: Brand?
+    let brand: Brand?
+  let subcategory: SubCategoryDataModel?
     let productSpecifications: [ProductSpecification]?
     let productVariants: [ProductVariant]?
 
@@ -139,6 +140,7 @@ struct ProductVariant: Codable {
     let discountType, discountValue, finalPrice, status: String?
     let createdAt, updatedAt: String?
     let color: ColorsLisDataModel?
+  let size :SizeListDataModel?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -160,7 +162,12 @@ struct ProductVariant: Codable {
         case createdAt = "created_at"
         case updatedAt = "updated_at"
         case color
+      case size
     }
 }
 
 
+struct AppliedFilter {
+    var categoryIDs: [String] = []
+    var brandIDs: [String] = []
+}

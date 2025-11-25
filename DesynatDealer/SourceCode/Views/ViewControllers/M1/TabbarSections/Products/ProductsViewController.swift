@@ -9,6 +9,7 @@ import UIKit
 
 class ProductsViewController: UIViewController {
   
+  @IBOutlet weak var searchTF: UITextField!
   @IBOutlet weak var noResultFoundLabel: UILabel!
   @IBOutlet weak var allTitleLabel: UILabel!
   @IBOutlet weak var allBottomLabel: UILabel!
@@ -24,9 +25,19 @@ class ProductsViewController: UIViewController {
   
   var selectedTab: ProductTabType = .all
   private lazy var viewModel = ProductsViewModel(hostVC: self)
+  var appliedFilter = AppliedFilter()
+  private var searchWorkItem: DispatchWorkItem?
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    viewModel.getBrandListApi()
+    viewModel.getCategoriesListApi()
+    searchTF.delegate = self
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    viewModel.getAllProducts(type: selectedTab.rawValue)
   }
   
   @IBAction func allDidTapped(_ sender: Any) {
@@ -58,40 +69,70 @@ class ProductsViewController: UIViewController {
   
   @IBAction func filterDidTapped(_ sender: Any) {
     let nextVC = ProductManagementFilterViewController.instantiate(fromAppStoryboard: .Product)
+    nextVC.viewModel.brandsList = viewModel.brandsList
+    nextVC.viewModel.categoriesList = viewModel.categoriesList
+    nextVC.selectedCategoryIDs = appliedFilter.categoryIDs
+    nextVC.selectedBrandIDs = appliedFilter.brandIDs
+    nextVC.onFilterApplied = { [weak self] selectedCat, selectedBrand in
+      guard let self = self else { return }
+      self.appliedFilter.categoryIDs = selectedCat
+      self.appliedFilter.brandIDs = selectedBrand
+      viewModel.getAllProducts(type: selectedTab.rawValue)
+    }
     self.navigationController?.present(nextVC, animated: true)
   }
   
-    func toggleStatus(product: ProductsList, index: Int) {
-    let params: [String: Any] = [
-      "product_id": product.id ?? 0
-    ]
+  func toggleStatus(at index: Int) {
+    let product = getProductByTab(index)   // read before modifying
+    let id = product.id ?? 0
+    let params = ["product_id": id]
     viewModel.updateActiveStatus(param: params) { [weak self] success in
       guard let self else { return }
       if success {
-          let newStatus = product.productActiveStatus == 1 ? 0 : 1
-          updateStatusLocally(at: index)
-          productTableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+        self.updateStatusLocally(at: index)
+        self.productTableView.reloadRows(
+          at: [IndexPath(row: index, section: 0)],
+          with: .automatic
+        )
       }
     }
   }
   
-    func updateStatusLocally(at index: Int) {
-        switch selectedTab {
-        case .all:
-            viewModel.productsListData?.allProductData?[index].productActiveStatus =
-                (viewModel.productsListData?.allProductData?[index].productActiveStatus == 1 ? 0 : 1)
-
-        case .active:
-            viewModel.productsListData?.activeProduct?[index].productActiveStatus =
-                (viewModel.productsListData?.activeProduct?[index].productActiveStatus == 1 ? 0 : 1)
-
-        case .inactive:
-            viewModel.productsListData?.inactiveProduct?[index].productActiveStatus =
-                (viewModel.productsListData?.inactiveProduct?[index].productActiveStatus == 1 ? 0 : 1)
-        }
+  func updateProductCounts() {
+    let allCount = viewModel.productsListData?.allProductData?.count ?? 0
+    let activeCount = viewModel.productsListData?.activeProduct?.count ?? 0
+    let inactiveCount = viewModel.productsListData?.inactiveProduct?.count ?? 0
+    
+    allTitleLabel.text = "All (\(allCount))"
+    activeTitleLabel.text = "Active (\(activeCount))"
+    inactiveLabel.text = "Inactive (\(inactiveCount))"
+  }
+  
+  
+  func updateStatusLocally(at index: Int) {
+    switch selectedTab {
+    case .all:
+      if var product = viewModel.productsListData?.allProductData?[index] {
+        product.productActiveStatus = (product.productActiveStatus == 1 ? 0 : 1)
+        viewModel.productsListData?.allProductData?[index] = product
+      }
+      
+    case .active:
+      if var product = viewModel.productsListData?.activeProduct?[index] {
+        product.productActiveStatus = (product.productActiveStatus == 1 ? 0 : 1)
+        viewModel.productsListData?.activeProduct?[index] = product
+      }
+      
+    case .inactive:
+      if var product = viewModel.productsListData?.inactiveProduct?[index] {
+        product.productActiveStatus = (product.productActiveStatus == 1 ? 0 : 1)
+        viewModel.productsListData?.inactiveProduct?[index] = product
+      }
     }
-
-
+  }
+  
+  
+  
   
   func updateTabUI() {
     allTitleLabel.textColor = selectedTab == .all ? .darkBrown : UIColor(named: "#B3B3B3")
@@ -135,16 +176,15 @@ extension ProductsViewController: UITableViewDelegate, UITableViewDataSource {
     let cell = tableView.dequeueReusableCell(withIdentifier: "ProductManagementTableViewCell", for: indexPath) as! ProductManagementTableViewCell
     let product = getProductByTab(indexPath.row)
     cell.configData(data: product)
-      cell.onStatusToggle = { [weak self] in
-          self?.toggleStatus(product: product, index: indexPath.row)
-      }
-
+    cell.onStatusToggle = { [weak self] in
+      self?.toggleStatus(at: indexPath.row)
+    }
     return cell
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let nextVC = ProductDetailViewController.instantiate(fromAppStoryboard: .Product)
-      nextVC.productId = getProductByTab(indexPath.row).id ?? 0
+    nextVC.productId = getProductByTab(indexPath.row).id ?? 0
     self.navigationController?.pushViewController(nextVC, animated: true)
   }
   
@@ -154,4 +194,19 @@ enum ProductTabType: String {
   case all = "0"
   case active = "1"
   case inactive = "2"
+}
+
+extension ProductsViewController: UITextFieldDelegate {
+  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    let currentText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
+    searchWorkItem?.cancel()
+    let workItem = DispatchWorkItem { [weak self] in
+      guard let self = self else { return }
+      self.viewModel.searchText = currentText
+      viewModel.getAllProducts(type: selectedTab.rawValue)
+    }
+    searchWorkItem = workItem
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: workItem)
+    return true
+  }
 }

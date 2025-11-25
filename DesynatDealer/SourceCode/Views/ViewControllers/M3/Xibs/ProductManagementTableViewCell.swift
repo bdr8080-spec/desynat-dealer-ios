@@ -41,42 +41,51 @@ class ProductManagementTableViewCell: UITableViewCell {
         onStatusToggle?()
     }
     
-    func configData(data: ProductsList) {
-        coloursList = data.productVariants?.compactMap { $0.color }
-        colorsCollectionView.reloadData()
-        productNameLabel.text = data.productNameEn
-        descriptionLabel.text = data.descriptionEn
-        let count = data.stock?.count ?? 0
-        if count > 0 {
-            stockLabel.text = "In Stock"
-        } else {
-            stockLabel.text = "Out of Stock"
-        }
-        if let imageUrlString = data.productVariants?.first?.variantImage?.first,
-           let url = URL(string: imageUrlString) {
-            productImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-            productImageView.sd_imageIndicator?.startAnimatingIndicator()
-            productImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "userProfile"))
-        } else {
-            productImageView.image = UIImage(named: "userProfile")
-        }
-        
-        ratingLabel.text = data.reviewRating
-        
-        orifinalPriceLabel.text = data.productVariants?.first?.finalPrice
-        dirscountPriceLabel.text = data.productVariants?.first?.actualPrice
-        discuntPercentageLabel.text = data.productVariants?.first?.discountValue
-        
-        if data.productActiveStatus == 1 {
-            statusLabel.text = "Active"
-            statusButton.setImage(UIImage(named: "toggleOn"), for: .normal)
-        } else {
-            statusLabel.text = "Deactive"
-            statusButton.setImage(UIImage(named: "toggleOff"), for: .normal)
-        }
-        
-        addedOnDateLaebl.text = "Added on- \(convertDate(data.createdAt ?? ""))"
-    }
+  func configData(data: ProductsList) {
+      // Safely extract colors from productVariants
+      var colorsArray: [ColorsLisDataModel] = []
+      
+      if let variants = data.productVariants, !variants.isEmpty {
+          for variant in variants {
+              if let color = variant.color {
+                  colorsArray.append(color)
+              }
+          }
+      }
+      
+      self.coloursList = colorsArray
+      colorsCollectionView.reloadData() // Reload collection view every time
+      
+      // Rest of your UI setup
+    productNameLabel.text = data.brand?.nameEnglish
+      descriptionLabel.text = data.productNameEn
+      stockLabel.text = (data.stock?.count ?? 0) > 0 ? "In Stock" : "Out of Stock"
+      
+      if let imageUrlString = data.productVariants?.first?.variantImage?.first,
+         let url = URL(string: imageUrlString) {
+          productImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+          productImageView.sd_imageIndicator?.startAnimatingIndicator()
+          productImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "userProfile"))
+      } else {
+          productImageView.image = UIImage(named: "userProfile")
+      }
+      
+      ratingLabel.text = "(\(data.reviewRating ?? "0"))"
+      orifinalPriceLabel.text = "\(data.productVariants?.first?.finalPrice ?? "") KD"
+      CommonUtils.setStrikethrough(label: dirscountPriceLabel, text: "\(data.productVariants?.first?.actualPrice ?? "") KD")
+      discuntPercentageLabel.text = "\(data.productVariants?.first?.discountValue ?? "") KD"
+      
+      if data.productActiveStatus == 1 {
+          statusLabel.text = "Active"
+          statusButton.setImage(UIImage(named: "toggle_on"), for: .normal)
+      } else {
+          statusLabel.text = "Inactive"
+          statusButton.setImage(UIImage(named: "toggle_off"), for: .normal)
+      }
+      
+      addedOnDateLaebl.text = "Added on- \(convertDate(data.createdAt ?? ""))"
+  }
+
     
     func convertDate(_ input: String) -> String {
         let inputFormatter = DateFormatter()

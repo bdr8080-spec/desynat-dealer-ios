@@ -11,13 +11,15 @@ import SDWebImage
 class ProductDetailImageCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var mainImageView: UIImageView!
-    
+  var imageURL: String?
+  
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
     
     func configData(variantImageUrl: String) {
+      
         if //let imageUrlString = variantImageUrl,
            let url = URL(string: variantImageUrl) {
             mainImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray

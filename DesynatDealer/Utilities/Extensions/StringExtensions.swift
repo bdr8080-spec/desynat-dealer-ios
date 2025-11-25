@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension String {
     
@@ -17,4 +18,7 @@ extension String {
         return NSLocalizedString(self, comment: comment)
     }
     
+  
+
+
 }

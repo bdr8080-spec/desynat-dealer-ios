@@ -48,6 +48,7 @@ enum NetworkEndPoint: String {
   case productsActiveStatus                  = "/api/seller/product-status-active-inactive"
   case getProductsDetails                 = "/api/seller/single-product-details"
   case deleteProductsDetails                 = "/api/seller/product-delete"
+  case editProductsDetails                 = "/api/seller/edit-product"
     
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"

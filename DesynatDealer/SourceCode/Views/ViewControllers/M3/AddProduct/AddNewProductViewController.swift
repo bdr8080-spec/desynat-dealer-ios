@@ -10,6 +10,7 @@ import SDWebImage
 
 class AddNewProductViewController: UIViewController {
   
+  @IBOutlet weak var addButtonLabel: UILabel!
   @IBOutlet weak var cancelView: CustomView!
   @IBOutlet weak var varaintTableViewHeightConstriant: NSLayoutConstraint!
   @IBOutlet weak var addSpecificationButtonOutlet: UIButton!
@@ -137,9 +138,11 @@ class AddNewProductViewController: UIViewController {
     case .forAddingProduct:
       cancelView.isHidden = true
       titleLabel.text = "Add new product"
+      addButtonLabel.text = "Add Product"
     case .forEditProduct:
       cancelView.isHidden = false
       titleLabel.text = "Edit product"
+      addButtonLabel.text = "Edit Product"
         viewModel.getProductDetailsService()
     }
   }
@@ -178,22 +181,36 @@ class AddNewProductViewController: UIViewController {
   @IBAction func addVariantDidTapped(_ sender: Any) {
     let lastRow = variantArray.count - 1
         let lastVariant = variantArray[lastRow]
+        
+        // Validate last cell
         if let lastCell = variantTableView.cellForRow(at: IndexPath(row: lastRow, section: 0)) as? AddVariantTableViewCell {
             let errors = lastCell.validateFieldsWithErrors(isWomenCategory: isWomenCategory)
             if !errors.isEmpty {
-              showAlert(msg: errors)
+                showAlert(msg: errors)
                 return
             }
         } else {
-            if lastVariant.sizeId == nil || lastVariant.colorId == nil || lastVariant.totalStock.isEmpty || lastVariant.sku.isEmpty {
+            // Fallback validation
+            if lastVariant.sizeId == nil || lastVariant.colorId == nil ||
+               lastVariant.totalStock.isEmpty || lastVariant.sku.isEmpty {
                 showAlert(msg: "Please fill all required fields of the current variant before adding a new one")
                 return
             }
         }
+
+        // Create and append new variant
         let newVariant = Variant()
         variantArray.append(newVariant)
-        variantTableView.reloadData()
-        updateVariantTableHeight()
+
+        // Properly insert the new row
+        let newIndexPath = IndexPath(row: variantArray.count - 1, section: 0)
+        
+        variantTableView.performBatchUpdates({
+            variantTableView.insertRows(at: [newIndexPath], with: .automatic)
+        }, completion: { _ in
+            self.updateVariantTableHeight()
+            self.variantTableView.scrollToRow(at: newIndexPath, at: .bottom, animated: true)
+        })
   }
   
   @IBAction func subCatgeoryAction(_ sender: UIButton) {
@@ -222,7 +239,12 @@ class AddNewProductViewController: UIViewController {
   
   @IBAction func addProductDidTapepd(_ sender: Any) {
     if viewModel.validFields() {
-      viewModel.addProductApi()
+      switch comingReason {
+      case .forEditProduct:
+        viewModel.editProductApi()
+      case .forAddingProduct:
+        viewModel.addProductApi()
+      }
     }
   }
   
@@ -331,8 +353,6 @@ class AddNewProductViewController: UIViewController {
               return nil
           }
           
-          // Collect images URLs (replace with actual uploaded URLs)
-//          let imagesURLs = cell.images.compactMap { $0 != nil ? "uploaded_image_url_here" : nil }
         let imagesURLs = cell.imageURLs.compactMap { $0 }
           variant_image.append(imagesURLs)
           
@@ -407,90 +427,100 @@ class AddNewProductViewController: UIViewController {
           "product_spe_feature_ar": product_spe_feature_ar
       ]
   }
+  
+  
     
-    func prefillProductDetails(_ data: ProductsList) {
-//
-//        // ---------- BASIC FIELDS ----------
-//        selectedCategoriesSection = Int(data.categoryID ?? "0")
-//        categoriesCollectionView.reloadData()
-//
-//        selectedSubCategoriesId = Int(data.subcategoryID ?? "0")
-//        subCatgeoryTF.text = data.subcategory
-//
-//        selectedBrandId = data.brandId
-//        selectedBrandTF.text = data.brandName
-//
-//        producNameEngTF.text = data.productNameEng
-//        productNameArabicTF.text = data.productNameAr
-//        descriptionEngTextView.text = data.descriptionEng
-//        descriptionArabicTextView.text = data.descriptionAr
-//        
-//        minCartQuantityTF.text = "\(data.minQty)"
-//        maxCartQuantityTF.text = "\(data.maxQty)"
-//        totalDaysReturningTF.text = "\(data.returnDays)"
-//
-//        // ---------- RADIO BUTTONS ----------
-//        isProductReturnable = data.isReturnable
-//        isProductExchangable = data.isExchangeable
-//        isRatingAllowed = data.isRatingAllowed
-//        isAffiliatedAllowed = data.isAffiliated
-//        isCustomizationAllowed = data.isCustomizable
-//        isReadyToShip = data.isReadyToShip
-//        isCashOnDeliveryAllowed = data.isCODAllowed
-//
-//        // ---------- SIZE CHART ----------
-//        selectedSizeChartImageUrl = data.sizeChartImage
-//        if let url = URL(string: data.sizeChartImage) {
-//            sizeChartImageView.sd_setImage(with: url)
-//        }
-//
-//        // ---------- SPECIFICATIONS ----------
-//        specifications.removeAll()
-//        for item in data.specifications {
-//            var spec = Spefication()
-//            spec.product_spe_en = item.nameEng
-//            spec.product_spe_ar = item.nameAr
-//            spec.product_spe_feature_en = item.featureEng
-//            spec.product_spe_feature_ar = item.featureAr
-//            specifications.append(spec)
-//        }
-//        specificationTableView.reloadData()
-//        updateSpecificationTableHeight()
-//
-//        // ---------- VARIANTS ----------
-//        variantArray.removeAll()
-//        for v in data.variants {
-//
-//            var variant = Variant()
-//            variant.colorId = v.colorId
-//            variant.sizeId = v.sizeId
-//
-//            variant.totalStock = v.stock
-//            variant.sku = v.sku
-//            variant.skuThreshold = v.threshold
-//
-//            variant.actualPrice = v.actualPrice
-//            variant.discountType = v.discountType // 1 = percentage, 2 = flat
-//            variant.discountValue = v.discountValue
-//            variant.finalPrice = v.finalPrice
-//            
-//            // women's size fields
-//            variant.bust = v.bust
-//            variant.hip = v.hip
-//            variant.waist = v.waist
-//            variant.length = v.length
-//            variant.shoulder = v.shoulder
-//            variant.sleeveLength = v.sleeveLength
-//
-//            // image URLs
-//            variant.imageURLs = v.imageURLs
-//
-//            variantArray.append(variant)
-//        }
-//        variantTableView.reloadData()
-//        updateVariantTableHeight()
-    }
+  func prefillProductDetails(_ data: ProductsList) {
+      // ---------- BASIC FIELDS ----------
+      selectedCategoriesSection = Int(data.categoryID ?? "0")
+      categoriesCollectionView.reloadData()
 
+      selectedSubCategoriesId = Int(data.subcategoryID ?? "0")
+    subCatgeoryTF.text = data.category?.description//data.subcategory?.nameEnglish
+
+      selectedBrandId = Int(data.brandID ?? "0")
+    selectedBrandTF.text = data.brand?.nameEnglish
+    otherBrandEnglishTF.text = data.otherEn
+    otherBrandArabicTF.text = data.otherAr
+      producNameEngTF.text = data.productNameEn
+      productNameArabicTF.text = data.productNameAr
+      descriptionEngTextView.text = data.descriptionEn
+      descriptionArabicTextView.text = data.descriptionAr
+    descriptionEngTextView.placeholderTextView = ""
+      descriptionArabicTextView.placeholderTextView = ""
+      
+      minCartQuantityTF.text = data.minCardQuantity
+      maxCartQuantityTF.text = data.maxCardQuantity
+      totalDaysReturningTF.text = data.returnDays
+    exchangableTF.text = data.exchangableDays
+
+      // ---------- RADIO BUTTONS ----------
+    isProductReturnable = (data.productReturn == "1")
+      isProductExchangable = (data.productExchangable == "1")
+      isRatingAllowed = (data.reviewRating == "1")
+    isAffiliatedAllowed = (data.affiliatedProduct == "1")
+      isCustomizationAllowed = (data.customizedProduct == "1")
+      isReadyToShip = (data.readyToShip == "1")
+      isCashOnDeliveryAllowed = (data.cashOnDelivery == "1")
+
+      // ---------- SIZE CHART ----------
+      selectedSizeChartImageUrl = data.uploadSizeChart
+      if let url = URL(string: data.uploadSizeChart ?? "") {
+          sizeChartImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "user_ic"))
+      }
+
+      // ---------- SPECIFICATIONS ----------
+      specifications.removeAll()
+    let specification = data.productSpecifications ?? []
+      for item in specification {
+          var spec = Spefication()
+          spec.product_spe_en = item.nameEn ?? ""
+          spec.product_spe_ar = item.nameAr ?? ""
+          spec.product_spe_feature_en = item.featureEn ?? ""
+          spec.product_spe_feature_ar = item.featureAr ?? ""
+          specifications.append(spec)
+      }
+      specificationTableView.reloadData()
+      updateSpecificationTableHeight()
+
+      // ---------- VARIANTS ----------
+    variantArray.removeAll()
+
+    let variants = data.productVariants ?? []
+    for v in variants {
+        var variant = Variant()
+      variant.colorId = v.colorID?.toInt
+        variant.sizeId = v.sizeID?.toInt //
+        variant.totalStock = v.totalStock ?? ""
+        variant.sku = v.sku ?? ""
+        variant.skuThreshold = v.skuThresholdValue ?? ""
+        variant.actualPrice = v.actualPrice ?? ""
+        variant.discountTypeIsPercentage = (v.discountType == "1")
+        variant.discountValue = v.discountValue ?? ""
+        variant.finalPrice = v.finalPrice ?? ""
+
+        // Women's size fields
+        variant.bust = v.bust ?? ""
+        variant.hip = v.hip ?? ""
+        variant.waist = v.waist ?? ""
+        variant.length = v.length ?? ""
+        variant.shoulder = v.shoulder ?? ""
+        variant.sleeveLength = v.sleeveLength ?? ""
+
+        // Images
+        if let imageStrings = v.variantImage, !imageStrings.isEmpty {
+            variant.imageURLs = imageStrings
+            variant.images = Array(repeating: nil, count: imageStrings.count)
+        } else {
+            variant.images = [nil]
+            variant.imageURLs = []
+        }
+        variantArray.append(variant)
+    }
+    variantTableView.reloadData()
+
+      updateVariantTableHeight()
+  }
 }
 
 extension AddNewProductViewController: UITableViewDelegate, UITableViewDataSource {
@@ -511,6 +541,13 @@ extension AddNewProductViewController: UITableViewDelegate, UITableViewDataSourc
     case specificationTableView:
       let cell = tableView.dequeueReusableCell(withIdentifier: "AddSpecificationTableViewCell", for: indexPath) as! AddSpecificationTableViewCell
       cell.delegate = self
+      
+      let spec = specifications[indexPath.row]
+        cell.nameEngTF.text = spec.product_spe_en
+        cell.featuresEngTF.text = spec.product_spe_feature_en
+        cell.nameARTF.text = spec.product_spe_ar
+        cell.featuresARTF.text = spec.product_spe_feature_ar
+      
       if specifications.count == 1 {
         cell.addRemoveStackView.isHidden = true
       } else {
@@ -522,6 +559,73 @@ extension AddNewProductViewController: UITableViewDelegate, UITableViewDataSourc
     case variantTableView:
       let cell = tableView.dequeueReusableCell(withIdentifier: "AddVariantTableViewCell", for: indexPath) as! AddVariantTableViewCell
       cell.delegate = self
+      
+      let variant = variantArray[indexPath.row]
+        
+        // Size & Color
+        cell.selectedSizeId = variant.sizeId
+        cell.selectedColorId = variant.colorId
+        
+        // Find and set size/color names from viewModel lists
+        if let sizeId = variant.sizeId,
+           let size = viewModel.sizesList.first(where: { $0.id == sizeId }) {
+            cell.sizeTF.text = size.name
+        }
+        
+      if let colorId = variant.colorId,
+         let color = viewModel.colorsList.first(where: { $0.id == colorId }) {
+          cell.colorTF.text = color.name
+      } else {
+          print("Color not found for id:", variant.colorId ?? -1)
+      }
+        
+        // Text fields
+        cell.totalStocksTF.text = variant.totalStock
+        cell.skuTF.text = variant.sku
+        cell.skuThresholdTF.text = variant.skuThreshold
+        cell.actualPriceTF.text = variant.actualPrice
+        cell.discountPriceTF.text = variant.discountValue
+        cell.finalPriceTF.text = variant.finalPrice
+        cell.discountTypeisPercentage = variant.discountTypeIsPercentage
+        
+        // Women's measurements
+        cell.bsutTF.text = variant.bust
+        cell.waistTF.text = variant.waist
+        cell.hipTF.text = variant.hip
+        cell.shouldTF.text = variant.shoulder
+        cell.sleeveLengthTF.text = variant.sleeveLength
+        cell.lengthTF.text = variant.length
+        
+
+      // Placeholder images for collection view
+      cell.images = Array(repeating: nil, count: variant.imageURLs?.count ?? 0)
+      cell.imageURLs = variant.imageURLs ?? []
+
+      // Load images asynchronously
+      if let urls = variant.imageURLs {
+          for (i, urlString) in urls.enumerated() {
+              if let urlStr = urlString, let url = URL(string: urlStr) {
+//                  cell..sd_setImage(with: url) // Don't set here
+                  SDWebImageManager.shared.loadImage(with: url, options: .highPriority, progress: nil) { image, _, _, _, _, _ in
+                      if let image = image {
+                          cell.images[i] = image
+                          cell.imagesCollectionView.reloadItems(at: [IndexPath(item: i, section: 0)])
+                      }
+                  }
+              }
+          }
+      }
+
+      // Add placeholder at the end
+      if cell.images.last != nil || cell.images.isEmpty {
+          cell.images.append(nil)
+          cell.imageURLs.append(nil)
+      }
+
+      cell.imagesCollectionView.reloadData()
+
+
+      
       cell.isWomenIsSelected = self.isWomenCategory
       if indexPath.row == 0 {
         cell.priceView.backgroundColor = UIColor(named: "#FFF7EA")
@@ -544,24 +648,6 @@ extension AddNewProductViewController: UITableViewDelegate, UITableViewDataSourc
       return UITableViewCell()
     }
   }
-  
-//  private func showColorDropdown(from sender: UIView) {
-//    let colorNames = viewModel.colorsList.map { $0.name ?? "" }
-//    kSharedAppDelegate.dropDown(dataSource: colorNames, anchorView: sender) { [weak self] index, item in
-//      guard let self = self else { return }
-//      let selectedColor = self.viewModel.colorsList[index]
-//      if let cell = sender.superview?.superview as? AddVariantTableViewCell {
-//        cell.colorTF.text = selectedColor.name
-//        let colorView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 16))
-//        colorView.backgroundColor = UIColor(hex: selectedColor.hexCode ?? "#000000")
-//        colorView.layer.cornerRadius = 8
-//        colorView.clipsToBounds = true
-//        cell.colorTF.leftView = colorView
-//        cell.colorTF.leftViewMode = .always
-//        cell.selectedColorId = selectedColor.id
-//      }
-//    }
-//  }
   
   private func showSizeDropdown(from textField: UITextField, in cell: AddVariantTableViewCell) {
       let sizesNames = viewModel.sizesList.map { $0.name ?? "" }
@@ -643,15 +729,33 @@ extension AddNewProductViewController: AddSpecificationCellDelegate, AddVariantC
       }
   }
 
-  
-  
-  
   func removeVariantTapped(from cell: AddVariantTableViewCell) {
-    guard let indexPath = variantTableView.indexPath(for: cell) else { return }
-    variantArray.remove(at: indexPath.row)
-    variantTableView.reloadData()
-    updateVariantTableHeight()
+      guard let indexPath = variantTableView.indexPath(for: cell) else { return }
+      
+      variantArray.remove(at: indexPath.row)
+      
+      variantTableView.performBatchUpdates({
+          variantTableView.deleteRows(at: [indexPath], with: .automatic)
+      }, completion: { _ in
+          self.updateVariantTableHeight()
+          
+          // If no variants left, ensure at least one exists (optional business rule)
+          if self.variantArray.isEmpty {
+              self.variantArray.append(Variant())
+              let newIndexPath = IndexPath(row: 0, section: 0)
+              self.variantTableView.insertRows(at: [newIndexPath], with: .automatic)
+              self.updateVariantTableHeight()
+          }
+      })
   }
+  
+  
+//  func removeVariantTapped(from cell: AddVariantTableViewCell) {
+//    guard let indexPath = variantTableView.indexPath(for: cell) else { return }
+//    variantArray.remove(at: indexPath.row)
+//    variantTableView.reloadData()
+//    updateVariantTableHeight()
+//  }
   
   func addSpecificationTapped(from cell: AddSpecificationTableViewCell) {
 
@@ -685,3 +789,8 @@ extension AddNewProductViewController: AddSpecificationCellDelegate, AddVariantC
   }
 }
 
+extension String {
+    var toInt: Int? {
+        return Int(self.trimmingCharacters(in: .whitespacesAndNewlines))
+    }
+}

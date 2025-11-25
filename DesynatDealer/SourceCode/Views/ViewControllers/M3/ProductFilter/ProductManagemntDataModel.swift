@@ -8,13 +8,14 @@
 import Foundation
 
 struct FilterSection {
-  let header: String
-  var options: [FilterOption]
+    var header: String
+    var options: [FilterOption]
 }
 
 struct FilterOption {
-  let title: String
-  var isSelected: Bool = false
-  let selectedImage: String = "filledCheckbox"
-  let unselectedImage: String = "checkBox"
+    var id: String
+    var title: String
+    var isSelected: Bool = false
+    var selectedImage: String = "filledCheckbox"
+    var unselectedImage: String = "checkBox"
 }

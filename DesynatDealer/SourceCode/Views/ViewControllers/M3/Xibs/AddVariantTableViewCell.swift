@@ -34,7 +34,7 @@ class AddVariantTableViewCell: UITableViewCell {
   @IBOutlet weak var finalPriceTF: UITextField!
   
   weak var delegate: AddVariantCellDelegate?
-  var images: [UIImage?] = [nil]
+  var images: [UIImage?] = []
   var imageURLs: [String?] = [nil]
   var onColorButtonTap: (() -> Void)?
   var onSizeButtonTap: (() -> Void)?
@@ -105,12 +105,12 @@ extension AddVariantTableViewCell: UICollectionViewDelegate, UICollectionViewDat
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductDetailImageCollectionViewCell", for: indexPath) as! ProductDetailImageCollectionViewCell
-    cell.mainImageView.layer.cornerRadius = 12
-    if let image = images[indexPath.item] {
-      cell.mainImageView.image = image
-    } else {
-      cell.mainImageView.image = UIImage(named: "uploadImages")
-    }
+        cell.mainImageView.layer.cornerRadius = 12
+        if let image = images[indexPath.item] {
+            cell.mainImageView.image = image
+        } else {
+            cell.mainImageView.image = UIImage(named: "uploadImages") // placeholder
+        }
     return cell
   }
   
@@ -135,7 +135,7 @@ extension AddVariantTableViewCell {
         }else if skuTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
             errors = "SKU is required"
         }else if skuThresholdTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-            errors = "SKU threshold is required"
+            errors = "SKU Limit is required"
         }else if actualPriceTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
             errors = "Actual price is required"
         }else if finalPriceTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {

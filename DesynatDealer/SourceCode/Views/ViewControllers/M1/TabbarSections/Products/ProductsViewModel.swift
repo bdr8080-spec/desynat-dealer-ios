@@ -12,9 +12,23 @@ class ProductsViewModel {
   private var hostVC: ProductsViewController?
   var productsListData: ProductsListDataModel?
   var searchText: String = ""
-
+  var categoriesList: [CategoryDataModel] = []
+  var brandsList: [BrandsListDataModel] = []
+  
   init(hostVC: ProductsViewController) {
     self.hostVC = hostVC
+  }
+  
+  func getCategoriesListApi() {
+      WebService.sharedInstance.getCategoriesService { [weak self] list in
+          self?.categoriesList = list
+      }
+  }
+  
+  func getBrandListApi() {
+      WebService.sharedInstance.getBrandService() { [weak self] list in
+          self?.brandsList = list
+      }
   }
   
   func getAllProducts(type: String) {
@@ -24,15 +38,14 @@ class ProductsViewModel {
           params["search"] = searchText
       }
 //      // cargory_filter
-//      if let id = appliedFilter.countryId {
-//          params["cargory_filter"] = id
-//      }
-//
-//      // brand_filter
-//      if let fromDate = appliedFilter.fromDate {
-//          params["brand_filter"] = fromDate
-//      }
+    if let categoryIDs = hostVC?.appliedFilter.categoryIDs, !categoryIDs.isEmpty {
+        params["cargory_filter"] = categoryIDs
+    }
 
+    // BRAND FILTER
+    if let brandIDs = hostVC?.appliedFilter.brandIDs, !brandIDs.isEmpty {
+        params["brand_filter"] = brandIDs
+    }
 
       // API CALL
       WebService.sharedInstance.getProductsListServices(param: params) { [weak self] response in
@@ -40,6 +53,7 @@ class ProductsViewModel {
           self.productsListData = response
           DispatchQueue.main.async {
               self.hostVC?.productTableView.reloadData()
+            self.hostVC?.updateProductCounts()
             switch type {
             case "0":
                 self.hostVC?.noResultFoundLabel.isHidden = !(self.productsListData?.allProductData?.isEmpty ?? true)

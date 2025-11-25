@@ -597,6 +597,7 @@
 		D13770192ED43FAE00D49E1A /* CategoriesSectionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D13770172ED43FAE00D49E1A /* CategoriesSectionCollectionViewCell.xib */; };
 		D137706C2ED4948D00D49E1A /* ProductsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D137706B2ED4948D00D49E1A /* ProductsViewModel.swift */; };
 		D137706E2ED494D000D49E1A /* ProductsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D137706D2ED494D000D49E1A /* ProductsDataModel.swift */; };
+		D1475AEC2ED59200008F6DF4 /* SizeChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1475AEB2ED59200008F6DF4 /* SizeChartViewController.swift */; };
 		D15F10842ECE02890091F88D /* ProductColoursCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F10822ECE02890091F88D /* ProductColoursCollectionViewCell.swift */; };
 		D15F10852ECE02890091F88D /* ProductColoursCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D15F10832ECE02890091F88D /* ProductColoursCollectionViewCell.xib */; };
 		D1AD19B72ECDEBC1007E1488 /* ColorsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1AD19B62ECDEBC1007E1488 /* ColorsCollectionViewCell.xib */; };
@@ -1227,6 +1228,7 @@
 		D13770172ED43FAE00D49E1A /* CategoriesSectionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoriesSectionCollectionViewCell.xib; sourceTree = "<group>"; };
 		D137706B2ED4948D00D49E1A /* ProductsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewModel.swift; sourceTree = "<group>"; };
 		D137706D2ED494D000D49E1A /* ProductsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsDataModel.swift; sourceTree = "<group>"; };
+		D1475AEB2ED59200008F6DF4 /* SizeChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeChartViewController.swift; sourceTree = "<group>"; };
 		D15F10822ECE02890091F88D /* ProductColoursCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductColoursCollectionViewCell.swift; sourceTree = "<group>"; };
 		D15F10832ECE02890091F88D /* ProductColoursCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductColoursCollectionViewCell.xib; sourceTree = "<group>"; };
 		D1AD19B52ECDEBC1007E1488 /* ColorsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -2318,6 +2320,7 @@
 				D1AD1A3D2ECDF422007E1488 /* ProductDetailViewController.swift */,
 				D1AD1A3E2ECDF422007E1488 /* ProductDetailsDataModel.swift */,
 				4924E83F2ED543EB001B7996 /* ProductDetailsViewModel.swift */,
+				D1475AEB2ED59200008F6DF4 /* SizeChartViewController.swift */,
 			);
 			path = ProductDetail;
 			sourceTree = "<group>";
@@ -3041,6 +3044,7 @@
 				6B38D0EF2EB3473B00C41192 /* SelectLanguageViewController.swift in Sources */,
 				6B38D0F02EB3473B00C41192 /* SignupViewController.swift in Sources */,
 				D1EDDB902ECED7EA0082D0A9 /* AddNewProductViewController.swift in Sources */,
+				D1475AEC2ED59200008F6DF4 /* SizeChartViewController.swift in Sources */,
 				49B2EB4B2EB88BC100EDC254 /* SummaryModel.swift in Sources */,
 				6B38D0F12EB3473B00C41192 /* StoreInformationViewController.swift in Sources */,
 				6B38D0F22EB3473B00C41192 /* UploadDocumnetViewController.swift in Sources */,
@@ -3146,7 +3150,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DesynatDealer/DesynatDealer.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Anshuman Gupta (6SUBR3T35U)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
@@ -3187,7 +3191,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DesynatDealer/DesynatDealer.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Anshuman Gupta (6SUBR3T35U)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";

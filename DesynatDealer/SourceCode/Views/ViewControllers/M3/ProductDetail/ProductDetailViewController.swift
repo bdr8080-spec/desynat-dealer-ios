@@ -8,8 +8,9 @@
 import UIKit
 
 class ProductDetailViewController: UIViewController {
-    
-    @IBOutlet weak var cashOnDeliveryLabel: UILabel!
+  
+  @IBOutlet weak var titlePageLabel: UILabel!
+  @IBOutlet weak var cashOnDeliveryLabel: UILabel!
     @IBOutlet weak var readyToShipLabel: UILabel!
     @IBOutlet weak var customizableLabel: UILabel!
     @IBOutlet weak var affiliatedLabel: UILabel!
@@ -77,20 +78,25 @@ class ProductDetailViewController: UIViewController {
     
     private var selectedColourIndex = 0
     private var selectedSizeIndex = 0
-    private var speifcationArray = ["Type 1- Feature", "Type 2- Feature", "Type 3- Feature"]
+    private var speifcationArray = [""]
     var productId: Int = 0
     private lazy var viewModel = ProductDetailsViewModel(hostVC: self)
     var productVariants: [ProductVariant] = []
     var coloursList: [ColorsLisDataModel] = []
     var sizesList: [SizeListDataModel] = []
     private var selectedVariant: ProductVariant?
-
+  private var sizeChartUrl :String? = ""
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.getProductDetailsService()
+        
     }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    viewModel.getProductDetailsService()
+  }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -125,22 +131,63 @@ class ProductDetailViewController: UIViewController {
             viewModel.deleteProductDetailsService()
         }
     }
-    
+  
+  @IBAction func updateStatusDidTapped(_ sender: Any) {
+    guard let user = viewModel.productDetails else { return }
+        let newStatus = user.productActiveStatus == 1 ? 0 : 1
+        let params: [String: Any] = ["product_id": user.id ?? 0]
+        
+        viewModel.updateActiveStatus(param: params) { [weak self] success in
+            guard let self = self else { return }
+            if success {
+                // Update the actual object in viewModel
+                self.viewModel.productDetails?.productActiveStatus = newStatus
+                
+                // Refresh UI
+                if let updatedUser = self.viewModel.productDetails {
+                    self.configData(data: updatedUser)
+                    let message = newStatus == 1 ? "Product has been activated Successfully" : "Product has been Deactivated Successfully"
+                    CommonUtils.showToast(message: message)
+                }
+            }
+        }
+  }
+  
+  @IBAction func sizeGuideDidTapped(_ sender: Any) {
+    let nextVC = SizeChartViewController.instantiate(fromAppStoryboard: .Product)
+    nextVC.sizeChartUrl = sizeChartUrl
+    self.navigationController?.present(nextVC, animated: true)
+  }
+  
     func configData(data: ProductsList) {
-
         // MARK: - Basic Product info
-        productNameLabel.text = data.productNameEn ?? "-"
+      titlePageLabel.text = "Product code- \(data.id ?? 0)"
+      productNameLabel.text = data.brand?.nameEnglish
+        descriptionLAbel.text = data.productNameEn ?? "-"
         descriptionLabel.text = data.descriptionEn ?? "-"
         addedOnLabel.text = "Added on - \(convertDate(data.createdAt ?? ""))"
-        brandCategoryLabel.text = "\(data.brand?.nameEnglish ?? "") | \(data.category?.name ?? "")"
-
+        brandCategoryLabel.text = "\(data.brand?.nameEnglish ?? "")  (\(data.category?.name ?? ""))"
+      ratingCountLabel.text = " (\(data.reviewRating ?? "0"))"
+      sizeChartUrl = data.uploadSizeChart
+      let categoryName = data.category?.name ?? "Women"
+      if categoryName == "Women" {
+        bustView.isHidden = false
+        hipView.isHidden = false
+        waistView.isHidden = false
+        shoulderView.isHidden = false
+      } else {
+        bustView.isHidden = true
+        hipView.isHidden = true
+        waistView.isHidden = true
+        shoulderView.isHidden = true
+      }
         // Status
         if data.productActiveStatus == 1 {
             statusLabel.text = "Active"
-            statusButton.setImage(UIImage(named: "toggleOn"), for: .normal)
+            statusButton.setImage(UIImage(named: "toggle_on"), for: .normal)
         } else {
             statusLabel.text = "Inactive"
-            statusButton.setImage(UIImage(named: "toggleOff"), for: .normal)
+            statusButton.setImage(UIImage(named: "toggle_off"), for: .normal)
         }
 
         // MARK: - Switch Labels (YES / NO)
@@ -148,25 +195,34 @@ class ProductDetailViewController: UIViewController {
         readyToShipLabel.text = data.readyToShip == "1" ? "Yes" : "No"
         customizableLabel.text = data.customizedProduct == "1" ? "Yes" : "No"
         affiliatedLabel.text = data.affiliatedProduct == "1" ? "Yes" : "No"
-        ratingReviewALlowedLabel.text = data.reviewRating == "1" ? "Allowed" : "Not Allowed"
-        returnAllowedLAbel.text = data.productReturn == "1" ? "Yes, \(data.returnDays ?? "") days" : "No"
-        exchnageAllowedLAbel.text = data.productExchangable == "1" ? "Yes, \(data.exchangableDays ?? "") days" : "No"
+        ratingReviewALlowedLabel.text = data.reviewRating == "1" ? "Yes" : "No"
+        returnAllowedLAbel.text = data.productReturn == "1" ? "\(data.returnDays ?? "") days" : "No"
+        exchnageAllowedLAbel.text = data.productExchangable == "1" ? "\(data.exchangableDays ?? "") days" : "No"
 
-        // MARK: - Variants Setup
-        productVariants = data.productVariants ?? []
-        coloursList = data.productVariants?.compactMap { $0.color } ?? []
-        colorsCollectionView.reloadData()
+      // In configData
+      productVariants = data.productVariants ?? []
 
-        // Default → Select first variant
-        selectedColourIndex = 0
-        selectedVariant = productVariants.first
+      // Get unique colors
+      var uniqueColorsDict: [Int: ColorsLisDataModel] = [:]
+      for variant in productVariants {
+          if let color = variant.color {
+              uniqueColorsDict[color.id ?? 0] = color
+          }
+      }
+      coloursList = Array(uniqueColorsDict.values)
+      colorsCollectionView.reloadData()
 
-        // Load sizes from selected variant
-//        sizesList = selectedVariant?.size ?? []
-        sizeCollectionView.reloadData()
+      // Default: first variant
+      selectedVariant = productVariants.first
+      selectedColourIndex = coloursList.firstIndex(where: { $0.id == selectedVariant?.color?.id }) ?? 0
 
-        // Load specs / price / images
-        updateVariantUI()
+      // Update sizes based on selected variant
+      sizesList = productVariants
+          .filter { $0.color?.id == selectedVariant?.color?.id }
+          .compactMap { $0.size }
+      sizeCollectionView.reloadData()
+
+      updateVariantUI()
 
         // MARK: Rating Section Reload
         ratingsTableView.reloadData()
@@ -179,38 +235,40 @@ class ProductDetailViewController: UIViewController {
         specificationTableViewHieghtConstraint.constant = specificationTableView.contentSize.height
     }
     
-    func updateVariantUI() {
-        guard let variant = selectedVariant else { return }
+  func updateVariantUI() {
+      guard let variant = selectedVariant else { return }
 
-        // IMAGES
-        imagesPageController.numberOfPages = variant.variantImage?.count ?? 0
-        productImageCollectionView.reloadData()
+      // IMAGES
+      let images = variant.variantImage ?? []
+      imagesPageController.numberOfPages = images.count
+      imagesPageController.currentPage = 0
+      productImageCollectionView.reloadData()
 
-        // PRICE
-        actualPriceLAbel.text = "AED \(variant.actualPrice ?? "0")"
-        discountPriceALbel.text = variant.discountValue ?? "0"
-        finalPriceLabel.text = "AED \(variant.finalPrice ?? "0")"
+      // PRICE
+//      actualPriceLAbel.text = "\(variant.actualPrice ?? "0") KD"
+      discountPriceALbel.text = variant.discountValue ?? "0"
+      finalPriceLabel.text = "\(variant.finalPrice ?? "0") KD"
+    CommonUtils.setStrikethrough(label: actualPriceLAbel, text: "\(variant.actualPrice ?? "0") KD")
+      // STOCK/SKU
+      totalStocksLabel.text = variant.totalStock ?? "0"
+      skuLabel.text = variant.sku ?? "-"
+      skuThresholderLabel.text = variant.skuThresholdValue ?? "-"
 
-        // STOCK/SKU
-        totalStocksLabel.text = variant.totalStock ?? "0"
-        skuLabel.text = variant.sku ?? "-"
-        skuThresholderLabel.text = variant.skuThresholdValue ?? "-"
+      // MEASUREMENTS
+      bustLabel.text = variant.bust ?? "-"
+      waistLabel.text = variant.waist ?? "-"
+      hipLabel.text = variant.hip ?? "-"
+      shoulderLabel.text = variant.shoulder ?? "-"
+      sleeveLenghtLabel.text = variant.sleeveLength ?? "-"
+      lengthLabel.text = variant.length ?? "-"
 
-        // MEASUREMENTS
-        bustLabel.text = variant.bust ?? "-"
-        waistLabel.text = variant.waist ?? "-"
-        hipLabel.text = variant.hip ?? "-"
-        shoulderLabel.text = variant.shoulder ?? "-"
-        sleeveLenghtLabel.text = variant.sleeveLength ?? "-"
-        lengthLabel.text = variant.length ?? "-"
+      // Sizes for selected color
+      sizesList = productVariants
+          .filter { $0.color?.id == variant.color?.id }
+          .compactMap { $0.size }
+      sizeCollectionView.reloadData()
+  }
 
-        // SIZES BASED ON SELECTED VARIANT
-//        sizesList = variant.size ?? []
-        sizeCollectionView.reloadData()
-
-        // SPECIFICATIONS
-        
-    }
 
 
     
@@ -237,7 +295,7 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
         case productImageCollectionView:
-            return 5
+          return selectedVariant?.variantImage?.count ?? 0
         case colorsCollectionView:
             return coloursList.count
         case sizeCollectionView:
@@ -250,13 +308,13 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch collectionView {
         case productImageCollectionView:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductDetailImageCollectionViewCell", for: indexPath) as! ProductDetailImageCollectionViewCell
-                
-                let images = selectedVariant?.variantImage ?? []
-                if images.count > indexPath.row {
-                    cell.configData(variantImageUrl: images[indexPath.row])
-                }
-            return cell
+          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductDetailImageCollectionViewCell", for: indexPath) as! ProductDetailImageCollectionViewCell
+                      
+                  // Show images of the selected variant
+                  if let images = selectedVariant?.variantImage, images.count > indexPath.row {
+                      cell.configData(variantImageUrl: images[indexPath.row])
+                  }
+                  return cell
         case colorsCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductColoursCollectionViewCell", for: indexPath) as! ProductColoursCollectionViewCell
             cell.mainView.backgroundColor = UIColor(hex: coloursList[indexPath.row].hexCode ?? "")
@@ -268,7 +326,8 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
             return cell
         case sizeCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SizeVariantCollectionViewCell", for: indexPath) as! SizeVariantCollectionViewCell
-            cell.titleLabel.text = sizesList[indexPath.row].name
+//            cell.titleLabel.text = sizesList[indexPath.row].name
+          cell.titleLabel.text = sizesList[indexPath.row].name
             if selectedSizeIndex == indexPath.row {
                 cell.mainView.layer.borderColor = UIColor.darkBrown.cgColor
             } else {
@@ -286,19 +345,36 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
         case productImageCollectionView:
             print("")
         case colorsCollectionView:
-            selectedColourIndex = indexPath.row
-                
-                let selectedColorId = coloursList[indexPath.row].id
-                
-                if let variant = productVariants.first(where: { $0.color?.id == selectedColorId }) {
-                    selectedVariant = variant
-                    updateVariantUI()
-                }
-                
-                colorsCollectionView.reloadData()
+          selectedColourIndex = indexPath.row
+                  let selectedColorId = coloursList[indexPath.row].id
+                  
+                  // Filter variants with selected color and pick the first variant
+                  if let firstVariant = productVariants.first(where: { $0.color?.id == selectedColorId }) {
+                      selectedVariant = firstVariant
+                  }
+                  
+                  // Update sizes list for this color
+                  sizesList = productVariants
+                      .filter { $0.color?.id == selectedColorId }
+                      .compactMap { $0.size }
+                  selectedSizeIndex = 0 // Default to first size
+                  
+                  sizeCollectionView.reloadData()
+                  updateVariantUI()
+                  colorsCollectionView.reloadData()
         case sizeCollectionView:
-            selectedSizeIndex = indexPath.row
-            sizeCollectionView.reloadData()
+          selectedSizeIndex = indexPath.row
+          guard let selectedColorId = selectedVariant?.color?.id else { return }
+          let selectedSizeId = sizesList[indexPath.row].id
+          
+          // Find variant matching both color and size
+          if let variant = productVariants.first(where: {
+              $0.color?.id == selectedColorId && $0.size?.id == selectedSizeId
+          }) {
+              selectedVariant = variant
+              updateVariantUI()
+          }
+          sizeCollectionView.reloadData()
         default:
             print("")
         }
@@ -319,12 +395,13 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
     }
     
     // MARK: - Update Page Control on Scroll
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView == productImageCollectionView {
-            let pageIndex = Int(round(scrollView.contentOffset.x / productImageCollectionView.frame.width))
-            imagesPageController.currentPage = pageIndex
-        }
-    }
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+      if scrollView == productImageCollectionView {
+          let pageIndex = Int(round(scrollView.contentOffset.x / productImageCollectionView.frame.width))
+          imagesPageController.currentPage = pageIndex
+      }
+  }
+
     
     
 }
@@ -347,7 +424,7 @@ extension ProductDetailViewController: UITableViewDataSource, UITableViewDelegat
         switch tableView {
         case specificationTableView:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ListTableViewCell", for: indexPath) as! ListTableViewCell
-            cell.titleLabel.text = "● \(speifcationArray[indexPath.row])"
+            cell.titleLabel.text = speifcationArray[indexPath.row]
             return cell
         case ratingsTableView:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProductRatingTableViewCell", for: indexPath) as! ProductRatingTableViewCell

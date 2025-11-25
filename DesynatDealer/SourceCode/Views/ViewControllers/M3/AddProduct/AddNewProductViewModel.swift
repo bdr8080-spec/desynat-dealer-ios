@@ -197,7 +197,8 @@ class AddNewProductViewModel: NSObject {
             guard let self = self else { return }
             CommonUtils.showToast(message: "Product has been deleted successfully")
             DispatchQueue.main.async {
-                self.hostVC.navigationController?.popViewController(animated: true)
+//                self.hostVC.navigationController?.popViewController(animated: true)
+              self.hostVC.navigationController?.popToRootViewController(animated: true)
             }
         }
     }
@@ -206,10 +207,70 @@ class AddNewProductViewModel: NSObject {
         let param: [String: Any] = ["product_id" :hostVC.productId ?? 0]
         WebService.sharedInstance.getProductDetailsService(param: param){ [weak self] response in
       guard let self = self else { return }
-            hostVC.prefillProductDetails(data: response)
+          hostVC.prefillProductDetails(response)
     }
   }
   
+  func editProductApi() {
+    let specificationData = hostVC.prepareSpecificationData() ?? [:]
+    let variantData = hostVC.prepareVariantData(isWomenCategory: hostVC.isWomenCategory) ?? [:]
+    var params: [String:Any] = [
+      "product_id": hostVC.productId ?? 0,
+      "category_id": hostVC.selectedCategoriesSection ?? "",
+      "subcategory_id": hostVC.selectedSubCategoriesId ?? "",
+      "brand_id": hostVC.selectedBrandId ?? "",
+      "other_en": hostVC.otherBrandEnglishTF.text?.trimmed() ?? "",
+      "other_ar": hostVC.otherBrandArabicTF.text?.trimmed() ?? "",
+      "product_name_en": hostVC.producNameEngTF.text?.trimmed() ?? "",
+      "product_name_ar": hostVC.productNameArabicTF.text?.trimmed() ?? "",
+      "description_en": hostVC.descriptionEngTextView.text?.trimmed() ?? "",
+      "description_ar": hostVC.descriptionArabicTextView.text?.trimmed() ?? "",
+      "min_card_quantity": hostVC.minCartQuantityTF.text?.trimmed() ?? "",
+      "max_card_quantity": hostVC.maxCartQuantityTF.text?.trimmed() ?? "",
+      "product_return": hostVC.isProductReturnable.toAPI,
+      "return_days": hostVC.returnDayTF.text?.trimmed() ?? "",
+      "product_exchangable": hostVC.isProductExchangable.toAPI,
+      "exchangable_days": hostVC.exchangableTF.text?.trimmed() ?? "",
+      "review_rating": hostVC.isRatingAllowed.toAPI,
+      "affiliated_product": hostVC.isAffiliatedAllowed.toAPI,
+      "customized_product": hostVC.isCustomizationAllowed.toAPI,
+      "ready_to_ship": hostVC.isCustomizationAllowed.toAPI,
+      "cash_on_delivery": hostVC.isCashOnDeliveryAllowed.toAPI,
+      "upload_size_chart": hostVC.selectedSizeChartImageUrl ?? "",
+    ]
+    // specification
+    params["product_spe_en"] = specificationData["product_spe_en"]
+    params["product_spe_feature_en"] = specificationData["product_spe_feature_en"]
+    params["product_spe_ar"] = specificationData["product_spe_ar"]
+    params["product_spe_feature_ar"] = specificationData["product_spe_feature_ar"]
+    
+    // variant Data
+    params["variant_image"] = variantData["variant_image"]
+    params["color_id"] = variantData["color_id"]
+    params["size_id"] = variantData["size_id"]
+    params["bust"] = variantData["bust"]
+    params["waist"] = variantData["waist"]
+    params["hip"] = variantData["hip"]
+    params["shoulder"] = variantData["shoulder"]
+    params["sleeve_length"] = variantData["sleeve_length"]
+    params["length"] = variantData["length"]
+    params["total_stock"] = variantData["total_stock"]
+    params["sku"] = variantData["sku"]
+    params["sku_threshold_value"] = variantData["sku_threshold_value"]
+    params["actual_price"] = variantData["actual_price"]
+    params["discount_type"] = variantData["discount_type"]
+    params["discount_value"] = variantData["discount_value"]
+    params["final_price"] = variantData["final_price"]
+    
+    print("param: ====>>\(params)")
+    WebService.sharedInstance.editProductService(param: params) { (response) in
+      CommonUtils.showToast(message: "Product is updated successfully")
+      DispatchQueue.main.async { [weak self] in
+        guard let self else { return }
+        self.hostVC.navigationController?.popViewController(animated: true)
+      }
+    }
+  }
   
 }
 

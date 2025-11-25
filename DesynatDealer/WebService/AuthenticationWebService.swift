@@ -465,7 +465,7 @@ extension WebService {
     
     func getProductDetailsService(param: [String:Any], completion:@escaping (_ user:ProductsList)-> Void) {
         CommonUtils.showHud(show: true)
-        NetworkManager.shared.request(withAPI:.endpoint(.getProductsDetails), requestMethod: .get, requestParams: param, requestModel:ProductsList.self) { result, code in
+        NetworkManager.shared.request(withAPI:.endpoint(.getProductsDetails), requestMethod: .post, requestParams: param, requestModel:ProductsList.self) { result, code in
             
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
@@ -496,5 +496,21 @@ extension WebService {
             }
         }
     }
+  
+  func editProductService(param: [String :Any], completion:@escaping (_ user: EmptyModel)-> Void) {
+      CommonUtils.showHud(show: true)
+      NetworkManager.shared.request(withAPI:.endpoint(.editProductsDetails), requestMethod: .post, requestParams: param, requestModel:EmptyModel.self) { result, code in
+          CommonUtils.showHud(show: false)
+          self.evaluateWebServiceResponse(response: result) { response, message,error in
+              guard let user = response else {
+                  if let error {
+                      UIApplication.shared.topViewController()?.showAlert(msg: error)
+                  }
+                  return
+              }
+              completion(user)
+          }
+      }
+  }
     
 }
