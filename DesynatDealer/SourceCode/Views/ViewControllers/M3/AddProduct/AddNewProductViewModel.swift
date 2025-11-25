@@ -54,74 +54,6 @@ class AddNewProductViewModel: NSObject {
     }
   }
   
-//  func validFields() -> Bool {
-//    var errorMessage: AlertConstant = .none
-//    let categoryId = hostVC.selectedCategoriesSection ?? -1
-//    let subcategoryId = hostVC.selectedSubCategoriesId ?? -1
-//    let brandId = hostVC.selectedBrandId ?? -1
-//    
-//    let otherBrandEn = hostVC.otherBrandEnglishTF.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-//    let otherBrandAr = hostVC.otherBrandArabicTF.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-//    let productNameEn = hostVC.producNameEngTF.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-//    let productNameAr = hostVC.productNameArabicTF.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-//    let descriptionEn = hostVC.descriptionEngTextView.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-//    let descriptionAr = hostVC.descriptionArabicTextView.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-//    let minQuantity = hostVC.minCartQuantityTF.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-//    let maxQuantity = hostVC.maxCartQuantityTF.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-//    let retunDays = hostVC.returnDayTF.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-//    let exchangeDays = hostVC.exchangableTF.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-//    if categoryId == -1 {
-//      errorMessage = .selectCategory
-//    } else if subcategoryId == -1 {
-//      errorMessage = .selectSubCategory
-//    } else if brandId == -1 {
-//      errorMessage = .selectBrand
-//    }  else if otherBrandEn.isEmpty {
-//      errorMessage = .otherBrandEnEmpty
-//    }  else if otherBrandAr.isEmpty {
-//      errorMessage = .otherBrandArEmpty
-//    } else if productNameEn.isEmpty {
-//      errorMessage = .productNameEnEmpty
-//    } else if productNameAr.isEmpty {
-//      errorMessage = .productNameArEmpty
-//    } else if descriptionEn.isEmpty {
-//      errorMessage = .descriptionEnEmpty
-//    } else if descriptionAr.isEmpty {
-//      errorMessage = .descriptionArEmpty
-//    } else if errorMessage == .none {
-//      if hostVC.prepareSpecificationData() == nil {
-//        hostVC.showAlert(msg: "Please fill all required fields for each specification")
-//        return false
-//      }
-//    } else if errorMessage == .none {
-//      if hostVC.prepareVariantData(isWomenCategory: true) == nil {
-//        hostVC.showAlert(msg: "Please fill all required fields for each variant before submitting")
-//        return false
-//      }
-//    } else if minQuantity.isEmpty {
-//      errorMessage = .minQuantity
-//    } else if maxQuantity.isEmpty {
-//      errorMessage = .maxQuantity
-//    } else if hostVC.isProductReturnable {
-//      if retunDays.isEmpty {
-//        errorMessage = .returnDays
-//      }
-//    } else if hostVC.isProductExchangable {
-//      if exchangeDays.isEmpty {
-//        errorMessage = .exchangeDays
-//      }
-//    } else if hostVC.selectedSizeChartImageUrl == nil  {
-//      errorMessage = .sizeChartUpload
-//    }
-//    
-//    if errorMessage != .none {
-//      hostVC.showAlert(msg: errorMessage.rawValue)
-//    }
-//    
-//    hostVC.view.endEditing(true)
-//    return errorMessage == .none
-//  }
-  
   func validFields() -> Bool {
       var errorMessage: AlertConstant = .none
 
@@ -256,6 +188,25 @@ class AddNewProductViewModel: NSObject {
         guard let self else { return }
         self.hostVC.navigationController?.popViewController(animated: true)
       }
+    }
+  }
+    
+    func deleteProductDetailsService() {
+        let param: [String: Any] = ["product_id" :hostVC.productId ?? 0]
+        WebService.sharedInstance.deleteProductDetailsService(param: param){ [weak self] response in
+            guard let self = self else { return }
+            CommonUtils.showToast(message: "Product has been deleted successfully")
+            DispatchQueue.main.async {
+                self.hostVC.navigationController?.popViewController(animated: true)
+            }
+        }
+    }
+    
+    func getProductDetailsService() {
+        let param: [String: Any] = ["product_id" :hostVC.productId ?? 0]
+        WebService.sharedInstance.getProductDetailsService(param: param){ [weak self] response in
+      guard let self = self else { return }
+            hostVC.prefillProductDetails(data: response)
     }
   }
   

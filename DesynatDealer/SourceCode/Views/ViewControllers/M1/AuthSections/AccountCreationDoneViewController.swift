@@ -19,7 +19,10 @@ class AccountCreationDoneViewController: UIViewController {
     }
     
     @IBAction func logoutDidTapped(_ sender: Any) {
-        logoutApi()
+        self.showConfirmationAlert(msg: "Are you sure you want to logout?"){ [weak self] in
+            guard let self = self else { return }
+            logoutApi()
+        }
     }
 
     

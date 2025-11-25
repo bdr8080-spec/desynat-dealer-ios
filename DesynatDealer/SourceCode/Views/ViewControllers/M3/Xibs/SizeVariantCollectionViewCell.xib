@@ -16,17 +16,17 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="SizeVariantCollectionViewCell" customModule="DesynatUser" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="SizeVariantCollectionViewCell" customModule="DesynatDealer" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="108" height="127"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="108" height="127"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Le4-Ud-UL1" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Le4-Ud-UL1" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
                         <rect key="frame" x="5" y="0.0" width="98" height="127"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5k6-0Z-PVC" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5k6-0Z-PVC" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
                                 <rect key="frame" x="4" y="4" width="90" height="119"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="S" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hdu-vB-PWd">
@@ -75,6 +75,7 @@
             <size key="customSize" width="108" height="127"/>
             <connections>
                 <outlet property="mainView" destination="Le4-Ud-UL1" id="RkO-Tt-KhV"/>
+                <outlet property="titleLabel" destination="Hdu-vB-PWd" id="awt-9U-d0Q"/>
             </connections>
             <point key="canvasLocation" x="77.862595419847324" y="15.845070422535212"/>
         </collectionViewCell>

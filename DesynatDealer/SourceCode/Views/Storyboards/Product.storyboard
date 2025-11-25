@@ -2534,6 +2534,9 @@
                                                                                         <real key="value" value="5"/>
                                                                                     </userDefinedRuntimeAttribute>
                                                                                 </userDefinedRuntimeAttributes>
+                                                                                <connections>
+                                                                                    <action selector="deleteDidTapped:" destination="QcP-qx-dGD" eventType="touchUpInside" id="8re-N7-kGg"/>
+                                                                                </connections>
                                                                             </button>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cancel" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HNx-AN-K0d">
                                                                                 <rect key="frame" x="60.666666666666671" y="10.999999999999998" width="43.666666666666671" height="16.333333333333329"/>

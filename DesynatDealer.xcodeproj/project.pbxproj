@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4924E8402ED543EB001B7996 /* ProductDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4924E83F2ED543EB001B7996 /* ProductDetailsViewModel.swift */; };
 		493DB73D2EAA6261008098A8 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 493DB73C2EAA6261008098A8 /* Alamofire */; };
 		49B2EB432EB88B8E00EDC254 /* UploadImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B2EB422EB88B8E00EDC254 /* UploadImageModel.swift */; };
 		49B2EB452EB88B9A00EDC254 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B2EB442EB88B9A00EDC254 /* UserDataModel.swift */; };
@@ -635,6 +636,7 @@
 /* Begin PBXFileReference section */
 		37A18E94AB484303BB2FD370 /* Pods-DesynatDealer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesynatDealer.debug.xcconfig"; path = "Target Support Files/Pods-DesynatDealer/Pods-DesynatDealer.debug.xcconfig"; sourceTree = "<group>"; };
 		40FCC5FE2116BF815C4B1BFB /* Pods_DesynatDealer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesynatDealer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4924E83F2ED543EB001B7996 /* ProductDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewModel.swift; sourceTree = "<group>"; };
 		493DB5C32EAA6210008098A8 /* DesynatDealer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DesynatDealer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49B2EB422EB88B8E00EDC254 /* UploadImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImageModel.swift; sourceTree = "<group>"; };
 		49B2EB442EB88B9A00EDC254 /* UserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
@@ -2315,6 +2317,7 @@
 			children = (
 				D1AD1A3D2ECDF422007E1488 /* ProductDetailViewController.swift */,
 				D1AD1A3E2ECDF422007E1488 /* ProductDetailsDataModel.swift */,
+				4924E83F2ED543EB001B7996 /* ProductDetailsViewModel.swift */,
 			);
 			path = ProductDetail;
 			sourceTree = "<group>";
@@ -3034,6 +3037,7 @@
 				6B38D0ED2EB3473B00C41192 /* RegisterationSuccessViewController.swift in Sources */,
 				6B38D0EE2EB3473B00C41192 /* ResetPasswordViewController.swift in Sources */,
 				49B2EB4F2EB88C5000EDC254 /* CountryModel.swift in Sources */,
+				4924E8402ED543EB001B7996 /* ProductDetailsViewModel.swift in Sources */,
 				6B38D0EF2EB3473B00C41192 /* SelectLanguageViewController.swift in Sources */,
 				6B38D0F02EB3473B00C41192 /* SignupViewController.swift in Sources */,
 				D1EDDB902ECED7EA0082D0A9 /* AddNewProductViewController.swift in Sources */,

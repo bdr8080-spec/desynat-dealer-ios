@@ -9,6 +9,7 @@ import UIKit
 
 class SizeVariantCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var mainView: CustomView!
     
     override func awakeFromNib() {

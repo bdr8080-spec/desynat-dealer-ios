@@ -75,6 +75,7 @@ class AddNewProductViewController: UIViewController {
       }
     }
   }
+    var productId: Int? = 0
   var selectedSubCategoriesId: Int? = -1
   var selectedBrandId: Int? = -1
   var selectedSizeChartImageUrl: String? = ""
@@ -139,6 +140,7 @@ class AddNewProductViewController: UIViewController {
     case .forEditProduct:
       cancelView.isHidden = false
       titleLabel.text = "Edit product"
+        viewModel.getProductDetailsService()
     }
   }
   
@@ -265,6 +267,13 @@ class AddNewProductViewController: UIViewController {
         }
     }
   }
+    
+    @IBAction func deleteDidTapped(_ sender: Any) {
+        self.showConfirmationAlert(msg: "Are you sure you want to delete this product?"){ [weak self] in
+            guard let self = self else { return }
+            viewModel.deleteProductDetailsService()
+        }
+    }
   
   func updateSpecificationTableHeight() {
     specificationTableView.layoutIfNeeded()
@@ -398,6 +407,89 @@ class AddNewProductViewController: UIViewController {
           "product_spe_feature_ar": product_spe_feature_ar
       ]
   }
+    
+    func prefillProductDetails(_ data: ProductsList) {
+//
+//        // ---------- BASIC FIELDS ----------
+//        selectedCategoriesSection = Int(data.categoryID ?? "0")
+//        categoriesCollectionView.reloadData()
+//
+//        selectedSubCategoriesId = Int(data.subcategoryID ?? "0")
+//        subCatgeoryTF.text = data.subcategory
+//
+//        selectedBrandId = data.brandId
+//        selectedBrandTF.text = data.brandName
+//
+//        producNameEngTF.text = data.productNameEng
+//        productNameArabicTF.text = data.productNameAr
+//        descriptionEngTextView.text = data.descriptionEng
+//        descriptionArabicTextView.text = data.descriptionAr
+//        
+//        minCartQuantityTF.text = "\(data.minQty)"
+//        maxCartQuantityTF.text = "\(data.maxQty)"
+//        totalDaysReturningTF.text = "\(data.returnDays)"
+//
+//        // ---------- RADIO BUTTONS ----------
+//        isProductReturnable = data.isReturnable
+//        isProductExchangable = data.isExchangeable
+//        isRatingAllowed = data.isRatingAllowed
+//        isAffiliatedAllowed = data.isAffiliated
+//        isCustomizationAllowed = data.isCustomizable
+//        isReadyToShip = data.isReadyToShip
+//        isCashOnDeliveryAllowed = data.isCODAllowed
+//
+//        // ---------- SIZE CHART ----------
+//        selectedSizeChartImageUrl = data.sizeChartImage
+//        if let url = URL(string: data.sizeChartImage) {
+//            sizeChartImageView.sd_setImage(with: url)
+//        }
+//
+//        // ---------- SPECIFICATIONS ----------
+//        specifications.removeAll()
+//        for item in data.specifications {
+//            var spec = Spefication()
+//            spec.product_spe_en = item.nameEng
+//            spec.product_spe_ar = item.nameAr
+//            spec.product_spe_feature_en = item.featureEng
+//            spec.product_spe_feature_ar = item.featureAr
+//            specifications.append(spec)
+//        }
+//        specificationTableView.reloadData()
+//        updateSpecificationTableHeight()
+//
+//        // ---------- VARIANTS ----------
+//        variantArray.removeAll()
+//        for v in data.variants {
+//
+//            var variant = Variant()
+//            variant.colorId = v.colorId
+//            variant.sizeId = v.sizeId
+//
+//            variant.totalStock = v.stock
+//            variant.sku = v.sku
+//            variant.skuThreshold = v.threshold
+//
+//            variant.actualPrice = v.actualPrice
+//            variant.discountType = v.discountType // 1 = percentage, 2 = flat
+//            variant.discountValue = v.discountValue
+//            variant.finalPrice = v.finalPrice
+//            
+//            // women's size fields
+//            variant.bust = v.bust
+//            variant.hip = v.hip
+//            variant.waist = v.waist
+//            variant.length = v.length
+//            variant.shoulder = v.shoulder
+//            variant.sleeveLength = v.sleeveLength
+//
+//            // image URLs
+//            variant.imageURLs = v.imageURLs
+//
+//            variantArray.append(variant)
+//        }
+//        variantTableView.reloadData()
+//        updateVariantTableHeight()
+    }
 
 }
 
