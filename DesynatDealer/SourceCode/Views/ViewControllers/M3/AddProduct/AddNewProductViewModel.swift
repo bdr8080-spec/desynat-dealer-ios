@@ -72,7 +72,8 @@ class AddNewProductViewModel: NSObject {
       let maxQuantity = hostVC.maxCartQuantityTF.text?.trimmed() ?? ""
       let returnDays = hostVC.returnDayTF.text?.trimmed() ?? ""
       let exchangeDays = hostVC.exchangableTF.text?.trimmed() ?? ""
-
+      let selectedBrand = brandsList.first { $0.id == brandId }
+      let isOtherBrand = selectedBrand?.nameEnglish?.lowercased() == "other"
       // --------------------
       // MAIN STATIC CHECKS
       // --------------------
@@ -82,10 +83,10 @@ class AddNewProductViewModel: NSObject {
           errorMessage = .selectSubCategory
       } else if brandId == -1 {
           errorMessage = .selectBrand
-      } else if otherBrandEn.isEmpty {
-          errorMessage = .otherBrandEnEmpty
-      } else if otherBrandAr.isEmpty {
-          errorMessage = .otherBrandArEmpty
+      }  else if isOtherBrand && otherBrandEn.isEmpty {
+        errorMessage = .otherBrandEnEmpty
+    } else if isOtherBrand && otherBrandAr.isEmpty {
+        errorMessage = .otherBrandArEmpty
       } else if productNameEn.isEmpty {
           errorMessage = .productNameEnEmpty
       } else if productNameAr.isEmpty {

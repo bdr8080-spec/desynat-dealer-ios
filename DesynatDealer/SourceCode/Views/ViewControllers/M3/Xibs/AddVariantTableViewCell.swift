@@ -109,7 +109,7 @@ extension AddVariantTableViewCell: UICollectionViewDelegate, UICollectionViewDat
         if let image = images[indexPath.item] {
             cell.mainImageView.image = image
         } else {
-            cell.mainImageView.image = UIImage(named: "uploadImages") // placeholder
+            cell.mainImageView.image = UIImage(named: "uploadProductImage") // placeholder
         }
     return cell
   }
@@ -127,46 +127,48 @@ extension AddVariantTableViewCell {
     func validateFieldsWithErrors(isWomenCategory: Bool) -> String {
         var errors: String = ""
         if colorTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-            errors = "Color is required"
+            errors = "Please select color"
         }else if sizeTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-            errors = "Size is required"
+            errors = "Please select size"
         } else if totalStocksTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-            errors = "Total stock is required"
+            errors = "Please enter total stocks"
         }else if skuTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-            errors = "SKU is required"
+            errors = "Please enter SKU"
         }else if skuThresholdTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-            errors = "SKU Limit is required"
+            errors = "Please enter SKU limit"
         }else if actualPriceTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-            errors = "Actual price is required"
-        }else if finalPriceTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-            errors = "Final price is required"
+            errors = "Please enter actual price"
+        } else if discountPriceTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
+          errors = "Please enter discount price"
+      }else if finalPriceTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
+            errors = "Please enter final price"
         }
         
         if isWomenCategory {
             if bsutTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-                errors = "Bust is required"
+                errors = "Please enter bust"
             }
             if waistTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-                errors = "Waist is required"
+                errors = "Please enter waist"
             }
             if shouldTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-                errors = "Shoulder is required"
+                errors = "Please enter hip"
             }
             if hipTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-                errors = "Hip is required"
+                errors = "Please enter shoulder"
             }
             if sleeveLengthTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-                errors = "Sleeve length is required"
+                errors = "Please enter sleeve length"
             }
             if lengthTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-                errors = "Length is required"
+                errors = "Please enter length"
             }
         }
         
         // Images
         let hasImage = images.contains { $0 != nil }
         if !hasImage {
-            errors = "At least one image is required"
+            errors = "please upload product image"
         }
         
         return errors

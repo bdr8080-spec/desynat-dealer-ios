@@ -18,7 +18,9 @@ extension String {
         return NSLocalizedString(self, comment: comment)
     }
     
-  
-
+  var toInt: Int? {
+    return Int(self.trimmingCharacters(in: .whitespacesAndNewlines))
+  }
 
 }
+
