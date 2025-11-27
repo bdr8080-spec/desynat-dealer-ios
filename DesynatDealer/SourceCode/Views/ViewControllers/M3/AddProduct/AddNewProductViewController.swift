@@ -521,13 +521,13 @@ class AddNewProductViewController: UIViewController {
       variant.shoulder = v.shoulder ?? ""
       variant.sleeveLength = v.sleeveLength ?? ""
       
-      if let imageStrings = v.variantImage, !imageStrings.isEmpty {
-        variant.imageURLs = imageStrings
-        variant.images = Array(repeating: nil, count: imageStrings.count)
-      } else {
-        variant.images = [nil]
-        variant.imageURLs = []
-      }
+        if let imageStrings = v.variantImage, !imageStrings.isEmpty {
+            variant.imageURLs = imageStrings.compactMap { $0 }  // removes any nil if backend sends them
+            variant.images = Array(repeating: UIImage(), count: imageStrings.count) // temp placeholder
+        } else {
+            variant.imageURLs = []
+            variant.images = []
+        }
       variantArray.append(variant)
     }
     variantTableView.reloadData()
@@ -600,28 +600,35 @@ extension AddNewProductViewController: UITableViewDelegate, UITableViewDataSourc
       cell.sleeveLengthTF.text = variant.sleeveLength
       cell.lengthTF.text = variant.length
       
-      cell.images = Array(repeating: nil, count: variant.imageURLs?.count ?? 0)
-      cell.imageURLs = variant.imageURLs ?? []
-      
-      if let urls = variant.imageURLs {
-        for (i, urlString) in urls.enumerated() {
-          if let urlStr = urlString, let url = URL(string: urlStr) {
-            SDWebImageManager.shared.loadImage(with: url, options: .highPriority, progress: nil) { image, _, _, _, _, _ in
-              if let image = image {
-                cell.images[i] = image
-                cell.imagesCollectionView.reloadItems(at: [IndexPath(item: i, section: 0)])
-              }
+        // Set only real images and URLs (no nil, no placeholder)
+        cell.images = variant.images         // [UIImage]
+        cell.imageURLs = variant.imageURLs  // [String]
+
+        // Load existing images from URLs (only when editing)
+        for (index, urlString) in cell.imageURLs.enumerated() {
+            guard let url = URL(string: urlString) else { continue }
+            
+            SDWebImageManager.shared.loadImage(
+                with: url,
+                options: [.highPriority, .retryFailed],
+                progress: nil
+            ) { [weak cell] (image, _, error, _, _, _) in
+                guard let image = image,
+                      let cell = cell,
+                      index < cell.images.count else { return }
+                
+                cell.images[index] = image
+                
+                DispatchQueue.main.async {
+                    cell.reloadImageItem(at: index)
+                }
             }
-          }
         }
-      }
-      
-      if cell.images.last != nil || cell.images.isEmpty {
-        cell.images.append(nil)
-        cell.imageURLs.append(nil)
-      }
-      
-      cell.imagesCollectionView.reloadData()
+
+        // Final safe refresh to ensure everything is displayed
+        DispatchQueue.main.async {
+            cell.imagesCollectionView.reloadData()
+        }
       
       cell.isWomenIsSelected = self.isWomenCategory
       if indexPath.row == 0 {
@@ -703,23 +710,29 @@ extension AddNewProductViewController: UICollectionViewDelegate, UICollectionVie
 
 extension AddNewProductViewController: AddSpecificationCellDelegate, AddVariantCellDelegate {
   
-  func addImageTapped(from cell: AddVariantTableViewCell, at index: Int) {
-    ImagePickerHelper.shared.showPickerController { image, imageName in
-      guard let image = image else { return }
-      
-      WebService.sharedInstance.uploadImage(withParams: image) { imageURL in
-        cell.images[index] = image
-        cell.imageURLs[index] = imageURL.url
-        if index == cell.images.count - 1 {
-          cell.images.append(nil)
-          cell.imageURLs.append(nil)
+    func addImageTapped(from cell: AddVariantTableViewCell, at index: Int) {
+        ImagePickerHelper.shared.showPickerController { [weak cell] image, imageName in
+            guard let image = image, let cell = cell else { return }
+            
+            WebService.sharedInstance.uploadImage(withParams: image) { imageURL in
+                DispatchQueue.main.async {
+                    // Insert new image at the end of real images
+                    let insertIndex = cell.images.count
+                    cell.images.append(image)
+                    cell.imageURLs.append(imageURL.url ?? "")
+                    
+                    // Reload only the new item (index 1-based)
+                    let newItemIndexPath = IndexPath(item: insertIndex + 1, section: 0) // +1 because 0 is placeholder
+                    cell.imagesCollectionView.performBatchUpdates({
+                        cell.imagesCollectionView.insertItems(at: [newItemIndexPath])
+                    }, completion: nil)
+                    
+                    // FOR DISABLE THE SCROLLING AFTER UPLAODING IMAGE
+                    cell.scrollToLastItem()
+                }
+            }
         }
-        
-        cell.imagesCollectionView.reloadData()
-        cell.scrollToLastItem()
-      }
     }
-  }
   
   func removeVariantTapped(from cell: AddVariantTableViewCell) {
     guard let indexPath = variantTableView.indexPath(for: cell) else { return }

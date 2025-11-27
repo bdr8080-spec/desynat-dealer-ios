@@ -14,8 +14,8 @@ enum ComingReasonAtAddToProduct {
 }
 
 struct Variant {
-  var images: [UIImage?] = [nil]           // Local images (new uploads)
-  var imageURLs: [String?]?
+    var images: [UIImage] = []           // Real images only
+        var imageURLs: [String] = []
 //    var images: [String?] = [nil]   placeholder image
     var colorId: Int? = -1
     var sizeId: Int? = -1
