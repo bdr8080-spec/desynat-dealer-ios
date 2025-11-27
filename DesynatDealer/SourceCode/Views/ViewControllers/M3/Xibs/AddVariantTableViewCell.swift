@@ -32,38 +32,44 @@ class AddVariantTableViewCell: UITableViewCell {
   @IBOutlet weak var percentageButton: UIButton!
   @IBOutlet weak var discountPriceTF: UITextField!
   @IBOutlet weak var finalPriceTF: UITextField!
+  @IBOutlet weak var sleeveLengthStackView: UIStackView!
   
   weak var delegate: AddVariantCellDelegate?
-    var images: [UIImage] = []                    // Only real uploaded images
-      var imageURLs: [String] = []
+  var images: [UIImage] = []                    // Only real uploaded images
+  var imageURLs: [String] = []
   var onColorButtonTap: (() -> Void)?
   var onSizeButtonTap: (() -> Void)?
   var selectedColorId: Int? = -1
   var selectedSizeId: Int? = -1
-    private var displayImages: [UIImage?] {
-          return [nil] + images  // nil = placeholder, then real images
-      }
-      
-      private var displayImageURLs: [String?] {
-          return [nil] + imageURLs
-      }
-  var isWomenIsSelected: Bool = false {
-      didSet {
-          bustWaistStackView.isHidden = !isWomenIsSelected
-          hipshouldStackView.isHidden = !isWomenIsSelected
-      }
-  }
+  private var finalPriceManuallyCleared = false
 
+  private var displayImages: [UIImage?] {
+    return [nil] + images  // nil = placeholder, then real images
+  }
+  
+  private var displayImageURLs: [String?] {
+    return [nil] + imageURLs
+  }
+  var isWomenIsSelected: Bool = false {
+    didSet {
+      bustWaistStackView.isHidden = !isWomenIsSelected
+      hipshouldStackView.isHidden = !isWomenIsSelected
+      sleeveLengthStackView.isHidden = !isWomenIsSelected
+    }
+  }
+  
   var discountTypeisPercentage = true {
-      didSet {
-          updateRadioButtons(selected: discountTypeisPercentage, yesButton: percentageButton, noButton: fixedPriceButton)
-      }
+    didSet {
+      updateRadioButtons(selected: discountTypeisPercentage, yesButton: percentageButton, noButton: fixedPriceButton)
+      updateDiscountPlaceholder()
+              updateFinalPrice()
+    }
   }
   
   override func awakeFromNib() {
     super.awakeFromNib()
     registerCell()
-      setupTextFieldDelegates()
+    setupTextFieldDelegates()
   }
   
   private func registerCell() {
@@ -87,32 +93,107 @@ class AddVariantTableViewCell: UITableViewCell {
   
   @IBAction func discountPriceAction(_ sender: Any) {
     discountTypeisPercentage.toggle()
+    discountPriceTF.text = ""
+    finalPriceTF.text = ""
   }
   
-    func scrollToLastItem() {
-        let lastIndex = displayImages.count - 1
-        if lastIndex > 0 {
-            imagesCollectionView.scrollToItem(at: IndexPath(item: lastIndex, section: 0), at: .right, animated: true)
-        }
+  func scrollToLastItem() {
+    let lastIndex = displayImages.count - 1
+    if lastIndex > 0 {
+      imagesCollectionView.scrollToItem(at: IndexPath(item: lastIndex, section: 0), at: .right, animated: true)
     }
-    
-    func reloadImageItem(at realIndex: Int) {
-        let collectionIndex = realIndex + 1  // +1 because index 0 is placeholder
-        let indexPath = IndexPath(item: collectionIndex, section: 0)
-        
-        // Safety: only reload if item actually exists
-        if collectionIndex < imagesCollectionView.numberOfItems(inSection: 0) {
-            imagesCollectionView.reloadItems(at: [indexPath])
-        }
+  }
+  
+  func reloadImageItem(at realIndex: Int) {
+    let collectionIndex = realIndex + 1  // +1 because index 0 is placeholder
+    let indexPath = IndexPath(item: collectionIndex, section: 0)
+    if collectionIndex < imagesCollectionView.numberOfItems(inSection: 0) {
+      imagesCollectionView.reloadItems(at: [indexPath])
     }
+  }
   
   private func updateRadioButtons(selected: Bool, yesButton: UIButton, noButton: UIButton) {
-      let yesImageName = selected ? "radioSelected" : "radioUnselected"
-      let noImageName = selected ? "radioUnselected" : "radioSelected"
-      
-      yesButton.setImage(UIImage(named: yesImageName), for: .normal)
-      noButton.setImage(UIImage(named: noImageName), for: .normal)
+    let yesImageName = selected ? "radioSelected" : "radioUnselected"
+    let noImageName = selected ? "radioUnselected" : "radioSelected"
+    
+    yesButton.setImage(UIImage(named: yesImageName), for: .normal)
+    noButton.setImage(UIImage(named: noImageName), for: .normal)
   }
+  
+  private func updateFinalPrice(for discountValue: Int? = nil) {
+      guard let actualPrice = Int(actualPriceTF.text ?? "0") else {
+          finalPriceTF.text = ""
+          return
+      }
+
+      let discount = discountValue ?? (Int(discountPriceTF.text ?? "0") ?? 0)
+      var finalPrice = actualPrice
+
+      if discountTypeisPercentage {
+          finalPrice = actualPrice - (actualPrice * discount / 100)
+      } else {
+          finalPrice = actualPrice - discount
+      }
+
+      finalPriceTF.text = "\(finalPrice)"
+  }
+  
+//  private func updateFinalPrice(for discountValue: Int? = nil) {
+//      guard let actualPrice = Int(actualPriceTF.text ?? "0"), actualPrice > 0 else {
+//          finalPriceTF.text = ""
+//          return
+//      }
+//    print(actualPrice)
+//
+//      let discount = discountValue ?? (Int(discountPriceTF.text ?? "0") ?? 0)
+//      var finalPrice = actualPrice
+//
+//      if discountTypeisPercentage {
+//          finalPrice = actualPrice - (actualPrice * discount / 100)
+//      } else {
+//          finalPrice = actualPrice - discount
+//      }
+//    print(actualPrice)
+//      // If final price is negative or zero, clear the field
+//      if finalPrice <= 0 {
+//          finalPriceTF.text = ""
+//        discountPriceTF.text = ""
+//      } else {
+//          finalPriceTF.text = "\(finalPrice)"
+//      }
+//  }
+
+
+  // Add this method to AddVariantTableViewCell
+  func updateColorAndSizeDisplay(colorsList: [ColorsLisDataModel], sizesList: [SizeListDataModel]) {
+      if let colorId = selectedColorId,
+         let color = colorsList.first(where: { $0.id == colorId }) {
+          colorTF.text = color.name
+      } else {
+          colorTF.text = ""
+      }
+      
+      if let sizeId = selectedSizeId,
+         let size = sizesList.first(where: { $0.id == sizeId }) {
+          sizeTF.text = size.name
+      } else {
+          sizeTF.text = ""
+      }
+  }
+
+  private func updateDiscountPlaceholder() {
+      if discountTypeisPercentage {
+          discountPriceTF.placeholder = "E.g. 10%"  // percentage example
+          discountPriceTF.keyboardType = .numberPad
+      } else {
+          discountPriceTF.placeholder = "E.g. 1200 KD"  // fixed amount example
+          discountPriceTF.keyboardType = .numberPad
+      }
+      
+//      discountPriceTF.text = "" // optional: clear old value when switching
+  }
+
+
 }
 
 extension AddVariantTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -123,32 +204,32 @@ extension AddVariantTableViewCell: UICollectionViewDelegate, UICollectionViewDat
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductDetailImageCollectionViewCell", for: indexPath) as! ProductDetailImageCollectionViewCell
-      cell.mainImageView.layer.cornerRadius = 12
-          cell.mainImageView.contentMode = .scaleAspectFill
-          cell.mainImageView.clipsToBounds = true
-          
-          if indexPath.item == 0 {
-              // Always show placeholder at index 0
-              cell.mainImageView.image = UIImage(named: "uploadProductImage")
-          } else {
-              // Real images from index 1 onwards
-              let realIndex = indexPath.item - 1
-              if realIndex < images.count {
-                  cell.mainImageView.image = images[realIndex]
-              } else {
-                  cell.mainImageView.image = UIImage(named: "uploadProductImage")
-              }
-          }
-          
-          
+    cell.mainImageView.layer.cornerRadius = 12
+    cell.mainImageView.contentMode = .scaleAspectFill
+    cell.mainImageView.clipsToBounds = true
+    
+    if indexPath.item == 0 {
+      // Always show placeholder at index 0
+      cell.mainImageView.image = UIImage(named: "uploadProductImage")
+    } else {
+      // Real images from index 1 onwards
+      let realIndex = indexPath.item - 1
+      if realIndex < images.count {
+        cell.mainImageView.image = images[realIndex]
+      } else {
+        cell.mainImageView.image = UIImage(named: "uploadProductImage")
+      }
+    }
+    
+    
     return cell
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-      if indexPath.item == 0 {
-              // Only trigger image picker on placeholder
-              delegate?.addImageTapped(from: self, at: images.count) // pass current count as insert position
-          }
+    if indexPath.item == 0 {
+      // Only trigger image picker on placeholder
+      delegate?.addImageTapped(from: self, at: images.count) // pass current count as insert position
+    }
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -157,58 +238,74 @@ extension AddVariantTableViewCell: UICollectionViewDelegate, UICollectionViewDat
 }
 
 extension AddVariantTableViewCell {
-    func validateFieldsWithErrors(isWomenCategory: Bool) -> String {
-        var errors: String = ""
-        if colorTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-            errors = "Please select color"
-        }else if sizeTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-            errors = "Please select size"
-        } else if totalStocksTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-            errors = "Please enter total stocks"
-        }else if skuTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-            errors = "Please enter SKU"
-        }else if skuThresholdTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-            errors = "Please enter SKU limit"
-        }else if actualPriceTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-            errors = "Please enter actual price"
-        } else if discountPriceTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-          errors = "Please enter discount price"
-      }else if finalPriceTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-            errors = "Please enter final price"
-        }
-        
-        if isWomenCategory {
-            if bsutTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-                errors = "Please enter bust"
-            }
-            if waistTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-                errors = "Please enter waist"
-            }
-            if shouldTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-                errors = "Please enter hip"
-            }
-            if hipTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-                errors = "Please enter shoulder"
-            }
-            if sleeveLengthTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-                errors = "Please enter sleeve length"
-            }
-            if lengthTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-                errors = "Please enter length"
-            }
-        }
-        
-        // Images
-        let hasImage = !images.isEmpty
-        if !hasImage {
-            errors = "please upload product image"
-        }
-        
-        return errors
+  func validateFieldsWithErrors(isWomenCategory: Bool) -> String {
+    var errors: String = ""
+    if colorTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
+      errors = "Please select color"
+    }else if sizeTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
+      errors = "Please select size"
+    } else if totalStocksTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
+      errors = "Please enter total stocks"
+    }else if skuTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
+      errors = "Please enter SKU limit"
+      //        }else if skuThresholdTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
+      //            errors = "Please enter SKU limit"
+    }else if actualPriceTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
+      errors = "Please enter actual price"
+      //    } else if discountPriceTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
+      //      errors = "Please enter discount price"
+    } else if discountPriceTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
+              errors = discountTypeisPercentage ? "Please enter discount percentage" : "Please enter discount fixed price"
+          
+    }else if finalPriceTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
+      errors = "Please enter final price"
     }
+    
+    if isWomenCategory {
+      if bsutTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
+        errors = "Please enter bust"
+      }
+      if waistTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
+        errors = "Please enter waist"
+      }
+      if shouldTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
+        errors = "Please enter hip"
+      }
+      if hipTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
+        errors = "Please enter shoulder"
+      }
+      if sleeveLengthTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
+        errors = "Please enter sleeve length"
+      }
+      if lengthTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
+        errors = "Please enter length"
+      }
+    }
+    
+    // Images
+    let hasImage = !images.isEmpty
+    if !hasImage {
+      errors = "please upload product image"
+    }
+    
+    return errors
+  }
+  
+//  private func updateFinalPriceForDiscount() {
+//      let actualPrice = Int(actualPriceTF.text ?? "") ?? 0
+//      let discount = Int(discountPriceTF.text ?? "0") ?? 0
+//
+//      let finalPrice: Int
+//      if discountTypeisPercentage {
+//          finalPrice = actualPrice - ((actualPrice * discount) / 100)
+//      } else {
+//          finalPrice = actualPrice - discount
+//      }
+//
+//      finalPriceTF.text = "\(max(finalPrice, 0))"
+//  }
+
 }
-
-
 
 protocol AddVariantCellDelegate: AnyObject {
   func removeVariantTapped(from cell: AddVariantTableViewCell)
@@ -220,177 +317,243 @@ struct VariantImage {
   var isPlaceholder: Bool
 }
 
-//extension AddVariantTableViewCell: UITextFieldDelegate {
-//    
-//    private func setupTextFieldDelegates() {
-//        totalStocksTF.delegate = self
-//        skuThresholdTF.delegate = self
-//        discountPriceTF.delegate = self
-//        actualPriceTF.delegate = self
-//        finalPriceTF.delegate = self
-//        skuTF.delegate = self
-//    }
-//    
-//    func textField(_ textField: UITextField,
-//                   shouldChangeCharactersIn range: NSRange,
-//                   replacementString string: String) -> Bool {
-//        
-//        // Convert NSRange → Swift Range safely
-//        guard let swiftRange = Range(range, in: textField.text ?? "") else { return false }
-//        let currentText = textField.text?.replacingCharacters(in: swiftRange, with: string) ?? string
-//        
-//        // Allow backspace
-//        if string.isEmpty { return true }
-//        
-//        // Prevent leading space
-//        if currentText.hasPrefix(" ") { return false }
-//        
-//        // Total Stocks: Max 6 digits
-//        if textField == totalStocksTF {
-//            return currentText.count <= 6 && string.areAllDigits
-//        }
-//        
-//        // SKU Threshold ≤ Total Stocks
-//        if textField == skuThresholdTF {
-//            let total = Int(totalStocksTF.text ?? "0") ?? 0
-//            let threshold = Int(currentText) ?? 0
-//            return threshold <= total && string.areAllDigits
-//        }
-//        
-//        // Discount % ≤ 100 (only when percentage mode)
-//        if textField == discountPriceTF && discountTypeisPercentage {
-//            let value = Int(currentText) ?? 0
-//            return value <= 100 && string.areAllDigits
-//        }
-//        
-//        // Price fields: Max 7 digits
-//        if textField == actualPriceTF || textField == finalPriceTF {
-//            return currentText.count <= 7 && string.areAllDigits
-//        }
-//        
-//        // SKU: No spaces
-//        if textField == skuTF {
-//            return !string.contains(" ")
-//        }
-//        
-//        return true
-//    }
-//}
 
 // MARK: - Add This Extension Inside AddVariantTableViewCell.swift
 
 // MARK: - UITextFieldDelegate + Validation (Add inside AddVariantTableViewCell)
 extension AddVariantTableViewCell: UITextFieldDelegate {
+  
+  private func setupTextFieldDelegates() {
+    let fields: [UITextField] = [
+      bsutTF, waistTF, hipTF, shouldTF, sleeveLengthTF, lengthTF,
+      totalStocksTF, //skuThresholdTF,
+      actualPriceTF, finalPriceTF,
+      discountPriceTF, skuTF
+    ]
+    fields.forEach { $0.delegate = self }
+  }
+  
+  // MARK: ONE AND ONLY shouldChangeCharactersIn
+  func textField(_ textField: UITextField,
+                 shouldChangeCharactersIn range: NSRange,
+                 replacementString string: String) -> Bool {
+    
+    let currentText = textField.text ?? ""
+    print("currentText==>\(currentText)")
+    let updatedText = (currentText as NSString).replacingCharacters(in: range, with: string)
+    print("currentText==>\(updatedText)")
+    // Allow deleting
+   
+    if textField == discountPriceTF {
+      if string == " " { return false }
+      // Block leading zero
+      if updatedText.count == 1 && updatedText == "0" {
+          return false
+      }
+            // Compute what the text will be after this edit
+            let currentText = textField.text ?? ""
+            let updatedText = (currentText as NSString).replacingCharacters(in: range, with: string)
+            
+            // Convert to Int, empty string means 0
+            let discount = Int(updatedText) ?? 0
+            let actualPrice = Int(actualPriceTF.text ?? "0") ?? 0
 
-    private func setupTextFieldDelegates() {
-        let fields: [UITextField] = [
-            totalStocksTF, skuThresholdTF,
-            actualPriceTF, finalPriceTF,
-            discountPriceTF, skuTF
-        ]
-        fields.forEach { $0.delegate = self }
-    }
-
-    // MARK: ONE AND ONLY shouldChangeCharactersIn
-    func textField(_ textField: UITextField,
-                   shouldChangeCharactersIn range: NSRange,
-                   replacementString string: String) -> Bool {
-
-        // Allow backspace
-        guard !string.isEmpty else { return true }
-
-        // ---- Block non-digits for number fields ----
-        let numberFields: [UITextField] = [
-            totalStocksTF, skuThresholdTF,
-            actualPriceTF, finalPriceTF,
-            discountPriceTF
-        ]
-
-        if numberFields.contains(textField) {
-            let allowed = CharacterSet.decimalDigits
-            if string.rangeOfCharacter(from: allowed.inverted) != nil {
-                return false
+            // Validate discount
+            if discountTypeisPercentage {
+                if discount > 100 {
+                    return false
+                }
+            } else {
+                if discount >= actualPrice {
+                    return false
+                }
             }
-        }
+            updateFinalPrice(for: discount)
 
-        // ---- Block space in SKU ----
-        if textField == skuTF && string.contains(" ") {
+            return true
+        }
+    
+    if textField == actualPriceTF {
+        let newText = updatedText.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        // If empty, reset dependent fields
+      print(newText)
+        if newText.isEmpty {
+//            discountPriceTF.text = ""
+            finalPriceTF.text = ""
+            return true
+        }
+        
+        // Block non-digit input
+        if string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) != nil {
             return false
         }
+        
+        // Max 7 digits
+        if newText.count > 7 {
+            showToast("Price cannot exceed 7 digits")
+            return false
+        }
+        
+        // Recalculate final price
+        let discount = Int(discountPriceTF.text ?? "0") ?? 0
+      print(discount)
+//        updateFinalPrice(for: discount)
+//      let discount = discount ?? (Int(discountPriceTF.text ?? "0") ?? 0)
+      var finalPrice = Int(updatedText) ?? 0
 
-        // ---- Real-time length limit (optional but nice) ----
-        guard let currentText = textField.text else { return true }
-        let newLength = currentText.count + string.count - range.length
-
-        if textField == totalStocksTF && newLength > 6 { return false }
-        if (textField == actualPriceTF || textField == finalPriceTF) && newLength > 7 { return false }
-
+      if discountTypeisPercentage {
+          finalPrice = finalPrice - (finalPrice * discount / 100)
+      } else {
+          finalPrice = finalPrice - discount
+      }
+    print(finalPrice)
+      // If final price is negative or zero, clear the field
+      if finalPrice <= 0 {
+          finalPriceTF.text = ""
+//        discountPriceTF.text = ""
+      } else {
+          finalPriceTF.text = "\(finalPrice)"
+      }
+        
         return true
     }
 
-    // MARK: Final validation + toast when user finishes editing
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let rawText = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-              !rawText.isEmpty else { return }
+    
+    
+    if textField === skuTF {
+      
+      // Block typing if Total Stocks empty
+      let totalText = totalStocksTF.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+      guard let totalStocks = Int(totalText), totalStocks > 0 else {
+        showToast("Please enter total stocks first")
+        return false
+      }
+      
+      // Block typing if SKU > Total Stocks
+      if let updatedSKU = Int(updatedText), updatedSKU > totalStocks {
+        //              showToast("SKU cannot exceed total stocks (\(totalStocks))")
+        showToast("Sku limit can not be greater than Total stocks ")
+        return false
+      }
+      
+      // Only digits for SKU
+      if string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) != nil {
+        return false
+      }
+      
+      // No leading zero for SKU
+      if updatedText.count == 1 && updatedText == "0" {
+        return false
+      }
+      
+      return true
+    }
 
-        let value = Int(rawText) ?? 0
+    let numericFields = [
+      bsutTF, waistTF, hipTF, shouldTF, sleeveLengthTF, lengthTF,
+      totalStocksTF, actualPriceTF, finalPriceTF, discountPriceTF
+    ].compactMap { $0 }
+    
+    if numericFields.contains(where: { $0 === textField }) {
+      
+      // No spaces
+      if string == " " { return false }
+      
+      // Only digits
+      if string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) != nil {
+        return false
+      }
+      
+      // No leading zero
+      if updatedText.count == 1 && updatedText == "0" {
+        return false
+      }
+      
+      // Total Stocks limit – max 6 digits
+      if textField === totalStocksTF && updatedText.count > 6 {
+        return false
+      }
+      
+      if textField === actualPriceTF || textField === finalPriceTF {
+                  if updatedText.count > 7 {
+                      showToast("Price cannot exceed 7 digits")
+                      return false
+                  }
+              }
 
-        // 1. Total Stocks – max 6 digits
-        if textField == totalStocksTF {
-            if rawText.count > 6 {
-                textField.text = String(rawText.prefix(6))
-                showToast("Total stocks cannot exceed 6 digits")
-            }
-            return
-        }
-
-        // 2. SKU Threshold – cannot be > Total Stocks
-        if textField == skuThresholdTF {
-            let totalText = totalStocksTF.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "0"
-            let totalStocks = Int(totalText) ?? 0
-
-            if totalStocks == 0 {
-                textField.text = ""
-                showToast("Please enter total stocks first")
-            } else if value > totalStocks {
-                textField.text = "\(totalStocks)"
-                showToast("SKU threshold cannot exceed total stocks (\(totalStocks))")
-            }
-            return
-        }
-
-        // 3. Discount % – max 100 (only when percentage mode)
-        if textField == discountPriceTF && discountTypeisPercentage {
-            if value > 100 {
-                textField.text = "100"
-                showToast("Discount percentage cannot exceed 100%")
-            }
-            return
-        }
-
-        // 4. Price fields – max 7 digits
-        if textField == actualPriceTF || textField == finalPriceTF {
-            if rawText.count > 7 {
-                textField.text = String(rawText.prefix(7))
-                showToast("Price cannot exceed 7 digits")
-            }
+      return true
+    }
+    
+    return true
+  }
+  
+  // MARK: Final validation + toast when user finishes editing
+  func textFieldDidEndEditing(_ textField: UITextField) {
+    guard let rawText = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+          !rawText.isEmpty else { return }
+    let actualPrice = Int(actualPriceTF.text ?? "") ?? 0
+        let discountValue = Int(rawText) ?? 0
+    if textField == actualPriceTF {
+        let newText = rawText
+        if newText.isEmpty {
+            discountPriceTF.text = ""
+            finalPriceTF.text = ""
         }
     }
+
+
+    let value = Int(rawText) ?? 0
+    if textField == totalStocksTF {
+      if rawText.count > 6 {
+        textField.text = String(rawText.prefix(6))
+        showToast("Total stocks cannot exceed 6 digits")
+      }
+      return
+    }
+    if textField == skuTF {
+      let totalText = totalStocksTF.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "0"
+      let totalStocks = Int(totalText) ?? 0
+      
+      if totalStocks == 0 {
+        textField.text = ""
+        showToast("Please enter total stocks first")
+      } else if value > totalStocks {
+        textField.text = "\(totalStocks)"
+        showToast("SKU Limit cannot exceed total stocks (\(totalStocks))")
+      }
+      return
+    }
+    if textField == discountPriceTF && discountTypeisPercentage {
+      if value > 100 {
+        textField.text = "100"
+        showToast("Discount percentage cannot exceed 100%")
+      }
+      return
+    }
+    if textField == actualPriceTF || textField == finalPriceTF {
+      if rawText.count > 7 {
+        textField.text = String(rawText.prefix(7))
+        showToast("Price cannot exceed 7 digits")
+      }
+    }
+  }
+  
 }
 
 // MARK: - Toast Helper
 private extension AddVariantTableViewCell {
-    func showToast(_ message: String) {
-        DispatchQueue.main.async {
-            CommonUtils.showToast(message: message)
-            // or your own toast method
-        }
+  func showToast(_ message: String) {
+    DispatchQueue.main.async {
+      CommonUtils.showToast(message: message)
+      // or your own toast method
     }
+  }
 }
 
 // Helper
 private extension String {
-    var areAllDigits: Bool {
-        return !isEmpty && rangeOfCharacter(from: .decimalDigits.inverted) == nil
-    }
+  var areAllDigits: Bool {
+    return !isEmpty && rangeOfCharacter(from: .decimalDigits.inverted) == nil
+  }
 }

@@ -26,7 +26,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="juk-v7-O5y">
-                        <rect key="frame" x="0.0" y="0.0" width="338" height="1138.6666666666667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="338" height="1046.6666666666667"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gx9-XP-WBH">
                                 <rect key="frame" x="0.0" y="0.0" width="338" height="62.666666666666664"/>
@@ -540,21 +540,21 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="5Zs-1u-C8W">
-                                <rect key="frame" x="0.0" y="600.66666666666663" width="338" height="72"/>
+                                <rect key="frame" x="0.0" y="600.66666666666663" width="338" height="75"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uiD-et-Kad">
-                                        <rect key="frame" x="0.0" y="0.0" width="161.66666666666666" height="72"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="161.66666666666666" height="75"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Stocks" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zTQ-b6-nrW">
-                                                <rect key="frame" x="24" y="0.0" width="137.66666666666666" height="17"/>
+                                                <rect key="frame" x="24" y="0.0" width="137.66666666666666" height="20"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="12"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QSh-cc-TzD" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
-                                                <rect key="frame" x="24" y="22" width="137.66666666666666" height="50"/>
+                                                <rect key="frame" x="24" y="25" width="137.66666666666666" height="50"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Eg. 32" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hdg-TH-ekB">
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Eg. 3200" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hdg-TH-ekB">
                                                         <rect key="frame" x="20.000000000000007" y="5" width="97.666666666666686" height="40"/>
                                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -592,18 +592,18 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HfG-fX-fxq">
-                                        <rect key="frame" x="176.66666666666663" y="0.0" width="161.33333333333337" height="72"/>
+                                        <rect key="frame" x="176.66666666666663" y="0.0" width="161.33333333333337" height="75"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SKU" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YrF-86-wYf">
-                                                <rect key="frame" x="0.0" y="0.0" width="137.33333333333334" height="17"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SKU Limit" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YrF-86-wYf">
+                                                <rect key="frame" x="0.0" y="0.0" width="137.33333333333334" height="20"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="12"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6HX-lv-z9M" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="22" width="137.33333333333334" height="50"/>
+                                                <rect key="frame" x="0.0" y="25" width="137.33333333333334" height="50"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="20019" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="06Z-ux-UoW">
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="200" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="06Z-ux-UoW">
                                                         <rect key="frame" x="19.999999999999993" y="5" width="97.333333333333314" height="40"/>
                                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -642,20 +642,20 @@
                                     </view>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="PNE-s6-7zB">
-                                <rect key="frame" x="0.0" y="692.66666666666663" width="338" height="75"/>
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="PNE-s6-7zB">
+                                <rect key="frame" x="0.0" y="685.66666666666663" width="338" height="55"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jLz-NQ-r7z">
-                                        <rect key="frame" x="0.0" y="0.0" width="161.66666666666666" height="75"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="161.66666666666666" height="55"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SKU Limit" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xdJ-yz-B7U">
-                                                <rect key="frame" x="24" y="0.0" width="137.66666666666666" height="20"/>
+                                                <rect key="frame" x="24" y="0.0" width="137.66666666666666" height="0.0"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="12"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1rO-7M-Z6c" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
-                                                <rect key="frame" x="24" y="25" width="137.66666666666666" height="50"/>
+                                                <rect key="frame" x="24" y="5" width="137.66666666666666" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="200" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Rf-BI-hM6">
                                                         <rect key="frame" x="20.000000000000007" y="5" width="97.666666666666686" height="40"/>
@@ -695,16 +695,16 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ik6-fb-xZS">
-                                        <rect key="frame" x="176.66666666666663" y="0.0" width="161.33333333333337" height="75"/>
+                                        <rect key="frame" x="176.66666666666663" y="0.0" width="161.33333333333337" height="55"/>
                                         <subviews>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SKU" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ab8-YY-jft">
-                                                <rect key="frame" x="0.0" y="0.0" width="137.33333333333334" height="20"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="137.33333333333334" height="0.0"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="12"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BY3-8I-IBY" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="25" width="137.33333333333334" height="50"/>
+                                                <rect key="frame" x="0.0" y="5" width="137.33333333333334" height="50"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="3tj-Gg-Ab7"/>
@@ -735,7 +735,7 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bwa-VH-7bH" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="787.66666666666663" width="338" height="350.99999999999989"/>
+                                <rect key="frame" x="0.0" y="695.66666666666663" width="338" height="350.99999999999989"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="aZz-dY-j9V">
                                         <rect key="frame" x="0.0" y="15" width="338" height="321"/>
@@ -752,7 +752,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4NA-2c-o9L" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
                                                         <rect key="frame" x="24" y="25" width="290" height="50"/>
                                                         <subviews>
-                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="299.00 KD" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gKb-GA-qNz">
+                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Eg. 2500 KD" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gKb-GA-qNz">
                                                                 <rect key="frame" x="20" y="5" width="250" height="40"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -906,7 +906,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WNV-Oi-9Ic">
-                                                <rect key="frame" x="0.0" y="246.00000000000011" width="338" height="75"/>
+                                                <rect key="frame" x="0.0" y="246" width="338" height="75"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Final Price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cSJ-Oi-dTa">
                                                         <rect key="frame" x="24" y="0.0" width="290" height="20"/>
@@ -917,7 +917,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dHm-Fk-kT4" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
                                                         <rect key="frame" x="24" y="25" width="290" height="50"/>
                                                         <subviews>
-                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Eg. 299.00 KD" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kRV-rz-X47">
+                                                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Eg. 299.00 KD" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kRV-rz-X47">
                                                                 <rect key="frame" x="20" y="5" width="250" height="40"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -1004,6 +1004,7 @@
                 <outlet property="sizeTF" destination="SgI-Kz-Xl5" id="9Mb-VJ-ENT"/>
                 <outlet property="skuTF" destination="06Z-ux-UoW" id="qVm-hf-bma"/>
                 <outlet property="skuThresholdTF" destination="9Rf-BI-hM6" id="IHH-Uf-YZ5"/>
+                <outlet property="sleeveLengthStackView" destination="U84-nV-Yx7" id="62I-RK-Si8"/>
                 <outlet property="sleeveLengthTF" destination="rSJ-aw-Vjr" id="8j8-nJ-0mS"/>
                 <outlet property="titleLabel" destination="g9e-qu-zXL" id="8M6-ji-VS7"/>
                 <outlet property="totalStocksTF" destination="hdg-TH-ekB" id="8yO-oA-cVC"/>

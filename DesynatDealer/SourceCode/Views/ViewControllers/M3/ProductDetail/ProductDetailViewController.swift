@@ -9,6 +9,10 @@ import UIKit
 
 class ProductDetailViewController: UIViewController {
   
+  @IBOutlet weak var womenStackView: UIStackView!
+  @IBOutlet weak var lengthStackView: UIStackView!
+  @IBOutlet weak var sleeveLengthStackView: UIStackView!
+  @IBOutlet weak var womenDetailsView: CustomView!
   @IBOutlet weak var titlePageLabel: UILabel!
   @IBOutlet weak var cashOnDeliveryLabel: UILabel!
     @IBOutlet weak var readyToShipLabel: UILabel!
@@ -87,7 +91,7 @@ class ProductDetailViewController: UIViewController {
     private var selectedVariant: ProductVariant?
   private var sizeChartUrl :String? = ""
 
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -161,25 +165,40 @@ class ProductDetailViewController: UIViewController {
   
     func configData(data: ProductsList) {
         // MARK: - Basic Product info
-      titlePageLabel.text = "Product code- \(data.id ?? 0)"
-      productNameLabel.text = data.brand?.nameEnglish
+//      titlePageLabel.text = data.brand?.nameEnglish ?? ""
+      if data.brand?.nameEnglish == "Other" {
+        productNameLabel.text = data.otherEn
+        titlePageLabel.text = data.otherEn
+      } else {
+        productNameLabel.text = data.brand?.nameEnglish
+        titlePageLabel.text = data.brand?.nameEnglish
+      }
+
         descriptionLAbel.text = data.productNameEn ?? "-"
         descriptionLabel.text = data.descriptionEn ?? "-"
         addedOnLabel.text = "Added on - \(convertDate(data.createdAt ?? ""))"
-        brandCategoryLabel.text = "\(data.brand?.nameEnglish ?? "")  (\(data.category?.name ?? ""))"
+        brandCategoryLabel.text = data.category?.name ?? ""//"\(data.brand?.nameEnglish ?? "")  (\(data.category?.name ?? ""))"
       ratingCountLabel.text = " (\(data.reviewRating ?? "0"))"
       sizeChartUrl = data.uploadSizeChart
       let categoryName = data.category?.name ?? "Women"
       if categoryName == "Women" {
+        womenDetailsView.isHidden = false
         bustView.isHidden = false
         hipView.isHidden = false
         waistView.isHidden = false
         shoulderView.isHidden = false
+        sleeveLengthStackView.isHidden = false
+        lengthStackView.isHidden = false
+        womenStackView.isHidden = false
       } else {
+        womenDetailsView.isHidden = true
         bustView.isHidden = true
         hipView.isHidden = true
         waistView.isHidden = true
         shoulderView.isHidden = true
+        sleeveLengthStackView.isHidden = true
+        lengthStackView.isHidden = true
+        womenStackView.isHidden = true
       }
         // Status
         if data.productActiveStatus == 1 {
@@ -203,26 +222,77 @@ class ProductDetailViewController: UIViewController {
       productVariants = data.productVariants ?? []
 
       // Get unique colors
+//      var uniqueColorsDict: [Int: ColorsLisDataModel] = [:]
+//      for variant in productVariants {
+//          if let color = variant.color {
+//              uniqueColorsDict[color.id ?? 0] = color
+//          }
+//      }
+//      coloursList = Array(uniqueColorsDict.values)
+//      colorsCollectionView.reloadData()
+//
+//      // Default: first variant
+//      selectedVariant = productVariants.first
+//      selectedColourIndex = coloursList.firstIndex(where: { $0.id == selectedVariant?.color?.id }) ?? 0
+//
+//      // Update sizes based on selected variant
+//      sizesList = productVariants
+//          .filter { $0.color?.id == selectedVariant?.color?.id }
+//          .compactMap { $0.size }
+//      sizeCollectionView.reloadData()
+//
+//      updateVariantUI()
+      
       var uniqueColorsDict: [Int: ColorsLisDataModel] = [:]
-      for variant in productVariants {
-          if let color = variant.color {
-              uniqueColorsDict[color.id ?? 0] = color
+          for variant in productVariants {
+              if let color = variant.color {
+                  if uniqueColorsDict[color.id ?? 0] == nil { // Keep first occurrence only
+                      uniqueColorsDict[color.id ?? 0] = color
+                  }
+              }
           }
-      }
-      coloursList = Array(uniqueColorsDict.values)
-      colorsCollectionView.reloadData()
+          coloursList = Array(uniqueColorsDict.values) // Ordered by first appearance
 
-      // Default: first variant
-      selectedVariant = productVariants.first
-      selectedColourIndex = coloursList.firstIndex(where: { $0.id == selectedVariant?.color?.id }) ?? 0
+          // SAFETY: Reload collection views first with empty/no selection
+          colorsCollectionView.reloadData()
+          sizeCollectionView.reloadData()
 
-      // Update sizes based on selected variant
-      sizesList = productVariants
-          .filter { $0.color?.id == selectedVariant?.color?.id }
-          .compactMap { $0.size }
-      sizeCollectionView.reloadData()
+          // === CRITICAL FIX: Always default to index 0 color ===
+          guard !coloursList.isEmpty else {
+              selectedVariant = nil
+              selectedColourIndex = 0
+              selectedSizeIndex = 0
+              updateVariantUI()
+              return
+          }
 
-      updateVariantUI()
+          // Force select the FIRST color (index 0)
+          selectedColourIndex = 0
+          let firstColor = coloursList[0]
+          let firstColorId = firstColor.id
+      
+      if let defaultVariant = productVariants.first(where: { $0.color?.id == firstColorId }) {
+              selectedVariant = defaultVariant
+          } else if let anyVariant = productVariants.first {
+              // Fallback: in case of corrupted data
+              selectedVariant = anyVariant
+              // Update selectedColourIndex to match this fallback color
+              selectedColourIndex = coloursList.firstIndex(where: { $0.id == anyVariant.color?.id }) ?? 0
+          }
+      // Now build sizes list based on selected color
+          sizesList = productVariants
+              .filter { $0.color?.id == firstColorId }
+              .compactMap { $0.size }
+
+          // Default to first size
+          selectedSizeIndex = 0
+
+          // Now reload UI
+          colorsCollectionView.reloadData()
+          sizeCollectionView.reloadData()
+          productImageCollectionView.reloadData()
+
+          updateVariantUI()
 
         // MARK: Rating Section Reload
         ratingsTableView.reloadData()
@@ -242,11 +312,20 @@ class ProductDetailViewController: UIViewController {
       let images = variant.variantImage ?? []
       imagesPageController.numberOfPages = images.count
       imagesPageController.currentPage = 0
+    productImageCollectionView.setContentOffset(CGPoint.zero, animated: false)
       productImageCollectionView.reloadData()
 
       // PRICE
 //      actualPriceLAbel.text = "\(variant.actualPrice ?? "0") KD"
-      discountPriceALbel.text = variant.discountValue ?? "0"
+//      discountPriceALbel.text = variant.discountValue ?? "0"/
+    
+    let discountType = variant.discountType ?? "1"
+    if discountType == "1" {
+      discountPriceALbel.text = "\(variant.discountValue ?? "")% Off"
+    } else {
+      discountPriceALbel.text = "\(variant.discountValue ?? "") KD Off"
+    }
+    
       finalPriceLabel.text = "\(variant.finalPrice ?? "0") KD"
     CommonUtils.setStrikethrough(label: actualPriceLAbel, text: "\(variant.actualPrice ?? "0") KD")
       // STOCK/SKU
@@ -345,23 +424,42 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
         case productImageCollectionView:
             print("")
         case colorsCollectionView:
+//          selectedColourIndex = indexPath.row
+//                  let selectedColorId = coloursList[indexPath.row].id
+//                  
+//                  // Filter variants with selected color and pick the first variant
+//                  if let firstVariant = productVariants.first(where: { $0.color?.id == selectedColorId }) {
+//                      selectedVariant = firstVariant
+//                  }
+//                  
+//                  // Update sizes list for this color
+//                  sizesList = productVariants
+//                      .filter { $0.color?.id == selectedColorId }
+//                      .compactMap { $0.size }
+//                  selectedSizeIndex = 0 // Default to first size
+//                  
+//                  sizeCollectionView.reloadData()
+//                  updateVariantUI()
+//                  colorsCollectionView.reloadData()
+          
           selectedColourIndex = indexPath.row
-                  let selectedColorId = coloursList[indexPath.row].id
-                  
-                  // Filter variants with selected color and pick the first variant
-                  if let firstVariant = productVariants.first(where: { $0.color?.id == selectedColorId }) {
-                      selectedVariant = firstVariant
-                  }
-                  
-                  // Update sizes list for this color
-                  sizesList = productVariants
-                      .filter { $0.color?.id == selectedColorId }
-                      .compactMap { $0.size }
-                  selectedSizeIndex = 0 // Default to first size
-                  
-                  sizeCollectionView.reloadData()
-                  updateVariantUI()
-                  colorsCollectionView.reloadData()
+              let selectedColorId = coloursList[indexPath.row].id
+
+              // Pick first variant with this color
+              if let variant = productVariants.first(where: { $0.color?.id == selectedColorId }) {
+                  selectedVariant = variant
+              }
+
+              // Update sizes for new color
+              sizesList = productVariants
+                  .filter { $0.color?.id == selectedColorId }
+                  .compactMap { $0.size }
+
+              selectedSizeIndex = 0 // Always reset size selection when color changes
+              sizeCollectionView.reloadData()
+              
+              colorsCollectionView.reloadData()
+          updateVariantUI()
         case sizeCollectionView:
           selectedSizeIndex = indexPath.row
           guard let selectedColorId = selectedVariant?.color?.id else { return }

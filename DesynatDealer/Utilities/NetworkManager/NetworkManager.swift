@@ -71,6 +71,64 @@ final class NetworkManager {
             }
         }
     }
+  
+  
+  func requestForAddingProduct<T: Decodable>(withAPI apiName: NetworkURL,
+                             requestMethod method: HTTPMethod = .get,
+                             requestParams params: Dictionary<String, Any>? = nil,
+                             encoding:ParameterEncoding? = JSONEncoding.default,
+                             requestModel model: T.Type,kkk
+                             completion: @escaping ResultHandler<BaseResponse<T>>) {
+      
+      guard NetworkReachabilityManager()?.isReachable == true else {
+          completion(.failure(.noNetwork), nil)
+          return
+      }
+      
+      let header = getHeaders()
+      
+      var url = ""
+      switch apiName {
+      case .endpoint(let networkEndPoint):
+          url = networkEndPoint.withBaseURL()
+      case .custom(let string):
+          url = BaseURL.value() + string
+      }
+      let printableParams: String = self.getPrintableParamsFromJson(postData: params ?? [:])
+      printInConsole("Header: \(header)")
+      printInConsole("Connecting to Host with URL \(url) with parameters: \(printableParams)")
+      
+      AF.request(url, method: method, parameters: params, encoding: encoding ?? URLEncoding.default, headers: header){ $0.timeoutInterval = 20.0 }.responseDecodable(of: BaseResponse<T>.self) { response in
+          
+          printInConsole(response.debugDescription)
+          let status = HTTPStatusCode(rawValue: response.response?.statusCode ?? 200) ?? .FORBIDDEN
+          
+          switch response.result {
+          case .success(let result):
+              if HTTPStatusCode.Sucess.contains(status) {
+                  completion(.success(result), status)
+              } else {
+                  if status == .UNAUTHORIZED {
+                      completion(.failure(.sessionExpired), status)
+                  } else {
+                      self.ErrorResponseHandle(response: response.data) { errResponse in
+                          completion(.failure(.invalidResponse(errResponse)), status)
+                      }
+                  }
+              }
+          case .failure(let err):
+              if status == .UNAUTHORIZED {
+                  completion(.failure(.sessionExpired), status)
+              } else if HTTPStatusCode.Failure.contains(status) {
+                  self.ErrorResponseHandle(response: response.data) { errResponse in
+                      completion(.failure(.invalidResponse(errResponse)), status)
+                  }
+              } else {
+                  completion(.failure(.decoding(err)), status)
+              }
+          }
+      }
+  }
     
     /// Request Multi part, upload Images/Videos
     /// - Parameters:

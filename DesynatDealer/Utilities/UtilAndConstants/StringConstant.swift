@@ -85,6 +85,7 @@ enum AlertConstant: String {
   case returnDays      = "Please enter total days for returning"
   case exchangeDays      = "Please enter total days for exchangable"
   case sizeChartUpload      = "Please upload size chart"
+  case maxMinQuantity =      "Max quantity cannot be less than Min quantity"
 
 func value() -> String {
     return self.rawValue

@@ -55,80 +55,82 @@ class AddNewProductViewModel: NSObject {
   }
   
   func validFields() -> Bool {
-      var errorMessage: AlertConstant = .none
-
-      let categoryId = hostVC.selectedCategoriesSection ?? -1
-      let subcategoryId = hostVC.selectedSubCategoriesId ?? -1
-      let brandId = hostVC.selectedBrandId ?? -1
-
-      let otherBrandEn = hostVC.otherBrandEnglishTF.text?.trimmed() ?? ""
-      let otherBrandAr = hostVC.otherBrandArabicTF.text?.trimmed() ?? ""
-      let productNameEn = hostVC.producNameEngTF.text?.trimmed() ?? ""
-      let productNameAr = hostVC.productNameArabicTF.text?.trimmed() ?? ""
-      let descriptionEn = hostVC.descriptionEngTextView.text?.trimmed() ?? ""
-      let descriptionAr = hostVC.descriptionArabicTextView.text?.trimmed() ?? ""
-
-      let minQuantity = hostVC.minCartQuantityTF.text?.trimmed() ?? ""
-      let maxQuantity = hostVC.maxCartQuantityTF.text?.trimmed() ?? ""
-      let returnDays = hostVC.returnDayTF.text?.trimmed() ?? ""
-      let exchangeDays = hostVC.exchangableTF.text?.trimmed() ?? ""
-      let selectedBrand = brandsList.first { $0.id == brandId }
-      let isOtherBrand = selectedBrand?.nameEnglish?.lowercased() == "other"
-      // --------------------
-      // MAIN STATIC CHECKS
-      // --------------------
-      if categoryId == -1 {
-          errorMessage = .selectCategory
-      } else if subcategoryId == -1 {
-          errorMessage = .selectSubCategory
-      } else if brandId == -1 {
-          errorMessage = .selectBrand
-      }  else if isOtherBrand && otherBrandEn.isEmpty {
-        errorMessage = .otherBrandEnEmpty
+    var errorMessage: AlertConstant = .none
+    
+    let categoryId = hostVC.selectedCategoriesSection ?? -1
+    let subcategoryId = hostVC.selectedSubCategoriesId ?? -1
+    let brandId = hostVC.selectedBrandId ?? -1
+    
+    let otherBrandEn = hostVC.otherBrandEnglishTF.text?.trimmed() ?? ""
+    let otherBrandAr = hostVC.otherBrandArabicTF.text?.trimmed() ?? ""
+    let productNameEn = hostVC.producNameEngTF.text?.trimmed() ?? ""
+    let productNameAr = hostVC.productNameArabicTF.text?.trimmed() ?? ""
+    let descriptionEn = hostVC.descriptionEngTextView.text?.trimmed() ?? ""
+    let descriptionAr = hostVC.descriptionArabicTextView.text?.trimmed() ?? ""
+    
+    let minQuantity = hostVC.minCartQuantityTF.text?.trimmed() ?? ""
+    let maxQuantity = hostVC.maxCartQuantityTF.text?.trimmed() ?? ""
+    let returnDays = hostVC.returnDayTF.text?.trimmed() ?? ""
+    let exchangeDays = hostVC.exchangableTF.text?.trimmed() ?? ""
+    let selectedBrand = brandsList.first { $0.id == brandId }
+    let isOtherBrand = selectedBrand?.nameEnglish?.lowercased() == "other"
+    // --------------------
+    // MAIN STATIC CHECKS
+    // --------------------
+    if categoryId == -1 {
+      errorMessage = .selectCategory
+    } else if subcategoryId == -1 {
+      errorMessage = .selectSubCategory
+    } else if brandId == -1 {
+      errorMessage = .selectBrand
+    }  else if isOtherBrand && otherBrandEn.isEmpty {
+      errorMessage = .otherBrandEnEmpty
     } else if isOtherBrand && otherBrandAr.isEmpty {
-        errorMessage = .otherBrandArEmpty
-      } else if productNameEn.isEmpty {
-          errorMessage = .productNameEnEmpty
-      } else if productNameAr.isEmpty {
-          errorMessage = .productNameArEmpty
-      } else if descriptionEn.isEmpty {
-          errorMessage = .descriptionEnEmpty
-      } else if descriptionAr.isEmpty {
-          errorMessage = .descriptionArEmpty   // <-- STOP here
-      }
-      // ------------------------------
-      // RIGHT AFTER descriptionAr check:
-      // Specification & Variant validation
-      // ------------------------------
-      else if hostVC.prepareSpecificationData() == nil {
-              hostVC.showAlert(msg: "Please fill all required fields for each specification")
-              return false
-          } else if hostVC.prepareVariantData(isWomenCategory: hostVC.isWomenCategory) == nil {
-              hostVC.showAlert(msg: "Please fill all required fields for each variant before submitting")
-              return false
-          }
-      else if minQuantity.isEmpty {
-          errorMessage = .minQuantity
-      } else if maxQuantity.isEmpty {
-          errorMessage = .maxQuantity
+      errorMessage = .otherBrandArEmpty
+    } else if productNameEn.isEmpty {
+      errorMessage = .productNameEnEmpty
+    } else if productNameAr.isEmpty {
+      errorMessage = .productNameArEmpty
+    } else if descriptionEn.isEmpty {
+      errorMessage = .descriptionEnEmpty
+    } else if descriptionAr.isEmpty {
+      errorMessage = .descriptionArEmpty   // <-- STOP here
+    } else if hostVC.prepareSpecificationData() == nil {
+      hostVC.showAlert(msg: "Please fill all required fields for each specification")
+      return false
+    } else if hostVC.prepareVariantData(isWomenCategory: hostVC.isWomenCategory) == nil {
+      hostVC.showAlert(msg: "Please fill all required fields for each variant before submitting")
+      return false
+    } else if minQuantity.isEmpty {
+      errorMessage = .minQuantity
+    } else if maxQuantity.isEmpty {
+      errorMessage = .maxQuantity
+    } else {
+      // Check if max < min
+      let minVal = Int(minQuantity) ?? 0
+      let maxVal = Int(maxQuantity) ?? 0
+      if maxVal < minVal {
+        errorMessage = .maxMinQuantity
       } else if hostVC.isProductReturnable && returnDays.isEmpty {
-          errorMessage = .returnDays
+        errorMessage = .returnDays
       } else if hostVC.isProductExchangable && exchangeDays.isEmpty {
-          errorMessage = .exchangeDays
+        errorMessage = .exchangeDays
       } else if hostVC.selectedSizeChartImageUrl == nil {
-          errorMessage = .sizeChartUpload
+        errorMessage = .sizeChartUpload
       }
-
-      // show final error if any
-      if errorMessage != .none {
-          hostVC.showAlert(msg: errorMessage.rawValue)
-          return false
-      }
-
-      return true
+    }
+    
+    
+    // show final error if any
+    if errorMessage != .none {
+      hostVC.showAlert(msg: errorMessage.rawValue)
+      return false
+    }
+    
+    return true
   }
-
-
+  
+  
   
   func addProductApi() {
     let specificationData = hostVC.prepareSpecificationData() ?? [:]
@@ -191,24 +193,24 @@ class AddNewProductViewModel: NSObject {
       }
     }
   }
-    
-    func deleteProductDetailsService() {
-        let param: [String: Any] = ["product_id" :hostVC.productId ?? 0]
-        WebService.sharedInstance.deleteProductDetailsService(param: param){ [weak self] response in
-            guard let self = self else { return }
-            CommonUtils.showToast(message: "Product has been deleted successfully")
-            DispatchQueue.main.async {
-//                self.hostVC.navigationController?.popViewController(animated: true)
-              self.hostVC.navigationController?.popToRootViewController(animated: true)
-            }
-        }
-    }
-    
-    func getProductDetailsService() {
-        let param: [String: Any] = ["product_id" :hostVC.productId ?? 0]
-        WebService.sharedInstance.getProductDetailsService(param: param){ [weak self] response in
+  
+  func deleteProductDetailsService() {
+    let param: [String: Any] = ["product_id" :hostVC.productId ?? 0]
+    WebService.sharedInstance.deleteProductDetailsService(param: param){ [weak self] response in
       guard let self = self else { return }
-          hostVC.prefillProductDetails(response)
+      CommonUtils.showToast(message: "Product has been deleted successfully")
+      DispatchQueue.main.async {
+        //                self.hostVC.navigationController?.popViewController(animated: true)
+        self.hostVC.navigationController?.popToRootViewController(animated: true)
+      }
+    }
+  }
+  
+  func getProductDetailsService() {
+    let param: [String: Any] = ["product_id" :hostVC.productId ?? 0]
+    WebService.sharedInstance.getProductDetailsService(param: param){ [weak self] response in
+      guard let self = self else { return }
+      hostVC.prefillProductDetails(response)
     }
   }
   
@@ -276,7 +278,7 @@ class AddNewProductViewModel: NSObject {
 }
 
 extension Bool {
-    var toAPI: String {
-        return self ? "1" : "0"
-    }
+  var toAPI: String {
+    return self ? "1" : "0"
+  }
 }

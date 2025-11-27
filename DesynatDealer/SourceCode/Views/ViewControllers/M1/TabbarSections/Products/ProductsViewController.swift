@@ -89,11 +89,12 @@ class ProductsViewController: UIViewController {
     viewModel.updateActiveStatus(param: params) { [weak self] success in
       guard let self else { return }
       if success {
-        self.updateStatusLocally(at: index)
-        self.productTableView.reloadRows(
-          at: [IndexPath(row: index, section: 0)],
-          with: .automatic
-        )
+        viewModel.getAllProducts(type: selectedTab.rawValue)
+//        self.updateStatusLocally(at: index)
+//        self.productTableView.reloadRows(
+//          at: [IndexPath(row: index, section: 0)],
+//          with: .automatic
+//        )
       }
     }
   }

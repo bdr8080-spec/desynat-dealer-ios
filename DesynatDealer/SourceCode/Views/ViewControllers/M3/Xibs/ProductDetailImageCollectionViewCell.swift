@@ -24,9 +24,9 @@ class ProductDetailImageCollectionViewCell: UICollectionViewCell {
            let url = URL(string: variantImageUrl) {
             mainImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
             mainImageView.sd_imageIndicator?.startAnimatingIndicator()
-            mainImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "userProfile"))
+            mainImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
         } else {
-            mainImageView.image = UIImage(named: "userProfile")
+            mainImageView.image = UIImage(named: "")
         }
     }
 

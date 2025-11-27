@@ -57,7 +57,13 @@ class ProductManagementTableViewCell: UITableViewCell {
       colorsCollectionView.reloadData() // Reload collection view every time
       
       // Rest of your UI setup
-    productNameLabel.text = data.brand?.nameEnglish
+//    productNameLabel.text = data.brand?.nameEnglish
+    
+    if data.brand?.nameEnglish == "Other" {
+      productNameLabel.text = data.otherEn
+    } else {
+      productNameLabel.text = data.brand?.nameEnglish
+    }
       descriptionLabel.text = data.productNameEn
       stockLabel.text = (data.stock?.count ?? 0) > 0 ? "In Stock" : "Out of Stock"
       
@@ -73,8 +79,13 @@ class ProductManagementTableViewCell: UITableViewCell {
       ratingLabel.text = "(\(data.reviewRating ?? "0"))"
       orifinalPriceLabel.text = "\(data.productVariants?.first?.finalPrice ?? "") KD"
       CommonUtils.setStrikethrough(label: dirscountPriceLabel, text: "\(data.productVariants?.first?.actualPrice ?? "") KD")
-      discuntPercentageLabel.text = "\(data.productVariants?.first?.discountValue ?? "") KD"
       
+    let discountType = data.productVariants?.first?.discountType ?? "1"
+    if discountType == "1" {
+      discuntPercentageLabel.text = "\(data.productVariants?.first?.discountValue ?? "")% Off"
+    } else {
+      discuntPercentageLabel.text = "\(data.productVariants?.first?.discountValue ?? "") KD Off"
+    }
       if data.productActiveStatus == 1 {
           statusLabel.text = "Active"
           statusButton.setImage(UIImage(named: "toggle_on"), for: .normal)
