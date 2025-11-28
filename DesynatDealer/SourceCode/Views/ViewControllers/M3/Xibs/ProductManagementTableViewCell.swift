@@ -71,9 +71,9 @@ class ProductManagementTableViewCell: UITableViewCell {
          let url = URL(string: imageUrlString) {
           productImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
           productImageView.sd_imageIndicator?.startAnimatingIndicator()
-          productImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "userProfile"))
+          productImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
       } else {
-          productImageView.image = UIImage(named: "userProfile")
+          productImageView.image = UIImage(named: "")
       }
       
       ratingLabel.text = "(\(data.reviewRating ?? "0"))"

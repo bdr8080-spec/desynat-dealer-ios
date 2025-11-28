@@ -50,14 +50,11 @@ extension AddSpecificationTableViewCell {
 
         if nameEngTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
             errors = "Enter name in english"
-        }
-        if nameARTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
+        }else if nameARTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
             errors = "Enter name in arabic"
-        }
-        if featuresEngTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
+        }else if featuresEngTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
             errors = "Enter feature in english"
-        }
-        if featuresARTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
+        }else if featuresARTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
             errors = "Enter feature in arabic"
         }
         return errors

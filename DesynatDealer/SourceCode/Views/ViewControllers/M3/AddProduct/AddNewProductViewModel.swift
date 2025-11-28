@@ -91,9 +91,9 @@ class AddNewProductViewModel: NSObject {
       errorMessage = .productNameEnEmpty
     } else if productNameAr.isEmpty {
       errorMessage = .productNameArEmpty
-    } else if descriptionEn.isEmpty {
+    } else if descriptionEn.isEmpty || descriptionEn == "Write Here" {//else if descriptionEn.isEmpty {
       errorMessage = .descriptionEnEmpty
-    } else if descriptionAr.isEmpty {
+    } else if descriptionAr.isEmpty || descriptionAr == "Write Here" {//else if descriptionAr.isEmpty {
       errorMessage = .descriptionArEmpty   // <-- STOP here
     } else if hostVC.prepareSpecificationData() == nil {
       hostVC.showAlert(msg: "Please fill all required fields for each specification")
@@ -115,7 +115,7 @@ class AddNewProductViewModel: NSObject {
         errorMessage = .returnDays
       } else if hostVC.isProductExchangable && exchangeDays.isEmpty {
         errorMessage = .exchangeDays
-      } else if hostVC.selectedSizeChartImageUrl == nil {
+      } else if hostVC.selectedSizeChartImageUrl?.isEmpty ?? true {
         errorMessage = .sizeChartUpload
       }
     }
