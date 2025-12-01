@@ -29,8 +29,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5k6-0Z-PVC" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
                                 <rect key="frame" x="4" y="4" width="90" height="119"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="S" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hdu-vB-PWd">
-                                        <rect key="frame" x="2" y="2" width="86" height="115"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="S" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hdu-vB-PWd">
+                                        <rect key="frame" x="0.0" y="2" width="90" height="115"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="20"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -38,9 +38,9 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="Hdu-vB-PWd" secondAttribute="bottom" constant="2" id="6XS-Xv-hQE"/>
-                                    <constraint firstAttribute="trailing" secondItem="Hdu-vB-PWd" secondAttribute="trailing" constant="2" id="AW3-vy-R39"/>
+                                    <constraint firstAttribute="trailing" secondItem="Hdu-vB-PWd" secondAttribute="trailing" id="AW3-vy-R39"/>
                                     <constraint firstItem="Hdu-vB-PWd" firstAttribute="top" secondItem="5k6-0Z-PVC" secondAttribute="top" constant="2" id="Ud7-SQ-7Zk"/>
-                                    <constraint firstItem="Hdu-vB-PWd" firstAttribute="leading" secondItem="5k6-0Z-PVC" secondAttribute="leading" constant="2" id="ljx-r8-jFF"/>
+                                    <constraint firstItem="Hdu-vB-PWd" firstAttribute="leading" secondItem="5k6-0Z-PVC" secondAttribute="leading" id="ljx-r8-jFF"/>
                                 </constraints>
                             </view>
                         </subviews>

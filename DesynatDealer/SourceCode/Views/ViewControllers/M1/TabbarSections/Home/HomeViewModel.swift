@@ -17,7 +17,6 @@ class HomeViewModel {
     self.hostVC = hostVC
   }
   
-  
   func statusUpdateAPI(completion: @escaping (Bool) -> Void) {
     WebService.sharedInstance.storeStatusUpdateService{ [weak self] response in
       guard let self = self else { return }
@@ -27,5 +26,13 @@ class HomeViewModel {
       completion(true)
     }
   }
+  
+//  func getDelearProfile(completion: @escaping (Bool) -> Void) {
+//    WebService.sharedInstance.getDelearProfileService{ [weak self] response in
+//      guard let self = self else { return }
+//      
+//      completion(true)
+//    }
+//  }
   
 }

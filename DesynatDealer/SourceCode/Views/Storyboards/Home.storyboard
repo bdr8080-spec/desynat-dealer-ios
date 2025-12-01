@@ -1271,7 +1271,7 @@
                                                                     <constraint firstAttribute="height" constant="24" id="Ntr-Eu-djG"/>
                                                                 </constraints>
                                                             </stackView>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cwl-iD-AXR">
+                                                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cwl-iD-AXR">
                                                                 <rect key="frame" x="16" y="78" width="361" height="157"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
