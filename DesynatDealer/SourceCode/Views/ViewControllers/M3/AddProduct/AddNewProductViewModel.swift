@@ -51,6 +51,7 @@ class AddNewProductViewModel: NSObject {
   func getSizeListApi(){
     WebService.sharedInstance.getSizeListService() { [self] list in
       self.sizesList = list
+      self.hostVC.variantTableView.reloadData()
     }
   }
   

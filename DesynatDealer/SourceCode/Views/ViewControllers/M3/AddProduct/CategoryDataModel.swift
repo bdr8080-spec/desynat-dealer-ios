@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 // MARK: - CategoryDataModel
 struct CategoryDataModel: Codable {
@@ -87,4 +88,8 @@ struct SizeListDataModel: Codable {
     }
 }
 
-
+// MARK: - VariantImage
+struct VariantImage {
+  var image: UIImage?
+  var isPlaceholder: Bool
+}

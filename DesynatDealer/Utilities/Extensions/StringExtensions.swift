@@ -22,5 +22,9 @@ extension String {
     return Int(self.trimmingCharacters(in: .whitespacesAndNewlines))
   }
 
+  var areAllDigits: Bool {
+    return !isEmpty && rangeOfCharacter(from: .decimalDigits.inverted) == nil
+  }
+  
 }
 

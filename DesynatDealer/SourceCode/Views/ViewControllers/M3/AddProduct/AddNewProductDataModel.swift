@@ -14,26 +14,27 @@ enum ComingReasonAtAddToProduct {
 }
 
 struct Variant {
-    var images: [UIImage] = []           // Real images only
-        var imageURLs: [String] = []
-//    var images: [String?] = [nil]   placeholder image
-    var colorId: Int? = -1
-    var sizeId: Int? = -1
-    var bust: String = ""
-    var waist: String = ""
-    var hip: String = ""
-    var shoulder: String = ""
-    var sleeveLength: String = ""
-    var length: String = ""
-    var totalStock: String = ""
-    var sku: String = ""
-    var skuThreshold: String = ""
-    var actualPrice: String = ""
-    var discountTypeIsPercentage: Bool = true
-    var discountValue: String = ""
-    var finalPrice: String = ""
+  var images: [UIImage] = []
+  var imageURLs: [String] = []
+  var colorId: Int? = -1
+  var sizeVariants: [SizeVariant] = [SizeVariant()]
 }
 
+struct SizeVariant {
+  var sizeId: Int? = -1
+  var bust: String = ""
+  var waist: String = ""
+  var hip: String = ""
+  var shoulder: String = ""
+  var sleeveLength: String = ""
+  var length: String = ""
+  var totalStock: String = ""
+  var sku: String = ""
+  var actualPrice: String = ""
+  var discountTypeIsPercentage: Bool = true
+  var discountValue: String = ""
+  var finalPrice: String = ""
+}
 
 struct Spefication {
   var product_spe_en: String = ""

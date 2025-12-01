@@ -586,6 +586,8 @@
 		7A54F9F92EC1DBD70027710A /* SideMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A54F9F82EC1DBD70027710A /* SideMenuModel.swift */; };
 		7A54F9FB2EC1DC030027710A /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A54F9FA2EC1DC030027710A /* ProfileViewModel.swift */; };
 		CF670A9299A5979395DF398F /* Pods_DesynatDealer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40FCC5FE2116BF815C4B1BFB /* Pods_DesynatDealer.framework */; };
+		D10406982EDD74B2002B5942 /* AddNewSizeVariantTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D10406972EDD74B2002B5942 /* AddNewSizeVariantTableViewCell.xib */; };
+		D10406992EDD74B2002B5942 /* AddNewSizeVariantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10406962EDD74B2002B5942 /* AddNewSizeVariantTableViewCell.swift */; };
 		D10E16C42EBCDE5700557B4D /* CustomButtonFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10E16C02EBCDE5700557B4D /* CustomButtonFont.swift */; };
 		D10E16C52EBCDE5700557B4D /* CustomLabelFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10E16C12EBCDE5700557B4D /* CustomLabelFont.swift */; };
 		D10E16C62EBCDE5700557B4D /* CustomTextfiledFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10E16C22EBCDE5700557B4D /* CustomTextfiledFont.swift */; };
@@ -1217,6 +1219,8 @@
 		7A54F9F52EC1DB360027710A /* SideMenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SideMenuTableViewCell.xib; sourceTree = "<group>"; };
 		7A54F9F82EC1DBD70027710A /* SideMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuModel.swift; sourceTree = "<group>"; };
 		7A54F9FA2EC1DC030027710A /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		D10406962EDD74B2002B5942 /* AddNewSizeVariantTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewSizeVariantTableViewCell.swift; sourceTree = "<group>"; };
+		D10406972EDD74B2002B5942 /* AddNewSizeVariantTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddNewSizeVariantTableViewCell.xib; sourceTree = "<group>"; };
 		D10E16C02EBCDE5700557B4D /* CustomButtonFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonFont.swift; sourceTree = "<group>"; };
 		D10E16C12EBCDE5700557B4D /* CustomLabelFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabelFont.swift; sourceTree = "<group>"; };
 		D10E16C22EBCDE5700557B4D /* CustomTextfiledFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextfiledFont.swift; sourceTree = "<group>"; };
@@ -2249,6 +2253,8 @@
 				D1C88BB72ECEFB08006B02A2 /* AddSpecificationTableViewCell.xib */,
 				D1C88BBC2ECF0F56006B02A2 /* AddVariantTableViewCell.swift */,
 				D1C88BBD2ECF0F56006B02A2 /* AddVariantTableViewCell.xib */,
+				D10406962EDD74B2002B5942 /* AddNewSizeVariantTableViewCell.swift */,
+				D10406972EDD74B2002B5942 /* AddNewSizeVariantTableViewCell.xib */,
 			);
 			path = Xibs;
 			sourceTree = "<group>";
@@ -2546,6 +2552,7 @@
 				6B38D3702EB3657F00C41192 /* Vanuatu.png in Resources */,
 				6B38D3712EB3657F00C41192 /* DM.png in Resources */,
 				6B38D3722EB3657F00C41192 /* CA.png in Resources */,
+				D10406982EDD74B2002B5942 /* AddNewSizeVariantTableViewCell.xib in Resources */,
 				6B38D3732EB3657F00C41192 /* YT.png in Resources */,
 				6B38D3742EB3657F00C41192 /* TJ.png in Resources */,
 				6B38D3752EB3657F00C41192 /* AQ.png in Resources */,
@@ -3013,6 +3020,7 @@
 				6B38D0DD2EB3473B00C41192 /* ForgotPasswordViewModel.swift in Sources */,
 				6B38D0DE2EB3473B00C41192 /* LocationViewModel.swift in Sources */,
 				6B38D0DF2EB3473B00C41192 /* LoginViewModel.swift in Sources */,
+				D10406992EDD74B2002B5942 /* AddNewSizeVariantTableViewCell.swift in Sources */,
 				D1AD1A4D2ECDF4A1007E1488 /* SizeVariantCollectionViewCell.swift in Sources */,
 				D1F88C0E2EBE1F2E0027A47C /* PaymentMethodVC.swift in Sources */,
 				6B38D0E02EB3473B00C41192 /* ResetPasswordViewModel.swift in Sources */,

@@ -145,11 +145,11 @@ class AddNewProductViewController: UIViewController {
   }
   
   override func viewDidLayoutSubviews() {
-    super.viewDidLayoutSubviews()
-    DispatchQueue.main.async {
-            self.updateSpecificationTableHeight()
-            self.updateVariantTableHeight()
-        }
+      super.viewDidLayoutSubviews()
+      DispatchQueue.main.async {
+          self.updateVariantTableHeight()
+          self.updateSpecificationTableHeight()
+      }
   }
   
   @IBAction func backDidTapped(_ sender: Any) {
@@ -157,85 +157,57 @@ class AddNewProductViewController: UIViewController {
   }
   
   @IBAction func addSpecificationsDidTapped(_ sender: Any) {
-//    let lastRow = specifications.count - 1
-//    let lastVariant = specifications[lastRow]
-//    if let lastCell = specificationTableView.cellForRow(at: IndexPath(row: lastRow, section: 0)) as? AddSpecificationTableViewCell {
-//      let errors = lastCell.validateSpecificationFields()
-//      if !errors.isEmpty {
-//        showAlert(msg: errors)
-//        return
-//      }
-//    } else {
-//      if lastVariant.product_spe_ar.isEmpty || lastVariant.product_spe_en.isEmpty || lastVariant.product_spe_feature_ar.isEmpty || lastVariant.product_spe_feature_en.isEmpty {
-//        showAlert(msg: "Please fill all required fields of the current spefication before adding a new one")
-//        return
-//      }
-//    }
-//    let newVariant = Spefication()
-//    specifications.append(newVariant)
-//    specificationTableView.reloadData()
-//    updateSpecificationTableHeight()
-    
     let lastIndex = specifications.count - 1
-        if let lastCell = specificationTableView.cellForRow(at: IndexPath(row: lastIndex, section: 0)) as? AddSpecificationTableViewCell {
-            let errors = lastCell.validateSpecificationFields()
-            if !errors.isEmpty {
-                showAlert(msg: errors)
-                return
-            }
-            
-            // Save data from UI to model
-          var spec = specifications[lastIndex]
-            spec.product_spe_en = lastCell.nameEngTF.text ?? ""
-            spec.product_spe_feature_en = lastCell.featuresEngTF.text ?? ""
-            spec.product_spe_ar = lastCell.nameARTF.text ?? ""
-            spec.product_spe_feature_ar = lastCell.featuresARTF.text ?? ""
-            specifications[lastIndex] = spec
-        }
-
-        // Add new empty spec
-        let newSpec = Spefication()
-        specifications.append(newSpec)
-
-        // Insert new row instead of reloadData()
-        let newIndexPath = IndexPath(row: specifications.count - 1, section: 0)
-        
-        specificationTableView.performBatchUpdates({
-            specificationTableView.insertRows(at: [newIndexPath], with: .automatic)
-        }) { _ in
-            self.updateSpecificationTableHeight()
-            self.specificationTableView.scrollToRow(at: newIndexPath, at: .bottom, animated: true)
-        }
-        
-        // Hide main add button if needed
-        addSpecificationButtonOutlet.isHidden = true
-  }
-  
-  @IBAction func addVariantDidTapped(_ sender: Any) {
-    let lastRow = variantArray.count - 1
-    let lastVariant = variantArray[lastRow]
-    if let lastCell = variantTableView.cellForRow(at: IndexPath(row: lastRow, section: 0)) as? AddVariantTableViewCell {
-      let errors = lastCell.validateFieldsWithErrors(isWomenCategory: isWomenCategory)
+    if let lastCell = specificationTableView.cellForRow(at: IndexPath(row: lastIndex, section: 0)) as? AddSpecificationTableViewCell {
+      let errors = lastCell.validateSpecificationFields()
       if !errors.isEmpty {
         showAlert(msg: errors)
         return
       }
-    } else {
-      if lastVariant.sizeId == nil || lastVariant.colorId == nil ||
-          lastVariant.totalStock.isEmpty || lastVariant.sku.isEmpty {
-        showAlert(msg: "Please fill all required fields of the current variant before adding a new one")
-        return
-      }
+      var spec = specifications[lastIndex]
+      spec.product_spe_en = lastCell.nameEngTF.text ?? ""
+      spec.product_spe_feature_en = lastCell.featuresEngTF.text ?? ""
+      spec.product_spe_ar = lastCell.nameARTF.text ?? ""
+      spec.product_spe_feature_ar = lastCell.featuresARTF.text ?? ""
+      specifications[lastIndex] = spec
     }
-    let newVariant = Variant()
-    variantArray.append(newVariant)
-    let newIndexPath = IndexPath(row: variantArray.count - 1, section: 0)
-    variantTableView.performBatchUpdates({
-      variantTableView.insertRows(at: [newIndexPath], with: .automatic)
-    }, completion: { _ in
-      self.updateVariantTableHeight()
-      self.variantTableView.scrollToRow(at: newIndexPath, at: .bottom, animated: true)
-    })
+    let newSpec = Spefication()
+    specifications.append(newSpec)
+    let newIndexPath = IndexPath(row: specifications.count - 1, section: 0)
+    specificationTableView.performBatchUpdates({
+      specificationTableView.insertRows(at: [newIndexPath], with: .automatic)
+    }) { _ in
+      self.updateSpecificationTableHeight()
+      self.specificationTableView.scrollToRow(at: newIndexPath, at: .bottom, animated: true)
+    }
+    addSpecificationButtonOutlet.isHidden = true
+  }
+  
+  @IBAction func addVariantDidTapped(_ sender: Any) {
+    let lastIndex = variantArray.count - 1
+
+        guard let lastCell = variantTableView.cellForRow(at: IndexPath(row: lastIndex, section: 0)) as? AddVariantTableViewCell else { return }
+        let errors = lastCell.validateFieldsWithErrors()
+        if !errors.isEmpty {
+            showAlert(msg: errors)
+            return
+        }
+        var variant = variantArray[lastIndex]
+        variant.colorId = lastCell.selectedColorId
+        variant.images = lastCell.images
+        variant.imageURLs = lastCell.imageURLs
+        variant.sizeVariants = lastCell.sizeVariants
+        variantArray[lastIndex] = variant
+        let newVariant = Variant()
+        variantArray.append(newVariant)
+        let newIndexPath = IndexPath(row: variantArray.count - 1, section: 0)
+
+        variantTableView.performBatchUpdates({
+            variantTableView.insertRows(at: [newIndexPath], with: .automatic)
+        }) { _ in
+            self.updateVariantTableHeight()
+            self.variantTableView.scrollToRow(at: newIndexPath, at: .bottom, animated: true)
+        }
   }
   
   @IBAction func subCatgeoryAction(_ sender: UIButton) {
@@ -328,13 +300,13 @@ class AddNewProductViewController: UIViewController {
   }
   
   private func refreshVariantCellDisplays() {
-      guard !viewModel.colorsList.isEmpty || !viewModel.sizesList.isEmpty else { return }
-      
-      for cell in variantTableView.visibleCells {
-          if let cell = cell as? AddVariantTableViewCell {
-            cell.updateColorAndSizeDisplay(colorsList: viewModel.colorsList, sizesList: viewModel.sizesList)
-          }
+    guard !viewModel.colorsList.isEmpty || !viewModel.sizesList.isEmpty else { return }
+    
+    for cell in variantTableView.visibleCells {
+      if let cell = cell as? AddVariantTableViewCell {
+        cell.updateColorAndSizeDisplay(colorsList: viewModel.colorsList, sizesList: viewModel.sizesList)
       }
+    }
   }
   
   private func initialSetup() {
@@ -361,57 +333,32 @@ class AddNewProductViewController: UIViewController {
     descriptionArabicTextView.delegate = self
   }
   
-//  func updateSpecificationTableHeight() {
-//    specificationTableView.layoutIfNeeded()
-//    self.specificationTableViewHeightConstraint.constant = self.specificationTableView.contentSize.height + 20
-//  }
-  
   func updateSpecificationTableHeight() {
-      // Ensure layout pass
-      specificationTableView.layoutIfNeeded()
-      
-      var height = specificationTableView.contentSize.height
-      
-      // Add padding if needed
-      height += 20
-      
-      // Minimum height to avoid collapse
-      if height < 100 {
-          height = 150
-      }
-      
-      // Animate constraint update
-      UIView.animate(withDuration: 0.1) {
-          self.specificationTableViewHeightConstraint.constant = height
-          self.view.layoutIfNeeded()
-      }
+    specificationTableView.layoutIfNeeded()
+    
+    var height = specificationTableView.contentSize.height
+    height += 20
+    if height < 100 {
+      height = 150
+    }
+    UIView.animate(withDuration: 0.1) {
+      self.specificationTableViewHeightConstraint.constant = height
+      self.view.layoutIfNeeded()
+    }
   }
   
   func updateVariantTableHeight() {
-      // Force full layout pass
-      variantTableView.setNeedsLayout()
       variantTableView.layoutIfNeeded()
-      
-      // Get accurate content size
-      let height = variantTableView.contentSize.height
-      
-      // Add safe padding (optional, but recommended)
-      let finalHeight = height + 10
-      
-      // Prevent collapse when empty or too small
-      let minimumHeight: CGFloat = 200
-      
-      // Animate smooth height change
-      UIView.animate(withDuration: 0.1, delay: 0, options: [.curveEaseOut], animations: {
-          self.varaintTableViewHeightConstriant.constant = max(finalHeight, minimumHeight)
-          self.view.layoutIfNeeded()
-      }, completion: nil)
-  }
-  
-//  func updateVariantTableHeight() {
-//    variantTableView.layoutIfNeeded()
-//    self.varaintTableViewHeightConstriant.constant = self.variantTableView.contentSize.height
-//  }
+      var height = variantTableView.contentSize.height
+      height += 20
+      if height < 100 {
+        height = 150
+      }
+      UIView.animate(withDuration: 0.1) {
+        self.varaintTableViewHeightConstriant.constant = height
+        self.view.layoutIfNeeded()
+      }
+    }
   
   private func updateRadioButtons(selected: Bool, yesButton: UIButton, noButton: UIButton) {
     let yesImageName = selected ? "radioSelected" : "radioUnselected"
@@ -422,24 +369,17 @@ class AddNewProductViewController: UIViewController {
   }
   
   func setupTextViewPlaceholder() {
-      descriptionEngTextView.text = "Write Here"
-      descriptionEngTextView.textColor = .lightGray
-      descriptionEngTextView.delegate = self
-
-      descriptionArabicTextView.text = "Write Here"
-      descriptionArabicTextView.textColor = .lightGray
-      descriptionArabicTextView.delegate = self
+    descriptionEngTextView.text = "Write Here"
+    descriptionEngTextView.textColor = .lightGray
+    descriptionEngTextView.delegate = self
+    
+    descriptionArabicTextView.text = "Write Here"
+    descriptionArabicTextView.textColor = .lightGray
+    descriptionArabicTextView.delegate = self
   }
-
+  
   
   // MARK: - Helper: Add New Specification
-//  func updateUIVisibility() {
-//    if specifications.count == 1 {
-//      addSpecificationButtonOutlet.isHidden = false
-//    } else {
-//      addSpecificationButtonOutlet.isHidden = true
-//    }
-//  }
   
   func prepareVariantData(isWomenCategory: Bool) -> [String: Any]? {
     var variant_image: [[String]] = []
@@ -453,47 +393,32 @@ class AddNewProductViewController: UIViewController {
     var length: [String] = []
     var total_stock: [String] = []
     var sku: [String] = []
-//    var sku_threshold_value: [String] = []
     var actual_price: [String] = []
     var discount_type: [String] = []
     var discount_value: [String] = []
     var final_price: [String] = []
-    
-    for row in 0..<variantTableView.numberOfRows(inSection: 0) {
-      guard let cell = variantTableView.cellForRow(at: IndexPath(row: row, section: 0)) as? AddVariantTableViewCell else { continue }
-      
-      // Get field errors
-      let errors = cell.validateFieldsWithErrors(isWomenCategory: isWomenCategory)
-      if !errors.isEmpty {
-        showAlert(msg: errors)
-        variantTableView.scrollToRow(at: IndexPath(row: row, section: 0), at: .middle, animated: true)
-        return nil
-      }
-      
-      let imagesURLs = cell.imageURLs.compactMap { $0 }
-      variant_image.append(imagesURLs)
-      
-      color_id.append("\(cell.selectedColorId ?? 0)")
-      size_id.append("\(cell.selectedSizeId ?? 0)")
-      
-      if isWomenCategory {
-        bust.append(cell.bsutTF.text ?? "")
-        waist.append(cell.waistTF.text ?? "")
-        hip.append(cell.hipTF.text ?? "")
-        shoulder.append(cell.shouldTF.text ?? "")
-        sleeve_length.append(cell.sleeveLengthTF.text ?? "")
-        length.append(cell.lengthTF.text ?? "")
-      }
-      
-      total_stock.append(cell.totalStocksTF.text ?? "")
-      sku.append(cell.skuTF.text ?? "")
-//      sku_threshold_value.append(cell.skuThresholdTF.text ?? "")
-      actual_price.append(cell.actualPriceTF.text ?? "")
-      discount_type.append(cell.discountTypeisPercentage ? "1" : "2")
-      discount_value.append(cell.discountPriceTF.text ?? "")
-      final_price.append(cell.finalPriceTF.text ?? "")
+    for variant in variantArray {
+        variant_image.append(variant.imageURLs)
+        color_id.append("\(variant.colorId ?? 0)")
+        
+        for sv in variant.sizeVariants {
+            size_id.append("\(sv.sizeId ?? 0)")
+          if isWomenCategory {
+            bust.append(isWomenCategory ? sv.bust : "")
+            waist.append(sv.waist)
+            hip.append(sv.hip)
+            shoulder.append(sv.shoulder)
+            sleeve_length.append(sv.sleeveLength)
+            length.append(sv.length)
+          }
+          total_stock.append(sv.totalStock)
+          sku.append(sv.sku)
+          actual_price.append(sv.actualPrice)
+          discount_type.append("\(sv.discountTypeIsPercentage)")
+          discount_value.append(sv.discountValue)
+          final_price.append(sv.finalPrice)
+        }
     }
-    
     return [
       "variant_image": variant_image,
       "color_id": color_id,
@@ -506,7 +431,6 @@ class AddNewProductViewController: UIViewController {
       "length": length,
       "total_stock": total_stock,
       "sku": sku,
-//      "sku_threshold_value": sku_threshold_value,
       "actual_price": actual_price,
       "discount_type": discount_type,
       "discount_value": discount_value,
@@ -546,19 +470,15 @@ class AddNewProductViewController: UIViewController {
   func prefillProductDetails(_ data: ProductsList) {
     selectedCategoriesSection = Int(data.categoryID ?? "0")
     categoriesCollectionView.reloadData()
-    
     selectedSubCategoriesId = Int(data.subcategoryID ?? "0")
     subCatgeoryTF.text = data.category?.description
-    
     selectedBrandId = Int(data.brandID ?? "0")
     selectedBrandTF.text = data.brand?.nameEnglish
-    
     if (data.brand?.nameEnglish?.lowercased() == "other") {
       self.otherStackView.isHidden = false
     } else {
       self.otherStackView.isHidden = true
     }
-    
     otherBrandEnglishTF.text = data.otherEn
     otherBrandArabicTF.text = data.otherAr
     producNameEngTF.text = data.productNameEn
@@ -567,7 +487,6 @@ class AddNewProductViewController: UIViewController {
     descriptionArabicTextView.text = data.descriptionAr
     descriptionEngTextView.placeholderTextView = ""
     descriptionArabicTextView.placeholderTextView = ""
-    
     minCartQuantityTF.text = data.minCardQuantity
     maxCartQuantityTF.text = data.maxCardQuantity
     totalDaysReturningTF.text = data.returnDays
@@ -580,12 +499,10 @@ class AddNewProductViewController: UIViewController {
     isCustomizationAllowed = (data.customizedProduct == "1")
     isReadyToShip = (data.readyToShip == "1")
     isCashOnDeliveryAllowed = (data.cashOnDelivery == "1")
-    
     selectedSizeChartImageUrl = data.uploadSizeChart
     if let url = URL(string: data.uploadSizeChart ?? "") {
       sizeChartImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "user_ic"))
     }
-    
     specifications.removeAll()
     let specification = data.productSpecifications ?? []
     for item in specification {
@@ -598,40 +515,39 @@ class AddNewProductViewController: UIViewController {
     }
     specificationTableView.reloadData()
     updateSpecificationTableHeight()
-    
     variantArray.removeAll()
-    
     let variants = data.productVariants ?? []
     for v in variants {
       var variant = Variant()
       variant.colorId = v.colorID?.toInt
-      variant.sizeId = v.sizeID?.toInt //
-      variant.totalStock = v.totalStock ?? ""
-      variant.sku = v.sku ?? ""
-      variant.skuThreshold = v.skuThresholdValue ?? ""
-      variant.actualPrice = v.actualPrice ?? ""
-      variant.discountTypeIsPercentage = (v.discountType == "1")
-      variant.discountValue = v.discountValue ?? ""
-      variant.finalPrice = v.finalPrice ?? ""
+      var sv = SizeVariant()
+      sv.sizeId = v.sizeID?.toInt //
+      sv.totalStock = v.totalStock ?? ""
+      sv.sku = v.sku ?? ""
+      sv.actualPrice = v.actualPrice ?? ""
+      sv.discountTypeIsPercentage = (v.discountType == "1")
+      sv.discountValue = v.discountValue ?? ""
+      sv.finalPrice = v.finalPrice ?? ""
+      sv.bust = v.bust ?? ""
+      sv.hip = v.hip ?? ""
+      sv.waist = v.waist ?? ""
+      sv.length = v.length ?? ""
+      sv.shoulder = v.shoulder ?? ""
+      sv.sleeveLength = v.sleeveLength ?? ""
       
-      variant.bust = v.bust ?? ""
-      variant.hip = v.hip ?? ""
-      variant.waist = v.waist ?? ""
-      variant.length = v.length ?? ""
-      variant.shoulder = v.shoulder ?? ""
-      variant.sleeveLength = v.sleeveLength ?? ""
-      
-        if let imageStrings = v.variantImage, !imageStrings.isEmpty {
-            variant.imageURLs = imageStrings.compactMap { $0 }  // removes any nil if backend sends them
-            variant.images = Array(repeating: UIImage(), count: imageStrings.count) // temp placeholder
-        } else {
-            variant.imageURLs = []
-            variant.images = []
-        }
+      if let imageStrings = v.variantImage, !imageStrings.isEmpty {
+        variant.imageURLs = imageStrings.compactMap { $0 }  // removes any nil if backend sends them
+        variant.images = Array(repeating: UIImage(), count: imageStrings.count) // temp placeholder
+      } else {
+        variant.imageURLs = []
+        variant.images = []
+      }
       variantArray.append(variant)
     }
     variantTableView.reloadData()
-    updateVariantTableHeight()
+    DispatchQueue.main.async {
+        self.updateVariantTableHeight()   // ← Critical!
+    }
     viewModel.getSubCategoriesListApi()
   }
 }
@@ -659,7 +575,6 @@ extension AddNewProductViewController: UITableViewDelegate, UITableViewDataSourc
       cell.featuresEngTF.text = spec.product_spe_feature_en
       cell.nameARTF.text = spec.product_spe_ar
       cell.featuresARTF.text = spec.product_spe_feature_ar
-      
       if specifications.count == 1 {
         cell.addRemoveStackView.isHidden = true
       } else {
@@ -671,97 +586,57 @@ extension AddNewProductViewController: UITableViewDelegate, UITableViewDataSourc
     case variantTableView:
       let cell = tableView.dequeueReusableCell(withIdentifier: "AddVariantTableViewCell", for: indexPath) as! AddVariantTableViewCell
       cell.delegate = self
-      let variant = variantArray[indexPath.row]
-      cell.selectedSizeId = variant.sizeId
-      cell.selectedColorId = variant.colorId
-//      if let sizeId = variant.sizeId,
-//         let size = viewModel.sizesList.first(where: { $0.id == sizeId }) {
-//        cell.sizeTF.text = size.name
-//      }
-      
-      if !viewModel.colorsList.isEmpty {
-        cell.updateColorAndSizeDisplay(colorsList: viewModel.colorsList, sizesList: viewModel.sizesList)
-      } else {
-          // If lists not loaded yet, do nothing — will be updated later
-          cell.colorTF.text = ""
-          cell.sizeTF.text = ""
-      }
-      
-      // In cellForRowAt — after setting IDs
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-          if let color = self.viewModel.colorsList.first(where: { $0.id == variant.colorId }) {
-              cell.colorTF.text = color.name
-          }
-          if let size = self.viewModel.sizesList.first(where: { $0.id == variant.sizeId }) {
-              cell.sizeTF.text = size.name
-          }
-      }
-      
-//      if let colorId = variant.colorId,
-//         let color = viewModel.colorsList.first(where: { $0.id == colorId }) {
-//        cell.colorTF.text = color.name
-//      } else {
-//        print("Color not found for id:", variant.colorId ?? -1)
-//      }
-      cell.totalStocksTF.text = variant.totalStock
-      cell.skuTF.text = variant.sku
-//      cell.skuThresholdTF.text = variant.skuThreshold
-      cell.actualPriceTF.text = variant.actualPrice
-      cell.discountPriceTF.text = variant.discountValue
-      cell.finalPriceTF.text = variant.finalPrice
-      cell.discountTypeisPercentage = variant.discountTypeIsPercentage
-      
-      // Women's measurements
-      cell.bsutTF.text = variant.bust
-      cell.waistTF.text = variant.waist
-      cell.hipTF.text = variant.hip
-      cell.shouldTF.text = variant.shoulder
-      cell.sleeveLengthTF.text = variant.sleeveLength
-      cell.lengthTF.text = variant.length
-      
-        // Set only real images and URLs (no nil, no placeholder)
-        cell.images = variant.images         // [UIImage]
-        cell.imageURLs = variant.imageURLs  // [String]
-
-        // Load existing images from URLs (only when editing)
-        for (index, urlString) in cell.imageURLs.enumerated() {
-            guard let url = URL(string: urlString) else { continue }
-            
-            SDWebImageManager.shared.loadImage(
-                with: url,
-                options: [.highPriority, .retryFailed],
-                progress: nil
-            ) { [weak cell] (image, _, error, _, _, _) in
-                guard let image = image,
-                      let cell = cell,
-                      index < cell.images.count else { return }
-                
-                cell.images[index] = image
-                
-                DispatchQueue.main.async {
-                    cell.reloadImageItem(at: index)
-                }
-            }
-        }
-
-        // Final safe refresh to ensure everything is displayed
-        DispatchQueue.main.async {
-            cell.imagesCollectionView.reloadData()
-        }
-      
-      cell.isWomenIsSelected = self.isWomenCategory
       if indexPath.row == 0 {
-        cell.priceView.backgroundColor = UIColor(named: "#FFF7EA")
         cell.headerView.isHidden = true
       } else {
         cell.headerView.isHidden = false
-        cell.titleLabel.text = "Variant \(indexPath.row)"
-        cell.priceView.backgroundColor = UIColor.white
       }
-      cell.onSizeButtonTap = { [weak self, weak cell] in
-        guard let self = self, let cell = cell else { return }
-        self.showSizeDropdown(from: cell.sizeTF, in: cell)
+      let variant = variantArray[indexPath.row]
+      cell.updateTableViewHeight()
+      cell.sizeVariants = variant.sizeVariants
+      cell.sizesList = viewModel.sizesList
+      cell.selectedColorId = variant.colorId
+      cell.onVariantUpdated = { [weak self] updatedVariant in
+              guard let self = self else { return }
+              self.variantArray[indexPath.row] = updatedVariant
+              print("Variant at row \(indexPath.row) updated with \(updatedVariant.sizeVariants.count) sizes")
+          }
+      if !viewModel.colorsList.isEmpty {
+        cell.updateColorAndSizeDisplay(colorsList: viewModel.colorsList, sizesList: viewModel.sizesList)
+      } else {
+        cell.colorTF.text = ""
       }
+      
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        if let color = self.viewModel.colorsList.first(where: { $0.id == variant.colorId }) {
+          cell.colorTF.text = color.name
+        }
+      }
+      cell.images = variant.images
+      cell.imageURLs = variant.imageURLs
+      for (index, urlString) in cell.imageURLs.enumerated() {
+        guard let url = URL(string: urlString) else { continue }
+        
+        SDWebImageManager.shared.loadImage(
+          with: url,
+          options: [.highPriority, .retryFailed],
+          progress: nil
+        ) { [weak cell] (image, _, error, _, _, _) in
+          guard let image = image,
+                let cell = cell,
+                index < cell.images.count else { return }
+          
+          cell.images[index] = image
+          
+          DispatchQueue.main.async {
+            cell.reloadImageItem(at: index)
+          }
+        }
+      }
+      DispatchQueue.main.async {
+        cell.imagesCollectionView.reloadData()
+      }
+      cell.isWomenIsSelected = self.isWomenCategory
       cell.onColorButtonTap = { [weak self, weak cell] in
         guard let self = self, let cell = cell else { return }
         self.showColorDropdown(from: cell.colorTF, in: cell)
@@ -769,16 +644,6 @@ extension AddNewProductViewController: UITableViewDelegate, UITableViewDataSourc
       return cell
     default:
       return UITableViewCell()
-    }
-  }
-  
-  private func showSizeDropdown(from textField: UITextField, in cell: AddVariantTableViewCell) {
-    let sizesNames = viewModel.sizesList.map { $0.name ?? "" }
-    kSharedAppDelegate.dropDown(dataSource: sizesNames, anchorView: textField) { [weak self] index, item in
-      guard let self = self else { return }
-      let selectedSize = self.viewModel.sizesList[index]
-      cell.sizeTF.text = selectedSize.name
-      cell.selectedSizeId = selectedSize.id
     }
   }
   
@@ -832,35 +697,28 @@ extension AddNewProductViewController: UICollectionViewDelegate, UICollectionVie
 
 extension AddNewProductViewController: AddSpecificationCellDelegate, AddVariantCellDelegate {
   
-    func addImageTapped(from cell: AddVariantTableViewCell, at index: Int) {
-        ImagePickerHelper.shared.showPickerController { [weak cell] image, imageName in
-            guard let image = image, let cell = cell else { return }
-            
-            WebService.sharedInstance.uploadImage(withParams: image) { imageURL in
-                DispatchQueue.main.async {
-                    // Insert new image at the end of real images
-                    let insertIndex = cell.images.count
-                    cell.images.append(image)
-                    cell.imageURLs.append(imageURL.url ?? "")
-                    
-                    // Reload only the new item (index 1-based)
-                    let newItemIndexPath = IndexPath(item: insertIndex + 1, section: 0) // +1 because 0 is placeholder
-                    cell.imagesCollectionView.performBatchUpdates({
-                        cell.imagesCollectionView.insertItems(at: [newItemIndexPath])
-                    }, completion: nil)
-                    
-                    // FOR DISABLE THE SCROLLING AFTER UPLAODING IMAGE
-                    cell.scrollToLastItem()
-                }
-            }
+  func addImageTapped(from cell: AddVariantTableViewCell, at index: Int) {
+    ImagePickerHelper.shared.showPickerController { [weak cell] image, imageName in
+      guard let image = image, let cell = cell else { return }
+      WebService.sharedInstance.uploadImage(withParams: image) { imageURL in
+        DispatchQueue.main.async {
+          let insertIndex = cell.images.count
+          cell.images.append(image)
+          cell.imageURLs.append(imageURL.url ?? "")
+          let newItemIndexPath = IndexPath(item: insertIndex + 1, section: 0) // +1 because 0 is placeholder
+          cell.imagesCollectionView.performBatchUpdates({
+            cell.imagesCollectionView.insertItems(at: [newItemIndexPath])
+          }, completion: nil)
+          
+          cell.scrollToLastItem()
         }
+      }
     }
+  }
   
   func removeVariantTapped(from cell: AddVariantTableViewCell) {
     guard let indexPath = variantTableView.indexPath(for: cell) else { return }
-    
     variantArray.remove(at: indexPath.row)
-    
     variantTableView.performBatchUpdates({
       variantTableView.deleteRows(at: [indexPath], with: .automatic)
     }, completion: { _ in
@@ -874,52 +732,29 @@ extension AddNewProductViewController: AddSpecificationCellDelegate, AddVariantC
     })
   }
   
-//  func addSpecificationTapped(from cell: AddSpecificationTableViewCell) {
-//    guard let index = specificationTableView.indexPath(for: cell)?.row else { return }
-//    let errors = cell.validateSpecificationFields()
-//    
-//    if !errors.isEmpty {
-//      showAlert(msg: errors)
-//      specificationTableView.scrollToRow(at: IndexPath(row: index, section: 0), at: .middle, animated: true)
-//      return
-//    }
-//    let newVariant = Spefication()
-//    specifications.append(newVariant)
-//    specificationTableView.reloadData()
-//    updateSpecificationTableHeight()
-//  }
-  
   func addSpecificationTapped(from cell: AddSpecificationTableViewCell) {
-      guard let indexPath = specificationTableView.indexPath(for: cell) else { return }
-      
-      // Validate current cell
-      let errors = cell.validateSpecificationFields()
-      if !errors.isEmpty {
-          showAlert(msg: errors)
-          specificationTableView.scrollToRow(at: indexPath, at: .middle, animated: true)
-          return
-      }
-
-      // Save current cell data to model
+    guard let indexPath = specificationTableView.indexPath(for: cell) else { return }
+    let errors = cell.validateSpecificationFields()
+    if !errors.isEmpty {
+      showAlert(msg: errors)
+      specificationTableView.scrollToRow(at: indexPath, at: .middle, animated: true)
+      return
+    }
     var currentSpec = specifications[indexPath.row]
-      currentSpec.product_spe_en = cell.nameEngTF.text ?? ""
-      currentSpec.product_spe_feature_en = cell.featuresEngTF.text ?? ""
-      currentSpec.product_spe_ar = cell.nameARTF.text ?? ""
-      currentSpec.product_spe_feature_ar = cell.featuresARTF.text ?? ""
-      specifications[indexPath.row] = currentSpec
-
-      // Add new one
-      let newSpec = Spefication()
-      specifications.append(newSpec)
-      
-      let newIndexPath = IndexPath(row: specifications.count - 1, section: 0)
-      
-      specificationTableView.performBatchUpdates({
-          specificationTableView.insertRows(at: [newIndexPath], with: .automatic)
-      }) { _ in
-          self.updateSpecificationTableHeight()
-          self.specificationTableView.scrollToRow(at: newIndexPath, at: .bottom, animated: true)
-      }
+    currentSpec.product_spe_en = cell.nameEngTF.text ?? ""
+    currentSpec.product_spe_feature_en = cell.featuresEngTF.text ?? ""
+    currentSpec.product_spe_ar = cell.nameARTF.text ?? ""
+    currentSpec.product_spe_feature_ar = cell.featuresARTF.text ?? ""
+    specifications[indexPath.row] = currentSpec
+    let newSpec = Spefication()
+    specifications.append(newSpec)
+    let newIndexPath = IndexPath(row: specifications.count - 1, section: 0)
+    specificationTableView.performBatchUpdates({
+      specificationTableView.insertRows(at: [newIndexPath], with: .automatic)
+    }) { _ in
+      self.updateSpecificationTableHeight()
+      self.specificationTableView.scrollToRow(at: newIndexPath, at: .bottom, animated: true)
+    }
   }
   
   func removeSpecificationTapped(from cell: AddSpecificationTableViewCell) {
@@ -931,172 +766,112 @@ extension AddNewProductViewController: AddSpecificationCellDelegate, AddVariantC
       addSpecificationButtonOutlet.isHidden = false
     }
   }
-  
-//  func removeSpecificationTapped(from cell: AddSpecificationTableViewCell) {
-//      guard let indexPath = specificationTableView.indexPath(for: cell) else { return }
-//      
-//      specifications.remove(at: indexPath.row)
-//      
-//      specificationTableView.performBatchUpdates({
-//          specificationTableView.deleteRows(at: [indexPath], with: .automatic)
-//      }) { _ in
-//          self.updateSpecificationTableHeight()
-//          
-//          if self.specifications.isEmpty {
-//              self.specifications.append(Spefication())
-//              self.specificationTableView.reloadData()
-//              self.updateSpecificationTableHeight()
-//          }
-//          
-//          self.addSpecificationButtonOutlet.isHidden = self.specifications.count > 1
-//      }
-//  }
 }
 
 extension AddNewProductViewController: UITextFieldDelegate {
-
-    func textField(_ textField: UITextField,
-                   shouldChangeCharactersIn range: NSRange,
-                   replacementString string: String) -> Bool {
-
-        let currentText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
-        
-        // Allow deleting/backspace
-        if string.isEmpty { return true }
-
-        // Prevent leading space
-        if currentText.hasPrefix(" ") { return false }
-
-        let fieldsAllowingSpaces: [UITextField] = [
-            otherBrandEnglishTF,
-            otherBrandArabicTF,
-            producNameEngTF,
-            productNameArabicTF,
-        ]
-        
-        let numericFields = [
-            minCartQuantityTF,
-            maxCartQuantityTF,
-            totalDaysReturningTF,
-            exchangableTF
-        ]
-        
-        // Handle numeric fields
-        if numericFields.contains(textField) {
-
-            // Block spaces
-            if string == " " { return false }
-
-            // Allow only digits
-            let allowedSet = CharacterSet.decimalDigits
-            if string.rangeOfCharacter(from: allowedSet.inverted) != nil {
-                return false
-            }
-
-            // Block leading zero
-            if currentText.count == 1 && currentText == "0" {
-                return false
-            }
-          
-          if (textField == minCartQuantityTF || textField == maxCartQuantityTF) && currentText.count > 6 {
-                         return false
-                     }
-
-            // Real-time min/max validation
-            if textField == maxCartQuantityTF {
-                let minVal = Int(minCartQuantityTF.text ?? "") ?? 0
-                let maxVal = Int(currentText) ?? 0
-//                if maxVal < minVal {
-//                    CommonUtils.showToast(message: "Max quantity cannot be less than Min quantity")
-//                    return true
-//                }
-            } else if textField == minCartQuantityTF {
-                let maxVal = Int(maxCartQuantityTF.text ?? "") ?? 0
-                let minVal = Int(currentText) ?? 0
-                if minVal > maxVal && maxVal != 0 {
-                    CommonUtils.showToast(message: "Min quantity cannot be greater than Max quantity")
-                    return false
-                }
-            }
-
-            return true
-        }
-
-        // Arabic text validation
-        if textField == otherBrandArabicTF || textField == productNameArabicTF {
-            let allowedSet = CharacterSet(charactersIn: "\u{0600}"..."\u{06FF}")
-                .union(CharacterSet(charactersIn: "\u{0750}"..."\u{077F}"))
-                .union(CharacterSet(charactersIn: "\u{08A0}"..."\u{08FF}"))
-                .union(CharacterSet.whitespaces)
-            
-            for scalar in string.unicodeScalars {
-                if !allowedSet.contains(scalar) {
-                    CommonUtils.showToast(message: "Please switch to Arabic keyboard")
-                    return false
-                }
-            }
-            return true
-        }
-
-        // English text validation
-        if textField == otherBrandEnglishTF || textField == producNameEngTF {
-            let allowedSet = CharacterSet.letters.union(.whitespaces)
-            for scalar in string.unicodeScalars {
-                if !allowedSet.contains(scalar) {
-                    return false
-                }
-            }
-            return true
-        }
-
-        // Block spaces for fields not allowing them
-        if !fieldsAllowingSpaces.contains(textField) {
-            if string.contains(" ") {
-                return false
-            }
-        }
-
-        return true
-    }
-
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        validateMinMaxQuantity()
-    }
-
-  func validateMinMaxQuantity() {
-          let minVal = Int(minCartQuantityTF.text ?? "") ?? 0
-          let maxVal = Int(maxCartQuantityTF.text ?? "") ?? 0
-
-          // Show toast only after user finishes editing
-          if minVal >= maxVal && maxVal != 0 {
-              CommonUtils.showToast(message: "Min Cart Quantity must be smaller than Max Cart Quantity")
-          }
+  
+  func textField(_ textField: UITextField,
+                 shouldChangeCharactersIn range: NSRange,
+                 replacementString string: String) -> Bool {
+    
+    let currentText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+    if string.isEmpty { return true }
+    
+    if currentText.hasPrefix(" ") { return false }
+    let fieldsAllowingSpaces: [UITextField] = [otherBrandEnglishTF,otherBrandArabicTF, producNameEngTF,productNameArabicTF,]
+    
+    let numericFields = [minCartQuantityTF,maxCartQuantityTF,totalDaysReturningTF,exchangableTF]
+    if numericFields.contains(textField) {
+      if string == " " { return false }
+      let allowedSet = CharacterSet.decimalDigits
+      if string.rangeOfCharacter(from: allowedSet.inverted) != nil {
+        return false
       }
-
+      if currentText.count == 1 && currentText == "0" {
+        return false
+      }
+      if (textField == minCartQuantityTF || textField == maxCartQuantityTF) && currentText.count > 6 {
+        return false
+      }
+      if textField == maxCartQuantityTF {
+        let minVal = Int(minCartQuantityTF.text ?? "") ?? 0
+        let maxVal = Int(currentText) ?? 0
+      } else if textField == minCartQuantityTF {
+        let maxVal = Int(maxCartQuantityTF.text ?? "") ?? 0
+        let minVal = Int(currentText) ?? 0
+        if minVal > maxVal && maxVal != 0 {
+          CommonUtils.showToast(message: "Min quantity cannot be greater than Max quantity")
+          return false
+        }
+      }
+      
+      return true
+    }
+    if textField == otherBrandArabicTF || textField == productNameArabicTF {
+      let allowedSet = CharacterSet(charactersIn: "\u{0600}"..."\u{06FF}")
+        .union(CharacterSet(charactersIn: "\u{0750}"..."\u{077F}"))
+        .union(CharacterSet(charactersIn: "\u{08A0}"..."\u{08FF}"))
+        .union(CharacterSet.whitespaces)
+      
+      for scalar in string.unicodeScalars {
+        if !allowedSet.contains(scalar) {
+          CommonUtils.showToast(message: "Please switch to Arabic keyboard")
+          return false
+        }
+      }
+      return true
+    }
+    if textField == otherBrandEnglishTF || textField == producNameEngTF {
+      let allowedSet = CharacterSet.letters.union(.whitespaces)
+      for scalar in string.unicodeScalars {
+        if !allowedSet.contains(scalar) {
+          return false
+        }
+      }
+      return true
+    }
+    if !fieldsAllowingSpaces.contains(textField) {
+      if string.contains(" ") {
+        return false
+      }
+    }
+    
+    return true
+  }
+  
+  func textFieldDidEndEditing(_ textField: UITextField) {
+    validateMinMaxQuantity()
+  }
+  
+  func validateMinMaxQuantity() {
+    let minVal = Int(minCartQuantityTF.text ?? "") ?? 0
+    let maxVal = Int(maxCartQuantityTF.text ?? "") ?? 0
+    if minVal >= maxVal && maxVal != 0 {
+      CommonUtils.showToast(message: "Min Cart Quantity must be smaller than Max Cart Quantity")
+    }
+  }
+  
 }
 
 extension AddNewProductViewController: UITextViewDelegate {
   
   func textViewDidBeginEditing(_ textView: UITextView) {
-          // Remove placeholder when user starts typing
-          if textView.textColor == .lightGray {
-              textView.text = ""
-              textView.textColor = .label // or .black depending on your design
-          }
+    if textView.textColor == .lightGray {
+      textView.text = ""
+      textView.textColor = .label
+    }
+  }
+  
+  func textViewDidEndEditing(_ textView: UITextView) {
+    if textView.text.isEmpty {
+      if textView == descriptionEngTextView {
+        textView.text = "Write Here"
+      } else if textView == descriptionArabicTextView {
+        textView.text = "Write Here"
       }
-
-      func textViewDidEndEditing(_ textView: UITextView) {
-          // Restore placeholder if text is empty
-          if textView.text.isEmpty {
-              if textView == descriptionEngTextView {
-                  textView.text = "Write Here"
-              } else if textView == descriptionArabicTextView {
-                  textView.text = "Write Here"
-              }
-              textView.textColor = .lightGray
-          }
-      }
-
+      textView.textColor = .lightGray
+    }
+  }
   
   func textView(_ textView: UITextView,
                 shouldChangeTextIn range: NSRange,

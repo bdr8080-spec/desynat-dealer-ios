@@ -43,32 +43,20 @@ class AddSpecificationTableViewCell: UITableViewCell {
 }
 
 extension AddSpecificationTableViewCell {
-
-    /// Returns dictionary of fieldName: errorMessage
-    func validateSpecificationFields() -> String {
-        var errors: String = ""
-
-        if nameEngTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-            errors = "Enter name in english"
-        }else if nameARTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-            errors = "Enter name in arabic"
-        }else if featuresEngTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-            errors = "Enter feature in english"
-        }else if featuresARTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-            errors = "Enter feature in arabic"
-        }
-        return errors
+  func validateSpecificationFields() -> String {
+    var errors: String = ""
+    
+    if nameEngTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
+      errors = "Enter name in english"
+    }else if nameARTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
+      errors = "Enter name in arabic"
+    }else if featuresEngTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
+      errors = "Enter feature in english"
+    }else if featuresARTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
+      errors = "Enter feature in arabic"
     }
-
-//    func showSpecificationErrors(_ errors: [String: String]) {
-//        var message = ""
-//        for error in errors.values {
-//            message += "\(error)\n"
-//        }
-//        if !message.isEmpty {
-//            UIApplication.shared.keyWindow?.rootViewController?.presentAlert(title: "Validation Error", message: message)
-//        }
-//    }
+    return errors
+  }
 }
 
 extension AddSpecificationTableViewCell: UITextFieldDelegate {
@@ -117,8 +105,6 @@ extension AddSpecificationTableViewCell: UITextFieldDelegate {
     
   }
 }
-
-
 
 protocol AddSpecificationCellDelegate: AnyObject {
   func addSpecificationTapped(from cell: AddSpecificationTableViewCell)
