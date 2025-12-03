@@ -43,12 +43,12 @@ enum NetworkEndPoint: String {
   case getBrandsList                   = "/api/seller/all-brand"
   case getColorsList                   = "/api/seller/all-color"
   case getSizesList                   = "/api/seller/all-size"
-  case addProduct                   = "/api/seller/add-product"
+  case addProduct                   = "/api/seller/add-product1"
   case getProductsList                  = "/api/seller/all-product"
   case productsActiveStatus                  = "/api/seller/product-status-active-inactive"
   case getProductsDetails                 = "/api/seller/single-product-details"
   case deleteProductsDetails                 = "/api/seller/product-delete"
-  case editProductsDetails                 = "/api/seller/edit-product"
+  case editProductsDetails                 = "/api/seller/edit-product1"
   case getSellerProfile                 = "/api/seller/seller-profile"
     
     func withBaseURL() -> String {

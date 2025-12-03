@@ -70,6 +70,7 @@ class AddNewProductViewController: UIViewController {
   var comingReason: ComingReasonAtAddToProduct = .forAddingProduct
   var specifications: [Spefication] = [Spefication()]
   var variantArray: [Variant] = [Variant()]
+    var colorsList: [ColorsLisDataModel] = []
   var productId: Int? = 0
   var selectedSubCategoriesId: Int? = -1
   var selectedBrandId: Int? = -1
@@ -142,15 +143,35 @@ class AddNewProductViewController: UIViewController {
     viewModel.getSizeListApi()
     initialSetup()
     setupTextViewPlaceholder()
+      variantTableView.rowHeight = UITableView.automaticDimension
+      variantTableView.estimatedRowHeight = 200
+      variantTableView.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
   }
+    
+    
+    deinit {
+        variantTableView.removeObserver(self, forKeyPath: "contentSize")
+       // print("Observer removed for tblCommitList contentSize")
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+      //  print("keyPath is---",keyPath ?? "")
+        if(keyPath == "contentSize"){
+            if let newvalue = change?[.newKey] {
+                let newsize  = newvalue as! CGSize
+                varaintTableViewHeightConstriant.constant = newsize.height
+            }
+        }
+    }
   
   override func viewDidLayoutSubviews() {
       super.viewDidLayoutSubviews()
       DispatchQueue.main.async {
-          self.updateVariantTableHeight()
+         // self.updateVariantTableHeight()
           self.updateSpecificationTableHeight()
       }
   }
+
   
   @IBAction func backDidTapped(_ sender: Any) {
     self.navigationController?.popViewController(animated: true)
@@ -183,32 +204,54 @@ class AddNewProductViewController: UIViewController {
     addSpecificationButtonOutlet.isHidden = true
   }
   
-  @IBAction func addVariantDidTapped(_ sender: Any) {
-    let lastIndex = variantArray.count - 1
+  @IBAction func addVariantDidTapped(_ sender: Any)  {
+      
+      let lastIndex = variantArray.count - 1
+      let indexPath = IndexPath(row: lastIndex, section: 0)
 
-        guard let lastCell = variantTableView.cellForRow(at: IndexPath(row: lastIndex, section: 0)) as? AddVariantTableViewCell else { return }
-        let errors = lastCell.validateFieldsWithErrors()
-        if !errors.isEmpty {
-            showAlert(msg: errors)
-            return
-        }
-        var variant = variantArray[lastIndex]
-        variant.colorId = lastCell.selectedColorId
-        variant.images = lastCell.images
-        variant.imageURLs = lastCell.imageURLs
-        variant.sizeVariants = lastCell.sizeVariants
-        variantArray[lastIndex] = variant
-        let newVariant = Variant()
-        variantArray.append(newVariant)
-        let newIndexPath = IndexPath(row: variantArray.count - 1, section: 0)
+      guard let lastCell = variantTableView.cellForRow(at: indexPath) as? AddVariantTableViewCell else { return }
 
-        variantTableView.performBatchUpdates({
-            variantTableView.insertRows(at: [newIndexPath], with: .automatic)
-        }) { _ in
-            self.updateVariantTableHeight()
-            self.variantTableView.scrollToRow(at: newIndexPath, at: .bottom, animated: true)
-        }
+      // 1️⃣ VALIDATION
+      let errors = lastCell.validateFieldsWithErrors()
+      if !errors.isEmpty {
+          showAlert(msg: errors)
+          return
+      }
+
+      // 2️⃣ SAVE SIZE VARIANTS FIRST (IMPORTANT)
+      lastCell.saveVariantData()   // updates lastCell.variant correctly
+
+      // 3️⃣ MERGE into variantArray
+      var variant = variantArray[lastIndex]
+
+      variant.colorId = lastCell.variant.colorId
+      variant.images = lastCell.variant.images
+      variant.imageURLs = lastCell.variant.imageURLs
+
+      // 🚀 MERGE ALL SIZE VARIANTS WITHOUT LOSING PREVIOUS ONES
+      variant.sizeVariants.removeAll()  // Reset
+      variant.sizeVariants.append(contentsOf: lastCell.variant.sizeVariants)
+
+      // 4️⃣ ASSIGN BACK TO ARRAY
+      variantArray[lastIndex] = variant
+
+      // 5️⃣ ADD NEW VARIANT ROW ONLY IF THIS ONE IS COMPLETE
+      if variant.colorId != -1 && !variant.sizeVariants.isEmpty {
+          variantArray.append(Variant())
+
+          let newIndex = IndexPath(row: variantArray.count - 1, section: 0)
+          variantTableView.performBatchUpdates({
+              variantTableView.insertRows(at: [newIndex], with: .automatic)
+          }) { _ in
+              DispatchQueue.main.async {
+                  self.variantTableView.scrollToRow(at: newIndex, at: .bottom, animated: true)
+              }
+          }
+      } else {
+          print("⚠️ Variant not complete. Not adding a new row.")
+      }
   }
+
   
   @IBAction func subCatgeoryAction(_ sender: UIButton) {
     let subCategoryNames = viewModel.subcategoriesList.map { subcategories -> String in
@@ -239,16 +282,110 @@ class AddNewProductViewController: UIViewController {
     }
   }
   
-  @IBAction func addProductDidTapepd(_ sender: Any) {
-    if viewModel.validFields() {
-      switch comingReason {
-      case .forEditProduct:
-        viewModel.editProductApi()
-      case .forAddingProduct:
-        viewModel.addProductApi()
-      }
+    @IBAction func addProductDidTapepd(_ sender: Any) {
+        saveLastVariantIfNeeded()  // 👈 IMPORTANT
+        if viewModel.validFields() {
+            viewModel.variantArray = self.variantArray  // 👈 MOVE ARRAY TO VIEWMODEL
+            switch comingReason {
+            case .forEditProduct: viewModel.editProductApi()
+            case .forAddingProduct: viewModel.addProductApi()
+            }
+        }
     }
-  }
+    
+//    func saveLastVariantIfNeeded() {
+//        guard variantArray.count > 0 else { return }
+//
+//        let lastIndex = variantArray.count - 1
+//        if let cell = variantTableView.cellForRow(at: IndexPath(row: lastIndex, section: 0)) as? AddVariantTableViewCell {
+//            cell.saveVariantData()
+//            variantArray[lastIndex] = cell.variant
+//        }
+//    }
+    
+    func saveLastVariantIfNeeded() {
+        let lastIndex = variantArray.count - 1
+        guard lastIndex >= 0 else { return }
+
+        let indexPath = IndexPath(row: lastIndex, section: 0)
+        guard let lastCell = variantTableView.cellForRow(at: indexPath) as? AddVariantTableViewCell else { return }
+
+        // 1️⃣ Save variant-level data
+        lastCell.saveVariantData()
+
+        // 2️⃣ Save last size row if it exists
+        if let sizeTable = lastCell.sizeVariantTableView,
+           !lastCell.sizeVariants.isEmpty {
+
+            let lastSizeIndex = lastCell.sizeVariants.count - 1
+            let lastSizeIndexPath = IndexPath(row: lastSizeIndex, section: 0)
+
+            if let lastSizeCell = sizeTable.cellForRow(at: lastSizeIndexPath) as? AddNewSizeVariantTableViewCell {
+                var lastSize = lastCell.sizeVariants[lastSizeIndex]
+                lastSize.sizeId = lastSizeCell.selectedSizeId
+                lastSize.bust = lastSizeCell.bustTF.text ?? ""
+                lastSize.waist = lastSizeCell.waistTF.text ?? ""
+                lastSize.hip = lastSizeCell.hipTF.text ?? ""
+                lastSize.shoulder = lastSizeCell.shoulderTF.text ?? ""
+                lastSize.sleeveLength = lastSizeCell.sleeveLengthTF.text ?? ""
+                lastSize.length = lastSizeCell.lengthTF.text ?? ""
+                lastSize.totalStock = lastSizeCell.totalStocksTF.text ?? ""
+                lastSize.sku = lastSizeCell.skuLimitTF.text ?? ""
+                lastSize.actualPrice = lastSizeCell.actualPriceTF.text ?? ""
+                lastSize.finalPrice = lastSizeCell.finalPriceTF.text ?? ""
+                lastSize.discountValue = lastSizeCell.discountPriceTF.text ?? ""
+                lastSize.discountTypeIsPercentage = lastSizeCell.discountTypeisPercentage
+
+                lastCell.sizeVariants[lastSizeIndex] = lastSize
+            }
+        }
+
+        // 3️⃣ Merge updated data back to variantArray
+        var variant = variantArray[lastIndex]
+        variant.colorId = lastCell.variant.colorId
+        variant.images = lastCell.variant.images
+        variant.imageURLs = lastCell.variant.imageURLs
+        variant.sizeVariants = lastCell.sizeVariants
+
+        // 4️⃣ Save back
+        variantArray[lastIndex] = variant
+    }
+
+    
+//    func saveLastVariantIfNeeded() {
+//        for (index, variant) in variantArray.enumerated() {
+//            guard let variantCell = variantTableView.cellForRow(at: IndexPath(row: index, section: 0)) as? AddVariantTableViewCell else { continue }
+//
+//            // Save variant-level data first
+//            variantCell.saveVariantData()
+//            variantArray[index] = variantCell.variant
+//
+//            // Save last size row if it's empty
+//            if let lastSizeCell = variantCell.sizeVariantTableView.cellForRow(at: IndexPath(row: variant.sizeVariants.count - 1, section: 0)) as? AddNewSizeVariantTableViewCell {
+//
+//                var lastSize = variantCell.sizeVariants.last ?? SizeVariant()
+//                lastSize.sizeId = lastSizeCell.selectedSizeId
+//                lastSize.bust = lastSizeCell.bustTF.text ?? ""
+//                lastSize.waist = lastSizeCell.waistTF.text ?? ""
+//                lastSize.hip = lastSizeCell.hipTF.text ?? ""
+//                lastSize.shoulder = lastSizeCell.shoulderTF.text ?? ""
+//                lastSize.sleeveLength = lastSizeCell.sleeveLengthTF.text ?? ""
+//                lastSize.length = lastSizeCell.lengthTF.text ?? ""
+//                lastSize.totalStock = lastSizeCell.totalStocksTF.text ?? ""
+//                lastSize.sku = lastSizeCell.skuLimitTF.text ?? ""
+//                lastSize.actualPrice = lastSizeCell.actualPriceTF.text ?? ""
+//                lastSize.finalPrice = lastSizeCell.finalPriceTF.text ?? ""
+//                lastSize.discountValue = lastSizeCell.discountPriceTF.text ?? ""
+//                lastSize.discountTypeIsPercentage = lastSizeCell.discountTypeisPercentage
+//
+//                variantCell.sizeVariants[variant.sizeVariants.count - 1] = lastSize
+//                variantCell.notifyParentIfNeeded() // update parent variantArray
+//            }
+//        }
+//    }
+
+
+
   
   @IBAction func productReturnableAction(_ sender: Any) {
     isProductReturnable.toggle()
@@ -300,7 +437,7 @@ class AddNewProductViewController: UIViewController {
   }
   
   private func refreshVariantCellDisplays() {
-    guard !viewModel.colorsList.isEmpty || !viewModel.sizesList.isEmpty else { return }
+   // guard !viewModel.colorsList.isEmpty || !viewModel.sizesList.isEmpty else { return }
     
     for cell in variantTableView.visibleCells {
       if let cell = cell as? AddVariantTableViewCell {
@@ -320,7 +457,10 @@ class AddNewProductViewController: UIViewController {
       titleLabel.text = "Edit product"
       addButtonLabel.text = "Edit Product"
       viewModel.getProductDetailsService()
-      refreshVariantCellDisplays()
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//            self.refreshVariantCellDisplays()
+//        }
+     // refreshVariantCellDisplays()
     }
     let textFields: [UITextField] = [
       otherBrandEnglishTF, otherBrandArabicTF, producNameEngTF, productNameArabicTF, minCartQuantityTF, maxCartQuantityTF, returnDayTF,
@@ -347,18 +487,32 @@ class AddNewProductViewController: UIViewController {
     }
   }
   
-  func updateVariantTableHeight() {
-      variantTableView.layoutIfNeeded()
-      var height = variantTableView.contentSize.height
-      height += 20
-      if height < 100 {
-        height = 150
-      }
-      UIView.animate(withDuration: 0.1) {
-        self.varaintTableViewHeightConstriant.constant = height
-        self.view.layoutIfNeeded()
-      }
+//  func updateVariantTableHeight() {
+//      variantTableView.layoutIfNeeded()
+//      var height = variantTableView.contentSize.height
+//      height += 20
+//      if height < 100 {
+//        height = 150
+//      }
+//      UIView.animate(withDuration: 0.1) {
+//        self.varaintTableViewHeightConstriant.constant = height
+//        self.view.layoutIfNeeded()
+//      }
+//    }
+    
+    func updateVariantTableHeight() {
+        variantTableView.layoutIfNeeded()
+
+        let height = max(variantTableView.contentSize.height + 20, 150)
+
+        if varaintTableViewHeightConstriant.constant != height {
+            UIView.animate(withDuration: 0.25) {
+                self.varaintTableViewHeightConstriant.constant = height
+                self.view.layoutIfNeeded()
+            }
+        }
     }
+
   
   private func updateRadioButtons(selected: Bool, yesButton: UIButton, noButton: UIButton) {
     let yesImageName = selected ? "radioSelected" : "radioUnselected"
@@ -380,64 +534,107 @@ class AddNewProductViewController: UIViewController {
   
   
   // MARK: - Helper: Add New Specification
+//  func prepareVariantData(isWomenCategory: Bool) -> [String: Any]? {
+//    var variant_image: [[String]] = []
+//    var color_id: [String] = []
+//    var size_id: [String] = []
+//    var bust: [String] = []
+//    var waist: [String] = []
+//    var hip: [String] = []
+//    var shoulder: [String] = []
+//    var sleeve_length: [String] = []
+//    var length: [String] = []
+//    var total_stock: [String] = []
+//    var sku: [String] = []
+//    var actual_price: [String] = []
+//    var discount_type: [String] = []
+//    var discount_value: [String] = []
+//    var final_price: [String] = []
+//    for variant in variantArray {
+//        variant_image.append(variant.imageURLs)
+//        color_id.append("\(variant.colorId ?? 0)")
+//
+//        for sv in variant.sizeVariants {
+//            size_id.append("\(sv.sizeId ?? 0)")
+//          if isWomenCategory {
+//            bust.append(isWomenCategory ? sv.bust : "")
+//            waist.append(sv.waist)
+//            hip.append(sv.hip)
+//            shoulder.append(sv.shoulder)
+//            sleeve_length.append(sv.sleeveLength)
+//            length.append(sv.length)
+//          }
+//          total_stock.append(sv.totalStock)
+//          sku.append(sv.sku)
+//          actual_price.append(sv.actualPrice)
+//          discount_type.append("\(sv.discountTypeIsPercentage)")
+//          discount_value.append(sv.discountValue)
+//          final_price.append(sv.finalPrice)
+//        }
+//    }
+//    return [
+//      "variant_image": variant_image,
+//      "color_id": color_id,
+//      "size_id": size_id,
+//      "bust": bust,
+//      "waist": waist,
+//      "hip": hip,
+//      "shoulder": shoulder,
+//      "sleeve_length": sleeve_length,
+//      "length": length,
+//      "total_stock": total_stock,
+//      "sku": sku,
+//      "actual_price": actual_price,
+//      "discount_type": discount_type,
+//      "discount_value": discount_value,
+//      "final_price": final_price
+//    ]
+//  }
   
-  func prepareVariantData(isWomenCategory: Bool) -> [String: Any]? {
-    var variant_image: [[String]] = []
-    var color_id: [String] = []
-    var size_id: [String] = []
-    var bust: [String] = []
-    var waist: [String] = []
-    var hip: [String] = []
-    var shoulder: [String] = []
-    var sleeve_length: [String] = []
-    var length: [String] = []
-    var total_stock: [String] = []
-    var sku: [String] = []
-    var actual_price: [String] = []
-    var discount_type: [String] = []
-    var discount_value: [String] = []
-    var final_price: [String] = []
-    for variant in variantArray {
-        variant_image.append(variant.imageURLs)
-        color_id.append("\(variant.colorId ?? 0)")
+    func prepareVariantData(isWomenCategory: Bool) -> [[String: Any]] {
+        var productsArray: [[String: Any]] = []
         
-        for sv in variant.sizeVariants {
-            size_id.append("\(sv.sizeId ?? 0)")
-          if isWomenCategory {
-            bust.append(isWomenCategory ? sv.bust : "")
-            waist.append(sv.waist)
-            hip.append(sv.hip)
-            shoulder.append(sv.shoulder)
-            sleeve_length.append(sv.sleeveLength)
-            length.append(sv.length)
-          }
-          total_stock.append(sv.totalStock)
-          sku.append(sv.sku)
-          actual_price.append(sv.actualPrice)
-          discount_type.append("\(sv.discountTypeIsPercentage)")
-          discount_value.append(sv.discountValue)
-          final_price.append(sv.finalPrice)
+        for variant in variantArray {
+            
+            // 1️⃣ IMAGES
+            let images = variant.imageURLs // Already array of URLs
+            
+            // 2️⃣ PRODUCT VARIATIONS (sizes)
+            var variationArray: [[String: Any]] = []
+            
+            for size in variant.sizeVariants {
+                var sizeDict: [String: Any] = [
+                    "size_id": size.sizeId ?? -1,
+                    "total_stock": size.totalStock,
+                    "sku": size.sku,
+                    "actual_price": size.actualPrice,
+                    "discount_type": size.discountTypeIsPercentage ? "1" : "2",
+                    "discount_value": size.discountValue,
+                    "final_price": size.finalPrice
+                ]
+                
+                if isWomenCategory {
+                    sizeDict["bust"] = size.bust
+                    sizeDict["waist"] = size.waist
+                    sizeDict["hip"] = size.hip
+                    sizeDict["shoulder"] = size.shoulder
+                    sizeDict["sleeve_length"] = size.sleeveLength
+                    sizeDict["length"] = size.length
+                }
+                variationArray.append(sizeDict)
+            }
+            
+            // 3️⃣ FINAL PRODUCT DICTIONARY
+            let productDict: [String: Any] = [
+                "variant_image": images,
+                "color_id": variant.colorId ?? -1,
+                "product_variation": variationArray
+            ]
+            productsArray.append(productDict)
         }
+        return productsArray
     }
-    return [
-      "variant_image": variant_image,
-      "color_id": color_id,
-      "size_id": size_id,
-      "bust": bust,
-      "waist": waist,
-      "hip": hip,
-      "shoulder": shoulder,
-      "sleeve_length": sleeve_length,
-      "length": length,
-      "total_stock": total_stock,
-      "sku": sku,
-      "actual_price": actual_price,
-      "discount_type": discount_type,
-      "discount_value": discount_value,
-      "final_price": final_price
-    ]
-  }
-  
+    
   func prepareSpecificationData() -> [String: Any]? {
     var product_spe_en: [String] = []
     var product_spe_feature_en: [String] = []
@@ -467,89 +664,141 @@ class AddNewProductViewController: UIViewController {
     ]
   }
   
-  func prefillProductDetails(_ data: ProductsList) {
-    selectedCategoriesSection = Int(data.categoryID ?? "0")
-    categoriesCollectionView.reloadData()
-    selectedSubCategoriesId = Int(data.subcategoryID ?? "0")
-    subCatgeoryTF.text = data.category?.description
-    selectedBrandId = Int(data.brandID ?? "0")
-    selectedBrandTF.text = data.brand?.nameEnglish
-    if (data.brand?.nameEnglish?.lowercased() == "other") {
-      self.otherStackView.isHidden = false
-    } else {
-      self.otherStackView.isHidden = true
+    func prefillProductDetails(_ data: ProductsList) {
+        selectedCategoriesSection = Int(data.categoryID ?? "0")
+        categoriesCollectionView.reloadData()
+        
+        selectedSubCategoriesId = Int(data.subcategoryID ?? "0")
+        subCatgeoryTF.text = data.category?.description
+        
+        selectedBrandId = Int(data.brandID ?? "0")
+        selectedBrandTF.text = data.brand?.nameEnglish
+        
+        otherStackView.isHidden = (data.brand?.nameEnglish?.lowercased() != "other")
+        otherBrandEnglishTF.text = data.otherEn
+        otherBrandArabicTF.text = data.otherAr
+        
+        producNameEngTF.text = data.productNameEn
+        productNameArabicTF.text = data.productNameAr
+        descriptionEngTextView.text = data.descriptionEn
+        descriptionArabicTextView.text = data.descriptionAr
+        descriptionEngTextView.placeholderTextView = ""
+        descriptionArabicTextView.placeholderTextView = ""
+        
+        minCartQuantityTF.text = data.minCardQuantity
+        maxCartQuantityTF.text = data.maxCardQuantity
+        totalDaysReturningTF.text = data.returnDays
+        exchangableTF.text = data.exchangableDays
+        
+        addSpecificationButtonOutlet.isHidden = true
+        isProductReturnable = (data.productReturn == "1")
+        isProductExchangable = (data.productExchangable == "1")
+        isRatingAllowed = (data.reviewRating == "1")
+        isAffiliatedAllowed = (data.affiliatedProduct == "1")
+        isCustomizationAllowed = (data.customizedProduct == "1")
+        isReadyToShip = (data.readyToShip == "1")
+        isCashOnDeliveryAllowed = (data.cashOnDelivery == "1")
+        
+        selectedSizeChartImageUrl = data.uploadSizeChart
+        if let url = URL(string: data.uploadSizeChart ?? "") {
+            sizeChartImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "user_ic"))
+        }
+        
+        // ---------------- SPECIFICATIONS ----------------
+        specifications.removeAll()
+        let specification = data.productSpecifications ?? []
+        for item in specification {
+            var spec = Spefication()
+            spec.product_spe_en = item.nameEn ?? ""
+            spec.product_spe_ar = item.nameAr ?? ""
+            spec.product_spe_feature_en = item.featureEn ?? ""
+            spec.product_spe_feature_ar = item.featureAr ?? ""
+            specifications.append(spec)
+        }
+        specificationTableView.reloadData()
+        updateSpecificationTableHeight()
+        
+        // ---------------- VARIANTS ----------------
+        variantArray.removeAll()
+        colorsList.removeAll()
+        
+        let variants = data.productVariants ?? []
+        
+        // Group by color
+        let groupedByColor = Dictionary(grouping: variants, by: { $0.colorID ?? "" })
+        
+        for (colorID, variantsForColor) in groupedByColor {
+            guard let firstVariant = variantsForColor.first else { continue }
+            
+            var variant = Variant()
+            variant.colorId = firstVariant.colorID?.toInt ?? -1
+            
+            // ----- Update Color List -----
+            if let cid = firstVariant.colorID?.toInt,
+               let cname = firstVariant.color?.name,
+               let ccode = firstVariant.color?.hexCode,
+               let created = firstVariant.createdAt,
+               let updated = firstVariant.updatedAt {
+                if !colorsList.contains(where: { $0.id == cid }) {
+                    let colorModel = ColorsLisDataModel(
+                        id: cid,
+                        name: cname,
+                        hexCode: ccode,
+                        createdAt: created,
+                        updatedAt: updated
+                    )
+                    colorsList.append(colorModel)
+                }
+            }
+            
+            // ----- Attach all sizes for this color -----
+            var sizeVariants: [SizeVariant] = []
+            for v in variantsForColor {
+                var sv = SizeVariant()
+                sv.sizeId = v.sizeID?.toInt ?? -1
+                sv.totalStock = v.totalStock ?? ""
+                sv.sku = v.sku ?? ""
+                sv.actualPrice = v.actualPrice ?? ""
+                sv.discountTypeIsPercentage = (v.discountType == "1")
+                sv.discountValue = v.discountValue ?? ""
+                sv.finalPrice = v.finalPrice ?? ""
+                
+                sv.bust = v.bust ?? ""
+                sv.hip = v.hip ?? ""
+                sv.waist = v.waist ?? ""
+                sv.length = v.length ?? ""
+                sv.shoulder = v.shoulder ?? ""
+                sv.sleeveLength = v.sleeveLength ?? ""
+                
+                sizeVariants.append(sv)
+            }
+            variant.sizeVariants = sizeVariants
+            
+            // ----- Attach images (first variant's images) -----
+            if let imgs = firstVariant.variantImage, !imgs.isEmpty {
+                variant.imageURLs = imgs
+                variant.images = Array(repeating: UIImage(), count: imgs.count)
+            } else {
+                variant.imageURLs = []
+                variant.images = []
+            }
+            
+            variantArray.append(variant)
+        }
+        
+        // ---------------- ASSIGN COLORS & SIZES TO VIEWMODEL ----------------
+            viewModel.colorsList = colorsList
+//        viewModel.sizesList = variantArray.flatMap { $0.sizeVariants } as! [SizeListDataModel]
+            
+            variantTableView.reloadData()
+            
+            // ---------------- REFRESH VISIBLE CELLS ----------------
+            DispatchQueue.main.async {
+                self.refreshVariantCellDisplays()
+            }
+        viewModel.getSubCategoriesListApi()
     }
-    otherBrandEnglishTF.text = data.otherEn
-    otherBrandArabicTF.text = data.otherAr
-    producNameEngTF.text = data.productNameEn
-    productNameArabicTF.text = data.productNameAr
-    descriptionEngTextView.text = data.descriptionEn
-    descriptionArabicTextView.text = data.descriptionAr
-    descriptionEngTextView.placeholderTextView = ""
-    descriptionArabicTextView.placeholderTextView = ""
-    minCartQuantityTF.text = data.minCardQuantity
-    maxCartQuantityTF.text = data.maxCardQuantity
-    totalDaysReturningTF.text = data.returnDays
-    exchangableTF.text = data.exchangableDays
-    addSpecificationButtonOutlet.isHidden = true
-    isProductReturnable = (data.productReturn == "1")
-    isProductExchangable = (data.productExchangable == "1")
-    isRatingAllowed = (data.reviewRating == "1")
-    isAffiliatedAllowed = (data.affiliatedProduct == "1")
-    isCustomizationAllowed = (data.customizedProduct == "1")
-    isReadyToShip = (data.readyToShip == "1")
-    isCashOnDeliveryAllowed = (data.cashOnDelivery == "1")
-    selectedSizeChartImageUrl = data.uploadSizeChart
-    if let url = URL(string: data.uploadSizeChart ?? "") {
-      sizeChartImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "user_ic"))
-    }
-    specifications.removeAll()
-    let specification = data.productSpecifications ?? []
-    for item in specification {
-      var spec = Spefication()
-      spec.product_spe_en = item.nameEn ?? ""
-      spec.product_spe_ar = item.nameAr ?? ""
-      spec.product_spe_feature_en = item.featureEn ?? ""
-      spec.product_spe_feature_ar = item.featureAr ?? ""
-      specifications.append(spec)
-    }
-    specificationTableView.reloadData()
-    updateSpecificationTableHeight()
-    variantArray.removeAll()
-    let variants = data.productVariants ?? []
-    for v in variants {
-      var variant = Variant()
-      variant.colorId = v.colorID?.toInt
-      var sv = SizeVariant()
-      sv.sizeId = v.sizeID?.toInt //
-      sv.totalStock = v.totalStock ?? ""
-      sv.sku = v.sku ?? ""
-      sv.actualPrice = v.actualPrice ?? ""
-      sv.discountTypeIsPercentage = (v.discountType == "1")
-      sv.discountValue = v.discountValue ?? ""
-      sv.finalPrice = v.finalPrice ?? ""
-      sv.bust = v.bust ?? ""
-      sv.hip = v.hip ?? ""
-      sv.waist = v.waist ?? ""
-      sv.length = v.length ?? ""
-      sv.shoulder = v.shoulder ?? ""
-      sv.sleeveLength = v.sleeveLength ?? ""
-      
-      if let imageStrings = v.variantImage, !imageStrings.isEmpty {
-        variant.imageURLs = imageStrings.compactMap { $0 }  // removes any nil if backend sends them
-        variant.images = Array(repeating: UIImage(), count: imageStrings.count) // temp placeholder
-      } else {
-        variant.imageURLs = []
-        variant.images = []
-      }
-      variantArray.append(variant)
-    }
-    variantTableView.reloadData()
-    DispatchQueue.main.async {
-        self.updateVariantTableHeight()   // ← Critical!
-    }
-    viewModel.getSubCategoriesListApi()
-  }
+
 }
 
 extension AddNewProductViewController: UITableViewDelegate, UITableViewDataSource {
@@ -584,64 +833,63 @@ extension AddNewProductViewController: UITableViewDelegate, UITableViewDataSourc
       cell.addNewView.isHidden = !isLastCell
       return cell
     case variantTableView:
-      let cell = tableView.dequeueReusableCell(withIdentifier: "AddVariantTableViewCell", for: indexPath) as! AddVariantTableViewCell
-      cell.delegate = self
-      if indexPath.row == 0 {
-        cell.headerView.isHidden = true
-      } else {
-        cell.headerView.isHidden = false
-      }
-      let variant = variantArray[indexPath.row]
-      cell.updateTableViewHeight()
-      cell.sizeVariants = variant.sizeVariants
-      cell.sizesList = viewModel.sizesList
-      cell.selectedColorId = variant.colorId
-      cell.onVariantUpdated = { [weak self] updatedVariant in
-              guard let self = self else { return }
-              self.variantArray[indexPath.row] = updatedVariant
-              print("Variant at row \(indexPath.row) updated with \(updatedVariant.sizeVariants.count) sizes")
-          }
-      if !viewModel.colorsList.isEmpty {
-        cell.updateColorAndSizeDisplay(colorsList: viewModel.colorsList, sizesList: viewModel.sizesList)
-      } else {
-        cell.colorTF.text = ""
-      }
-      
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-        if let color = self.viewModel.colorsList.first(where: { $0.id == variant.colorId }) {
-          cell.colorTF.text = color.name
+        let cell = tableView.dequeueReusableCell(withIdentifier: "AddVariantTableViewCell", for: indexPath) as! AddVariantTableViewCell
+        cell.delegate = self
+
+        let variant = variantArray[indexPath.row]
+
+        // Hide header for first row
+        cell.headerView.isHidden = indexPath.row == 0
+
+        // Restore saved UI values (MOST IMPORTANT FIX)
+        cell.sizeVariants = variant.sizeVariants
+        cell.selectedColorId = variant.colorId
+        cell.images = variant.images
+        cell.imageURLs = variant.imageURLs
+
+        // Restore color selection
+        if let color = viewModel.colorsList.first(where: { $0.id == variant.colorId }) {
+            cell.colorTF.text = color.name
+        } else {
+            cell.colorTF.text = ""
         }
-      }
-      cell.images = variant.images
-      cell.imageURLs = variant.imageURLs
-      for (index, urlString) in cell.imageURLs.enumerated() {
-        guard let url = URL(string: urlString) else { continue }
+
+        // Load images
+        for (index, urlString) in variant.imageURLs.enumerated() {
+            guard let url = URL(string: urlString) else { continue }
+
+            SDWebImageManager.shared.loadImage(
+                with: url,
+                options: [.highPriority, .retryFailed],
+                progress: nil
+            ) { [weak cell] (image, _, _, _, _, _) in
+                guard let cell = cell, let image = image, index < cell.images.count else { return }
+                cell.images[index] = image
+                DispatchQueue.main.async { cell.reloadImageItem(at: index) }
+            }
+        }
+
+        // Reload collection once
+        DispatchQueue.main.async {
+            cell.imagesCollectionView.reloadData()
+        }
+
+        cell.isWomenIsSelected = self.isWomenCategory
+        cell.sizesList = viewModel.sizesList
+
+        // Variant update callback
+        cell.onVariantUpdated = { [weak self] updatedVariant in
+            guard let self = self else { return }
+            self.variantArray[indexPath.row] = updatedVariant
+        }
+
+        // Color picker button
+        cell.onColorButtonTap = { [weak self, weak cell] in
+            guard let self = self, let cell = cell else { return }
+            self.showColorDropdown(from: cell.colorTF, in: cell)
+        }
         
-        SDWebImageManager.shared.loadImage(
-          with: url,
-          options: [.highPriority, .retryFailed],
-          progress: nil
-        ) { [weak cell] (image, _, error, _, _, _) in
-          guard let image = image,
-                let cell = cell,
-                index < cell.images.count else { return }
-          
-          cell.images[index] = image
-          
-          DispatchQueue.main.async {
-            cell.reloadImageItem(at: index)
-          }
-        }
-      }
-      DispatchQueue.main.async {
-        cell.imagesCollectionView.reloadData()
-      }
-      cell.isWomenIsSelected = self.isWomenCategory
-      cell.onColorButtonTap = { [weak self, weak cell] in
-        guard let self = self, let cell = cell else { return }
-        self.showColorDropdown(from: cell.colorTF, in: cell)
-      }
-      return cell
+        return cell
     default:
       return UITableViewCell()
     }
@@ -684,7 +932,7 @@ extension AddNewProductViewController: UICollectionViewDelegate, UICollectionVie
     subCatgeoryTF.text = ""
     selectedSubCategoriesId = -1
     variantTableView.reloadData()
-    updateVariantTableHeight()
+  //  updateVariantTableHeight()
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -696,6 +944,14 @@ extension AddNewProductViewController: UICollectionViewDelegate, UICollectionVie
 }
 
 extension AddNewProductViewController: AddSpecificationCellDelegate, AddVariantCellDelegate {
+    
+    func innerTableViewHeightChanged(from cell: AddVariantTableViewCell) {
+            DispatchQueue.main.async {
+                self.variantTableView.beginUpdates()
+                self.variantTableView.endUpdates()
+            }
+        }
+
   
   func addImageTapped(from cell: AddVariantTableViewCell, at index: Int) {
     ImagePickerHelper.shared.showPickerController { [weak cell] image, imageName in
@@ -722,12 +978,12 @@ extension AddNewProductViewController: AddSpecificationCellDelegate, AddVariantC
     variantTableView.performBatchUpdates({
       variantTableView.deleteRows(at: [indexPath], with: .automatic)
     }, completion: { _ in
-      self.updateVariantTableHeight()
+     // self.updateVariantTableHeight()
       if self.variantArray.isEmpty {
         self.variantArray.append(Variant())
         let newIndexPath = IndexPath(row: 0, section: 0)
         self.variantTableView.insertRows(at: [newIndexPath], with: .automatic)
-        self.updateVariantTableHeight()
+      //  self.updateVariantTableHeight()
       }
     })
   }

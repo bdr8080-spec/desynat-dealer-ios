@@ -43,18 +43,18 @@ class ProductManagementTableViewCell: UITableViewCell {
     
   func configData(data: ProductsList) {
       // Safely extract colors from productVariants
-      var colorsArray: [ColorsLisDataModel] = []
-      
-      if let variants = data.productVariants, !variants.isEmpty {
-          for variant in variants {
-              if let color = variant.color {
-                  colorsArray.append(color)
-              }
-          }
-      }
-      
-      self.coloursList = colorsArray
-      colorsCollectionView.reloadData() // Reload collection view every time
+    var colorsArray: [ColorsLisDataModel] = []
+        if let variants = data.productVariants {
+            var seenHexCodes = Set<String>()
+            for variant in variants {
+                if let color = variant.color, let hex = color.hexCode, !seenHexCodes.contains(hex) {
+                    colorsArray.append(color)
+                    seenHexCodes.insert(hex)
+                }
+            }
+        }
+        self.coloursList = colorsArray
+        colorsCollectionView.reloadData()
       
       // Rest of your UI setup
 //    productNameLabel.text = data.brand?.nameEnglish

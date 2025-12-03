@@ -90,11 +90,6 @@ class ProductsViewController: UIViewController {
       guard let self else { return }
       if success {
         viewModel.getAllProducts(type: selectedTab.rawValue)
-//        self.updateStatusLocally(at: index)
-//        self.productTableView.reloadRows(
-//          at: [IndexPath(row: index, section: 0)],
-//          with: .automatic
-//        )
       }
     }
   }
@@ -108,7 +103,6 @@ class ProductsViewController: UIViewController {
     activeTitleLabel.text = "Active (\(activeCount))"
     inactiveLabel.text = "Inactive (\(inactiveCount))"
   }
-  
   
   func updateStatusLocally(at index: Int) {
     switch selectedTab {
@@ -131,9 +125,6 @@ class ProductsViewController: UIViewController {
       }
     }
   }
-  
-  
-  
   
   func updateTabUI() {
     allTitleLabel.textColor = selectedTab == .all ? .darkBrown : UIColor(named: "#B3B3B3")
