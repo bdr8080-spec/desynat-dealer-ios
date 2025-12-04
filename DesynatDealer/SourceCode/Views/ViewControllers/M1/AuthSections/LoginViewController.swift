@@ -58,11 +58,6 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func btnTapCountryCode(_ sender: UIButton) {
-//        CommonUtils.openPicker(controller: self) { _ , _, callingCode in
-//            self.setUpCountryCode(code: callingCode)
-//            self.countryCode = callingCode
-//        }
-        
         let countryNames = viewModel.countryList.map { country -> String in
             let name = country.name ?? ""
             let dialCode = country.dialCode ?? ""

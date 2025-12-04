@@ -11,8 +11,7 @@ import SDWebImage
 protocol AddVariantCellDelegate: AnyObject {
   func removeVariantTapped(from cell: AddVariantTableViewCell)
   func addImageTapped(from cell: AddVariantTableViewCell, at index: Int)
-    // NEW REQUIRED METHOD
-        func innerTableViewHeightChanged(from cell: AddVariantTableViewCell)
+  func innerTableViewHeightChanged(from cell: AddVariantTableViewCell)
 }
 
 class AddVariantTableViewCell: UITableViewCell {
@@ -32,13 +31,12 @@ class AddVariantTableViewCell: UITableViewCell {
   var selectedColorId: Int? = -1
   var sizeVariants: [SizeVariant] = [SizeVariant()]
   var addedSizeVariantDetails: ((SizeVariant) -> SizeVariant)?
-//  var onAddNewSizeRequested: (() -> Void)?
   var onSizeVariantsChanged: (([SizeVariant]) -> Void)?
   var onVariantUpdated: ((Variant) -> Void)?
   var isWomenIsSelected: Bool = false {
     didSet { sizeVariantTableView.reloadData() }
   }
-    var variant = Variant()
+  var variant = Variant()
   
   private var displayImages: [UIImage?] {
     return [nil] + images
@@ -48,94 +46,68 @@ class AddVariantTableViewCell: UITableViewCell {
     return [nil] + imageURLs
   }
   
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        registerCell()
-        self.sizeVariantTableView.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-//            self.updateTableViewHeight()
-//        }
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    registerCell()
+    self.sizeVariantTableView.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
+  }
+  
+  deinit {
+    // Remove observer
+    self.sizeVariantTableView.removeObserver(self, forKeyPath: "contentSize")
+    //  print("Observer removed for tblClaimQty contentSize")
+  }
+  
+  override func observeValue(forKeyPath keyPath: String?, of object: Any?,
+                             change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    
+    guard keyPath == "contentSize",
+          let newSize = change?[.newKey] as? CGSize else { return }
+    
+    tableViewHeightConstraint.constant = newSize.height
+    self.layoutIfNeeded() // 🔥 required
+    
+    // Notify parent table
+    delegate?.innerTableViewHeightChanged(from: self)
+  }
+  
+  func saveVariantData() {
+    
+    variant.colorId = selectedColorId
+    variant.images = images
+    variant.imageURLs = imageURLs
+    
+    var cleanedSizes: [SizeVariant] = []
+    
+    let totalRows = sizeVariantTableView.numberOfRows(inSection: 0)
+    
+    for row in 0..<totalRows {
+      let indexPath = IndexPath(row: row, section: 0)
+      
+      guard let cell = sizeVariantTableView.cellForRow(at: indexPath) as? AddNewSizeVariantTableViewCell else {
+        continue // skip non-visible cells
+      }
+      
+      // Update model from cell fields
+      cell.saveToModel()
+      let model = cell.sizeVariant
+      
+      // Skip placeholder / empty row
+      if let id = model.sizeId, id != -1 {
+        cleanedSizes.append(model)
+      }
     }
     
-    deinit {
-        // Remove observer
-        self.sizeVariantTableView.removeObserver(self, forKeyPath: "contentSize")
-      //  print("Observer removed for tblClaimQty contentSize")
+    // Update final variant
+    variant.sizeVariants = cleanedSizes
+    
+    print("------ SAVED VARIANT SIZES ------")
+    for (i, s) in cleanedSizes.enumerated() {
+      print("SIZE \(i + 1) → id: \(s.sizeId ?? 0), qty: \(s.totalStock), price: \(s.actualPrice)")
     }
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?,
-                               change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-
-        guard keyPath == "contentSize",
-              let newSize = change?[.newKey] as? CGSize else { return }
-
-        tableViewHeightConstraint.constant = newSize.height
-        self.layoutIfNeeded() // 🔥 required
-
-        // Notify parent table
-        delegate?.innerTableViewHeightChanged(from: self)
-    }
-
-    
-//    func saveVariantData() {
-//        variant.colorId = selectedColorId
-//        variant.images = images
-//        variant.imageURLs = imageURLs
-//
-//        // VERY IMPORTANT
-//        // iterate on sizeVariants array, not visibleCells
-//        for (index, _) in variant.sizeVariants.enumerated() {
-//            let indexPath = IndexPath(row: index, section: 0)
-//
-//            if let sizeCell = sizeVariantTableView.cellForRow(at: indexPath) as? AddNewSizeVariantTableViewCell {
-//                sizeCell.saveToModel() // update model from UI
-//                variant.sizeVariants[index] = sizeCell.sizeVariant
-//            }
-//            // ELSE: cell was not visible → model already has data → keep it
-//        }
-//    }
-    
-    func saveVariantData() {
-
-        variant.colorId = selectedColorId
-        variant.images = images
-        variant.imageURLs = imageURLs
-
-        var cleanedSizes: [SizeVariant] = []
-
-        let totalRows = sizeVariantTableView.numberOfRows(inSection: 0)
-
-        for row in 0..<totalRows {
-            let indexPath = IndexPath(row: row, section: 0)
-
-            guard let cell = sizeVariantTableView.cellForRow(at: indexPath) as? AddNewSizeVariantTableViewCell else {
-                continue // skip non-visible cells
-            }
-
-            // Update model from cell fields
-            cell.saveToModel()
-            let model = cell.sizeVariant
-
-            // Skip placeholder / empty row
-            if let id = model.sizeId, id != -1 {
-                cleanedSizes.append(model)
-            }
-        }
-
-        // Update final variant
-        variant.sizeVariants = cleanedSizes
-
-        print("------ SAVED VARIANT SIZES ------")
-        for (i, s) in cleanedSizes.enumerated() {
-            print("SIZE \(i + 1) → id: \(s.sizeId ?? 0), qty: \(s.totalStock), price: \(s.actualPrice)")
-        }
-        print("--------------------------------")
-    }
-
-
-
-    
-    
+    print("--------------------------------")
+  }
+  
   private func registerCell() {
     imagesCollectionView.delegate = self
     imagesCollectionView.dataSource = self
@@ -182,31 +154,21 @@ class AddVariantTableViewCell: UITableViewCell {
     }
   }
   
-//  func updateColorAndSizeDisplay(colorsList: [ColorsLisDataModel], sizesList: [SizeListDataModel]) {
-//    if let colorId = selectedColorId,
-//       let color = colorsList.first(where: { $0.id == colorId }) {
-//      colorTF.text = color.name
-//    } else {
-//      colorTF.text = ""
-//    }
-//    self.sizesList = sizesList
-//  }
+  func updateColorAndSizeDisplay(colorsList: [ColorsLisDataModel], sizesList: [SizeListDataModel]) {
+    self.sizesList = sizesList
     
-    func updateColorAndSizeDisplay(colorsList: [ColorsLisDataModel], sizesList: [SizeListDataModel]) {
-        self.sizesList = sizesList
-        
-        // Update colorTF only if selectedColorId exists
-        if let colorId = self.selectedColorId,
-           let color = colorsList.first(where: { $0.id == colorId }) {
-            self.colorTF.text = color.name
-        } else if let firstColor = colorsList.first {
-            self.colorTF.text = firstColor.name
-            self.selectedColorId = firstColor.id
-        } else {
-            self.colorTF.text = ""
-        }
+    // Update colorTF only if selectedColorId exists
+    if let colorId = self.selectedColorId,
+       let color = colorsList.first(where: { $0.id == colorId }) {
+      self.colorTF.text = color.name
+    } else if let firstColor = colorsList.first {
+      self.colorTF.text = firstColor.name
+      self.selectedColorId = firstColor.id
+    } else {
+      self.colorTF.text = ""
     }
-
+  }
+  
   
   private func showSizeDropdown(from textField: UITextField, for indexPath: IndexPath) {
     let sizesNames = sizesList.map { $0.name ?? "" }
@@ -272,6 +234,11 @@ extension AddVariantTableViewCell: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "AddNewSizeVariantTableViewCell", for: indexPath) as! AddNewSizeVariantTableViewCell
     let sizeVar = sizeVariants[indexPath.row]
+    if indexPath.row == 0 {
+        cell.plusButonOutlet.isHidden = false
+    } else {
+        cell.plusButonOutlet.isHidden = true
+    }
     cell.sizeVariant = sizeVar
     cell.bustTF.text = sizeVar.bust
     cell.waistTF.text = sizeVar.waist
@@ -285,7 +252,7 @@ extension AddVariantTableViewCell: UITableViewDelegate, UITableViewDataSource {
     cell.finalPriceTF.text = sizeVar.finalPrice
     cell.discountPriceTF.text = sizeVar.discountValue
     cell.discountTypeisPercentage = sizeVar.discountTypeIsPercentage
-   // cell.configure(with: sizeVar)
+    // cell.configure(with: sizeVar)
     if let sizeId = sizeVar.sizeId,
        let sizeModel = self.sizesList.first(where: { $0.id == sizeId }) {
       cell.sizeTF.text = sizeModel.name
@@ -303,10 +270,9 @@ extension AddVariantTableViewCell: UITableViewDelegate, UITableViewDataSource {
       cell.priceView.backgroundColor = UIColor(named: "#FFF7EA")
     } else {
       cell.deleteButtonOutlet.isHidden = false
-      //              cell.titleLabel?.text = "Variant \(indexPath.row + 1)"
     }
     cell.sizesList = self.sizesList
-      
+    
     cell.onSizeButtonTap = { [weak self] in
       guard let self = self else { return }
       guard let indexPath = self.sizeVariantTableView.indexPath(for: cell) else { return }
@@ -324,185 +290,123 @@ extension AddVariantTableViewCell: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension AddVariantTableViewCell: AddNewSizeVariantDelegate {
-    
-    func addNewSizeTapped(from cell: AddNewSizeVariantTableViewCell) {
-
-        // 1. Validate ALL existing rows
-        for row in 0..<sizeVariants.count {
-            guard let cell = sizeVariantTableView.cellForRow(at: IndexPath(row: row, section: 0)) as? AddNewSizeVariantTableViewCell else { continue }
-
-            let error = cell.validateFieldsWithErrors(isWomenCategory: isWomenIsSelected)
-            if !error.isEmpty {
-                CommonUtils.showToast(message: "Please fill all required fields in size row \(row + 1)")
-                return
-            }
-        }
-
-        // 2. Save data of LAST ROW
-        let lastIndex = sizeVariants.count - 1
-        if let lastCell = sizeVariantTableView.cellForRow(at: IndexPath(row: lastIndex, section: 0)) as? AddNewSizeVariantTableViewCell {
-
-            var variant = sizeVariants[lastIndex]
-            variant.sizeId = lastCell.selectedSizeId
-            variant.bust = lastCell.bustTF.text ?? ""
-            variant.waist = lastCell.waistTF.text ?? ""
-            variant.hip = lastCell.hipTF.text ?? ""
-            variant.shoulder = lastCell.shoulderTF.text ?? ""
-            variant.sleeveLength = lastCell.sleeveLengthTF.text ?? ""
-            variant.length = lastCell.lengthTF.text ?? ""
-            variant.totalStock = lastCell.totalStocksTF.text ?? ""
-            variant.sku = lastCell.skuLimitTF.text ?? ""
-            variant.actualPrice = lastCell.actualPriceTF.text ?? ""
-            variant.finalPrice = lastCell.finalPriceTF.text ?? ""
-            variant.discountValue = lastCell.discountPriceTF.text ?? ""
-            variant.discountTypeIsPercentage = lastCell.discountTypeisPercentage
-
-            sizeVariants[lastIndex] = variant
-        }
-
-        // 3. Append new blank variant
-        let newSpec = SizeVariant()
-        sizeVariants.append(newSpec)
-
-        let newIndexPath = IndexPath(row: sizeVariants.count - 1, section: 0)
-        sizeVariantTableView.performBatchUpdates({
-            sizeVariantTableView.insertRows(at: [newIndexPath], with: .automatic)
-        }) { _ in
-            self.sizeVariantTableView.scrollToRow(at: newIndexPath, at: .bottom, animated: true)
-        }
-
-        // 4. Notify parent
-        self.notifyParentIfNeeded()
-    }
-
   
-//  func addNewSizeTapped(from cell: AddNewSizeVariantTableViewCell) {
-//    let lastIndex = sizeVariants.count - 1
-//    if let lastCell = sizeVariantTableView.cellForRow(at: IndexPath(row: lastIndex, section: 0)) as? AddNewSizeVariantTableViewCell {
-//
-//      let error = lastCell.validateFieldsWithErrors(isWomenCategory: isWomenIsSelected)
-//      if !error.isEmpty {
-//        CommonUtils.showToast(message: error)
-//        return
-//      }
-//      var variant = sizeVariants[lastIndex]
-//      variant.sizeId = lastCell.selectedSizeId
-//      variant.bust = lastCell.bustTF.text ?? ""
-//      variant.waist = lastCell.waistTF.text ?? ""
-//      variant.hip = lastCell.hipTF.text ?? ""
-//      variant.shoulder = lastCell.shoulderTF.text ?? ""
-//      variant.sleeveLength = lastCell.sleeveLengthTF.text ?? ""
-//      variant.length = lastCell.lengthTF.text ?? ""
-//      variant.totalStock = lastCell.totalStocksTF.text ?? ""
-//      variant.sku = lastCell.skuLimitTF.text ?? ""
-//      variant.actualPrice = lastCell.actualPriceTF.text ?? ""
-//      variant.finalPrice = lastCell.finalPriceTF.text ?? ""
-//      variant.discountValue = lastCell.discountPriceTF.text ?? ""
-//      variant.discountTypeIsPercentage = lastCell.discountTypeisPercentage
-//      sizeVariants[lastIndex] = variant
-//    }
-//    let newSpec = SizeVariant()
-//    sizeVariants.append(newSpec)
-//    let newIndexPath = IndexPath(row: sizeVariants.count - 1, section: 0)
-//    sizeVariantTableView.performBatchUpdates({
-//      sizeVariantTableView.insertRows(at: [newIndexPath], with: .automatic)
-//    }) { _ in
-//    //  self.updateTableViewHeight()
-//      self.sizeVariantTableView.scrollToRow(at: newIndexPath, at: .bottom, animated: true)
-//    }
-//    self.notifyParentIfNeeded()
-//  }
+  func addNewSizeTapped(from cell: AddNewSizeVariantTableViewCell) {
+    
+    // 1. Validate ALL existing rows
+    for row in 0..<sizeVariants.count {
+      guard let cell = sizeVariantTableView.cellForRow(at: IndexPath(row: row, section: 0)) as? AddNewSizeVariantTableViewCell else { continue }
+      
+      let error = cell.validateFieldsWithErrors(isWomenCategory: isWomenIsSelected)
+      if !error.isEmpty {
+        CommonUtils.showToast(message: "Please fill all required fields in size row \(row + 1)")
+        return
+      }
+    }
+    
+    // 2. Save data of LAST ROW
+    let lastIndex = sizeVariants.count - 1
+    if let lastCell = sizeVariantTableView.cellForRow(at: IndexPath(row: lastIndex, section: 0)) as? AddNewSizeVariantTableViewCell {
+      
+      var variant = sizeVariants[lastIndex]
+      variant.sizeId = lastCell.selectedSizeId
+      variant.bust = lastCell.bustTF.text ?? ""
+      variant.waist = lastCell.waistTF.text ?? ""
+      variant.hip = lastCell.hipTF.text ?? ""
+      variant.shoulder = lastCell.shoulderTF.text ?? ""
+      variant.sleeveLength = lastCell.sleeveLengthTF.text ?? ""
+      variant.length = lastCell.lengthTF.text ?? ""
+      variant.totalStock = lastCell.totalStocksTF.text ?? ""
+      variant.sku = lastCell.skuLimitTF.text ?? ""
+      variant.actualPrice = lastCell.actualPriceTF.text ?? ""
+      variant.finalPrice = lastCell.finalPriceTF.text ?? ""
+      variant.discountValue = lastCell.discountPriceTF.text ?? ""
+      variant.discountTypeIsPercentage = lastCell.discountTypeisPercentage
+      
+      sizeVariants[lastIndex] = variant
+    }
+    
+    // 3. Append new blank variant
+    let newSpec = SizeVariant()
+    sizeVariants.append(newSpec)
+    
+    let newIndexPath = IndexPath(row: sizeVariants.count - 1, section: 0)
+    sizeVariantTableView.performBatchUpdates({
+      sizeVariantTableView.insertRows(at: [newIndexPath], with: .automatic)
+    }) { _ in
+      self.sizeVariantTableView.scrollToRow(at: newIndexPath, at: .bottom, animated: true)
+    }
+    
+    // 4. Notify parent
+    self.notifyParentIfNeeded()
+  }
   
   private func notifyParentIfNeeded() {
-          // Create a temporary Variant object to send
-          var currentVariant = Variant()
-          currentVariant.sizeVariants = self.sizeVariants
-          currentVariant.colorId = self.selectedColorId
-          currentVariant.images = self.images
-          currentVariant.imageURLs = self.imageURLs
-
-          // Option 1: Only sizeVariants
-          onSizeVariantsChanged?(self.sizeVariants)
-
-          // Option 2: Full variant (RECOMMENDED)
-          onVariantUpdated?(currentVariant)
-      }
+    // Create a temporary Variant object to send
+    var currentVariant = Variant()
+    currentVariant.sizeVariants = self.sizeVariants
+    currentVariant.colorId = self.selectedColorId
+    currentVariant.images = self.images
+    currentVariant.imageURLs = self.imageURLs
+    
+    // Option 1: Only sizeVariants
+    onSizeVariantsChanged?(self.sizeVariants)
+    
+    // Option 2: Full variant (RECOMMENDED)
+    onVariantUpdated?(currentVariant)
+  }
   
-    func removeSizeTapped(from cell: AddNewSizeVariantTableViewCell) {
-        guard let indexPath = sizeVariantTableView.indexPath(for: cell) else { return }
-
-        // Minimum 1 variant allowed
-        guard sizeVariants.count > 1 else { return }
-
-        sizeVariants.remove(at: indexPath.row)
-
-        sizeVariantTableView.beginUpdates()
-        sizeVariantTableView.deleteRows(at: [indexPath], with: .automatic)
-        sizeVariantTableView.endUpdates()
-
-        // Notify parent table for height update
-        delegate?.innerTableViewHeightChanged(from: self)
-    }
-
+  func removeSizeTapped(from cell: AddNewSizeVariantTableViewCell) {
+    guard let indexPath = sizeVariantTableView.indexPath(for: cell) else { return }
+    
+    // Minimum 1 variant allowed
+    guard sizeVariants.count > 1 else { return }
+    
+    sizeVariants.remove(at: indexPath.row)
+    
+    sizeVariantTableView.beginUpdates()
+    sizeVariantTableView.deleteRows(at: [indexPath], with: .automatic)
+    sizeVariantTableView.endUpdates()
+    
+    // Notify parent table for height update
+    delegate?.innerTableViewHeightChanged(from: self)
+  }
+  
 }
 
 extension AddVariantTableViewCell {
   
-//  func validateFieldsWithErrors() -> String {
-//
-//    func isEmpty(_ text: String?) -> Bool {
-//      return text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true
-//    }
-//
-//    if isEmpty(imageURLs.first) { return "Please upload image"}
-//    if isEmpty(colorTF.text) { return "Please select colour" }
-//    for (index, _) in sizeVariants.enumerated() {
-//      let indexPath = IndexPath(row: index, section: 0)
-//      guard let sizeCell = sizeVariantTableView.cellForRow(at: indexPath) as? AddNewSizeVariantTableViewCell else {
-//        continue
-//      }
-//
-//      let error = sizeCell.validateFieldsWithErrors(isWomenCategory: isWomenIsSelected)
-//      if !error.isEmpty { return error }
-//
-//      sizeCell.saveToModel()              // <--- Save cell data
-//      sizeVariants[index] = sizeCell.sizeVariant
-//    }
-//
-//    return ""
-//  }
-  
-    func validateFieldsWithErrors() -> String {
-
-        func isEmpty(_ text: String?) -> Bool {
-            return text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true
-        }
-
-        // Variant level checks
-        if imageURLs.isEmpty { return "Please upload image" }
-        if isEmpty(colorTF.text) { return "Please select colour" }
-
-        // SIZE LEVEL VALIDATION
-        if sizeVariants.isEmpty { return "Please add at least one size" }
-
-        for (index, size) in sizeVariants.enumerated() {
-            let indexPath = IndexPath(row: index, section: 0)
-
-            guard let sizeCell = sizeVariantTableView.cellForRow(at: indexPath) as? AddNewSizeVariantTableViewCell else {
-                continue
-            }
-
-            let sizeError = sizeCell.validateFieldsWithErrors(isWomenCategory: isWomenIsSelected)
-            if !sizeError.isEmpty {
-                return sizeError
-            }
-
-            // Save size data into model
-            sizeCell.saveToModel()
-            sizeVariants[index] = sizeCell.sizeVariant
-        }
-
-        return ""
+  func validateFieldsWithErrors() -> String {
+    
+    func isEmpty(_ text: String?) -> Bool {
+      return text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true
     }
-
+    
+    // Variant level checks
+    if imageURLs.isEmpty { return "Please upload image" }
+    if isEmpty(colorTF.text) { return "Please select colour" }
+    
+    // SIZE LEVEL VALIDATION
+    if sizeVariants.isEmpty { return "Please add at least one size" }
+    
+    for (index, size) in sizeVariants.enumerated() {
+      let indexPath = IndexPath(row: index, section: 0)
+      
+      guard let sizeCell = sizeVariantTableView.cellForRow(at: indexPath) as? AddNewSizeVariantTableViewCell else {
+        continue
+      }
+      
+      let sizeError = sizeCell.validateFieldsWithErrors(isWomenCategory: isWomenIsSelected)
+      if !sizeError.isEmpty {
+        return sizeError
+      }
+      
+      // Save size data into model
+      sizeCell.saveToModel()
+      sizeVariants[index] = sizeCell.sizeVariant
+    }
+    
+    return ""
+  }
+  
 }

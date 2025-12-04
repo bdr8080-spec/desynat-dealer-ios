@@ -30,8 +30,8 @@ class ProductsViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    viewModel.getBrandListApi()
-    viewModel.getCategoriesListApi()
+//    viewModel.getBrandListApi()
+//    viewModel.getCategoriesListApi()
     searchTF.delegate = self
   }
   

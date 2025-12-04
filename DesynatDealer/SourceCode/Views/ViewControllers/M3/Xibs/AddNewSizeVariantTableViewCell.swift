@@ -257,19 +257,6 @@ extension AddNewSizeVariantTableViewCell: UITextFieldDelegate {
            isEditingField = true
        }
 
-//       func textFieldDidEndEditing(_ textField: UITextField) {
-//           isEditingField = false
-//           saveToModel()
-//       }
-
-
-//    func textField(_ textField: UITextField,
-//                   shouldChangeCharactersIn range: NSRange,
-//                   replacementString string: String) -> Bool {
-//        // Just allow typing
-//        return true
-//    }
-  
 //  // MARK: ONE AND ONLY shouldChangeCharactersIn
   func textField(_ textField: UITextField,
                  shouldChangeCharactersIn range: NSRange,
