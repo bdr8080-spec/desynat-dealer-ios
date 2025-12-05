@@ -19,7 +19,7 @@ final class NetworkManager {
                                requestMethod method: HTTPMethod = .get,
                                requestParams params: Dictionary<String, Any>? = nil,
                                encoding:ParameterEncoding? = URLEncoding.default,
-                               requestModel model: T.Type,kkk
+                               requestModel model: T.Type,
                                completion: @escaping ResultHandler<BaseResponse<T>>) {
         
         guard NetworkReachabilityManager()?.isReachable == true else {

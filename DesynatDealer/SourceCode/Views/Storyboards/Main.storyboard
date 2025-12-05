@@ -5321,6 +5321,7 @@ you for your patience. Team Desynat App</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="currentLocationButton" destination="psB-wW-JxM" id="fJI-4f-A6y"/>
                         <outlet property="lblLocation" destination="xzG-ij-1aM" id="eek-ta-MEe"/>
                         <outlet property="txtSearch" destination="CcI-Fe-2es" id="RJm-hP-cnK"/>
                         <outlet property="viewMap" destination="0HC-bb-X3m" id="e4O-dM-NsS"/>

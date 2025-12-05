@@ -47,8 +47,6 @@ class UploadDocumnetViewController: UIViewController {
     
     @IBAction func backDidTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
-        print(self.navigationController)
-        print("back tapped===>")
     }
     
     @IBAction func submitDidTapped(_ sender: Any) {
@@ -89,21 +87,7 @@ class UploadDocumnetViewController: UIViewController {
     }
     
     @IBAction func storeDocumentDidTapped(_ sender: UIButton) {
-//        ImagePickerManager().pickImage(self) { [weak self] image, fileName, url in
-//            guard let self = self else { return }
-//            DispatchQueue.main.async {
-//                if sender.tag == 0 {
-//                    self.storeDocImage1.image = image
-//                    self.selectedStoreDoc1 = image
-//                } else {
-//                    self.storeDocImage2.image = image
-//                    self.selectedStoreDoc2 = image
-//                }
-//            }
-//        }
-        
         let tag = sender.tag
-        
         if tag == 0 {
             ImagePickerHelper.shared.showPickerController {  image , imageName in
                 if let image = image {
@@ -151,14 +135,6 @@ class UploadDocumnetViewController: UIViewController {
     }
     
     @IBAction func accountHolderImageDidTapped(_ sender: Any) {
-//        ImagePickerManager().pickImage(self) { [weak self] image, fileName, url in
-//            guard let self = self else { return }
-//            DispatchQueue.main.async {
-//                self.accountHolderImageView.image = image
-//                self.selectedAccountHolderDoc = image
-//                
-//            }
-//        }
         ImagePickerHelper.shared.showPickerController {  image , imageName in
             if let image = image {
                 WebService.sharedInstance.uploadImage(withParams: image) { imageURL in

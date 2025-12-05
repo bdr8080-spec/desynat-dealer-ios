@@ -47,57 +47,17 @@ class StoreInformationViewController: UIViewController {
     }
     
     @IBAction func addressDidTapped(_ sender: Any) {
-//        let vc = LocationViewController.instantiate(fromAppStoryboard: .Main)
-//
-//        vc.locationCallBack = { [weak self] address, locality, city, state, country, pincode, lat, long in
-//            guard let self = self else { return }
-//            let safeAddress = address.isEmpty ? "" : address
-//            let safeLocality = locality.isEmpty ? "" : locality
-//            let safeCity = city.isEmpty ? "" : city
-//            let safeState = state.isEmpty ? "" : state
-//            let safeCountry = country.isEmpty ? "" : country
-//            let safePincode = pincode.isEmpty ? "" : pincode
-//
-//            let lineTwoData = [safeCity, safeState]
-//                .filter { !$0.isEmpty }
-//                .joined(separator: ", ")
-//                + (safePincode.isEmpty ? "" : " - \(safePincode)")
-//
-//            self.storeAddressTextField.text = safeAddress
-//
-//            if safeLocality.isEmpty {
-//                // If locality (line 1) is empty → use city/state/pincode data
-//                self.addressLineOneTextField.text = lineTwoData
-//                self.addressLineTwoTextField.text = ""
-//            } else {
-//                // Otherwise show proper structured data
-//                self.addressLineOneTextField.text = safeLocality
-//                self.addressLineTwoTextField.text = lineTwoData
-//            }
-//            self.lat = lat
-//            self.long = long
-//        }
-        
-        
-        
-        
         let vc = LocationViewController.instantiate(fromAppStoryboard: .Main)
-           
            vc.locationCallBack = { [weak self] address, locality, city, state, country, pincode, lat, long in
                guard let self = self else { return }
-               
-               // ✅ Safely unwrap each value with fallbacks
                let safeAddress = address.isEmpty ? "" : address
                let safeLocality = locality.isEmpty ? "" : locality
                let safeCity = city.isEmpty ? "" : city
                let safeState = state.isEmpty ? "" : state
                let safeCountry = country.isEmpty ? "" : country
                let safePincode = pincode.isEmpty ? "" : pincode
-               
-               // ✅ Assign values properly to all fields
                self.storeAddressTextField.text = safeAddress
                self.addressLineOneTextField.text = safeLocality
-//               self.addressLineTwoTextField.text = "\(safeCity), \(safeState) - \(safePincode)"
                var components: [String] = []
 
                if !safeCity.isEmpty {
@@ -112,17 +72,11 @@ class StoreInformationViewController: UIViewController {
                if !safePincode.isEmpty {
                    address += " - \(safePincode)"
                }
-
                self.addressLineTwoTextField.text = address
-
-//               self.txtCountry.text = safeCountry
-               
                self.lat = lat
                self.long = long
            }
-           
            self.navigationController?.pushViewController(vc, animated: true)
-
         }
 
     

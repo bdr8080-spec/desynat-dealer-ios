@@ -620,6 +620,7 @@
 		D1C88BBB2ECEFBED006B02A2 /* AddNewProductDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C88BBA2ECEFBED006B02A2 /* AddNewProductDataModel.swift */; };
 		D1C88BBE2ECF0F56006B02A2 /* AddVariantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C88BBC2ECF0F56006B02A2 /* AddVariantTableViewCell.swift */; };
 		D1C88BBF2ECF0F56006B02A2 /* AddVariantTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1C88BBD2ECF0F56006B02A2 /* AddVariantTableViewCell.xib */; };
+		D1D328222EE2B79F0052431A /* InventoryAffilate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1D328212EE2B79F0052431A /* InventoryAffilate.storyboard */; };
 		D1EDDB902ECED7EA0082D0A9 /* AddNewProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1EDDB8F2ECED7EA0082D0A9 /* AddNewProductViewController.swift */; };
 		D1EDDC162ECEECE20082D0A9 /* FilterOptionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1EDDC142ECEECE20082D0A9 /* FilterOptionsTableViewCell.swift */; };
 		D1EDDC172ECEECE20082D0A9 /* FilterOptionsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1EDDC152ECEECE20082D0A9 /* FilterOptionsTableViewCell.xib */; };
@@ -1253,6 +1254,7 @@
 		D1C88BBA2ECEFBED006B02A2 /* AddNewProductDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewProductDataModel.swift; sourceTree = "<group>"; };
 		D1C88BBC2ECF0F56006B02A2 /* AddVariantTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVariantTableViewCell.swift; sourceTree = "<group>"; };
 		D1C88BBD2ECF0F56006B02A2 /* AddVariantTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddVariantTableViewCell.xib; sourceTree = "<group>"; };
+		D1D328212EE2B79F0052431A /* InventoryAffilate.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = InventoryAffilate.storyboard; sourceTree = "<group>"; };
 		D1EDDB8F2ECED7EA0082D0A9 /* AddNewProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewProductViewController.swift; sourceTree = "<group>"; };
 		D1EDDC142ECEECE20082D0A9 /* FilterOptionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterOptionsTableViewCell.swift; sourceTree = "<group>"; };
 		D1EDDC152ECEECE20082D0A9 /* FilterOptionsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterOptionsTableViewCell.xib; sourceTree = "<group>"; };
@@ -1269,6 +1271,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		D1D328742EE2B9060052431A /* M4 */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = M4;
+			sourceTree = "<group>";
+		};
 		D1EDDC112ECEEBDF0082D0A9 /* ProductFilter */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = ProductFilter;
@@ -1383,6 +1390,7 @@
 				6B38D0592EB3473B00C41192 /* Main.storyboard */,
 				7A54F9EF2EC1D2170027710A /* Profile.storyboard */,
 				D1AD19FB2ECDF3C4007E1488 /* Product.storyboard */,
+				D1D328212EE2B79F0052431A /* InventoryAffilate.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1499,6 +1507,7 @@
 		6B38D07E2EB3473B00C41192 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				D1D328742EE2B9060052431A /* M4 */,
 				7A1F4AF42ECD8C3B00644235 /* M3 */,
 				6B38D07D2EB3473B00C41192 /* M1 */,
 				D19666992EBCD07500193688 /* M2 */,
@@ -2378,6 +2387,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				D1D328742EE2B9060052431A /* M4 */,
 				D1EDDC112ECEEBDF0082D0A9 /* ProductFilter */,
 			);
 			name = DesynatDealer;
@@ -2495,6 +2505,7 @@
 				6B38D33A2EB3657F00C41192 /* CR.png in Resources */,
 				6B38D33B2EB3657F00C41192 /* GA.png in Resources */,
 				6B38D33C2EB3657F00C41192 /* BI.png in Resources */,
+				D1D328222EE2B79F0052431A /* InventoryAffilate.storyboard in Resources */,
 				6B38D33D2EB3657F00C41192 /* Cape-Verde.png in Resources */,
 				6B38D33E2EB3657F00C41192 /* GR.png in Resources */,
 				6B38D33F2EB3657F00C41192 /* GT.png in Resources */,
