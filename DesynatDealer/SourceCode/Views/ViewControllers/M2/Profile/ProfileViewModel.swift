@@ -8,11 +8,13 @@
 
 import Foundation
 import UIKit
+import SDWebImage
 
 class ProfileViewModel {
     
-    private var hostVC: ProfileViewController
-    
+  private var hostVC: ProfileViewController
+  var userProfile: SellerProfileDataModel?
+  
     init(hostVC: ProfileViewController) {
         self.hostVC = hostVC
     }
@@ -24,5 +26,27 @@ class ProfileViewModel {
             UserDefaults.standard.setValue("No", forKey:"isLogin")
         }
     }
+  
+  func getUserProfile(){
+    WebService.sharedInstance.getUserProfile { [weak self] response in
+      guard let self else { return }
+      userProfile = response
+      populateData(data: response)
+    }
+  }
+  
+  func populateData(data: SellerProfileDataModel) {
+    if let imageUrlString = data.profilePic,
+       let url = URL(string: imageUrlString) {
+      hostVC.userProfileImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+      hostVC.userProfileImageView.sd_imageIndicator?.startAnimatingIndicator()
+      hostVC.userProfileImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
+    } else {
+      hostVC.userProfileImageView.image = UIImage(named: "")
+    }
+    
+    hostVC.usernameLabel.text = "\(data.firstName ?? "") \(data.lastName ?? "")"
+    hostVC.userEmailLabel.text = data.email
+  }
 
 }

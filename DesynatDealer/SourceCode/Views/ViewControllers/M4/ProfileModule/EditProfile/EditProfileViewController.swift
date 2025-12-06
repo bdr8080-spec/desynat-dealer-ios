@@ -25,7 +25,8 @@ class EditProfileViewController: UIViewController {
   @IBOutlet weak var personalAccountImage: UIImageView!
   @IBOutlet weak var businessAccountImage: UIImageView!
   @IBOutlet weak var userProfileImageView: CustomImageView!
-  @IBOutlet weak var fullNameTF: UITextField!
+  @IBOutlet weak var firsNameTF: UITextField!
+  @IBOutlet weak var lastNameTF: UITextField!
   @IBOutlet weak var mobileTF: UITextField!
   @IBOutlet weak var countrycodeTF: UITextField!
   @IBOutlet weak var emailTF: UITextField!
@@ -45,14 +46,16 @@ class EditProfileViewController: UIViewController {
   var storeImageUrl: String = ""
   var bankProofUrl: String = ""
   private lazy var viewModel = EditProfileViewModel(hostVC: self)
-  private var lat: Double? = 0.0
-  private var long: Double? = 0.0
+  var lat: Double? = 0.0
+  var long: Double? = 0.0
+  var countryId = 0
   
   override func viewDidLoad() {
     super.viewDidLoad()
     personalInfoStackView.isHidden = false
     bankDetailsStackView.isHidden = true
     setAllTextFieldDelegates()
+    viewModel.countryListApi()
     viewModel.getUserProfile()
   }
   
@@ -179,8 +182,37 @@ class EditProfileViewController: UIViewController {
     }
   }
   
+  @IBAction func saveChangesDidTapped(_ sender: Any) {
+    if viewModel.validStoreInfoFields() {
+      viewModel.updateStoreInfoDocumentApi()
+    }
+  }
+  
+  @IBAction func storePhoneCountryCodeAction(_ sender: UIButton) {
+    let countryNames = viewModel.countryList.map { country -> String in
+        let name = country.name ?? ""
+        let dialCode = country.dialCode ?? ""
+        let flag = country.flag ?? "🇰🇼"
+        return "\(flag)  \(name) (\(dialCode))"
+    }
+
+    kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
+        let selectedCountry = self.viewModel.countryList[index]
+        let code = selectedCountry.dialCode ?? "+965"
+        self.storeCountryCodeTF.text = code
+    }
+  }
+  
+  @IBAction func btnTapCountry(_ sender: UIButton) {
+      let countryNames = viewModel.countryList.map { $0.name ?? ""}
+      kSharedAppDelegate.dropDown(dataSource:countryNames, anchorView:sender) { index, item in
+          self.contryTF.text = item
+          self.countryId = self.viewModel.countryList[index].id ?? 0
+      }
+  }
+  
   private func setAllTextFieldDelegates() {
-    let textFields: [UITextField] = [accountHolderNameTF,bankNameTF,swiftTF, ibanTF, fullNameTF,  mobileTF, countrycodeTF, emailTF, storeNameTF,  contryTF, storeAddressTF,addressLineOneTF, addressLineTwoTF, storePhoneTF, storeCountryCodeTF, storeEmailTF]
+    let textFields: [UITextField] = [accountHolderNameTF,bankNameTF,swiftTF, ibanTF, firsNameTF, lastNameTF,  mobileTF, countrycodeTF, emailTF, storeNameTF,  contryTF, storeAddressTF,addressLineOneTF, addressLineTwoTF, storePhoneTF, storeCountryCodeTF, storeEmailTF]
     textFields.forEach { $0.delegate = self }
   }
   
@@ -196,7 +228,8 @@ class EditProfileViewController: UIViewController {
     } else {
       userProfileImageView.image = UIImage(named: "")
     }
-    fullNameTF.text = "\(data?.firstName ?? "") \(data?.lastName ?? "")"
+    firsNameTF.text = data?.firstName
+    lastNameTF.text = data?.lastName
     mobileTF.text = data?.mobile
     countrycodeTF.text = data?.countryCode
     emailTF.text = data?.email
@@ -210,7 +243,8 @@ class EditProfileViewController: UIViewController {
       storeImageView.image = UIImage(named: "")
     }
     storeNameTF.text = data?.storeInfo?.storeName
-    contryTF.text = data?.storeInfo?.country
+    countryId = Int(data?.storeInfo?.country ?? "0") ?? 0
+    contryTF.text = data?.storeInfo?.countryInfo?.name
     storeAddressTF.text = data?.storeInfo?.storeAddress
     addressLineOneTF.text = data?.storeInfo?.addressLine1
     addressLineTwoTF.text = data?.storeInfo?.addressLine2

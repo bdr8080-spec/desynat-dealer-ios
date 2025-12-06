@@ -224,13 +224,6 @@ extension AddNewSizeVariantTableViewCell {
 
 // MARK: - UITextFieldDelegate + Validation (Add inside AddNewSizeVariantTableViewCell)
 extension AddNewSizeVariantTableViewCell: UITextFieldDelegate {
-  
-//  private func setupTextFieldDelegates() {
-//    let fields: [UITextField] = [ bustTF, waistTF, hipTF, shoulderTF, sleeveLengthTF, lengthTF,totalStocksTF,actualPriceTF, finalPriceTF,discountPriceTF, skuLimitTF]
-//    fields.forEach { $0.delegate = self }
-//
-//  }
-  
     func setupTextFieldDelegates() {
         let textFields: [UITextField] = [
             sizeTF, bustTF, waistTF, hipTF, shoulderTF,

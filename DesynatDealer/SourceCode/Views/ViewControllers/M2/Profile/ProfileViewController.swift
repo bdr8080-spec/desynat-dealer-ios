@@ -9,6 +9,7 @@ import UIKit
 
 class ProfileViewController: UIViewController {
   
+  @IBOutlet weak var userEmailLabel: UILabel!
   @IBOutlet weak var usernameLabel: UILabel!
   @IBOutlet weak var userProfileImageView: CustomImageView!
   @IBOutlet weak var sideMenuHeightConstaint: NSLayoutConstraint!
@@ -20,13 +21,13 @@ class ProfileViewController: UIViewController {
   
   private var sideMenuData: [SideMenuModel] = [
     SideMenuModel(title: "Inventory management ", image: "inventory"),
+    SideMenuModel(title: "Affiliated Commission", image: "affiliated"),
     SideMenuModel(title: "Staff management", image: "staffMan"),
     SideMenuModel(title: "Subscription Plans", image: "subscriptionPlan"),
     SideMenuModel(title: "Banner management", image: "bannerMan"),
     SideMenuModel(title: "Live Coverage request", image: "liveCoverage"),
     SideMenuModel(title: "Deals management", image: "dealsMan"),
     SideMenuModel(title: "Refund management", image: "refundMan"),
-    SideMenuModel(title: "Affiliated Commission", image: "affiliated"),
     SideMenuModel(title: "Terms & Condition", image: "termsCond"),
     SideMenuModel(title: "Return Policy", image: "returnPolicy"),
     SideMenuModel(title: "About Us", image: "aboutUS"),
@@ -42,6 +43,11 @@ class ProfileViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    viewModel.getUserProfile()
   }
   
   override func viewDidLayoutSubviews() {
@@ -115,6 +121,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
       self.navigationController?.pushViewController(nextVC, animated: true)
     case "Affiliated Commission":
       let nextVC = AffiliatedCommisionViewController.instantiate(fromAppStoryboard: .InventoryAffilate)
+      nextVC.commissionValue = viewModel.userProfile?.affilateCommission
       self.navigationController?.pushViewController(nextVC, animated: true)
       
     case "Terms & Condition":

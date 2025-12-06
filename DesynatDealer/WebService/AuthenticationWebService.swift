@@ -466,7 +466,6 @@ extension WebService {
     func getProductDetailsService(param: [String:Any], completion:@escaping (_ user:ProductsList)-> Void) {
         CommonUtils.showHud(show: true)
         NetworkManager.shared.request(withAPI:.endpoint(.getProductsDetails), requestMethod: .post, requestParams: param, requestModel:ProductsList.self) { result, code in
-            
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
@@ -575,6 +574,70 @@ extension WebService {
         completion(response)
       }
     }
+  }
+  
+  func getInventoryListServices(param: [String :Any], completion:@escaping (_ user: InventoryListDataModel)-> Void) {
+      CommonUtils.showHud(show: true)
+      NetworkManager.shared.request(withAPI:.endpoint(.allInventoryList), requestMethod: .post, requestParams: param, requestModel:InventoryListDataModel.self) { result, code in
+          CommonUtils.showHud(show: false)
+          self.evaluateWebServiceResponse(response: result) { response, message,error in
+              guard let user = response else {
+                  if let error {
+                      UIApplication.shared.topViewController()?.showAlert(msg: error)
+                  }
+                  return
+              }
+              completion(user)
+          }
+      }
+  }
+  
+  func updateInventoryActiveStatus(param: [String :Any], completion:@escaping (_ user: EmptyModel)-> Void) {
+      CommonUtils.showHud(show: true)
+      NetworkManager.shared.request(withAPI:.endpoint(.productsActiveStatus), requestMethod: .put, requestParams: param, requestModel:EmptyModel.self) { result, code in
+          CommonUtils.showHud(show: false)
+          self.evaluateWebServiceResponse(response: result) { response, message,error in
+              guard let user = response else {
+                  if let error {
+                      UIApplication.shared.topViewController()?.showAlert(msg: error)
+                  }
+                  return
+              }
+              completion(user)
+          }
+      }
+  }
+  
+  func updateInventoryDetails(param: [String :Any], completion:@escaping (_ user: EmptyModel)-> Void) {
+      CommonUtils.showHud(show: true)
+      NetworkManager.shared.request(withAPI:.endpoint(.updateInventoryDetails), requestMethod: .put, requestParams: param, requestModel:EmptyModel.self) { result, code in
+          CommonUtils.showHud(show: false)
+          self.evaluateWebServiceResponse(response: result) { response, message,error in
+              guard let user = response else {
+                  if let error {
+                      UIApplication.shared.topViewController()?.showAlert(msg: error)
+                  }
+                  return
+              }
+              completion(user)
+          }
+      }
+  }
+  
+  func updateAffiliated(param: [String :Any], completion:@escaping (_ user: EmptyModel)-> Void) {
+      CommonUtils.showHud(show: true)
+      NetworkManager.shared.request(withAPI:.endpoint(.updateAffiliatedValue), requestMethod: .put, requestParams: param, requestModel:EmptyModel.self) { result, code in
+          CommonUtils.showHud(show: false)
+          self.evaluateWebServiceResponse(response: result) { response, message,error in
+              guard let user = response else {
+                  if let error {
+                      UIApplication.shared.topViewController()?.showAlert(msg: error)
+                  }
+                  return
+              }
+              completion(user)
+          }
+      }
   }
     
 }

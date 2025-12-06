@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class DelearProfileViewController: UIViewController {
   
@@ -30,8 +31,40 @@ class DelearProfileViewController: UIViewController {
     }
   }
   
+  @IBOutlet weak var storeImageView: UIImageView!
+  @IBOutlet weak var userProfileImageView: CustomImageView!
+  @IBOutlet weak var userNameLabel: UILabel!
+  @IBOutlet weak var userMobileLabel: UILabel!
+  @IBOutlet weak var useremailLabel: UILabel!
+  @IBOutlet weak var ratingCountLabel: UILabel!
+  @IBOutlet weak var storeNameLabel: UILabel!
+  @IBOutlet weak var storePhoneLabel: UILabel!
+  @IBOutlet weak var storeEmailLabel: UILabel!
+  @IBOutlet weak var storeAddressLabel: UILabel!
+  @IBOutlet weak var bioLabel: UILabel!
+  @IBOutlet weak var fronOwnerImageView: CustomImageView!
+  @IBOutlet weak var backOwnerImageView: CustomImageView!
+  @IBOutlet weak var storeFrontImageView: CustomImageView!
+  @IBOutlet weak var storebackImageView: CustomImageView!
+  @IBOutlet weak var accountTypeLabel: UILabel!
+  @IBOutlet weak var ibanLabel: UILabel!
+  @IBOutlet weak var swiftLabel: UILabel!
+  @IBOutlet weak var swiftView: UIView!
+  @IBOutlet weak var banknameLabel: UILabel!
+  @IBOutlet weak var accountHolderNameLabel: UILabel!
+  @IBOutlet weak var proofDocumentImageView: CustomImageView!
+  @IBOutlet weak var ibanView: UIView!
+  
+  private lazy var viewModel = DelearProfileViewModel(hostVC: self)
+  
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    viewModel.getUserProfile()
   }
   
   override func viewWillLayoutSubviews() {
@@ -70,6 +103,94 @@ class DelearProfileViewController: UIViewController {
   @IBAction func editPencilDidTapped(_ sender: Any) {
     let nextVC = EditProfileViewController.instantiate(fromAppStoryboard: .Profile)
     self.navigationController?.pushViewController(nextVC, animated: true)
+  }
+  
+  func populateData() {
+    let data = viewModel.userProfile
+    
+    if let imageUrlString = data?.profilePic,
+       let url = URL(string: imageUrlString) {
+      userProfileImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+      userProfileImageView.sd_imageIndicator?.startAnimatingIndicator()
+      userProfileImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
+    } else {
+      userProfileImageView.image = UIImage(named: "")
+    }
+    
+    if let storeImageUrl = data?.storeInfo?.storeImage,
+       let url = URL(string: storeImageUrl) {
+      storeImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+      storeImageView.sd_imageIndicator?.startAnimatingIndicator()
+      storeImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
+    }
+    
+    userNameLabel.text = "\(data?.firstName ?? "") \(data?.lastName ?? "")"
+    userMobileLabel.text = "\(data?.countryCode ?? "+965")\(data?.mobile ?? "")"
+    useremailLabel.text = data?.email
+    
+    storeNameLabel.text = data?.storeInfo?.storeName
+    storePhoneLabel.text = "\(data?.storeInfo?.countryCode ?? "+965")\(data?.storeInfo?.storePhone ?? "")"
+    storeEmailLabel.text = data?.storeInfo?.storeMailID
+    storeAddressLabel.text = "\(data?.storeInfo?.storeAddress ?? "") \(data?.storeInfo?.addressLine1 ?? "") \(data?.storeInfo?.addressLine2 ?? "")"
+    bioLabel.text = data?.storeInfo?.bio
+    
+    if let storeImageUrl = data?.ownerDocument?.first?.documentPath,
+       let url = URL(string: storeImageUrl) {
+      fronOwnerImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+      fronOwnerImageView.sd_imageIndicator?.startAnimatingIndicator()
+      fronOwnerImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
+    }
+    
+    if let storeImageUrl = data?.ownerDocument?.last?.documentPath,
+       let url = URL(string: storeImageUrl) {
+      backOwnerImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+      backOwnerImageView.sd_imageIndicator?.startAnimatingIndicator()
+      backOwnerImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
+    }
+    
+    if let storeImageUrl = data?.storeDocument?.first?.documentPath,
+       let url = URL(string: storeImageUrl) {
+      storeFrontImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+      storeFrontImageView.sd_imageIndicator?.startAnimatingIndicator()
+      storeFrontImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
+    }
+    
+    if let storeImageUrl = data?.storeDocument?.last?.documentPath,
+       let url = URL(string: storeImageUrl) {
+      storebackImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+      storebackImageView.sd_imageIndicator?.startAnimatingIndicator()
+      storebackImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
+    }
+    
+    let type = data?.sellerBankDetails?.accountType ?? "0"
+    if type == "0" {
+        accountTypeLabel.text = "Personal"
+    } else {
+        accountTypeLabel.text = "Business"
+    }
+    
+    if let iban = data?.sellerBankDetails?.iban, !iban.isEmpty {
+        ibanView.isHidden = false
+        ibanLabel.text = iban
+    } else {
+        ibanView.isHidden = true
+    }
+    
+    if let swift = data?.sellerBankDetails?.swift, !swift.isEmpty {
+        swiftView.isHidden = false
+        swiftLabel.text = swift
+    } else {
+        swiftView.isHidden = true
+    }
+    banknameLabel.text = data?.sellerBankDetails?.bankName
+    accountHolderNameLabel.text = data?.sellerBankDetails?.accountHolderName
+    
+    if let storeImageUrl = data?.sellerBankDetails?.uploadProof,
+       let url = URL(string: storeImageUrl) {
+      proofDocumentImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+      proofDocumentImageView.sd_imageIndicator?.startAnimatingIndicator()
+      proofDocumentImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
+    }
   }
   
 

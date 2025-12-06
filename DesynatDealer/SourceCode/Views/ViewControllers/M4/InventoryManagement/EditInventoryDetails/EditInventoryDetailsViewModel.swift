@@ -10,8 +10,43 @@ import Foundation
 class EditInventoryDetailsViewModel {
   
   private var hostVC: EditInventoryDetailsViewController?
+  var productDetails: ProductsList?
   
   init(hostVC: EditInventoryDetailsViewController? = nil) {
     self.hostVC = hostVC
   }
+  
+  func updateActiveStatus(param: [String: Any], completion: @escaping (Bool) -> Void) {
+      WebService.sharedInstance.updateProductActiveStatus(param: param){ response in
+          completion(true)
+      }
+  }
+  
+  func populateData() {
+    hostVC?.configData(data: productDetails)
+  }
+  
+  func validateFieldsWithErrors() -> String {
+    func isEmpty(_ text: String?) -> Bool {
+      return text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true
+    }
+    if isEmpty(hostVC?.totalStocksTF.text) { return "Please enter total stocks" }
+    
+    if isEmpty(hostVC?.skuLimitTF.text) { return "Please enter SKU limit" }
+    return ""
+  }
+  
+  func updateInventoryDetails() {
+    let param: [String: Any] = ["product_id": hostVC?.productId ?? 0,
+                                "variation_id": hostVC?.selectedVariant?.id ?? 0,
+                                "stock_quantity": hostVC?.totalStocksTF.text ?? "",
+                                "sku": hostVC?.skuLimitTF.text ?? ""]
+      WebService.sharedInstance.updateInventoryDetails(param: param){ response in
+        DispatchQueue.main.async {
+          CommonUtils.showToast(message: "Inventory Details are updated")
+          self.hostVC?.navigationController?.popToViewController(ofClass: InventoryListViewController.self, animated: true)
+        }
+      }
+  }
+  
 }
