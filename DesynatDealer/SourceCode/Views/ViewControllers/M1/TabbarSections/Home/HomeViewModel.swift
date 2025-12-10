@@ -12,6 +12,7 @@ class HomeViewModel {
   
   private var hostVC: HomeViewController
   var storeAvailabilityModel: StoreAvailabilityStatusModel?
+  var userProfile: SellerProfileDataModel?
   
   init(hostVC: HomeViewController) {
     self.hostVC = hostVC
@@ -24,6 +25,14 @@ class HomeViewModel {
       UserDefaults.standard.saveIntFor(key: .storeAvailabilityStatus, value: updatedStatus)
       self.storeAvailabilityModel = response
       completion(true)
+    }
+  }
+  
+  func getUserProfile(){
+    WebService.sharedInstance.getUserProfile { [weak self] response in
+      guard let self else { return }
+      userProfile = response
+      hostVC.showProfileImage()
     }
   }
   

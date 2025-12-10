@@ -72,10 +72,22 @@ class InventoryDetailsViewController: UIViewController {
   }
   
   @IBAction func editDidTapped(_ sender: Any) {
+//    let nextVC = EditInventoryDetailsViewController.instantiate(fromAppStoryboard: .InventoryAffilate)
+//    nextVC.productId = viewModel.productDetails?.id ?? 0
+//    nextVC.viewModel.productDetails = viewModel.productDetails
+//    self.navigationController?.pushViewController(nextVC, animated: true)
+    
+    
     let nextVC = EditInventoryDetailsViewController.instantiate(fromAppStoryboard: .InventoryAffilate)
-    nextVC.productId = viewModel.productDetails?.id ?? 0
-    nextVC.viewModel.productDetails = viewModel.productDetails
-    self.navigationController?.pushViewController(nextVC, animated: true)
+       nextVC.productId = viewModel.productDetails?.id ?? 0
+
+       // Pass the entire product details
+       nextVC.viewModel.productDetails = viewModel.productDetails
+       
+       // MOST IMPORTANT — Pass the currently selected variant
+       nextVC.selectedVariant = self.selectedVariant
+
+       self.navigationController?.pushViewController(nextVC, animated: true)
   }
   
   @IBAction func updateStatusDidTapped(_ sender: Any) {
@@ -241,16 +253,16 @@ extension InventoryDetailsViewController: UICollectionViewDelegate, UICollection
           cell.titleLabel.text = size.name
           if let colorId = selectedVariant?.color?.id,
              let variant = productVariants.first(where: { $0.color?.id == colorId && $0.size?.id == size.id }) {
-              let stock = Int(variant.totalStock ?? "0") ?? 0
-              if stock > 0 {
+             // let stock = Int(variant.totalStock ?? "0") ?? 0
+//              if stock > 0 {
                   cell.titleLabel.textColor = .black
                   cell.mainView.alpha = 1.0
                   cell.mainView.layer.borderColor = (selectedSizeIndex == indexPath.row ? UIColor.darkBrown : UIColor.lightGray).cgColor
-              } else {
-                  cell.titleLabel.textColor = .gray
-                  cell.mainView.layer.borderColor = UIColor.lightGray.cgColor
-                  cell.mainView.alpha = 0.5
-              }
+//              } else {
+//                  cell.titleLabel.textColor = .gray
+//                  cell.mainView.layer.borderColor = UIColor.lightGray.cgColor
+//                  cell.mainView.alpha = 0.5
+//              }
           }
       return cell
     default:
@@ -290,8 +302,8 @@ extension InventoryDetailsViewController: UICollectionViewDelegate, UICollection
       let size = sizesList[indexPath.row]
           guard let colorId = selectedVariant?.color?.id else { return }
           if let variant = productVariants.first(where: { $0.color?.id == colorId && $0.size?.id == size.id }) {
-              let stock = Int(variant.totalStock ?? "0") ?? 0
-              guard stock > 0 else { return }
+              //let stock = Int(variant.totalStock ?? "0") ?? 0
+              //guard stock > 0 else { return }
               selectedVariant = variant
               selectedSizeIndex = indexPath.row
               updateVariantUI(updateImages: false)

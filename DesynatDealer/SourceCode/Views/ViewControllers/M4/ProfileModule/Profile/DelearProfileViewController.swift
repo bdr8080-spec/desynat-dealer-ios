@@ -125,11 +125,11 @@ class DelearProfileViewController: UIViewController {
     }
     
     userNameLabel.text = "\(data?.firstName ?? "") \(data?.lastName ?? "")"
-    userMobileLabel.text = "\(data?.countryCode ?? "+965")\(data?.mobile ?? "")"
+    userMobileLabel.text = "\(data?.countryCode ?? "+965") \(data?.mobile ?? "")"
     useremailLabel.text = data?.email
     
     storeNameLabel.text = data?.storeInfo?.storeName
-    storePhoneLabel.text = "\(data?.storeInfo?.countryCode ?? "+965")\(data?.storeInfo?.storePhone ?? "")"
+    storePhoneLabel.text = "\(data?.storeInfo?.countryCode ?? "+965") \(data?.storeInfo?.storePhone ?? "")"
     storeEmailLabel.text = data?.storeInfo?.storeMailID
     storeAddressLabel.text = "\(data?.storeInfo?.storeAddress ?? "") \(data?.storeInfo?.addressLine1 ?? "") \(data?.storeInfo?.addressLine2 ?? "")"
     bioLabel.text = data?.storeInfo?.bio

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EditInventoryDetailsViewController: UIViewController, UITextFieldDelegate {
+class EditInventoryDetailsViewController: UIViewController {
   
   @IBOutlet weak var titlePageLabel: UILabel!
   @IBOutlet weak var skuLimitTF: UITextField!
@@ -71,8 +71,8 @@ class EditInventoryDetailsViewController: UIViewController, UITextFieldDelegate 
   @IBAction func editDidTapped(_ sender: Any) {
     let errors = viewModel.validateFieldsWithErrors()
     if !errors.isEmpty {
-        showAlert(msg: errors)
-        return
+      showAlert(msg: errors)
+      return
     } else {
       viewModel.updateInventoryDetails()
     }
@@ -95,75 +95,188 @@ class EditInventoryDetailsViewController: UIViewController, UITextFieldDelegate 
     }
   }
   
+//  func configData(data: ProductsList?) {
+//    // MARK: - Basic Product info
+//    if data?.brand?.nameEnglish == "Other" {
+//      productNameLabel.text = data?.otherEn
+//      titlePageLabel.text = data?.otherEn
+//    } else {
+//      productNameLabel.text = data?.brand?.nameEnglish
+//      titlePageLabel.text = data?.brand?.nameEnglish
+//    }
+//    descriptionLAbel.text = data?.productNameEn ?? "-"
+//    brandCategoryLabel.text = data?.category?.name ?? ""
+//    ratingCountLabel.text = " (\(data?.reviewRating ?? "0"))"
+//    // Status
+//    if data?.productActiveStatus == 1 {
+//      statusLabel.text = "Active"
+//      statusButton.setImage(UIImage(named: "toggle_on"), for: .normal)
+//    } else {
+//      statusLabel.text = "Inactive"
+//      statusButton.setImage(UIImage(named: "toggle_off"), for: .normal)
+//    }
+//    
+//    // MARK: - Switch Labels (YES / NO)
+//    
+//    productVariants = data?.productVariants ?? []
+//    var uniqueColorsDict: [Int: ColorsLisDataModel] = [:]
+//    for variant in productVariants {
+//      if let color = variant.color {
+//        if uniqueColorsDict[color.id ?? 0] == nil {
+//          uniqueColorsDict[color.id ?? 0] = color
+//        }
+//      }
+//    }
+//    coloursList = Array(uniqueColorsDict.values)
+//    colorsCollectionView.reloadData()
+//    sizeCollectionView.reloadData()
+//    guard !coloursList.isEmpty else {
+//      selectedVariant = nil
+//      selectedColourIndex = 0
+//      selectedSizeIndex = 0
+//      updateVariantUI()
+//      return
+//    }
+//    
+//    selectedColourIndex = 0
+//    let firstColor = coloursList[0]
+//    let firstColorId = firstColor.id
+//    
+//    if let defaultVariant = productVariants.first(where: { $0.color?.id == firstColorId }) {
+//      selectedVariant = defaultVariant
+//    } else if let anyVariant = productVariants.first {
+//      // Fallback: in case of corrupted data
+//      selectedVariant = anyVariant
+//      // Update selectedColourIndex to match this fallback color
+//      selectedColourIndex = coloursList.firstIndex(where: { $0.id == anyVariant.color?.id }) ?? 0
+//    }
+//    // Now build sizes list based on selected color
+//    sizesList = productVariants
+//      .filter { $0.color?.id == firstColorId }
+//      .compactMap { $0.size }
+//    
+//    // Default to first size
+//    selectedSizeIndex = 0
+//    
+//    // Now reload UI
+//    colorsCollectionView.reloadData()
+//    sizeCollectionView.reloadData()
+//    productImageCollectionView.reloadData()
+//    updateVariantUI()
+//  }
+  
   func configData(data: ProductsList?) {
-    // MARK: - Basic Product info
-    if data?.brand?.nameEnglish == "Other" {
-      productNameLabel.text = data?.otherEn
-      titlePageLabel.text = data?.otherEn
-    } else {
-      productNameLabel.text = data?.brand?.nameEnglish
-      titlePageLabel.text = data?.brand?.nameEnglish
-    }
-    descriptionLAbel.text = data?.productNameEn ?? "-"
-    brandCategoryLabel.text = data?.category?.name ?? ""
-    ratingCountLabel.text = " (\(data?.reviewRating ?? "0"))"
-    // Status
-    if data?.productActiveStatus == 1 {
-      statusLabel.text = "Active"
-      statusButton.setImage(UIImage(named: "toggle_on"), for: .normal)
-    } else {
-      statusLabel.text = "Inactive"
-      statusButton.setImage(UIImage(named: "toggle_off"), for: .normal)
-    }
-    
-    // MARK: - Switch Labels (YES / NO)
-    
-    productVariants = data?.productVariants ?? []
-    var uniqueColorsDict: [Int: ColorsLisDataModel] = [:]
-    for variant in productVariants {
-      if let color = variant.color {
-        if uniqueColorsDict[color.id ?? 0] == nil {
-          uniqueColorsDict[color.id ?? 0] = color
-        }
+      guard let data = data else { return }
+
+      // MARK: - Basic Product info
+      if data.brand?.nameEnglish == "Other" {
+          productNameLabel.text = data.otherEn
+          titlePageLabel.text = data.otherEn
+      } else {
+          productNameLabel.text = data.brand?.nameEnglish
+          titlePageLabel.text = data.brand?.nameEnglish
       }
-    }
-    coloursList = Array(uniqueColorsDict.values)
-    colorsCollectionView.reloadData()
-    sizeCollectionView.reloadData()
-    guard !coloursList.isEmpty else {
-      selectedVariant = nil
+
+      descriptionLAbel.text = data.productNameEn ?? "-"
+      brandCategoryLabel.text = data.category?.name ?? ""
+      ratingCountLabel.text = " (\(data.reviewRating ?? "0"))"
+
+      // Status
+      if data.productActiveStatus == 1 {
+          statusLabel.text = "Active"
+          statusButton.setImage(UIImage(named: "toggle_on"), for: .normal)
+      } else {
+          statusLabel.text = "Inactive"
+          statusButton.setImage(UIImage(named: "toggle_off"), for: .normal)
+      }
+
+      // MARK: - Variants
+      productVariants = data.productVariants ?? []
+
+      // Unique Colors
+      var uniqueColors: [Int: ColorsLisDataModel] = [:]
+      for variant in productVariants {
+          if let color = variant.color, let id = color.id {
+              if uniqueColors[id] == nil {
+                  uniqueColors[id] = color
+              }
+          }
+      }
+      coloursList = Array(uniqueColors.values)
+
+      // No colors → fallback
+      guard !coloursList.isEmpty else {
+          selectedVariant = nil
+          selectedColourIndex = 0
+          selectedSizeIndex = 0
+          updateVariantUI()
+          return
+      }
+
+      // MARK: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+      //      USE SELECTED VARIANT THAT WAS PASSED FROM PREVIOUS SCREEN
+      // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+      if let passedVariant = selectedVariant {
+          
+          // 1️⃣ Find matching COLOR index
+          if let colorId = passedVariant.color?.id,
+             let index = coloursList.firstIndex(where: { $0.id == colorId }) {
+              selectedColourIndex = index
+          } else {
+              selectedColourIndex = 0
+          }
+
+          // 2️⃣ Sizes for this color
+          sizesList = productVariants
+              .filter { $0.color?.id == passedVariant.color?.id }
+              .compactMap { $0.size }
+
+          // 3️⃣ Find matching SIZE index
+          if let sizeId = passedVariant.size?.id,
+             let index = sizesList.firstIndex(where: { $0.id == sizeId }) {
+              selectedSizeIndex = index
+          } else {
+              selectedSizeIndex = 0
+          }
+
+          // 4️⃣ Update UI for the passed variant
+          colorsCollectionView.reloadData()
+          sizeCollectionView.reloadData()
+          productImageCollectionView.reloadData()
+          updateVariantUI(updateImages: true)
+
+          return   // STOP — do not reset to first variant
+      }
+
+      // MARK: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+      // If NO variant was passed → fallback to your original
+      // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
       selectedColourIndex = 0
+      let firstColor = coloursList[0]
+      let firstColorId = firstColor.id
+
+      if let defaultVariant = productVariants.first(where: { $0.color?.id == firstColorId }) {
+          selectedVariant = defaultVariant
+      } else {
+          selectedVariant = productVariants.first
+          selectedColourIndex = coloursList.firstIndex(where: { $0.id == selectedVariant?.color?.id }) ?? 0
+      }
+
+      // Sizes for first color
+      sizesList = productVariants
+          .filter { $0.color?.id == firstColorId }
+          .compactMap { $0.size }
+
       selectedSizeIndex = 0
-      updateVariantUI()
-      return
-    }
-    
-    selectedColourIndex = 0
-    let firstColor = coloursList[0]
-    let firstColorId = firstColor.id
-    
-    if let defaultVariant = productVariants.first(where: { $0.color?.id == firstColorId }) {
-      selectedVariant = defaultVariant
-    } else if let anyVariant = productVariants.first {
-      // Fallback: in case of corrupted data
-      selectedVariant = anyVariant
-      // Update selectedColourIndex to match this fallback color
-      selectedColourIndex = coloursList.firstIndex(where: { $0.id == anyVariant.color?.id }) ?? 0
-    }
-    // Now build sizes list based on selected color
-    sizesList = productVariants
-      .filter { $0.color?.id == firstColorId }
-      .compactMap { $0.size }
-    
-    // Default to first size
-    selectedSizeIndex = 0
-    
-    // Now reload UI
-    colorsCollectionView.reloadData()
-    sizeCollectionView.reloadData()
-    productImageCollectionView.reloadData()
-    updateVariantUI()
+
+      colorsCollectionView.reloadData()
+      sizeCollectionView.reloadData()
+      productImageCollectionView.reloadData()
+      updateVariantUI(updateImages: true)
   }
+
   
   func updateVariantUI(updateImages: Bool = true) {
     guard let variant = selectedVariant else { return }
@@ -236,16 +349,16 @@ extension EditInventoryDetailsViewController: UICollectionViewDelegate, UICollec
       cell.titleLabel.text = size.name
       if let colorId = selectedVariant?.color?.id,
          let variant = productVariants.first(where: { $0.color?.id == colorId && $0.size?.id == size.id }) {
-        let stock = Int(variant.totalStock ?? "0") ?? 0
-        if stock > 0 {
+//        let stock = Int(variant.totalStock ?? "0") ?? 0
+//        if stock > 0 {
           cell.titleLabel.textColor = .black
           cell.mainView.alpha = 1.0
           cell.mainView.layer.borderColor = (selectedSizeIndex == indexPath.row ? UIColor.darkBrown : UIColor.lightGray).cgColor
-        } else {
-          cell.titleLabel.textColor = .gray
-          cell.mainView.layer.borderColor = UIColor.lightGray.cgColor
-          cell.mainView.alpha = 0.5
-        }
+//        } else {
+//          cell.titleLabel.textColor = .gray
+//          cell.mainView.layer.borderColor = UIColor.lightGray.cgColor
+//          cell.mainView.alpha = 0.5
+//        }
       }
       return cell
     default:
@@ -285,8 +398,8 @@ extension EditInventoryDetailsViewController: UICollectionViewDelegate, UICollec
       let size = sizesList[indexPath.row]
       guard let colorId = selectedVariant?.color?.id else { return }
       if let variant = productVariants.first(where: { $0.color?.id == colorId && $0.size?.id == size.id }) {
-        let stock = Int(variant.totalStock ?? "0") ?? 0
-        guard stock > 0 else { return }
+//        let stock = Int(variant.totalStock ?? "0") ?? 0
+//        guard stock > 0 else { return }
         selectedVariant = variant
         selectedSizeIndex = indexPath.row
         updateVariantUI(updateImages: false)
@@ -321,74 +434,163 @@ extension EditInventoryDetailsViewController: UICollectionViewDelegate, UICollec
   
 }
 
-extension EditInventoryDetailsViewController {
-  func textField(_ textField: UITextField,
-                 shouldChangeCharactersIn range: NSRange,
-                 replacementString string: String) -> Bool {
-    
-    let currentText = textField.text ?? ""
-    let updatedText = (currentText as NSString).replacingCharacters(in: range, with: string)
-    if textField === skuLimitTF {
-      let totalText = totalStocksTF.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-      guard let totalStocks = Int(totalText), totalStocks > 0 else {
-        CommonUtils.showToast(message: "Please enter total stocks first")
-        return false
-      }
-      if let updatedSKU = Int(updatedText), updatedSKU > totalStocks {
-        CommonUtils.showToast(message: "Sku limit can not be greater than Total stocks ")
-        return false
-      }
-      if string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) != nil {
-        return false
-      }
-      if updatedText.count == 1 && updatedText == "0" {
-        return false
-      }
-      return true
+//extension EditInventoryDetailsViewController: UITextFieldDelegate {
+//
+//    func textField(_ textField: UITextField,
+//                   shouldChangeCharactersIn range: NSRange,
+//                   replacementString string: String) -> Bool {
+//        
+//        let currentText = textField.text ?? ""
+//        let updatedText = (currentText as NSString).replacingCharacters(in: range, with: string)
+//        
+//        // Disallow spaces in any numeric field
+//        if string.contains(" ") {
+//            return false
+//        }
+//        
+//        // Only allow digits
+//        if string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) != nil {
+//            return false
+//        }
+//        
+//        // Handle totalStocksTF
+//        if textField === totalStocksTF {
+//            // Limit to 6 digits
+//            if updatedText.count > 6 {
+//                return false
+//            }
+//            return true
+//        }
+//        
+//        // Handle skuLimitTF
+//        if textField === skuLimitTF {
+//            let totalText = totalStocksTF.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "0"
+//            let totalStocks = Int(totalText) ?? 0
+//            
+//            if let updatedSKU = Int(updatedText), updatedSKU > totalStocks {
+//                CommonUtils.showToast(message: "SKU limit cannot be greater than Total stocks")
+//                return false
+//            }
+//            return true
+//        }
+//        
+//        return true
+//    }
+//
+//  func textFieldDidEndEditing(_ textField: UITextField) {
+//      guard let rawText = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+//
+//      if textField == totalStocksTF {
+//          let totalStocks = Int(rawText) ?? 0
+//          
+//          // Limit to 6 digits
+//          if rawText.count > 6 {
+//              textField.text = String(rawText.prefix(6))
+//              CommonUtils.showToast(message: "Total stocks cannot exceed 6 digits")
+//          }
+//          
+//          // Only warn the user if SKU exceeds total stocks
+//          if let skuValue = Int(skuLimitTF.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "0"),
+//             skuValue > totalStocks {
+//              CommonUtils.showToast(message: "SKU Limit cannot exceed total stocks (\(totalStocks))")
+//          }
+//
+//          return
+//      }
+//
+//      if textField == skuLimitTF {
+//          let totalStocks = Int(totalStocksTF.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "0") ?? 0
+//          let skuValue = Int(rawText) ?? 0
+//          
+//          if skuValue > totalStocks {
+//              textField.text = "\(totalStocks)"  // Optional: only update here after editing
+//              CommonUtils.showToast(message: "SKU Limit cannot exceed total stocks (\(totalStocks))")
+//          }
+//      }
+//  }
+//
+//}
+
+
+extension EditInventoryDetailsViewController: UITextFieldDelegate {
+
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
+
+        let currentText = textField.text ?? ""
+        let updatedText = (currentText as NSString).replacingCharacters(in: range, with: string)
+        
+        // Allow deleting text
+        if string.isEmpty {
+            return true
+        }
+
+        // Disallow spaces in any numeric field
+        if string.contains(" ") {
+            return false
+        }
+
+        // Only allow digits
+        if string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) != nil {
+            return false
+        }
+
+        // Handle totalStocksTF
+        if textField === totalStocksTF {
+            // Limit to 6 digits
+            if updatedText.count > 6 {
+                return false
+            }
+            return true
+        }
+
+        // Handle skuLimitTF
+        if textField === skuLimitTF {
+            let totalText = totalStocksTF.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+            let totalStocks = Int(totalText) ?? Int.max // If totalStocks is empty, treat as unlimited
+            
+            if let updatedSKU = Int(updatedText), updatedSKU > totalStocks {
+                CommonUtils.showToast(message: "SKU limit cannot be greater than Total stocks")
+                return false
+            }
+            return true
+        }
+
+        return true
     }
-    let numericFields = [totalStocksTF, skuLimitTF].compactMap { $0 }
-    if numericFields.contains(where: { $0 === textField }) {
-      if string == " " { return false }
-      if string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) != nil {
-        return false
-      }
-      if updatedText.count == 1 && updatedText == "0" {
-        return false
-      }
-      if textField === totalStocksTF && updatedText.count > 6 {
-        return false
-      }
-      return true
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let rawText = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+
+        if textField == totalStocksTF {
+            // Only limit digits if user entered something
+            if !rawText.isEmpty && rawText.count > 6 {
+                textField.text = String(rawText.prefix(6))
+                CommonUtils.showToast(message: "Total stocks cannot exceed 6 digits")
+            }
+
+            // Only warn if both fields are not empty
+            if let skuText = skuLimitTF.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+               !skuText.isEmpty,
+               let totalStocks = Int(rawText),
+               let skuValue = Int(skuText),
+               skuValue > totalStocks {
+                CommonUtils.showToast(message: "SKU Limit cannot exceed total stocks (\(totalStocks))")
+            }
+
+            return
+        }
+
+        if textField == skuLimitTF {
+            // Only validate if user entered something
+            if !rawText.isEmpty {
+                let totalStocks = Int(totalStocksTF.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "") ?? Int.max
+                if let skuValue = Int(rawText), skuValue > totalStocks {
+                    textField.text = "\(totalStocks)" // Optional: update to max allowed
+                    CommonUtils.showToast(message: "SKU Limit cannot exceed total stocks (\(totalStocks))")
+                }
+            }
+        }
     }
-    return true
-  }
-  
-  func textFieldDidEndEditing(_ textField: UITextField) {
-    
-    guard let rawText = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-          !rawText.isEmpty else { return }
-    
-    let value = Int(rawText) ?? 0
-    if textField == totalStocksTF {
-      if rawText.count > 6 {
-        textField.text = String(rawText.prefix(6))
-        CommonUtils.showToast(message: "Total stocks cannot exceed 6 digits")
-      }
-      return
-    }
-    if textField == skuLimitTF {
-      let totalText = totalStocksTF.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "0"
-      let totalStocks = Int(totalText) ?? 0
-      
-      if totalStocks == 0 {
-        textField.text = ""
-        CommonUtils.showToast(message: "Please enter total stocks first")
-      } else if value > totalStocks {
-        textField.text = "\(totalStocks)"
-        CommonUtils.showToast(message: "SKU Limit cannot exceed total stocks (\(totalStocks))")
-      }
-      return
-    }
-  }
-  
 }

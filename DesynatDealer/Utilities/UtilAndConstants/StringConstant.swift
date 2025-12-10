@@ -64,7 +64,7 @@ enum AlertConstant: String {
     case UploadAccountHolderImage   = "Please upload proof of account"
     case SelectAccountType          = "Please select an account type"
     case EnterIBAN                  = "Please enter IBAN number"
-    case EnterSWIFT                 = "Please enter SWIFT/BIC code"
+    case EnterSWIFT                 = "Please enter SWIFT/BIC number"
     case EnterBankName              = "Please enter bank name"
     case EnterAccountHolder         = "Please enter account holder name"
     case EnterStorePhoneNumber      = "Please enter store phone number"

@@ -34,11 +34,15 @@ class EditProfileViewModel {
   
   func validBankInfoFields() -> Bool {
     var errorMessage: AlertConstant = .none
-    //    let iban = String.getString(hostVC.ibanTF.text).trimmingCharacters(in: .whitespacesAndNewlines)
-    //    let swiftCode = String.getString(hostVC.swiftTF.text).trimmingCharacters(in: .whitespacesAndNewlines)
+    let iban = String.getString(hostVC.ibanTF.text).trimmingCharacters(in: .whitespacesAndNewlines)
+    let swiftCode = String.getString(hostVC.swiftTF.text).trimmingCharacters(in: .whitespacesAndNewlines)
     let bankName = String.getString(hostVC.bankNameTF.text).trimmingCharacters(in: .whitespacesAndNewlines)
     let accountHolder = String.getString(hostVC.accountHolderNameTF.text).trimmingCharacters(in: .whitespacesAndNewlines)
-    if bankName.isEmpty {
+    if iban.isEmpty {
+      errorMessage = .EnterIBAN
+    } else if swiftCode.isEmpty {
+      errorMessage = .EnterSWIFT
+    }else if bankName.isEmpty {
       errorMessage = .EnterBankName
     } else if accountHolder.isEmpty {
       errorMessage = .EnterAccountHolder
@@ -62,7 +66,7 @@ class EditProfileViewModel {
       "user_id": userProfile?.id ?? 0,
       "upload_proof": hostVC.bankProofUrl]
     WebService.sharedInstance.updateBankInformationRequest(param:param) { user in
-      CommonUtils.showToast(message: "Bank Details is updated")
+      CommonUtils.showToast(message: "Bank Detail Updated Succesfully")
       DispatchQueue.main.async {
         self.hostVC.navigationController?.popViewController(animated: true)
       }
@@ -172,7 +176,7 @@ class EditProfileViewModel {
       "let": hostVC.lat ?? 0.0,
       "long": hostVC.long ?? 0.0]
     WebService.sharedInstance.updateStoreInformationRequest(param:param) { user in
-      CommonUtils.showToast(message: "Personal Information updated")
+      CommonUtils.showToast(message: "Profile Updated Succesfully")
       DispatchQueue.main.async {
         self.hostVC.navigationController?.popViewController(animated: true)
       }

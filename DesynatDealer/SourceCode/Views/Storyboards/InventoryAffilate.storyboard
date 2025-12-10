@@ -239,8 +239,8 @@
                                                             <action selector="childrenDidTapped:" destination="YBs-SF-D3n" eventType="touchUpInside" id="ZGp-Mn-3N0"/>
                                                         </connections>
                                                     </button>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Children" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NB5-bK-Mke">
-                                                        <rect key="frame" x="28.999999999999972" y="9.3333333333333446" width="60" height="19.666666666666671"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="kids" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NB5-bK-Mke">
+                                                        <rect key="frame" x="44.666666666666657" y="9.3333333333333446" width="28.666666666666671" height="19.666666666666671"/>
                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -1265,7 +1265,7 @@
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nno-mm-JWz" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="25.000000000000114" width="345" height="50"/>
                                                                         <subviews>
-                                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="13208" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ULR-it-xyR">
+                                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Eg .1000 " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ULR-it-xyR">
                                                                                 <rect key="frame" x="20" y="5" width="305" height="40"/>
                                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -1315,7 +1315,7 @@
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UwC-fU-xw5" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="25" width="345" height="50"/>
                                                                         <subviews>
-                                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="13208" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="u2w-8H-lYp">
+                                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Eg .1000 " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="u2w-8H-lYp">
                                                                                 <rect key="frame" x="20" y="5" width="305" height="40"/>
                                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -1550,10 +1550,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fgc-Pa-Q1M" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
-                                <rect key="frame" x="24" y="220.66666666666666" width="345" height="37.999999999999972"/>
+                                <rect key="frame" x="24" y="220.66666666666666" width="345" height="39.999999999999972"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Eg. 5%" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SgU-AT-os9">
-                                        <rect key="frame" x="15" y="0.0" width="258" height="38"/>
+                                        <rect key="frame" x="15" y="0.0" width="263" height="40"/>
                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="13"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                         <userDefinedRuntimeAttributes>
@@ -1563,14 +1563,17 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jJr-PR-0ZJ">
-                                        <rect key="frame" x="293" y="2" width="51" height="34"/>
+                                        <rect key="frame" x="298" y="0.0" width="46" height="40"/>
                                         <color key="backgroundColor" red="0.99607843159999998" green="0.96862745289999996" blue="0.92156863209999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="34" id="Cxw-Zb-DQb"/>
-                                            <constraint firstAttribute="width" secondItem="jJr-PR-0ZJ" secondAttribute="height" multiplier="1.5:1" id="jmR-MR-4Gz"/>
+                                            <constraint firstAttribute="height" constant="40" id="Cxw-Zb-DQb"/>
+                                            <constraint firstAttribute="width" secondItem="jJr-PR-0ZJ" secondAttribute="height" multiplier="1.15:1" id="jmR-MR-4Gz"/>
                                         </constraints>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" image="editAffiliated"/>
+                                        <connections>
+                                            <action selector="editDidTapped:" destination="oyX-SG-w7Y" eventType="touchUpInside" id="BQ1-1f-0Ga"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1580,7 +1583,7 @@
                                     <constraint firstAttribute="trailing" secondItem="jJr-PR-0ZJ" secondAttribute="trailing" constant="1" id="abj-46-FNq"/>
                                     <constraint firstItem="SgU-AT-os9" firstAttribute="top" secondItem="fgc-Pa-Q1M" secondAttribute="top" id="czq-pH-bAL"/>
                                     <constraint firstItem="jJr-PR-0ZJ" firstAttribute="centerY" secondItem="fgc-Pa-Q1M" secondAttribute="centerY" id="g0i-oT-tfa"/>
-                                    <constraint firstAttribute="height" constant="38" id="xTE-nh-N8Z"/>
+                                    <constraint firstAttribute="height" constant="40" id="xTE-nh-N8Z"/>
                                     <constraint firstItem="SgU-AT-os9" firstAttribute="leading" secondItem="fgc-Pa-Q1M" secondAttribute="leading" constant="15" id="xU7-RS-BtD"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
@@ -1865,10 +1868,10 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray4Color">
-            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

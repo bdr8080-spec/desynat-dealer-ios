@@ -18,10 +18,18 @@ class AffiliatedCommisionViewController: UIViewController {
     super.viewDidLoad()
     commissionTF.delegate = self
     commissionTF.text = commissionValue
+    commissionTF.isUserInteractionEnabled = false
   }
   
   
   @IBAction func saveChangesDidTapped(_ sender: Any) {
+    let currentValue = commissionTF.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        
+        // Check if value has changed
+        if currentValue == (commissionValue ?? "") {
+            CommonUtils.showToast(message: "No changes made to the commission value")
+            return
+        }
     if viewModel.validCommissionFields() {
       viewModel.updateAffiliated()
     }
@@ -31,6 +39,10 @@ class AffiliatedCommisionViewController: UIViewController {
     self.navigationController?.popViewController(animated: true)
   }
   
+  @IBAction func editDidTapped(_ sender: Any) {
+    commissionTF.isUserInteractionEnabled = true
+    commissionTF.becomeFirstResponder()
+  }
 }
 
 extension AffiliatedCommisionViewController: UITextFieldDelegate {

@@ -33,7 +33,7 @@ class RegisterationSuccessViewController: UIViewController {
     case .planPurchased:
       descriptionLabel.text = "Plan purchased successfully!"
     case .affiliatedCommission:
-      descriptionLabel.text = "Changes saved"
+      descriptionLabel.text = "Commisson saved"
     }
   }
   

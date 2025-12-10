@@ -8,9 +8,11 @@
 import UIKit
 import Charts
 import DGCharts
+import SDWebImage
 
 class HomeViewController: UIViewController {
   
+  @IBOutlet weak var userProfileImageView: CustomImageView!
   @IBOutlet weak var btnToggle: UIButton!
   @IBOutlet weak var txtChooseFromDate: UITextField!
   @IBOutlet weak var txtChooseToDate: UITextField!
@@ -58,6 +60,7 @@ class HomeViewController: UIViewController {
       for: .normal
     )
     busyOnOffLabel.text = savedStatus == 1 ? "Busy/On" : "Busy/Off"
+    viewModel.getUserProfile()
   }
   
   @IBAction func btnDesynatShowDesign(_ sender: Any) {
@@ -105,6 +108,15 @@ class HomeViewController: UIViewController {
     btnToggle.setImage(UIImage(named: "toggle_off"), for: .normal)
     updateRadioSelection(for: dateButtons, selectedButton: btnToday)
     updateRadioSelection(for: statsButtons, selectedButton: btnTotalOrderConversion)
+  }
+  
+  func showProfileImage() {
+    if let storeImageUrl = viewModel.userProfile?.profilePic,
+       let url = URL(string: storeImageUrl) {
+      userProfileImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+      userProfileImageView.sd_imageIndicator?.startAnimatingIndicator()
+      userProfileImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
+    }
   }
   
   private func updateRadioSelection(for buttons: [UIButton], selectedButton: UIButton) {

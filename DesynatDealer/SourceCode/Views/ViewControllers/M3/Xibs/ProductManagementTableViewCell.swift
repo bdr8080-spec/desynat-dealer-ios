@@ -65,8 +65,8 @@ class ProductManagementTableViewCell: UITableViewCell {
       productNameLabel.text = data.brand?.nameEnglish
     }
       descriptionLabel.text = data.productNameEn
-      stockLabel.text = (data.stock?.count ?? 0) > 0 ? "In Stock" : "Out of Stock"
-      
+//      stockLabel.text = (data.stock?.count ?? 0) > 0 ? "In Stock" : "Out of Stock"
+    stockLabel.text = " \(data.stock ?? "In Stock") "
       if let imageUrlString = data.productVariants?.first?.variantImage?.first,
          let url = URL(string: imageUrlString) {
           productImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
