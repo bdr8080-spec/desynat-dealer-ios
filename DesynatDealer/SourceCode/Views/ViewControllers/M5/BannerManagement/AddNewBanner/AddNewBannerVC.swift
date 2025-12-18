@@ -1,0 +1,230 @@
+//
+//  AddNewBannerVC.swift
+//  DesynatDealer
+//
+//  Created by fluper on 18/12/25.
+//
+
+import UIKit
+import SDWebImage
+
+class AddNewBannerVC: UIViewController {
+
+    @IBOutlet weak var img1: UIImageView!
+    @IBOutlet weak var img2: UIImageView!
+    @IBOutlet weak var img3: UIImageView!
+    @IBOutlet weak var lblCategory: UILabel!
+    @IBOutlet weak var lblSubCategory: UILabel!
+    @IBOutlet weak var txtFromDate: UITextField!
+    @IBOutlet weak var txtToDate: UITextField!
+    @IBOutlet weak var lblTotalDays: UILabel!
+    @IBOutlet weak var imgBanner: CustomImageView!
+    @IBOutlet weak var lblTotalPrice: UILabel!
+    @IBOutlet weak var viewCategory: UIView!
+    @IBOutlet weak var viewSubCategory: UIView!
+    
+    lazy private var viewModel = AddNewBannerVM(hostVC: self)
+    var selectedImg: Int?
+    var bannerImageUrl: String = ""
+    let datePicker = UIDatePicker()
+    private var activeTextField: UITextField?
+    var categoriesList: [CategoryDataModel] = []
+    var subcategoriesList: [SubCategoryDataModel] = []
+    var selectedCategoryId: Int?
+    var selectedSubCategoriesId: Int? = -1
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setUpTextFields()
+        viewModel.getCategoriesListApi()
+        viewCategory.isHidden = true
+        viewSubCategory.isHidden = true
+    }
+
+    private func resetRadio() {
+        img1.image = UIImage(named: "radioUnselected")
+        img2.image = UIImage(named: "radioUnselected")
+        img3.image = UIImage(named: "radioUnselected")
+    }
+    
+    @IBAction func btnBack(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func btnSelectPosition(_ sender: UIButton) {
+        resetRadio()
+        switch sender.tag {
+        case 0:
+            img1.image = UIImage(named: "radioSelected")
+            viewCategory.isHidden = true
+            viewSubCategory.isHidden = true
+        case 1:
+            img2.image = UIImage(named: "radioSelected")
+            viewCategory.isHidden = true
+            viewSubCategory.isHidden = true
+        case 2:
+            img3.image = UIImage(named: "radioSelected")
+            viewCategory.isHidden = false
+            viewSubCategory.isHidden = false
+            
+            if categoriesList.isEmpty {
+                viewModel.getCategoriesListApi()
+            }
+        default:
+            break
+        }
+        selectedImg = sender.tag
+    }
+    
+    @IBAction func btnUploadImg(_ sender: Any) {
+        ImagePickerHelper.shared.showPickerController {  image , imageName in
+            if let image = image {
+                WebService.sharedInstance.uploadImage(withParams: image) { imageURL in
+                    self.bannerImageUrl = imageURL.url ?? ""
+                    if let url = URL(string: imageURL.url ?? "") {
+                        self.imgBanner.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                        self.imgBanner.sd_setImage(with: url,placeholderImage: UIImage(named: ""))
+                    }
+                }
+            }
+        }
+    }
+    
+    @IBAction func catgeoryAction(_ sender: UIButton) {
+        let categoryNames = categoriesList.map { $0.name ?? "" }
+        kSharedAppDelegate.dropDown(dataSource: categoryNames, anchorView: sender) { index, item in
+            let selectedCategory = self.categoriesList[index]
+            self.lblCategory.text = selectedCategory.name ?? ""
+            self.selectedCategoryId = selectedCategory.id
+            self.selectedSubCategoriesId = nil
+            self.subcategoriesList.removeAll()
+            self.viewModel.getSubCategoriesListApi(categoryId: selectedCategory.id ?? 0)
+        }
+    }
+    
+    @IBAction func subCatgeoryAction(_ sender: UIButton) {
+        
+        guard let _ = selectedCategoryId else {
+            showAlert(msg: "Please select the category first")
+            return
+        }
+        
+        //If no subcategories available
+        guard !subcategoriesList.isEmpty else {
+            showAlert(msg: "No subcategories available")
+            return
+        }
+        
+        let subCategoryNames = self.subcategoriesList.map { $0.nameEnglish ?? "" }
+        
+        kSharedAppDelegate.dropDown(dataSource: subCategoryNames, anchorView: sender) { index, item in
+            let selectedsubCategory = self.subcategoriesList[index]
+            self.lblSubCategory.text = selectedsubCategory.nameEnglish ?? ""
+            self.selectedSubCategoriesId = selectedsubCategory.id
+        }
+    }
+    
+    @IBAction func btnSendRequest(_ sender: Any) {
+        viewModel.addBanner()
+    }
+}
+
+// Date Picker
+extension AddNewBannerVC {
+    private func setUpTextFields() {
+        datePicker.preferredDatePickerStyle = .wheels
+        datePicker.datePickerMode = .date
+        datePicker.minimumDate = nil
+        datePicker.backgroundColor = .white
+        
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneDatePicker))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker))
+        toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        
+        let textFields = [txtFromDate, txtToDate]
+        textFields.forEach { textField in
+            textField?.inputView = datePicker
+            textField?.inputAccessoryView = toolbar
+            textField?.delegate = self
+        }
+    }
+    
+    @objc private func doneDatePicker() {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+        
+        guard let activeTextField = activeTextField else { return }
+        
+        // Apply selected date
+        activeTextField.text = formatter.string(from: datePicker.date)
+        view.endEditing(true)
+        
+        calculateTotalDays()
+        
+        // Handle automatic focus movement
+        switch activeTextField {
+        case txtFromDate:
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.txtToDate.becomeFirstResponder()
+            }
+            
+        default:
+            break
+        }
+    }
+    
+    @objc private func cancelDatePicker() {
+        view.endEditing(true)
+    }
+    
+    func calculateTotalDays() {
+        guard let fromText = txtFromDate.text, let toText = txtToDate.text, !fromText.isEmpty, !toText.isEmpty
+        else { return }
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+        
+        guard let startDate = formatter.date(from: fromText), let endDate = formatter.date(from: toText)
+        else { return }
+        
+        let days = Calendar.current.dateComponents([.day], from: startDate, to: endDate).day ?? 0
+        let totalDays = days + 1   // inclusive
+        
+        lblTotalDays.text = "\(totalDays)"
+    }
+}
+
+//TExtField Delegate
+extension AddNewBannerVC: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        activeTextField = textField
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+        
+        if textField == txtToDate, let fromDateText = txtFromDate.text, let fromDate = formatter.date(from: fromDateText) {
+            datePicker.minimumDate = fromDate
+        } else {
+            datePicker.minimumDate = nil
+        }
+    }
+}
+
+extension String {
+    func toAPIDate() -> String {
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "dd/MM/yyyy"
+
+        let outputFormatter = DateFormatter()
+        outputFormatter.dateFormat = "yyyy-MM-dd"
+
+        if let date = inputFormatter.date(from: self) {
+            return outputFormatter.string(from: date)
+        }
+        return ""
+    }
+}

@@ -106,6 +106,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
       
     case "Banner management":
       print("➡️ Navigate to Banner management")
+        let vc = BannerManagemntVC.instantiate(fromAppStoryboard: .BannerManagement)
+        self.navigationController?.pushViewController(vc, animated: true)
       
     case "Live Coverage request":
       print("➡️ Navigate to Live Coverage request")
