@@ -214,7 +214,41 @@ extension UIViewController {
         return "0.00"
     }
 
+    func formatDate(_ dateString: String?) -> String {
+        guard let dateString = dateString else { return "-" }
 
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+
+        if let date = formatter.date(from: dateString) {
+            formatter.dateFormat = "dd MMM yyyy"
+            return formatter.string(from: date)
+        }
+        return dateString
+    }
+    
+    func formatBannerDate(_ dateString: String?) -> String {
+        guard let dateString = dateString else { return "-" }
+        
+        let isoFormatter = ISO8601DateFormatter()
+        isoFormatter.formatOptions = [
+            .withInternetDateTime,
+            .withFractionalSeconds
+        ]
+        
+        guard let date = isoFormatter.date(from: dateString) else {
+            return "-"
+        }
+        
+        let outputFormatter = DateFormatter()
+        outputFormatter.dateFormat = "dd/MM/yyyy 'at' hh:mm a"
+        outputFormatter.amSymbol = "AM"
+        outputFormatter.pmSymbol = "PM"
+        
+        return outputFormatter.string(from: date)
+    }
+
+    
     func formattedMinimu(from amount: Float?) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal

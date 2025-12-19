@@ -641,8 +641,8 @@
                                                                             <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
                                                                         </userDefinedRuntimeAttributes>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="07" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UfL-gp-DIn" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
-                                                                        <rect key="frame" x="329.66666666666669" y="14" width="17.333333333333314" height="17"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="days" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UfL-gp-DIn" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
+                                                                        <rect key="frame" x="315" y="14" width="32" height="17"/>
                                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                                         <color key="textColor" red="0.43137254899999999" green="0.27058823529999998" blue="0.1529411765" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
@@ -783,8 +783,8 @@
                                                                             <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
                                                                         </userDefinedRuntimeAttributes>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="499 kD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uue-WX-jkB" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
-                                                                        <rect key="frame" x="297.33333333333331" y="14" width="49.666666666666686" height="17"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uue-WX-jkB" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
+                                                                        <rect key="frame" x="312.66666666666669" y="14" width="34.333333333333314" height="17"/>
                                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -918,11 +918,11 @@
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qdm-D6-MLX" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
                                         <rect key="frame" x="20" y="115.99999999999999" width="313" height="150.66666666666663"/>
-                                        <mutableString key="text">Your banner request has been successfully submitted for verification !
+                                        <string key="text">Your banner request has been successfully submitted for verification !
 
 Our team is currently reviewing your details please allow 3-4 hour for the verification process to be completed.
 
-you will be notified once your banner is approved on the desynat platform</mutableString>
+you will be notified once your banner is approved on the desynat platform</string>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -1472,6 +1472,7 @@ you will be notified once your banner is approved on the desynat platform</mutab
                         <outlet property="lblToDate" destination="Zz9-WY-tI6" id="w0Q-Na-Nvi"/>
                         <outlet property="lblTotalDays" destination="rRz-P9-ulm" id="lJF-DU-TZL"/>
                         <outlet property="lblTotalPrice" destination="8pu-Jv-nbN" id="KiM-ti-3nH"/>
+                        <outlet property="viewBtnPay" destination="RgY-4F-T45" id="Ecx-WU-qRu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LoK-rr-scs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

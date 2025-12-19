@@ -138,7 +138,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LeA-Iq-YTE">
-                                        <rect key="frame" x="0.0" y="218" width="320" height="31.333333333333343"/>
+                                        <rect key="frame" x="0.0" y="218" width="320" height="39.333333333333314"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5kb-HO-btX" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
                                                 <rect key="frame" x="12" y="10" width="37.666666666666664" height="14.333333333333336"/>
@@ -150,7 +150,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirmed" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PCT-7n-J20" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
-                                                <rect key="frame" x="247" y="12.999999999999998" width="61" height="18.333333333333329"/>
+                                                <rect key="frame" x="247" y="13" width="61" height="14.333333333333336"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                                 <color key="textColor" red="0.40784313725490196" green="0.792156862745098" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -163,17 +163,17 @@
                                         <constraints>
                                             <constraint firstItem="PCT-7n-J20" firstAttribute="top" secondItem="LeA-Iq-YTE" secondAttribute="top" constant="13" id="8yz-DC-LJG"/>
                                             <constraint firstItem="5kb-HO-btX" firstAttribute="leading" secondItem="LeA-Iq-YTE" secondAttribute="leading" constant="12" id="EeQ-0l-1dx"/>
-                                            <constraint firstAttribute="bottom" secondItem="PCT-7n-J20" secondAttribute="bottom" id="bQE-JV-ItB"/>
+                                            <constraint firstAttribute="bottom" secondItem="PCT-7n-J20" secondAttribute="bottom" constant="12" id="bQE-JV-ItB"/>
                                             <constraint firstItem="PCT-7n-J20" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5kb-HO-btX" secondAttribute="trailing" constant="10" id="gK5-W5-1Kt"/>
                                             <constraint firstItem="5kb-HO-btX" firstAttribute="top" secondItem="LeA-Iq-YTE" secondAttribute="top" constant="10" id="nFT-n7-x8K"/>
                                             <constraint firstAttribute="trailing" secondItem="PCT-7n-J20" secondAttribute="trailing" constant="12" id="vNa-Xp-Q3i"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eKM-Aq-eoD">
-                                        <rect key="frame" x="0.0" y="249.33333333333337" width="320" height="83"/>
+                                        <rect key="frame" x="0.0" y="257.33333333333331" width="320" height="71"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WDg-9O-L2T" customClass="CustomButton" customModule="DesynatDealer" customModuleProvider="target">
-                                                <rect key="frame" x="45" y="24.999999999999972" width="230" height="38"/>
+                                                <rect key="frame" x="45" y="13" width="230" height="38"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="38" id="6lC-yj-uVg"/>
                                                 </constraints>
@@ -194,14 +194,14 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="WDg-9O-L2T" firstAttribute="top" secondItem="eKM-Aq-eoD" secondAttribute="top" constant="25" id="AMU-1H-Hx8"/>
+                                            <constraint firstItem="WDg-9O-L2T" firstAttribute="top" secondItem="eKM-Aq-eoD" secondAttribute="top" constant="13" id="AMU-1H-Hx8"/>
                                             <constraint firstAttribute="bottom" secondItem="WDg-9O-L2T" secondAttribute="bottom" constant="20" id="GWa-Gj-OnJ"/>
                                             <constraint firstAttribute="trailing" secondItem="WDg-9O-L2T" secondAttribute="trailing" constant="45" id="TOT-0m-lbR"/>
                                             <constraint firstItem="WDg-9O-L2T" firstAttribute="leading" secondItem="eKM-Aq-eoD" secondAttribute="leading" constant="45" id="gKr-9U-DDW"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AQu-6w-kCz">
-                                        <rect key="frame" x="0.0" y="332.33333333333331" width="320" height="27.333333333333314"/>
+                                        <rect key="frame" x="0.0" y="328.33333333333331" width="320" height="31.333333333333314"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rejected on" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3gb-rB-Xzz" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
                                                 <rect key="frame" x="12" y="10" width="68.666666666666671" height="14.333333333333336"/>
@@ -213,7 +213,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21/09/2025 at 10:15 AM" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f7d-nY-A2E" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
-                                                <rect key="frame" x="170.33333333333337" y="13" width="137.66666666666663" height="14.333333333333336"/>
+                                                <rect key="frame" x="170.33333333333337" y="12.999999999999998" width="137.66666666666663" height="18.333333333333329"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>

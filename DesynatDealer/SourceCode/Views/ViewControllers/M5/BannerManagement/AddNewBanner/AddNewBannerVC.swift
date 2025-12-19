@@ -32,6 +32,7 @@ class AddNewBannerVC: UIViewController {
     var subcategoriesList: [SubCategoryDataModel] = []
     var selectedCategoryId: Int?
     var selectedSubCategoriesId: Int? = -1
+    var onBannerAdded: (() -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,33 +48,66 @@ class AddNewBannerVC: UIViewController {
         img3.image = UIImage(named: "radioUnselected")
     }
     
+    private func resetCategoryData() {
+        lblCategory.text = "Select Category"
+        lblSubCategory.text = "Select Sub-Category"
+        selectedCategoryId = nil
+        selectedSubCategoriesId = nil
+        subcategoriesList.removeAll()
+    }
+    
+    func calculateFinalPrice() {
+        guard let daysTxt = lblTotalDays.text, let days = Int(daysTxt), let priceTxt = lblTotalPrice.text else { return }
+        
+        let priceOnly = priceTxt
+            .replacingOccurrences(of: " KD", with: "")
+            .trimmingCharacters(in: .whitespaces)
+        
+        guard let pricePerDay = Int(priceOnly) else { return }
+        
+        let totalPrice = days * pricePerDay
+        lblTotalPrice.text = "\(totalPrice) KD"
+    }
+    
     @IBAction func btnBack(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func btnSelectPosition(_ sender: UIButton) {
         resetRadio()
+        var bannerType = "1"
+        
         switch sender.tag {
         case 0:
             img1.image = UIImage(named: "radioSelected")
             viewCategory.isHidden = true
             viewSubCategory.isHidden = true
+            resetCategoryData()
+            bannerType = "1"
+            
         case 1:
             img2.image = UIImage(named: "radioSelected")
             viewCategory.isHidden = true
             viewSubCategory.isHidden = true
+            resetCategoryData()
+            bannerType = "2"
+            
         case 2:
             img3.image = UIImage(named: "radioSelected")
             viewCategory.isHidden = false
             viewSubCategory.isHidden = false
+            resetCategoryData()
+            bannerType = "3"
             
             if categoriesList.isEmpty {
                 viewModel.getCategoriesListApi()
             }
+            
         default:
             break
         }
         selectedImg = sender.tag
+        viewModel.getPrice(type: bannerType)
     }
     
     @IBAction func btnUploadImg(_ sender: Any) {
@@ -125,7 +159,9 @@ class AddNewBannerVC: UIViewController {
     }
     
     @IBAction func btnSendRequest(_ sender: Any) {
-        viewModel.addBanner()
+        if viewModel.validation() {
+            viewModel.addBanner()
+        }
     }
 }
 
@@ -195,6 +231,7 @@ extension AddNewBannerVC {
         let totalDays = days + 1   // inclusive
         
         lblTotalDays.text = "\(totalDays)"
+        calculateFinalPrice()
     }
 }
 

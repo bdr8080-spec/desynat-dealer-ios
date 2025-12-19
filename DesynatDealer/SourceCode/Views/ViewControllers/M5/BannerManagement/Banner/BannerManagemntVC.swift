@@ -40,6 +40,9 @@ class BannerManagemntVC: UIViewController {
     
     @IBAction func btnAddBanner(_ sender: Any) {
         let vc = AddNewBannerVC.instantiate(fromAppStoryboard: .BannerManagement)
+        vc.onBannerAdded = {
+            self.viewModel.getAllBanners()
+        }
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -51,12 +54,19 @@ extension BannerManagemntVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BannerMgmtTableCell", for: indexPath) as! BannerMgmtTableCell
-        cell.configure(with: bannerData[indexPath.row])
+        let banner = bannerData[indexPath.row]
+        cell.configure(with: banner)
+        cell.onPayTap = {
+            let vc = PaymentMethodVC.instantiate(fromAppStoryboard: .Main)
+            vc.transactionIds = banner.orderID ?? ""
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = BannerDetailVC.instantiate(fromAppStoryboard: .BannerManagement)
+        vc.banners = bannerData[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

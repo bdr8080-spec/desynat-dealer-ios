@@ -672,9 +672,9 @@ extension WebService {
         }
     }
     
-    func getPrice(param: [String :Any], completion:@escaping (_ user: PriceModel)-> Void) {
+    func getBannerPrice(param: [String :Any], completion:@escaping (_ user: [PriceModel])-> Void) {
         CommonUtils.showHud(show: true)
-        NetworkManager.shared.request(withAPI:.endpoint(.addPrice), requestMethod: .post, requestParams: param, requestModel: PriceModel.self) { result, code in
+        NetworkManager.shared.request(withAPI:.endpoint(.getBannerPrice), requestMethod: .post, requestParams: param, requestModel: [PriceModel].self) { result, code in
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {

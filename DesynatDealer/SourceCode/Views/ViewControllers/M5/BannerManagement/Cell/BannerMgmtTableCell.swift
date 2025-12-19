@@ -21,20 +21,27 @@ class BannerMgmtTableCell: UITableViewCell {
     @IBOutlet weak var viewRejectDate: UIView!
     @IBOutlet weak var viewRejectReason: UIView!
     
+    var onPayTap: (() -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        setupUI()
+    }
+    
+    private func setupUI() {
+        imgBanner.layer.cornerRadius = 8
+        imgBanner.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        imgBanner.layer.masksToBounds = true
     }
     
     func configure(with data: BannerModel) {
-//        if let imageUrlString = data.i, let url = URL(string: imageUrlString) {
-//          imgBanner.sd_imageIndicator = SDWebImageActivityIndicator.gray
-//          imgBanner.sd_imageIndicator?.startAnimatingIndicator()
-//          imgBanner.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
-//        } else {
-//          imgBanner.image = UIImage(named: "")
-//        }
+        if let imageUrlString = data.uploadBanner, let url = URL(string: imageUrlString) {
+          imgBanner.sd_imageIndicator = SDWebImageActivityIndicator.gray
+          imgBanner.sd_imageIndicator?.startAnimatingIndicator()
+          imgBanner.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
+        } else {
+          imgBanner.image = UIImage(named: "")
+        }
         
         lblRequestedId.text = data.orderID ?? "Nil"
         lblTotalAmount.text = data.price ?? "Nil"
@@ -49,6 +56,7 @@ class BannerMgmtTableCell: UITableViewCell {
         switch status {
         case "0": //Pending
             lblStatus.text = "Pending"
+            lblStatus.textColor = UIColor(hex: "#E28F12")
             viewBtnPay.isHidden = true
             viewRejectDate.isHidden = true
             viewRejectReason.isHidden = true
@@ -56,12 +64,14 @@ class BannerMgmtTableCell: UITableViewCell {
             
         case "1": //Approved
             lblStatus.text = "Approved"
+            lblStatus.textColor = UIColor(hex: "#68CA44")
             viewBtnPay.isHidden = false
             viewRejectDate.isHidden = true
             viewRejectReason.isHidden = true
             
         case "2": //Rejected
             lblStatus.text = "Rejected"
+            lblStatus.textColor = UIColor(hex: "#D53B36")
             viewBtnPay.isHidden = true
             viewRejectDate.isHidden = false
             viewRejectReason.isHidden = false
@@ -76,13 +86,13 @@ class BannerMgmtTableCell: UITableViewCell {
     }
     
     @IBAction func btnPay(_ sender: Any) {
+        onPayTap?()
     }
     
     
 }
 
 extension BannerMgmtTableCell {
-
     private func formatDate(_ dateString: String?) -> String {
         guard let dateString = dateString else { return "-" }
 

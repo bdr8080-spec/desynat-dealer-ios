@@ -70,27 +70,32 @@ enum AlertConstant: String {
     case EnterStorePhoneNumber      = "Please enter store phone number"
     case EnterCountry               = "Please choose Country"
     case EnterComission             = "Please enter Affiliated Commission"
-  
-  
+    
+    
     case selectCategory             = "Please select category"
-    case selectSubCategory             = "Please select sub-category"
-    case selectBrand             = "Please select brand"
-  case otherBrandEnEmpty      = "Please enter other brand name in english"
-  case otherBrandArEmpty      = "Please enter other brand name in arabic"
-  case productNameEnEmpty      = "Please enter product name in english"
-  case productNameArEmpty      = "Please enter product name in arabic"
-  case descriptionEnEmpty      = "Please enter description in english"
-  case descriptionArEmpty      = "Please enter description in arabic"
-  case minQuantity      = "Please enter min. cart quantity"
-  case maxQuantity      = "Please enter max. cart quantity"
-  case returnDays      = "Please enter total days for returning"
-  case exchangeDays      = "Please enter total days for exchangable"
-  case sizeChartUpload      = "Please upload size chart"
-  case maxMinQuantity =      "Max quantity cannot be less than Min quantity"
-
-func value() -> String {
-    return self.rawValue
-}
+    case selectSubCategory          = "Please select sub-category"
+    case selectBrand                = "Please select brand"
+    case otherBrandEnEmpty          = "Please enter other brand name in english"
+    case otherBrandArEmpty          = "Please enter other brand name in arabic"
+    case productNameEnEmpty         = "Please enter product name in english"
+    case productNameArEmpty         = "Please enter product name in arabic"
+    case descriptionEnEmpty         = "Please enter description in english"
+    case descriptionArEmpty         = "Please enter description in arabic"
+    case minQuantity                = "Please enter min. cart quantity"
+    case maxQuantity                = "Please enter max. cart quantity"
+    case returnDays                 = "Please enter total days for returning"
+    case exchangeDays               = "Please enter total days for exchangable"
+    case sizeChartUpload            = "Please upload size chart"
+    case maxMinQuantity             = "Max quantity cannot be less than Min quantity"
+    
+    case selectBanner               = "Please select banner position"
+    case selectFromDate             = "Please select from date"
+    case selectToDate               = "Please select to date"
+    case uploadBanner               = "Please upload banner image"
+    
+    func value() -> String {
+        return self.rawValue
+    }
 }
 
 struct MatchCharacterConstant {

@@ -16,7 +16,8 @@ struct BannerModel: Codable {
     let price, adminVerify, paymentStatus: String?
     let transactionID, cancelledReason: String?
     let createdAt, updatedAt: String?
-    let categoryDetails, subcategoryDetails: String?
+    let categoryDetails: CategoryDetails?
+    let subcategoryDetails: SubcategoryDetails?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -37,6 +38,41 @@ struct BannerModel: Codable {
         case updatedAt = "updated_at"
         case categoryDetails = "category_details"
         case subcategoryDetails = "subcategory_details"
+    }
+}
+
+// MARK: CategoryDetails
+struct CategoryDetails: Codable {
+    let id: Int?
+    let name, description: String?
+    let image: String?
+    let status: Int?
+    let colorCode, createdAt, updatedAt: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id, name, description, image, status
+        case colorCode = "color_code"
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+    }
+}
+
+// MARK: SubcategoryDetails
+struct SubcategoryDetails: Codable {
+    let id, categoryID: Int?
+    let nameEnglish, nameArabic: String?
+    let image: String?
+    let status: Int?
+    let createdAt, updatedAt: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case categoryID = "category_id"
+        case nameEnglish = "name_english"
+        case nameArabic = "name_arabic"
+        case image, status
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
     }
 }
 

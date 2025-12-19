@@ -64,7 +64,7 @@ enum NetworkEndPoint: String {
     //M5
     case getBanners                     = "/api/seller/all-banners"
     case addBanner                      = "/api/seller/add-banner"
-    case addPrice                       = "/api/seller/get-seller-banner-price"
+    case getBannerPrice                 = "/api/seller/get-seller-banner-price"
     
     
     

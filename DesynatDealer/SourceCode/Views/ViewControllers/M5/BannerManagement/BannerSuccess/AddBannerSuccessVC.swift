@@ -14,7 +14,9 @@ class AddBannerSuccessVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-            self.dismiss(animated: true)
+            self.dismiss(animated: true) {
+                self.dismissCallBack?()
+            }
         }
     }
 
