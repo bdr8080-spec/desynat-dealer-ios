@@ -44,16 +44,17 @@ class BannerMgmtTableCell: UITableViewCell {
         }
         
         lblRequestedId.text = data.orderID ?? "Nil"
-        lblTotalAmount.text = data.price ?? "Nil"
+        lblTotalAmount.text = "\(data.price ?? "0") KD"
         lblRequestedOn.text = formatDate(data.createdAt)
         
         
         viewBtnPay.isHidden = true
         viewRejectDate.isHidden = true
         viewRejectReason.isHidden = true
-        let status = data.adminVerify ?? ""
+        let adminStatus = data.adminVerify ?? ""
+        let paymentStatus = data.paymentStatus ?? ""
         
-        switch status {
+        switch adminStatus {
         case "0": //Pending
             lblStatus.text = "Pending"
             lblStatus.textColor = UIColor(hex: "#E28F12")
@@ -63,11 +64,33 @@ class BannerMgmtTableCell: UITableViewCell {
             
             
         case "1": //Approved
-            lblStatus.text = "Approved"
-            lblStatus.textColor = UIColor(hex: "#68CA44")
-            viewBtnPay.isHidden = false
-            viewRejectDate.isHidden = true
-            viewRejectReason.isHidden = true
+            switch paymentStatus {
+            case "0":
+                lblStatus.text = "Confirmed"
+                lblStatus.textColor = UIColor(hex: "#68CA44")
+                viewBtnPay.isHidden = false
+                viewRejectDate.isHidden = true
+                viewRejectReason.isHidden = true
+                
+            case "1":
+                lblStatus.text = "Active"
+                lblStatus.textColor = UIColor(hex: "#C4A176")
+                viewBtnPay.isHidden = true
+                viewRejectDate.isHidden = true
+                viewRejectReason.isHidden = true
+                
+            case "2":
+                lblStatus.text = "Rejected"
+                lblStatus.textColor = UIColor(hex: "#D53B36")
+                viewBtnPay.isHidden = true
+                viewRejectDate.isHidden = false
+                viewRejectReason.isHidden = false
+                //lblRejectedOn.text = data.re
+                lblRejectReason.text = data.cancelledReason ?? "Nil"
+                
+            default:
+                return
+            }
             
         case "2": //Rejected
             lblStatus.text = "Rejected"
@@ -95,14 +118,21 @@ class BannerMgmtTableCell: UITableViewCell {
 extension BannerMgmtTableCell {
     private func formatDate(_ dateString: String?) -> String {
         guard let dateString = dateString else { return "-" }
-
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-
-        if let date = formatter.date(from: dateString) {
-            formatter.dateFormat = "dd MMM yyyy"
-            return formatter.string(from: date)
+        
+        let inputFormatter = DateFormatter()
+        inputFormatter.locale = Locale(identifier: "en_US_POSIX")
+        inputFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+        inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ"
+        
+        guard let date = inputFormatter.date(from: dateString) else {
+            return dateString
         }
-        return dateString
+        
+        let outputFormatter = DateFormatter()
+        outputFormatter.locale = Locale(identifier: "en_US_POSIX")
+        outputFormatter.timeZone = TimeZone.current
+        outputFormatter.dateFormat = "dd/MM/yyyy 'at' hh:mm a"
+        
+        return outputFormatter.string(from: date)
     }
 }

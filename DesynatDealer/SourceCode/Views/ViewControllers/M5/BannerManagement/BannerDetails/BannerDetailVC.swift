@@ -20,6 +20,8 @@ class BannerDetailVC: UIViewController {
     @IBOutlet weak var lblTotalDays: CustomLabelFont!
     @IBOutlet weak var lblTotalPrice: CustomLabelFont!
     @IBOutlet weak var viewBtnPay: CustomButton!
+    @IBOutlet weak var viewSubCategory: UIView!
+    @IBOutlet weak var lblSubCategory: CustomLabelFont!
     
     var banners: BannerModel?
     
@@ -47,17 +49,36 @@ class BannerDetailVC: UIViewController {
         lblRequestedId.text = data?.orderID ?? "Nil"
         lblRequestedDate.text = formatBannerDate(data?.createdAt)
         
+        let adminStatus = data?.adminVerify ?? ""
+        let paymentStatus = data?.paymentStatus ?? ""
+        
         //Status
-        switch data?.adminVerify {
+        switch adminStatus {
         case "0": //Pending
             lblRequestedStatus.text = "Pending"
             lblRequestedStatus.textColor = UIColor(hex: "#E28F12")
             viewBtnPay.isHidden = true
 
         case "1": //Approved
-            lblRequestedStatus.text = "Approved"
-            lblRequestedStatus.textColor = UIColor(hex: "#68CA44")
-            viewBtnPay.isHidden = false
+            switch paymentStatus {
+            case "0":
+                lblRequestedStatus.text = "Confirmed"
+                lblRequestedStatus.textColor = UIColor(hex: "#68CA44")
+                viewBtnPay.isHidden = false
+                
+            case "1":
+                lblRequestedStatus.text = "Active"
+                lblRequestedStatus.textColor = UIColor(hex: "#C4A176")
+                viewBtnPay.isHidden = true
+                
+            case "2":
+                lblRequestedStatus.text = "Rejected"
+                lblRequestedStatus.textColor = UIColor(hex: "#D53B36")
+                viewBtnPay.isHidden = true
+                
+            default:
+                return
+            }
             
         case "2": //Rejected
             lblRequestedStatus.text = "Rejected"
@@ -68,6 +89,7 @@ class BannerDetailVC: UIViewController {
             return
         }
         
+        viewSubCategory.isHidden = true
         // Banner position
         switch data?.bannerPosition {
         case "1":
@@ -75,7 +97,9 @@ class BannerDetailVC: UIViewController {
         case "2":
             lblBannerPosition.text = "Home Banner"
         case "3":
+            viewSubCategory.isHidden = false
             lblBannerPosition.text = "Category"
+            lblSubCategory.text = data?.subcategoryDetails?.nameEnglish ?? ""
         default:
             lblBannerPosition.text = "Nil"
         }
@@ -83,7 +107,7 @@ class BannerDetailVC: UIViewController {
         lblFromDate.text = formatDate(data?.startDate)
         lblToDate.text = formatDate(data?.endDate)
         lblTotalDays.text = data?.totalDays ?? "0"
-        lblTotalPrice.text = "\(data?.price ?? "0")"
+        lblTotalPrice.text = "\(data?.price ?? "0") KD"
     }
     
     @IBAction func btnBack(_ sender: Any) {
@@ -92,7 +116,9 @@ class BannerDetailVC: UIViewController {
     
     @IBAction func btnPay(_ sender: Any) {
         let vc = PaymentMethodVC.instantiate(fromAppStoryboard: .Main)
+        vc.paymentFrom = .banner
         vc.transactionIds = banners?.orderID ?? ""
+        vc.payAmount = Int(banners?.price ?? "") ?? 0
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

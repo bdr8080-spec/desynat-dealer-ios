@@ -33,6 +33,7 @@ class AddNewBannerVC: UIViewController {
     var selectedCategoryId: Int?
     var selectedSubCategoriesId: Int? = -1
     var onBannerAdded: (() -> Void)?
+    var pricePerDay: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +41,10 @@ class AddNewBannerVC: UIViewController {
         viewModel.getCategoriesListApi()
         viewCategory.isHidden = true
         viewSubCategory.isHidden = true
+        
+        let defaultBtn = UIButton()
+        defaultBtn.tag = 0
+        btnSelectPosition(defaultBtn)
     }
 
     private func resetRadio() {
@@ -69,12 +74,27 @@ class AddNewBannerVC: UIViewController {
         lblTotalPrice.text = "\(totalPrice) KD"
     }
     
+    func getNumericBannerAmount() -> Int {
+        let priceText = lblTotalPrice.text ?? ""
+        
+        let numericText = priceText
+            .replacingOccurrences(of: "KD", with: "")
+            .replacingOccurrences(of: " ", with: "")
+        
+        return Int(numericText) ?? 0
+    }
+
     @IBAction func btnBack(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func btnSelectPosition(_ sender: UIButton) {
         resetRadio()
+        txtFromDate.text = ""
+        txtToDate.text = ""
+        lblTotalDays.text = "days"
+        lblTotalPrice.text = "\(pricePerDay) KD"
+        
         var bannerType = "1"
         
         switch sender.tag {
@@ -170,7 +190,7 @@ extension AddNewBannerVC {
     private func setUpTextFields() {
         datePicker.preferredDatePickerStyle = .wheels
         datePicker.datePickerMode = .date
-        datePicker.minimumDate = nil
+        datePicker.minimumDate = Date()
         datePicker.backgroundColor = .white
         
         let toolbar = UIToolbar()
@@ -246,7 +266,7 @@ extension AddNewBannerVC: UITextFieldDelegate {
         if textField == txtToDate, let fromDateText = txtFromDate.text, let fromDate = formatter.date(from: fromDateText) {
             datePicker.minimumDate = fromDate
         } else {
-            datePicker.minimumDate = nil
+            datePicker.minimumDate = Date()
         }
     }
 }

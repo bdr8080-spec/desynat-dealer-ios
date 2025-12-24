@@ -89,8 +89,8 @@ enum AlertConstant: String {
     case maxMinQuantity             = "Max quantity cannot be less than Min quantity"
     
     case selectBanner               = "Please select banner position"
-    case selectFromDate             = "Please select from date"
-    case selectToDate               = "Please select to date"
+    case selectFromDate             = "Please select start date"
+    case selectToDate               = "Please select end date"
     case uploadBanner               = "Please upload banner image"
     
     func value() -> String {

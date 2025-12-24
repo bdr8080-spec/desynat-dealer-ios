@@ -65,9 +65,11 @@ class AddNewBannerVM: NSObject {
         ]
         
         WebService.sharedInstance.getBannerPrice(param: params) { data in
-            let pricePerDay = data.first?.perDayPrice ?? "0"
-            self.hostVC.lblTotalPrice.text = "\(pricePerDay) KD"
-            self.hostVC.calculateFinalPrice()
+            let priceString = data.first?.perDayPrice ?? "0"
+            let price = Int(priceString) ?? 0
+            self.hostVC.pricePerDay = price
+            self.hostVC.lblTotalPrice.text = "\(price) KD"
+            //self.hostVC.calculateFinalPrice()
         }
     }
     
@@ -81,7 +83,7 @@ class AddNewBannerVM: NSObject {
             "end_date": hostVC.txtToDate.text?.toAPIDate() ?? "",
             "total_days": hostVC.lblTotalDays.text ?? "",
             "upload_banner": hostVC.bannerImageUrl,
-            "price": hostVC.lblTotalPrice.text ?? ""
+            "price": hostVC.getNumericBannerAmount()
         ]
         
         if bannerPosition == "3" {

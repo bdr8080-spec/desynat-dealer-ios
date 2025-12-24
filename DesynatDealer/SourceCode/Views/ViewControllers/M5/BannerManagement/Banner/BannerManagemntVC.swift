@@ -5,6 +5,11 @@
 //  Created by fluper on 18/12/25.
 //
 
+protocol BannerFilterDelegate: AnyObject {
+    func didApplyFilter(_ filter: BannerFilterModel)
+    func didClearFilter()
+}
+
 import UIKit
 
 class BannerManagemntVC: UIViewController {
@@ -36,6 +41,10 @@ class BannerManagemntVC: UIViewController {
     }
     
     @IBAction func btnFilter(_ sender: Any) {
+        let vc = BannerFilterVC.instantiate(fromAppStoryboard: .BannerManagement)
+        vc.delegate = self
+        vc.appliedFilter = viewModel.appliedFilter
+        self.navigationController?.present(vc, animated: true)
     }
     
     @IBAction func btnAddBanner(_ sender: Any) {
@@ -58,7 +67,10 @@ extension BannerManagemntVC: UITableViewDelegate, UITableViewDataSource {
         cell.configure(with: banner)
         cell.onPayTap = {
             let vc = PaymentMethodVC.instantiate(fromAppStoryboard: .Main)
+            //vc.transactionIds = banner.orderID ?? ""
+            vc.paymentFrom = .banner
             vc.transactionIds = banner.orderID ?? ""
+            vc.payAmount = Int(banner.price ?? "") ?? 0
             self.navigationController?.pushViewController(vc, animated: true)
         }
         return cell
@@ -84,5 +96,17 @@ extension BannerManagemntVC: UITextFieldDelegate {
         searchWorkItem = workItem
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: workItem)
         return true
+    }
+}
+
+extension BannerManagemntVC: BannerFilterDelegate {
+    func didApplyFilter(_ filter: BannerFilterModel) {
+        viewModel.appliedFilter = filter
+        viewModel.getAllBanners()
+    }
+
+    func didClearFilter() {
+        viewModel.appliedFilter = nil
+        viewModel.getAllBanners()
     }
 }

@@ -13,7 +13,7 @@ class SubscriptionPlaneViewModel: NSObject {
     private var hostVC: SubscriptionVC
     var plansList: [GetPlansSubscriptionModel]? = []
     var transactionId: String?
-    var payAmt: Double?
+    var payAmt: Int?
     var durationOfPlan: String?
     
     init(hostVC: SubscriptionVC) {
@@ -31,6 +31,7 @@ class SubscriptionPlaneViewModel: NSObject {
         let params: [String: Any] = ["plan_id": planID]
         WebService.sharedInstance.purchasePlansListService(param: params) { result in
             let vc = PaymentMethodVC.instantiate(fromAppStoryboard: .Main)
+            vc.paymentFrom = .plan
             vc.transactionIds = result.transactionID ?? ""
             vc.payAmount = self.payAmt ?? 0
             vc.durationOfPlan = self.durationOfPlan

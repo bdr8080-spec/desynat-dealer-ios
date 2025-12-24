@@ -21,7 +21,8 @@ struct SellerProfileDataModel: Codable {
     let createdAt, updatedAt: String?
     let storeInfo: StoreInfo?
     let sellerBankDetails: SellerBankDetails?
-    let subcriptionPlan: [String]?
+//    let subcriptionPlan: [String]?
+    let subcriptionPlan: [SubcriptionPlan]?
     let ownerDocument, storeDocument: [Document]?
 
     enum CodingKeys: String, CodingKey {
@@ -50,5 +51,31 @@ struct SellerProfileDataModel: Codable {
         case subcriptionPlan = "subcription_plan"
         case ownerDocument = "owner_document"
         case storeDocument = "store_document"
+    }
+}
+
+// MARK: - SubcriptionPlan
+struct SubcriptionPlan: Codable {
+    let id: Int?
+    let transactionID: String?
+    let sellerID, planID: Int?
+    let status, planStartDate, planEndDate, amount: String?
+    let onlineTransactionID, paymentMethod, paymentStatus, createdAt: String?
+    let updatedAt: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case transactionID = "transaction_id"
+        case sellerID = "seller_id"
+        case planID = "plan_id"
+        case status
+        case planStartDate = "plan_start_date"
+        case planEndDate = "plan_end_date"
+        case amount
+        case onlineTransactionID = "online_transaction_id"
+        case paymentMethod = "payment_method"
+        case paymentStatus = "payment_status"
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
     }
 }

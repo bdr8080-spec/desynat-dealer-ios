@@ -90,3 +90,9 @@ struct PriceModel: Codable {
         case updatedAt = "updated_at"
     }
 }
+
+struct BannerFilterModel {
+    var fromDate: String?
+    var toDate: String?
+    var statusIds: [Int] = []
+}
