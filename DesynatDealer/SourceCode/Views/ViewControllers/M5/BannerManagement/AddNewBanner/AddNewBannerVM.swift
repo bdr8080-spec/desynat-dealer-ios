@@ -14,36 +14,77 @@ class AddNewBannerVM: NSObject {
         self.hostVC = hostVC
     }
     
-    func validation() -> Bool {
-        let selectedBanner = hostVC.selectedImg
-        let fromDate = hostVC.txtFromDate.text ?? ""
-        let toDate = hostVC.txtToDate.text ?? ""
-        let bannerImg = hostVC.bannerImageUrl
-        var errorMessage: AlertConstant = .none
-        
-        if selectedBanner == nil {
-            errorMessage = .selectBanner
-        } else if selectedBanner == 2 {
-            if hostVC.selectedCategoryId == nil {
-                errorMessage = .selectCategory
-            } else if hostVC.selectedSubCategoriesId == nil {
-                errorMessage = .selectSubCategory
-            }
-        } else if fromDate.isEmpty {
-            errorMessage = .selectFromDate
-        } else if toDate.isEmpty {
-            errorMessage = .selectToDate
-        } else if bannerImg.isEmpty {
-            errorMessage = .uploadBanner
-        }
-        
-        if errorMessage != .none {
-            hostVC.showAlert(msg: errorMessage.rawValue.localiz())
-        }
-        
-        hostVC.view.endEditing(true)
-        return errorMessage == .none
-    }
+//    func validation() -> Bool {
+//        let selectedBanner = hostVC.selectedImg
+//        let fromDate = hostVC.txtFromDate.text ?? ""
+//        let toDate = hostVC.txtToDate.text ?? ""
+//        let bannerImg = hostVC.bannerImageUrl
+//        var errorMessage: AlertConstant = .none
+//        
+//        if selectedBanner == nil {
+//            errorMessage = .selectBanner
+//        } else if selectedBanner == 2 {
+//            if hostVC.selectedCategoryId == nil {
+//                errorMessage = .selectCategory
+//            } else if hostVC.selectedSubCategoriesId == nil {
+//                errorMessage = .selectSubCategory
+//            }
+//        } else if fromDate.isEmpty {
+//            errorMessage = .selectFromDate
+//        } else if toDate.isEmpty {
+//            errorMessage = .selectToDate
+//        } else if bannerImg.isEmpty {
+//            errorMessage = .uploadBanner
+//        }
+//        
+//        if errorMessage != .none {
+//            hostVC.showAlert(msg: errorMessage.rawValue.localiz())
+//        }
+//        
+//        hostVC.view.endEditing(true)
+//        return errorMessage == .none
+//    }
+  
+  func validation() -> Bool {
+      let selectedBanner = hostVC.selectedImg
+      let fromDate = hostVC.txtFromDate.text ?? ""
+      let toDate = hostVC.txtToDate.text ?? ""
+      let bannerImg = hostVC.bannerImageUrl
+      var errorMessage: AlertConstant = .none
+
+      // 1️⃣ Banner position
+      if selectedBanner == nil {
+          errorMessage = .selectBanner
+      }
+
+      // 2️⃣ Category-specific validation
+      else if selectedBanner == 2 {
+          if hostVC.selectedCategoryId == nil {
+              errorMessage = .selectCategory
+          } else if hostVC.selectedSubCategoriesId == nil {
+              errorMessage = .selectSubCategory
+          }
+      }
+
+      // 3️⃣ Common validations (for ALL banner types)
+      if errorMessage == .none {
+          if fromDate.isEmpty {
+              errorMessage = .selectFromDate
+          } else if toDate.isEmpty {
+              errorMessage = .selectToDate
+          } else if bannerImg.isEmpty {
+              errorMessage = .uploadBanner
+          }
+      }
+
+      if errorMessage != .none {
+          hostVC.showAlert(msg: errorMessage.rawValue.localiz())
+      }
+
+      hostVC.view.endEditing(true)
+      return errorMessage == .none
+  }
+
 
     
     func getCategoriesListApi() {
@@ -58,20 +99,21 @@ class AddNewBannerVM: NSObject {
             self.hostVC.subcategoriesList = list
         }
     }
-    
-    func getPrice(type: String) {
-        let params: [String: Any] = [
-            "type": type // 1-top, 2-bottom, 3-sub category
-        ]
-        
-        WebService.sharedInstance.getBannerPrice(param: params) { data in
-            let priceString = data.first?.perDayPrice ?? "0"
-            let price = Int(priceString) ?? 0
-            self.hostVC.pricePerDay = price
-            self.hostVC.lblTotalPrice.text = "\(price) KD"
-            //self.hostVC.calculateFinalPrice()
-        }
-    }
+  
+  func getPrice(type: String) {
+      let params: [String: Any] = [
+          "type": type
+      ]
+      
+      WebService.sharedInstance.getBannerPrice(param: params) { data in
+          let priceString = data.first?.perDayPrice ?? "0"
+          let price = Int(priceString) ?? 0
+          
+          self.hostVC.pricePerDay = price
+          self.hostVC.lblTotalPrice.text = "0 KD"
+      }
+  }
+
     
     func addBanner() {
         guard let positionIndex = hostVC.selectedImg else { return }

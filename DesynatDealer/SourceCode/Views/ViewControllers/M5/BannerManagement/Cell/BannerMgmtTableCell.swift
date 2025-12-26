@@ -73,11 +73,44 @@ class BannerMgmtTableCell: UITableViewCell {
                 viewRejectReason.isHidden = true
                 
             case "1":
-                lblStatus.text = "Active"
-                lblStatus.textColor = UIColor(hex: "#C4A176")
-                viewBtnPay.isHidden = true
-                viewRejectDate.isHidden = true
-                viewRejectReason.isHidden = true
+//                lblStatus.text = "Active"
+//                lblStatus.textColor = UIColor(hex: "#C4A176")
+//                viewBtnPay.isHidden = true
+//                viewRejectDate.isHidden = true
+//                viewRejectReason.isHidden = true
+              
+              
+              let today = Calendar.current.startOfDay(for: Date())
+                      let startDate = apiDate(data.startDate)
+                      let endDate = apiDate(data.endDate)
+                      
+                      if let start = startDate, let end = endDate {
+                          
+                          if today < start {
+                              // ✅ Future banner
+                              lblStatus.text = "Confirmed"
+                              lblStatus.textColor = UIColor(hex: "#68CA44")
+                              
+                          } else if isDate(today, between: start, and: end) {
+                              // ✅ Currently active
+                              lblStatus.text = "Active"
+                              lblStatus.textColor = UIColor(hex: "#C4A176")
+                              
+                          } else if today > end {
+                              // ✅ Expired banner
+                              lblStatus.text = "Expired"
+                              lblStatus.textColor = UIColor(hex: "#9E9E9E")
+                          }
+                          
+                      } else {
+                          // Fallback
+                          lblStatus.text = "Confirmed"
+                          lblStatus.textColor = UIColor(hex: "#68CA44")
+                      }
+                      
+                      viewBtnPay.isHidden = true
+                      viewRejectDate.isHidden = true
+                      viewRejectReason.isHidden = true
                 
             case "2":
                 lblStatus.text = "Rejected"
@@ -107,6 +140,19 @@ class BannerMgmtTableCell: UITableViewCell {
     
         
     }
+  
+  func isDate(_ date: Date, between startDate: Date, and endDate: Date) -> Bool {
+      return (startDate ... endDate).contains(date)
+  }
+
+  func apiDate(_ dateString: String?) -> Date? {
+      guard let dateString = dateString else { return nil }
+      let formatter = DateFormatter()
+      formatter.dateFormat = "yyyy-MM-dd"
+      formatter.locale = Locale(identifier: "en_US_POSIX")
+      return formatter.date(from: dateString)
+  }
+
     
     @IBAction func btnPay(_ sender: Any) {
         onPayTap?()

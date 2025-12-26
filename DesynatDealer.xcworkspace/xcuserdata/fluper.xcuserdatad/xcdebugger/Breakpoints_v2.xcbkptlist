@@ -34,36 +34,6 @@
             endingLineNumber = "107"
             landmarkName = "btnPay(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "A6B5FA5C-96EF-4630-9B9F-A687E32A7B68 - ee7843626597c9ad"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "DesynatDealer.PaymentMethodVC.btnPay(Any) -&gt; ()"
-                  moduleName = "DesynatDealer.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fluper/Documents/desynat-dealer-ios/DesynatDealer/SourceCode/Views/ViewControllers/M2/Payment/PaymentMethodVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "107"
-                  endingLineNumber = "107">
-               </Location>
-               <Location
-                  uuid = "A6B5FA5C-96EF-4630-9B9F-A687E32A7B68 - 322c21f6db7db53e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;MFSDK.MFPaymentStatusResponse&gt;, Swift.Optional&lt;Swift.String&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in DesynatDealer.PaymentMethodVC.btnPay(Any) -&gt; ()"
-                  moduleName = "DesynatDealer.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fluper/Documents/desynat-dealer-ios/DesynatDealer/SourceCode/Views/ViewControllers/M2/Payment/PaymentMethodVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "107"
-                  endingLineNumber = "107">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

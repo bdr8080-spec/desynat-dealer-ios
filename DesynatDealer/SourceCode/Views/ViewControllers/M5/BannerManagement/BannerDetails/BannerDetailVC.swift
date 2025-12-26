@@ -65,11 +65,41 @@ class BannerDetailVC: UIViewController {
                 lblRequestedStatus.text = "Confirmed"
                 lblRequestedStatus.textColor = UIColor(hex: "#68CA44")
                 viewBtnPay.isHidden = false
-                
+              
             case "1":
-                lblRequestedStatus.text = "Active"
-                lblRequestedStatus.textColor = UIColor(hex: "#C4A176")
-                viewBtnPay.isHidden = true
+//                lblRequestedStatus.text = "Active"
+//                lblRequestedStatus.textColor = UIColor(hex: "#C4A176")
+//                viewBtnPay.isHidden = true
+              
+              let today = Calendar.current.startOfDay(for: Date())
+              let startDate = apiDate(data?.startDate)
+              let endDate = apiDate(data?.endDate)
+                      
+                      if let start = startDate, let end = endDate {
+                          
+                          if today < start {
+                              // ✅ Future banner
+                            lblRequestedStatus.text = "Confirmed"
+                            lblRequestedStatus.textColor = UIColor(hex: "#68CA44")
+                              
+                          } else if isDate(today, between: start, and: end) {
+                              // ✅ Currently active
+                            lblRequestedStatus.text = "Active"
+                            lblRequestedStatus.textColor = UIColor(hex: "#C4A176")
+                              
+                          } else if today > end {
+                              // ✅ Expired banner
+                            lblRequestedStatus.text = "Expired"
+                            lblRequestedStatus.textColor = UIColor(hex: "#9E9E9E")
+                          }
+                          
+                      } else {
+                          // Fallback
+                        lblRequestedStatus.text = "Confirmed"
+                        lblRequestedStatus.textColor = UIColor(hex: "#68CA44")
+                      }
+                      
+              viewBtnPay.isHidden = true
                 
             case "2":
                 lblRequestedStatus.text = "Rejected"
@@ -121,5 +151,17 @@ class BannerDetailVC: UIViewController {
         vc.payAmount = Int(banners?.price ?? "") ?? 0
         self.navigationController?.pushViewController(vc, animated: true)
     }
+  
+  func isDate(_ date: Date, between startDate: Date, and endDate: Date) -> Bool {
+      return (startDate ... endDate).contains(date)
+  }
+
+  func apiDate(_ dateString: String?) -> Date? {
+      guard let dateString = dateString else { return nil }
+      let formatter = DateFormatter()
+      formatter.dateFormat = "yyyy-MM-dd"
+      formatter.locale = Locale(identifier: "en_US_POSIX")
+      return formatter.date(from: dateString)
+  }
     
 }

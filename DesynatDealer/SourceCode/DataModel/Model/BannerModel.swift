@@ -94,5 +94,5 @@ struct PriceModel: Codable {
 struct BannerFilterModel {
     var fromDate: String?
     var toDate: String?
-    var statusIds: [Int] = []
+    var statusId: Int?
 }

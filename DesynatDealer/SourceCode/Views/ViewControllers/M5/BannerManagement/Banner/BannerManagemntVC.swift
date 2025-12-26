@@ -26,8 +26,12 @@ class BannerManagemntVC: UIViewController {
         super.viewDidLoad()
         registerXib()
         txtSearch.delegate = self
-        viewModel.getAllBanners()
     }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    viewModel.getAllBanners()
+  }
     
     func registerXib() {
         bannerTableView.delegate = self

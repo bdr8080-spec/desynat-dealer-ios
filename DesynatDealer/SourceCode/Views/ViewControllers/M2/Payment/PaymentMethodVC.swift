@@ -241,11 +241,11 @@ extension PaymentMethodVC {
         ]
         WebService.sharedInstance.bannerPayment(param: params) { result in
             DispatchQueue.main.async {
-//                                self.stopLoading()
                 let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
-                vc.comingReason = .planPurchased
+                vc.comingReason = .bannerPlanPurchased
                 vc.callBackDismiss = {
-                    kSharedSceneDelegate.navigateToDealerHomeVc()
+//                  self.navigationController?.popToViewController(<#T##viewController: UIViewController##UIViewController#>, animated: <#T##Bool#>)//popToRootViewController(animated: true)
+                  self.navigationController?.popToViewController(ofClass: BannerManagemntVC.self, animated: true)
                 }
                 self.present(vc, animated: true)
             }

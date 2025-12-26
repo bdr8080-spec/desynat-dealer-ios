@@ -32,9 +32,13 @@ class BannerManagementVM: NSObject {
             params["to"] = to
         }
 
-        if !(filter?.statusIds.isEmpty ?? false) {
-            params["banner_filter"] = filter?.statusIds
-        }
+//        if !(filter?.statusIds.isEmpty ?? false) {
+//            params["banner_filter"] = filter?.statusIds
+//        }
+      
+      if let status = filter?.statusId {
+          params["banner_filter"] = status // wrap in array if API expects array
+      }
         
         WebService.sharedInstance.getBanners(param: params) { data in
             self.hostVC.bannerData = data

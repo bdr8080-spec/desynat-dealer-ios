@@ -32,6 +32,8 @@ class RegisterationSuccessViewController: UIViewController {
       descriptionLabel.text = "Thank you for sinning up\nwith DESYNAT"
     case .planPurchased:
       descriptionLabel.text = "Plan purchased successfully!"
+    case .bannerPlanPurchased:
+      descriptionLabel.text = "Banner plan purchased succesfully!"
     case .affiliatedCommission:
       descriptionLabel.text = "Commisson saved"
     }
@@ -44,4 +46,5 @@ enum ComingReasonAtRegisterationSuccess {
   case accountCreated
   case planPurchased
   case affiliatedCommission
+  case bannerPlanPurchased
 }

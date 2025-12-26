@@ -92,8 +92,9 @@ class AddNewBannerVC: UIViewController {
         resetRadio()
         txtFromDate.text = ""
         txtToDate.text = ""
-        lblTotalDays.text = "days"
-        lblTotalPrice.text = "\(pricePerDay) KD"
+      lblTotalDays.text = "days"
+      lblTotalPrice.text = "0 KD"
+//        lblTotalPrice.text = "\(pricePerDay) KD"
         
         var bannerType = "1"
         
@@ -209,66 +210,97 @@ extension AddNewBannerVC {
         }
     }
     
-    @objc private func doneDatePicker() {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd/MM/yyyy"
-        
-        guard let activeTextField = activeTextField else { return }
-        
-        // Apply selected date
-        activeTextField.text = formatter.string(from: datePicker.date)
-        view.endEditing(true)
-        
-        calculateTotalDays()
-        
-        // Handle automatic focus movement
-        switch activeTextField {
-        case txtFromDate:
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                self.txtToDate.becomeFirstResponder()
-            }
-            
-        default:
-            break
-        }
-    }
+  @objc private func doneDatePicker() {
+      let formatter = DateFormatter()
+      formatter.dateFormat = "dd/MM/yyyy"
+      
+      guard let activeTextField = activeTextField else { return }
+      
+      let selectedDate = datePicker.date
+      activeTextField.text = formatter.string(from: selectedDate)
+      view.endEditing(true)
+      
+      // ✅ Case: From date changed
+      if activeTextField == txtFromDate,
+         let toText = txtToDate.text,
+         !toText.isEmpty,
+         let toDate = formatter.date(from: toText) {
+          
+          // 🚫 From > To → invalidate To
+          if selectedDate > toDate {
+              txtToDate.text = ""
+              lblTotalDays.text = "days"
+              lblTotalPrice.text = "0 KD"
+              
+              // 🔁 Force user to select To Date again
+              DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                  self.txtToDate.becomeFirstResponder()
+              }
+              return
+          }
+      }
+      
+      // ✅ Calculate only when both dates are valid
+      calculateTotalDays()
+  }
+
+
     
     @objc private func cancelDatePicker() {
         view.endEditing(true)
     }
-    
-    func calculateTotalDays() {
-        guard let fromText = txtFromDate.text, let toText = txtToDate.text, !fromText.isEmpty, !toText.isEmpty
-        else { return }
-        
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd/MM/yyyy"
-        
-        guard let startDate = formatter.date(from: fromText), let endDate = formatter.date(from: toText)
-        else { return }
-        
-        let days = Calendar.current.dateComponents([.day], from: startDate, to: endDate).day ?? 0
-        let totalDays = days + 1   // inclusive
-        
-        lblTotalDays.text = "\(totalDays)"
-        calculateFinalPrice()
-    }
+  
+  func calculateTotalDays() {
+      guard
+          let fromText = txtFromDate.text, !fromText.isEmpty,
+          let toText = txtToDate.text, !toText.isEmpty
+      else {
+          lblTotalDays.text = "days"
+          lblTotalPrice.text = "0 KD"
+          return
+      }
+      
+      let formatter = DateFormatter()
+      formatter.dateFormat = "dd/MM/yyyy"
+      
+      guard
+          let startDate = formatter.date(from: fromText),
+          let endDate = formatter.date(from: toText),
+          startDate <= endDate
+      else {
+          lblTotalDays.text = "days"
+          lblTotalPrice.text = "0 KD"
+          return
+      }
+      
+      let days = Calendar.current.dateComponents([.day], from: startDate, to: endDate).day ?? 0
+      let totalDays = days + 1   // inclusive
+      
+      lblTotalDays.text = "\(totalDays)"
+      lblTotalPrice.text = "\(totalDays * pricePerDay) KD"
+  }
+
 }
 
 //TExtField Delegate
 extension AddNewBannerVC: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        activeTextField = textField
-        
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd/MM/yyyy"
-        
-        if textField == txtToDate, let fromDateText = txtFromDate.text, let fromDate = formatter.date(from: fromDateText) {
-            datePicker.minimumDate = fromDate
-        } else {
-            datePicker.minimumDate = Date()
-        }
-    }
+  func textFieldDidBeginEditing(_ textField: UITextField) {
+      activeTextField = textField
+      
+      let formatter = DateFormatter()
+      formatter.dateFormat = "dd/MM/yyyy"
+      
+      if textField == txtToDate,
+         let fromText = txtFromDate.text,
+         let fromDate = formatter.date(from: fromText) {
+          datePicker.minimumDate = fromDate
+      } else {
+          datePicker.minimumDate = Date()
+      }
+  }
+
+
+
 }
 
 extension String {
