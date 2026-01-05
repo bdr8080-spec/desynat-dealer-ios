@@ -26,10 +26,9 @@ class ResetPasswordViewModel: NSObject {
             // Validate create password
             if createPassword.isEmpty {
                 errorMessage = .EnterNewPassword
+            } else if !createPassword.isValidPassword() {
+                errorMessage = .InvalidPasswordFormat
             }
-//        else if !createPassword.isValidPassword() {
-//                errorMessage = .InvalidPasswordFormat
-//            }
             // Validate confirm password
             else if confirmPassword.isEmpty {
                 errorMessage = .EnterConfirmPassword

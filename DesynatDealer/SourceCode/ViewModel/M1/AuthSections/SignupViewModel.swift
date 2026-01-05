@@ -60,10 +60,9 @@ class SignupViewModel: NSObject {
         if errorMessage == .none {
             if password.isEmpty {
                 errorMessage = .EnterPassword
+            }else if !password.isValidPassword() {
+                errorMessage = .InvalidPasswordFormat
             }
-//            else if !password.isValidPassword() {
-//                errorMessage = .InvalidPasswordFormat
-//            }
         }
         
         let confirmPassword = String.getString(hostVC.txtConfirmPassword.text).trimmingCharacters(in: .whitespacesAndNewlines)

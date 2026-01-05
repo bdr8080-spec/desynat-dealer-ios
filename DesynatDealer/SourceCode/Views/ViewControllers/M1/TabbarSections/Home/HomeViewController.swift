@@ -67,6 +67,8 @@ class HomeViewController: UIViewController {
   }
   
   @IBAction func btnChat(_ sender: Any) {
+    let nextVC = ChatInboxListViewController.instantiate(fromAppStoryboard: .OrderAndChat)
+    self.navigationController?.pushViewController(nextVC, animated: true)
   }
   
   @IBAction func btnNotification(_ sender: Any) {

@@ -35,8 +35,8 @@ class AddNewSizeVariantTableViewCell: UITableViewCell {
   var sizesList: [SizeListDataModel] = []
   var variantArray: [Variant] = [Variant()]
   var selectedSizeId: Int? = -1
-    private var isEditingField = false
-
+  private var isEditingField = false
+  
   
   
   var sizeVariant: SizeVariant = SizeVariant() {
@@ -87,8 +87,8 @@ class AddNewSizeVariantTableViewCell: UITableViewCell {
     discountTypeisPercentage.toggle()
     discountPriceTF.text = ""
     finalPriceTF.text = ""
-//            updateModelFromUI()
-            onValueChanged?()
+    //            updateModelFromUI()
+    onValueChanged?()
   }
   
   func saveToModel() {
@@ -105,40 +105,40 @@ class AddNewSizeVariantTableViewCell: UITableViewCell {
     sizeVariant.shoulder     = shoulderTF.text ?? ""
     sizeVariant.sleeveLength = sleeveLengthTF.text ?? ""
     sizeVariant.length       = lengthTF.text ?? ""
-      print("------ SAVED SIZE DATA ------")
-       print("Size: \(sizeVariant.sizeId)")
-       print("Actual Price: \(sizeVariant.actualPrice)")
-       print("Final Price: \(sizeVariant.finalPrice)")
-       print("Discount: \(sizeVariant.discountValue)")
-       print("Total Stocks: \(sizeVariant.totalStock)")
-       print("SKU Limit: \(sizeVariant.sku)")
-       print("--------------------------------")
+    print("------ SAVED SIZE DATA ------")
+    print("Size: \(sizeVariant.sizeId)")
+    print("Actual Price: \(sizeVariant.actualPrice)")
+    print("Final Price: \(sizeVariant.finalPrice)")
+    print("Discount: \(sizeVariant.discountValue)")
+    print("Total Stocks: \(sizeVariant.totalStock)")
+    print("SKU Limit: \(sizeVariant.sku)")
+    print("--------------------------------")
   }
   
   
   
-    private func populateFromModel() {
-          guard !isEditingField else { return } // Don't overwrite while editing
-
-          bustTF.text = sizeVariant.bust
-          waistTF.text = sizeVariant.waist
-          hipTF.text = sizeVariant.hip
-          shoulderTF.text = sizeVariant.shoulder
-          sleeveLengthTF.text = sizeVariant.sleeveLength
-          lengthTF.text = sizeVariant.length
-
-          totalStocksTF.text = sizeVariant.totalStock
-          skuLimitTF.text = sizeVariant.sku
-          actualPriceTF.text = sizeVariant.actualPrice
-          discountPriceTF.text = sizeVariant.discountValue
-          finalPriceTF.text = sizeVariant.finalPrice
-
-          discountTypeisPercentage = sizeVariant.discountTypeIsPercentage
-
-          updateDiscountPlaceholder()
-          updateRadioButtons()
-          updateFinalPrice()
-      }
+  private func populateFromModel() {
+    guard !isEditingField else { return } // Don't overwrite while editing
+    
+    bustTF.text = sizeVariant.bust
+    waistTF.text = sizeVariant.waist
+    hipTF.text = sizeVariant.hip
+    shoulderTF.text = sizeVariant.shoulder
+    sleeveLengthTF.text = sizeVariant.sleeveLength
+    lengthTF.text = sizeVariant.length
+    
+    totalStocksTF.text = sizeVariant.totalStock
+    skuLimitTF.text = sizeVariant.sku
+    actualPriceTF.text = sizeVariant.actualPrice
+    discountPriceTF.text = sizeVariant.discountValue
+    finalPriceTF.text = sizeVariant.finalPrice
+    
+    discountTypeisPercentage = sizeVariant.discountTypeIsPercentage
+    
+    updateDiscountPlaceholder()
+    updateRadioButtons()
+    updateFinalPrice()
+  }
   
   private func updateRadioButtons() {
     percentageButton.setImage(UIImage(named: discountTypeisPercentage ? "radioSelected" : "radioUnselected"), for: .normal)
@@ -224,33 +224,33 @@ extension AddNewSizeVariantTableViewCell {
 
 // MARK: - UITextFieldDelegate + Validation (Add inside AddNewSizeVariantTableViewCell)
 extension AddNewSizeVariantTableViewCell: UITextFieldDelegate {
-    func setupTextFieldDelegates() {
-        let textFields: [UITextField] = [
-            sizeTF, bustTF, waistTF, hipTF, shoulderTF,
-            sleeveLengthTF, lengthTF, totalStocksTF, skuLimitTF,
-            actualPriceTF, discountPriceTF, finalPriceTF
-        ]
-
-        for tf in textFields {
-            tf.delegate = self   // Keep delegate for safe editing if needed
-            tf.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-            tf.keyboardType = .numberPad
-        }
-    }
-
-    @objc private func textFieldDidChange(_ textField: UITextField) {
-        // Optional: limit digits manually if needed
-        if let text = textField.text, text.count > 7 {
-            textField.text = String(text.prefix(7))
-        }
-        saveToModel() // Auto-save every change
-    }
+  func setupTextFieldDelegates() {
+    let textFields: [UITextField] = [
+      sizeTF, bustTF, waistTF, hipTF, shoulderTF,
+      sleeveLengthTF, lengthTF, totalStocksTF, skuLimitTF,
+      actualPriceTF, discountPriceTF, finalPriceTF
+    ]
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-           isEditingField = true
-       }
-
-//  // MARK: ONE AND ONLY shouldChangeCharactersIn
+    for tf in textFields {
+      tf.delegate = self   // Keep delegate for safe editing if needed
+      tf.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+      tf.keyboardType = .numberPad
+    }
+  }
+  
+  @objc private func textFieldDidChange(_ textField: UITextField) {
+    // Optional: limit digits manually if needed
+    if let text = textField.text, text.count > 7 {
+      textField.text = String(text.prefix(7))
+    }
+    saveToModel() // Auto-save every change
+  }
+  
+  func textFieldDidBeginEditing(_ textField: UITextField) {
+    isEditingField = true
+  }
+  
+  //  // MARK: ONE AND ONLY shouldChangeCharactersIn
   func textField(_ textField: UITextField,
                  shouldChangeCharactersIn range: NSRange,
                  replacementString string: String) -> Bool {
@@ -274,31 +274,67 @@ extension AddNewSizeVariantTableViewCell: UITextFieldDelegate {
       return true
     }
     
+//    if textField == discountPriceTF {
+//      if string == " " { return false }
+////      if updatedText.count == 1 && updatedText == "0" {
+////        return false
+////      }
+//      let currentText = textField.text ?? ""
+//      let updatedText = (currentText as NSString).replacingCharacters(in: range, with: string)
+//      let discount = Int(updatedText) ?? 0
+//      let actualPrice = Int(actualPriceTF.text ?? "0") ?? 0
+//      if discountTypeisPercentage {
+//        if discount > 100 {
+//          return false
+//        }
+//      } else {
+//        if discount >= actualPrice {
+//          return false
+//        }
+//      }
+//      if discount > 0 {
+//        updateFinalPrice(for: discount)
+//      } else {
+//        finalPriceTF.text = ""
+//      }
+//      return true
+//    }
+    
     if textField == discountPriceTF {
-      if string == " " { return false }
-      if updatedText.count == 1 && updatedText == "0" {
-        return false
-      }
-      let currentText = textField.text ?? ""
-      let updatedText = (currentText as NSString).replacingCharacters(in: range, with: string)
-      let discount = Int(updatedText) ?? 0
-      let actualPrice = Int(actualPriceTF.text ?? "0") ?? 0
-      if discountTypeisPercentage {
-        if discount > 100 {
-          return false
+
+        // No spaces
+        if string == " " { return false }
+
+        // Only digits
+        if string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) != nil {
+            return false
         }
-      } else {
-        if discount >= actualPrice {
-          return false
+
+        // Allow empty (backspace)
+        if updatedText.isEmpty {
+            finalPriceTF.text = ""
+            return true
         }
-      }
-      if discount > 0 {
+
+        let discount = Int(updatedText) ?? 0
+        let actualPrice = Int(actualPriceTF.text ?? "0") ?? 0
+
+        if discountTypeisPercentage {
+            // Percentage: allow 0–100
+            if discount > 100 {
+                return false
+            }
+        } else {
+            // Fixed price: allow 0 < actual price
+            if discount > actualPrice {
+                return false
+            }
+        }
+
         updateFinalPrice(for: discount)
-      } else {
-        finalPriceTF.text = ""
-      }
-      return true
+        return true
     }
+
     
     if textField == actualPriceTF {
       let newText = updatedText.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -419,11 +455,11 @@ extension AddNewSizeVariantTableViewCell: UITextFieldDelegate {
     
     return true
   }
-//
-//  // MARK: Final validation + toast when user finishes editing
+  //
+  //  // MARK: Final validation + toast when user finishes editing
   func textFieldDidEndEditing(_ textField: UITextField) {
-      isEditingField = false
-      saveToModel()
+    isEditingField = false
+    saveToModel()
     guard let rawText = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
           !rawText.isEmpty else { return }
     let actualPrice = Int(actualPriceTF.text ?? "") ?? 0

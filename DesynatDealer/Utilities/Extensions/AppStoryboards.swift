@@ -14,6 +14,7 @@ enum AppStoryboard : String {
   case Product
   case InventoryAffilate
   case BannerManagement
+  case OrderAndChat
 }
 
 extension AppStoryboard {
