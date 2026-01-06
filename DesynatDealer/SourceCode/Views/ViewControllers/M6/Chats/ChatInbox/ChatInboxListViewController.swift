@@ -40,7 +40,7 @@ extension ChatInboxListViewController: UITableViewDelegate, UITableViewDataSourc
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let nextVC = ChatViewController.instantiate(fromAppStoryboard: .OrderAndChat)
-    nextVC.comingFroQuotation = indexPath.row % 2 == 0
+    nextVC.comingReason = .quotationSentForFirstTime
     self.navigationController?.pushViewController(nextVC, animated: true)
   }
   

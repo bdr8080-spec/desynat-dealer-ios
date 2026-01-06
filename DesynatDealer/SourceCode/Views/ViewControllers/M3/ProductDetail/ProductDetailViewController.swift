@@ -306,50 +306,50 @@ class ProductDetailViewController: UIViewController {
   }
   
   func updateVariantUI(updateImages: Bool = true) {
-      guard let variant = selectedVariant else { return }
-
-      // Only update images if needed
-      if updateImages {
-          let images = variant.variantImage ?? []
-          imagesPageController.numberOfPages = images.count
-          imagesPageController.currentPage = 0
-          productImageCollectionView.setContentOffset(CGPoint.zero, animated: false)
-          productImageCollectionView.reloadData()
-      }
-
-      // PRICE
-      let discountType = variant.discountType ?? "1"
-      if discountType == "1" {
-          discountPriceALbel.text = "\(variant.discountValue ?? "")% Off"
-      } else {
-          discountPriceALbel.text = "\(variant.discountValue ?? "") KD Off"
-      }
-      finalPriceLabel.text = "\(variant.finalPrice ?? "0") KD"
-      CommonUtils.setStrikethrough(label: actualPriceLAbel, text: "\(variant.actualPrice ?? "0") KD")
-
-      // STOCK/SKU
-      totalStocksLabel.text = variant.totalStock ?? "0"
-      skuLabel.text = variant.sku ?? "-"
-      skuThresholderLabel.text = variant.skuThresholdValue ?? "-"
-
-      // MEASUREMENTS
-      bustLabel.text = variant.bust ?? "-"
-      waistLabel.text = variant.waist ?? "-"
-      hipLabel.text = variant.hip ?? "-"
-      shoulderLabel.text = variant.shoulder ?? "-"
-      sleeveLenghtLabel.text = variant.sleeveLength ?? "-"
-      lengthLabel.text = variant.length ?? "-"
-
-      // Update sizes for selected color
-      if let colorId = variant.color?.id {
-          sizesList = productVariants
-              .filter { $0.color?.id == colorId }
-              .compactMap { $0.size }
-          sizeCollectionView.reloadData()
-      }
+    guard let variant = selectedVariant else { return }
+    
+    // Only update images if needed
+    if updateImages {
+      let images = variant.variantImage ?? []
+      imagesPageController.numberOfPages = images.count
+      imagesPageController.currentPage = 0
+      productImageCollectionView.setContentOffset(CGPoint.zero, animated: false)
+      productImageCollectionView.reloadData()
+    }
+    
+    // PRICE
+    let discountType = variant.discountType ?? "1"
+    if discountType == "1" {
+      discountPriceALbel.text = "\(variant.discountValue ?? "")% Off"
+    } else {
+      discountPriceALbel.text = "\(variant.discountValue ?? "") KD Off"
+    }
+    finalPriceLabel.text = "\(variant.finalPrice ?? "0") KD"
+    CommonUtils.setStrikethrough(label: actualPriceLAbel, text: "\(variant.actualPrice ?? "0") KD")
+    
+    // STOCK/SKU
+    totalStocksLabel.text = variant.totalStock ?? "0"
+    skuLabel.text = variant.sku ?? "-"
+    skuThresholderLabel.text = variant.skuThresholdValue ?? "-"
+    
+    // MEASUREMENTS
+    bustLabel.text = variant.bust ?? "-"
+    waistLabel.text = variant.waist ?? "-"
+    hipLabel.text = variant.hip ?? "-"
+    shoulderLabel.text = variant.shoulder ?? "-"
+    sleeveLenghtLabel.text = variant.sleeveLength ?? "-"
+    lengthLabel.text = variant.length ?? "-"
+    
+    // Update sizes for selected color
+    if let colorId = variant.color?.id {
+      sizesList = productVariants
+        .filter { $0.color?.id == colorId }
+        .compactMap { $0.size }
+      sizeCollectionView.reloadData()
+    }
   }
-
-
+  
+  
   
   
   func convertDate(_ input: String) -> String {
@@ -406,27 +406,27 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
       return cell
     case sizeCollectionView:
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SizeVariantCollectionViewCell", for: indexPath) as! SizeVariantCollectionViewCell
-          let size = sizesList[indexPath.row]
-          
-          cell.titleLabel.text = size.name
-
-          // Get variant for selected color + this size
-          if let colorId = selectedVariant?.color?.id,
-             let variant = productVariants.first(where: { $0.color?.id == colorId && $0.size?.id == size.id }) {
-              
-              let stock = Int(variant.totalStock ?? "0") ?? 0
-              
-              if stock > 0 {
-                  cell.titleLabel.textColor = .black
-                  cell.mainView.alpha = 1.0
-                  cell.mainView.layer.borderColor = (selectedSizeIndex == indexPath.row ? UIColor.darkBrown : UIColor.lightGray).cgColor
-              } else {
-                  cell.titleLabel.textColor = .gray
-                  cell.mainView.layer.borderColor = UIColor.lightGray.cgColor
-                  cell.mainView.alpha = 0.5
-              }
-          }
-
+      let size = sizesList[indexPath.row]
+      
+      cell.titleLabel.text = size.name
+      
+      // Get variant for selected color + this size
+      if let colorId = selectedVariant?.color?.id,
+         let variant = productVariants.first(where: { $0.color?.id == colorId && $0.size?.id == size.id }) {
+        
+        let stock = Int(variant.totalStock ?? "0") ?? 0
+        
+        if stock > 0 {
+          cell.titleLabel.textColor = .black
+          cell.mainView.alpha = 1.0
+          cell.mainView.layer.borderColor = (selectedSizeIndex == indexPath.row ? UIColor.darkBrown : UIColor.lightGray).cgColor
+        } else {
+          cell.titleLabel.textColor = .gray
+          cell.mainView.layer.borderColor = UIColor.lightGray.cgColor
+          cell.mainView.alpha = 0.5
+        }
+      }
+      
       return cell
     default:
       return UICollectionViewCell()
@@ -437,58 +437,63 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     switch collectionView {
     case productImageCollectionView:
-      print("")
+      guard let images = selectedVariant?.variantImage else { return }
+      let vc = FullscreenGalleryViewController()
+      vc.images = images
+      vc.startIndex = indexPath.row
+      vc.modalPresentationStyle = .fullScreen
+      present(vc, animated: true)
     case colorsCollectionView:
       selectedColourIndex = indexPath.row
-          let selectedColorId = coloursList[indexPath.row].id
-
-          // Pick first in-stock variant for this color
-          if let firstInStockVariant = productVariants.first(where: { $0.color?.id == selectedColorId && (Int($0.totalStock ?? "0") ?? 0) > 0 }) {
-              selectedVariant = firstInStockVariant
-          } else {
-              // fallback: pick first variant of this color
-              selectedVariant = productVariants.first(where: { $0.color?.id == selectedColorId })
-          }
-
-          // Update sizes for selected color
-          sizesList = productVariants
-              .filter { $0.color?.id == selectedColorId }
-              .compactMap { $0.size }
-
-          // Select first in-stock size, else index 0
-      if let firstInStockSizeIndex = sizesList.firstIndex(where: {_ in 
-              if let variant = productVariants.first(where: { $0.color?.id == selectedColorId && $0.size?.id == $0.id }) {
-                  return (Int(variant.totalStock ?? "0") ?? 0) > 0
-              }
-              return false
-          }) {
-              selectedSizeIndex = firstInStockSizeIndex
-          } else {
-              selectedSizeIndex = 0
-          }
-
-          colorsCollectionView.reloadData()
-          sizeCollectionView.reloadData()
-          updateVariantUI(updateImages: true)
+      let selectedColorId = coloursList[indexPath.row].id
+      
+      // Pick first in-stock variant for this color
+      if let firstInStockVariant = productVariants.first(where: { $0.color?.id == selectedColorId && (Int($0.totalStock ?? "0") ?? 0) > 0 }) {
+        selectedVariant = firstInStockVariant
+      } else {
+        // fallback: pick first variant of this color
+        selectedVariant = productVariants.first(where: { $0.color?.id == selectedColorId })
+      }
+      
+      // Update sizes for selected color
+      sizesList = productVariants
+        .filter { $0.color?.id == selectedColorId }
+        .compactMap { $0.size }
+      
+      // Select first in-stock size, else index 0
+      if let firstInStockSizeIndex = sizesList.firstIndex(where: {_ in
+        if let variant = productVariants.first(where: { $0.color?.id == selectedColorId && $0.size?.id == $0.id }) {
+          return (Int(variant.totalStock ?? "0") ?? 0) > 0
+        }
+        return false
+      }) {
+        selectedSizeIndex = firstInStockSizeIndex
+      } else {
+        selectedSizeIndex = 0
+      }
+      
+      colorsCollectionView.reloadData()
+      sizeCollectionView.reloadData()
+      updateVariantUI(updateImages: true)
     case sizeCollectionView:
       let size = sizesList[indexPath.row]
-          guard let colorId = selectedVariant?.color?.id else { return }
-
-          // Find variant for this color + size
-          if let variant = productVariants.first(where: { $0.color?.id == colorId && $0.size?.id == size.id }) {
-
-              let stock = Int(variant.totalStock ?? "0") ?? 0
-
-              // Only allow selection if stock > 0
-              guard stock > 0 else { return }
-
-              selectedVariant = variant
-              selectedSizeIndex = indexPath.row
-
-              // Update all details except images
-              updateVariantUI(updateImages: false)
-              sizeCollectionView.reloadData()
-          }
+      guard let colorId = selectedVariant?.color?.id else { return }
+      
+      // Find variant for this color + size
+      if let variant = productVariants.first(where: { $0.color?.id == colorId && $0.size?.id == size.id }) {
+        
+        let stock = Int(variant.totalStock ?? "0") ?? 0
+        
+        // Only allow selection if stock > 0
+        guard stock > 0 else { return }
+        
+        selectedVariant = variant
+        selectedSizeIndex = indexPath.row
+        
+        // Update all details except images
+        updateVariantUI(updateImages: false)
+        sizeCollectionView.reloadData()
+      }
     default:
       print("")
     }
@@ -515,7 +520,7 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
       imagesPageController.currentPage = pageIndex
     }
   }
-
+  
 }
 
 extension ProductDetailViewController: UITableViewDataSource, UITableViewDelegate {

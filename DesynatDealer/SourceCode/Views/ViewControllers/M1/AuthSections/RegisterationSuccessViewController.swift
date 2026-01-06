@@ -24,7 +24,7 @@ class RegisterationSuccessViewController: UIViewController {
     }
   }
   
-  func initialSetup() {
+  private func initialSetup() {
     switch comingReason {
     case .passwordUpdated:
       descriptionLabel.text = "Password Reset\nsuccessfully!"
@@ -36,6 +36,10 @@ class RegisterationSuccessViewController: UIViewController {
       descriptionLabel.text = "Banner plan purchased succesfully!"
     case .affiliatedCommission:
       descriptionLabel.text = "Commisson saved"
+    case .sendQuotation:
+      descriptionLabel.text = "Request Sent\nsuccessfully!"
+    case .modifyQuotation:
+      descriptionLabel.text = "Modified\nsuccessfully!"
     }
   }
   
@@ -47,4 +51,6 @@ enum ComingReasonAtRegisterationSuccess {
   case planPurchased
   case affiliatedCommission
   case bannerPlanPurchased
+  case sendQuotation
+  case modifyQuotation
 }

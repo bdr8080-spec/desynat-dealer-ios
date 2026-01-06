@@ -26,9 +26,12 @@ class ProductDetailImageCollectionViewCell: UICollectionViewCell {
       mainImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
       mainImageView.sd_imageIndicator?.startAnimatingIndicator()
       mainImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
+      
     } else {
       mainImageView.image = UIImage(named: "")
     }
+//    mainImageView.enableFullscreenZoom()
+
   }
   
 }

@@ -9,6 +9,8 @@ import UIKit
 
 class ChatViewController: UIViewController {
   
+  @IBOutlet weak var sendQuotationButtonLabel: UILabel!
+  @IBOutlet weak var priceDetailsView: CustomView!
   @IBOutlet weak var extraBottomSpaceLabelForOrderDetails: UILabel!
   @IBOutlet weak var requestIdLabel: UILabel!
   @IBOutlet weak var sendQuotationView: UIView!
@@ -25,8 +27,8 @@ class ChatViewController: UIViewController {
       chatTableView.registerCellFromNib(cellID: "SenderChatTableViewCell")
     }
   }
-  var comingFroQuotation: Bool = false
-
+  var comingReason: ComingReasonAtChatScreen = .quotationSentForFirstTime
+  
   override func viewDidLoad() {
     super.viewDidLoad()
       handleQuotationUI()
@@ -37,21 +39,38 @@ class ChatViewController: UIViewController {
     self.navigationController?.popViewController(animated: true)
   }
   
+  @IBAction func sendQuotationDidTapped(_ sender: Any) {
+    let nextVC = SendQuotationViewController.instantiate(fromAppStoryboard: .OrderAndChat)
+    nextVC.comingReason = comingReason
+    nextVC.onQuotationSent = { [weak self] in
+      print("update the ui after quotation sent")
+      self?.sendQuotationButtonLabel.text  = "Modify Quotation"
+      self?.priceDetailsView.isHidden = false
+      self?.productDetailsView.isHidden = true
+      self?.productTableView.reloadData()
+      self?.comingReason = .doModificationAfterQuotationSent
+        }
+    self.navigationController?.present(nextVC, animated: true)
+  }
+  
   func handleQuotationUI() {
-    if comingFroQuotation {
+    switch comingReason {
+    case comingReason:
       productTableView.isHidden = false
       mainHeaderView.backgroundColor = UIColor(hex: "#FFF7EA")
       productDetailsView.isHidden = false
       sendQuotationView.isHidden = false
       requestIdLabel.isHidden = false
       extraBottomSpaceLabelForOrderDetails.isHidden = false
-    } else {
+      priceDetailsView.isHidden = true // show when quotation is sent
+    default:
       productTableView.isHidden = true
       mainHeaderView.backgroundColor = .white
       productDetailsView.isHidden = true
       sendQuotationView.isHidden = true
       requestIdLabel.isHidden = true
       extraBottomSpaceLabelForOrderDetails.isHidden = true
+      priceDetailsView.isHidden = true // show when quotation is sent
     }
   }
   
@@ -81,4 +100,9 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     }
   }
   
+}
+
+enum ComingReasonAtChatScreen {
+  case quotationSentForFirstTime
+  case doModificationAfterQuotationSent
 }

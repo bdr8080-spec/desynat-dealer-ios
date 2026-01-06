@@ -140,6 +140,7 @@ class AddNewBannerVC: UIViewController {
                         self.imgBanner.sd_imageIndicator = SDWebImageActivityIndicator.gray
                         self.imgBanner.sd_setImage(with: url,placeholderImage: UIImage(named: ""))
                     }
+                  
                 }
             }
         }
