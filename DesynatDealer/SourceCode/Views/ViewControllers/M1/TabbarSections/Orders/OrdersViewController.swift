@@ -9,6 +9,7 @@ import UIKit
 
 class OrdersViewController: UIViewController {
   
+  @IBOutlet weak var noDataFoundLabel: UILabel!
   @IBOutlet weak var searchTF: UITextField!
   @IBOutlet weak var allLabel: UILabel!
   @IBOutlet weak var allBottomLabel: UILabel!
@@ -26,14 +27,19 @@ class OrdersViewController: UIViewController {
     }
   }
   
-  private var orderCategoryType: OrderCategoryType = .normalOrders
+  var orderCategoryType: OrderCategoryType = .normalOrders
   private var searchWorkItem: DispatchWorkItem?
-  private var selectedTab: OrderSelectedTabType = .all
+  var selectedTab: OrderSelectedTabType = .all
   private lazy var viewModel = OrdersViewModel(hostVC: self)
   
   override func viewDidLoad() {
     super.viewDidLoad()
     searchTF.delegate = self
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    viewModel.getAllOrders()
   }
   
   @IBAction func normalDidTapped(_ sender: Any) {
@@ -61,13 +67,13 @@ class OrdersViewController: UIViewController {
         guard let self = self else { return }
         self.viewModel.appliedFilter = filter
 //        self.viewModel.currentPage = 1
-//        self.viewModel.getAllDeliveryBoy()
+        self.viewModel.getAllOrders()
     }
     vc.onClearFilter = { [weak self] in
         guard let self = self else { return }
-//        self.viewModel.appliedFilter = DriverFilterModel()
+        self.viewModel.appliedFilter = OrderListFilterModel()
 //        self.viewModel.currentPage = 1
-//        self.viewModel.getAllDeliveryBoy()
+        self.viewModel.getAllOrders()
     }
     self.navigationController?.present(vc, animated: false)
   }
@@ -76,20 +82,20 @@ class OrdersViewController: UIViewController {
   @IBAction func allDidTapped(_ sender: Any) {
     selectedTab = .all
     updateTabUI()
-//    viewModel.getAllProducts()
+    viewModel.getAllOrders()
   }
   
   @IBAction func ongoingDidTapped(_ sender: Any) {
     selectedTab = .ongoing
     updateTabUI()
-//    viewModel.getAllProducts()
+    viewModel.getAllOrders()
   }
   
   
   @IBAction func pastDidTapped(_ sender: Any) {
     selectedTab = .past
     updateTabUI()
-//    viewModel.getAllProducts()
+    viewModel.getAllOrders()
   }
   
   func updateTabUI() {
@@ -103,15 +109,44 @@ class OrdersViewController: UIViewController {
     pastBottomLabel.backgroundColor = selectedTab == .past ? .darkBrown : UIColor(named: "#B3B3B3")
   }
   
+  func updateProductCounts() {
+    let allCount = viewModel.ordersListData?.allOrder?.count ?? 0
+    let activeCount = viewModel.ordersListData?.ongoingOrder?.count ?? 0
+    let inactiveCount = viewModel.ordersListData?.pastOrder?.count ?? 0
+    
+    allLabel.text = "All (\(allCount))"
+    ongoingLabel.text = "Active (\(activeCount))"
+    pastLabel.text = "Inactive (\(inactiveCount))"
+  }
+  
 }
 
 extension OrdersViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 4
+    switch selectedTab {
+    case .all:
+      return viewModel.ordersListData?.allOrder?.count ?? 0
+    case .ongoing:
+      return viewModel.ordersListData?.ongoingOrder?.count ?? 0
+    case .past:
+      return viewModel.ordersListData?.pastOrder?.count ?? 0
+    }
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "OrdersListTableViewCell", for: indexPath) as! OrdersListTableViewCell
+    switch selectedTab {
+    case .all:
+      let data = viewModel.ordersListData?.allOrder?[indexPath.row]
+      cell.configData(data: data)
+    case .ongoing:
+      let data = viewModel.ordersListData?.ongoingOrder?[indexPath.row]
+      cell.configData(data: data)
+    case .past:
+      let data = viewModel.ordersListData?.pastOrder?[indexPath.row]
+      cell.configData(data: data)
+      
+    }
     return cell
   }
   

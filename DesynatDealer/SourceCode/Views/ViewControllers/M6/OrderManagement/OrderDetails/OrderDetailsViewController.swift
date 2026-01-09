@@ -15,8 +15,16 @@ class OrderDetailsViewController: UIViewController {
     }
   }
   
+  private lazy var viewModel = OrderDetailsViewModel(hostVC: self)
+  
+  
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
     
   }
   

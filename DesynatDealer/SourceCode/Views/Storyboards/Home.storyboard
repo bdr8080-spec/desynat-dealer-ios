@@ -2141,7 +2141,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="0O2-Na-OAs">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="0O2-Na-OAs">
                                 <rect key="frame" x="24" y="336.66666666666674" width="345" height="367.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
@@ -2149,6 +2149,12 @@
                                     <outlet property="delegate" destination="Rsm-a9-ejD" id="9H6-iq-WzQ"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="no Orders Found" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fan-rm-U1X">
+                                <rect key="frame" x="130" y="439.66666666666669" width="133.33333333333337" height="22.666666666666686"/>
+                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="HaX-ty-CYu"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -2156,12 +2162,14 @@
                             <constraint firstItem="6ya-yT-HVw" firstAttribute="trailing" secondItem="7Nb-6x-X1Y" secondAttribute="trailing" id="9sg-Gh-NlE"/>
                             <constraint firstItem="bea-ai-3Rm" firstAttribute="leading" secondItem="HaX-ty-CYu" secondAttribute="leading" id="AV6-AY-vf0"/>
                             <constraint firstItem="bea-ai-3Rm" firstAttribute="trailing" secondItem="HaX-ty-CYu" secondAttribute="trailing" id="BsP-mk-lWu"/>
+                            <constraint firstItem="Fan-rm-U1X" firstAttribute="centerX" secondItem="HaX-ty-CYu" secondAttribute="centerX" id="CZJ-o6-FZo"/>
                             <constraint firstItem="0O2-Na-OAs" firstAttribute="leading" secondItem="6ya-yT-HVw" secondAttribute="leading" id="Csa-bC-ng3"/>
                             <constraint firstItem="6ya-yT-HVw" firstAttribute="top" secondItem="7Nb-6x-X1Y" secondAttribute="bottom" constant="20" id="EFb-3K-4St"/>
                             <constraint firstItem="7Nb-6x-X1Y" firstAttribute="leading" secondItem="cvj-Nx-EyN" secondAttribute="leading" id="Fxi-98-Yli"/>
                             <constraint firstItem="6ya-yT-HVw" firstAttribute="leading" secondItem="7Nb-6x-X1Y" secondAttribute="leading" id="IrA-Il-ezO"/>
                             <constraint firstItem="0O2-Na-OAs" firstAttribute="trailing" secondItem="6ya-yT-HVw" secondAttribute="trailing" id="KNT-TX-iKJ"/>
                             <constraint firstItem="HaX-ty-CYu" firstAttribute="bottom" secondItem="0O2-Na-OAs" secondAttribute="bottom" constant="80" id="TZJ-AL-sDn"/>
+                            <constraint firstItem="Fan-rm-U1X" firstAttribute="centerY" secondItem="HaX-ty-CYu" secondAttribute="centerY" id="XcM-Pr-LdC"/>
                             <constraint firstItem="cvj-Nx-EyN" firstAttribute="leading" secondItem="HaX-ty-CYu" secondAttribute="leading" constant="24" id="ZNW-d1-QO1"/>
                             <constraint firstItem="7Nb-6x-X1Y" firstAttribute="top" secondItem="cvj-Nx-EyN" secondAttribute="bottom" constant="15" id="eCg-cc-Hiz"/>
                             <constraint firstItem="0O2-Na-OAs" firstAttribute="top" secondItem="6ya-yT-HVw" secondAttribute="bottom" constant="20" id="eaS-Lq-2CZ"/>
@@ -2176,6 +2184,7 @@
                         <outlet property="allLabel" destination="aKU-pf-Wsl" id="cHn-Fr-xRS"/>
                         <outlet property="customizedButtonOutlet" destination="WCg-cO-aAg" id="aKh-R3-vYU"/>
                         <outlet property="customizedLabel" destination="Ifw-Hz-Itx" id="fmn-iA-evd"/>
+                        <outlet property="noDataFoundLabel" destination="Fan-rm-U1X" id="VRh-na-oyV"/>
                         <outlet property="normalButtonOutlet" destination="2st-jO-49o" id="BrZ-5e-B7S"/>
                         <outlet property="normalLabel" destination="giO-DU-IOB" id="7eK-zB-p5r"/>
                         <outlet property="ongoingBottomLabel" destination="GVH-y1-Zqb" id="1Kz-dd-alN"/>
@@ -2261,7 +2270,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

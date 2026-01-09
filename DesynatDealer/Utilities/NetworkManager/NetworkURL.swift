@@ -67,7 +67,9 @@ enum NetworkEndPoint: String {
     case getBannerPrice                 = "/api/seller/get-seller-banner-price"
     case bannerPayment                  = "/api/seller/complete-banner-payment"
     
-    
+    //M6
+  case ordersList                       = "/api/seller/all-orders"
+  
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"
     }

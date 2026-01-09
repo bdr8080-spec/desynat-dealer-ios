@@ -12,58 +12,65 @@ class OrdersViewModel {
   private var hostVC: OrdersViewController?
   var searchText: String = ""
   var appliedFilter = OrderListFilterModel()
+  var ordersListData: OrdersListDataModel?
+  
   init(hostVC: OrdersViewController? = nil) {
     self.hostVC = hostVC
   }
   
   func getAllOrders() {
-//      var params: [String : Any] = ["type": type] // 0 all_orders 1 ongoing_orders 2 past_orders
-//      // Search
-//      if !searchText.isEmpty {
-//          params["search"] = searchText
-//      }
-////      // cargory_filter
-//    if let categoryIDs = hostVC?.appliedFilter.categoryIDs, !categoryIDs.isEmpty {
-//        params["cargory_filter"] = categoryIDs
-//    }
-//
-//    // BRAND FILTER
-//    if let brandIDs = hostVC?.appliedFilter.brandIDs, !brandIDs.isEmpty {
-//        params["brand_filter"] = brandIDs
-//    }
-//
-//      // API CALL
-//      WebService.sharedInstance.getProductsListServices(param: params) { [weak self] response in
-//          guard let self = self else { return }
-//          self.productsListData = response
-//          DispatchQueue.main.async {
-//              self.hostVC?.productTableView.reloadData()
-//            self.hostVC?.updateProductCounts()
-//            switch type {
-//            case "0":
-//                self.hostVC?.noResultFoundLabel.isHidden = !(self.productsListData?.allProductData?.isEmpty ?? true)
-//
-//            case "1":
-//                self.hostVC?.noResultFoundLabel.isHidden = !(self.productsListData?.activeProduct?.isEmpty ?? true)
-//
-//            case "2":
-//                self.hostVC?.noResultFoundLabel.isHidden = !(self.productsListData?.inactiveProduct?.isEmpty ?? true)
-//
-//            default:
-//                break
-//            }
-//          }
-//      }
+    var params: [String : Any] = ["type": hostVC?.orderCategoryType.rawValue ?? 1, // 1 Normal 2 Orders
+                                  "tabs": hostVC?.selectedTab.rawValue ?? 1] // 0 all_orders 1 ongoing_orders 2 past_orders
+    // Search
+    if !searchText.isEmpty {
+      params["search"] = searchText
+    }
+    
+    //    if let status = appliedFilter.orderDeliveryStatus, !status.isEmpty {
+    //      params["status"] = toDate
+    //    }
+    
+    if let fromDate = appliedFilter.fromDate, !fromDate.isEmpty {
+      params["from_date"] = fromDate
+    }
+    
+    if let toDate = appliedFilter.toDate, !toDate.isEmpty {
+      params["to_date"] = toDate
+    }
+    
+    // API CALL
+    WebService.sharedInstance.getOrdersListServices(param: params) { [weak self] response in
+      guard let self = self else { return }
+      ordersListData = response
+      DispatchQueue.main.async {
+        self.hostVC?.ordersTableView.reloadData()
+        self.hostVC?.updateProductCounts()
+        let type = self.hostVC?.selectedTab.rawValue ?? 1
+        switch type {
+        case 1:
+          self.hostVC?.noDataFoundLabel.isHidden = !(self.ordersListData?.allOrder?.isEmpty ?? true)
+          
+        case 2:
+          self.hostVC?.noDataFoundLabel.isHidden = !(self.ordersListData?.ongoingOrder?.isEmpty ?? true)
+          
+        case 3:
+          self.hostVC?.noDataFoundLabel.isHidden = !(self.ordersListData?.pastOrder?.isEmpty ?? true)
+          
+        default:
+          break
+        }
+      }
+    }
   }
 }
 
-enum OrderCategoryType {
-  case normalOrders
-  case customizedOrders
+enum OrderCategoryType: Int {
+  case normalOrders = 1
+  case customizedOrders = 2
 }
-
-enum OrderSelectedTabType {
-  case all
-  case ongoing
-  case past
+//1 all 2 onging 3 Past Order
+enum OrderSelectedTabType: Int {
+  case all = 1
+  case ongoing = 2
+  case past = 3
 }
