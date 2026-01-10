@@ -22,13 +22,5 @@ class FiltersOptionsTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-  
-  func updateSelection(_ isSelected: Bool) {
-          if isSelected {
-              mainImageView.image = UIImage(named: "filledCheckbox")
-          } else {
-              mainImageView.image = UIImage(named: "checkBox")
-          }
-      }
     
 }

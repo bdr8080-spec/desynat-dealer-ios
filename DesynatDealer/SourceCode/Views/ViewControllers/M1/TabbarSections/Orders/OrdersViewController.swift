@@ -113,7 +113,6 @@ class OrdersViewController: UIViewController {
     let allCount = viewModel.ordersListData?.allOrder?.count ?? 0
     let activeCount = viewModel.ordersListData?.ongoingOrder?.count ?? 0
     let inactiveCount = viewModel.ordersListData?.pastOrder?.count ?? 0
-    
     allLabel.text = "All (\(allCount))"
     ongoingLabel.text = "Active (\(activeCount))"
     pastLabel.text = "Inactive (\(inactiveCount))"
@@ -152,9 +151,16 @@ extension OrdersViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let nextVC = OrderDetailsViewController.instantiate(fromAppStoryboard: .OrderAndChat)
+    switch selectedTab {
+    case .all:
+      nextVC.orderId = viewModel.ordersListData?.allOrder?[indexPath.row].id ?? 0
+    case .ongoing:
+      nextVC.orderId = viewModel.ordersListData?.ongoingOrder?[indexPath.row].id ?? 0
+    case .past:
+      nextVC.orderId = viewModel.ordersListData?.pastOrder?[indexPath.row].id ?? 0
+    }
     self.navigationController?.pushViewController(nextVC, animated: true)
   }
-  
   
 }
 
@@ -164,8 +170,8 @@ extension OrdersViewController: UITextFieldDelegate {
     searchWorkItem?.cancel()
     let workItem = DispatchWorkItem { [weak self] in
       guard let self = self else { return }
-//      self.viewModel.searchText = currentText
-//      viewModel.getAllProducts(type: selectedTab.rawValue)
+      self.viewModel.searchText = currentText
+      viewModel.getAllOrders()
     }
     searchWorkItem = workItem
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: workItem)

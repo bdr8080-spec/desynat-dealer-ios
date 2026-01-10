@@ -7,128 +7,64 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D0BA1632-47BA-4412-AF3F-D2D67078486D"
+            uuid = "34FFB3E3-E594-43BE-B9CF-F5556D9A1A86"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DesynatDealer/SourceCode/Views/ViewControllers/M2/Payment/PaymentMethodVC.swift"
+            filePath = "DesynatDealer/SourceCode/Views/ViewControllers/M6/OrderManagement/OrdersFilters/OrdersfilterViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
-            landmarkName = "btnPay(_:)"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A6B5FA5C-96EF-4630-9B9F-A687E32A7B68"
+            uuid = "6F062743-650C-4AD8-816C-74C4FEF0147F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DesynatDealer/SourceCode/Views/ViewControllers/M2/Payment/PaymentMethodVC.swift"
+            filePath = "DesynatDealer/SourceCode/Views/ViewControllers/M6/OrderManagement/OrdersFilters/OrdersfilterViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
-            landmarkName = "btnPay(_:)"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "AF63FA6C-2026-4D5B-B6A9-EE5064BF65C0"
+            uuid = "9F6413E1-46AC-4298-86C7-6E73C2830EF6"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DesynatDealer/SourceCode/Views/ViewControllers/M2/Payment/PaymentMethodVC.swift"
+            filePath = "DesynatDealer/SourceCode/Views/ViewControllers/M6/OrderManagement/OrdersFilters/OrdersfilterViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
-            landmarkName = "btnPay(_:)"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "838B1934-3AFB-409F-94B6-5B9285C34CE4"
+            uuid = "26D1F52C-CE15-4B7A-ADDB-01A26F726B57"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DesynatDealer/SourceCode/Views/ViewControllers/M2/Payment/PaymentMethodVC.swift"
+            filePath = "DesynatDealer/SourceCode/Views/ViewControllers/M6/OrderManagement/OrdersFilters/OrdersfilterViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "295"
-            endingLineNumber = "295"
-            landmarkName = "creditDebitCardPayment(invoiceValue:orderId:supplierId:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "815CD3B2-B199-4BBE-8C49-5D4059B90757"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DesynatDealer/SourceCode/Views/ViewControllers/M2/Payment/PaymentMethodVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "298"
-            endingLineNumber = "298"
-            landmarkName = "creditDebitCardPayment(invoiceValue:orderId:supplierId:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "53B3C807-66FB-406A-AEB8-8893BAB20975"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DesynatDealer/SourceCode/Views/ViewControllers/M2/Payment/PaymentMethodVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "283"
-            endingLineNumber = "283"
-            landmarkName = "creditDebitCardPayment(invoiceValue:orderId:supplierId:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "388C996F-DDCD-4EB6-AF5B-68E9BE8F56CB"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DesynatDealer/SourceCode/Views/ViewControllers/M2/Payment/PaymentMethodVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "281"
-            endingLineNumber = "281"
-            landmarkName = "creditDebitCardPayment(invoiceValue:orderId:supplierId:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "A1CADF41-9C83-4377-A842-60A250DC86E4"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DesynatDealer/SourceCode/Views/ViewControllers/M3/Xibs/ProductDetailImageCollectionViewCell.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
-            landmarkName = "configData(variantImageUrl:)"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

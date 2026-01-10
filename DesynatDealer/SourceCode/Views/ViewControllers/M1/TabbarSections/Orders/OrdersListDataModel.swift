@@ -41,6 +41,7 @@ struct OrdersListData: Codable {
   let order: Order?
   let productDetails: ProductDetails?
   let variationDetails: VariationDetails?
+  let userRatingReviewProvide: UserRatingReviewProvide?
   
   enum CodingKeys: String, CodingKey {
     case id
@@ -78,8 +79,45 @@ struct OrdersListData: Codable {
     case order
     case productDetails = "product_details"
     case variationDetails = "variation_details"
+    case userRatingReviewProvide = "user_rating_review_provide"
   }
 }
+
+//// MARK: - Category
+//struct Category: Codable {
+//    let id: Int?
+//    let name, description: String?
+//    let image: String?
+//    let status: Int?
+//    let colorCode, createdAt, updatedAt: String?
+//
+//    enum CodingKeys: String, CodingKey {
+//        case id, name, description, image, status
+//        case colorCode = "color_code"
+//        case createdAt = "created_at"
+//        case updatedAt = "updated_at"
+//    }
+//}
+
+//// MARK: - Subcategory
+//struct Subcategory: Codable {
+//    let id, categoryID: Int?
+//    let nameEnglish, nameArabic: String?
+//    let image: String?
+//    let status: Int?
+//    let createdAt, updatedAt: String?
+//
+//    enum CodingKeys: String, CodingKey {
+//        case id
+//        case categoryID = "category_id"
+//        case nameEnglish = "name_english"
+//        case nameArabic = "name_arabic"
+//        case image, status
+//        case createdAt = "created_at"
+//        case updatedAt = "updated_at"
+//    }
+//}
+
 
 // MARK: - Order
 struct Order: Codable {
@@ -208,6 +246,10 @@ struct ProductDetails: Codable {
   let uploadSizeChart: String?
   let productActiveStatus: Int?
   let createdAt, updatedAt: String?
+  let category: Category?
+  let subcategory: SubcategoryDetails?
+  let brand: Brand?
+  
   
   enum CodingKeys: String, CodingKey {
     case id
@@ -238,6 +280,7 @@ struct ProductDetails: Codable {
     case productActiveStatus = "product_active_status"
     case createdAt = "created_at"
     case updatedAt = "updated_at"
+    case category, subcategory, brand
   }
 }
 
@@ -289,4 +332,34 @@ struct SizeDetails: Codable {
     case createdAt = "created_at"
     case updatedAt = "updated_at"
   }
+}
+
+// MARK: - UserRatingReviewProvide
+struct UserRatingReviewProvide: Codable {
+    let id, userID, orderID, orderdetailsID: Int?
+    let productID: Int?
+    let productRating: String?
+    let productReview: String?
+    let productImage: String?
+    let storeID: Int?
+    let storeRating: String?
+    let storeReview: String?
+    let storeImage, createdAt, updatedAt: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case userID = "user_id"
+        case orderID = "order_id"
+        case orderdetailsID = "orderdetails_id"
+        case productID = "product_id"
+        case productRating = "product_rating"
+        case productReview = "product_review"
+        case productImage = "product_image"
+        case storeID = "store_id"
+        case storeRating = "store_rating"
+        case storeReview = "store_review"
+        case storeImage = "store_image"
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+    }
 }

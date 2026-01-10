@@ -15,5 +15,27 @@ class OrderDetailsViewModel {
     self.hostVC = hostVC
   }
   
+  func orderDetailRequest() {
+    let param: [String: Any] = ["id": hostVC.orderId]
+      WebService.sharedInstance.ordersDetails(param: param){ response in
+        DispatchQueue.main.async {
+          self.hostVC.orderDetails = response
+          self.hostVC.bindData()
+        }
+
+      }
+  }
+
+  func orderStatusRequest(status: String) {
+    let param: [String: Any] = ["id": hostVC.orderId,
+                                "status": status]
+      WebService.sharedInstance.updateOrdersStatus(param: param){ response in
+        DispatchQueue.main.async {
+          CommonUtils.showToast(message: "Status is updated")
+          self.orderDetailRequest()
+        }
+
+      }
+  }
   
 }

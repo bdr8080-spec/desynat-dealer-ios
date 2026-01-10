@@ -63,6 +63,36 @@ class CommonUtils {
       
       label.attributedText = attributeString
   }
+  
+  static func formatPriceStringInput(_ amount: String?, currency: String = "KD") -> String {
+      guard
+          let amount = amount,
+          let doubleAmount = Double(amount)
+      else {
+          return "0 \(currency)"
+      }
+
+      let roundedAmount = round(doubleAmount * 100) / 100
+
+      if roundedAmount.truncatingRemainder(dividingBy: 1) == 0 {
+          return "\(Int(roundedAmount)) \(currency)"
+      } else {
+          return String(format: "%.2f", roundedAmount) + " \(currency)"
+      }
+  }
+  
+  static func formatPrice(_ amount: Double?, currency: String = "KD") -> String {
+    guard let amount = amount else { return "0 \(currency)" }
+    
+    let roundedAmount = round(amount * 100) / 100   // Round to 2 decimal places
+    if roundedAmount.truncatingRemainder(dividingBy: 1) == 0 {
+      // If whole number, show without decimal
+      return "\(Int(roundedAmount)) \(currency)"
+    } else {
+      // Show up to 2 decimal places
+      return String(format: "%.2f", roundedAmount) + " \(currency)"
+    }
+  }
     
     /// This function will help developer to get an image with User's Initials
     static func getImageWithUserInitials(withName name: String?, backgroundColor bgColor: UIColor, textColor txtColor: UIColor, textFont txtFont: UIFont, andSize size: CGFloat) -> UIImage? {

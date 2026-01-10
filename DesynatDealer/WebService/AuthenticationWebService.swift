@@ -719,4 +719,53 @@ extension WebService {
           }
       }
   }
+  
+  func ordersDetails(param: [String :Any], completion:@escaping (_ user: OrdersListData)-> Void) {
+      CommonUtils.showHud(show: true)
+      NetworkManager.shared.request(withAPI: .endpoint(.singleOrderDetails), requestMethod: .post, requestParams: param, requestModel:OrdersListData.self) { result, code in
+          CommonUtils.showHud(show: false)
+          self.evaluateWebServiceResponse(response: result) { response, message,error in
+              guard let user = response else {
+                  if let error {
+                      UIApplication.shared.topViewController()?.showAlert(msg: error)
+                  }
+                  return
+              }
+              completion(user)
+          }
+      }
+  }
+  
+  func updateOrdersStatus(param: [String :Any], completion:@escaping (_ user: EmptyModel)-> Void) {
+      CommonUtils.showHud(show: true)
+      NetworkManager.shared.request(withAPI: .endpoint(.updateOrderStatus), requestMethod: .post, requestParams: param, requestModel:EmptyModel.self) { result, code in
+          CommonUtils.showHud(show: false)
+          self.evaluateWebServiceResponse(response: result) { response, message,error in
+              guard let user = response else {
+                  if let error {
+                      UIApplication.shared.topViewController()?.showAlert(msg: error)
+                  }
+                  return
+              }
+              completion(user)
+          }
+      }
+  }
+  
+  //Chat Module
+  func getAllChatsList(param: [String :Any], completion:@escaping (_ user: EmptyModel)-> Void) {
+      CommonUtils.showHud(show: true)
+      NetworkManager.shared.request(withAPI: .endpoint(.updateOrderStatus), requestMethod: .post, requestParams: param, requestModel:EmptyModel.self) { result, code in
+          CommonUtils.showHud(show: false)
+          self.evaluateWebServiceResponse(response: result) { response, message,error in
+              guard let user = response else {
+                  if let error {
+                      UIApplication.shared.topViewController()?.showAlert(msg: error)
+                  }
+                  return
+              }
+              completion(user)
+          }
+      }
+  }
 }

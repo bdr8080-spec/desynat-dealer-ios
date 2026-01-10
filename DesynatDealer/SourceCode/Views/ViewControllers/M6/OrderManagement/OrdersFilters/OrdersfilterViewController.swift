@@ -25,7 +25,7 @@ class OrdersfilterViewController: UIViewController {
   var onClearFilter: (() -> Void)?
   
   private var filtersOptions = ["Confirmed", "Packed", "Shipped", "Exchange"]
-  private var selectedIndex: IndexPath?
+  private var selectedIndex: Int = -1
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -50,6 +50,7 @@ class OrdersfilterViewController: UIViewController {
     if let toDate = toTextField.text, !toDate.isEmpty {
       filter.toDate = toDate
     }
+//    filter.orderDeliveryStatus = selectedIndex
     onApplyFilter?(filter)
     dismiss(animated: true)
   }
@@ -67,10 +68,9 @@ class OrdersfilterViewController: UIViewController {
     toTextField.text = selectedFilter.toDate
   }
   
-  
 }
 
-extension OrdersfilterViewController: UITabBarDelegate, UITableViewDataSource {
+extension OrdersfilterViewController:  UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return filtersOptions.count
   }
@@ -78,14 +78,17 @@ extension OrdersfilterViewController: UITabBarDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "FiltersOptionsTableViewCell", for: indexPath) as! FiltersOptionsTableViewCell
     cell.titleLabel.text = filtersOptions[indexPath.row]
-    let isSelected = (indexPath == selectedIndex)
-    cell.updateSelection(isSelected)
+    if selectedIndex == indexPath.row {
+      cell.mainImageView.image = .filledCheckbox//UIImage(named: "filledCheckbox")
+    } else {
+      cell.mainImageView.image = .checkBox//UIImage(named: "checkBox")
+    }
     return cell
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    selectedIndex = indexPath
-    tableView.reloadData()
+    selectedIndex = indexPath.row
+    filtersTableView.reloadData()
   }
   
 }

@@ -30,12 +30,16 @@ class OrdersViewModel {
     //      params["status"] = toDate
     //    }
     
-    if let fromDate = appliedFilter.fromDate, !fromDate.isEmpty {
-      params["from_date"] = fromDate
+    if let fromDate = appliedFilter.fromDate,
+       !fromDate.isEmpty,
+       let formattedFromDate = convertDateFormat(fromDate) {
+        params["from_date"] = formattedFromDate
     }
-    
-    if let toDate = appliedFilter.toDate, !toDate.isEmpty {
-      params["to_date"] = toDate
+
+    if let toDate = appliedFilter.toDate,
+       !toDate.isEmpty,
+       let formattedToDate = convertDateFormat(toDate) {
+        params["to_date"] = formattedToDate
     }
     
     // API CALL
@@ -62,6 +66,26 @@ class OrdersViewModel {
       }
     }
   }
+  
+  func convertDateFormat(
+      _ dateString: String,
+      from inputFormat: String = "dd/MM/yyyy",
+      to outputFormat: String = "yyyy-MM-dd"
+  ) -> String? {
+      let inputFormatter = DateFormatter()
+      inputFormatter.dateFormat = inputFormat
+      inputFormatter.locale = Locale(identifier: "en_US_POSIX")
+
+      let outputFormatter = DateFormatter()
+      outputFormatter.dateFormat = outputFormat
+      outputFormatter.locale = Locale(identifier: "en_US_POSIX")
+
+      guard let date = inputFormatter.date(from: dateString) else {
+          return nil
+      }
+      return outputFormatter.string(from: date)
+  }
+
 }
 
 enum OrderCategoryType: Int {
