@@ -753,9 +753,9 @@ extension WebService {
   }
   
   //Chat Module
-  func getAllChatsList(param: [String :Any], completion:@escaping (_ user: EmptyModel)-> Void) {
+  func getAllChatsList(completion:@escaping (_ user: [ChatInboxListModel])-> Void) {
       CommonUtils.showHud(show: true)
-      NetworkManager.shared.request(withAPI: .endpoint(.updateOrderStatus), requestMethod: .post, requestParams: param, requestModel:EmptyModel.self) { result, code in
+      NetworkManager.shared.request(withAPI: .endpoint(.getAllChatsRecord), requestMethod: .post, requestModel:[ChatInboxListModel].self) { result, code in
           CommonUtils.showHud(show: false)
           self.evaluateWebServiceResponse(response: result) { response, message,error in
               guard let user = response else {
@@ -768,4 +768,52 @@ extension WebService {
           }
       }
   }
+    
+    func singleChatDetails(param: [String: Any], completion:@escaping (_ user: ChatDetailsDataModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.getSingleChats), requestMethod: .post, requestParams: param, requestModel:ChatDetailsDataModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func sendMessageInChat(param: [String: Any], completion:@escaping (_ user: SendMessageInChatDataModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.sendInMessageChat), requestMethod: .post, requestParams: param, requestModel: SendMessageInChatDataModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func sendQuotatioRequest(param: [String: Any], completion:@escaping (_ user: SendQuotationDataModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.qutationChatEdit), requestMethod: .post, requestParams: param, requestModel:SendQuotationDataModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
 }

@@ -13,37 +13,6 @@ class AddNewBannerVM: NSObject {
     init(hostVC: AddNewBannerVC) {
         self.hostVC = hostVC
     }
-    
-//    func validation() -> Bool {
-//        let selectedBanner = hostVC.selectedImg
-//        let fromDate = hostVC.txtFromDate.text ?? ""
-//        let toDate = hostVC.txtToDate.text ?? ""
-//        let bannerImg = hostVC.bannerImageUrl
-//        var errorMessage: AlertConstant = .none
-//        
-//        if selectedBanner == nil {
-//            errorMessage = .selectBanner
-//        } else if selectedBanner == 2 {
-//            if hostVC.selectedCategoryId == nil {
-//                errorMessage = .selectCategory
-//            } else if hostVC.selectedSubCategoriesId == nil {
-//                errorMessage = .selectSubCategory
-//            }
-//        } else if fromDate.isEmpty {
-//            errorMessage = .selectFromDate
-//        } else if toDate.isEmpty {
-//            errorMessage = .selectToDate
-//        } else if bannerImg.isEmpty {
-//            errorMessage = .uploadBanner
-//        }
-//        
-//        if errorMessage != .none {
-//            hostVC.showAlert(msg: errorMessage.rawValue.localiz())
-//        }
-//        
-//        hostVC.view.endEditing(true)
-//        return errorMessage == .none
-//    }
   
   func validation() -> Bool {
       let selectedBanner = hostVC.selectedImg

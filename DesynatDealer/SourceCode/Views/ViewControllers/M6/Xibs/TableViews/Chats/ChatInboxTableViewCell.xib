@@ -108,6 +108,7 @@
                         <constraints>
                             <constraint firstItem="mq9-A3-eFZ" firstAttribute="centerY" secondItem="7dd-cg-VI7" secondAttribute="centerY" id="4Pu-ya-MQG"/>
                             <constraint firstItem="7dd-cg-VI7" firstAttribute="centerY" secondItem="Zzp-Ll-1ey" secondAttribute="centerY" id="SFN-9g-6LK"/>
+                            <constraint firstItem="a8q-my-1Hf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mq9-A3-eFZ" secondAttribute="trailing" constant="10" id="jfw-mj-XSc"/>
                             <constraint firstItem="mq9-A3-eFZ" firstAttribute="leading" secondItem="7dd-cg-VI7" secondAttribute="trailing" constant="15" id="kdg-HD-hu5"/>
                             <constraint firstItem="7dd-cg-VI7" firstAttribute="top" secondItem="Zzp-Ll-1ey" secondAttribute="top" constant="15" id="ntl-ly-Rpk"/>
                             <constraint firstItem="7dd-cg-VI7" firstAttribute="leading" secondItem="Zzp-Ll-1ey" secondAttribute="leading" constant="8" id="oYu-eP-p9T"/>
@@ -135,6 +136,14 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="messageLabel" destination="raJ-3f-w47" id="afC-iD-hjH"/>
+                <outlet property="messageTypeLabel" destination="iXs-pO-7rA" id="gmI-cq-zcJ"/>
+                <outlet property="messageTypeStatusView" destination="a8q-my-1Hf" id="u4x-ab-DEY"/>
+                <outlet property="timeLabel" destination="g2i-ma-hre" id="HcR-3g-1oL"/>
+                <outlet property="userProfileImageView" destination="Z3L-Uo-ahH" id="gMn-e4-Xe2"/>
+                <outlet property="usernameLabel" destination="dlb-fs-ZDR" id="JYT-Ka-rRg"/>
+            </connections>
             <point key="canvasLocation" x="466" y="27"/>
         </tableViewCell>
     </objects>

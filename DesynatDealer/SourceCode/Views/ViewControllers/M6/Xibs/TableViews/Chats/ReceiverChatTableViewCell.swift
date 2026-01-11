@@ -27,4 +27,10 @@ class ReceiverChatTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func configData(data: ChatMessage?) {
+        messageLabel.text = data?.message
+//        timeLabel.text = data?.timestamp
+        
+    }
+    
 }

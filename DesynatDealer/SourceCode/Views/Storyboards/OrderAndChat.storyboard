@@ -1914,6 +1914,9 @@ Apartment, Kuwait</string>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pPg-6q-5uU">
                                                 <rect key="frame" x="245" y="0.0" width="30" height="40"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <connections>
+                                                    <action selector="sendAttachmentDidTapped:" destination="Ez5-Z0-u2y" eventType="touchUpInside" id="oyY-Fu-Tov"/>
+                                                </connections>
                                             </button>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Type here..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cz6-kI-ehY">
                                                 <rect key="frame" x="16" y="0.0" width="229" height="40"/>
@@ -1959,6 +1962,9 @@ Apartment, Kuwait</string>
                                         </constraints>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" image="sendMessage"/>
+                                        <connections>
+                                            <action selector="sendMessageDidTapped:" destination="Ez5-Z0-u2y" eventType="touchUpInside" id="dRw-Pg-sKn"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1997,6 +2003,7 @@ Apartment, Kuwait</string>
                         <outlet property="productDetailsView" destination="IOb-dk-xlD" id="mcC-lK-Q9F"/>
                         <outlet property="productTableView" destination="hXV-lX-SFQ" id="SNN-dG-heK"/>
                         <outlet property="requestIdLabel" destination="OpQ-2X-Skr" id="GN3-SD-QHI"/>
+                        <outlet property="sendMessageTF" destination="Cz6-kI-ehY" id="r4W-5t-fD3"/>
                         <outlet property="sendQuotationButtonLabel" destination="nhS-Np-qOG" id="XRL-Sx-wdg"/>
                         <outlet property="sendQuotationView" destination="yuS-ag-3Ut" id="sxH-Vu-ENV"/>
                     </connections>
@@ -2069,7 +2076,7 @@ Apartment, Kuwait</string>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Eg 20 KD" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uaj-32-gmB">
                                                                         <rect key="frame" x="20" y="5" width="273" height="40"/>
                                                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
-                                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                                                     </textField>
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -2122,7 +2129,7 @@ Apartment, Kuwait</string>
                                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Eg 20 KD" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8FB-rm-2Sc">
                                                                                 <rect key="frame" x="20" y="5" width="109" height="40"/>
                                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
-                                                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                                                             </textField>
                                                                         </subviews>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -2171,7 +2178,7 @@ Apartment, Kuwait</string>
                                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Eg 20 KD" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dT5-G7-089">
                                                                                 <rect key="frame" x="20" y="5" width="109" height="40"/>
                                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
-                                                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                                                             </textField>
                                                                         </subviews>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -2225,7 +2232,7 @@ Apartment, Kuwait</string>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Eg 20 KD" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yK0-8y-4Jj">
                                                                         <rect key="frame" x="20" y="5" width="273" height="40"/>
                                                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
-                                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                                                     </textField>
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -2376,7 +2383,11 @@ Apartment, Kuwait</string>
                     <connections>
                         <outlet property="buttonTitleLabel" destination="ztQ-2Z-CtV" id="i2j-ia-K3n"/>
                         <outlet property="headerView" destination="sxr-wy-T6b" id="Xr3-EM-hFo"/>
+                        <outlet property="itemPriceTF" destination="Uaj-32-gmB" id="xfG-HC-Iv6"/>
+                        <outlet property="shippingFeesTF" destination="8FB-rm-2Sc" id="snw-Hm-jkG"/>
+                        <outlet property="taxTF" destination="dT5-G7-089" id="4dw-pq-qQq"/>
                         <outlet property="titleLabel" destination="tVw-Vc-sec" id="8Le-n0-9U9"/>
+                        <outlet property="totalAmountTF" destination="yK0-8y-4Jj" id="4l2-Ak-JJr"/>
                         <outlet property="viewButtonOutlet" destination="dwE-9v-wCQ" id="ZqP-MB-hub"/>
                     </connections>
                 </viewController>
