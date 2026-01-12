@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseCore
 
 class ReceiverChatTableViewCell: UITableViewCell {
 
@@ -27,10 +28,13 @@ class ReceiverChatTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configData(data: ChatMessage?) {
+    func configData(data: Chat?) {
         messageLabel.text = data?.message
-//        timeLabel.text = data?.timestamp
+      if let date = data?.getCreatedOn() {
+          self.timeLabel.text = date.change_DateIntoString(format: .dd_MMM_yy_h_mm_a)
+      }
         
     }
     
 }
+

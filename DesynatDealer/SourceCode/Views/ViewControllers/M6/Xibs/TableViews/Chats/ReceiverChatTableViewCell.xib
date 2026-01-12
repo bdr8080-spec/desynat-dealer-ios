@@ -22,10 +22,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bRi-Qc-oz3">
-                        <rect key="frame" x="83.666666666666671" y="0.0" width="250.33333333333331" height="89"/>
+                        <rect key="frame" x="132.33333333333337" y="0.0" width="177.66666666666663" height="89"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bje-p7-20a">
-                                <rect key="frame" x="15" y="15" width="220.33333333333334" height="59"/>
+                                <rect key="frame" x="15" y="15" width="147.66666666666666" height="59"/>
                                 <string key="text">Hello John Deo!
 consectetur adipiscing elit ames.</string>
                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
@@ -42,14 +42,14 @@ consectetur adipiscing elit ames.</string>
                         </constraints>
                     </view>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="messageRead" translatesAutoresizingMaskIntoConstraints="NO" id="59O-gO-Nez">
-                        <rect key="frame" x="308" y="94" width="16" height="8"/>
+                        <rect key="frame" x="284" y="94" width="16" height="8"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="8" id="Gd6-EC-wZJ"/>
                             <constraint firstAttribute="width" constant="16" id="agu-s5-lb8"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="08:32 AM" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="elJ-pl-GEM">
-                        <rect key="frame" x="269.33333333333331" y="112" width="54.666666666666686" height="14.333333333333329"/>
+                        <rect key="frame" x="245.33333333333334" y="107" width="54.666666666666657" height="14.333333333333329"/>
                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -57,12 +57,12 @@ consectetur adipiscing elit ames.</string>
                 </subviews>
                 <constraints>
                     <constraint firstItem="bRi-Qc-oz3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="CuK-HO-plJ"/>
-                    <constraint firstAttribute="trailing" secondItem="elJ-pl-GEM" secondAttribute="trailing" constant="10" id="TwX-QE-BNq"/>
-                    <constraint firstItem="bRi-Qc-oz3" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.75" id="Y7h-4c-HEh"/>
-                    <constraint firstAttribute="trailing" secondItem="59O-gO-Nez" secondAttribute="trailing" constant="10" id="ce9-aC-1IY"/>
+                    <constraint firstItem="bRi-Qc-oz3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="120" id="OSJ-Xd-cSy"/>
+                    <constraint firstAttribute="trailing" secondItem="elJ-pl-GEM" secondAttribute="trailing" constant="34" id="TwX-QE-BNq"/>
+                    <constraint firstAttribute="trailing" secondItem="59O-gO-Nez" secondAttribute="trailing" constant="34" id="ce9-aC-1IY"/>
                     <constraint firstItem="59O-gO-Nez" firstAttribute="top" secondItem="bRi-Qc-oz3" secondAttribute="bottom" constant="5" id="i7x-pN-L2A"/>
-                    <constraint firstAttribute="trailing" secondItem="bRi-Qc-oz3" secondAttribute="trailing" id="ps7-Pz-3tq"/>
-                    <constraint firstItem="elJ-pl-GEM" firstAttribute="top" secondItem="59O-gO-Nez" secondAttribute="bottom" constant="10" id="shh-ag-8pY"/>
+                    <constraint firstAttribute="trailing" secondItem="bRi-Qc-oz3" secondAttribute="trailing" constant="24" id="ps7-Pz-3tq"/>
+                    <constraint firstItem="elJ-pl-GEM" firstAttribute="top" secondItem="59O-gO-Nez" secondAttribute="bottom" constant="5" id="shh-ag-8pY"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="elJ-pl-GEM" secondAttribute="bottom" constant="20" id="w3w-nw-bCs"/>
                 </constraints>
             </tableViewCellContentView>

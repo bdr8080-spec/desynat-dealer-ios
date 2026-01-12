@@ -6,10 +6,18 @@
 //
 
 import UIKit
+import SDWebImage
 
 class OrderForChatTableViewCell: UITableViewCell {
 
-    override func awakeFromNib() {
+  @IBOutlet weak var productImageView: CustomImageView!
+  @IBOutlet weak var discountPriceLabel: UILabel!
+  @IBOutlet weak var actualPriceLabel: CustomLabelFont!
+  @IBOutlet weak var finalPriceLabel: UILabel!
+  @IBOutlet weak var productDetailsLabel: UILabel!
+  @IBOutlet weak var productNameLabel: UILabel!
+  
+  override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
@@ -19,5 +27,29 @@ class OrderForChatTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+  
+  func configData(data: ProductVariation?) {
+    if let imageUrl = data?.variantImage?.first, let url = URL(string: imageUrl) {
+      productImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+      productImageView.sd_imageIndicator?.startAnimatingIndicator()
+      productImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
+    } else {
+      productImageView.image = UIImage(named: "")
+    }
+    productNameLabel.text = data?.productDetails?.productNameEn ?? ""
+    let discountType = data?.discountType ?? "1"
+    if discountType == "1" {
+      discountPriceLabel.text = "\(data?.discountValue ?? "")% Off"
+    } else {
+      discountPriceLabel.text = "\(data?.discountValue ?? "") KD Off"
+    }
+    
+    finalPriceLabel.text = "\(data?.finalPrice ?? "") KD"
+    CommonUtils.setStrikethrough(label: actualPriceLabel, text: "\(data?.actualPrice ?? "0") KD")
+    
+    setColorBox(size: data?.size?.name ?? "", label: productDetailsLabel, hexColor: data?.color?.hexCode ?? "#98ADFF", quantity: "1")
+  }
+  
+  
     
 }

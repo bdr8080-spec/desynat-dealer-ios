@@ -13,7 +13,7 @@ class SendQuotationViewModel {
     private var hostVC: SendQuotationViewController
     var quotationData: SendQuotationDataModel?
     var chatDetailsUniqueId: String = ""
-    var itemQuantity: Int = 0
+    var itemQuantity: String = "1"
     
     init(hostVC: SendQuotationViewController) {
         self.hostVC = hostVC

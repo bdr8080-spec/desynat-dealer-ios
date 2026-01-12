@@ -22,10 +22,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kfb-iT-UR5">
-                        <rect key="frame" x="0.0" y="0.0" width="277.66666666666669" height="69.333333333333329"/>
+                        <rect key="frame" x="24" y="0.0" width="194.66666666666666" height="89"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IUg-93-Aue">
-                                <rect key="frame" x="14.999999999999986" y="15.000000000000004" width="247.66666666666663" height="39.333333333333343"/>
+                                <rect key="frame" x="15" y="15" width="164.66666666666666" height="59"/>
                                 <string key="text">Hello John Deo!
 consectetur adipiscing elit ames.</string>
                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
@@ -42,7 +42,7 @@ consectetur adipiscing elit ames.</string>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="08:32 AM" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cEd-sQ-jrZ">
-                        <rect key="frame" x="0.0" y="75.333333333333329" width="54.666666666666664" height="14.333333333333329"/>
+                        <rect key="frame" x="23.999999999999996" y="95" width="54.666666666666657" height="14.333333333333329"/>
                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -53,8 +53,8 @@ consectetur adipiscing elit ames.</string>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="cEd-sQ-jrZ" secondAttribute="bottom" constant="20" id="bHO-ue-c9X"/>
                     <constraint firstItem="cEd-sQ-jrZ" firstAttribute="leading" secondItem="kfb-iT-UR5" secondAttribute="leading" id="cPB-zr-4hb"/>
                     <constraint firstItem="kfb-iT-UR5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="j5G-iZ-KBj"/>
-                    <constraint firstItem="kfb-iT-UR5" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.75" id="o2i-Xf-Afd"/>
-                    <constraint firstItem="kfb-iT-UR5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ypK-i2-ax8"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="kfb-iT-UR5" secondAttribute="trailing" constant="120" id="q92-Do-Hzg"/>
+                    <constraint firstItem="kfb-iT-UR5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="ypK-i2-ax8"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

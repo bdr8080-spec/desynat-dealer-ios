@@ -1,20 +1,9 @@
 ${PODS_ROOT}/Target Support Files/Pods-DesynatDealer/Pods-DesynatDealer-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework
 ${BUILT_PRODUCTS_DIR}/AppCheckCore/AppCheckCore.framework
-${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework
 ${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework
 ${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework
 ${BUILT_PRODUCTS_DIR}/FTIndicator/FTIndicator.framework
-${BUILT_PRODUCTS_DIR}/FirebaseAppCheckInterop/FirebaseAppCheckInterop.framework
-${BUILT_PRODUCTS_DIR}/FirebaseAuthInterop/FirebaseAuthInterop.framework
-${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework
-${BUILT_PRODUCTS_DIR}/FirebaseCoreExtension/FirebaseCoreExtension.framework
-${BUILT_PRODUCTS_DIR}/FirebaseCoreInternal/FirebaseCoreInternal.framework
-${BUILT_PRODUCTS_DIR}/FirebaseFirestore/FirebaseFirestore.framework
-${BUILT_PRODUCTS_DIR}/FirebaseFirestoreInternal/FirebaseFirestoreInternal.framework
-${BUILT_PRODUCTS_DIR}/FirebaseInstallations/FirebaseInstallations.framework
-${BUILT_PRODUCTS_DIR}/FirebaseSharedSwift/FirebaseSharedSwift.framework
-${BUILT_PRODUCTS_DIR}/FirebaseStorage/FirebaseStorage.framework
 ${BUILT_PRODUCTS_DIR}/GTMAppAuth/GTMAppAuth.framework
 ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework
 ${BUILT_PRODUCTS_DIR}/GoogleSignIn/GoogleSignIn.framework
@@ -27,9 +16,4 @@ ${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework
 ${BUILT_PRODUCTS_DIR}/ScalingCarousel/ScalingCarousel.framework
 ${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework
 ${BUILT_PRODUCTS_DIR}/Toaster/Toaster.framework
-${BUILT_PRODUCTS_DIR}/abseil/absl.framework
-${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework
-${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework
-${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework
-${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework
 ${PODS_XCFRAMEWORKS_BUILD_DIR}/MyFatoorah/MFSDK.framework/MFSDK

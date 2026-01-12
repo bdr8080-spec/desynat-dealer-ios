@@ -20,8 +20,8 @@ target 'DesynatDealer' do
   pod 'ScalingCarousel'
   pod 'RangeSeekSlider'
   pod 'MyFatoorah'
-  pod 'Firebase/Core'
-  pod 'Firebase/Firestore'
-  pod 'Firebase/Storage'  # to upload images directly to Firebase Storage
+#  pod 'Firebase/Core'
+#  pod 'Firebase/Firestore'
+#  pod 'Firebase/Storage'  # to upload images directly to Firebase Storage
   
 end

@@ -63,7 +63,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="mq9-A3-eFZ">
-                                <rect key="frame" x="81" y="17.333333333333332" width="97.333333333333314" height="53.666666666666671"/>
+                                <rect key="frame" x="81" y="0.6666666666666643" width="97.333333333333314" height="86.666666666666686"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max jacobson" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dlb-fs-ZDR">
                                         <rect key="frame" x="0.0" y="0.0" width="97.333333333333329" height="19.666666666666668"/>
@@ -72,24 +72,24 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thank you, bro!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="raJ-3f-w47">
-                                        <rect key="frame" x="0.0" y="19.666666666666668" width="97.333333333333329" height="17.000000000000004"/>
+                                        <rect key="frame" x="0.0" y="19.666666666666664" width="97.333333333333329" height="17"/>
                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                         <color key="textColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today 5 PM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g2i-ma-hre">
-                                        <rect key="frame" x="0.0" y="36.666666666666671" width="97.333333333333329" height="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g2i-ma-hre">
+                                        <rect key="frame" x="0.0" y="36.666666666666671" width="97.333333333333329" height="50"/>
                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                         <color key="textColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a8q-my-1Hf">
-                                <rect key="frame" x="306" y="15" width="91" height="24"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a8q-my-1Hf" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
+                                <rect key="frame" x="306" y="-1.6666666666666661" width="91" height="24.333333333333329"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quotation Sent" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iXs-pO-7rA">
-                                        <rect key="frame" x="8" y="5" width="75" height="14"/>
+                                        <rect key="frame" x="8" y="5.3333333333333321" width="75" height="14"/>
                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="10"/>
                                         <color key="textColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -102,6 +102,11 @@
                                     <constraint firstAttribute="trailing" secondItem="iXs-pO-7rA" secondAttribute="trailing" constant="8" id="v2E-4p-Lh5"/>
                                     <constraint firstItem="iXs-pO-7rA" firstAttribute="top" secondItem="a8q-my-1Hf" secondAttribute="top" constant="5" id="yzY-ab-SlD"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -139,7 +144,7 @@
             <connections>
                 <outlet property="messageLabel" destination="raJ-3f-w47" id="afC-iD-hjH"/>
                 <outlet property="messageTypeLabel" destination="iXs-pO-7rA" id="gmI-cq-zcJ"/>
-                <outlet property="messageTypeStatusView" destination="a8q-my-1Hf" id="u4x-ab-DEY"/>
+                <outlet property="messageTypeStatusView" destination="a8q-my-1Hf" id="WRq-iv-zLF"/>
                 <outlet property="timeLabel" destination="g2i-ma-hre" id="HcR-3g-1oL"/>
                 <outlet property="userProfileImageView" destination="Z3L-Uo-ahH" id="gMn-e4-Xe2"/>
                 <outlet property="usernameLabel" destination="dlb-fs-ZDR" id="JYT-Ka-rRg"/>

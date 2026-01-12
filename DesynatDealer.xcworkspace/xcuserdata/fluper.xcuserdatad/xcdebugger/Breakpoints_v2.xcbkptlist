@@ -7,64 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "34FFB3E3-E594-43BE-B9CF-F5556D9A1A86"
+            uuid = "C45C0FC0-436F-457F-B955-920725A9AF12"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DesynatDealer/SourceCode/Views/ViewControllers/M6/OrderManagement/OrdersFilters/OrdersfilterViewController.swift"
+            filePath = "DesynatDealer/SourceCode/Views/ViewControllers/M6/Chats/ChatDetail/ChatViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "tableView(_:cellForRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "6F062743-650C-4AD8-816C-74C4FEF0147F"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DesynatDealer/SourceCode/Views/ViewControllers/M6/OrderManagement/OrdersFilters/OrdersfilterViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
-            landmarkName = "tableView(_:cellForRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "9F6413E1-46AC-4298-86C7-6E73C2830EF6"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DesynatDealer/SourceCode/Views/ViewControllers/M6/OrderManagement/OrdersFilters/OrdersfilterViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
-            landmarkName = "tableView(_:didSelectRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "26D1F52C-CE15-4B7A-ADDB-01A26F726B57"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DesynatDealer/SourceCode/Views/ViewControllers/M6/OrderManagement/OrdersFilters/OrdersfilterViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
-            landmarkName = "tableView(_:didSelectRowAt:)"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
+            landmarkName = "handleUIUpdate()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

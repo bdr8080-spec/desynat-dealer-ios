@@ -6,36 +6,112 @@
 //
 
 import UIKit
+import SDWebImage
 
 class ChatInboxTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var messageTypeStatusView: UIView!
-    @IBOutlet weak var messageTypeLabel: UILabel!
-    @IBOutlet weak var userProfileImageView: CustomImageView!
-    @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var messageLabel: UILabel!
+  @IBOutlet weak var messageTypeStatusView: CustomView!
+  @IBOutlet weak var messageTypeLabel: UILabel!
+  @IBOutlet weak var userProfileImageView: CustomImageView!
+  @IBOutlet weak var usernameLabel: UILabel!
+  @IBOutlet weak var timeLabel: UILabel!
+  @IBOutlet weak var messageLabel: UILabel!
+  
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    // Initialization code
+  }
+  
+  override func setSelected(_ selected: Bool, animated: Bool) {
+    super.setSelected(selected, animated: animated)
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    // Configure the view for the selected state
+  }
+  
+  func configData(data: ChatInboxListModel?) {
+    if let imageUrlString = data?.userDetails?.profileImage,
+       let url = URL(string: imageUrlString) {
+      userProfileImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+      userProfileImageView.sd_imageIndicator?.startAnimatingIndicator()
+      userProfileImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "userProfile"))
+    } else {
+      userProfileImageView.image = UIImage(named: "userProfile")
     }
+    usernameLabel.text = data?.userDetails?.fullName
+    messageLabel.text = data?.lastChat ?? "Sent an attachment"
+    timeLabel.text = formattedChatTime(from: data?.updatedAt ?? "")
+    let messageType = data?.type ?? "1" // normal msg, customization send
+    let productRequest = data?.productRequest ?? "1"
+    let actiontype = data?.action ?? "1"
+    switch messageType {
+    case "1":
+      messageTypeStatusView.isHidden = true
+    default:
+      messageTypeStatusView.isHidden = false
+      switch productRequest {
+      case "1":
+        messageTypeLabel.text = "New"
+        messageTypeLabel.textColor = UIColor(hex: "#EA9413") // orange
+        messageTypeStatusView.backgroundColor = UIColor(hex: "#EA9413")?.withAlphaComponent(0.25)
+      default:
+        switch actiontype {
+        case "0":
+          messageTypeLabel.text = "New"
+          messageTypeLabel.textColor = UIColor(hex: "#EA9413") // orange
+          messageTypeStatusView.backgroundColor = UIColor(hex: "#EA9413")?.withAlphaComponent(0.25)
+        case "1":
+          messageTypeLabel.text = "Quotation Sent"
+          messageTypeLabel.textColor = UIColor(hex: "#172B85") // dark blue
+          messageTypeStatusView.backgroundColor = UIColor(hex: "#172B85")?.withAlphaComponent(0.25)
+        case "2":
+          messageTypeLabel.text = "Quotation Accepted"
+          messageTypeLabel.textColor = UIColor(hex: "#16B364") // green
+          messageTypeStatusView.backgroundColor = UIColor(hex: "#16B364")?.withAlphaComponent(0.25)
+        default:
+          messageTypeStatusView.isHidden = true
+        }
+      }
+    }
+  }
+  
+  func formattedChatTime(from isoString: String) -> String {
+      
+      // 1️⃣ Parse ISO string
+      let isoFormatter = ISO8601DateFormatter()
+      isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+      
+      guard let date = isoFormatter.date(from: isoString) else {
+          return ""
+      }
+      
+      let calendar = Calendar.current
+//      let now = Date()
+      
+      // 2️⃣ Time formatter
+      let timeFormatter = DateFormatter()
+      timeFormatter.locale = Locale.current
+      timeFormatter.timeZone = .current
+      timeFormatter.dateFormat = "h:mm a"
+      
+      // 3️⃣ Date formatter (fallback)
+      let dateFormatter = DateFormatter()
+      dateFormatter.locale = Locale.current
+      dateFormatter.timeZone = .current
+      dateFormatter.dateFormat = "dd/MM/yy, h:mm a"
+      
+      // 4️⃣ Today
+      if calendar.isDateInToday(date) {
+          return "Today \(timeFormatter.string(from: date))"
+      }
+      
+      // 5️⃣ Yesterday
+      if calendar.isDateInYesterday(date) {
+          return "Yesterday \(timeFormatter.string(from: date))"
+      }
+      
+      // 6️⃣ Older dates
+      return dateFormatter.string(from: date)
+  }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
-    func configData(data: ChatInboxListModel?) {
-//        if let imageUrlString = data?.userDetails?.profileImage,
-//           let url = URL(string: imageUrlString) {
-//          userProfileImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-//          userProfileImageView.sd_imageIndicator?.startAnimatingIndicator()
-//          userProfileImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "userProfile"))
-//        } else {
-//          userProfileImageView.image = UIImage(named: "userProfile")
-//        }
-    }
-    
+  
 }
