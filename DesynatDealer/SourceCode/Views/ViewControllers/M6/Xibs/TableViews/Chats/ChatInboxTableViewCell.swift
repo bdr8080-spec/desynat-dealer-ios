@@ -41,35 +41,32 @@ class ChatInboxTableViewCell: UITableViewCell {
     messageLabel.text = data?.lastChat ?? "Sent an attachment"
     timeLabel.text = formattedChatTime(from: data?.updatedAt ?? "")
     let messageType = data?.type ?? "1" // normal msg, customization send
-    let productRequest = data?.productRequest ?? "1"
+//    let productRequest = data?.productRequest ?? "1"
     let actiontype = data?.action ?? "1"
-    switch messageType {
-    case "1":
+    if messageType == "1" {
       messageTypeStatusView.isHidden = true
-    default:
+    } else {
       messageTypeStatusView.isHidden = false
-      switch productRequest {
-      case "1":
+      switch actiontype {
+      case "0":
         messageTypeLabel.text = "New"
         messageTypeLabel.textColor = UIColor(hex: "#EA9413") // orange
         messageTypeStatusView.backgroundColor = UIColor(hex: "#EA9413")?.withAlphaComponent(0.25)
-      default:
-        switch actiontype {
-        case "0":
-          messageTypeLabel.text = "New"
-          messageTypeLabel.textColor = UIColor(hex: "#EA9413") // orange
-          messageTypeStatusView.backgroundColor = UIColor(hex: "#EA9413")?.withAlphaComponent(0.25)
-        case "1":
-          messageTypeLabel.text = "Quotation Sent"
-          messageTypeLabel.textColor = UIColor(hex: "#172B85") // dark blue
-          messageTypeStatusView.backgroundColor = UIColor(hex: "#172B85")?.withAlphaComponent(0.25)
-        case "2":
-          messageTypeLabel.text = "Quotation Accepted"
+      case "1":
+        messageTypeLabel.text = "Quotation Sent"
+        messageTypeLabel.textColor = UIColor(hex: "#172B85") // dark blue
+        messageTypeStatusView.backgroundColor = UIColor(hex: "#172B85")?.withAlphaComponent(0.25)
+      case "2":
+        let readyToship = data?.productVariation?.productDetails?.readyToShip ?? "1"
+        if readyToship == "1"{
+          messageTypeStatusView.isHidden = true
+        } else {
+          messageTypeLabel.text = "Quotation Modified"
           messageTypeLabel.textColor = UIColor(hex: "#16B364") // green
           messageTypeStatusView.backgroundColor = UIColor(hex: "#16B364")?.withAlphaComponent(0.25)
-        default:
-          messageTypeStatusView.isHidden = true
         }
+      default:
+        messageTypeStatusView.isHidden = true
       }
     }
   }

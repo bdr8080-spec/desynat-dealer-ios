@@ -21,7 +21,8 @@ class SendQuotationViewController: UIViewController {
     var onQuotationSent: (() -> Void)?
     var comingReason: ComingReasonAtChatScreen = .quotationSentForFirstTime
     lazy var viewModel = SendQuotationViewModel(hostVC: self)
-    
+  var quotationData: Record?
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         handleUISetup()
@@ -40,6 +41,7 @@ class SendQuotationViewController: UIViewController {
     
     @IBAction func viewRequestDidTapped(_ sender: Any) {
         let nextVC = ViewRequestViewController.instantiate(fromAppStoryboard: .OrderAndChat)
+      nextVC.quotationData = quotationData
         self.present(nextVC, animated: true)
     }
     
@@ -82,6 +84,10 @@ class SendQuotationViewController: UIViewController {
             titleLabel.text = "Modify Quotation"
             buttonTitleLabel.text = "Confirm & Modify"
             viewButtonOutlet.isHidden = false
+          itemPriceTF.text = CommonUtils.formatPriceAmount(quotationData?.price)
+          shippingFeesTF.text = CommonUtils.formatPriceAmount(quotationData?.shipping)
+          taxTF.text = CommonUtils.formatPriceAmount(quotationData?.tax)
+          totalAmountTF.text = CommonUtils.formatPriceAmount(quotationData?.totalAmount)
         }
     }
 }

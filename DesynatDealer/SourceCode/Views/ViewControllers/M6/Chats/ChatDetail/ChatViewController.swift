@@ -10,6 +10,10 @@ import IQKeyboardManagerSwift
 
 class ChatViewController: UIViewController {
   
+  @IBOutlet weak var requetsStackView: UIStackView!
+  @IBOutlet weak var viewRequestButonOutlet: UIButton!
+  @IBOutlet weak var noChatFoundLabel: UILabel!
+  @IBOutlet weak var detailsStackView: UIView!
   @IBOutlet weak var userNameLabel: UILabel!
   @IBOutlet weak var baseBottomConstraint: NSLayoutConstraint!
   @IBOutlet weak var totalAmountLabel: UILabel!
@@ -47,16 +51,16 @@ class ChatViewController: UIViewController {
   lazy var selfID:String = {
     return String.getString(Global.shared.user?.id)
   }()
-  var viewModel = ChatEnquiryViewModel()
+  lazy var viewModel = ChatEnquiryViewModel(hostVC: self)
   var chatList:[Chat] = []
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    handleQuotationUI()
+//    handleQuotationUI()
     viewModel.delegate = self
     IQKeyboardManager.shared.disabledDistanceHandlingClasses = [ChatViewController.self]
     self.viewModel.callBackRefresh = {
-                self.handleUIUpdate()
+      self.handleUIUpdate()
       self.baseScrollView.setNeedsDisplay()
     }
   }
@@ -67,7 +71,6 @@ class ChatViewController: UIViewController {
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     self.viewModel.singleChatDetailRequest()
     self.viewModel.checkForEnquiryChat()
-    //    IQKeyboardManager.shared. = false
   }
   
   override func viewWillDisappear(_ animated: Bool) {
@@ -81,18 +84,38 @@ class ChatViewController: UIViewController {
   }
   
   @IBAction func sendQuotationDidTapped(_ sender: Any) {
-    let nextVC = SendQuotationViewController.instantiate(fromAppStoryboard: .OrderAndChat)
-    nextVC.comingReason = comingReason
-    nextVC.viewModel.chatDetailsUniqueId = viewModel.chatDetailsUniqueId
-    nextVC.viewModel.itemQuantity = viewModel.quotationData?.quantity ?? "1"
-    nextVC.onQuotationSent = { [weak self] in
-      self?.sendQuotationButtonLabel.text = "Modify Quotation"
-      self?.priceDetailsView.isHidden = false
-      self?.productDetailsView.isHidden = true
-      self?.productTableView.reloadData()
-      self?.comingReason = .doModificationAfterQuotationSent
+    let actiontype = viewModel.quotationData?.action ?? "1"
+    if actiontype == "2" {
+      let nextVC = SendQuotationViewController.instantiate(fromAppStoryboard: .OrderAndChat)
+      nextVC.comingReason = .doModificationAfterQuotationSent
+      nextVC.viewModel.chatDetailsUniqueId = viewModel.chatDetailsUniqueId
+      nextVC.viewModel.itemQuantity = viewModel.quotationData?.quantity ?? "1"
+      nextVC.quotationData = viewModel.quotationData
+      nextVC.onQuotationSent = { [weak self] in
+        self?.viewModel.singleChatDetailRequest()
+//        self?.sendQuotationButtonLabel.text = "Modify Quotation"
+//        self?.priceDetailsView.isHidden = false
+//        self?.productDetailsView.isHidden = true
+//        self?.productTableView.reloadData()
+//        self?.comingReason = .doModificationAfterQuotationSent
+      }
+      present(nextVC, animated: true)
+    } else {
+      let nextVC = SendQuotationViewController.instantiate(fromAppStoryboard: .OrderAndChat)
+      nextVC.comingReason = comingReason
+      nextVC.viewModel.chatDetailsUniqueId = viewModel.chatDetailsUniqueId
+      nextVC.viewModel.itemQuantity = viewModel.quotationData?.quantity ?? "1"
+      nextVC.onQuotationSent = { [weak self] in
+        self?.viewModel.singleChatDetailRequest()
+//        self?.sendQuotationButtonLabel.text = "Modify Quotation"
+//        self?.priceDetailsView.isHidden = false
+//        self?.productDetailsView.isHidden = true
+//        self?.productTableView.reloadData()
+//        self?.comingReason = .doModificationAfterQuotationSent
+      }
+      present(nextVC, animated: true)
     }
-    present(nextVC, animated: true)
+    
   }
   
   @IBAction func sendAttachmentDidTapped(_ sender: Any) {
@@ -113,58 +136,69 @@ class ChatViewController: UIViewController {
     handleSendMessage(msg: txt, type: "0")
   }
   
+  private func updateNoChatUI() {
+    let hasChats = !chatList.isEmpty
+    noChatFoundLabel.isHidden = hasChats
+    chatTableView.isHidden = !hasChats
+  }
+  
+  
   func handleSendMessage(msg: String, type: String) {
-    let formatter = ISO8601DateFormatter()
-    formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-    let isoDate = formatter.string(from: Date())
-    let localChat = Chat(uniqueId: viewModel.chatDetailsUniqueId,senderId: self.selfID, type: type,message: msg,by: "seller", read: 0,times: isoDate)
-    self.chatList.append(localChat)
-    self.chatTableView.reloadData()
-    self.scrollToBottom()
-    // Send to Firebase
+//    let formatter = ISO8601DateFormatter()
+//    formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+//    let isoDate = formatter.string(from: Date())
+//    let localChat = Chat(uniqueId: viewModel.chatDetailsUniqueId,senderId: self.selfID, type: type,message: msg,by: "seller", read: 0,times: isoDate)
+//    self.chatList.append(localChat)
+//    self.chatTableView.reloadData()
+//    updateNoChatUI()
+//    self.scrollToBottom()
     self.viewModel.sendMsg(msg: msg, type: type)
   }
   
-  private func handleQuotationUI() {
-    switch comingReason {
-    case comingReason:
-      productTableView.isHidden = false
-      mainHeaderView.backgroundColor = UIColor(hex: "#FFF7EA")
-      productDetailsView.isHidden = false
-      sendQuotationView.isHidden = false
-      requestIdLabel.isHidden = false
-      priceDetailsView.isHidden = true
-    default:
-      productTableView.isHidden = true
-      mainHeaderView.backgroundColor = .white
-      productDetailsView.isHidden = true
-      sendQuotationView.isHidden = true
-      requestIdLabel.isHidden = true
-      priceDetailsView.isHidden = true
-    }
-  }
+//  private func handleQuotationUI() {
+//    switch comingReason {
+//    case comingReason:
+//      productTableView.isHidden = false
+//      mainHeaderView.backgroundColor = UIColor(hex: "#FFF7EA")
+//      productDetailsView.isHidden = false
+//      sendQuotationView.isHidden = false
+//      requestIdLabel.isHidden = false
+//      priceDetailsView.isHidden = true
+//    default:
+//      productTableView.isHidden = true
+//      mainHeaderView.backgroundColor = .white
+//      productDetailsView.isHidden = true
+//      sendQuotationView.isHidden = true
+//      requestIdLabel.isHidden = true
+//      priceDetailsView.isHidden = true
+//    }
+//  }
   
   func handleUIUpdate() {
     let quotationData = viewModel.quotationData
     let messageType = quotationData?.type ?? "1" // normal msg, customization send
-    let productRequest = quotationData?.productRequest ?? "1"
     let actiontype = quotationData?.action ?? "1"
     userNameLabel.text = quotationData?.userDetails?.fullName ?? ""
-    switch messageType {
-    case "1":
+    if messageType == "1" {
       productTableView.isHidden = true
       mainHeaderView.backgroundColor = .white
       productDetailsView.isHidden = true
       sendQuotationView.isHidden = true
       requestIdLabel.isHidden = true
       priceDetailsView.isHidden = true
-    default:
+      detailsStackView.backgroundColor = .white
+      requetsStackView.isHidden = true
+    } else {
       productTableView.isHidden = false
+      requetsStackView.isHidden = false
       mainHeaderView.backgroundColor = UIColor(hex: "#FFF7EA")
+      detailsStackView.backgroundColor = UIColor(hex: "#FFF7EA")
       productDetailsView.isHidden = false
       sendQuotationView.isHidden = false
       requestIdLabel.isHidden = false
       priceDetailsView.isHidden = true
+      viewRequestButonOutlet.isHidden = true
+      requestIdLabel.text = "Request Id #\(quotationData?.id ?? 0)"
       totalQuantityLabel.text = quotationData?.quantity
       productTableView.reloadData()
       adressLabel.text = viewModel.buildFullAddress(from: quotationData?.deliveryDetails)
@@ -173,38 +207,45 @@ class ChatViewController: UIViewController {
       shippingPriceLabel.text = CommonUtils.formatPriceStringInput(quotationData?.shipping)
       taxLabel.text = CommonUtils.formatPriceStringInput(quotationData?.tax)
       totalAmountLabel.text = CommonUtils.formatPriceStringInput(quotationData?.totalAmount)
-      
-      switch productRequest {
-      case "1":
-        print("new request")
-        
-        switch actiontype {
-        case "0":
-          print("new request actiontype")
-//          messageTypeLabel.text = "New"
-//          messageTypeLabel.textColor = UIColor(hex: "#EA9413") // orange
-//          messageTypeStatusView.backgroundColor = UIColor(hex: "#EA9413")?.withAlphaComponent(0.5)
-        case "1":
-          print("Quotation Sent")
-//          messageTypeLabel.text = "Quotation Sent"
-//          messageTypeLabel.textColor = UIColor(hex: "#172B85") // dark blue
-//          messageTypeStatusView.backgroundColor = UIColor(hex: "#172B85")?.withAlphaComponent(0.5)
-        case "2":
-          print("Quotation Accepted")
-          sendQuotationButtonLabel.text = "Modify Quotation"
-          priceDetailsView.isHidden = false
+      switch actiontype {
+      case "0": //user sent chat for customization new
+        print("just normal chat")
+      case "1": //"Quotation Sent"
+        productDetailsView.isHidden = true
+        viewRequestButonOutlet.isHidden = false
+        priceDetailsView.isHidden = false
+      case "2":
+        let readyToship = quotationData?.productVariation?.productDetails?.readyToShip ?? "1"
+        if readyToship == "1"{ // product is about to deliver
           productDetailsView.isHidden = true
-        default:
-          print("default")
-//          messageTypeStatusView.isHidden = true
+          viewRequestButonOutlet.isHidden = false
+          sendQuotationView.isHidden = true
+          priceDetailsView.isHidden = true
+          productTableView.reloadData()
+        } else { //"Quotation Modified"
+          productDetailsView.isHidden = true
+          viewRequestButonOutlet.isHidden = false
+          priceDetailsView.isHidden = false
+          sendQuotationButtonLabel.text = "Modify Quotation"
         }
       default:
-        print("====")
+        viewRequestButonOutlet.isHidden = true
+        mainHeaderView.backgroundColor = .white
+        productDetailsView.isHidden = true
+        sendQuotationView.isHidden = true
+        requestIdLabel.isHidden = true
+        priceDetailsView.isHidden = true
+        detailsStackView.backgroundColor = .white
+        productTableView.reloadData()
       }
     }
   }
   
-  
+  @IBAction func viewRequestDidTapped(_ sender: Any) {
+    let nextVC = ViewRequestViewController.instantiate(fromAppStoryboard: .OrderAndChat)
+    nextVC.quotationData = viewModel.quotationData
+    self.present(nextVC, animated: true)
+  }
   
   @objc func keyboardWillShow(_ notification: Notification) {
     guard
@@ -214,22 +255,23 @@ class ChatViewController: UIViewController {
       let curveRaw = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt
     else { return }
     
-    let keyboardHeight = keyboardFrame.height
-    let safeAreaBottom = view.safeAreaInsets.bottom
-    let finalHeight = keyboardHeight - safeAreaBottom
+    let keyboardHeight = keyboardFrame.height - view.safeAreaInsets.bottom
+    let inputViewHeight = sendMessageTF.superview?.bounds.height ?? 0
     let curve = UIView.AnimationOptions(rawValue: curveRaw << 16)
     
     UIView.animate(withDuration: duration, delay: 0, options: curve) {
-      // Move input view above keyboard
-      self.baseBottomConstraint.constant = finalHeight + 400
       
-      // 👇 THIS IS THE IMPORTANT PART
-      self.chatTableView.contentInset.bottom = finalHeight
-      self.chatTableView.scrollIndicatorInsets.bottom = finalHeight
+      // 1️⃣ Move input view above keyboard (inverted constraint)
+      self.baseBottomConstraint.constant = -keyboardHeight - 15
+      
+      // 2️⃣ ScrollView inset = input view height ONLY
+      self.baseScrollView.contentInset.bottom = inputViewHeight
+      self.baseScrollView.verticalScrollIndicatorInsets.bottom = inputViewHeight
       
       self.view.layoutIfNeeded()
-      self.scrollChatToBottom()
     }
+    
+    scrollToBottom()
   }
   
   @objc func keyboardWillHide(_ notification: Notification) {
@@ -242,23 +284,34 @@ class ChatViewController: UIViewController {
     let curve = UIView.AnimationOptions(rawValue: curveRaw << 16)
     
     UIView.animate(withDuration: duration, delay: 0, options: curve) {
+      
       self.baseBottomConstraint.constant = 0
-      self.chatTableView.contentInset = .zero
-      self.chatTableView.scrollIndicatorInsets = .zero
+      self.baseScrollView.contentInset = .zero
+      self.baseScrollView.verticalScrollIndicatorInsets = .zero
+      
       self.view.layoutIfNeeded()
     }
   }
   
-  func scrollChatToBottom(animated: Bool = true) {
+  
+//  func scrollChatToBottom(animated: Bool = true) {
+//    DispatchQueue.main.async {
+//      let rows = self.chatTableView.numberOfRows(inSection: 0)
+//      guard rows > 0 else { return }
+//      
+//      let indexPath = IndexPath(row: rows - 1, section: 0)
+//      self.chatTableView.scrollToRow(at: indexPath, at: .bottom, animated: animated)
+//    }
+//  }
+  
+  func getNewMsgHanlder(msg: Chat) {
+    self.chatList.append(msg)
     DispatchQueue.main.async {
-      let rows = self.chatTableView.numberOfRows(inSection: 0)
-      guard rows > 0 else { return }
-      
-      let indexPath = IndexPath(row: rows - 1, section: 0)
-      self.chatTableView.scrollToRow(at: indexPath, at: .bottom, animated: animated)
+      self.chatTableView.reloadData()
+      self.updateNoChatUI()
+      self.scrollToBottom()
     }
   }
-  
   
 }
 
@@ -305,7 +358,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
       }
     }
   }
-
+  
   func scrollToBottom(animated: Bool = true) {
     DispatchQueue.main.async {
       let contentHeight = self.baseScrollView.contentSize.height
@@ -325,19 +378,19 @@ extension ChatViewController : ChatViewModelDelegate {
   func getAllMsg(list: [Chat]) {
     self.chatList = list
     self.chatTableView.reloadData()
+    updateNoChatUI()
     self.scrollToBottom()
   }
   
-  func getNewMsg(msg: Chat) {
-    guard !self.chatList.contains(where: { $0.uniqueId == msg.uniqueId }) else { return }
-    
-    self.chatList.append(msg)
-    
-    DispatchQueue.main.async {
-      self.chatTableView.reloadData()
-      self.scrollToBottom()
-    }
-  }
+//  func getNewMsg(msg: Chat) {
+//    self.chatList.append(msg)
+//    DispatchQueue.main.async {
+//      self.chatTableView.reloadData()
+//      self.updateNoChatUI()
+//      self.scrollToBottom()
+//    }
+//  }
+  
   
 }
 
@@ -348,3 +401,4 @@ extension ChatViewController : UITextFieldDelegate {
     baseScrollView.scrollRectToVisible(rect, animated: true)
   }
 }
+

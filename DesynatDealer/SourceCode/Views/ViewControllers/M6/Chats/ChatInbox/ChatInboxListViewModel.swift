@@ -8,20 +8,31 @@
 import Foundation
 
 class ChatInboxListViewModel {
-    
-    private var hostVC: ChatInboxListViewController
-    var chatList: [ChatInboxListModel]?
-    
-    init(hostVC: ChatInboxListViewController) {
-        self.hostVC = hostVC
+  
+  private var hostVC: ChatInboxListViewController
+  var chatList: [ChatInboxListModel]?
+  var searchText: String = ""
+  var appliedFilter = ChatInboxListFilterModel()
+  
+  init(hostVC: ChatInboxListViewController) {
+    self.hostVC = hostVC
+  }
+  
+  func getChatInboxRequest() {
+    var param: [String: Any] = [:]
+    if !searchText.isEmpty {
+      param["search"] = searchText
     }
-    
-    func getChatInboxRequest() {
-        WebService.sharedInstance.getAllChatsList(){ response in
-          DispatchQueue.main.async {
-            self.chatList = response
-            self.hostVC.bindData()
-          }
-        }
+    //      if let status = appliedFilter.orderDeliveryStatus {
+    //        param["status"] = status
+    //      }
+    WebService.sharedInstance.getAllChatsList(param: param){ response in
+      DispatchQueue.main.async {
+        self.chatList = response
+        self.hostVC.bindData()
+        let chat = self.chatList ?? []
+        self.hostVC.noChatFoundLabel.isHidden = !chat.isEmpty
+      }
     }
+  }
 }

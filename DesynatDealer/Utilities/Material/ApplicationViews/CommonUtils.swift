@@ -103,6 +103,23 @@ class CommonUtils {
       }
   }
   
+  static func formatPriceAmount(_ amount: String?) -> String {
+      guard
+          let amount = amount,
+          let doubleAmount = Double(amount)
+      else {
+          return "0"
+      }
+
+      let roundedAmount = round(doubleAmount * 100) / 100
+
+      if roundedAmount.truncatingRemainder(dividingBy: 1) == 0 {
+          return "\(Int(roundedAmount))"
+      } else {
+          return String(format: "%.2f", roundedAmount)
+      }
+  }
+  
   static func formatPrice(_ amount: Double?, currency: String = "KD") -> String {
     guard let amount = amount else { return "0 \(currency)" }
     

@@ -9,6 +9,8 @@ import UIKit
 
 class ChatInboxListViewController: UIViewController {
   
+  @IBOutlet weak var searchTF: UITextField!
+  @IBOutlet weak var noChatFoundLabel: UILabel!
   @IBOutlet weak var inboxTableView: UITableView! {
     didSet {
       inboxTableView.registerCellFromNib(cellID: "ChatInboxTableViewCell")
@@ -16,10 +18,11 @@ class ChatInboxListViewController: UIViewController {
   }
   
   private lazy var viewModel = ChatInboxListViewModel(hostVC: self)
+  private var searchWorkItem: DispatchWorkItem?
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    searchTF.delegate = self
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -31,6 +34,23 @@ class ChatInboxListViewController: UIViewController {
     self.navigationController?.popViewController(animated: true)
   }
   
+  @IBAction func filterDidTapped(_ sender: Any) {
+    let vc = ChatFilterViewController.instantiate(fromAppStoryboard: .OrderAndChat)
+    vc.selectedFilter = viewModel.appliedFilter
+    vc.onApplyFilter = { [weak self] filter in
+        guard let self = self else { return }
+        self.viewModel.appliedFilter = filter
+//        self.viewModel.currentPage = 1
+        self.viewModel.getChatInboxRequest()
+    }
+    vc.onClearFilter = { [weak self] in
+        guard let self = self else { return }
+        self.viewModel.appliedFilter = ChatInboxListFilterModel()
+//        self.viewModel.currentPage = 1
+        self.viewModel.getChatInboxRequest()
+    }
+    self.navigationController?.present(vc, animated: false)
+  }
   func bindData() {
     inboxTableView.reloadData()
   }
@@ -59,4 +79,19 @@ extension ChatInboxListViewController: UITableViewDelegate, UITableViewDataSourc
   }
   
   
+}
+
+extension ChatInboxListViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
+        searchWorkItem?.cancel()
+        let workItem = DispatchWorkItem { [weak self] in
+            guard let self = self else { return }
+            self.viewModel.searchText = currentText
+            viewModel.getChatInboxRequest()
+        }
+        searchWorkItem = workItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: workItem)
+        return true
+    }
 }
