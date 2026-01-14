@@ -64,6 +64,11 @@ class OrdersListTableViewCell: UITableViewCell {
     if paymentMethod == "1" || paymentMethod == "2" {
       if paymentStatus == "1" {
         switch deliveryStatus {
+        case "0":
+          if data?.rEApprove == "1" {
+            statusLabel.text = "Return Conf."
+            statusLabel.textColor = UIColor(hex: "#FF5F1B")
+          }
         case "1": //Pending
           statusLabel.text = "Ongoing"
           statusLabel.textColor = UIColor(hex: "#FF5F1B")
@@ -93,6 +98,11 @@ class OrdersListTableViewCell: UITableViewCell {
     } else if paymentMethod == "3" {
       if paymentStatus == "0" || paymentStatus == "1" {
         switch deliveryStatus {
+        case "0":
+          if data?.rEApprove == "1" {
+            statusLabel.text = "Return Conf."
+            statusLabel.textColor = UIColor(hex: "#FF5F1B")
+          }
         case "1": //Pending
           statusLabel.text = "Ongoing"
           statusLabel.textColor = UIColor(hex: "#FF5F1B")

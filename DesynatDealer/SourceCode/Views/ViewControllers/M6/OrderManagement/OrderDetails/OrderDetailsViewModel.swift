@@ -38,4 +38,15 @@ class OrderDetailsViewModel {
       }
   }
   
+  func orderStatusRequestForExchangeAndReturn(status: String) {
+    let param: [String: Any] = ["id": hostVC.orderId,
+                                "status": status]
+      WebService.sharedInstance.updateOrdersStatusForExchnageAndReturn(param: param){ response in
+        DispatchQueue.main.async {
+          self.orderDetailRequest()
+        }
+
+      }
+  }
+  
 }

@@ -76,6 +76,7 @@ enum NetworkEndPoint: String {
   case getSingleChats                   = "/api/seller/single-chats-records"
   case qutationChatEdit                 = "/api/seller/Modify-single-chats-records"
   case sendInMessageChat                = "/api/send-message-in-chats"
+  case updateReturnExchangeStatus       = "/api/seller/update-order-exchange-return-status"
   
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"

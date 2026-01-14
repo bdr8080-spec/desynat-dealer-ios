@@ -63,9 +63,14 @@ class OrderDetailsViewController: UIViewController {
   var orderId: Int = 0
   var orderDetails: OrdersListData?
   private let deliveryStatus: [String: String] = [
-      "Packed": "2",
+//      "Packed": "2",
       "Shipped": "2.1"
   ]
+  
+  private let returnDeliveryRequest: [String: String] = [
+          "Confirmed": "1",
+          "Reject": "2"
+      ]
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -78,22 +83,40 @@ class OrderDetailsViewController: UIViewController {
   }
   
   @IBAction func statusDidTapped(_ sender: UIButton) {
-    kSharedAppDelegate.dropDown(
-            dataSource: Array(deliveryStatus.keys),
-            anchorView: self.paymentDetailsView
-        ) { index, item in
-            self.statusTF.text = item
-        }
+    if orderDetails?.returnType == "1" { // return and exchange
+      kSharedAppDelegate.dropDown(
+        dataSource: Array(returnDeliveryRequest.keys),
+        anchorView: self.paymentDetailsView
+      ) { index, item in
+        self.statusTF.text = item
+      }
+    } else {
+      kSharedAppDelegate.dropDown(
+        dataSource: Array(deliveryStatus.keys),
+        anchorView: self.paymentDetailsView
+      ) { index, item in
+        self.statusTF.text = item
+      }
+    }
   }
   
   @IBAction func submitDidTapped(_ sender: Any) {
-    guard let selectedStatus = statusTF.text?.trimmed(),
-              let apiStatus = deliveryStatus[selectedStatus] else {
-            CommonUtils.showToast(message: "Please update the status")
-            return
-        }
-        
-        viewModel.orderStatusRequest(status: apiStatus)
+    if orderDetails?.returnType == "1" { // return and exchange
+      guard let selectedStatus = statusTF.text?.trimmed(),
+            let apiStatus = returnDeliveryRequest[selectedStatus] else {
+        CommonUtils.showToast(message: "Please update the status")
+        return
+      }
+      viewModel.orderStatusRequestForExchangeAndReturn(status: apiStatus)
+    } else {
+      guard let selectedStatus = statusTF.text?.trimmed(),
+            let apiStatus = deliveryStatus[selectedStatus] else {
+        CommonUtils.showToast(message: "Please update the status")
+        return
+      }
+      
+      viewModel.orderStatusRequest(status: apiStatus)
+    }
   }
   
   @IBAction func backDidTapped(_ sender: Any) {
@@ -233,6 +256,13 @@ class OrderDetailsViewController: UIViewController {
     if paymentMethod == "1" || paymentMethod == "2" {
       if paymentStatus == "1" {
         switch deliveryStatus {
+        case "0":
+          if data.rEApprove == "1" {
+            orderStatusLabel.text = "Return Conf."
+            orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
+            returnDetailsView.isHidden = false
+            returnReasonView.isHidden = false
+          }
         case "1": //Pending
           orderStatusLabel.text = "Ongoing"
           orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
@@ -249,8 +279,10 @@ class OrderDetailsViewController: UIViewController {
           if data.returnType == "1" {
             orderStatusLabel.text = "Return Req."
             orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
-            returnDetailsView.isHidden = true
-            returnReasonView.isHidden = true
+            returnDetailsView.isHidden = false
+            returnReasonView.isHidden = false
+            updateStatusView.isHidden = false
+            statusView.isHidden = false
           }
           
           let userRatingDone = data.userRatingReviewProvide
@@ -282,6 +314,8 @@ class OrderDetailsViewController: UIViewController {
           orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
           returnDetailsView.isHidden = false
           returnReasonView.isHidden = false
+          updateStatusView.isHidden = false
+          statusView.isHidden = false
           
         case "9": // Exchange
           orderStatusLabel.text = "Exchange Req."
@@ -301,6 +335,13 @@ class OrderDetailsViewController: UIViewController {
     } else if paymentMethod == "3" {
       if paymentStatus == "0" || paymentStatus == "1" {
         switch deliveryStatus {
+        case "0":
+          if data.rEApprove == "1" {
+            orderStatusLabel.text = "Return Conf."
+            orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
+            returnDetailsView.isHidden = false
+            returnReasonView.isHidden = false
+          }
         case "1": //Pending
           orderStatusLabel.text = "Ongoing"
           orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
@@ -320,6 +361,8 @@ class OrderDetailsViewController: UIViewController {
             orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
             returnDetailsView.isHidden = false
             returnReasonView.isHidden = false
+            updateStatusView.isHidden = false
+            statusView.isHidden = false
           }
           let userRatingDone = data.userRatingReviewProvide
           guard let ratingData = userRatingDone else { return }
@@ -365,6 +408,8 @@ class OrderDetailsViewController: UIViewController {
           orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
           returnDetailsView.isHidden = false
           returnReasonView.isHidden = false
+          updateStatusView.isHidden = false
+          statusView.isHidden = false
         case "9": // Exchange
           orderStatusLabel.text = "Exchange Req."
           orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
