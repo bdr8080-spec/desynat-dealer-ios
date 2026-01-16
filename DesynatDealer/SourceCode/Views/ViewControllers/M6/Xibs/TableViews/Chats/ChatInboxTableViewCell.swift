@@ -38,11 +38,17 @@ class ChatInboxTableViewCell: UITableViewCell {
       userProfileImageView.image = UIImage(named: "userProfile")
     }
     usernameLabel.text = data?.userDetails?.fullName
-    messageLabel.text = data?.lastChat ?? "Sent an attachment"
+    //messageLabel.text = data?.lastChat ?? "Sent an attachment"
     timeLabel.text = formattedChatTime(from: data?.updatedAt ?? "")
     let messageType = data?.type ?? "1" // normal msg, customization send
+    let msgType = data?.messageType ?? "1"
 //    let productRequest = data?.productRequest ?? "1"
     let actiontype = data?.action ?? "1"
+    if msgType == "1" {
+      messageLabel.text = "Sent an attachment"
+    } else {
+      messageLabel.text = data?.lastChat ?? "Sent an attachment"
+    }
     if messageType == "1" {
       messageTypeStatusView.isHidden = true
     } else {
@@ -52,19 +58,31 @@ class ChatInboxTableViewCell: UITableViewCell {
         messageTypeLabel.text = "New"
         messageTypeLabel.textColor = UIColor(hex: "#EA9413") // orange
         messageTypeStatusView.backgroundColor = UIColor(hex: "#EA9413")?.withAlphaComponent(0.25)
-      case "1":
+      
+      case "2":
         messageTypeLabel.text = "Quotation Sent"
         messageTypeLabel.textColor = UIColor(hex: "#172B85") // dark blue
-        messageTypeStatusView.backgroundColor = UIColor(hex: "#172B85")?.withAlphaComponent(0.25)
-      case "2":
-        let readyToship = data?.productVariation?.productDetails?.readyToShip ?? "1"
-        if readyToship == "1"{
-          messageTypeStatusView.isHidden = true
-        } else {
-          messageTypeLabel.text = "Quotation Modified"
+        messageTypeStatusView.backgroundColor = UIColor(hex: "#172B85")?.withAlphaComponent(0.08)
+      
+      case "5":
+        messageTypeLabel.text = "Quotation Accepted"
+        messageTypeLabel.textColor = UIColor(hex: "#16B364") // green
+        messageTypeStatusView.backgroundColor = UIColor(hex: "#16B364")?.withAlphaComponent(0.08)
+        let orderPlace = data?.orderCreateStatus?.id
+        if orderPlace != nil {
+          messageTypeLabel.text = "Placed"
           messageTypeLabel.textColor = UIColor(hex: "#16B364") // green
-          messageTypeStatusView.backgroundColor = UIColor(hex: "#16B364")?.withAlphaComponent(0.25)
+          messageTypeStatusView.backgroundColor = UIColor(hex: "#16B364")?.withAlphaComponent(0.08)
         }
+//      case "3":
+//        let readyToship = data?.productVariation?.productDetails?.readyToShip ?? "1"
+//        if readyToship == "1"{
+//          messageTypeStatusView.isHidden = true
+//        } else {
+//          messageTypeLabel.text = "Quotation Modified"
+//          messageTypeLabel.textColor = UIColor(hex: "#16B364") // green
+//          messageTypeStatusView.backgroundColor = UIColor(hex: "#16B364")?.withAlphaComponent(0.25)
+//        }
       default:
         messageTypeStatusView.isHidden = true
       }

@@ -50,7 +50,21 @@ class OrdersfilterViewController: UIViewController {
     if let toDate = toTextField.text, !toDate.isEmpty {
       filter.toDate = toDate
     }
-//    filter.orderDeliveryStatus = selectedIndex
+    
+    switch selectedIndex {
+    case 0:
+      filter.orderDeliveryStatus = .confirmed
+    case 1:
+      filter.orderDeliveryStatus = .packed
+    case 2:
+      filter.orderDeliveryStatus = .shipped
+    case 3:
+      filter.orderDeliveryStatus = .exchange
+    default:
+      filter.orderDeliveryStatus = nil
+    }
+    
+    //filter.orderDeliveryStatus = selectedIndex
     onApplyFilter?(filter)
     dismiss(animated: true)
   }
@@ -176,11 +190,19 @@ extension OrdersfilterViewController: UITextFieldDelegate {
 }
 
 struct OrderListFilterModel {
-  var orderDeliveryStatus: String?
+//  var orderDeliveryStatus: String?
+//  var fromDate: String?
+//  var toDate: String?
+//  
+//  var isEmpty: Bool {
+//    return fromDate == nil && toDate == nil
+//  }
+  
+  var orderDeliveryStatus: OrderStatus?
   var fromDate: String?
   var toDate: String?
   
   var isEmpty: Bool {
-    return fromDate == nil && toDate == nil
+    return orderDeliveryStatus == nil && fromDate == nil && toDate == nil
   }
 }

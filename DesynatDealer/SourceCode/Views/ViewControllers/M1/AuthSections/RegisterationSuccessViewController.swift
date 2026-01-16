@@ -37,7 +37,7 @@ class RegisterationSuccessViewController: UIViewController {
     case .affiliatedCommission:
       descriptionLabel.text = "Commisson saved"
     case .sendQuotation:
-      descriptionLabel.text = "Request Sent\nsuccessfully!"
+      descriptionLabel.text = "Quotation Sent\nsuccessfully!"
     case .modifyQuotation:
       descriptionLabel.text = "Modified\nsuccessfully!"
     }

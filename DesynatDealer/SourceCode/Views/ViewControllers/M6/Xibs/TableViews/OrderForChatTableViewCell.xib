@@ -46,6 +46,12 @@
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Active" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qbP-4g-2kg">
+                                <rect key="frame" x="294" y="15.666666666666664" width="37" height="14.333333333333336"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Size: M, Color: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pxi-Ie-Pod" userLabel="Size: M, Color:">
                                 <rect key="frame" x="86" y="34.666666666666664" width="260" height="17"/>
                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
@@ -84,14 +90,16 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="FaA-Ky-iyP" firstAttribute="leading" secondItem="ewj-H6-0x2" secondAttribute="leading" id="1Sx-00-amg"/>
+                            <constraint firstAttribute="trailing" secondItem="qbP-4g-2kg" secondAttribute="trailing" constant="20" id="40s-On-uB3"/>
                             <constraint firstItem="pxi-Ie-Pod" firstAttribute="centerY" secondItem="Omm-a2-Hkd" secondAttribute="centerY" id="5ew-kK-YWE"/>
                             <constraint firstItem="pxi-Ie-Pod" firstAttribute="top" secondItem="ewj-H6-0x2" secondAttribute="bottom" constant="2" id="7to-u6-wcg"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ewj-H6-0x2" secondAttribute="trailing" constant="20" id="HxW-Hi-cSb"/>
+                            <constraint firstItem="qbP-4g-2kg" firstAttribute="top" secondItem="ewj-H6-0x2" secondAttribute="top" id="9gT-lQ-Glw"/>
                             <constraint firstItem="Omm-a2-Hkd" firstAttribute="leading" secondItem="lPv-gm-nof" secondAttribute="leading" constant="8" id="NPD-S5-XsX"/>
                             <constraint firstItem="Omm-a2-Hkd" firstAttribute="centerY" secondItem="lPv-gm-nof" secondAttribute="centerY" id="OSy-MF-h8v"/>
                             <constraint firstItem="FaA-Ky-iyP" firstAttribute="top" secondItem="pxi-Ie-Pod" secondAttribute="bottom" constant="2" id="nKu-RU-tsd"/>
                             <constraint firstItem="Omm-a2-Hkd" firstAttribute="top" secondItem="lPv-gm-nof" secondAttribute="top" constant="8" id="ohE-fg-qP2"/>
                             <constraint firstItem="pxi-Ie-Pod" firstAttribute="leading" secondItem="ewj-H6-0x2" secondAttribute="leading" id="qs3-gB-Ss3"/>
+                            <constraint firstItem="qbP-4g-2kg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ewj-H6-0x2" secondAttribute="trailing" constant="20" id="qvf-sw-5ZV"/>
                             <constraint firstAttribute="trailing" secondItem="pxi-Ie-Pod" secondAttribute="trailing" constant="5" id="tOr-tj-0A1"/>
                             <constraint firstItem="ewj-H6-0x2" firstAttribute="leading" secondItem="Omm-a2-Hkd" secondAttribute="trailing" constant="8" id="uWS-Kf-4uR"/>
                         </constraints>
@@ -116,6 +124,7 @@
                 <outlet property="actualPriceLabel" destination="OdA-FB-Pch" id="69l-EO-geX"/>
                 <outlet property="discountPriceLabel" destination="pwi-Et-ZNo" id="0jZ-Fs-lXo"/>
                 <outlet property="finalPriceLabel" destination="wHg-st-OLy" id="vup-Bp-g7Y"/>
+                <outlet property="lblStatus" destination="qbP-4g-2kg" id="qlS-nh-AAT"/>
                 <outlet property="productDetailsLabel" destination="pxi-Ie-Pod" id="uxn-yc-fNd"/>
                 <outlet property="productImageView" destination="Omm-a2-Hkd" id="vBk-jg-0Re"/>
                 <outlet property="productNameLabel" destination="ewj-H6-0x2" id="iTc-xJ-tqd"/>

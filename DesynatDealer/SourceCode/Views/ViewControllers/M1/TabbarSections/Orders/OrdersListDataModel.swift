@@ -27,7 +27,8 @@ struct OrdersListData: Codable {
   let promocodeID, promocodeValue, giftcardID, giftcardAmount: String?
   let status, createdAt, updatedAt, returnType: String?
   let rEApprove: String?
-  let returnReason, returnImage, exchangeReason, exchangeNewSize: String?
+  let returnReason, exchangeReason, exchangeNewSize: String?
+  let returnImage: [String]?
   let exchangeOldSize: String?
   let paymentStatus, deliveryStatus: String?
   let deliveryBoyID: String?

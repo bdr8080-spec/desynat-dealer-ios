@@ -133,6 +133,19 @@ class CommonUtils {
     }
   }
     
+    static func formatPriceWithoutKd(_ amount: Double?) -> String {
+      guard let amount = amount else { return "0" }
+      
+      let roundedAmount = round(amount * 100) / 100   // Round to 2 decimal places
+      if roundedAmount.truncatingRemainder(dividingBy: 1) == 0 {
+        // If whole number, show without decimal
+        return "\(Int(roundedAmount))"
+      } else {
+        // Show up to 2 decimal places
+        return String(format: "%.2f", roundedAmount)
+      }
+    }
+    
     /// This function will help developer to get an image with User's Initials
     static func getImageWithUserInitials(withName name: String?, backgroundColor bgColor: UIColor, textColor txtColor: UIColor, textFont txtFont: UIFont, andSize size: CGFloat) -> UIImage? {
         let frame = CGRect(x: 0.0, y: 0.0, width: size, height: size)

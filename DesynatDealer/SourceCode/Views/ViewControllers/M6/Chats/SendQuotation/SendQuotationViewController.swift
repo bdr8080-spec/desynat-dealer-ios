@@ -27,6 +27,7 @@ class SendQuotationViewController: UIViewController {
         super.viewDidLoad()
         handleUISetup()
         setupTextFieldValidation()
+        totalAmountTF.isUserInteractionEnabled = false
     }
     
     @IBAction func dismissDidTapped(_ sender: Any) {
@@ -46,14 +47,24 @@ class SendQuotationViewController: UIViewController {
     }
     
     private func setupTextFieldValidation() {
-        let textFields = [totalAmountTF, taxTF, shippingFeesTF, itemPriceTF]
-        
+        let textFields = [itemPriceTF, shippingFeesTF, taxTF]
         textFields.forEach {
             $0?.keyboardType = .numberPad
             $0?.delegate = self
+            $0?.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         }
     }
-    
+  
+    private func calculateTotalAmount() {
+        let itemPrice = Double(itemPriceTF.text ?? "") ?? 0
+        let shipping = Double(shippingFeesTF.text ?? "") ?? 0
+        let tax = Double(taxTF.text ?? "") ?? 0
+        let quantity = Double(viewModel.itemQuantity) ?? 1
+
+        let total = (itemPrice * quantity) + shipping + tax
+        totalAmountTF.text = CommonUtils.formatPriceWithoutKd(total)
+    }
+
     
     func handleNavigationAfterSuccess() {
         let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
@@ -92,3 +103,37 @@ class SendQuotationViewController: UIViewController {
     }
 }
 
+extension SendQuotationViewController: UITextFieldDelegate {
+    func textField(
+        _ textField: UITextField,
+        shouldChangeCharactersIn range: NSRange,
+        replacementString string: String
+    ) -> Bool {
+        
+        // Allow only numbers
+        if !string.isEmpty && !CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: string)) {
+            return false
+        }
+        
+        // Max 7 digits
+        let currentText = textField.text ?? ""
+        let updatedText = (currentText as NSString).replacingCharacters(in: range, with: string)
+        
+        return updatedText.count <= 7
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        calculateTotalAmount()
+    }
+}
+
+extension String {
+    func numericValue() -> Double {
+        let filtered = self.replacingOccurrences(
+            of: "[^0-9.]",
+            with: "",
+            options: .regularExpression
+        )
+        return Double(filtered) ?? 0
+    }
+}

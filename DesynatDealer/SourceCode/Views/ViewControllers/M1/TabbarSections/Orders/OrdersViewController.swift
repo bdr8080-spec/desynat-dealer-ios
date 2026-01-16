@@ -114,8 +114,8 @@ class OrdersViewController: UIViewController {
     let activeCount = viewModel.ordersListData?.ongoingOrder?.count ?? 0
     let inactiveCount = viewModel.ordersListData?.pastOrder?.count ?? 0
     allLabel.text = "All (\(allCount))"
-    ongoingLabel.text = "Active (\(activeCount))"
-    pastLabel.text = "Inactive (\(inactiveCount))"
+    ongoingLabel.text = "Ongoing (\(activeCount))"
+    pastLabel.text = "Past (\(inactiveCount))"
   }
   
 }
@@ -151,6 +151,7 @@ extension OrdersViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let nextVC = OrderDetailsViewController.instantiate(fromAppStoryboard: .OrderAndChat)
+    nextVC.orderCategoryType = orderCategoryType
     switch selectedTab {
     case .all:
       nextVC.orderId = viewModel.ordersListData?.allOrder?[indexPath.row].id ?? 0

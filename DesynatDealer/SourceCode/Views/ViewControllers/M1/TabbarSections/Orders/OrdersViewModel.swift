@@ -26,9 +26,13 @@ class OrdersViewModel {
       params["search"] = searchText
     }
     
-    //    if let status = appliedFilter.orderDeliveryStatus, !status.isEmpty {
-    //      params["status"] = toDate
-    //    }
+//    if let status = appliedFilter.orderDeliveryStatus, !status.isEmpty {
+//      params["status"] = toDate
+//    }
+    
+    if let status = appliedFilter.orderDeliveryStatus {
+      params["status"] = status.rawValue
+    }
     
     if let fromDate = appliedFilter.fromDate,
        !fromDate.isEmpty,
@@ -97,4 +101,11 @@ enum OrderSelectedTabType: Int {
   case all = 1
   case ongoing = 2
   case past = 3
+}
+
+enum OrderStatus: String {
+    case confirmed = "1"
+    case packed    = "2"
+    case shipped   = "3"
+    case exchange  = "4"
 }

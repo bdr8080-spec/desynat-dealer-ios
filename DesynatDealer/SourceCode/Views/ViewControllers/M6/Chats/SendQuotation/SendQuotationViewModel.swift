@@ -58,23 +58,3 @@ class SendQuotationViewModel {
     
 }
 
-extension SendQuotationViewController: UITextFieldDelegate {
-    
-    func textField(
-        _ textField: UITextField,
-        shouldChangeCharactersIn range: NSRange,
-        replacementString string: String
-    ) -> Bool {
-        
-        // Allow only numbers
-        if !string.isEmpty && !CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: string)) {
-            return false
-        }
-        
-        // Max 7 digits
-        let currentText = textField.text ?? ""
-        let updatedText = (currentText as NSString).replacingCharacters(in: range, with: string)
-        
-        return updatedText.count <= 7
-    }
-}

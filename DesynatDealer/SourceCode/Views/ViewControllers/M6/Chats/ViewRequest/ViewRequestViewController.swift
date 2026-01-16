@@ -42,38 +42,80 @@ class ViewRequestViewController: UIViewController {
     customizationDetailsLabel.text = quotationData?.customDetails
   }
 
+//  func buildFullAddress(from details: DeliveryDetails?) -> String {
+//      guard let details = details else { return "" }
+//      
+//      var addressParts: [String] = []
+//      
+//      // Base address (if API already provides)
+//      if let baseAddress = details.address?.trimmingCharacters(in: .whitespacesAndNewlines),
+//         !baseAddress.isEmpty {
+//          addressParts.append(baseAddress)
+//      }
+//      
+//      let additionalParts = [
+//          details.houseNo,
+//          details.streetNo,
+//          details.landmark,
+//          details.city,
+//          details.state,
+//          details.countryName,
+//          details.postalCode,
+//      ]
+//      
+//      for part in additionalParts {
+//          guard let value = part?.trimmingCharacters(in: .whitespacesAndNewlines),
+//                !value.isEmpty else { continue }
+//          
+//          if !addressParts.joined(separator: " ").localizedCaseInsensitiveContains(value) {
+//              addressParts.append(value)
+//          }
+//      }
+//      
+//      return addressParts.joined(separator: ", ")
+//  }
+  
   func buildFullAddress(from details: DeliveryDetails?) -> String {
       guard let details = details else { return "" }
-      
+
       var addressParts: [String] = []
-      
-      // Base address (if API already provides)
-      if let baseAddress = details.address?.trimmingCharacters(in: .whitespacesAndNewlines),
-         !baseAddress.isEmpty {
-          addressParts.append(baseAddress)
-      }
-      
-      let additionalParts = [
-          details.houseNo,
-          details.streetNo,
-          details.landmark,
-          details.city,
-          details.state,
-          details.countryName,
-          details.postalCode,
-      ]
-      
-      for part in additionalParts {
-          guard let value = part?.trimmingCharacters(in: .whitespacesAndNewlines),
-                !value.isEmpty else { continue }
-          
-          if !addressParts.joined(separator: " ").localizedCaseInsensitiveContains(value) {
-              addressParts.append(value)
+      var usedWords = Set<String>()
+
+      func addPart(_ part: String?) {
+          guard let part = part?
+                  .trimmingCharacters(in: .whitespacesAndNewlines),
+                !part.isEmpty else { return }
+
+          let words = part
+              .lowercased()
+              .split(separator: " ")
+              .map(String.init)
+
+          // If most words already exist, skip it
+          let duplicateCount = words.filter { usedWords.contains($0) }.count
+          if duplicateCount >= max(1, words.count / 2) {
+              return
           }
+
+          addressParts.append(part)
+          words.forEach { usedWords.insert($0) }
       }
-      
+
+      // Base address (from API)
+      addPart(details.address)
+
+      // Additional fields
+      addPart(details.houseNo)
+      addPart(details.streetNo)
+      addPart(details.landmark)
+      addPart(details.city)
+      addPart(details.state)
+      addPart(details.countryName)
+      addPart(details.postalCode)
+
       return addressParts.joined(separator: ", ")
   }
+
   
 }
 

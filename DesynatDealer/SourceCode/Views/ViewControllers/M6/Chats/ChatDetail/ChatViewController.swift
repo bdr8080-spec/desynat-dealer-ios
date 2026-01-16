@@ -187,12 +187,14 @@ class ChatViewController: UIViewController {
       requestIdLabel.isHidden = true
       priceDetailsView.isHidden = true
       detailsStackView.backgroundColor = .white
+      detailsStackView.isHidden = true
       requetsStackView.isHidden = true
     } else {
       productTableView.isHidden = false
       requetsStackView.isHidden = false
       mainHeaderView.backgroundColor = UIColor(hex: "#FFF7EA")
       detailsStackView.backgroundColor = UIColor(hex: "#FFF7EA")
+      detailsStackView.isHidden = false
       productDetailsView.isHidden = false
       sendQuotationView.isHidden = false
       requestIdLabel.isHidden = false
@@ -206,7 +208,7 @@ class ChatViewController: UIViewController {
       perItemPriceLabel.text = CommonUtils.formatPriceStringInput(quotationData?.price)
       shippingPriceLabel.text = CommonUtils.formatPriceStringInput(quotationData?.shipping)
       taxLabel.text = CommonUtils.formatPriceStringInput(quotationData?.tax)
-      totalAmountLabel.text = CommonUtils.formatPriceStringInput(quotationData?.totalAmount)
+      totalAmountLabel.text = quotationData?.totalAmount //CommonUtils.formatPriceStringInput(quotationData?.totalAmount)
       switch actiontype {
       case "0": //user sent chat for customization new
         print("just normal chat")
@@ -215,27 +217,37 @@ class ChatViewController: UIViewController {
         viewRequestButonOutlet.isHidden = false
         priceDetailsView.isHidden = false
       case "2":
-        let readyToship = quotationData?.productVariation?.productDetails?.readyToShip ?? "1"
-        if readyToship == "1"{ // product is about to deliver
-          productDetailsView.isHidden = true
-          viewRequestButonOutlet.isHidden = false
-          sendQuotationView.isHidden = true
-          priceDetailsView.isHidden = true
-          productTableView.reloadData()
-        } else { //"Quotation Modified"
+//        let readyToship = quotationData?.productVariation?.productDetails?.readyToShip ?? "1"
+//        if readyToship == "1"{ // product is about to deliver
+//          productDetailsView.isHidden = true
+//          viewRequestButonOutlet.isHidden = false
+//          sendQuotationView.isHidden = true
+//          priceDetailsView.isHidden = true
+//          productTableView.reloadData()
+//        } else { //"Quotation Modified"
           productDetailsView.isHidden = true
           viewRequestButonOutlet.isHidden = false
           priceDetailsView.isHidden = false
           sendQuotationButtonLabel.text = "Modify Quotation"
-        }
+        //}
+      case "5":
+          productTableView.isHidden = false
+          requetsStackView.isHidden = false
+          priceDetailsView.isHidden = false
+          sendQuotationView.isHidden = true
+          productDetailsView.isHidden = true
+          viewRequestButonOutlet.isHidden = false
+          productTableView.reloadData()
+          
       default:
         viewRequestButonOutlet.isHidden = true
         mainHeaderView.backgroundColor = .white
-        productDetailsView.isHidden = true
+        productDetailsView.isHidden = false
         sendQuotationView.isHidden = true
         requestIdLabel.isHidden = true
-        priceDetailsView.isHidden = true
+        priceDetailsView.isHidden = false
         detailsStackView.backgroundColor = .white
+        detailsStackView.isHidden = true
         productTableView.reloadData()
       }
     }
@@ -329,6 +341,26 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     if tableView == productTableView {
       let cell = tableView.dequeueReusableCell(withIdentifier: "OrderForChatTableViewCell", for: indexPath) as! OrderForChatTableViewCell
       let data = viewModel.quotationData?.productVariation
+      let actionType = viewModel.quotationData?.action
+      let orderPlace = viewModel.quotationData?.orderCreateStatus?.id
+      cell.lblStatus.isHidden = true
+      if actionType == "2" {
+        cell.lblStatus.isHidden = false
+        cell.lblStatus.text = "Pending"
+        cell.lblStatus.textColor = UIColor(hexString: "#FF5F1B")
+      } else if actionType == "5" {
+        cell.lblStatus.isHidden = false
+        cell.lblStatus.text = "Accepted"
+        cell.lblStatus.textColor = UIColor(hexString: "#68CA44")
+        priceDetailsView.isHidden = false
+        if orderPlace != nil {
+          cell.lblStatus.isHidden = false
+          cell.lblStatus.text = "Placed"
+          cell.lblStatus.textColor = UIColor(hexString: "#68CA44")
+          productTableView.isHidden = false
+          priceDetailsView.isHidden = true
+        }
+      }
       cell.configData(data: data)
       return cell
     }

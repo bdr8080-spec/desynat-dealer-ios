@@ -24,6 +24,14 @@ class OrderDetailsViewController: UIViewController {
   @IBOutlet weak var adminComissionLabel: UILabel!
   @IBOutlet weak var paidByCustomerLabel: UILabel!
   @IBOutlet weak var totalLabel: UILabel!
+  
+  @IBOutlet weak var viewSubItem: UIStackView!
+  @IBOutlet weak var viewItemPrice: UIStackView!
+  @IBOutlet weak var viewTax: UIStackView!
+  @IBOutlet weak var lblItemPrice: UILabel!
+  @IBOutlet weak var lblItemPriceAmt: UILabel!
+  @IBOutlet weak var lblTax: UILabel!
+  
   @IBOutlet weak var shippingChargeLAbel: UILabel!
   @IBOutlet weak var totalSavingAmountLabel: UILabel!
   @IBOutlet weak var coupanLabel: UILabel!
@@ -59,6 +67,12 @@ class OrderDetailsViewController: UIViewController {
     }
   }
   
+  @IBOutlet weak var reviewStackView: UIStackView!
+  
+    @IBOutlet weak var lblReturnExchangeHeading: CustomLabelFont!
+    @IBOutlet weak var lblReturnExchangeId: CustomLabelFont!
+    
+  var orderCategoryType: OrderCategoryType = .normalOrders
   lazy var viewModel = OrderDetailsViewModel(hostVC: self)
   var orderId: Int = 0
   var orderDetails: OrdersListData?
@@ -74,7 +88,7 @@ class OrderDetailsViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    setUpUI()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -83,7 +97,7 @@ class OrderDetailsViewController: UIViewController {
   }
   
   @IBAction func statusDidTapped(_ sender: UIButton) {
-    if orderDetails?.returnType == "1" { // return and exchange
+      if orderDetails?.returnType == "1" || orderDetails?.returnType == "2" { // return and exchange
       kSharedAppDelegate.dropDown(
         dataSource: Array(returnDeliveryRequest.keys),
         anchorView: self.paymentDetailsView
@@ -101,7 +115,7 @@ class OrderDetailsViewController: UIViewController {
   }
   
   @IBAction func submitDidTapped(_ sender: Any) {
-    if orderDetails?.returnType == "1" { // return and exchange
+      if orderDetails?.returnType == "1" || orderDetails?.returnType == "2" { // return and exchange
       guard let selectedStatus = statusTF.text?.trimmed(),
             let apiStatus = returnDeliveryRequest[selectedStatus] else {
         CommonUtils.showToast(message: "Please update the status")
@@ -121,6 +135,20 @@ class OrderDetailsViewController: UIViewController {
   
   @IBAction func backDidTapped(_ sender: Any) {
     self.navigationController?.popViewController(animated: true)
+  }
+  
+  func setUpUI() {
+    if orderCategoryType == .normalOrders {
+      viewItemPrice.isHidden = true
+      viewSubItem.isHidden = false
+      couponAppliedStackView.isHidden = false
+      totalSavingAmountLabel.isHidden = true
+    } else {
+      viewItemPrice.isHidden = false
+      viewSubItem.isHidden = true
+      couponAppliedStackView.isHidden = true
+      totalSavingAmountLabel.isHidden = true
+    }
   }
   
   func bindData() {
@@ -170,7 +198,7 @@ class OrderDetailsViewController: UIViewController {
       paidByLabel.text = "Wallet"
       transactionStackView.isHidden = false
     default:
-      paidByLabel.text = "COD"
+      paidByLabel.text = "Via COD"
       transactionStackView.isHidden = true
     }
     totalItemLabel.text = "\(data.quantity ?? 1) item"
@@ -189,11 +217,31 @@ class OrderDetailsViewController: UIViewController {
 //    let paidAmount = totalAmount - data.promocodeValue
 //    paidByCustomerLabel.text = CommonUtils.formatPriceStringInput(paidAmount)
     
-    let totalAmount = toDouble(data.amount) + toDouble(data.shippingFees)
-    totalLabel.text = CommonUtils.formatPrice(totalAmount)
+    
+    lblTax.text = CommonUtils.formatPriceStringInput(data.tax)
+    
+    let priceString = data.amount ?? "0"   // String
+    let quantity = data.quantity ?? 1      // Int
 
-    let paidAmount = totalAmount - toDouble(data.promocodeValue)
-    paidByCustomerLabel.text = CommonUtils.formatPrice(paidAmount)
+    let price = Double(priceString) ?? 0
+    let totalPrice = price * Double(quantity)
+
+    lblItemPrice.text = "Item Price (\(CommonUtils.formatPriceStringInput(priceString)) x \(quantity))"
+    lblItemPriceAmt.text = CommonUtils.formatPriceStringInput(String(totalPrice))
+    
+    let totalAmount = toDouble(data.amount) + toDouble(data.shippingFees) + toDouble(data.tax)
+    
+    
+    let totalCustomPrice = totalPrice + toDouble(data.tax) + toDouble(data.shippingFees)
+    if orderCategoryType == .normalOrders {
+      totalLabel.text = CommonUtils.formatPrice(totalAmount)
+      let paidAmount = totalAmount - toDouble(data.promocodeValue)
+      paidByCustomerLabel.text = CommonUtils.formatPrice(paidAmount)
+    } else {
+      totalLabel.text = CommonUtils.formatPrice(totalCustomPrice)
+      paidByCustomerLabel.text = CommonUtils.formatPrice(totalCustomPrice)
+    }
+    
     adminComissionLabel.text = CommonUtils.formatPriceStringInput(data.adminCommission)
 //    coupanLabel.text = CommonUtils.formatPriceStringInput(data.promocodeValue)
     
@@ -250,6 +298,24 @@ class OrderDetailsViewController: UIViewController {
     statusView.isHidden = true
     
     guard let data = orderDetails else { return }
+    let userRatingDone = data.userRatingReviewProvide
+    guard let ratingData = userRatingDone else { return }
+    
+    /// ✅ PRODUCT RATING CHECK
+    let productReview = ratingData.productReview ?? ""
+    let productRatingValue = Double(ratingData.productRating ?? "") ?? 0
+    
+    if !productReview.isEmpty || productRatingValue > 0 {
+        self.reviewStackView.isHidden = false
+        self.customerReviewDetailsLabel.text = productReview
+        self.customerRatingView.rating = productRatingValue
+    }
+    
+    if !productReview.isEmpty {
+        self.reviewStackView.isHidden = false
+    } else {
+        self.reviewStackView.isHidden = true
+    }
     let paymentMethod = data.order?.paymentMethod ?? "1"
     let paymentStatus = data.paymentStatus ?? "1"
     let deliveryStatus = data.deliveryStatus ?? "1"
@@ -263,60 +329,87 @@ class OrderDetailsViewController: UIViewController {
             returnDetailsView.isHidden = false
             returnReasonView.isHidden = false
           }
+        
         case "1": //Pending
+          orderStatusLabel.text = "Confirmed"
+          orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
+          updateStatusView.isHidden = false
+          statusView.isHidden = false
+            
+            if data.assignStatus == "1" || data.rEApprove == "1" {
+                orderStatusLabel.text = "On The Way"
+                orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
+                updateStatusView.isHidden = true
+                statusView.isHidden = true
+            }
+            
+        case "2": //Ongoing
           orderStatusLabel.text = "Ongoing"
           orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
           updateStatusView.isHidden = false
           statusView.isHidden = false
-        case "2", "7": //Ongoing
-          orderStatusLabel.text = "Ongoing"
-          orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
-          updateStatusView.isHidden = false
-          statusView.isHidden = false
+            
         case "3": //Delivered
           orderStatusLabel.text = "Delivered"
           orderStatusLabel.textColor = UIColor(hex: "#16B364")
-          if data.returnType == "1" {
-            orderStatusLabel.text = "Return Req."
-            orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
-            returnDetailsView.isHidden = false
-            returnReasonView.isHidden = false
-            updateStatusView.isHidden = false
-            statusView.isHidden = false
+            if data.returnType == "1" || data.returnType == "2" {
+                if data.returnType == "1" {
+                    orderStatusLabel.text = "Return Req."
+                    orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
+                    returnDetailsView.isHidden = false
+                    returnReasonView.isHidden = false
+                    updateStatusView.isHidden = false
+                    statusView.isHidden = false
+                    lblReturnExchangeHeading.text = "Return Details"
+                    lblReturnExchangeId.text = "Return Id"
+                } else if data.returnType == "2" {
+                    orderStatusLabel.text = "Exchange Req."
+                    orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
+                    returnDetailsView.isHidden = false
+                    returnReasonView.isHidden = false
+                    updateStatusView.isHidden = true
+                    statusView.isHidden = false
+                    lblReturnExchangeHeading.text = "Exchange Details"
+                    lblReturnExchangeId.text = "Exchange Id"
+                }
+              if data.rEApprove == "1" {
+                orderStatusLabel.text = "Completed"
+                orderStatusLabel.textColor = UIColor(hex: "#16B364")
+                updateStatusView.isHidden = true
+                statusView.isHidden = true
+                if data.returnType == "2" {
+                  orderStatusLabel.text = "Exchange Req."
+                  orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
+                  updateStatusView.isHidden = true
+                  statusView.isHidden = true
+                }
+              } else if data.rEApprove == "2" {
+                orderStatusLabel.text = "Rejected"
+                orderStatusLabel.textColor = UIColor(hex: "#E70000")
+                updateStatusView.isHidden = true
+                statusView.isHidden = true
+              }
           }
-          
-          let userRatingDone = data.userRatingReviewProvide
-          guard let ratingData = userRatingDone else { return }
-          
-          /// ✅ PRODUCT RATING CHECK
-          let productReview = ratingData.productReview ?? ""
-          let productRatingValue = Double(ratingData.productRating ?? "") ?? 0
-          
-          if !productReview.isEmpty || productRatingValue > 0 {
-              self.customerRatingDetailsView.isHidden = false
-              self.customerReviewDetailsLabel.text = productReview
-              self.customerRatingView.rating = productRatingValue
-          }
-          
-          if !productReview.isEmpty {
-              self.customerReviewDetailsLabel.isHidden = false
-          } else {
-              self.customerReviewDetailsLabel.isHidden = true
-          }
-          
+
         case "4": //Cancelled
           orderStatusLabel.text = "Cancelled"
           orderStatusLabel.textColor = UIColor(hex: "#E70000")
           returnReasonView.isHidden = false
+        
         case "5": // Return
-          
           orderStatusLabel.text = "Return Req."
           orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
           returnDetailsView.isHidden = false
           returnReasonView.isHidden = false
           updateStatusView.isHidden = false
           statusView.isHidden = false
-          
+        
+        case "7": //Ongoing
+          orderStatusLabel.text = "Picked"
+          orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
+          updateStatusView.isHidden = true
+          statusView.isHidden = true
+        
         case "9": // Exchange
           orderStatusLabel.text = "Exchange Req."
           orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
@@ -324,6 +417,19 @@ class OrderDetailsViewController: UIViewController {
           exchangeView.isHidden = false
           exchangeSizeLabel.text = data.exchangeNewSize
           returnReasonView.isHidden = false
+            
+        case "2.1": //Shipped
+            orderStatusLabel.text = "Shipped"
+            orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
+            updateStatusView.isHidden = true
+            statusView.isHidden = true
+            if data.assignStatus == "1" {
+                orderStatusLabel.text = "On The Way"
+                orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
+                updateStatusView.isHidden = true
+                statusView.isHidden = true
+            }
+            
         default:
           return
         }
@@ -343,60 +449,83 @@ class OrderDetailsViewController: UIViewController {
             returnReasonView.isHidden = false
           }
         case "1": //Pending
+          orderStatusLabel.text = "Confirmed"
+          orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
+          updateStatusView.isHidden = false
+          statusView.isHidden = false
+            
+            if data.assignStatus == "1" || data.rEApprove == "1" {
+                orderStatusLabel.text = "On The Way"
+                orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
+                updateStatusView.isHidden = true
+                statusView.isHidden = true
+            }
+            
+        case "2": //Ongoing, Picked
           orderStatusLabel.text = "Ongoing"
           orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
           updateStatusView.isHidden = false
           statusView.isHidden = false
-        case "2", "7": //Ongoing, Picked
-          orderStatusLabel.text = "Ongoing"
-          orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
-          updateStatusView.isHidden = false
-          statusView.isHidden = false
+        
         case "3": //Delivered
           orderStatusLabel.text = "Delivered"
           orderStatusLabel.textColor = UIColor(hex: "#16B364")
-          
-          if data.returnType == "1" {
-            orderStatusLabel.text = "Return Req."
-            orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
-            returnDetailsView.isHidden = false
-            returnReasonView.isHidden = false
-            updateStatusView.isHidden = false
-            statusView.isHidden = false
+          if data.returnType == "1" || data.returnType == "2" {
+            if data.returnType == "1" {
+              orderStatusLabel.text = "Return Req."
+              orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
+              returnDetailsView.isHidden = false
+              returnReasonView.isHidden = false
+              updateStatusView.isHidden = false
+              statusView.isHidden = false
+              lblReturnExchangeHeading.text = "Return Details"
+              lblReturnExchangeId.text = "Return Id"
+            } else if data.returnType == "2" {
+              orderStatusLabel.text = "Exchange Req."
+              orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
+              returnDetailsView.isHidden = true
+              returnReasonView.isHidden = false
+              updateStatusView.isHidden = false
+              statusView.isHidden = false
+              lblReturnExchangeHeading.text = "Exchange Details"
+              lblReturnExchangeId.text = "Exchange Id"
+            }
+            if data.rEApprove == "1" {
+              orderStatusLabel.text = "Completed"
+              orderStatusLabel.textColor = UIColor(hex: "#16B364")
+              updateStatusView.isHidden = true
+              statusView.isHidden = true
+              if data.returnType == "2" {
+                orderStatusLabel.text = "Exchange Req."
+                orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
+                updateStatusView.isHidden = true
+                statusView.isHidden = true
+              }
+            } else if data.rEApprove == "2" {
+              orderStatusLabel.text = "Rejected"
+              orderStatusLabel.textColor = UIColor(hex: "#E70000")
+              updateStatusView.isHidden = true
+              statusView.isHidden = true
+            }
           }
-          let userRatingDone = data.userRatingReviewProvide
-          guard let ratingData = userRatingDone else { return }
-          
-          /// ✅ PRODUCT RATING CHECK
-          let productReview = ratingData.productReview ?? ""
-          let productRatingValue = Double(ratingData.productRating ?? "") ?? 0
-          
-          if !productReview.isEmpty || productRatingValue > 0 {
-              self.customerRatingDetailsView.isHidden = false
-              self.customerReviewDetailsLabel.text = productReview
-              self.customerRatingView.rating = productRatingValue
-          }
-          
-          if !productReview.isEmpty {
-              self.customerReviewDetailsLabel.isHidden = false
-          } else {
-              self.customerReviewDetailsLabel.isHidden = true
-          }
+            
+//          let userRatingDone = data.userRatingReviewProvide
+//          guard let ratingData = userRatingDone else { return }
 //          
-//          /// ✅ SELLER RATING CHECK
-//          let sellerReview = ratingData.storeReview ?? ""
-//          let sellerRatingValue = Double(ratingData.storeRating ?? "") ?? 0
+//          /// ✅ PRODUCT RATING CHECK
+//          let productReview = ratingData.productReview ?? ""
+//          let productRatingValue = Double(ratingData.productRating ?? "") ?? 0
 //          
-//          if !sellerReview.isEmpty || sellerRatingValue > 0 {
-//              self.sellerRatingStackView.isHidden = false
-//              self.lblSellerReview.text = sellerReview
-//              self.sellerRatingView.rating = sellerRatingValue
-//              
+//          if !productReview.isEmpty || productRatingValue > 0 {
+//              self.customerRatingDetailsView.isHidden = false
+//              self.customerReviewDetailsLabel.text = productReview
+//              self.customerRatingView.rating = productRatingValue
 //          }
-//          if !sellerReview.isEmpty {
-//              self.sellerReviewTitleLabel.isHidden = false
-//          }else {
-//              self.sellerReviewTitleLabel.isHidden = true
+//          
+//          if !productReview.isEmpty {
+//              self.customerReviewDetailsLabel.isHidden = false
+//          } else {
+//              self.customerReviewDetailsLabel.isHidden = true
 //          }
           
         case "4", "8":
@@ -410,6 +539,13 @@ class OrderDetailsViewController: UIViewController {
           returnReasonView.isHidden = false
           updateStatusView.isHidden = false
           statusView.isHidden = false
+            
+        case "7": //Ongoing
+          orderStatusLabel.text = "Picked"
+          orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
+          updateStatusView.isHidden = true
+          statusView.isHidden = true
+            
         case "9": // Exchange
           orderStatusLabel.text = "Exchange Req."
           orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
@@ -417,6 +553,19 @@ class OrderDetailsViewController: UIViewController {
           exchangeView.isHidden = false
           exchangeSizeLabel.text = data.exchangeNewSize
           returnReasonView.isHidden = false
+            
+        case "2.1": //Shipped
+            orderStatusLabel.text = "Shipped"
+            orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
+            updateStatusView.isHidden = true
+            statusView.isHidden = true
+            if data.assignStatus == "1" {
+                orderStatusLabel.text = "On The Way"
+                orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
+                updateStatusView.isHidden = true
+                statusView.isHidden = true
+            }
+            
         default:
           return
         }

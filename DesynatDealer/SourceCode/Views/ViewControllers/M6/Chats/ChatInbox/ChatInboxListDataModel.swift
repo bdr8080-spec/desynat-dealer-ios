@@ -9,7 +9,7 @@ import Foundation
 
 struct ChatInboxListModel: Codable {
   let id: Int?
-  let uniqueID, type: String?
+  let uniqueID, type, messageType: String?
   let userID, sellerID: Int?
   let productID, variationID, price, quantity: String?
   let deliveryAddress, shipping, tax, totalAmount: String?
@@ -20,11 +20,12 @@ struct ChatInboxListModel: Codable {
   let productVariation: ProductVariation?
   let userDetails: UserDetails?
   let sellerDetails: UserDetails?
-
+  let orderCreateStatus: OrderCreateStatus?
+  
   enum CodingKeys: String, CodingKey {
       case id
       case uniqueID = "unique_id"
-      case type
+      case type, messageType
       case userID = "user_id"
       case sellerID = "seller_id"
       case productID = "product_id"
@@ -43,6 +44,7 @@ struct ChatInboxListModel: Codable {
       case productVariation = "product_variation"
       case userDetails = "user_details"
       case sellerDetails = "seller_details"
+    case orderCreateStatus = "order_create_status"
   }
 }
 

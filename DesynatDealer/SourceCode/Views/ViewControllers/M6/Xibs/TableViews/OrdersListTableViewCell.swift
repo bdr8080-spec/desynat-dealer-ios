@@ -70,24 +70,58 @@ class OrdersListTableViewCell: UITableViewCell {
             statusLabel.textColor = UIColor(hex: "#FF5F1B")
           }
         case "1": //Pending
-          statusLabel.text = "Ongoing"
+          statusLabel.text = "Confirmed"
           statusLabel.textColor = UIColor(hex: "#FF5F1B")
+            
+            if data?.assignStatus == "1" || data?.rEApprove == "1" {
+                statusLabel.text = "On The Way"
+                statusLabel.textColor = UIColor(hex: "#FF5F1B")
+            }
           
-        case "2", "7": //Ongoing
+        case "2": //Ongoing
           statusLabel.text = "Ongoing"
           statusLabel.textColor = UIColor(hex: "#FF5F1B")
           
         case "3": //Delivered
           statusLabel.text = "Delivered"
           statusLabel.textColor = UIColor(hex: "#16B364")
-          if data?.returnType == "1" {
-            statusLabel.text = "Return Req."
-            statusLabel.textColor = UIColor(hex: "#FF5F1B")
+            if data?.returnType == "1" || data?.returnType == "2"  {
+                if data?.returnType == "1" {
+                    statusLabel.text = "Return Req."
+                    statusLabel.textColor = UIColor(hex: "#FF5F1B")
+                } else if data?.returnType == "2" {
+                    statusLabel.text = "Exchange"
+                    statusLabel.textColor = UIColor(hex: "#FF5F1B")
+                }
+              if data?.rEApprove == "1" {
+                  statusLabel.text = "Completed"
+                  statusLabel.textColor = UIColor(hex: "#16B364")
+                if data?.returnType == "2" {
+                  statusLabel.text = "Exchange Req."
+                  statusLabel.textColor = UIColor(hex: "#FF5F1B")
+                }
+              } else if data?.rEApprove == "2" {
+                statusLabel.text = "Rejected"
+                statusLabel.textColor = UIColor(hex: "#E70000")
+              }
           }
           
         case "4": //Cancelled
           statusLabel.text = "Cancelled"
           statusLabel.textColor = UIColor(hex: "#E70000")
+            
+        case "7": //Ongoing
+          statusLabel.text = "Picked"
+          statusLabel.textColor = UIColor(hex: "#FF5F1B")
+            
+        case "2.1": //Shipped
+           statusLabel.text = "Shipped"
+           statusLabel.textColor = UIColor(hex: "#FF5F1B")
+            if data?.assignStatus == "1" {
+                statusLabel.text = "On The Way"
+                statusLabel.textColor = UIColor(hex: "#FF5F1B")
+            }
+            
         default:
           return
         }
@@ -104,25 +138,57 @@ class OrdersListTableViewCell: UITableViewCell {
             statusLabel.textColor = UIColor(hex: "#FF5F1B")
           }
         case "1": //Pending
-          statusLabel.text = "Ongoing"
+          statusLabel.text = "Confirmed"
           statusLabel.textColor = UIColor(hex: "#FF5F1B")
+            
+            if data?.assignStatus == "1" || data?.rEApprove == "1" {
+                statusLabel.text = "On The Way"
+                statusLabel.textColor = UIColor(hex: "#FF5F1B")
+            }
           
-        case "2", "7": //Ongoing, Picked
+        case "2": //Ongoing, Picked
           statusLabel.text = "Ongoing"
           statusLabel.textColor = UIColor(hex: "#FF5F1B")
          
         case "3": //Delivered
           statusLabel.text = "Delivered"
           statusLabel.textColor = UIColor(hex: "#16B364")
-
-          if data?.returnType == "1" {
-            statusLabel.text = "Return Req."
-            statusLabel.textColor = UIColor(hex: "#FF5F1B")
+            if data?.returnType == "1" || data?.returnType == "2"  {
+                if data?.returnType == "1" {
+                    statusLabel.text = "Return Req."
+                    statusLabel.textColor = UIColor(hex: "#FF5F1B")
+                } else if data?.returnType == "2" {
+                    statusLabel.text = "Exchange"
+                    statusLabel.textColor = UIColor(hex: "#FF5F1B")
+                }
+              if data?.rEApprove == "1" {
+                  statusLabel.text = "Completed"
+                  statusLabel.textColor = UIColor(hex: "#16B364")
+                if data?.returnType == "2" {
+                  statusLabel.text = "Exchange Req."
+                  statusLabel.textColor = UIColor(hex: "#FF5F1B")
+                }
+              } else if data?.rEApprove == "2" {
+                statusLabel.text = "Rejected"
+                statusLabel.textColor = UIColor(hex: "#E70000")
+              }
           }
           
+        case "7": //Ongoing
+          statusLabel.text = "Picked"
+          statusLabel.textColor = UIColor(hex: "#FF5F1B")
+            
         case "4", "8": //Cancelled
           statusLabel.text = "Cancelled"
           statusLabel.textColor = UIColor(hex: "#E70000")
+            
+        case "2.1": //Shipped
+           statusLabel.text = "Shipped"
+           statusLabel.textColor = UIColor(hex: "#FF5F1B")
+            if data?.assignStatus == "1" {
+                statusLabel.text = "On The Way"
+                statusLabel.textColor = UIColor(hex: "#FF5F1B")
+            }
         default:
           return
         }

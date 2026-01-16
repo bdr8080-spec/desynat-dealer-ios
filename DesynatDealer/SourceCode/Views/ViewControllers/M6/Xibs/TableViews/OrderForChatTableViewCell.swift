@@ -16,17 +16,17 @@ class OrderForChatTableViewCell: UITableViewCell {
   @IBOutlet weak var finalPriceLabel: UILabel!
   @IBOutlet weak var productDetailsLabel: UILabel!
   @IBOutlet weak var productNameLabel: UILabel!
+  @IBOutlet weak var lblStatus: UILabel!
   
   override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+      super.awakeFromNib()
+      // Initialization code
+  }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+  override func setSelected(_ selected: Bool, animated: Bool) {
+      super.setSelected(selected, animated: animated)
+      // Configure the view for the selected state
+  }
   
   func configData(data: ProductVariation?) {
     if let imageUrl = data?.variantImage?.first, let url = URL(string: imageUrl) {
@@ -47,7 +47,8 @@ class OrderForChatTableViewCell: UITableViewCell {
     finalPriceLabel.text = "\(data?.finalPrice ?? "") KD"
     CommonUtils.setStrikethrough(label: actualPriceLabel, text: "\(data?.actualPrice ?? "0") KD")
     
-    setColorBox(size: data?.size?.name ?? "", label: productDetailsLabel, hexColor: data?.color?.hexCode ?? "#98ADFF", quantity: "1")
+    //setColorBox(size: data?.size?.name ?? "", label: productDetailsLabel, hexColor: data?.color?.hexCode ?? "#98ADFF", quantity: "1")
+    setColorBoxWithoutQuantity(size: data?.size?.name ?? "", label: productDetailsLabel, hexColor: data?.color?.hexCode ?? "#98ADFF")
   }
   
   
