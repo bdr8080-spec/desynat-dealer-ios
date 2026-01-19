@@ -40,45 +40,6 @@ class ChatEnquiryViewModel {
     self.chatReference = ref
     self.getAllChatHistory()
   }
-  
-//  func getAllChatHistory() {
-//    if let ref = self.chatReference {
-//      ref.observeSingleEvent(of: .value) { snap  in
-//        if snap.exists() {
-//          if let value = snap.value {
-//            let msges = CommonUtils.getDictionary(value).map({$0.value})
-//            if msges.count > 0 {
-//              CommonUtils.getModelFromAny(model: [Chat].self, data: msges) { list in
-//                let list = list.sorted { chatOne, chatTwo in
-//                  return (chatOne.getCreatedOn() ?? Date()) < (chatTwo.getCreatedOn() ?? Date())
-//                }
-//                self.delegate?.getAllMsg(list: list)
-//              }
-//            }
-//          }
-//        } else {
-//          // 👇 NO CHAT FOUND
-//          self.delegate?.getAllMsg(list: [])
-//      }
-//      }
-//    }
-//    self.getNewChat()
-//  }
-
-  
-//  func getNewChat() {
-//      self.chatReference?.observe(.childAdded, with: { snap in
-//          if let value = snap.value {
-//              CommonUtils.getModelFromAny(model: Chat.self, data: value) { message in
-//                print("message===>\(message)")
-////                  self.delegate?.getNewMsg(msg: message)
-//                self.hostVC?.getNewMsgHanlder(msg: message)
-//              }
-//          }
-//      })
-//  }
-  
-   // Track messages already loaded
 
   func getAllChatHistory() {
       guard let ref = self.chatReference else { return }

@@ -25,7 +25,8 @@ struct ChatInboxListModel: Codable {
   enum CodingKeys: String, CodingKey {
       case id
       case uniqueID = "unique_id"
-      case type, messageType
+      case type
+      case messageType = "message_type"
       case userID = "user_id"
       case sellerID = "seller_id"
       case productID = "product_id"

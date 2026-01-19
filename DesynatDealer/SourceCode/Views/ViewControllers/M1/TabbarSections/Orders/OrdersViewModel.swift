@@ -31,7 +31,7 @@ class OrdersViewModel {
 //    }
     
     if let status = appliedFilter.orderDeliveryStatus {
-      params["status"] = status.rawValue
+      params["filter"] = status.rawValue
     }
     
     if let fromDate = appliedFilter.fromDate,

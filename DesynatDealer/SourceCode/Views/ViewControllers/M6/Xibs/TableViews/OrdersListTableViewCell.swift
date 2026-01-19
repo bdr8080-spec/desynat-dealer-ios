@@ -76,6 +76,11 @@ class OrdersListTableViewCell: UITableViewCell {
             if data?.assignStatus == "1" || data?.rEApprove == "1" {
                 statusLabel.text = "On The Way"
                 statusLabel.textColor = UIColor(hex: "#FF5F1B")
+                
+                if data?.returnType == "1" && data?.rEApprove == "1" && data?.assignStatus == "0"{
+                    statusLabel.text = "Return Accepted"
+                    statusLabel.textColor = UIColor(hex: "#FF5F1B")
+                }
             }
           
         case "2": //Ongoing
@@ -97,7 +102,7 @@ class OrdersListTableViewCell: UITableViewCell {
                   statusLabel.text = "Completed"
                   statusLabel.textColor = UIColor(hex: "#16B364")
                 if data?.returnType == "2" {
-                  statusLabel.text = "Exchange Req."
+                  statusLabel.text = "Exchange Req Accepted"
                   statusLabel.textColor = UIColor(hex: "#FF5F1B")
                 }
               } else if data?.rEApprove == "2" {
@@ -110,8 +115,8 @@ class OrdersListTableViewCell: UITableViewCell {
           statusLabel.text = "Cancelled"
           statusLabel.textColor = UIColor(hex: "#E70000")
             
-        case "7": //Ongoing
-          statusLabel.text = "Picked"
+        case "7": //Picked
+          statusLabel.text = "On The Way"
           statusLabel.textColor = UIColor(hex: "#FF5F1B")
             
         case "2.1": //Shipped
@@ -144,6 +149,10 @@ class OrdersListTableViewCell: UITableViewCell {
             if data?.assignStatus == "1" || data?.rEApprove == "1" {
                 statusLabel.text = "On The Way"
                 statusLabel.textColor = UIColor(hex: "#FF5F1B")
+                if data?.returnType == "1" && data?.rEApprove == "1" && data?.assignStatus == "0"{
+                    statusLabel.text = "Return Accepted"
+                    statusLabel.textColor = UIColor(hex: "#FF5F1B")
+                }
             }
           
         case "2": //Ongoing, Picked
@@ -165,7 +174,7 @@ class OrdersListTableViewCell: UITableViewCell {
                   statusLabel.text = "Completed"
                   statusLabel.textColor = UIColor(hex: "#16B364")
                 if data?.returnType == "2" {
-                  statusLabel.text = "Exchange Req."
+                  statusLabel.text = "Exchange Req Accepted"
                   statusLabel.textColor = UIColor(hex: "#FF5F1B")
                 }
               } else if data?.rEApprove == "2" {
@@ -174,8 +183,8 @@ class OrdersListTableViewCell: UITableViewCell {
               }
           }
           
-        case "7": //Ongoing
-          statusLabel.text = "Picked"
+        case "7": //Picked
+          statusLabel.text = "On The Way "
           statusLabel.textColor = UIColor(hex: "#FF5F1B")
             
         case "4", "8": //Cancelled

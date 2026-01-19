@@ -308,6 +308,7 @@ class CommonUtils {
 extension Date {
     public enum DateCustomFormat : String {
       case dd_MMM_yy_h_mm_a           = "dd MMM yy, h:mm a"
+      case h_mm_a           = "h:mm a"
     }
     
     func change_DateIntoString(format:DateCustomFormat) -> String{

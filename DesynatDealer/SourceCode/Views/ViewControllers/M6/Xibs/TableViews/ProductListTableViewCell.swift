@@ -9,7 +9,7 @@ import UIKit
 
 class ProductListTableViewCell: UITableViewCell {
   
-  
+    @IBOutlet weak var quantityLabel: UILabel!
   @IBOutlet weak var serialNumberLabel: UILabel!
   @IBOutlet weak var productImageView: UIImageView!
   @IBOutlet weak var nameLabel: UILabel!
@@ -28,7 +28,7 @@ class ProductListTableViewCell: UITableViewCell {
     super.setSelected(selected, animated: animated)
   }
   
-  func configData(data: OrdersListData?) {
+    func configData(data: OrdersListData?, isCustomOrder: Bool) {
     self.nameLabel.text = data?.productDetails?.productNameEn ?? ""
     let totalPrice = (Double(data?.variationDetails?.finalPrice ?? "") ?? 0)
                    * Double(data?.quantity ?? 1)
@@ -36,12 +36,21 @@ class ProductListTableViewCell: UITableViewCell {
     self.sizeLabel.text = data?.variationDetails?.size?.name ?? ""
     self.colourLabel.text = data?.variationDetails?.color?.name ?? ""
     self.categoryLabel.text = data?.productDetails?.category?.name ?? ""
-    self.perItemPriceLabel.text = data?.variationDetails?.finalPrice
+//    self.perItemPriceLabel.text = data?.variationDetails?.finalPrice
     self.sizeLabel.text = data?.variationDetails?.size?.name ?? ""
     self.colourLabel.text = data?.variationDetails?.color?.name ?? ""
     self.materialLabel.text = data?.productDetails?.brand?.nameEnglish ?? ""
     if let url = URL(string: data?.variationDetails?.variantImage?.first ?? "") {
       self.productImageView.sd_setImage(with: url,placeholderImage: UIImage(named: ""))
     }
+        if isCustomOrder {
+            quantityLabel.text = "Per Item Price"
+            let priceString = data?.amount ?? "0"
+            perItemPriceLabel.text = CommonUtils.formatPriceStringInput(priceString)
+        } else {
+            quantityLabel.text = "Quantity"
+            let priceString = data?.amount ?? "0"
+            perItemPriceLabel.text = "\(CommonUtils.formatPriceStringInput(priceString)) x \(data?.quantity ?? 1)"
+        }
   }
 }

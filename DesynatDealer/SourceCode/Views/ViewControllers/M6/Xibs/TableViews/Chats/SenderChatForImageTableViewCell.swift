@@ -36,7 +36,7 @@ class SenderChatForImageTableViewCell: UITableViewCell {
     }
     mainImageView.enableFullscreenZoom()
     if let date = data?.getCreatedOn() {
-        self.timeLabel.text = date.change_DateIntoString(format: .dd_MMM_yy_h_mm_a)
+        self.timeLabel.text = date.change_DateIntoString(format: .h_mm_a)
     }
       
   }

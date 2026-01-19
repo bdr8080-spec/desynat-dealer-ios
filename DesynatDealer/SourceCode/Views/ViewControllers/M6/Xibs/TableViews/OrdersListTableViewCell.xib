@@ -26,7 +26,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bhw-Nc-aDT" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="395" height="269"/>
+                        <rect key="frame" x="0.0" y="0.0" width="395" height="243"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userProfile" translatesAutoresizingMaskIntoConstraints="NO" id="mfI-Oo-tQA" customClass="CustomImageView" customModule="DesynatDealer" customModuleProvider="target">
                                 <rect key="frame" x="15" y="15" width="40" height="40"/>
@@ -101,7 +101,7 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JLI-y5-JJH">
-                                <rect key="frame" x="15.000000000000007" y="97" width="118.66666666666669" height="25"/>
+                                <rect key="frame" x="15.000000000000007" y="91" width="118.66666666666669" height="25"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AWp-lR-L83">
                                         <rect key="frame" x="0.0" y="2" width="118.66666666666667" height="21"/>
@@ -110,7 +110,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JM3-xW-u5G">
-                                        <rect key="frame" x="0.0" y="21" width="118.66666666666667" height="1"/>
+                                        <rect key="frame" x="0.0" y="19" width="118.66666666666667" height="1"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="ZLe-o3-lTg"/>
@@ -128,11 +128,11 @@
                                     <constraint firstItem="AWp-lR-L83" firstAttribute="leading" secondItem="JLI-y5-JJH" secondAttribute="leading" id="Y9Q-Qt-N5t"/>
                                     <constraint firstAttribute="height" constant="25" id="k38-cs-CHX"/>
                                     <constraint firstItem="JM3-xW-u5G" firstAttribute="trailing" secondItem="AWp-lR-L83" secondAttribute="trailing" id="plZ-dJ-m0n"/>
-                                    <constraint firstItem="JM3-xW-u5G" firstAttribute="top" secondItem="AWp-lR-L83" secondAttribute="bottom" constant="-2" id="zt7-XB-m9G"/>
+                                    <constraint firstItem="JM3-xW-u5G" firstAttribute="top" secondItem="AWp-lR-L83" secondAttribute="bottom" constant="-4" id="zt7-XB-m9G"/>
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mpb-ck-lnk" customClass="CustomImageView" customModule="DesynatDealer" customModuleProvider="target">
-                                <rect key="frame" x="15" y="137" width="30" height="40"/>
+                                <rect key="frame" x="15" y="126" width="30" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="0iX-Zd-pTJ"/>
                                     <constraint firstAttribute="height" constant="40" id="hfO-8O-Qiv"/>
@@ -142,7 +142,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Giw-tv-Pzx">
-                                <rect key="frame" x="55" y="139" width="335" height="36"/>
+                                <rect key="frame" x="55" y="128" width="335" height="36"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nike Black T-shirt (M)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B9e-Qt-qMr">
                                         <rect key="frame" x="0.0" y="0.0" width="130.66666666666666" height="17"/>
@@ -170,7 +170,7 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lik-Ck-d47">
-                                <rect key="frame" x="14.999999999999993" y="192" width="109.33333333333331" height="25"/>
+                                <rect key="frame" x="14.999999999999993" y="171" width="109.33333333333331" height="25"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shipping Address " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rdm-tF-qEO">
                                         <rect key="frame" x="0.0" y="2" width="109.33333333333333" height="21"/>
@@ -179,7 +179,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DAy-MW-IBt">
-                                        <rect key="frame" x="0.0" y="21" width="109.33333333333333" height="1"/>
+                                        <rect key="frame" x="0.0" y="19" width="109.33333333333333" height="1"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="Suk-n9-gff"/>
@@ -190,7 +190,7 @@
                                     </label>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="DAy-MW-IBt" firstAttribute="top" secondItem="rdm-tF-qEO" secondAttribute="bottom" constant="-2" id="JRI-Cb-MQc"/>
+                                    <constraint firstItem="DAy-MW-IBt" firstAttribute="top" secondItem="rdm-tF-qEO" secondAttribute="bottom" constant="-4" id="JRI-Cb-MQc"/>
                                     <constraint firstItem="rdm-tF-qEO" firstAttribute="leading" secondItem="lik-Ck-d47" secondAttribute="leading" id="JjE-fJ-CQv"/>
                                     <constraint firstAttribute="bottom" secondItem="rdm-tF-qEO" secondAttribute="bottom" constant="2" id="KUm-VM-foV"/>
                                     <constraint firstAttribute="height" constant="25" id="Mn0-hq-KWj"/>
@@ -201,7 +201,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flat No.- 123, B Wing Khifayat Road, Oman, 112" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pnc-ef-hN6">
-                                <rect key="frame" x="15" y="232" width="365" height="17"/>
+                                <rect key="frame" x="15" y="206" width="365" height="17"/>
                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="12"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -218,20 +218,20 @@
                             <constraint firstItem="lik-Ck-d47" firstAttribute="leading" secondItem="mpb-ck-lnk" secondAttribute="leading" id="FkG-jy-HB6"/>
                             <constraint firstItem="PX8-YY-N3J" firstAttribute="leading" secondItem="mfI-Oo-tQA" secondAttribute="trailing" constant="10.000000000000014" id="Jl4-Uz-k98"/>
                             <constraint firstItem="PX8-YY-N3J" firstAttribute="centerY" secondItem="mfI-Oo-tQA" secondAttribute="centerY" id="L6U-Jr-36n"/>
-                            <constraint firstItem="Pnc-ef-hN6" firstAttribute="top" secondItem="lik-Ck-d47" secondAttribute="bottom" constant="15" id="Lvr-7c-IXu"/>
+                            <constraint firstItem="Pnc-ef-hN6" firstAttribute="top" secondItem="lik-Ck-d47" secondAttribute="bottom" constant="10" id="Lvr-7c-IXu"/>
                             <constraint firstItem="lSy-ei-8RR" firstAttribute="top" secondItem="mfI-Oo-tQA" secondAttribute="bottom" constant="15" id="M80-vd-fwZ"/>
-                            <constraint firstItem="lik-Ck-d47" firstAttribute="top" secondItem="mpb-ck-lnk" secondAttribute="bottom" constant="15" id="Mpm-ic-Ndu"/>
+                            <constraint firstItem="lik-Ck-d47" firstAttribute="top" secondItem="mpb-ck-lnk" secondAttribute="bottom" constant="5" id="Mpm-ic-Ndu"/>
                             <constraint firstAttribute="trailing" secondItem="Giw-tv-Pzx" secondAttribute="trailing" constant="5" id="P3P-Ez-PtN"/>
                             <constraint firstItem="lSy-ei-8RR" firstAttribute="leading" secondItem="mfI-Oo-tQA" secondAttribute="leading" id="PX0-AU-rap"/>
                             <constraint firstAttribute="trailing" secondItem="Pnc-ef-hN6" secondAttribute="trailing" constant="15" id="SKF-IZ-hqV"/>
                             <constraint firstItem="mfI-Oo-tQA" firstAttribute="leading" secondItem="Bhw-Nc-aDT" secondAttribute="leading" constant="15" id="UgT-Qc-txn"/>
                             <constraint firstItem="mpb-ck-lnk" firstAttribute="leading" secondItem="mfI-Oo-tQA" secondAttribute="leading" id="YK5-lo-zXO"/>
-                            <constraint firstItem="JLI-y5-JJH" firstAttribute="top" secondItem="lSy-ei-8RR" secondAttribute="bottom" constant="10" id="djw-kB-pbT"/>
+                            <constraint firstItem="JLI-y5-JJH" firstAttribute="top" secondItem="lSy-ei-8RR" secondAttribute="bottom" constant="4" id="djw-kB-pbT"/>
                             <constraint firstItem="mfI-Oo-tQA" firstAttribute="top" secondItem="Bhw-Nc-aDT" secondAttribute="top" constant="15" id="i85-8x-FOB"/>
                             <constraint firstAttribute="trailing" secondItem="agd-B9-YQs" secondAttribute="trailing" constant="10" id="lkv-Dg-rp5"/>
                             <constraint firstAttribute="bottom" secondItem="Pnc-ef-hN6" secondAttribute="bottom" constant="20" id="wi9-mP-sPp"/>
                             <constraint firstItem="agd-B9-YQs" firstAttribute="centerY" secondItem="sXb-CM-VYb" secondAttribute="centerY" id="xVE-EY-ufW"/>
-                            <constraint firstItem="mpb-ck-lnk" firstAttribute="top" secondItem="JLI-y5-JJH" secondAttribute="bottom" constant="15" id="yhZ-em-MaK"/>
+                            <constraint firstItem="mpb-ck-lnk" firstAttribute="top" secondItem="JLI-y5-JJH" secondAttribute="bottom" constant="10" id="yhZ-em-MaK"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">

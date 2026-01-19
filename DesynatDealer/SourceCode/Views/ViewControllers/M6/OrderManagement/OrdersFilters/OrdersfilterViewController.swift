@@ -26,7 +26,13 @@ class OrdersfilterViewController: UIViewController {
   
   private var filtersOptions = ["Confirmed", "Packed", "Shipped", "Exchange"]
   private var selectedIndex: Int = -1
-  
+    private let statusMapping: [OrderStatus] = [
+        .confirmed,
+        .packed,
+        .shipped,
+        .exchange
+    ]
+
   override func viewDidLoad() {
     super.viewDidLoad()
     handleUISetup()
@@ -43,30 +49,19 @@ class OrdersfilterViewController: UIViewController {
   }
   
   @IBAction func applyDidTapped(_ sender: Any) {
-    var filter = OrderListFilterModel()
-    if let fromDate = fromTextField.text, !fromDate.isEmpty {
-      filter.fromDate = fromDate
-    }
-    if let toDate = toTextField.text, !toDate.isEmpty {
-      filter.toDate = toDate
-    }
-    
-    switch selectedIndex {
-    case 0:
-      filter.orderDeliveryStatus = .confirmed
-    case 1:
-      filter.orderDeliveryStatus = .packed
-    case 2:
-      filter.orderDeliveryStatus = .shipped
-    case 3:
-      filter.orderDeliveryStatus = .exchange
-    default:
-      filter.orderDeliveryStatus = nil
-    }
-    
-    //filter.orderDeliveryStatus = selectedIndex
-    onApplyFilter?(filter)
-    dismiss(animated: true)
+      var filter = OrderListFilterModel()
+
+          filter.fromDate = fromTextField.text?.isEmpty == false ? fromTextField.text : nil
+          filter.toDate   = toTextField.text?.isEmpty == false ? toTextField.text : nil
+
+          if selectedIndex >= 0 && selectedIndex < statusMapping.count {
+              filter.orderDeliveryStatus = statusMapping[selectedIndex]
+          } else {
+              filter.orderDeliveryStatus = nil
+          }
+
+          onApplyFilter?(filter)
+          dismiss(animated: true)
   }
   
   private func handleUISetup() {
@@ -80,6 +75,14 @@ class OrdersfilterViewController: UIViewController {
     // Preselect date fields
     fromTextField.text = selectedFilter.fromDate
     toTextField.text = selectedFilter.toDate
+      if let status = selectedFilter.orderDeliveryStatus,
+             let index = statusMapping.firstIndex(of: status) {
+              selectedIndex = index
+          } else {
+              selectedIndex = -1
+          }
+
+          filtersTableView.reloadData()
   }
   
 }

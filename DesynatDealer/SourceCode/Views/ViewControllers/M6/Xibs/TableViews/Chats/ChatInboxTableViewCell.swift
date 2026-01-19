@@ -41,13 +41,13 @@ class ChatInboxTableViewCell: UITableViewCell {
     //messageLabel.text = data?.lastChat ?? "Sent an attachment"
     timeLabel.text = formattedChatTime(from: data?.updatedAt ?? "")
     let messageType = data?.type ?? "1" // normal msg, customization send
-    let msgType = data?.messageType ?? "1"
+    let msgType = data?.messageType ?? "0"
 //    let productRequest = data?.productRequest ?? "1"
     let actiontype = data?.action ?? "1"
     if msgType == "1" {
       messageLabel.text = "Sent an attachment"
     } else {
-      messageLabel.text = data?.lastChat ?? "Sent an attachment"
+      messageLabel.text = data?.lastChat ?? ""
     }
     if messageType == "1" {
       messageTypeStatusView.isHidden = true
