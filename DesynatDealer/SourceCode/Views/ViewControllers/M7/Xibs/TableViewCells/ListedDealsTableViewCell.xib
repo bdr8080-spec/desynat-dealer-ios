@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="403" id="KGk-i7-Jjw" customClass="ListedDealsTableViewCell" customModule="DesynatDealer" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="453" height="403"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="453" height="403"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MzR-Qt-uH9" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="453" height="301"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Pea-NG-iuK">
+                                <rect key="frame" x="0.0" y="0.0" width="453" height="286"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TRe-YW-a3b">
+                                        <rect key="frame" x="0.0" y="0.0" width="453" height="136"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bannerImg" translatesAutoresizingMaskIntoConstraints="NO" id="IBh-qq-hnF">
+                                                <rect key="frame" x="0.0" y="0.0" width="453" height="136"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="136" id="QNP-By-6fu"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="IBh-qq-hnF" firstAttribute="top" secondItem="TRe-YW-a3b" secondAttribute="top" id="Vdb-f3-z6A"/>
+                                            <constraint firstItem="IBh-qq-hnF" firstAttribute="leading" secondItem="TRe-YW-a3b" secondAttribute="leading" id="afu-6j-nzI"/>
+                                            <constraint firstAttribute="trailing" secondItem="IBh-qq-hnF" secondAttribute="trailing" id="fMy-qK-nBl"/>
+                                            <constraint firstAttribute="bottom" secondItem="IBh-qq-hnF" secondAttribute="bottom" id="hMA-zD-HLc"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zos-4d-cA0">
+                                        <rect key="frame" x="0.0" y="136" width="453" height="50"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Starts From - 2nd July 2025" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SNU-au-qnJ" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
+                                                <rect key="frame" x="116.00000000000001" y="15" width="221.33333333333337" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20" id="1pG-ZN-2cA"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                                <color key="textColor" red="0.63397097589999996" green="0.49046933650000002" blue="0.34303653239999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="SNU-au-qnJ" firstAttribute="top" secondItem="Zos-4d-cA0" secondAttribute="top" constant="15" id="Gj6-y6-CY7"/>
+                                            <constraint firstItem="SNU-au-qnJ" firstAttribute="centerY" secondItem="Zos-4d-cA0" secondAttribute="centerY" id="MKj-Ys-FVL"/>
+                                            <constraint firstItem="SNU-au-qnJ" firstAttribute="centerX" secondItem="Zos-4d-cA0" secondAttribute="centerX" id="crl-Aw-6Wl"/>
+                                        </constraints>
+                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="8Cr-eW-NiZ">
+                                        <rect key="frame" x="0.0" y="186" width="453" height="100"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A00-Z8-3pD">
+                                                <rect key="frame" x="0.0" y="0.0" width="453" height="25"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Starts On" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XJR-VL-vsv" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
+                                                        <rect key="frame" x="12" y="10" width="55" height="14.333333333333336"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2nd July 2025" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eif-3n-Eow" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
+                                                        <rect key="frame" x="358" y="10" width="83" height="15"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="eif-3n-Eow" secondAttribute="bottom" id="Arx-0T-sUB"/>
+                                                    <constraint firstItem="XJR-VL-vsv" firstAttribute="leading" secondItem="A00-Z8-3pD" secondAttribute="leading" constant="12" id="CZ6-sh-ksY"/>
+                                                    <constraint firstAttribute="trailing" secondItem="eif-3n-Eow" secondAttribute="trailing" constant="12" id="Fnq-XL-4iO"/>
+                                                    <constraint firstAttribute="height" constant="25" id="H2z-TU-Obw"/>
+                                                    <constraint firstItem="eif-3n-Eow" firstAttribute="top" secondItem="XJR-VL-vsv" secondAttribute="top" id="c6o-46-6co"/>
+                                                    <constraint firstItem="eif-3n-Eow" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XJR-VL-vsv" secondAttribute="trailing" constant="10" id="jCH-N9-XW3"/>
+                                                    <constraint firstItem="XJR-VL-vsv" firstAttribute="top" secondItem="A00-Z8-3pD" secondAttribute="top" constant="10" id="wPN-k9-16V"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nQs-Px-FI6">
+                                                <rect key="frame" x="0.0" y="25" width="453" height="25"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MBC-e6-5Mv" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
+                                                        <rect key="frame" x="12.000000000000002" y="10" width="29.666666666666671" height="14.333333333333336"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6:00 Pm to 9:00 Pm" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bnk-0k-HdA" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
+                                                        <rect key="frame" x="324.66666666666669" y="10" width="116.33333333333331" height="15"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="bnk-0k-HdA" firstAttribute="top" secondItem="MBC-e6-5Mv" secondAttribute="top" id="BxH-1d-q3h"/>
+                                                    <constraint firstItem="bnk-0k-HdA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="MBC-e6-5Mv" secondAttribute="trailing" constant="10" id="FA3-Sb-Zpz"/>
+                                                    <constraint firstAttribute="trailing" secondItem="bnk-0k-HdA" secondAttribute="trailing" constant="12" id="QpF-qW-Djf"/>
+                                                    <constraint firstItem="MBC-e6-5Mv" firstAttribute="top" secondItem="nQs-Px-FI6" secondAttribute="top" constant="10" id="a76-Ty-MJe"/>
+                                                    <constraint firstItem="MBC-e6-5Mv" firstAttribute="leading" secondItem="nQs-Px-FI6" secondAttribute="leading" constant="12" id="e9r-KJ-jK2"/>
+                                                    <constraint firstAttribute="bottom" secondItem="bnk-0k-HdA" secondAttribute="bottom" id="tfb-FI-xJT"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NHp-kA-sFk">
+                                                <rect key="frame" x="0.0" y="50" width="453" height="25"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Products added" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DvJ-HC-zLh" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
+                                                        <rect key="frame" x="12" y="10" width="92" height="14.333333333333336"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vtO-OS-apW" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
+                                                        <rect key="frame" x="425.66666666666669" y="10" width="15.333333333333314" height="15"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="vtO-OS-apW" secondAttribute="bottom" id="3Vu-8x-ZPf"/>
+                                                    <constraint firstAttribute="trailing" secondItem="vtO-OS-apW" secondAttribute="trailing" constant="12" id="M4N-Zi-133"/>
+                                                    <constraint firstItem="DvJ-HC-zLh" firstAttribute="leading" secondItem="NHp-kA-sFk" secondAttribute="leading" constant="12" id="a1Z-Dl-VfP"/>
+                                                    <constraint firstItem="DvJ-HC-zLh" firstAttribute="top" secondItem="NHp-kA-sFk" secondAttribute="top" constant="10" id="dKU-O8-itI"/>
+                                                    <constraint firstItem="vtO-OS-apW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DvJ-HC-zLh" secondAttribute="trailing" constant="10" id="vg7-MQ-c6C"/>
+                                                    <constraint firstItem="vtO-OS-apW" firstAttribute="top" secondItem="DvJ-HC-zLh" secondAttribute="top" id="zSG-2V-Mhn"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0xE-sV-r4E">
+                                                <rect key="frame" x="0.0" y="75" width="453" height="25"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Gr-kv-iqA" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
+                                                        <rect key="frame" x="12" y="10" width="37.666666666666664" height="14.333333333333336"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Active" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jLG-0t-gqb" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
+                                                        <rect key="frame" x="397.66666666666669" y="8.6666666666666856" width="43.333333333333314" height="17"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                        <color key="textColor" red="0.63397097589999996" green="0.49046933650000002" blue="0.34303653239999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="jLG-0t-gqb" firstAttribute="centerY" secondItem="0Gr-kv-iqA" secondAttribute="centerY" id="QXn-UH-Qfi"/>
+                                                    <constraint firstItem="0Gr-kv-iqA" firstAttribute="leading" secondItem="0xE-sV-r4E" secondAttribute="leading" constant="12" id="S6b-OC-g4R"/>
+                                                    <constraint firstItem="0Gr-kv-iqA" firstAttribute="top" secondItem="0xE-sV-r4E" secondAttribute="top" constant="10" id="Uxi-jG-BDm"/>
+                                                    <constraint firstItem="jLG-0t-gqb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0Gr-kv-iqA" secondAttribute="trailing" constant="20" id="eVc-4a-8a1"/>
+                                                    <constraint firstAttribute="trailing" secondItem="jLG-0t-gqb" secondAttribute="trailing" constant="12" id="mvj-IP-8v9"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Pea-NG-iuK" secondAttribute="bottom" constant="15" id="140-AI-nGN"/>
+                            <constraint firstItem="Pea-NG-iuK" firstAttribute="top" secondItem="MzR-Qt-uH9" secondAttribute="top" id="1bR-0S-Kgr"/>
+                            <constraint firstItem="Pea-NG-iuK" firstAttribute="leading" secondItem="MzR-Qt-uH9" secondAttribute="leading" id="7RO-dB-n0z"/>
+                            <constraint firstAttribute="trailing" secondItem="Pea-NG-iuK" secondAttribute="trailing" id="Fpp-FY-zgN"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="MzR-Qt-uH9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="6Rd-N5-CyN"/>
+                    <constraint firstItem="MzR-Qt-uH9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="AyJ-dm-QOW"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="MzR-Qt-uH9" secondAttribute="bottom" constant="20" id="O08-Z7-EdI"/>
+                    <constraint firstAttribute="trailing" secondItem="MzR-Qt-uH9" secondAttribute="trailing" id="r3N-nH-2uC"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="addedOnLabel" destination="vtO-OS-apW" id="HyB-0q-yvE"/>
+                <outlet property="detailsStackView" destination="8Cr-eW-NiZ" id="x8j-0C-Iiw"/>
+                <outlet property="fromLabel" destination="bnk-0k-HdA" id="jBm-vP-hqy"/>
+                <outlet property="listedDealsView" destination="Zos-4d-cA0" id="VNd-Ma-A6v"/>
+                <outlet property="mainImageView" destination="IBh-qq-hnF" id="mkt-uE-04n"/>
+                <outlet property="starstFromLabel" destination="SNU-au-qnJ" id="QHo-oT-Ugj"/>
+                <outlet property="startsOnLabel" destination="eif-3n-Eow" id="VOB-Hy-k5G"/>
+                <outlet property="statusLabel" destination="jLG-0t-gqb" id="UXa-AU-hEZ"/>
+            </connections>
+            <point key="canvasLocation" x="391.60305343511448" y="142.6056338028169"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="bannerImg" width="343" height="136"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

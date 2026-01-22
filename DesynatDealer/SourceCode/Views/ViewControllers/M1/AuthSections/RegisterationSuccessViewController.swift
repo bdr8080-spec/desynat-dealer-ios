@@ -40,6 +40,8 @@ class RegisterationSuccessViewController: UIViewController {
       descriptionLabel.text = "Quotation Sent\nsuccessfully!"
     case .modifyQuotation:
       descriptionLabel.text = "Modified\nsuccessfully!"
+    case .dealAdded:
+      descriptionLabel.text = "Items added to deals\nsuccessfully!"
     }
   }
   
@@ -53,4 +55,5 @@ enum ComingReasonAtRegisterationSuccess {
   case bannerPlanPurchased
   case sendQuotation
   case modifyQuotation
+  case dealAdded
 }

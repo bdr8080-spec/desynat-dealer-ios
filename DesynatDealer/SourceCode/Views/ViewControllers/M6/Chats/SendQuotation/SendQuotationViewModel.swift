@@ -24,7 +24,7 @@ class SendQuotationViewModel {
         let fields: [(UITextField?, String)] = [
             (hostVC.itemPriceTF, "Item price"),
             (hostVC.taxTF, "Tax"),
-            (hostVC.shippingFeesTF, "Shipping fees"),
+            (hostVC.shippingFeesTF, "Delivery fees"),
             (hostVC.totalAmountTF, "Total amount")
         ]
         

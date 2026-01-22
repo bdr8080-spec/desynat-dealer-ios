@@ -22,11 +22,12 @@ class ProfileViewController: UIViewController {
   private var sideMenuData: [SideMenuModel] = [
     SideMenuModel(title: "Inventory management ", image: "inventory"),
     SideMenuModel(title: "Affiliated Commission", image: "affiliated"),
+    SideMenuModel(title: "Banner management", image: "bannerMan"),
+    SideMenuModel(title: "Deals management", image: "dealsMan"),
+    
     SideMenuModel(title: "Staff management", image: "staffMan"),
     SideMenuModel(title: "Subscription Plans", image: "subscriptionPlan"),
-    SideMenuModel(title: "Banner management", image: "bannerMan"),
     SideMenuModel(title: "Live Coverage request", image: "liveCoverage"),
-    SideMenuModel(title: "Deals management", image: "dealsMan"),
     SideMenuModel(title: "Refund management", image: "refundMan"),
     SideMenuModel(title: "Terms & Condition", image: "termsCond"),
     SideMenuModel(title: "Return Policy", image: "returnPolicy"),
@@ -105,7 +106,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
       print("➡️ Navigate to Subscription Plans")
       
     case "Banner management":
-      print("➡️ Navigate to Banner management")
         let vc = BannerManagemntVC.instantiate(fromAppStoryboard: .BannerManagement)
         self.navigationController?.pushViewController(vc, animated: true)
       
@@ -113,7 +113,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
       print("➡️ Navigate to Live Coverage request")
       
     case "Deals management":
-      print("➡️ Navigate to Deals management")
+        let vc = DealListedViewController.instantiate(fromAppStoryboard: .OrderAndChat)
+        self.navigationController?.pushViewController(vc, animated: true)
       
     case "Refund management":
       print("➡️ Navigate to Refund management")
