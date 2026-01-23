@@ -26,18 +26,25 @@ class DealListedViewController: UIViewController {
     @IBOutlet weak var listedDealsLabel: UILabel!
     @IBOutlet weak var listedDealsButton: CustomButton!
     
-    
-    private var tabType: DealsListedType = .listedDeals
+    var tabType: DealsListedType = .listedDeals
     private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
     private let audioEngine = AVAudioEngine()
     private var isListening = false
+    private lazy var viewModel = DealListedViewModel(hostVC: self)
+    private var searchWorkItem: DispatchWorkItem?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        serachTF.delegate = self
         requestPermissions()
         handleListedDealsAction()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.dealsListRequest()
     }
     
     deinit {
@@ -209,18 +216,41 @@ class DealListedViewController: UIViewController {
 extension DealListedViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        switch tabType {
+        case .listedDeals:
+            return viewModel.listedDeal?.count ?? 0
+        case .enrolled:
+            return viewModel.enrolledDeals?.count ?? 0
+        case .expired:
+            return viewModel.expiredDeal?.count ?? 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ListedDealsTableViewCell", for: indexPath) as! ListedDealsTableViewCell
-        cell.configData(type: tabType)
+        switch tabType {
+        case .listedDeals:
+            cell.configData(type: tabType, data: viewModel.listedDeal?[indexPath.row])
+        case .enrolled:
+            cell.configData(type: tabType, data: viewModel.enrolledDeals?[indexPath.row])
+        case .expired:
+            cell.configData(type: tabType, data: viewModel.expiredDeal?[indexPath.row])
+        }
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let nextVC = DealsDetailsViewController.instantiate(fromAppStoryboard: .OrderAndChat)
         nextVC.tabType = tabType
+        switch tabType {
+        case .listedDeals:
+            nextVC.dealID = viewModel.listedDeal?[indexPath.row].id ?? 0
+        case .enrolled:
+            nextVC.dealID = viewModel.enrolledDeals?[indexPath.row].id ?? 0
+        case .expired:
+            nextVC.dealID = viewModel.expiredDeal?[indexPath.row].id ?? 0
+        }
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
 }
@@ -228,14 +258,14 @@ extension DealListedViewController: UITableViewDataSource, UITableViewDelegate {
 extension DealListedViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
-//        searchWorkItem?.cancel()
-//        let workItem = DispatchWorkItem { [weak self] in
-//            guard let self = self else { return }
-//            self.viewModel.searchText = currentText
-//            viewModel.getChatInboxRequest()
-//        }
-//        searchWorkItem = workItem
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: workItem)
+        searchWorkItem?.cancel()
+        let workItem = DispatchWorkItem { [weak self] in
+            guard let self = self else { return }
+            self.viewModel.searchText = currentText
+            viewModel.dealsListRequest()
+        }
+        searchWorkItem = workItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: workItem)
         return true
     }
 }

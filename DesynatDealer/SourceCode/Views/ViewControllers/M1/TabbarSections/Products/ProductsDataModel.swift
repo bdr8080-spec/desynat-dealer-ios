@@ -25,8 +25,8 @@ struct ProductsListDataModel: Codable {
 
 // MARK: - ProductsList
 struct ProductsList: Codable {
-    let id: Int?
-    let sellerID, storeID, categoryID, subcategoryID: String?
+    let id, sellerID: Int?
+    let storeID, categoryID, subcategoryID: String?
     let brandID, otherEn, otherAr, productNameEn: String?
     let productNameAr, descriptionEn, descriptionAr, minCardQuantity: String?
     let maxCardQuantity, productReturn, returnDays, productExchangable: String?

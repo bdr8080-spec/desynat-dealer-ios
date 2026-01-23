@@ -7,6 +7,7 @@
 
 import UIKit
 import Cosmos
+import SDWebImage
 
 class ProductsCollectionViewCell: UICollectionViewCell {
 
@@ -23,6 +24,11 @@ class ProductsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var actualPriceLabel: CustomLabelFont!
     @IBOutlet weak var totalSoldLabel: UILabel!
     
+    var wishlistButtonTapped: (() -> Void)?
+    var deleteButtonTapped: (() -> Void)?
+    var checkboxButtonTapped: (() -> Void)?
+    var shareButtonTapped: (() -> Void)?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         mainImageView.layer.cornerRadius = 8
@@ -33,7 +39,23 @@ class ProductsCollectionViewCell: UICollectionViewCell {
         detailsView.layer.masksToBounds = true
     }
     
-    func configData(type: DealsListedType) {
+    @IBAction func likeButtonTapped(_ sender: UIButton) {
+      wishlistButtonTapped?()
+    }
+    
+    @IBAction func checkboxDidTapped(_ sender: Any) {
+        checkboxButtonTapped?()
+    }
+    
+    @IBAction func deleteDidTapped(_ sender: Any) {
+        deleteButtonTapped?()
+    }
+    
+    @IBAction func shareDidTapped(_ sender: Any) {
+        shareButtonTapped?()
+    }
+    
+    func configData(type: DealsListedType, data: ProductsList?) {
         deleteButton.isHidden = true
         checkboxButton.isHidden = true
         totalSoldView.isHidden = true
@@ -46,6 +68,43 @@ class ProductsCollectionViewCell: UICollectionViewCell {
             deleteButton.isHidden = false
             totalSoldView.isHidden = false
         }
+        configDealData(data: data)
+    }
+    
+    func configDealData(data: ProductsList?) {
+        if let imageUrlString = data?.productVariants?.first?.variantImage?.first,
+           let url = URL(string: imageUrlString) {
+            mainImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            mainImageView.sd_imageIndicator?.startAnimatingIndicator()
+            mainImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
+        } else {
+            mainImageView.image = UIImage(named: "")
+        }
+        titleLabel.text = data?.productNameEn
+        if let ratingString = data?.reviewRating, let rating = Double(ratingString) {
+            ratingView.rating = rating
+            let ratingInt = Int(ratingString) ?? 0
+            ratingLabel.text = "(\(ratingInt))"
+        } else {
+            ratingView.rating = 0.0 // default value if conversion fails
+            ratingLabel.text = "(\(0))"
+        }
+
+        finalPriceLabel.text = "\(data?.productVariants?.first?.finalPrice ?? "") KD"
+        CommonUtils.setStrikethrough(label: actualPriceLabel, text: "\(data?.productVariants?.first?.actualPrice ?? "") KD")
+        //    iscountPriceLabel.text = "\(data?.productVariants?.first?.discountValue ?? "") KD"
+        let discountType = data?.productVariants?.first?.discountType ?? "1"
+        if discountType == "1" {
+          discountPriceLabel.text = "\(data?.productVariants?.first?.discountValue ?? "")% Off"
+        } else {
+            discountPriceLabel.text = "\(data?.productVariants?.first?.discountValue ?? "") KD Off"
+        }
+        
+//        if data?.wishlist == 1 {
+//          likeButtonOutlet.setImage(UIImage(named: "selectedHeartImage"), for: .normal)
+//        } else {
+//          likeButtonOutlet.setImage(UIImage(named: "besSellLike"), for: .normal)
+//        }
     }
 
 }

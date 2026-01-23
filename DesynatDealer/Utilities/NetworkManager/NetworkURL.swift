@@ -78,6 +78,13 @@ enum NetworkEndPoint: String {
   case sendInMessageChat                = "/api/send-message-in-chats"
   case updateReturnExchangeStatus       = "/api/seller/update-order-exchange-return-status"
   
+    
+    //M7
+    case getAllDealsList                = "/api/seller/view-deals"
+    case getDealsDetails                = "/api/seller/view-single-deals"
+    case addProductsInDeals             = "/api/seller/Add-products-in-deal-inside"
+    
+    
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"
     }

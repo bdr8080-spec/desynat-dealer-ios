@@ -147,4 +147,6 @@ class CustomView: UIView {
         gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
         return gradient
     }
+    
+    
 }
