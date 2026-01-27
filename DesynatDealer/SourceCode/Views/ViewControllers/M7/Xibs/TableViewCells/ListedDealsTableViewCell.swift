@@ -21,7 +21,15 @@ class ListedDealsTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+
+        mainImageView.layer.cornerRadius = 8
+        mainImageView.layer.maskedCorners = [
+            .layerMinXMinYCorner,   // top-left
+            .layerMaxXMinYCorner    // top-right
+        ]
+        mainImageView.clipsToBounds = true
     }
+
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -38,8 +46,20 @@ class ListedDealsTableViewCell: UITableViewCell {
             listedDealsView.isHidden = false
         case .enrolled:
             detailsStackView.isHidden = false
+            if let status = categorizeDeal(from: data?.from ?? "", to: data?.to ?? "") {
+                statusLabel.isHidden = false
+                if status == .upcoming {
+                    statusLabel.text = "Upcoming"
+                    statusLabel.textColor = .black
+                } else {
+                    statusLabel.text = "Active"
+                    statusLabel.textColor = UIColor(hex: "#A27D57")
+                }
+            }
         case .expired:
             detailsStackView.isHidden = false
+            statusLabel.text = "Expired"
+            statusLabel.textColor = .red
         }
         configDealData(data: data)
     }
@@ -56,24 +76,28 @@ class ListedDealsTableViewCell: UITableViewCell {
         
         starstFromLabel.text = "Starts From - \(friendlyStartDate(from: data?.from ?? "") ?? "")"
         startsOnLabel.text = friendlyStartDate(from: data?.from ?? "")
-        fromLabel.text = friendlyStartDate(from: data?.to ?? "")
+        let fromDate = convertDateFormat(data?.from ?? "")
+        let endDate = convertDateFormat(data?.to ?? "")
+        fromLabel.text = "\(fromDate) - \(endDate)"
         addedOnLabel.text = data?.sellerDealCount?.description
         
-        // Example Usage:
-        if let status = categorizeDeal(from: data?.from ?? "", to: data?.to ?? "") {
-            switch status {
-            case .upcoming:
-                statusLabel.text = "Upcoming"
-                statusLabel.textColor = .black
-            case .active:
-                statusLabel.text = "Active"
-                statusLabel.textColor = UIColor(hex: "#A27D57")
-            case .expired:
-                statusLabel.text = "Expired"
-                statusLabel.textColor = .red
-            }
-        }
     }
+    
+    func convertDateFormat(_ dateString: String) -> String {
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "yyyy-MM-dd"
+        inputFormatter.locale = Locale(identifier: "en_US_POSIX")
+
+        let outputFormatter = DateFormatter()
+        outputFormatter.dateFormat = "dd/MM/yyyy"
+
+        guard let date = inputFormatter.date(from: dateString) else {
+            return ""
+        }
+
+        return outputFormatter.string(from: date)
+    }
+
     
     func friendlyStartDate(from isoDate: String) -> String? {
         // 1️⃣ Parse ISO date string
@@ -109,28 +133,42 @@ class ListedDealsTableViewCell: UITableViewCell {
         return "\(dayWithOrdinal) \(monthName) \(year)"
     }
     
-    func categorizeDeal(from fromDateString: String, to toDateString: String) -> DealStatus? {
-        let isoFormatter = ISO8601DateFormatter()
-        isoFormatter.formatOptions = [.withFullDate] // yyyy-MM-dd
-        
-        guard let fromDate = isoFormatter.date(from: fromDateString),
-              let toDate = isoFormatter.date(from: toDateString) else {
+    func categorizeDeal(from fromDateString: String,
+                        to toDateString: String) -> DealStatus? {
+
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.timeZone = TimeZone.current   // local timezone (IST)
+
+        guard let fromDate = formatter.date(from: fromDateString),
+              let toDate = formatter.date(from: toDateString) else {
             return nil
         }
-        
-        let currentDate = Date()
-        
-        if currentDate < fromDate {
+
+        let calendar = Calendar.current
+        let now = Date()
+
+        let startOfFromDate = calendar.startOfDay(for: fromDate)
+
+        // End of "to" day → 23:59:59
+        let endOfToDate = calendar.date(
+            bySettingHour: 23,
+            minute: 59,
+            second: 59,
+            of: toDate
+        )!
+
+        if now < startOfFromDate {
             return .upcoming
-        } else if currentDate >= fromDate && currentDate <= toDate {
-            return .active
-        } else {
-            return .expired
         }
+
+        if now <= endOfToDate {
+            return .active
+        }
+
+        // ❌ Do not show expired
+        return nil
     }
-
-
-
 
 }
 

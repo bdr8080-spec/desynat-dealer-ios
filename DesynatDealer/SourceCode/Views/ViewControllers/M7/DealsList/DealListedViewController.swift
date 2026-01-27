@@ -10,9 +10,9 @@ import AVFAudio
 import Speech
 
 class DealListedViewController: UIViewController {
-
+    
     @IBOutlet weak var noDataFoundLabel: UILabel!
-    @IBOutlet weak var searchView: CustomView!
+//    @IBOutlet weak var searchView: CustomView!
     @IBOutlet weak var listTableView: UITableView! {
         didSet {
             listTableView.registerCellFromNib(cellID: "ListedDealsTableViewCell")
@@ -27,39 +27,52 @@ class DealListedViewController: UIViewController {
     @IBOutlet weak var listedDealsButton: CustomButton!
     
     var tabType: DealsListedType = .listedDeals
-    private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
-    private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
-    private var recognitionTask: SFSpeechRecognitionTask?
-    private let audioEngine = AVAudioEngine()
-    private var isListening = false
     private lazy var viewModel = DealListedViewModel(hostVC: self)
     private var searchWorkItem: DispatchWorkItem?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         serachTF.delegate = self
-        requestPermissions()
         handleListedDealsAction()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.dealsListRequest()
-    }
-    
-    deinit {
-        stopListening()
+        viewModel.dealsListRequest(tab: tabType)
     }
     
     @IBAction func micDidTapped(_ sender: UIButton) {
-        if isListening {
-            stopListening()
-            sender.setImage(UIImage(systemName: "mic"), for: .normal)
-        } else {
-            startListening()
-            sender.setImage(UIImage(systemName: "mic.fill"), for: .normal)
-            sender.tintColor = .systemRed // optional: show it's active
-        }
+//        let vc = DealsListFilterViewController.instantiate(fromAppStoryboard: .OrderAndChat)
+//        vc.selectedFilter = viewModel.appliedFilter
+//        vc.onApplyFilter = { [weak self] filter in
+//            guard let self = self else { return }
+//            self.viewModel.appliedFilter = filter
+//            self.viewModel.dealsListRequest()
+//        }
+//        vc.onClearFilter = { [weak self] in
+//            guard let self = self else { return }
+//            self.viewModel.appliedFilter = DealListFilterModel()
+//            self.viewModel.dealsListRequest()
+//        }
+//        self.navigationController?.present(vc, animated: false)
+        let vc = DealsListFilterViewController.instantiate(fromAppStoryboard: .OrderAndChat)
+
+                // Load filter for current tab
+                vc.selectedFilter = viewModel.currentFilter(for: tabType)
+
+                vc.onApplyFilter = { [weak self] filter in
+                    guard let self = self else { return }
+                    self.viewModel.filtersByTab[self.tabType] = filter
+                    self.viewModel.dealsListRequest(tab: self.tabType)
+                }
+
+                vc.onClearFilter = { [weak self] in
+                    guard let self = self else { return }
+                    self.viewModel.filtersByTab[self.tabType] = DealListFilterModel()
+                    self.viewModel.dealsListRequest(tab: self.tabType)
+                }
+
+                navigationController?.present(vc, animated: false)
     }
     
     @IBAction func backDidTapped(_ sender: Any) {
@@ -68,20 +81,46 @@ class DealListedViewController: UIViewController {
     
     @IBAction func listedDidTapped(_ sender: Any) {
         handleListedDealsAction()
-        searchView.isHidden = true
+//        searchView.isHidden = true
+        if tabType != .listedDeals {
+                viewModel.filtersByTab[.listedDeals] = DealListFilterModel()
+            }
         listTableView.reloadData()
+        updateNoDataState()
     }
     
     @IBAction func enrolledDidTapped(_ sender: Any) {
         handleEnrolledAction()
-        searchView.isHidden = false
+//        searchView.isHidden = false
+        if tabType != .enrolled {
+                viewModel.filtersByTab[.listedDeals] = DealListFilterModel()
+            }
         listTableView.reloadData()
+        updateNoDataState()
     }
     
     @IBAction func expiredDidTapped(_ sender: Any) {
         handleExpiredAction()
-        searchView.isHidden = false
+//        searchView.isHidden = false
+        if tabType != .expired {
+                viewModel.filtersByTab[.listedDeals] = DealListFilterModel()
+            }
         listTableView.reloadData()
+        updateNoDataState()
+    }
+    
+    func updateNoDataState() {
+        let isEmpty: Bool
+        switch tabType {
+        case .listedDeals:
+            isEmpty = viewModel.listedDeal?.isEmpty ?? true
+        case .enrolled:
+            isEmpty = viewModel.enrolledDeals?.isEmpty ?? true
+        case .expired:
+            isEmpty = viewModel.expiredDeal?.isEmpty ?? true
+        }
+        noDataFoundLabel.isHidden = !isEmpty
+        listTableView.isHidden = isEmpty
     }
     
     private func handleListedDealsAction() {
@@ -92,7 +131,7 @@ class DealListedViewController: UIViewController {
             viewType: .listedDeals
         )
     }
-
+    
     private func handleEnrolledAction() {
         activateTab(
             button: enrollButton,
@@ -100,7 +139,7 @@ class DealListedViewController: UIViewController {
             viewType: .enrolled
         )
     }
-
+    
     private func handleExpiredAction() {
         activateTab(
             button: expiredButton,
@@ -109,22 +148,22 @@ class DealListedViewController: UIViewController {
             viewType: .expired
         )
     }
-
+    
     private func resetTabs() {
         let buttons = [expiredButton, listedDealsButton, enrollButton]
         let labels = [expiredLabel, listedDealsLabel, enrollLabel]
-
+        
         buttons.forEach {
             $0?.setImage(nil, for: .normal)
             $0?.layer.cornerRadius = 0
             $0?.clipsToBounds = false
         }
-
+        
         labels.forEach {
             $0?.textColor = .black
         }
     }
-
+    
     private func activateTab(
         button: UIButton,
         label: UILabel,
@@ -132,85 +171,16 @@ class DealListedViewController: UIViewController {
         viewType: DealsListedType
     ) {
         resetTabs()
-
+        
         button.setImage(UIImage(named: "topTabbar"), for: .normal)
         button.layer.cornerRadius = corners.isEmpty ? 0 : 5
         button.layer.maskedCorners = corners
         button.clipsToBounds = !corners.isEmpty
-
+        
         label.textColor = .white
         tabType = viewType
     }
-    
-    private func requestPermissions() {
-        SFSpeechRecognizer.requestAuthorization { _ in }
-        AVAudioSession.sharedInstance().requestRecordPermission { _ in }
-    }
-    
-    // MARK: - Start Listening (Speech → Text)
-    private func startListening() {
-        // Reset everything
-        recognitionTask?.cancel()
-        recognitionTask = nil
-        recognitionRequest = nil
-        
-        let audioSession = AVAudioSession.sharedInstance()
-        do {
-            try audioSession.setCategory(.record, mode: .measurement, options: .duckOthers)
-            try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
-        } catch {
-            print("Audio session error: \(error)")
-            return
-        }
-        
-        recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
-        guard let request = recognitionRequest else { return }
-        request.shouldReportPartialResults = true
-        
-        recognitionTask = speechRecognizer?.recognitionTask(with: request) { [weak self] result, error in
-            guard let self = self else { return }
-            
-            if let result = result {
-                let text = result.bestTranscription.formattedString
-                self.serachTF.text = text
-                // CALL API HERE FOR SEARCHs
-            }
-            
-            if error != nil || result?.isFinal == true {
-                self.stopListening()
-                DispatchQueue.main.async {
-                    (self.serachTF.inputView as? UIButton)?.setImage(UIImage(systemName: "mic"), for: .normal)
-                }
-            }
-        }
-        
-        let inputNode = audioEngine.inputNode
-        let recordingFormat = inputNode.outputFormat(forBus: 0)
-        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { buffer, _ in
-            request.append(buffer)
-        }
-        
-        audioEngine.prepare()
-        do {
-            try audioEngine.start()
-            isListening = true
-            serachTF.becomeFirstResponder() // optional: show cursor
-        } catch {
-            print("Failed to start audio engine: \(error)")
-            stopListening()
-        }
-    }
-    
-    // MARK: - Stop Listening
-    private func stopListening() {
-        audioEngine.stop()
-        audioEngine.inputNode.removeTap(onBus: 0)
-        recognitionRequest?.endAudio()
-        recognitionRequest = nil
-        recognitionTask?.cancel()
-        recognitionTask = nil
-        isListening = false
-    }
+
 }
 
 extension DealListedViewController: UITableViewDataSource, UITableViewDelegate {
@@ -236,7 +206,6 @@ extension DealListedViewController: UITableViewDataSource, UITableViewDelegate {
         case .expired:
             cell.configData(type: tabType, data: viewModel.expiredDeal?[indexPath.row])
         }
-        
         return cell
     }
     
@@ -262,7 +231,7 @@ extension DealListedViewController: UITextFieldDelegate {
         let workItem = DispatchWorkItem { [weak self] in
             guard let self = self else { return }
             self.viewModel.searchText = currentText
-            viewModel.dealsListRequest()
+            viewModel.dealsListRequest(tab: tabType)
         }
         searchWorkItem = workItem
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: workItem)
@@ -271,8 +240,8 @@ extension DealListedViewController: UITextFieldDelegate {
 }
 
 
-enum DealsListedType {
-    case listedDeals
-    case enrolled
-    case expired
+enum DealsListedType: Int {
+    case listedDeals = 1
+    case enrolled = 2
+    case expired = 3
 }

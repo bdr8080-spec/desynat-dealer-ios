@@ -29,7 +29,7 @@ struct ListedDeal: Codable {
     let status: Int?
     let createdAt, updatedAt: String?
     let sellerDealCount: Int?
-    let sellerDealrecord: SellerDealrecord?
+    let sellerDealrecord: [SellerDealrecord]?
     
     enum CodingKeys: String, CodingKey {
         case id, image
@@ -47,8 +47,8 @@ struct ListedDeal: Codable {
 
 // MARK: - SellerDealrecord
 struct SellerDealrecord: Codable {
-    let id, dealID, sellerID, productID: Int?
-    let discount, createdAt, updatedAt: String?
+    let id, dealID, productID: Int?
+    let discount,sellerID, createdAt, updatedAt: String?
     
     enum CodingKeys: String, CodingKey {
         case id

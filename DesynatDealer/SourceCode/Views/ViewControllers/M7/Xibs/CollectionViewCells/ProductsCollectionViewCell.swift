@@ -39,6 +39,23 @@ class ProductsCollectionViewCell: UICollectionViewCell {
         detailsView.layer.masksToBounds = true
     }
     
+//    override func prepareForReuse() {
+//        super.prepareForReuse()
+//
+//        mainImageView.image = nil
+//        titleLabel.text = nil
+//        ratingLabel.text = "(0)"
+//        ratingView.rating = 0
+//        finalPriceLabel.text = nil
+//        actualPriceLabel.text = nil
+//        discountPriceLabel.text = nil
+//        totalSoldLabel.text = nil
+//
+//        deleteButton.isHidden = true
+//        checkboxButton.isHidden = true
+//        totalSoldView.isHidden = true
+//    }
+    
     @IBAction func likeButtonTapped(_ sender: UIButton) {
       wishlistButtonTapped?()
     }
@@ -55,7 +72,7 @@ class ProductsCollectionViewCell: UICollectionViewCell {
         shareButtonTapped?()
     }
     
-    func configData(type: DealsListedType, data: ProductsList?) {
+    func configData(type: DealsListedType) {
         deleteButton.isHidden = true
         checkboxButton.isHidden = true
         totalSoldView.isHidden = true
@@ -65,10 +82,8 @@ class ProductsCollectionViewCell: UICollectionViewCell {
         case .enrolled:
             deleteButton.isHidden = false
         case .expired:
-            deleteButton.isHidden = false
             totalSoldView.isHidden = false
         }
-        configDealData(data: data)
     }
     
     func configDealData(data: ProductsList?) {
@@ -81,10 +96,10 @@ class ProductsCollectionViewCell: UICollectionViewCell {
             mainImageView.image = UIImage(named: "")
         }
         titleLabel.text = data?.productNameEn
-        if let ratingString = data?.reviewRating, let rating = Double(ratingString) {
-            ratingView.rating = rating
-            let ratingInt = Int(ratingString) ?? 0
-            ratingLabel.text = "(\(ratingInt))"
+        if let ratingString = data?.avgProductRating {//, let rating = Double(ratingString) {
+            ratingView.rating = Double(Int(ratingString))
+//            let ratingInt = Int(ratingString) ?? 0
+            ratingLabel.text = "(\(ratingString))"
         } else {
             ratingView.rating = 0.0 // default value if conversion fails
             ratingLabel.text = "(\(0))"
@@ -98,6 +113,42 @@ class ProductsCollectionViewCell: UICollectionViewCell {
           discountPriceLabel.text = "\(data?.productVariants?.first?.discountValue ?? "")% Off"
         } else {
             discountPriceLabel.text = "\(data?.productVariants?.first?.discountValue ?? "") KD Off"
+        }
+        
+//        if data?.wishlist == 1 {
+//          likeButtonOutlet.setImage(UIImage(named: "selectedHeartImage"), for: .normal)
+//        } else {
+//          likeButtonOutlet.setImage(UIImage(named: "besSellLike"), for: .normal)
+//        }
+    }
+    
+    func configDealDataForAddedProduct(data: AddedProductInDeal?) {
+        if let imageUrlString = data?.productDetails?.productVariants?.first?.variantImage?.first,
+           let url = URL(string: imageUrlString) {
+            mainImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            mainImageView.sd_imageIndicator?.startAnimatingIndicator()
+            mainImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
+        } else {
+            mainImageView.image = UIImage(named: "")
+        }
+        titleLabel.text = data?.productDetails?.productNameEn
+        if let ratingString = data?.productDetails?.avgProductRating { //}, let rating = Double(ratingString) {
+            ratingView.rating = Double(Int(ratingString))
+//            let ratingInt = Int(ratingString) ?? 0
+            ratingLabel.text = "(\(ratingString))"
+        } else {
+            ratingView.rating = 0.0 // default value if conversion fails
+            ratingLabel.text = "(\(0))"
+        }
+
+        finalPriceLabel.text = "\(data?.productDetails?.productVariants?.first?.finalPrice ?? "") KD"
+        CommonUtils.setStrikethrough(label: actualPriceLabel, text: "\(data?.productDetails?.productVariants?.first?.actualPrice ?? "") KD")
+        //    iscountPriceLabel.text = "\(data?.productVariants?.first?.discountValue ?? "") KD"
+        let discountType = data?.productDetails?.productVariants?.first?.discountType ?? "1"
+        if discountType == "1" {
+            discountPriceLabel.text = "\(data?.productDetails?.productVariants?.first?.discountValue ?? "")% Off"
+        } else {
+            discountPriceLabel.text = "\(data?.productDetails?.productVariants?.first?.discountValue ?? "") KD Off"
         }
         
 //        if data?.wishlist == 1 {

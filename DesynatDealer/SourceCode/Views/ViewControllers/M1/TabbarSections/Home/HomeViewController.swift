@@ -117,7 +117,7 @@ class HomeViewController: UIViewController {
        let url = URL(string: storeImageUrl) {
       userProfileImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
       userProfileImageView.sd_imageIndicator?.startAnimatingIndicator()
-      userProfileImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
+        userProfileImageView.sd_setImage(with: url, placeholderImage: .userProfile)
     }
   }
   

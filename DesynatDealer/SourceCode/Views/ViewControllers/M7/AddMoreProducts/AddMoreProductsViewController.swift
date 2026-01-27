@@ -9,6 +9,8 @@ import UIKit
 
 class AddMoreProductsViewController: UIViewController {
     
+    @IBOutlet weak var addToDealsButton: CustomButton!
+    @IBOutlet weak var noDataFoundLabel: UILabel!
     @IBOutlet weak var searchTF: UITextField!
     @IBOutlet weak var productsCollectionView: UICollectionView! {
         didSet {
@@ -24,6 +26,12 @@ class AddMoreProductsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         searchTF.delegate = self
+        updateAddToDealsButtonState()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.dealDetailsRequest()
     }
     
     @IBAction func backDidTapped(_ sender: Any) {
@@ -31,13 +39,20 @@ class AddMoreProductsViewController: UIViewController {
     }
     
     @IBAction func addToDealsDidTapped(_ sender: Any) {
-//        guard !selectedProductIDs.isEmpty else {
-//            self.showAlert(msg: "Please select at least one product.")
-//            return
-//        }
-//        let selectedIDsArray = Array(selectedProductIDs)
-//        viewModel.addProductsRequest()
+        guard !selectedProductIDs.isEmpty else {
+            self.showAlert(msg: "Please select at least one product")
+            return
+        }
+        let selectedIDsArray = Array(selectedProductIDs)
+        viewModel.addProductsRequest(ids: selectedIDsArray)
     }
+    
+    func updateAddToDealsButtonState() {
+        let isEnabled = !selectedProductIDs.isEmpty
+        addToDealsButton.isEnabled = isEnabled
+        addToDealsButton.alpha = isEnabled ? 1.0 : 0.5
+    }
+
     
 }
 
@@ -49,20 +64,30 @@ extension AddMoreProductsViewController: UICollectionViewDelegate, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductsCollectionViewCell", for: indexPath) as! ProductsCollectionViewCell
-        cell.configData(type: .enrolled, data: dealDetails?[indexPath.row])
+        cell.configData(type: .listedDeals)
+        cell.configDealData(data: dealDetails?[indexPath.row])
+        let productID = dealDetails?[indexPath.row].id ?? 0
+
+        if selectedProductIDs.contains(productID) {
+            cell.checkboxButton.setImage(UIImage(named: "filledCheckbox"), for: .normal)
+        } else {
+            cell.checkboxButton.setImage(UIImage(named: "checkBox"), for: .normal)
+        }
+
         cell.checkboxButtonTapped = { [weak self] in
             guard let self = self else { return }
-            let productData = self.dealDetails?[indexPath.row]
-            guard let productID = productData?.id else { return }
-            
-            // Toggle selection
+            guard let productID = self.dealDetails?[indexPath.row].id else { return }
+
             if self.selectedProductIDs.contains(productID) {
                 self.selectedProductIDs.remove(productID)
-                cell.checkboxButton.setImage(UIImage(named: "filledCheckbox"), for: .normal)
             } else {
                 self.selectedProductIDs.insert(productID)
-                cell.checkboxButton.setImage(UIImage(named: "checkBox"), for: .normal)
             }
+
+            self.updateAddToDealsButtonState()
+
+            // Reload only this cell
+            self.productsCollectionView.reloadItems(at: [indexPath])
         }
         return cell
     }
@@ -86,8 +111,8 @@ extension AddMoreProductsViewController: UITextFieldDelegate {
             searchWorkItem?.cancel()
             let workItem = DispatchWorkItem { [weak self] in
                 guard let self = self else { return }
-//                self.viewModel.searchText = currentText
-//                viewModel.getDe()
+                self.viewModel.searchText = currentText
+                viewModel.dealDetailsRequest()
             }
             searchWorkItem = workItem
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: workItem)

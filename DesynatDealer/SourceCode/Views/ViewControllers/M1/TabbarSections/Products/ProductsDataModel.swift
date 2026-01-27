@@ -25,15 +25,15 @@ struct ProductsListDataModel: Codable {
 
 // MARK: - ProductsList
 struct ProductsList: Codable {
-    let id, sellerID: Int?
-    let storeID, categoryID, subcategoryID: String?
+    let id: Int?
+    let storeID,sellerID, categoryID, subcategoryID: String?
     let brandID, otherEn, otherAr, productNameEn: String?
     let productNameAr, descriptionEn, descriptionAr, minCardQuantity: String?
     let maxCardQuantity, productReturn, returnDays, productExchangable: String?
     let exchangableDays, reviewRating, affiliatedProduct, customizedProduct: String?
     let readyToShip, cashOnDelivery: String?
     let uploadSizeChart: String?
-    var productActiveStatus: Int?
+    var productActiveStatus, avgProductRating: Int?
     let createdAt, updatedAt, stock: String?
     let category: Category?
     let brand: Brand?
@@ -58,6 +58,7 @@ struct ProductsList: Codable {
         case maxCardQuantity = "max_card_quantity"
         case productReturn = "product_return"
         case returnDays = "return_days"
+        case avgProductRating = "avg_product_rating"
         case productExchangable = "product_exchangable"
         case exchangableDays = "exchangable_days"
         case reviewRating = "review_rating"

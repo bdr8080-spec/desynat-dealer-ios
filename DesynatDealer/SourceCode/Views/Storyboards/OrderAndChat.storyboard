@@ -3242,7 +3242,7 @@ Apartment, Kuwait</string>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="3VZ-F5-MX5">
                                 <rect key="frame" x="24" y="241" width="345" height="543"/>
                                 <subviews>
-                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FuK-Sr-JR8" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FuK-Sr-JR8" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="345" height="38"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search" translatesAutoresizingMaskIntoConstraints="NO" id="etc-BK-t8w">
@@ -3269,7 +3269,7 @@ Apartment, Kuwait</string>
                                                     <constraint firstAttribute="width" constant="50" id="y0Y-4A-OJK"/>
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" image="mic"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="filter"/>
                                                 <connections>
                                                     <action selector="micDidTapped:" destination="ZmN-LO-pa6" eventType="touchUpInside" id="147-2w-0JX"/>
                                                 </connections>
@@ -3300,22 +3300,25 @@ Apartment, Kuwait</string>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="kuN-ll-dgW">
-                                        <rect key="frame" x="0.0" y="0.0" width="345" height="543"/>
+                                        <rect key="frame" x="0.0" y="53" width="345" height="490"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <connections>
                                             <outlet property="dataSource" destination="ZmN-LO-pa6" id="qUM-1u-wYS"/>
                                             <outlet property="delegate" destination="ZmN-LO-pa6" id="CFF-pX-b4r"/>
                                         </connections>
                                     </tableView>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="no deals found" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="etM-nK-D3s">
+                                        <rect key="frame" x="0.0" y="543" width="345" height="200"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="78G-rZ-Ks9"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="no data found" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BRG-uA-4nl">
-                                <rect key="frame" x="139.33333333333334" y="439.66666666666669" width="114.66666666666666" height="22.666666666666686"/>
-                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ZeE-9O-KeF"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -3323,8 +3326,6 @@ Apartment, Kuwait</string>
                             <constraint firstItem="r6Q-dk-DXP" firstAttribute="leading" secondItem="ZeE-9O-KeF" secondAttribute="leading" constant="24" id="9C3-QK-JTI"/>
                             <constraint firstItem="xNO-22-16t" firstAttribute="trailing" secondItem="ZeE-9O-KeF" secondAttribute="trailing" id="AZn-ML-QNc"/>
                             <constraint firstItem="ZeE-9O-KeF" firstAttribute="trailing" secondItem="3VZ-F5-MX5" secondAttribute="trailing" constant="24" id="Bs7-VW-P2u"/>
-                            <constraint firstItem="BRG-uA-4nl" firstAttribute="centerY" secondItem="ZeE-9O-KeF" secondAttribute="centerY" id="I5e-B8-8GL"/>
-                            <constraint firstItem="BRG-uA-4nl" firstAttribute="centerX" secondItem="ZeE-9O-KeF" secondAttribute="centerX" id="IIt-gL-yRV"/>
                             <constraint firstItem="3VZ-F5-MX5" firstAttribute="leading" secondItem="ZeE-9O-KeF" secondAttribute="leading" constant="24" id="S8t-l3-M9t"/>
                             <constraint firstItem="xNO-22-16t" firstAttribute="leading" secondItem="ZeE-9O-KeF" secondAttribute="leading" id="cW3-tt-FVA"/>
                             <constraint firstItem="3VZ-F5-MX5" firstAttribute="bottom" secondItem="ZeE-9O-KeF" secondAttribute="bottom" id="eZJ-CN-Cam"/>
@@ -3342,8 +3343,7 @@ Apartment, Kuwait</string>
                         <outlet property="listTableView" destination="kuN-ll-dgW" id="hAD-26-UEI"/>
                         <outlet property="listedDealsButton" destination="8qv-o7-Xtx" id="cqm-w1-OJ9"/>
                         <outlet property="listedDealsLabel" destination="6bx-Jo-HjN" id="ZQQ-01-caV"/>
-                        <outlet property="noDataFoundLabel" destination="BRG-uA-4nl" id="9vL-H2-Rey"/>
-                        <outlet property="searchView" destination="FuK-Sr-JR8" id="xlB-vj-EJ5"/>
+                        <outlet property="noDataFoundLabel" destination="etM-nK-D3s" id="6sc-aO-IUi"/>
                         <outlet property="serachTF" destination="2WC-DD-4Gc" id="aZI-00-K3g"/>
                     </connections>
                 </viewController>
@@ -3399,10 +3399,10 @@ Apartment, Kuwait</string>
                                 <rect key="frame" x="0.0" y="178" width="393" height="606"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QrF-cc-RCI">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="1294.3333333333333"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="1409.3333333333333"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="xE0-06-wyE">
-                                                <rect key="frame" x="24" y="0.0" width="345" height="1294.3333333333333"/>
+                                                <rect key="frame" x="24" y="0.0" width="345" height="1409.3333333333333"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qlk-cy-sMP" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="345" height="455.33333333333331"/>
@@ -3413,7 +3413,7 @@ Apartment, Kuwait</string>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4BW-BB-uSL">
                                                                         <rect key="frame" x="0.0" y="0.0" width="345" height="136"/>
                                                                         <subviews>
-                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bannerImg" translatesAutoresizingMaskIntoConstraints="NO" id="CH3-NS-7OQ">
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CH3-NS-7OQ">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="345" height="136"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="136" id="JB3-bS-P8Z"/>
@@ -3443,8 +3443,8 @@ Apartment, Kuwait</string>
                                                                                             <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
                                                                                         </userDefinedRuntimeAttributes>
                                                                                     </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2nd July 2025" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TRg-bX-udv" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
-                                                                                        <rect key="frame" x="238" y="10" width="95" height="20"/>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TRg-bX-udv" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
+                                                                                        <rect key="frame" x="326.33333333333331" y="10" width="6.6666666666666856" height="20"/>
                                                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <nil key="highlightedColor"/>
@@ -3467,8 +3467,8 @@ Apartment, Kuwait</string>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JhL-cV-HCQ">
                                                                                 <rect key="frame" x="0.0" y="35" width="345" height="30"/>
                                                                                 <subviews>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ends On" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdT-wt-Smr" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
-                                                                                        <rect key="frame" x="12" y="10" width="48" height="14.333333333333336"/>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdT-wt-Smr" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
+                                                                                        <rect key="frame" x="12.000000000000002" y="10" width="29.666666666666671" height="14.333333333333336"/>
                                                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                                         <nil key="highlightedColor"/>
@@ -3476,8 +3476,8 @@ Apartment, Kuwait</string>
                                                                                             <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
                                                                                         </userDefinedRuntimeAttributes>
                                                                                     </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6:00 Pm to 9:00 Pm" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ly-5R-X2u" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
-                                                                                        <rect key="frame" x="200" y="10" width="133" height="20"/>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ly-5R-X2u" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
+                                                                                        <rect key="frame" x="326.33333333333331" y="10" width="6.6666666666666856" height="20"/>
                                                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <nil key="highlightedColor"/>
@@ -3508,8 +3508,8 @@ Apartment, Kuwait</string>
                                                                                             <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
                                                                                         </userDefinedRuntimeAttributes>
                                                                                     </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="40%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Blk-ZR-xpS" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
-                                                                                        <rect key="frame" x="299.66666666666669" y="8.6666666666666856" width="33.333333333333314" height="17"/>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Blk-ZR-xpS" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
+                                                                                        <rect key="frame" x="326.33333333333331" y="8.6666666666666856" width="6.6666666666666856" height="17"/>
                                                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                                                         <color key="textColor" name="34A853"/>
                                                                                         <nil key="highlightedColor"/>
@@ -3539,8 +3539,8 @@ Apartment, Kuwait</string>
                                                                                             <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
                                                                                         </userDefinedRuntimeAttributes>
                                                                                     </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Men" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0JH-XZ-mBn" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
-                                                                                        <rect key="frame" x="304.33333333333331" y="10" width="28.666666666666686" height="20"/>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0JH-XZ-mBn" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
+                                                                                        <rect key="frame" x="326.33333333333331" y="10" width="6.6666666666666856" height="20"/>
                                                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <nil key="highlightedColor"/>
@@ -3571,8 +3571,8 @@ Apartment, Kuwait</string>
                                                                                             <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
                                                                                         </userDefinedRuntimeAttributes>
                                                                                     </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Traditional" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ras-Hm-DZE" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
-                                                                                        <rect key="frame" x="263" y="10" width="70" height="20"/>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ras-Hm-DZE" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
+                                                                                        <rect key="frame" x="326.33333333333331" y="10" width="6.6666666666666856" height="20"/>
                                                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <nil key="highlightedColor"/>
@@ -3596,11 +3596,10 @@ Apartment, Kuwait</string>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dG4-Sp-acn">
                                                                         <rect key="frame" x="0.0" y="336" width="345" height="119.33333333333331"/>
                                                                         <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="emK-Pr-MOM" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="emK-Pr-MOM" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
                                                                                 <rect key="frame" x="12" y="5" width="321" height="99.333333333333329"/>
-                                                                                <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit,  sed do eiusmod tempor incididunt ut labore et dolore  magna aliqua. Ut enim ad minim veniam, quis nostrud  exercitation ullamco laboris nisi ut aliquip ex ea</string>
                                                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
-                                                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
                                                                                 <userDefinedRuntimeAttributes>
                                                                                     <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
@@ -3750,8 +3749,17 @@ Apartment, Kuwait</string>
                                                             <outlet property="delegate" destination="1vQ-zM-V7n" id="vAy-lC-j3g"/>
                                                         </connections>
                                                     </collectionView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="no product found" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L2P-dk-Xmo">
+                                                        <rect key="frame" x="0.0" y="1203.3333333333333" width="345" height="100"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="100" id="ytN-sl-9ke"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
+                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WZ4-qd-XB0">
-                                                        <rect key="frame" x="0.0" y="1203.3333333333333" width="345" height="38"/>
+                                                        <rect key="frame" x="0.0" y="1318.3333333333333" width="345" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wMw-9a-QfH" customClass="CustomButton">
                                                                 <rect key="frame" x="0.0" y="0.0" width="345" height="38"/>
@@ -3790,7 +3798,7 @@ Apartment, Kuwait</string>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Ih-Z9-axE">
-                                                        <rect key="frame" x="0.0" y="1256.3333333333333" width="345" height="38"/>
+                                                        <rect key="frame" x="0.0" y="1371.3333333333333" width="345" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mhw-HH-L2V" customClass="CustomButton" customModule="DesynatDealer" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="345" height="38"/>
@@ -3870,14 +3878,15 @@ Apartment, Kuwait</string>
                     </view>
                     <connections>
                         <outlet property="addMoreProdutsView" destination="0Ih-Z9-axE" id="2O5-p4-8Nl"/>
+                        <outlet property="addToDealsButton" destination="wMw-9a-QfH" id="eel-yA-S4p"/>
                         <outlet property="addToDealsView" destination="WZ4-qd-XB0" id="lKh-j2-6b2"/>
                         <outlet property="categoryLabel" destination="0JH-XZ-mBn" id="bX6-fb-Z3D"/>
                         <outlet property="descriptionLabel" destination="emK-Pr-MOM" id="9Tl-bx-WjD"/>
                         <outlet property="discountPercentageLabel" destination="Blk-ZR-xpS" id="t1I-A5-gJo"/>
-                        <outlet property="endsOn" destination="bdT-wt-Smr" id="Q7q-RC-IkX"/>
-                        <outlet property="fromLabel" destination="6ly-5R-X2u" id="ko4-AB-ckj"/>
+                        <outlet property="endsOn" destination="6ly-5R-X2u" id="ICC-OY-K42"/>
                         <outlet property="heightOfProductCollectionViewConstraint" destination="vS0-4s-px3" id="DG6-ts-1sf"/>
                         <outlet property="mainImageView" destination="CH3-NS-7OQ" id="eze-WX-1a7"/>
+                        <outlet property="noDataFound" destination="L2P-dk-Xmo" id="ELA-Om-mbs"/>
                         <outlet property="productsCollectionView" destination="mwc-Xf-3R4" id="1cl-nv-Xpa"/>
                         <outlet property="searchTF" destination="JYP-Li-zD1" id="5kv-qn-EpI"/>
                         <outlet property="startsOnLabel" destination="TRg-bX-udv" id="2Ij-VK-bQT"/>
@@ -3888,7 +3897,7 @@ Apartment, Kuwait</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uTt-Tc-Xj3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="679" y="-2258"/>
+            <point key="canvasLocation" x="700" y="-2258"/>
         </scene>
         <!--Add More Products View Controller-->
         <scene sceneID="Wjl-EI-8Ea">
@@ -3992,6 +4001,12 @@ Apartment, Kuwait</string>
                                     <outlet property="delegate" destination="b1D-51-qtv" id="VoB-wI-56n"/>
                                 </connections>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="no product found" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eb1-fN-1gY">
+                                <rect key="frame" x="126.33333333333333" y="439.66666666666669" width="140.33333333333337" height="22.666666666666686"/>
+                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8NI-yk-zzI">
                                 <rect key="frame" x="24" y="746" width="345" height="38"/>
                                 <subviews>
@@ -4043,14 +4058,18 @@ Apartment, Kuwait</string>
                             <constraint firstItem="8NI-yk-zzI" firstAttribute="leading" secondItem="GiR-Cy-Hpq" secondAttribute="leading" constant="24" id="JW9-tf-Ddx"/>
                             <constraint firstItem="x2b-JR-ylx" firstAttribute="leading" secondItem="GiR-Cy-Hpq" secondAttribute="leading" id="Lh8-dE-691"/>
                             <constraint firstItem="GiR-Cy-Hpq" firstAttribute="trailing" secondItem="SPN-12-5aG" secondAttribute="trailing" constant="24" id="NG5-QA-xLf"/>
+                            <constraint firstItem="Eb1-fN-1gY" firstAttribute="centerY" secondItem="GiR-Cy-Hpq" secondAttribute="centerY" id="NRE-4T-6aZ"/>
                             <constraint firstItem="GiR-Cy-Hpq" firstAttribute="bottom" secondItem="8NI-yk-zzI" secondAttribute="bottom" id="P8w-7B-Lfb"/>
                             <constraint firstItem="SPN-12-5aG" firstAttribute="top" secondItem="fmU-kH-9Wd" secondAttribute="bottom" constant="15" id="VWH-LR-8Lq"/>
                             <constraint firstItem="GiR-Cy-Hpq" firstAttribute="trailing" secondItem="fmU-kH-9Wd" secondAttribute="trailing" constant="24" id="fyx-5l-O79"/>
+                            <constraint firstItem="Eb1-fN-1gY" firstAttribute="centerX" secondItem="GiR-Cy-Hpq" secondAttribute="centerX" id="hvY-Ig-Gwp"/>
                             <constraint firstItem="x2b-JR-ylx" firstAttribute="top" secondItem="GiR-Cy-Hpq" secondAttribute="top" id="uWG-Ya-5e1"/>
                             <constraint firstItem="SPN-12-5aG" firstAttribute="leading" secondItem="GiR-Cy-Hpq" secondAttribute="leading" constant="24" id="vZn-DS-iOG"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addToDealsButton" destination="fAV-de-V1k" id="vHZ-W3-wba"/>
+                        <outlet property="noDataFoundLabel" destination="Eb1-fN-1gY" id="JDq-B7-J9h"/>
                         <outlet property="productsCollectionView" destination="SPN-12-5aG" id="ivJ-ub-gBW"/>
                         <outlet property="searchTF" destination="eFG-XU-ocv" id="jcG-km-z3b"/>
                     </connections>
@@ -4059,10 +4078,300 @@ Apartment, Kuwait</string>
             </objects>
             <point key="canvasLocation" x="1422" y="-2258"/>
         </scene>
+        <!--Deals List Filter View Controller-->
+        <scene sceneID="9CS-HH-SKS">
+            <objects>
+                <viewController storyboardIdentifier="DealsListFilterViewController" modalPresentationStyle="overFullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LTw-I7-Nf9" customClass="DealsListFilterViewController" customModule="DesynatDealer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PXb-hn-e9g">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yiZ-0V-70G" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="576.66666666666663" width="393" height="275.33333333333337"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Crh-Nc-XMC">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="62.666666666666664"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tLh-Da-WAi">
+                                                <rect key="frame" x="20" y="18" width="298" height="22.666666666666671"/>
+                                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mOX-Ul-i3q">
+                                                <rect key="frame" x="338" y="12" width="35" height="35"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="35" id="5wz-xG-usz"/>
+                                                    <constraint firstAttribute="height" constant="35" id="Ui6-X7-Mgb"/>
+                                                </constraints>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" image="cross"/>
+                                                <connections>
+                                                    <action selector="dismissDidTapped:" destination="LTw-I7-Nf9" eventType="touchUpInside" id="uxW-QJ-Qca"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="1" green="0.96710246799999999" blue="0.91878283019999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="mOX-Ul-i3q" firstAttribute="leading" secondItem="tLh-Da-WAi" secondAttribute="trailing" constant="20" id="33c-Gu-5iq"/>
+                                            <constraint firstItem="mOX-Ul-i3q" firstAttribute="centerY" secondItem="tLh-Da-WAi" secondAttribute="centerY" id="DWg-WZ-BD3"/>
+                                            <constraint firstItem="tLh-Da-WAi" firstAttribute="top" secondItem="Crh-Nc-XMC" secondAttribute="top" constant="18" id="LQf-wh-DGD"/>
+                                            <constraint firstItem="tLh-Da-WAi" firstAttribute="leading" secondItem="Crh-Nc-XMC" secondAttribute="leading" constant="20" id="fHo-DD-kmy"/>
+                                            <constraint firstAttribute="trailing" secondItem="mOX-Ul-i3q" secondAttribute="trailing" constant="20" id="lgF-ja-mfE"/>
+                                            <constraint firstAttribute="bottom" secondItem="tLh-Da-WAi" secondAttribute="bottom" constant="22" id="va6-gi-xvG"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sz6-Qq-dJ6">
+                                        <rect key="frame" x="24" y="107.66666666666674" width="345" height="69.666666666666686"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter by Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W4N-e9-qhW">
+                                                <rect key="frame" x="0.0" y="0.0" width="345" height="19.666666666666668"/>
+                                                <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="14"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Cq9-Xu-hIa">
+                                                <rect key="frame" x="0.0" y="31.666666666666629" width="345" height="38"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qyc-mB-AIO" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="165" height="38"/>
+                                                        <subviews>
+                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="From   //  //" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SFj-d4-jj4">
+                                                                <rect key="frame" x="12" y="0.0" width="109" height="38"/>
+                                                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                                        <color key="value" name="171717"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </textField>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendar" translatesAutoresizingMaskIntoConstraints="NO" id="35S-6Z-vNl">
+                                                                <rect key="frame" x="133" y="8" width="22" height="22"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="22" id="Tsy-UC-Gdj"/>
+                                                                    <constraint firstAttribute="height" constant="22" id="zB9-4x-Fdo"/>
+                                                                </constraints>
+                                                            </imageView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="35S-6Z-vNl" secondAttribute="trailing" constant="10" id="130-En-WOM"/>
+                                                            <constraint firstAttribute="bottom" secondItem="SFj-d4-jj4" secondAttribute="bottom" id="EEn-mX-InA"/>
+                                                            <constraint firstItem="35S-6Z-vNl" firstAttribute="leading" secondItem="SFj-d4-jj4" secondAttribute="trailing" constant="12" id="MMf-Tb-Jb7"/>
+                                                            <constraint firstAttribute="height" constant="38" id="cfa-pY-8p5"/>
+                                                            <constraint firstItem="35S-6Z-vNl" firstAttribute="centerY" secondItem="Qyc-mB-AIO" secondAttribute="centerY" id="evU-g1-u9v"/>
+                                                            <constraint firstItem="SFj-d4-jj4" firstAttribute="top" secondItem="Qyc-mB-AIO" secondAttribute="top" id="mwY-6E-ac5"/>
+                                                            <constraint firstItem="SFj-d4-jj4" firstAttribute="leading" secondItem="Qyc-mB-AIO" secondAttribute="leading" constant="12" id="ojo-hx-bR2"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="12"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                <real key="value" value="1"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                <color key="value" systemColor="systemGray5Color"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ml-5q-I1v" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
+                                                        <rect key="frame" x="180" y="0.0" width="165" height="38"/>
+                                                        <subviews>
+                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="To   //  //" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vyR-W2-sXo">
+                                                                <rect key="frame" x="12" y="0.0" width="109" height="38"/>
+                                                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </textField>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendar" translatesAutoresizingMaskIntoConstraints="NO" id="ow0-nR-R26">
+                                                                <rect key="frame" x="133" y="8" width="22" height="22"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="22" id="cWE-kR-5ab"/>
+                                                                    <constraint firstAttribute="height" constant="22" id="dB4-ys-ilo"/>
+                                                                </constraints>
+                                                            </imageView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="bottom" secondItem="vyR-W2-sXo" secondAttribute="bottom" id="NBB-yE-6AD"/>
+                                                            <constraint firstAttribute="height" constant="38" id="Pem-fD-DyH"/>
+                                                            <constraint firstItem="vyR-W2-sXo" firstAttribute="top" secondItem="2ml-5q-I1v" secondAttribute="top" id="Y4H-8Y-lfJ"/>
+                                                            <constraint firstAttribute="trailing" secondItem="ow0-nR-R26" secondAttribute="trailing" constant="10" id="gDT-NK-WjY"/>
+                                                            <constraint firstItem="vyR-W2-sXo" firstAttribute="leading" secondItem="2ml-5q-I1v" secondAttribute="leading" constant="12" id="ihJ-Xb-pfh"/>
+                                                            <constraint firstItem="ow0-nR-R26" firstAttribute="leading" secondItem="vyR-W2-sXo" secondAttribute="trailing" constant="12" id="vZn-Xk-aSB"/>
+                                                            <constraint firstItem="ow0-nR-R26" firstAttribute="centerY" secondItem="2ml-5q-I1v" secondAttribute="centerY" id="zuf-Tf-lZh"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="12"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                <real key="value" value="1"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                <color key="value" systemColor="systemGray5Color"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="W4N-e9-qhW" secondAttribute="trailing" id="AZT-yH-LMx"/>
+                                            <constraint firstItem="W4N-e9-qhW" firstAttribute="top" secondItem="Sz6-Qq-dJ6" secondAttribute="top" id="OCG-Nl-Oyd"/>
+                                            <constraint firstItem="Cq9-Xu-hIa" firstAttribute="top" secondItem="W4N-e9-qhW" secondAttribute="bottom" constant="12" id="XxH-G8-3zX"/>
+                                            <constraint firstItem="W4N-e9-qhW" firstAttribute="leading" secondItem="Sz6-Qq-dJ6" secondAttribute="leading" id="a8V-Wr-qIR"/>
+                                            <constraint firstItem="Cq9-Xu-hIa" firstAttribute="leading" secondItem="W4N-e9-qhW" secondAttribute="leading" id="bTi-Kj-fPa"/>
+                                            <constraint firstItem="Cq9-Xu-hIa" firstAttribute="trailing" secondItem="W4N-e9-qhW" secondAttribute="trailing" id="bh3-K4-7VD"/>
+                                            <constraint firstAttribute="bottom" secondItem="Cq9-Xu-hIa" secondAttribute="bottom" id="ohN-9h-MZn"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="ft3-Lo-8ue">
+                                        <rect key="frame" x="24" y="207.33333333333337" width="345" height="38"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PFW-cM-YKn">
+                                                <rect key="frame" x="0.0" y="0.0" width="165" height="38"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dvb-7k-gct" customClass="CustomButton" customModule="DesynatDealer" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="165" height="38"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="38" id="0Cl-oX-g95"/>
+                                                        </constraints>
+                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="5"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                <color key="value" red="0.43137254899999999" green="0.27058823529999998" blue="0.1529411765" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                <real key="value" value="1"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="clearDidTapped:" destination="LTw-I7-Nf9" eventType="touchUpInside" id="hWR-Wq-I1B"/>
+                                                        </connections>
+                                                    </button>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clear" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jqd-3n-mmV">
+                                                        <rect key="frame" x="15" y="9.333333333333373" width="135" height="19.666666666666671"/>
+                                                        <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
+                                                        <color key="textColor" name="darkBrown"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="dvb-7k-gct" secondAttribute="trailing" id="210-7D-qyL"/>
+                                                    <constraint firstItem="dvb-7k-gct" firstAttribute="leading" secondItem="PFW-cM-YKn" secondAttribute="leading" id="BIg-IZ-GsJ"/>
+                                                    <constraint firstItem="jqd-3n-mmV" firstAttribute="leading" secondItem="PFW-cM-YKn" secondAttribute="leading" constant="15" id="Cr3-sy-5Du"/>
+                                                    <constraint firstItem="jqd-3n-mmV" firstAttribute="centerY" secondItem="PFW-cM-YKn" secondAttribute="centerY" id="g9J-w3-9Hy"/>
+                                                    <constraint firstItem="dvb-7k-gct" firstAttribute="top" secondItem="PFW-cM-YKn" secondAttribute="top" id="t3Q-MO-7rq"/>
+                                                    <constraint firstAttribute="bottom" secondItem="dvb-7k-gct" secondAttribute="bottom" id="vXy-3x-LeC"/>
+                                                    <constraint firstItem="jqd-3n-mmV" firstAttribute="centerX" secondItem="PFW-cM-YKn" secondAttribute="centerX" id="wWO-Ig-Hm2"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HUF-uS-cdZ">
+                                                <rect key="frame" x="180" y="0.0" width="165" height="38"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yje-NS-Wpo" customClass="CustomButton">
+                                                        <rect key="frame" x="0.0" y="0.0" width="165" height="38"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="38" id="rHS-3e-2Yu"/>
+                                                        </constraints>
+                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" image="btnGradient"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="5"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="applyDidTapped:" destination="LTw-I7-Nf9" eventType="touchUpInside" id="gn0-i3-KXJ"/>
+                                                        </connections>
+                                                    </button>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Apply" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ci-KM-aBE">
+                                                        <rect key="frame" x="15" y="9.333333333333373" width="135" height="19.666666666666671"/>
+                                                        <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="yje-NS-Wpo" secondAttribute="bottom" id="AL2-F3-eAf"/>
+                                                    <constraint firstItem="yje-NS-Wpo" firstAttribute="top" secondItem="HUF-uS-cdZ" secondAttribute="top" id="AyU-ch-fDZ"/>
+                                                    <constraint firstItem="0Ci-KM-aBE" firstAttribute="leading" secondItem="HUF-uS-cdZ" secondAttribute="leading" constant="15" id="Ils-SO-hmI"/>
+                                                    <constraint firstItem="yje-NS-Wpo" firstAttribute="leading" secondItem="HUF-uS-cdZ" secondAttribute="leading" id="JrI-WM-ZDJ"/>
+                                                    <constraint firstItem="0Ci-KM-aBE" firstAttribute="centerX" secondItem="HUF-uS-cdZ" secondAttribute="centerX" id="OXq-Mp-neu"/>
+                                                    <constraint firstItem="0Ci-KM-aBE" firstAttribute="centerY" secondItem="HUF-uS-cdZ" secondAttribute="centerY" id="m7z-tc-PNy"/>
+                                                    <constraint firstAttribute="trailing" secondItem="yje-NS-Wpo" secondAttribute="trailing" id="qt7-Qk-eQn"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="ft3-Lo-8ue" firstAttribute="trailing" secondItem="Sz6-Qq-dJ6" secondAttribute="trailing" id="2kR-1h-cMT"/>
+                                    <constraint firstAttribute="trailing" secondItem="Crh-Nc-XMC" secondAttribute="trailing" id="9c9-ae-k1Y"/>
+                                    <constraint firstAttribute="bottom" secondItem="ft3-Lo-8ue" secondAttribute="bottom" constant="30" id="M1g-IU-4cm"/>
+                                    <constraint firstItem="Crh-Nc-XMC" firstAttribute="leading" secondItem="yiZ-0V-70G" secondAttribute="leading" id="NQZ-z4-DSy"/>
+                                    <constraint firstItem="Sz6-Qq-dJ6" firstAttribute="leading" secondItem="yiZ-0V-70G" secondAttribute="leading" constant="24" id="Qug-v3-fWW"/>
+                                    <constraint firstAttribute="trailing" secondItem="Sz6-Qq-dJ6" secondAttribute="trailing" constant="24" id="bhU-Ig-1N4"/>
+                                    <constraint firstItem="Crh-Nc-XMC" firstAttribute="top" secondItem="yiZ-0V-70G" secondAttribute="top" id="fhM-sC-IQa"/>
+                                    <constraint firstItem="Sz6-Qq-dJ6" firstAttribute="top" secondItem="Crh-Nc-XMC" secondAttribute="bottom" constant="45" id="i3t-N6-Qra"/>
+                                    <constraint firstItem="ft3-Lo-8ue" firstAttribute="leading" secondItem="Sz6-Qq-dJ6" secondAttribute="leading" id="sMS-la-BqL"/>
+                                    <constraint firstItem="ft3-Lo-8ue" firstAttribute="top" secondItem="Sz6-Qq-dJ6" secondAttribute="bottom" constant="30" id="yvo-ET-iwn"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="32"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="3Cr-yK-JAJ"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.60420115890000003" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="3Cr-yK-JAJ" firstAttribute="trailing" secondItem="yiZ-0V-70G" secondAttribute="trailing" id="FTr-Fg-4Yd"/>
+                            <constraint firstAttribute="bottom" secondItem="yiZ-0V-70G" secondAttribute="bottom" id="S9M-ss-NxW"/>
+                            <constraint firstItem="yiZ-0V-70G" firstAttribute="centerX" secondItem="PXb-hn-e9g" secondAttribute="centerX" id="mIx-Bf-Uwn"/>
+                            <constraint firstItem="yiZ-0V-70G" firstAttribute="leading" secondItem="3Cr-yK-JAJ" secondAttribute="leading" id="qZ4-6m-ivj"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="fromTextField" destination="SFj-d4-jj4" id="J5P-gN-xnB"/>
+                        <outlet property="headerView" destination="Crh-Nc-XMC" id="Ubv-ic-cNU"/>
+                        <outlet property="toTextField" destination="vyR-W2-sXo" id="bGp-zF-9Lh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cx8-Xl-x4O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2143" y="-2258"/>
+        </scene>
     </scenes>
     <resources>
         <image name="attachmentMessage" width="24" height="24"/>
-        <image name="bannerImg" width="343" height="136"/>
         <image name="btnGradient" width="343" height="38"/>
         <image name="calendar" width="22" height="22"/>
         <image name="couponApplied" width="24" height="24"/>
@@ -4072,7 +4381,6 @@ Apartment, Kuwait</string>
         <image name="filledStar" width="32" height="32"/>
         <image name="filter" width="50.333332061767578" height="40.666667938232422"/>
         <image name="leftVector" width="9.6666669845581055" height="17.666666030883789"/>
-        <image name="mic" width="50" height="36"/>
         <image name="orderBag" width="30" height="30"/>
         <image name="revenue" width="45" height="45"/>
         <image name="search" width="20" height="20"/>

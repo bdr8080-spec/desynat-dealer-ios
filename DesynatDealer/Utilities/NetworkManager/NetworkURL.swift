@@ -83,6 +83,7 @@ enum NetworkEndPoint: String {
     case getAllDealsList                = "/api/seller/view-deals"
     case getDealsDetails                = "/api/seller/view-single-deals"
     case addProductsInDeals             = "/api/seller/Add-products-in-deal-inside"
+    case removeProductsInDeals          = "/api/seller/remove-products-in-deal"
     
     
     func withBaseURL() -> String {
