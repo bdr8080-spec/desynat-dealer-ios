@@ -59,7 +59,8 @@ class LoginViewModel: NSObject {
             APIKeys.countryCode:loginHostVC.countryCode,
             APIKeys.emailMobile:loginHostVC.emailTextField.text ?? "",
             APIKeys.password: loginHostVC.txtPassword.text ?? "",
-            APIKeys.type:loginHostVC.type
+            APIKeys.type:loginHostVC.type,
+            "lang": LanguageManager.currentLanguageCode
         ]
         WebService.sharedInstance.loginService(withParams: params) { (response) in
             if response.storeInformation == "0" {

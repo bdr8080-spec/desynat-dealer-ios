@@ -94,21 +94,46 @@ class ChatEnquiryViewModel {
   }
 
   
-  public func sendMsg(msg: String, type: String, by: String = "seller") {
-      guard let detail = Global.shared.user,
-            let id = detail.id,
-            let ref = self.chatReference else { return }
-      
-      let childRef = ref.childByAutoId()
+//  public func sendMsg(msg: String, type: String, by: String = "seller") {
+//      guard let detail = Global.shared.user,
+//            let id = detail.id,
+//            let ref = self.chatReference else { return }
+//      
+//      let childRef = ref.childByAutoId()
+//
+//      // Create Chat with ISO8601 times
+//      let formatter = ISO8601DateFormatter()
+//      formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+//      let isoDate = formatter.string(from: Date())
+//      let chat = Chat(uniqueId: chatDetailsUniqueId, senderId: String(id), type: type, message: msg, by: by, read: 0, times: isoDate)
+//      
+//      childRef.updateChildValues(chat.toBackendDictionary(uniqueId: chatDetailsUniqueId))
+//  }
+    
+    public func sendMsg(msg: String, type: String, by: String = "seller") {
+        guard let detail = Global.shared.user,
+              let id = detail.id,
+              let ref = self.chatReference else { return }
+        
+        TranslationService.translateToArabic(msg) { arabicText in
+            let formatter = ISO8601DateFormatter()
+            formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+            let isoDate = formatter.string(from: Date())
+            let chat = Chat(
+                uniqueId: self.chatDetailsUniqueId,
+                senderId: String(id),
+                type: type,
+                message: msg,
+                messageAr: arabicText,
+                by: by,
+                read: 0,
+                times: isoDate)
 
-      // Create Chat with ISO8601 times
-      let formatter = ISO8601DateFormatter()
-      formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-      let isoDate = formatter.string(from: Date())
-      let chat = Chat(uniqueId: chatDetailsUniqueId, senderId: String(id), type: type, message: msg, by: by, read: 0, times: isoDate)
-      
-      childRef.updateChildValues(chat.toBackendDictionary(uniqueId: chatDetailsUniqueId))
-  }
+            ref.childByAutoId()
+               .updateChildValues(chat.toBackendDictionary(uniqueId: self.chatDetailsUniqueId))
+        }
+
+    }
 
   func buildFullAddress(from details: DeliveryDetails?) -> String {
       guard let details = details else { return "" }

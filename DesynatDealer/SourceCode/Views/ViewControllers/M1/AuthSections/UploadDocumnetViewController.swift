@@ -9,7 +9,7 @@ import UIKit
 import SDWebImage
 
 class UploadDocumnetViewController: UIViewController {
-    lazy private var viewModel = UploadDocumentViewModel(hostVC: self)
+    
     @IBOutlet weak var onwerDocImage1: CustomImageView!
     @IBOutlet weak var onwerDocImage2: CustomImageView!
     @IBOutlet weak var storeDocImage1: CustomImageView!
@@ -22,12 +22,12 @@ class UploadDocumnetViewController: UIViewController {
     @IBOutlet weak var accountHolderTextField: UITextField!
     @IBOutlet weak var accountHolderImageView: CustomImageView!
     
+    lazy private var viewModel = UploadDocumentViewModel(hostVC: self)
     var imageOwnerDoc1:String = ""
     var imageOwnerDoc2:String = ""
     var imageStoreDoc1:String = ""
     var imageStoreDoc2:String = ""
     var imageAccountHolderDoc:String = ""
-
     var selectedOwnerDoc1: UIImage?
     var selectedOwnerDoc2: UIImage?
     var selectedStoreDoc1: UIImage?

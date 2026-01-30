@@ -8,38 +8,6 @@
 
 import Foundation
 import FirebaseFirestore
-//import FirebaseFirestoreSwift
-
-// Main message model for Firestore
-
-//struct ChatMessage: Codable, Identifiable {
-//    @DocumentID var id: String?
-//    let by: String
-//    let message: String
-//    let type: String
-//    let timestamp: Timestamp
-//}
-
-
-//struct Chat : Equatable, Codable {
-//    var id:String?
-//    var senderId :String?
-//    var type:String//ChatMessageType = .text
-//    var message:String?
-//    var timestamp:Int?
-//    
-//    static func == (lhs: Chat, rhs: Chat) -> Bool {
-//        return lhs.senderId == rhs.senderId
-//    }
-//    
-//    func getCreatedOn() -> Date? {
-//        if timestamp != nil {
-//            return Date(timeIntervalSince1970: TimeInterval(Int.getInt(timestamp!)/1000))
-//        } else {
-//            return nil
-//        }
-//    }
-//}
 
 enum ChatMessageType : Int, Codable {
     case text = 0
@@ -53,6 +21,7 @@ struct Chat: Equatable, Codable {
     var senderId: String?
     var type: String // "0" = message, "1" = image
     var message: String?
+    var messageAr: String?
     var by: String? // "user" or "seller"
     var read: Int?  // 0 unread, 1 read
     var times: String? // ISO8601 string
@@ -67,6 +36,15 @@ struct Chat: Equatable, Codable {
         formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
         return formatter.date(from: times)
     }
+    
+    func localizedMessage() -> String {
+            switch AppLanguage.current {
+            case .arabic:
+                return messageAr ?? message ?? ""
+            case .english:
+                return message ?? ""
+            }
+        }
 
     func toBackendDictionary(uniqueId: String) -> [String: Any] {
         let formatter = ISO8601DateFormatter()
@@ -77,6 +55,7 @@ struct Chat: Equatable, Codable {
             "user_id": senderId ?? "",
             "unique_id": uniqueId,
             "message": message ?? "",
+            "messageAr": messageAr ?? "",
             "type": type,
             "by": by ?? "user",
             "times": isoDate,

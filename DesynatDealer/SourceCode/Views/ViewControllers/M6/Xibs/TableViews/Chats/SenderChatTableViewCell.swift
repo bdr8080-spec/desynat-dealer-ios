@@ -28,7 +28,8 @@ class SenderChatTableViewCell: UITableViewCell {
     }
     
     func configData(data: Chat?) {
-        messageLabel.text = data?.message
+//        messageLabel.text = data?.message
+        messageLabel.text = data?.localizedMessage()
       if let date = data?.getCreatedOn() {
           self.timeLabel.text = date.change_DateIntoString(format: .h_mm_a)
       }

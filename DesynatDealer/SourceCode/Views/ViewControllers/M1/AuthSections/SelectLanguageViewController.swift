@@ -15,6 +15,7 @@ class SelectLanguageViewController: UIViewController {
     @IBOutlet weak var imgEnglish: UIImageView!
     
     var comingFirstTime: Bool = true
+    private var selectedLanguage: String = "en"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,11 +47,13 @@ class SelectLanguageViewController: UIViewController {
     
     @IBAction func btnSelectLanguage(_ sender: UIButton) {
         if sender.tag == 0 {
+            selectedLanguage = "en"
             imgArabic.image = UIImage(named: "radioUnselected")
             imgEnglish.image = UIImage(named: "radioSelected")
             arabicView.layer.borderColor = UIColor.lightGray.cgColor
             englishView.layer.borderColor = UIColor(named: "darkBrown")?.cgColor
         } else {
+            selectedLanguage = "ar"
             imgArabic.image = UIImage(named: "radioSelected")
             imgEnglish.image = UIImage(named: "radioUnselected")
             arabicView.layer.borderColor = UIColor(named: "darkBrown")?.cgColor
@@ -59,6 +62,7 @@ class SelectLanguageViewController: UIViewController {
     }
     
     @IBAction func btnTapContinue(_ sender: Any) {
+        UserDefaults.standard.setValue(selectedLanguage, forKey: "AppLanguage")
         if comingFirstTime {
             let vc = WelcomeScreenViewController.instantiate(fromAppStoryboard: .Main)
             self.navigationController?.pushViewController(vc, animated: true)
