@@ -178,7 +178,7 @@ class ChatViewController: UIViewController {
       perItemPriceLabel.text = CommonUtils.formatPriceStringInput(quotationData?.price)
       shippingPriceLabel.text = CommonUtils.formatPriceStringInput(quotationData?.shipping)
       taxLabel.text = CommonUtils.formatPriceStringInput(quotationData?.tax)
-      totalAmountLabel.text = quotationData?.totalAmount
+      totalAmountLabel.text = CommonUtils.formatPriceStringInput(quotationData?.totalAmount)
       switch actiontype {
       case "0": //user sent chat for customization new
         print("just normal chat")
