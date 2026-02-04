@@ -19,7 +19,7 @@ class OrdersViewModel {
   }
   
   func getAllOrders() {
-    var params: [String : Any] = ["type": hostVC?.orderCategoryType.rawValue ?? 1, // 1 Normal 2 Orders
+    var params: [String : Any] = ["type": 1, //hostVC?.orderCategoryType.rawValue ?? 1, // 1 Normal 2 Orders
                                   "tabs": hostVC?.selectedTab.rawValue ?? 1] // 0 all_orders 1 ongoing_orders 2 past_orders
     // Search
     if !searchText.isEmpty {

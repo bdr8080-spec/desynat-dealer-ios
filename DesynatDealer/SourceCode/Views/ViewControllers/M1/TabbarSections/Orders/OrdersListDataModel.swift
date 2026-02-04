@@ -23,7 +23,7 @@ struct OrdersListDataModel: Codable {
 struct OrdersListData: Codable {
     let id, orderID, userID, productID: Int?
     let variantsID, quantity: Int?
-    let amount, tax, shippingFees: String?
+    let amount, tax, shippingFees, orderType: String?
     let promocodeID, promocodeValue, giftcardID, giftcardAmount: String?
     let status, createdAt, updatedAt, returnType: String?
     let rEApprove: String?
@@ -50,6 +50,7 @@ struct OrdersListData: Codable {
         case orderID = "order_id"
         case userID = "user_id"
         case productID = "product_id"
+        case orderType = "order_type"
         case variantsID = "variants_id"
         case quantity, amount, tax
         case shippingFees = "shipping_fees"

@@ -63,7 +63,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="aGu-EZ-oz7">
                                 <rect key="frame" x="105" y="71" width="116" height="12"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wYZ-3v-fEy" customClass="CosmosView" customModule="Cosmos">
+                                    <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wYZ-3v-fEy" customClass="CosmosView" customModule="Cosmos">
                                         <rect key="frame" x="0.0" y="0.0" width="75" height="12"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -231,8 +231,8 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="emptyStar" width="10" height="10"/>
-        <image name="filledStar" width="10" height="10"/>
+        <image name="emptyStar" width="32" height="32"/>
+        <image name="filledStar" width="32" height="32"/>
         <image name="product" width="82" height="82"/>
         <image name="toggle_on" width="40" height="22"/>
         <namedColor name="darkBrown">

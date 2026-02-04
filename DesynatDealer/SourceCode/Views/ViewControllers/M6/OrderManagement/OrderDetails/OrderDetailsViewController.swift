@@ -168,7 +168,7 @@ class OrderDetailsViewController: UIViewController {
         orderIDLabe.text = "#\(data.id ?? 0)"
         let formattedDate = formatDateString(data.order?.updatedAt ?? "") ?? ""
         dateAndTimeLabel.text = formattedDate
-        if data.order?.orderType == "1" {
+        if data.orderType == "1" {
             orderTypeLabel.text = "Normal Orders"
             customDetailsView.isHidden = true
             customOrderView.isHidden = true

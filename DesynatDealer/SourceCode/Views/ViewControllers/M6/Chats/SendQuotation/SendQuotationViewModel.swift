@@ -23,10 +23,9 @@ class SendQuotationViewModel {
         
         let fields: [(UITextField?, String)] = [
             (hostVC.itemPriceTF, "Item price"),
-            (hostVC.taxTF, "Tax"),
-            (hostVC.shippingFeesTF, "Delivery fees"),
-            (hostVC.totalAmountTF, "Total amount")
-        ]
+//            (hostVC.taxTF, "Tax"),
+//            (hostVC.shippingFeesTF, "Delivery fees"),
+            (hostVC.totalAmountTF, "Total amount")]
         
         for (field, name) in fields {
             guard let text = field?.text, !text.trimmingCharacters(in: .whitespaces).isEmpty else {
@@ -44,8 +43,8 @@ class SendQuotationViewModel {
         let param: [String: Any] = ["unique_id": chatDetailsUniqueId,
                                     "price": hostVC.itemPriceTF.text?.trimmed() ?? "",
                                     "quantity": itemQuantity,
-                                    "shipping": hostVC.shippingFeesTF.text?.trimmed() ?? "",
-                                    "tax": hostVC.taxTF.text?.trimmed() ?? "",
+//                                    "shipping": hostVC.shippingFeesTF.text?.trimmed() ?? "",
+//                                    "tax": hostVC.taxTF.text?.trimmed() ?? "",
                                     "total_amount": hostVC.totalAmountTF.text?.trimmed() ?? ""]
         WebService.sharedInstance.sendQuotatioRequest(param: param){ response in
             DispatchQueue.main.async {

@@ -21,8 +21,8 @@ class SendQuotationViewController: UIViewController {
     var onQuotationSent: (() -> Void)?
     var comingReason: ComingReasonAtChatScreen = .quotationSentForFirstTime
     lazy var viewModel = SendQuotationViewModel(hostVC: self)
-  var quotationData: Record?
-  
+    var quotationData: Record?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         handleUISetup()
@@ -42,7 +42,7 @@ class SendQuotationViewController: UIViewController {
     
     @IBAction func viewRequestDidTapped(_ sender: Any) {
         let nextVC = ViewRequestViewController.instantiate(fromAppStoryboard: .OrderAndChat)
-      nextVC.quotationData = quotationData
+        nextVC.quotationData = quotationData
         self.present(nextVC, animated: true)
     }
     
@@ -54,17 +54,17 @@ class SendQuotationViewController: UIViewController {
             $0?.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         }
     }
-  
+    
     private func calculateTotalAmount() {
         let itemPrice = Double(itemPriceTF.text ?? "") ?? 0
-        let shipping = Double(shippingFeesTF.text ?? "") ?? 0
-        let tax = Double(taxTF.text ?? "") ?? 0
+//        let shipping = Double(shippingFeesTF.text ?? "") ?? 0
+//        let tax = Double(taxTF.text ?? "") ?? 0
         let quantity = Double(viewModel.itemQuantity) ?? 1
-
-        let total = (itemPrice * quantity) + shipping + tax
+        
+        let total = (itemPrice * quantity) //+ shipping + tax
         totalAmountTF.text = CommonUtils.formatPriceWithoutKd(total)
     }
-
+    
     
     func handleNavigationAfterSuccess() {
         let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
@@ -79,7 +79,7 @@ class SendQuotationViewController: UIViewController {
                 self?.onQuotationSent?()
             }
         }
-        self.present(vc, animated: true) // ✅ FIX
+        self.present(vc, animated: true) // FIX
     }
     
     private func handleUISetup() {
@@ -95,10 +95,10 @@ class SendQuotationViewController: UIViewController {
             titleLabel.text = "Modify Quotation"
             buttonTitleLabel.text = "Confirm & Modify"
             viewButtonOutlet.isHidden = false
-          itemPriceTF.text = CommonUtils.formatPriceAmount(quotationData?.price)
-          shippingFeesTF.text = CommonUtils.formatPriceAmount(quotationData?.shipping)
-          taxTF.text = CommonUtils.formatPriceAmount(quotationData?.tax)
-          totalAmountTF.text = CommonUtils.formatPriceAmount(quotationData?.totalAmount)
+            itemPriceTF.text = CommonUtils.formatPriceAmount(quotationData?.price)
+            shippingFeesTF.text = CommonUtils.formatPriceAmount(quotationData?.shipping)
+            taxTF.text = CommonUtils.formatPriceAmount(quotationData?.tax)
+            totalAmountTF.text = CommonUtils.formatPriceAmount(quotationData?.totalAmount)
         }
     }
 }
