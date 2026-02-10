@@ -78,7 +78,6 @@ extension ChatInboxListViewController: UITableViewDelegate, UITableViewDataSourc
     self.navigationController?.pushViewController(nextVC, animated: true)
   }
   
-  
 }
 
 extension ChatInboxListViewController: UITextFieldDelegate {

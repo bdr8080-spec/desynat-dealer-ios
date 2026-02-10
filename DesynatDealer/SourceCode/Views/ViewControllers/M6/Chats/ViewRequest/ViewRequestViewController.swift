@@ -115,8 +115,6 @@ class ViewRequestViewController: UIViewController {
 
       return addressParts.joined(separator: ", ")
   }
-
-  
 }
 
 extension ViewRequestViewController: UITableViewDelegate, UITableViewDataSource {

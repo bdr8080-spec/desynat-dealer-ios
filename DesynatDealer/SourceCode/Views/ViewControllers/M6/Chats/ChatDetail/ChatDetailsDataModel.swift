@@ -64,7 +64,7 @@ struct Record: Codable {
 // MARK: - Welcome
 struct OrderCreateStatus: Codable {
     let id: Int?
-    let orderType, orderID: String?
+//    let orderType, orderID: String?
     let userID, deliveryAddress: Int?
     let totalMrp, discountMrp, promocodeStatus: String?
     let promocodeID, promocodeValue, giftcardAmount, giftcardID: String?
@@ -80,8 +80,8 @@ struct OrderCreateStatus: Codable {
 
     enum CodingKeys: String, CodingKey {
         case id
-        case orderType = "order_type"
-        case orderID = "order_id"
+//        case orderType = "order_type"
+//        case orderID = "order_id"
         case userID = "user_id"
         case deliveryAddress = "delivery_address"
         case totalMrp = "total_mrp"

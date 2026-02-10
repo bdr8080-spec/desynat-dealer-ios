@@ -14,7 +14,7 @@ struct ChatInboxListModel: Codable {
   let productID, variationID, price, quantity: String?
   let deliveryAddress, shipping, tax, totalAmount: String?
   let customDetails: String?
-  let productRequest, action, createdAt, updatedAt: String?
+  let productRequest, action,productBuyStatus, createdAt, updatedAt: String?
   let lastChat: String?
   let lastChatTime: String?
   let productVariation: ProductVariation?
@@ -32,6 +32,7 @@ struct ChatInboxListModel: Codable {
       case productID = "product_id"
       case variationID = "variation_id"
       case price, quantity
+      case productBuyStatus = "product_buy_status"
       case deliveryAddress = "delivery_address"
       case shipping, tax
       case totalAmount = "total_amount"

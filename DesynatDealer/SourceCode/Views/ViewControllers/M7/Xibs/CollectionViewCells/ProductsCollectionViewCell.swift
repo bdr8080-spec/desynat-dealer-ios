@@ -107,19 +107,17 @@ class ProductsCollectionViewCell: UICollectionViewCell {
 
         finalPriceLabel.text = "\(data?.productVariants?.first?.finalPrice ?? "") KD"
         CommonUtils.setStrikethrough(label: actualPriceLabel, text: "\(data?.productVariants?.first?.actualPrice ?? "") KD")
-        //    iscountPriceLabel.text = "\(data?.productVariants?.first?.discountValue ?? "") KD"
-        let discountType = data?.productVariants?.first?.discountType ?? "1"
-        if discountType == "1" {
-          discountPriceLabel.text = "\(data?.productVariants?.first?.discountValue ?? "")% Off"
-        } else {
-            discountPriceLabel.text = "\(data?.productVariants?.first?.discountValue ?? "") KD Off"
-        }
-        
-//        if data?.wishlist == 1 {
-//          likeButtonOutlet.setImage(UIImage(named: "selectedHeartImage"), for: .normal)
+//        let discountType = data?.productVariants?.first?.discountType ?? "1"
+//        if discountType == "1" {
+//          discountPriceLabel.text = "\(data?.productVariants?.first?.discountValue ?? "")% Off"
 //        } else {
-//          likeButtonOutlet.setImage(UIImage(named: "besSellLike"), for: .normal)
+//            discountPriceLabel.text = "\(data?.productVariants?.first?.discountValue ?? "") KD Off"
 //        }
+        
+        CommonUtils.updateDiscountPercentageLabel(discountPriceLabel,
+                                                  actualAmountLabel: actualPriceLabel,
+                                                  discountType: data?.productVariants?.first?.discountType,
+                                                  discountValue: data?.productVariants?.first?.discountValue)
     }
     
     func configDealDataForAddedProduct(data: AddedProductInDeal?) {
@@ -144,18 +142,17 @@ class ProductsCollectionViewCell: UICollectionViewCell {
         finalPriceLabel.text = "\(data?.productDetails?.productVariants?.first?.finalPrice ?? "") KD"
         CommonUtils.setStrikethrough(label: actualPriceLabel, text: "\(data?.productDetails?.productVariants?.first?.actualPrice ?? "") KD")
         //    iscountPriceLabel.text = "\(data?.productVariants?.first?.discountValue ?? "") KD"
-        let discountType = data?.productDetails?.productVariants?.first?.discountType ?? "1"
-        if discountType == "1" {
-            discountPriceLabel.text = "\(data?.productDetails?.productVariants?.first?.discountValue ?? "")% Off"
-        } else {
-            discountPriceLabel.text = "\(data?.productDetails?.productVariants?.first?.discountValue ?? "") KD Off"
-        }
-        
-//        if data?.wishlist == 1 {
-//          likeButtonOutlet.setImage(UIImage(named: "selectedHeartImage"), for: .normal)
+//        let discountType = data?.productDetails?.productVariants?.first?.discountType ?? "1"
+//        if discountType == "1" {
+//            discountPriceLabel.text = "\(data?.productDetails?.productVariants?.first?.discountValue ?? "")% Off"
 //        } else {
-//          likeButtonOutlet.setImage(UIImage(named: "besSellLike"), for: .normal)
+//            discountPriceLabel.text = "\(data?.productDetails?.productVariants?.first?.discountValue ?? "") KD Off"
 //        }
+        
+        CommonUtils.updateDiscountPercentageLabel(discountPriceLabel,
+                                                  actualAmountLabel: actualPriceLabel,
+                                                  discountType: data?.productDetails?.productVariants?.first?.discountType,
+                                                  discountValue: data?.productDetails?.productVariants?.first?.discountValue)
     }
 
 }

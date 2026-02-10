@@ -57,14 +57,10 @@ class SendQuotationViewController: UIViewController {
     
     private func calculateTotalAmount() {
         let itemPrice = Double(itemPriceTF.text ?? "") ?? 0
-//        let shipping = Double(shippingFeesTF.text ?? "") ?? 0
-//        let tax = Double(taxTF.text ?? "") ?? 0
         let quantity = Double(viewModel.itemQuantity) ?? 1
-        
-        let total = (itemPrice * quantity) //+ shipping + tax
+        let total = (itemPrice * quantity)
         totalAmountTF.text = CommonUtils.formatPriceWithoutKd(total)
     }
-    
     
     func handleNavigationAfterSuccess() {
         let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
@@ -79,7 +75,7 @@ class SendQuotationViewController: UIViewController {
                 self?.onQuotationSent?()
             }
         }
-        self.present(vc, animated: true) // FIX
+        self.present(vc, animated: true)
     }
     
     private func handleUISetup() {

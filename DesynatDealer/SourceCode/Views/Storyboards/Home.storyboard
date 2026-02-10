@@ -26,7 +26,7 @@
             <objects>
                 <viewController storyboardIdentifier="HomeViewController" id="Y6W-OH-hqX" customClass="HomeViewController" customModule="DesynatDealer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="1600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r9S-L1-3tf">
@@ -57,6 +57,7 @@
                                             <constraint firstAttribute="width" constant="40" id="Zpk-PT-Tbc"/>
                                         </constraints>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="userProfile"/>
                                         <connections>
                                             <action selector="btnProfile:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="9yV-qH-GMJ"/>
                                         </connections>
@@ -113,7 +114,7 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ObD-4s-UcQ">
-                                <rect key="frame" x="0.0" y="129" width="393" height="1393"/>
+                                <rect key="frame" x="0.0" y="129" width="393" height="645"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rhg-6g-69W">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="1439"/>
@@ -387,8 +388,8 @@
                                                                             <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
                                                                         </userDefinedRuntimeAttributes>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12542 KD" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dyd-Ux-Seo" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
-                                                                        <rect key="frame" x="19" y="54.333333333333371" width="165.33333333333334" height="43"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 KD" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dyd-Ux-Seo" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
+                                                                        <rect key="frame" x="19" y="54.333333333333371" width="81" height="43"/>
                                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -1333,7 +1334,6 @@
                             <constraint firstItem="r9S-L1-3tf" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="xMY-HR-Ip0"/>
                         </constraints>
                     </view>
-                    <size key="freeformSize" width="393" height="1600"/>
                     <connections>
                         <outlet property="btnThisMonth" destination="sPt-tN-Osq" id="aT1-m8-nJh"/>
                         <outlet property="btnThisWeek" destination="Us0-q0-Egf" id="w8l-Qh-et1"/>
@@ -1364,7 +1364,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1147.3282442748091" y="207.74647887323945"/>
+            <point key="canvasLocation" x="-1127" y="-54"/>
         </scene>
         <!--Shows View Controller-->
         <scene sceneID="tV1-QO-Ujw">
@@ -2246,11 +2246,12 @@
         <image name="show" width="52.666667938232422" height="52.666667938232422"/>
         <image name="staff" width="40" height="40"/>
         <image name="toggle_on" width="40" height="22"/>
+        <image name="userProfile" width="32" height="32"/>
         <namedColor name="#B3B3B3">
             <color red="0.70196078431372544" green="0.70196078431372544" blue="0.70196078431372544" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="AccentColor">
-            <color red="1" green="0.79199999570846558" blue="0.15700000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.4309999942779541" green="0.27099999785423279" blue="0.15299999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="darkBrown">
             <color red="0.43137254901960786" green="0.27058823529411763" blue="0.15294117647058825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

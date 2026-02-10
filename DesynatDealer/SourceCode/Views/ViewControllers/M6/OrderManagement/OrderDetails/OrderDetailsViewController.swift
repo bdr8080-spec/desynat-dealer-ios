@@ -40,7 +40,6 @@ class OrderDetailsViewController: UIViewController {
     @IBOutlet weak var lblItemPrice: UILabel!
     @IBOutlet weak var lblItemPriceAmt: UILabel!
     @IBOutlet weak var lblTax: UILabel!
-    
     @IBOutlet weak var storeReviewsStackView: UIStackView!
     @IBOutlet weak var shippingChargeLAbel: UILabel!
     @IBOutlet weak var totalSavingAmountLabel: UILabel!
@@ -78,7 +77,6 @@ class OrderDetailsViewController: UIViewController {
     }
     
     @IBOutlet weak var reviewStackView: UIStackView!
-    
     @IBOutlet weak var lblReturnExchangeHeading: CustomLabelFont!
     @IBOutlet weak var lblReturnExchangeId: CustomLabelFont!
     
@@ -86,15 +84,8 @@ class OrderDetailsViewController: UIViewController {
     lazy var viewModel = OrderDetailsViewModel(hostVC: self)
     var orderId: Int = 0
     var orderDetails: OrdersListData?
-    private let deliveryStatus: [String: String] = [
-        //      "Packed": "2",
-        "Shipped": "2.1"
-    ]
-    
-    private let returnDeliveryRequest: [String: String] = [
-        "Accept": "1",
-        "Reject": "2"
-    ]
+    private let deliveryStatus: [String: String] = ["Shipped": "2.1"]
+    private let returnDeliveryRequest: [String: String] = ["Accept": "1","Reject": "2"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -178,7 +169,6 @@ class OrderDetailsViewController: UIViewController {
             customDetailsView.isHidden = false
         }
         customDetailsLabel.text = data.chatRoomrecords?.customDetails
-        //    zoneLabel.text = data.order?.del
         userNameLabel.text = data.order?.userDetails?.fullName
         phoneumberLabel.text = "\(data.order?.userDetails?.countryCode ?? "") \(data.order?.userDetails?.mobile ?? "")"
         emailIdLabel.text = data.order?.userDetails?.email
@@ -196,8 +186,6 @@ class OrderDetailsViewController: UIViewController {
         productTableView.reloadData()
         
         totalQuantityLabel.text = data.quantity?.description
-        
-        //    returnIdLabel.text = data.re
         self.returnIdLabel.text = "#\(data.id ?? 0)"
         self.returnRequestDateLabel.text = data.updatedAt?.formattedPlacedDate() ?? ""
         self.reasonLabel.text = data.returnReason ?? data.exchangeReason ?? data.cancelReason ?? "-"
@@ -224,12 +212,6 @@ class OrderDetailsViewController: UIViewController {
         }
         shippingChargeLAbel.text = CommonUtils.formatPriceStringInput(data.shippingFees)
         subTotalLabel.text = CommonUtils.formatPriceStringInput(data.amount)
-        //    let totalAmount = data.amount + data.shippingFees
-        //    totalLabel.text = CommonUtils.formatPriceStringInput(totalAmount)
-        //    let paidAmount = totalAmount - data.promocodeValue
-        //    paidByCustomerLabel.text = CommonUtils.formatPriceStringInput(paidAmount)
-        
-        
         lblTax.text = CommonUtils.formatPriceStringInput(data.tax)
         
         let priceString = data.amount ?? "0"   // String
@@ -258,8 +240,6 @@ class OrderDetailsViewController: UIViewController {
         }
         
         adminComissionLabel.text = CommonUtils.formatPriceStringInput(data.adminCommission)
-        //    coupanLabel.text = CommonUtils.formatPriceStringInput(data.promocodeValue)
-        
     }
     
     func toDouble(_ value: String?) -> Double {

@@ -24,7 +24,8 @@ struct ListedDeal: Codable {
     let id: Int?
     let image: String?
     let nameEnglish, nameArabic: String?
-    let categoryID, subCategoryID: Int?
+    let categoryID: Int?
+    let subCategoryID: [String]?
     let discount, from, to: String?
     let status: Int?
     let createdAt, updatedAt: String?

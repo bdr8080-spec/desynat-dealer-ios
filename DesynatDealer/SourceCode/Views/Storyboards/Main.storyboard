@@ -240,11 +240,11 @@ experience the app in your preferred language.</string>
             <objects>
                 <viewController storyboardIdentifier="WelcomeScreenViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bsc-Nc-3Ck" customClass="WelcomeScreenViewController" customModule="DesynatDealer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yw1-w1-X6b">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vsw-zr-hoq" customClass="CustomButton" customModule="DesynatDealer" customModuleProvider="target">
-                                <rect key="frame" x="305" y="118" width="50" height="25"/>
+                                <rect key="frame" x="323" y="118" width="50" height="25"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="7q5-rE-Vqr"/>
@@ -262,7 +262,7 @@ experience the app in your preferred language.</string>
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="c0F-JV-6mZ">
-                                <rect key="frame" x="18.666666666666657" y="193" width="337.66666666666674" height="297"/>
+                                <rect key="frame" x="19.666666666666657" y="193.00000000000003" width="353.66666666666674" height="299.66666666666674"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kdC-kc-i2F">
                                     <size key="itemSize" width="336" height="296"/>
@@ -272,7 +272,7 @@ experience the app in your preferred language.</string>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="WalkThroughCell" id="3Mo-FT-acu" customClass="WalkThroughCell" customModule="DesynatDealer" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.66666666666666663" width="336" height="296"/>
+                                        <rect key="frame" x="0.0" y="2" width="336" height="296"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="zgf-oh-y0O">
                                             <rect key="frame" x="0.0" y="0.0" width="336" height="296"/>
@@ -309,10 +309,10 @@ experience the app in your preferred language.</string>
                                 </cells>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gQ2-F6-th6">
-                                <rect key="frame" x="0.0" y="550" width="375" height="107"/>
+                                <rect key="frame" x="0.0" y="552.66666666666663" width="393" height="110.33333333333337"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select language" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L1F-Ux-5qs">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="25"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="v7O-ZR-tPa"/>
                                         </constraints>
@@ -321,7 +321,7 @@ experience the app in your preferred language.</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem ipsum dolor sit amet consectetur. Mi ultrices diam sociis volutpat orci non. Commodo pretium urna ut augue ac amet sed." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xbb-ox-epL">
-                                        <rect key="frame" x="20" y="45" width="335" height="52"/>
+                                        <rect key="frame" x="20" y="45" width="353" height="55.333333333333343"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                         <color key="textColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -339,14 +339,14 @@ experience the app in your preferred language.</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bub-hC-5fT" customClass="BannerPageControl" customModule="DesynatDealer" customModuleProvider="target">
-                                <rect key="frame" x="87.666666666666686" y="672" width="200" height="20"/>
+                                <rect key="frame" x="96.666666666666686" y="678" width="200" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="J9q-h0-hkO"/>
                                     <constraint firstAttribute="width" constant="200" id="QXW-CC-iQh"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cUc-kK-sVW" customClass="CustomButton" customModule="DesynatDealer" customModuleProvider="target">
-                                <rect key="frame" x="299" y="722" width="56" height="56"/>
+                                <rect key="frame" x="317" y="728" width="56" height="56"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="ITC-mH-NzS"/>
@@ -368,7 +368,7 @@ experience the app in your preferred language.</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IJD-K5-Wam" customClass="CustomButton" customModule="DesynatDealer" customModuleProvider="target">
-                                <rect key="frame" x="20" y="722" width="56" height="56"/>
+                                <rect key="frame" x="20" y="728" width="56" height="56"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="Nzt-Z0-Tt6"/>
@@ -412,7 +412,6 @@ experience the app in your preferred language.</string>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Qgb-zR-Y0N"/>
-                    <size key="freeformSize" width="375" height="812"/>
                     <connections>
                         <outlet property="descriptionLabel" destination="xbb-ox-epL" id="dF0-SI-UA7"/>
                         <outlet property="ellipse" destination="bub-hC-5fT" id="Xg4-D1-LF6"/>
@@ -1923,7 +1922,7 @@ experience the app in your preferred language.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cCz-UT-OEq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1170" y="676"/>
+            <point key="canvasLocation" x="1715" y="674"/>
         </scene>
         <!--Registeration Success View Controller-->
         <scene sceneID="aTA-2q-dTm">
@@ -1981,7 +1980,7 @@ experience the app in your preferred language.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ft3-Tu-9pd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2337" y="1424"/>
+            <point key="canvasLocation" x="1714" y="1382"/>
         </scene>
         <!--Forgot Password View Controller-->
         <scene sceneID="aHz-le-d5n">
@@ -2609,7 +2608,7 @@ letters and special characters.</string>
             <objects>
                 <viewController storyboardIdentifier="SummaryViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qAD-PU-Lt6" customClass="SummaryViewController" customModule="DesynatDealer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cqv-pU-XDX">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="2200"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Xl-sY-hPu">
@@ -2649,7 +2648,7 @@ letters and special characters.</string>
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VAI-Sm-Bid">
-                                <rect key="frame" x="0.0" y="100" width="393" height="2100"/>
+                                <rect key="frame" x="0.0" y="100" width="393" height="752"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2CZ-Q5-NoI">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="1971.6666666666667"/>
@@ -3480,7 +3479,6 @@ tempor</string>
                             <constraint firstItem="VAI-Sm-Bid" firstAttribute="leading" secondItem="a9f-Bo-4bQ" secondAttribute="leading" id="raM-A7-MA2"/>
                         </constraints>
                     </view>
-                    <size key="freeformSize" width="393" height="2200"/>
                     <connections>
                         <outlet property="ibanView" destination="yv1-Oy-hjn" id="9h6-zR-1jz"/>
                         <outlet property="imgOwnerDoc1" destination="ZLB-jO-uxI" id="Bkq-Kd-IKC"/>
@@ -3508,7 +3506,7 @@ tempor</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FXJ-aU-4Lg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5994.6564885496182" y="443.66197183098592"/>
+            <point key="canvasLocation" x="6005" y="-28"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YDK-kJ-kAk">
@@ -3589,7 +3587,7 @@ tempor</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tTd-ae-wU8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2427" y="2476"/>
+            <point key="canvasLocation" x="5218" y="674"/>
         </scene>
         <!--Payment MethodVC-->
         <scene sceneID="yEE-sd-egf">
@@ -3683,7 +3681,7 @@ tempor</string>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Credit/ Debit Card" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tmn-eS-Fgr" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
-                                                        <rect key="frame" x="94" y="14.333333333333345" width="130" height="19.666666666666671"/>
+                                                        <rect key="frame" x="94" y="14.333333333333345" width="130" height="19.666666666666664"/>
                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -3870,7 +3868,7 @@ tempor</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tww-Ba-DGs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3217.5572519083967" y="2474.6478873239439"/>
+            <point key="canvasLocation" x="6004" y="674"/>
         </scene>
         <!--Location Permission View Controller-->
         <scene sceneID="Q7b-j0-cLi">
@@ -4021,7 +4019,7 @@ your location with </string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DuY-Sf-Xuy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3289" y="1751"/>
+            <point key="canvasLocation" x="2442" y="1382"/>
         </scene>
         <!--Notification Permission View Controller-->
         <scene sceneID="HPj-FK-jaF">
@@ -4159,7 +4157,7 @@ miss out</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T3F-va-Uff" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4108" y="1424"/>
+            <point key="canvasLocation" x="3137" y="1382"/>
         </scene>
         <!--Media Permission View Controller-->
         <scene sceneID="kTh-9K-bgP">
@@ -4316,7 +4314,7 @@ miss out</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xbm-v1-YhV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4837" y="1424"/>
+            <point key="canvasLocation" x="3871" y="1382"/>
         </scene>
         <!--Store Information View Controller-->
         <scene sceneID="Fko-9G-OdL">
@@ -4991,7 +4989,7 @@ miss out</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7gr-lz-r84" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1858.7786259541983" y="674.64788732394368"/>
+            <point key="canvasLocation" x="2457" y="674"/>
         </scene>
         <!--Account Creation Done View Controller-->
         <scene sceneID="Kbs-cU-Wky">
@@ -5083,7 +5081,7 @@ you for your patience. Team Desynat App</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YGS-Su-sz2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4108" y="675"/>
+            <point key="canvasLocation" x="4488" y="674"/>
         </scene>
         <!--Location View Controller-->
         <scene sceneID="cfe-QR-gtc">
@@ -5330,14 +5328,14 @@ you for your patience. Team Desynat App</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c8P-Wn-Bxc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2595" y="675"/>
+            <point key="canvasLocation" x="3137" y="674"/>
         </scene>
         <!--Upload Documnet View Controller-->
         <scene sceneID="Fby-8U-jmu">
             <objects>
                 <viewController storyboardIdentifier="UploadDocumnetViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ls5-vN-DGh" customClass="UploadDocumnetViewController" customModule="DesynatDealer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="w7z-4Y-V3T">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="1300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8G4-Md-q0O">
@@ -5378,7 +5376,7 @@ you for your patience. Team Desynat App</string>
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vHz-Km-OMg">
-                                <rect key="frame" x="0.0" y="178" width="393.33333333333331" height="1054"/>
+                                <rect key="frame" x="0.0" y="178" width="393.33333333333331" height="606"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W3a-AD-icw">
                                         <rect key="frame" x="0.0" y="0.0" width="393.33333333333331" height="1095.6666666666667"/>
@@ -6089,7 +6087,6 @@ you for your patience. Team Desynat App</string>
                             <constraint firstItem="8G4-Md-q0O" firstAttribute="top" secondItem="VFV-ee-oWH" secondAttribute="top" id="zRK-kZ-jTR"/>
                         </constraints>
                     </view>
-                    <size key="freeformSize" width="393" height="1300"/>
                     <connections>
                         <outlet property="accountHolderImageView" destination="JA6-wP-5gi" id="bga-Vp-Qge"/>
                         <outlet property="accountHolderTextField" destination="PR0-jG-Ahr" id="Xsk-Og-htB"/>
@@ -6106,7 +6103,7 @@ you for your patience. Team Desynat App</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kLF-Nu-1WQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3359.5419847328244" y="831.69014084507046"/>
+            <point key="canvasLocation" x="3836" y="674"/>
         </scene>
     </scenes>
     <resources>
@@ -6145,7 +6142,7 @@ you for your patience. Team Desynat App</string>
         <image name="uploadStore" width="343" height="120"/>
         <image name="walk1" width="343" height="343"/>
         <namedColor name="AccentColor">
-            <color red="1" green="0.79199999570846558" blue="0.15700000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.4309999942779541" green="0.27099999785423279" blue="0.15299999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="darkBrown">
             <color red="0.43137254901960786" green="0.27058823529411763" blue="0.15294117647058825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -1856,7 +1856,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AEn-Zk-gLl">
                                                                 <rect key="frame" x="0.0" y="470" width="343" height="85"/>
                                                                 <subviews>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="product" translatesAutoresizingMaskIntoConstraints="NO" id="GEL-AH-g9n" customClass="CustomImageView" customModule="DesynatDealer" customModuleProvider="target">
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GEL-AH-g9n" customClass="CustomImageView" customModule="DesynatDealer" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="12" width="137" height="61"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="61" id="42M-ti-nYJ"/>
@@ -2928,7 +2928,6 @@
         <image name="logout" width="16" height="16"/>
         <image name="mark" width="24" height="24"/>
         <image name="pencil" width="24" height="24"/>
-        <image name="product" width="82" height="82"/>
         <image name="qrCode" width="69.333335876464844" height="64"/>
         <image name="radioSelected" width="20" height="20"/>
         <image name="radioUnselected" width="20" height="20"/>

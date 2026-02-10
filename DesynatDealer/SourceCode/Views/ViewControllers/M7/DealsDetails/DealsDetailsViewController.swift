@@ -122,7 +122,8 @@ class DealsDetailsViewController: UIViewController {
         endsOn.text = "\(fromDate) - \(endDate)"
         discountPercentageLabel.text = "\(CommonUtils.formatPriceAmount(data.discount))%"
         categoryLabel.text = data.categoryDetails?.name
-        subCategoryLabel.text = data.subCategoryDetails?.nameEnglish
+//        subCategoryLabel.text = data.subCategoryDetails?.nameEnglish
+        subCategoryLabel.text = data.subCategoryDetails?.compactMap({ $0.nameEnglish }).joined(separator: ", ")
         descriptionLabel.text = data.nameEnglish
         //        totalRevenueLabel.text = CommonUtils.formatPrice(data.re, currency: <#T##String#>)
         

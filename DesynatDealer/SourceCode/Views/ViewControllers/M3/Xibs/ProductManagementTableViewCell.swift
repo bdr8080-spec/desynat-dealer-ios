@@ -76,12 +76,16 @@ class ProductManagementTableViewCell: UITableViewCell {
     orifinalPriceLabel.text = "\(data.productVariants?.first?.finalPrice ?? "") KD"
     CommonUtils.setStrikethrough(label: dirscountPriceLabel, text: "\(data.productVariants?.first?.actualPrice ?? "") KD")
     
-    let discountType = data.productVariants?.first?.discountType ?? "1"
-    if discountType == "1" {
-      discuntPercentageLabel.text = "\(data.productVariants?.first?.discountValue ?? "")% Off"
-    } else {
-      discuntPercentageLabel.text = "\(data.productVariants?.first?.discountValue ?? "") KD Off"
-    }
+//    let discountType = data.productVariants?.first?.discountType ?? "1"
+//    if discountType == "1" {
+//      discuntPercentageLabel.text = "\(data.productVariants?.first?.discountValue ?? "")% Off"
+//    } else {
+//      discuntPercentageLabel.text = "\(data.productVariants?.first?.discountValue ?? "") KD Off"
+//    }
+      CommonUtils.updateDiscountPercentageLabel(discuntPercentageLabel,
+                                                actualAmountLabel: dirscountPriceLabel,
+                                                discountType: data.productVariants?.first?.discountType,
+                                                discountValue: data.productVariants?.first?.discountValue)
     if data.productActiveStatus == 1 {
       statusLabel.text = "Active"
       statusButton.setImage(UIImage(named: "toggle_on"), for: .normal)

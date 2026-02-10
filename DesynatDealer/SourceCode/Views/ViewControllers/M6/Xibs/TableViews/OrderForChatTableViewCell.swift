@@ -37,16 +37,20 @@ class OrderForChatTableViewCell: UITableViewCell {
       productImageView.image = UIImage(named: "")
     }
     productNameLabel.text = data?.productDetails?.productNameEn ?? ""
-    let discountType = data?.discountType ?? "1"
-    if discountType == "1" {
-      discountPriceLabel.text = "\(data?.discountValue ?? "")% Off"
-    } else {
-      discountPriceLabel.text = "\(data?.discountValue ?? "") KD Off"
-    }
+//    let discountType = data?.discountType ?? "1"
+//    if discountType == "1" {
+//      discountPriceLabel.text = "\(data?.discountValue ?? "")% Off"
+//    } else {
+//      discountPriceLabel.text = "\(data?.discountValue ?? "") KD Off"
+//    }
     
     finalPriceLabel.text = "\(data?.finalPrice ?? "") KD"
     CommonUtils.setStrikethrough(label: actualPriceLabel, text: "\(data?.actualPrice ?? "0") KD")
-    
+      
+      CommonUtils.updateDiscountPercentageLabel(discountPriceLabel,
+                                                actualAmountLabel: actualPriceLabel,
+                                                discountType: data?.discountType,
+                                                discountValue: data?.discountValue)
     //setColorBox(size: data?.size?.name ?? "", label: productDetailsLabel, hexColor: data?.color?.hexCode ?? "#98ADFF", quantity: "1")
     setColorBoxWithoutQuantity(size: data?.size?.name ?? "", label: productDetailsLabel, hexColor: data?.color?.hexCode ?? "#98ADFF")
   }

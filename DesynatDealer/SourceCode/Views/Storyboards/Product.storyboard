@@ -357,7 +357,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="f1q-7w-OSV">
-                                                                <rect key="frame" x="0.0" y="63.333333333333364" width="325" height="19.66666666666665"/>
+                                                                <rect key="frame" x="0.0" y="63.333333333333364" width="325" height="19.666666666666664"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hip" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5me-1C-es8">
                                                                         <rect key="frame" x="0.0" y="0.0" width="157.66666666666666" height="19.666666666666668"/>
@@ -988,6 +988,7 @@
                         <outlet property="imagesPageController" destination="YGr-Ud-myn" id="jDo-he-3J4"/>
                         <outlet property="lengthLabel" destination="GJg-7V-GTb" id="Fu3-xq-uuu"/>
                         <outlet property="lengthStackView" destination="nT7-hm-jOd" id="drH-Ny-rx7"/>
+                        <outlet property="priceSeparatorLabel" destination="LXy-9C-IeJ" id="hOz-md-ANm"/>
                         <outlet property="productImageCollectionView" destination="FE0-Jv-SfK" id="5xN-x5-1rr"/>
                         <outlet property="productNameLabel" destination="glf-my-7lD" id="6v1-5B-45P"/>
                         <outlet property="ratingCountLabel" destination="5qp-KB-lgF" id="R2c-4d-alR"/>
@@ -1025,7 +1026,7 @@
             <objects>
                 <viewController storyboardIdentifier="AddNewProductViewController" id="QcP-qx-dGD" customClass="AddNewProductViewController" customModule="DesynatDealer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9vE-TU-9ud">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="3555"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xp1-EP-fNn">
@@ -1065,7 +1066,7 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mFp-sb-DPS">
-                                <rect key="frame" x="0.0" y="183" width="393" height="3304"/>
+                                <rect key="frame" x="0.0" y="183" width="393" height="601"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bpa-XX-MZG">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="2264.3333333333335"/>
@@ -2657,7 +2658,6 @@
                             <constraint firstItem="mFp-sb-DPS" firstAttribute="bottom" secondItem="ljr-iU-SpC" secondAttribute="bottom" id="xTx-eK-jqt"/>
                         </constraints>
                     </view>
-                    <size key="freeformSize" width="393" height="3555"/>
                     <connections>
                         <outlet property="addButtonLabel" destination="Fij-Lj-we5" id="JUY-b8-40P"/>
                         <outlet property="addSpecificationButtonOutlet" destination="ZNJ-Vx-dJB" id="X5W-PZ-Zhq"/>
@@ -2703,7 +2703,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nEL-rd-Mal" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="811" y="924"/>
+            <point key="canvasLocation" x="836" y="-27"/>
         </scene>
         <!--Product Management Filter View Controller-->
         <scene sceneID="bDA-0O-IzE">

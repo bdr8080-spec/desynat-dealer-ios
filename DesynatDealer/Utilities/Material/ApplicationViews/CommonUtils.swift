@@ -55,6 +55,22 @@ class CommonUtils {
           debugPrint("Err:\(err)")
       }
   }
+    
+    static func updateDiscountPercentageLabel(_ label: UILabel, actualAmountLabel: UILabel, discountType: String?,discountValue: String?) {
+        let value = Double(discountValue ?? "0") ?? 0
+        guard value > 0 else {
+            label.isHidden = true
+            actualAmountLabel.isHidden = true
+            return
+        }
+        label.isHidden = false
+        actualAmountLabel.isHidden = false
+        if discountType == "1" {
+            label.text = "\(discountValue ?? "")% Off"
+        } else {
+            label.text = "\(discountValue ?? "") KD Off"
+        }
+    }
   
   static func setStrikethrough(label: UILabel, text: String) {
       let attributeString = NSMutableAttributedString(string: text)

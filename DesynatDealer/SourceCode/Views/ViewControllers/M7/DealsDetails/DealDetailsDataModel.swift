@@ -25,12 +25,13 @@ struct DealData: Codable {
     let id: Int?
     let image: String?
     let nameEnglish, nameArabic: String?
-    let categoryID, subCategoryID: Int?
+    let categoryID: Int?
+    let subCategoryID: [String]?
     let discount, from, to: String?
     let status: Int?
     let createdAt, updatedAt: String?
     let categoryDetails: Category?
-    let subCategoryDetails: SubcategoryDetails?
+    let subCategoryDetails: [SubcategoryDetails]?
 
     enum CodingKeys: String, CodingKey {
         case id, image
@@ -42,7 +43,7 @@ struct DealData: Codable {
         case createdAt = "created_at"
         case updatedAt = "updated_at"
         case categoryDetails = "category_details"
-        case subCategoryDetails = "sub_category_details"
+        case subCategoryDetails = "subCategory_details"
     }
 }
 

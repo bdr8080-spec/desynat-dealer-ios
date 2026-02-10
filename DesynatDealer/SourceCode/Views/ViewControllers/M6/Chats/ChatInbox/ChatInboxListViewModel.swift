@@ -23,7 +23,7 @@ class ChatInboxListViewModel {
         if !searchText.isEmpty {
             param["search"] = searchText
         }
-        if let status = appliedFilter.orderDeliveryStatus { //// 1 all 2 wating 3 quataion recived 4 accpeed
+        if let status = appliedFilter.orderDeliveryStatus {
             param["filters"] = status + 1
         }
         WebService.sharedInstance.getAllChatsList(param: param){ response in

@@ -964,6 +964,7 @@
                         <outlet property="discountPriceALbel" destination="1Xp-Fj-Ihh" id="fPJ-X3-Ugq"/>
                         <outlet property="finalPriceLabel" destination="YMP-Cy-5Ou" id="2w9-OS-mxB"/>
                         <outlet property="imagesPageController" destination="Em7-ov-iil" id="8tK-9l-vIm"/>
+                        <outlet property="priceSeparatorLabel" destination="lHt-9L-Onz" id="2GA-x5-Xbq"/>
                         <outlet property="productImageCollectionView" destination="wgH-dk-rcL" id="VGb-vt-OA9"/>
                         <outlet property="productNameLabel" destination="LQw-SO-nC5" id="1zF-QM-wXh"/>
                         <outlet property="ratingCountLabel" destination="bSc-kj-6UQ" id="6wj-33-7Gq"/>
@@ -1484,6 +1485,7 @@
                         <outlet property="discountPriceALbel" destination="pAu-Pf-NZU" id="KkY-hE-1Qw"/>
                         <outlet property="finalPriceLabel" destination="88m-L2-k6t" id="WiX-PH-e47"/>
                         <outlet property="imagesPageController" destination="cTn-4c-H1l" id="P1C-nz-j61"/>
+                        <outlet property="priceSeparatorLabel" destination="jVV-1d-sWy" id="3Be-H2-EJJ"/>
                         <outlet property="productImageCollectionView" destination="scj-Xf-raA" id="lcL-IW-EW6"/>
                         <outlet property="productNameLabel" destination="uhV-vk-H59" id="w6Y-Mb-3BA"/>
                         <outlet property="ratingCountLabel" destination="gQX-dE-stA" id="96E-fl-HPM"/>
