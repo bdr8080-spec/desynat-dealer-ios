@@ -92,6 +92,7 @@ class OrderDetailsViewController: UIViewController {
         setUpUI()
         storeRatingCosmisView.settings.fillMode = .precise
         customerRatingView.settings.fillMode = .precise
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -144,12 +145,10 @@ class OrderDetailsViewController: UIViewController {
         if orderCategoryType == .normalOrders {
             viewItemPrice.isHidden = true
             viewSubItem.isHidden = false
-            couponAppliedStackView.isHidden = false
             totalSavingAmountLabel.isHidden = true
         } else {
             viewItemPrice.isHidden = false
             viewSubItem.isHidden = true
-            couponAppliedStackView.isHidden = true
             totalSavingAmountLabel.isHidden = true
         }
     }
@@ -160,11 +159,11 @@ class OrderDetailsViewController: UIViewController {
         let formattedDate = formatDateString(data.order?.updatedAt ?? "") ?? ""
         dateAndTimeLabel.text = formattedDate
         if data.orderType == "1" {
-            orderTypeLabel.text = "Normal Orders"
+            orderTypeLabel.text = "Normal"
             customDetailsView.isHidden = true
             customOrderView.isHidden = true
         } else {
-            orderTypeLabel.text = "Custom Orders"
+            orderTypeLabel.text = "Custom"
             customOrderView.isHidden = false
             customDetailsView.isHidden = false
         }
@@ -223,19 +222,20 @@ class OrderDetailsViewController: UIViewController {
         lblItemPrice.text = "Item Price (\(CommonUtils.formatPriceStringInput(priceString)) x \(quantity))"
         lblItemPriceAmt.text = CommonUtils.formatPriceStringInput(String(totalPrice))
         discountOnMRpLabel.text = CommonUtils.formatPriceStringInput(data.order?.discountMrp ?? "", currency: "KD")
-        let totalAmount = toDouble(data.amount) + toDouble(data.shippingFees) + toDouble(data.tax)
         
-        
-        let totalCustomPrice = totalPrice + toDouble(data.tax) + toDouble(data.shippingFees)
         if orderCategoryType == .normalOrders {
+            let totalAmount = totalPrice + toDouble(data.shippingFees) + toDouble(data.tax)
             totalLabel.text = CommonUtils.formatPrice(totalAmount)
             let paidAmount = totalAmount - toDouble(data.promocodeValue)
             paidByCustomerLabel.text = CommonUtils.formatPrice(paidAmount)
             discountOnMRPStackView.isHidden = false
         } else {
+            let totalCustomPrice = totalPrice + toDouble(data.tax) + toDouble(data.shippingFees)
+            let totalPrice = data.chatRoomrecords?.totalAmount
             totalLabel.text = CommonUtils.formatPrice(totalCustomPrice)
-            paidByCustomerLabel.text = CommonUtils.formatPrice(totalCustomPrice)
-            quotedPriceLabel.text = CommonUtils.formatPrice(totalCustomPrice)
+            let paidByCustomerAmount = totalCustomPrice - toDouble(data.promocodeValue)
+            paidByCustomerLabel.text = CommonUtils.formatPrice(paidByCustomerAmount)
+            quotedPriceLabel.text = CommonUtils.formatPriceStringInput(totalPrice)
             discountOnMRPStackView.isHidden = true
         }
         
@@ -551,11 +551,11 @@ class OrderDetailsViewController: UIViewController {
         guard let ratingData = userRatingDone else { return }
         customerRatingDetailsView.isHidden = false
         if let storeurl = URL(string: userRatingDone?.storeImage ?? "") {
-          self.storeRatingattachmentImageView.sd_setImage(with: storeurl,placeholderImage: UIImage(named: ""))
+            self.storeRatingattachmentImageView.sd_setImage(with: storeurl,placeholderImage: UIImage(named: ""))
         }
         
         if let productUrl = URL(string: userRatingDone?.productImage ?? "") {
-          self.productAttackemntImageView.sd_setImage(with: productUrl,placeholderImage: UIImage(named: ""))
+            self.productAttackemntImageView.sd_setImage(with: productUrl,placeholderImage: UIImage(named: ""))
         }
         /// ✅ PRODUCT RATING CHECK
         let productReview = ratingData.productReview ?? ""
@@ -596,7 +596,7 @@ class OrderDetailsViewController: UIViewController {
         } else {
             productattachmentView.isHidden = true
         }
-
+        
         if let storeImage = userRatingDone?.storeImage,
            !storeImage.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
            storeImage.lowercased() != "null" {

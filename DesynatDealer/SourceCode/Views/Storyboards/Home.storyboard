@@ -57,7 +57,6 @@
                                             <constraint firstAttribute="width" constant="40" id="Zpk-PT-Tbc"/>
                                         </constraints>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="userProfile"/>
                                         <connections>
                                             <action selector="btnProfile:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="9yV-qH-GMJ"/>
                                         </connections>
@@ -2246,12 +2245,11 @@
         <image name="show" width="52.666667938232422" height="52.666667938232422"/>
         <image name="staff" width="40" height="40"/>
         <image name="toggle_on" width="40" height="22"/>
-        <image name="userProfile" width="32" height="32"/>
         <namedColor name="#B3B3B3">
             <color red="0.70196078431372544" green="0.70196078431372544" blue="0.70196078431372544" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="AccentColor">
-            <color red="0.4309999942779541" green="0.27099999785423279" blue="0.15299999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.79199999570846558" blue="0.15700000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="darkBrown">
             <color red="0.43137254901960786" green="0.27058823529411763" blue="0.15294117647058825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

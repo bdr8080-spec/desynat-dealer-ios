@@ -32,7 +32,7 @@ class ProductListTableViewCell: UITableViewCell {
     self.nameLabel.text = data?.productDetails?.productNameEn ?? ""
     let totalPrice = (Double(data?.variationDetails?.finalPrice ?? "") ?? 0)
                    * Double(data?.quantity ?? 1)
-    priceLabel.text = CommonUtils.formatPrice(totalPrice)
+    
     self.sizeLabel.text = data?.variationDetails?.size?.name ?? ""
     self.colourLabel.text = data?.variationDetails?.color?.name ?? ""
     self.categoryLabel.text = data?.productDetails?.category?.name ?? ""
@@ -44,10 +44,12 @@ class ProductListTableViewCell: UITableViewCell {
       self.productImageView.sd_setImage(with: url,placeholderImage: UIImage(named: ""))
     }
         if isCustomOrder {
+            priceLabel.text = CommonUtils.formatPriceStringInput(data?.chatRoomrecords?.totalAmount)
             quantityLabel.text = "Per Item Price"
             let priceString = data?.amount ?? "0"
             perItemPriceLabel.text = CommonUtils.formatPriceStringInput(priceString)
         } else {
+            priceLabel.text = CommonUtils.formatPrice(totalPrice)
             quantityLabel.text = "Quantity"
             let priceString = data?.amount ?? "0"
             perItemPriceLabel.text = "\(CommonUtils.formatPriceStringInput(priceString)) x \(data?.quantity ?? 1)"
