@@ -209,7 +209,7 @@ class OrderDetailsViewController: UIViewController {
         } else {
             couponAppliedStackView.isHidden = true
         }
-        shippingChargeLAbel.text = CommonUtils.formatPriceStringInput(data.shippingFees)
+        shippingChargeLAbel.text = CommonUtils.formatDeliveryCharges(Double(data.shippingFees ?? "0"))//CommonUtils.formatPriceStringInput(data.shippingFees)
         subTotalLabel.text = CommonUtils.formatPriceStringInput(data.amount)
         lblTax.text = CommonUtils.formatPriceStringInput(data.tax)
         

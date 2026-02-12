@@ -149,6 +149,14 @@ class CommonUtils {
     }
   }
     
+    static func formatDeliveryCharges(_ deliveryFees: Double?) -> String {
+        if deliveryFees == 0 {
+            return "Free Delivery"
+        } else {
+            return formatPrice(deliveryFees) // Assuming formatPrice(_:) returns a formatted string like "$10.00"
+        }
+    }
+    
     static func formatPriceWithoutKd(_ amount: Double?) -> String {
       guard let amount = amount else { return "0" }
       
