@@ -174,13 +174,6 @@ extension ProductManagementFilterViewController: UITableViewDelegate, UITableVie
     return cell
   }
   
-  //  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-  //    for i in 0..<filtersOptions[indexPath.section].options.count {
-  //      filtersOptions[indexPath.section].options[i].isSelected = (i == indexPath.row)
-  //    }
-  //    tableView.reloadSections(IndexSet(integer: indexPath.section), with: .none)
-  //  }
-  
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     
     // CATEGORY SECTION (single selection)

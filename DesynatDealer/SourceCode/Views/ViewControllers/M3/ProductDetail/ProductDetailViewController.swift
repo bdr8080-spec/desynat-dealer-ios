@@ -339,10 +339,7 @@ class ProductDetailViewController: UIViewController {
             sizeCollectionView.reloadData()
         }
     }
-    
-    
-    
-    
+
     func convertDate(_ input: String) -> String {
         let inputFormatter = DateFormatter()
         inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ"

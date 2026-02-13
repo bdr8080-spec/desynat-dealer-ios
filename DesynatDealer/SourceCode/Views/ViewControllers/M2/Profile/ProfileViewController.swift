@@ -24,10 +24,10 @@ class ProfileViewController: UIViewController {
     SideMenuModel(title: "Affiliated Commission", image: "affiliated"),
     SideMenuModel(title: "Banner management", image: "bannerMan"),
     SideMenuModel(title: "Deals management", image: "dealsMan"),
+    SideMenuModel(title: "Live Coverage request", image: "liveCoverage"),
     
     SideMenuModel(title: "Staff management", image: "staffMan"),
     SideMenuModel(title: "Subscription Plans", image: "subscriptionPlan"),
-    SideMenuModel(title: "Live Coverage request", image: "liveCoverage"),
     SideMenuModel(title: "Refund management", image: "refundMan"),
     SideMenuModel(title: "Terms & Condition", image: "termsCond"),
     SideMenuModel(title: "Return Policy", image: "returnPolicy"),
@@ -110,8 +110,9 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         self.navigationController?.pushViewController(vc, animated: true)
       
     case "Live Coverage request":
-      print("➡️ Navigate to Live Coverage request")
-      
+        let nextVC = LiveCoverageListViewController.instantiate(fromAppStoryboard: .Profile)
+        self.navigationController?.pushViewController(nextVC, animated: true)
+        
     case "Deals management":
         let vc = DealListedViewController.instantiate(fromAppStoryboard: .OrderAndChat)
         self.navigationController?.pushViewController(vc, animated: true)
