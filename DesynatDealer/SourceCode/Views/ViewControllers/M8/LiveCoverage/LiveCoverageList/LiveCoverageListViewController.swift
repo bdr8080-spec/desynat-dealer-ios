@@ -17,7 +17,7 @@ class LiveCoverageListViewController: UIViewController {
     @IBOutlet weak var noDataFoundLabel: UILabel!
     @IBOutlet weak var timeSlotsTableView: UITableView! {
         didSet {
-            timeSlotsTableView.registerCellFromNib(cellID: "LiveCoverageListTableViewCell")
+            timeSlotsTableView.registerCellFromNib(cellID: "LiveCoverageRequestTableViewCell")
         }
     }
     @IBOutlet weak var searchTF: UITextField!
@@ -96,23 +96,7 @@ class LiveCoverageListViewController: UIViewController {
     }
     
     @IBAction func filterDidTapped(_ sender: Any) {
-        //        let vc = PromocodeFilterViewController.instantiate(fromAppStoryboard: .ShippingPromocode)
-        //       vc.selectedFilter = viewModel.appliedFilter
-        //       vc.onApplyFilter = { [weak self] filter in
-        //           guard let self = self else { return }
-        //           self.viewModel.appliedFilter = filter
-        //           self.viewModel.currentPage = 1
-        //           self.viewModel.getAllPromocode()
-        //       }
-        //       vc.onClearFilter = { [weak self] in
-        //           guard let self = self else { return }
-        //           self.viewModel.appliedFilter = UserFilterModel()
-        //           self.viewModel.currentPage = 1
-        //           self.viewModel.getAllPromocode()
-        //       }
-        //        self.navigationController?.present(vc, animated: true)
     }
-    
     
     private func selectTodayDate() {
         let today = Calendar.current.startOfDay(for: Date())
@@ -122,22 +106,15 @@ class LiveCoverageListViewController: UIViewController {
         
         selectedDateString = apiDateFormatter.string(from: today)
         dateLabelInCustomCalender.text = shortDateFormatterForCalender.string(from: today)
-        // Fetch with default date + country
-        //        viewModel.fetchTimeSlotsIfPossible()
-        
     }
     
     private func configureCalendar() {
         viewCalendar.delegate = self
         viewCalendar.dataSource = self
-        
-        // Register custom gradient cell
         viewCalendar.register(
             GradientCalendarCell.self,
             forCellReuseIdentifier: "GradientCalendarCell"
         )
-        
-        // Disable default selection color
         viewCalendar.appearance.selectionColor = .clear
         viewCalendar.appearance.titleSelectionColor = .white
         
@@ -164,80 +141,87 @@ extension LiveCoverageListViewController: UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "LiveCoverageListTableViewCell", for: indexPath) as! LiveCoverageListTableViewCell
-//                cell.cancelRequestView.isHidden = true
-//                cell.rehjectedView.isHidden = true
-//                if indexPath.row == 0 {
-//                    cell.cancelRequestView.isHidden = false
-//                } else if indexPath.row == 1 {
-//                    cell.rehjectedView.isHidden = false
-//                }
-//                cell.onCancelRequestTapped = {
-//                    
-//                }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "LiveCoverageRequestTableViewCell", for: indexPath) as! LiveCoverageRequestTableViewCell
+        cell.cancelRequestView.isHidden = true
+        cell.rejectedView.isHidden = true
+        cell.rejectedDateView.isHidden = true
+        if indexPath.row == 0 {
+            cell.cancelRequestView.isHidden = false
+        } else if indexPath.row == 1 {
+            cell.rejectedView.isHidden = false
+            cell.rejectedDateView.isHidden = false
+        }
+        cell.onCancelRequest = {
+            let nextVC = CancelSendRequestViewController.instantiate(fromAppStoryboard: .Profile)
+            self.navigationController?.present(nextVC, animated: true)
+        }
         return cell
     }
-}
     
-    extension LiveCoverageListViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
-        
-        func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
-            let today = Calendar.current.startOfDay(for: Date())
-            let targetDate = Calendar.current.startOfDay(for: date)
-            return targetDate >= today
-        }
-        
-        func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-            let today = Calendar.current.startOfDay(for: Date())
-            let targetDate = Calendar.current.startOfDay(for: date)
-            guard targetDate >= today else { return }
-            selectedDateString = apiDateFormatter.string(from: targetDate)
-            dateLabelInCustomCalender.text = shortDateFormatterForCalender.string(from: targetDate)
-            //        viewModel.fetchTimeSlotsIfPossible()
-            calendar.reloadData()
-        }
-        
-        // Highlight selected range
-        func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillDefaultColorFor date: Date) -> UIColor? {
-            return nil
-        }
-        
-        // Title color
-        func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
-            let today = Calendar.current.startOfDay(for: Date())
-            let targetDate = Calendar.current.startOfDay(for: date)
-            if targetDate < today {
-                return .lightGray
-            } else if targetDate >= today {
-                return .black
-            }
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        viewWillLayoutSubviews()
+    }
+}
+
+extension LiveCoverageListViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
+    
+    func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
+        let today = Calendar.current.startOfDay(for: Date())
+        let targetDate = Calendar.current.startOfDay(for: date)
+        return targetDate >= today
+    }
+    
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        let today = Calendar.current.startOfDay(for: Date())
+        let targetDate = Calendar.current.startOfDay(for: date)
+        guard targetDate >= today else { return }
+        selectedDateString = apiDateFormatter.string(from: targetDate)
+        dateLabelInCustomCalender.text = shortDateFormatterForCalender.string(from: targetDate)
+        //        viewModel.fetchTimeSlotsIfPossible()
+        calendar.reloadData()
+    }
+    
+    // Highlight selected range
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillDefaultColorFor date: Date) -> UIColor? {
+        return nil
+    }
+    
+    // Title color
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
+        let today = Calendar.current.startOfDay(for: Date())
+        let targetDate = Calendar.current.startOfDay(for: date)
+        if targetDate < today {
+            return .lightGray
+        } else if targetDate >= today {
             return .black
         }
-        
-        func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
-            dateAndYearLabel.text = monthYearFormatter.string(from: calendar.currentPage)
-        }
-        
-        func calendar(_ calendar: FSCalendar,cellFor date: Date,at position: FSCalendarMonthPosition) -> FSCalendarCell {
-            let cell = calendar.dequeueReusableCell(withIdentifier: "GradientCalendarCell",for: date, at: position) as! GradientCalendarCell
-            return cell
-        }
-        
+        return .black
     }
     
-    extension LiveCoverageListViewController: UITextFieldDelegate {
-        
-        func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-            let currentText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
-            searchWorkItem?.cancel()
-            let workItem = DispatchWorkItem { [weak self] in
-                guard let self = self else { return }
-                self.viewModel.searchText = currentText
-                self.viewModel.currentPage = 1
-                //            self.viewModel.getLiveRequest()
-            }
-            searchWorkItem = workItem
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: workItem)
-            return true
-        }
+    func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
+        dateAndYearLabel.text = monthYearFormatter.string(from: calendar.currentPage)
     }
+    
+    func calendar(_ calendar: FSCalendar,cellFor date: Date,at position: FSCalendarMonthPosition) -> FSCalendarCell {
+        let cell = calendar.dequeueReusableCell(withIdentifier: "GradientCalendarCell",for: date, at: position) as! GradientCalendarCell
+        return cell
+    }
+    
+}
+
+extension LiveCoverageListViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
+        searchWorkItem?.cancel()
+        let workItem = DispatchWorkItem { [weak self] in
+            guard let self = self else { return }
+            self.viewModel.searchText = currentText
+            self.viewModel.currentPage = 1
+            //            self.viewModel.getLiveRequest()
+        }
+        searchWorkItem = workItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: workItem)
+        return true
+    }
+}
