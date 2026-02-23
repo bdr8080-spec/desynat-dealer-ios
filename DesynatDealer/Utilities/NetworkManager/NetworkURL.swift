@@ -86,6 +86,13 @@ enum NetworkEndPoint: String {
     case removeProductsInDeals          = "/api/seller/remove-products-in-deal"
     
     
+    //M8
+    case getliveCoverageRequest         = "/api/seller/get_live_requests"
+    case getTimeSlotsRequest            = "/api/seller/get_timeslots"
+    case cancelLiveCoverageRequest      = "/api/seller/cancel_live_request"
+    case sendLiveCoverageRequest        = "/api/seller/send_live_request"
+    
+    
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"
     }

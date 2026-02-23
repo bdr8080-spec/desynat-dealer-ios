@@ -22,34 +22,41 @@
                 <rect key="frame" x="0.0" y="0.0" width="198" height="113"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="giK-Ak-o58" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="giK-Ak-o58">
                         <rect key="frame" x="0.0" y="0.0" width="198" height="113"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gNi-NV-gCd" customClass="CustomImageView" customModule="DesynatDealer" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="198" height="113"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.65978980060000003" green="0.52553981540000005" blue="0.37635815140000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10:30 AM TO 11:30 AM" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wzq-QW-Czv">
                                 <rect key="frame" x="5" y="5" width="188" height="103"/>
-                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="gNi-NV-gCd" secondAttribute="trailing" id="Dtg-t1-d4c"/>
                             <constraint firstAttribute="bottom" secondItem="wzq-QW-Czv" secondAttribute="bottom" constant="5" id="Ifo-Vj-FRs"/>
+                            <constraint firstItem="gNi-NV-gCd" firstAttribute="top" secondItem="giK-Ak-o58" secondAttribute="top" id="SMA-MX-eje"/>
                             <constraint firstItem="wzq-QW-Czv" firstAttribute="leading" secondItem="giK-Ak-o58" secondAttribute="leading" constant="5" id="Vqv-5o-840"/>
                             <constraint firstItem="wzq-QW-Czv" firstAttribute="top" secondItem="giK-Ak-o58" secondAttribute="top" constant="5" id="aAC-Zt-8QU"/>
                             <constraint firstAttribute="trailing" secondItem="wzq-QW-Czv" secondAttribute="trailing" constant="5" id="aVh-PK-jAo"/>
+                            <constraint firstAttribute="bottom" secondItem="gNi-NV-gCd" secondAttribute="bottom" id="cP4-C4-Bh6"/>
+                            <constraint firstItem="gNi-NV-gCd" firstAttribute="leading" secondItem="giK-Ak-o58" secondAttribute="leading" id="eSM-Eg-toX"/>
                         </constraints>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="8"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                <color key="value" red="0.65978980060000003" green="0.52553981540000005" blue="0.37635815140000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                <real key="value" value="1"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
             </view>
@@ -61,6 +68,10 @@
                 <constraint firstItem="giK-Ak-o58" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="kEl-Ll-hQ4"/>
             </constraints>
             <size key="customSize" width="198" height="113"/>
+            <connections>
+                <outlet property="mainImageView" destination="gNi-NV-gCd" id="ePH-ta-6qX"/>
+                <outlet property="titleLabel" destination="wzq-QW-Czv" id="Zer-sg-my4"/>
+            </connections>
             <point key="canvasLocation" x="242.74809160305344" y="10.91549295774648"/>
         </collectionViewCell>
     </objects>

@@ -41,8 +41,8 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" #5372821" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5vD-cd-yWJ" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
-                                                <rect key="frame" x="274" y="10" width="62" height="15"/>
-                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                                <rect key="frame" x="265" y="10" width="71" height="15"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                                 <userDefinedRuntimeAttributes>
@@ -74,8 +74,8 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21/09/2025 at 10:15 AM" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fbY-io-1CE" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
-                                                <rect key="frame" x="198.33333333333337" y="10" width="137.66666666666663" height="15"/>
-                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                                <rect key="frame" x="178.66666666666663" y="10" width="157.33333333333337" height="15"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                                 <userDefinedRuntimeAttributes>
@@ -107,8 +107,8 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21/09/2025 at 10:15 AM" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nns-rL-Dz4" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
-                                                <rect key="frame" x="198.33333333333337" y="10" width="137.66666666666663" height="15"/>
-                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                                <rect key="frame" x="178.66666666666663" y="10" width="157.33333333333337" height="15"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                                 <userDefinedRuntimeAttributes>
@@ -204,7 +204,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yXh-4d-xcQ" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
-                                                <rect key="frame" x="12" y="29.333333333333339" width="324" height="61.666666666666657"/>
+                                                <rect key="frame" x="12" y="32.333333333333343" width="324" height="58.666666666666657"/>
                                                 <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit,  sed do eiusmod tempor Lorem ipsum dolor sit amet,  consectetur adipiscing elit, sed do eiusmod</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -220,7 +220,7 @@
                                             <constraint firstAttribute="bottom" secondItem="yXh-4d-xcQ" secondAttribute="bottom" constant="5" id="KER-pQ-Nq5"/>
                                             <constraint firstItem="Nbq-Y3-Gb7" firstAttribute="top" secondItem="4x6-UF-Rnf" secondAttribute="top" constant="10" id="Qep-tE-Vf9"/>
                                             <constraint firstItem="Nbq-Y3-Gb7" firstAttribute="leading" secondItem="yXh-4d-xcQ" secondAttribute="leading" id="WYq-ir-5fC"/>
-                                            <constraint firstItem="yXh-4d-xcQ" firstAttribute="top" secondItem="Nbq-Y3-Gb7" secondAttribute="bottom" constant="5" id="r6F-X3-wNK"/>
+                                            <constraint firstItem="yXh-4d-xcQ" firstAttribute="top" secondItem="Nbq-Y3-Gb7" secondAttribute="bottom" constant="8" id="r6F-X3-wNK"/>
                                             <constraint firstItem="Nbq-Y3-Gb7" firstAttribute="trailing" secondItem="yXh-4d-xcQ" secondAttribute="trailing" id="wF0-kT-INw"/>
                                             <constraint firstAttribute="trailing" secondItem="Nbq-Y3-Gb7" secondAttribute="trailing" constant="12" id="wlj-4e-91B"/>
                                         </constraints>
@@ -299,6 +299,8 @@
                 <outlet property="liveRequestDateLabel" destination="nns-rL-Dz4" id="wXs-WX-azv"/>
                 <outlet property="rejectedDateLabel" destination="rr8-Cv-R6v" id="m8j-8u-1kV"/>
                 <outlet property="rejectedDateView" destination="tXv-hs-sDw" id="4lQ-vr-aKg"/>
+                <outlet property="rejectedOnTitleLabel" destination="XS7-kU-3QC" id="Vwh-Vv-1xk"/>
+                <outlet property="rejectedREasonTitleLabel" destination="Nbq-Y3-Gb7" id="Zfs-aP-8n3"/>
                 <outlet property="rejectedReaonLabel" destination="yXh-4d-xcQ" id="aom-hH-bB7"/>
                 <outlet property="rejectedView" destination="4x6-UF-Rnf" id="4ce-ly-3Fk"/>
                 <outlet property="requestIDLabel" destination="5vD-cd-yWJ" id="lMY-Zs-2iZ"/>

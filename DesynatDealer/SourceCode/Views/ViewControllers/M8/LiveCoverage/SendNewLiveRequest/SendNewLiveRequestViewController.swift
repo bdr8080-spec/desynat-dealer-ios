@@ -9,6 +9,8 @@ import UIKit
 
 class SendNewLiveRequestViewController: UIViewController {
 
+    @IBOutlet weak var totalCoverageLabel: UILabel!
+    @IBOutlet weak var noDataFoundLabel: UILabel!
     @IBOutlet weak var collectionViewHieghtconstraint: NSLayoutConstraint!
     @IBOutlet weak var dateTF: UITextField!
     @IBOutlet weak var headerView: UIView!
@@ -21,29 +23,38 @@ class SendNewLiveRequestViewController: UIViewController {
     // MARK: - Properties
     private let datePicker = UIDatePicker()
     var onSendTapped: (() -> Void)?
+    var selectedDateString: String? = ""
+    private lazy var viewModel = SendNewLiveRequestViewModel(hostVC: self)
+    private var selectedIndexID: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         handleUISetup()
         setupDatePicker()
+        dateTF.text = selectedDateString
+        viewModel.getAllTimeSlotsRequest()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        DispatchQueue.main.async { [self] in
-            self.collectionViewHieghtconstraint.constant = self.timeCollectionView.contentSize.height
+    func handleHeightOfTableView() {
+        DispatchQueue.main.async {
+            self.timeCollectionView.layoutIfNeeded()
+            self.collectionViewHieghtconstraint.constant =
+                self.timeCollectionView.contentSize.height
+            self.view.layoutIfNeeded()
         }
     }
+    
 
     @IBAction func dismissDidTapped(_ sender: Any) {
         dismiss(animated: true)
     }
     
     @IBAction func sendRequestDidTapped(_ sender: Any) {
-        print("Selected Date:", dateTF.text ?? "")
-        dismiss(animated: true) { [weak self] in
-               self?.onSendTapped?()
-           }
+        guard let selectedIndexID = selectedIndexID else {
+                showAlert(msg: "Please select time slot")
+                return
+            }
+        viewModel.sendTimeSlotsRequest(timeslotId: selectedIndexID)
     }
     
     private func handleUISetup() {
@@ -53,27 +64,36 @@ class SendNewLiveRequestViewController: UIViewController {
     }
 }
 
-
 extension SendNewLiveRequestViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return viewModel.timeSlotsList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SendNewLiveRequestCollectionViewCell", for: indexPath) as! SendNewLiveRequestCollectionViewCell
+        let data = viewModel.timeSlotsList[indexPath.row]
+        if selectedIndexID == data.id {
+            cell.mainImageView.image = .btnGradient
+            cell.titleLabel.textColor = .white
+        } else {
+            cell.mainImageView.image = nil
+            cell.titleLabel.textColor = .black
+        }
+        cell.configData(data: data)
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedIndexID = viewModel.timeSlotsList[indexPath.row].id
+        timeCollectionView.reloadData()
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let spacing: CGFloat = 3
+        let spacing: CGFloat = 2
         let totalSpacing = spacing * 2
         let width = (collectionView.frame.width - totalSpacing) / 2
         return CGSize(width: width, height: 38)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        viewDidLayoutSubviews()
     }
     
 }
@@ -119,12 +139,13 @@ extension SendNewLiveRequestViewController {
     }
     
     @objc private func doneDatePicker() {
-        
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd/MM/yyyy"
-        
+        formatter.dateFormat = "yyyy-MM-dd"//"dd/MM/yyyy"
         dateTF.text = formatter.string(from: datePicker.date)
         view.endEditing(true)
+        selectedIndexID = nil
+        selectedDateString = formatter.string(from: datePicker.date)
+        viewModel.getAllTimeSlotsRequest()
     }
     
     @objc private func cancelDatePicker() {

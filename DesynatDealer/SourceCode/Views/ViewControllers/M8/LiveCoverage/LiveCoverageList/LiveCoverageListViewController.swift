@@ -21,6 +21,7 @@ class LiveCoverageListViewController: UIViewController {
         }
     }
     @IBOutlet weak var searchTF: UITextField!
+    @IBOutlet weak var mainScrollView: UIScrollView!
     
     private var searchWorkItem: DispatchWorkItem?
     var liveRequestTimeslotISSelcted: Bool = true
@@ -56,17 +57,17 @@ class LiveCoverageListViewController: UIViewController {
         searchTF.delegate = self
         configureCalendar()
         selectTodayDate()
+        mainScrollView.delegate = self
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        DispatchQueue.main.async {
-            self.liveRequestTbleViewHieghtConstarint.constant = self.timeSlotsTableView.contentSize.height
-        }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.getAllLiveCoverageRequest()
     }
     
     @IBAction func editDidTapped(_ sender: Any) {
         let nextVC = SendNewLiveRequestViewController.instantiate(fromAppStoryboard: .Profile)
+        nextVC.selectedDateString = selectedDateString
         nextVC.onSendTapped = { [weak self] in
             guard let self = self else { return }
             let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
@@ -96,6 +97,24 @@ class LiveCoverageListViewController: UIViewController {
     }
     
     @IBAction func filterDidTapped(_ sender: Any) {
+        let vc = LiveCoverageFilterViewController.instantiate(fromAppStoryboard: .Profile)
+        vc.delegate = self
+        vc.appliedFilter = viewModel.appliedFilter
+        self.navigationController?.present(vc, animated: true)
+    }
+    
+//    func handleHeightOfTableView() {
+//        timeSlotsTableView.layoutIfNeeded()
+//        liveRequestTbleViewHieghtConstarint.constant = timeSlotsTableView.contentSize.height
+//    }
+    
+    func handleHeightOfTableView() {
+        DispatchQueue.main.async {
+            self.timeSlotsTableView.layoutIfNeeded()
+            self.liveRequestTbleViewHieghtConstarint.constant =
+                self.timeSlotsTableView.contentSize.height
+            self.view.layoutIfNeeded()
+        }
     }
     
     private func selectTodayDate() {
@@ -137,30 +156,58 @@ class LiveCoverageListViewController: UIViewController {
 
 extension LiveCoverageListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return viewModel.liveRequestList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LiveCoverageRequestTableViewCell", for: indexPath) as! LiveCoverageRequestTableViewCell
-        cell.cancelRequestView.isHidden = true
-        cell.rejectedView.isHidden = true
-        cell.rejectedDateView.isHidden = true
-        if indexPath.row == 0 {
-            cell.cancelRequestView.isHidden = false
-        } else if indexPath.row == 1 {
-            cell.rejectedView.isHidden = false
-            cell.rejectedDateView.isHidden = false
-        }
+        let data = viewModel.liveRequestList[indexPath.row]
+        cell.configData(data: data)
         cell.onCancelRequest = {
             let nextVC = CancelSendRequestViewController.instantiate(fromAppStoryboard: .Profile)
-            self.navigationController?.present(nextVC, animated: true)
+            nextVC.timeSlotsId = data.id
+            nextVC.onCancellationDone = { [weak self] in
+                self?.viewModel.currentPage = 1
+                self?.viewModel.hasMoreData = true
+                self?.viewModel.getAllLiveCoverageRequest()
+            }
+            self.present(nextVC, animated: true)
         }
         return cell
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        viewWillLayoutSubviews()
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        
+//        let offsetY = scrollView.contentOffset.y
+//        let contentHeight = scrollView.contentSize.height
+//        let height = scrollView.frame.size.height
+//        
+//        if offsetY > contentHeight - height - 100 {
+//            if !viewModel.isLoading && viewModel.hasMoreData {
+//                viewModel.currentPage += 1
+//                viewModel.getAllLiveCoverageRequest()
+//            }
+//        }
+//    }
+    
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        guard scrollView == mainScrollView else { return }
+        
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let frameHeight = scrollView.frame.size.height
+        
+        if offsetY > contentHeight - frameHeight - 100 {
+            
+            if !viewModel.isLoading && viewModel.hasMoreData {
+                viewModel.currentPage += 1
+                viewModel.getAllLiveCoverageRequest()
+            }
+        }
     }
+
 }
 
 extension LiveCoverageListViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
@@ -218,10 +265,28 @@ extension LiveCoverageListViewController: UITextFieldDelegate {
             guard let self = self else { return }
             self.viewModel.searchText = currentText
             self.viewModel.currentPage = 1
-            //            self.viewModel.getLiveRequest()
+            self.viewModel.hasMoreData = true
+            self.viewModel.getAllLiveCoverageRequest()
         }
         searchWorkItem = workItem
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: workItem)
         return true
     }
+}
+
+extension LiveCoverageListViewController: LiveCoverageFilterDelegate {
+    func didApplyFilter(_ filter: LiveCoverageFilterModel) {
+        viewModel.appliedFilter = filter
+        viewModel.currentPage = 1
+        viewModel.hasMoreData = true
+        viewModel.getAllLiveCoverageRequest()
+    }
+    
+    func didClearFilter() {
+        viewModel.appliedFilter = nil
+        viewModel.currentPage = 1
+        viewModel.hasMoreData = true
+        viewModel.getAllLiveCoverageRequest()
+    }
+
 }

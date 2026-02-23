@@ -47,8 +47,4 @@ class BannerManagementVM: NSObject {
         }
     }
     
-    
-    
-    
-    
 }
