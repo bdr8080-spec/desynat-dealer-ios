@@ -45,7 +45,6 @@ class LiveCoverageRequestTableViewCell: UITableViewCell {
         rejectedDateView.isHidden = true
         rejectedView.isHidden = true
         cancelRequestView.isHidden = true
-        
         switch adminVerifyStaus {
         case 3:
             statusLabel.text = "Cancelled"
@@ -66,8 +65,34 @@ class LiveCoverageRequestTableViewCell: UITableViewCell {
             rejectedDateLabel.text = formatDate(data?.updatedAt)
             rejectedReaonLabel.text = data?.rejectReason
         case 1:
-            statusLabel.text = "Completed"
+//            statusLabel.text = "Confirmed"
             statusLabel.textColor = UIColor(hexString: "#68CA44")
+            var isTimeslotOver = false
+                if let timeslot = data?.timeslotDetails,
+                   let timeslotDate = timeslot.date,
+                   let toTime = timeslot.to {
+                    
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+                    dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+                    
+                    // Use 23:59 if end time missing
+                    let endTimeString = toTime.count == 5 ? toTime : "23:59"
+                    
+                    if let endDate = dateFormatter.date(from: "\(timeslotDate) \(endTimeString)") {
+                        let now = Date()
+                        if now >= endDate {
+                            isTimeslotOver = true
+                        }
+                    }
+                }
+                
+                // Update status based on timeslot
+                if isTimeslotOver {
+                    statusLabel.text = "Completed"
+                } else {
+                    statusLabel.text = "Confirmed"
+                }
         default:
             statusLabel.text = "Pending"
             statusLabel.textColor = UIColor(hexString: "#E28F12")

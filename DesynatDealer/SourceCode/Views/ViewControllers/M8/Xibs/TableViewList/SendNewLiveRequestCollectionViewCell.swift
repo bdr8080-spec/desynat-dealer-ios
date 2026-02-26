@@ -18,8 +18,8 @@ class SendNewLiveRequestCollectionViewCell: UICollectionViewCell {
         // Initialization code
     }
     
-    func configData(data: GetTimeSlotsDataModel?) {
-        titleLabel.text = formatDateTime(date: data?.date ?? "", time: data?.from ?? "")
+    func configData(data: GetTimeSlotsDataModel?) { //10:30 AM TO 11:30 AM
+        titleLabel.text = "\(data?.from ?? "") TO \(data?.to ?? "")"//formatDateTime(date: data?.date ?? "", time: data?.from ?? "")
     }
     
     func formatDateTime(date: String, time: String) -> String? {

@@ -24,8 +24,9 @@ class LiveCoverageListViewController: UIViewController {
     @IBOutlet weak var mainScrollView: UIScrollView!
     
     private var searchWorkItem: DispatchWorkItem?
-    var liveRequestTimeslotISSelcted: Bool = true
     private lazy var viewModel = LiveCoverageListViewModel(hostVC: self)
+    private var monthYearPicker: UIDatePicker?
+    var liveRequestTimeslotISSelcted: Bool = true
     var selectedDateString: String? = ""
     
     private lazy var selectedDateFormatterForLiveRequestTimeSlot: DateFormatter = {
@@ -66,18 +67,19 @@ class LiveCoverageListViewController: UIViewController {
     }
     
     @IBAction func editDidTapped(_ sender: Any) {
-        let nextVC = SendNewLiveRequestViewController.instantiate(fromAppStoryboard: .Profile)
-        nextVC.selectedDateString = selectedDateString
-        nextVC.onSendTapped = { [weak self] in
-            guard let self = self else { return }
-            let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
-            vc.comingReason = .liveRequest
-            vc.callBackDismiss = {
-                print("Success dismissed")
-            }
-            self.present(vc, animated: true)
-        }
-        self.present(nextVC, animated: true)
+        handleEditAction()
+//        let nextVC = SendNewLiveRequestViewController.instantiate(fromAppStoryboard: .Profile)
+//        nextVC.selectedDateString = selectedDateString
+//        nextVC.onSendTapped = { [weak self] in
+//            guard let self = self else { return }
+//            let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
+//            vc.comingReason = .liveRequest
+//            vc.callBackDismiss = {
+//                print("Success dismissed")
+//            }
+//            self.present(vc, animated: true)
+//        }
+//        self.present(nextVC, animated: true)
     }
     
     @IBAction func btnCalenderBackTap(_ sender: Any) {
@@ -103,10 +105,27 @@ class LiveCoverageListViewController: UIViewController {
         self.navigationController?.present(vc, animated: true)
     }
     
-//    func handleHeightOfTableView() {
-//        timeSlotsTableView.layoutIfNeeded()
-//        liveRequestTbleViewHieghtConstarint.constant = timeSlotsTableView.contentSize.height
-//    }
+    @IBAction func monthYearDidTapped(_ sender: Any) {
+        let vc = MonthYearPickerViewController()
+           vc.modalPresentationStyle = .pageSheet
+
+        if let sheet = vc.sheetPresentationController {
+            sheet.detents = [
+                .custom { _ in 280 } // or 220–250 for compact layout
+            ]
+            sheet.prefersGrabberVisible = true
+            sheet.prefersEdgeAttachedInCompactHeight = true
+            sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
+        }
+           vc.onDateSelected = { [weak self] selectedDate in
+               guard let self = self else { return }
+
+               self.viewCalendar.setCurrentPage(selectedDate, animated: true)
+               self.dateAndYearLabel.text = self.monthYearFormatter.string(from: selectedDate)
+           }
+
+           present(vc, animated: true)
+    }
     
     func handleHeightOfTableView() {
         DispatchQueue.main.async {
@@ -175,21 +194,6 @@ extension LiveCoverageListViewController: UITableViewDelegate, UITableViewDataSo
         }
         return cell
     }
-    
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        
-//        let offsetY = scrollView.contentOffset.y
-//        let contentHeight = scrollView.contentSize.height
-//        let height = scrollView.frame.size.height
-//        
-//        if offsetY > contentHeight - height - 100 {
-//            if !viewModel.isLoading && viewModel.hasMoreData {
-//                viewModel.currentPage += 1
-//                viewModel.getAllLiveCoverageRequest()
-//            }
-//        }
-//    }
-    
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
@@ -206,6 +210,24 @@ extension LiveCoverageListViewController: UITableViewDelegate, UITableViewDataSo
                 viewModel.getAllLiveCoverageRequest()
             }
         }
+    }
+    
+    func handleEditAction() {
+        let nextVC = SendNewLiveRequestViewController.instantiate(fromAppStoryboard: .Profile)
+        nextVC.selectedDateString = selectedDateString
+        nextVC.onSendTapped = { [weak self] in
+            guard let self = self else { return }
+            let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
+            vc.comingReason = .liveRequest
+            vc.callBackDismiss = {
+                print("Success dismissed")
+                self.viewModel.currentPage = 1
+                self.viewModel.hasMoreData = true
+                self.viewModel.getAllLiveCoverageRequest()
+            }
+            self.present(vc, animated: true)
+        }
+        self.present(nextVC, animated: true)
     }
 
 }
@@ -225,7 +247,11 @@ extension LiveCoverageListViewController: FSCalendarDelegate, FSCalendarDataSour
         selectedDateString = apiDateFormatter.string(from: targetDate)
         dateLabelInCustomCalender.text = shortDateFormatterForCalender.string(from: targetDate)
         //        viewModel.fetchTimeSlotsIfPossible()
+        
         calendar.reloadData()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.handleEditAction()
+        }
     }
     
     // Highlight selected range
