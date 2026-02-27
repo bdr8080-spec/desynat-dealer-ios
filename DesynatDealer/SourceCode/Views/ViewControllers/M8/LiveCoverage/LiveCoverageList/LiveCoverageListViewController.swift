@@ -68,7 +68,7 @@ class LiveCoverageListViewController: UIViewController {
     
     @IBAction func editDidTapped(_ sender: Any) {
 //        handleEditAction()
-        handleMonthAndYearDatePicker()
+        editHandleMonthAndYearDatePicker()
 //        let nextVC = SendNewLiveRequestViewController.instantiate(fromAppStoryboard: .Profile)
 //        nextVC.selectedDateString = selectedDateString
 //        nextVC.onSendTapped = { [weak self] in
@@ -128,26 +128,96 @@ class LiveCoverageListViewController: UIViewController {
            present(vc, animated: true)
     }
     
-    private func handleMonthAndYearDatePicker() {
-        let vc = MonthYearPickerViewController()
-           vc.modalPresentationStyle = .pageSheet
+//    private func handleMonthAndYearDatePicker() {
+//        let vc = MonthYearPickerViewController()
+//           vc.modalPresentationStyle = .pageSheet
+//
+//        if let sheet = vc.sheetPresentationController {
+//            sheet.detents = [
+//                .custom { _ in 280 } // or 220–250 for compact layout
+//            ]
+//            sheet.prefersGrabberVisible = true
+//            sheet.prefersEdgeAttachedInCompactHeight = true
+//            sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
+//        }
+//           vc.onDateSelected = { [weak self] selectedDate in
+//               guard let self = self else { return }
+//
+//               self.viewCalendar.setCurrentPage(selectedDate, animated: true)
+//               self.dateAndYearLabel.text = self.monthYearFormatter.string(from: selectedDate)
+//           }
+//
+//           present(vc, animated: true)
+//    }
+    
+    private func editHandleMonthAndYearDatePicker() {
+        let pickerVC = UIViewController()
+        pickerVC.view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
 
-        if let sheet = vc.sheetPresentationController {
-            sheet.detents = [
-                .custom { _ in 280 } // or 220–250 for compact layout
-            ]
-            sheet.prefersGrabberVisible = true
-            sheet.prefersEdgeAttachedInCompactHeight = true
-            sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
-        }
-           vc.onDateSelected = { [weak self] selectedDate in
-               guard let self = self else { return }
+        let picker = UIDatePicker()
+        picker.datePickerMode = .date
+        picker.preferredDatePickerStyle = .inline
+        picker.date = viewCalendar.selectedDate ?? Date()
+        
+        // ✅ Disable past dates so they appear gray
+        picker.minimumDate = Date() // today
+        picker.maximumDate = nil
+        
+        picker.translatesAutoresizingMaskIntoConstraints = false
+        picker.layer.cornerRadius = 12
+        picker.clipsToBounds = true
+        picker.backgroundColor = .systemBackground
 
-               self.viewCalendar.setCurrentPage(selectedDate, animated: true)
-               self.dateAndYearLabel.text = self.monthYearFormatter.string(from: selectedDate)
-           }
+        pickerVC.view.addSubview(picker)
 
-           present(vc, animated: true)
+        NSLayoutConstraint.activate([
+            picker.centerXAnchor.constraint(equalTo: pickerVC.view.centerXAnchor),
+            picker.centerYAnchor.constraint(equalTo: pickerVC.view.centerYAnchor),
+            picker.leadingAnchor.constraint(equalTo: pickerVC.view.leadingAnchor, constant: 25),
+            picker.trailingAnchor.constraint(equalTo: pickerVC.view.trailingAnchor, constant: -25)
+        ])
+
+        let dismissView = UIView()
+        dismissView.translatesAutoresizingMaskIntoConstraints = false
+        pickerVC.view.insertSubview(dismissView, at: 0)
+        NSLayoutConstraint.activate([
+            dismissView.topAnchor.constraint(equalTo: pickerVC.view.topAnchor),
+            dismissView.bottomAnchor.constraint(equalTo: pickerVC.view.bottomAnchor),
+            dismissView.leadingAnchor.constraint(equalTo: pickerVC.view.leadingAnchor),
+            dismissView.trailingAnchor.constraint(equalTo: pickerVC.view.trailingAnchor)
+        ])
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissDatePicker))
+        dismissView.addGestureRecognizer(tapGesture)
+
+        picker.addTarget(self, action: #selector(centerDatePicked(_:)), for: .valueChanged)
+
+        pickerVC.modalPresentationStyle = .overCurrentContext
+        pickerVC.modalTransitionStyle = .crossDissolve
+        present(pickerVC, animated: true)
+
+        self.monthYearPicker = picker
+    }
+    
+    @objc private func centerDatePicked(_ sender: UIDatePicker) {
+        let selectedDate = sender.date
+
+        // 1️⃣ Update FSCalendar
+        viewCalendar.setCurrentPage(selectedDate, animated: true)
+        viewCalendar.select(selectedDate)
+
+        // 2️⃣ Update labels
+        dateAndYearLabel.text = monthYearFormatter.string(from: selectedDate) // November 2025
+        dateLabelInCustomCalender.text = shortDateFormatterForCalender.string(from: selectedDate) // Mon, Nov 17
+
+        // 3️⃣ Store selected date for API
+        selectedDateString = apiDateFormatter.string(from: selectedDate) // "yyyy-MM-dd"
+
+        // 4️⃣ Dismiss picker automatically
+        dismissDatePicker()
+    }
+    
+    @objc private func dismissDatePicker() {
+        presentedViewController?.dismiss(animated: true)
     }
     
     func handleHeightOfTableView() {
