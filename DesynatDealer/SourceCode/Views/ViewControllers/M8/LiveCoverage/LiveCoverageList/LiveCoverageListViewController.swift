@@ -67,7 +67,8 @@ class LiveCoverageListViewController: UIViewController {
     }
     
     @IBAction func editDidTapped(_ sender: Any) {
-        handleEditAction()
+//        handleEditAction()
+        handleMonthAndYearDatePicker()
 //        let nextVC = SendNewLiveRequestViewController.instantiate(fromAppStoryboard: .Profile)
 //        nextVC.selectedDateString = selectedDateString
 //        nextVC.onSendTapped = { [weak self] in
@@ -106,6 +107,28 @@ class LiveCoverageListViewController: UIViewController {
     }
     
     @IBAction func monthYearDidTapped(_ sender: Any) {
+        let vc = MonthYearPickerViewController()
+           vc.modalPresentationStyle = .pageSheet
+
+        if let sheet = vc.sheetPresentationController {
+            sheet.detents = [
+                .custom { _ in 280 } // or 220–250 for compact layout
+            ]
+            sheet.prefersGrabberVisible = true
+            sheet.prefersEdgeAttachedInCompactHeight = true
+            sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
+        }
+           vc.onDateSelected = { [weak self] selectedDate in
+               guard let self = self else { return }
+
+               self.viewCalendar.setCurrentPage(selectedDate, animated: true)
+               self.dateAndYearLabel.text = self.monthYearFormatter.string(from: selectedDate)
+           }
+
+           present(vc, animated: true)
+    }
+    
+    private func handleMonthAndYearDatePicker() {
         let vc = MonthYearPickerViewController()
            vc.modalPresentationStyle = .pageSheet
 

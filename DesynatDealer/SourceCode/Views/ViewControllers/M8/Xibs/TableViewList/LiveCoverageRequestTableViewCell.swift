@@ -65,7 +65,6 @@ class LiveCoverageRequestTableViewCell: UITableViewCell {
             rejectedDateLabel.text = formatDate(data?.updatedAt)
             rejectedReaonLabel.text = data?.rejectReason
         case 1:
-//            statusLabel.text = "Confirmed"
             statusLabel.textColor = UIColor(hexString: "#68CA44")
             var isTimeslotOver = false
                 if let timeslot = data?.timeslotDetails,
