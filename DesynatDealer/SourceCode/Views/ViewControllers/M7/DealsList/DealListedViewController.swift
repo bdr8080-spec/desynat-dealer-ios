@@ -12,7 +12,6 @@ import Speech
 class DealListedViewController: UIViewController {
     
     @IBOutlet weak var noDataFoundLabel: UILabel!
-//    @IBOutlet weak var searchView: CustomView!
     @IBOutlet weak var listTableView: UITableView! {
         didSet {
             listTableView.registerCellFromNib(cellID: "ListedDealsTableViewCell")
@@ -42,19 +41,7 @@ class DealListedViewController: UIViewController {
     }
     
     @IBAction func micDidTapped(_ sender: UIButton) {
-//        let vc = DealsListFilterViewController.instantiate(fromAppStoryboard: .OrderAndChat)
-//        vc.selectedFilter = viewModel.appliedFilter
-//        vc.onApplyFilter = { [weak self] filter in
-//            guard let self = self else { return }
-//            self.viewModel.appliedFilter = filter
-//            self.viewModel.dealsListRequest()
-//        }
-//        vc.onClearFilter = { [weak self] in
-//            guard let self = self else { return }
-//            self.viewModel.appliedFilter = DealListFilterModel()
-//            self.viewModel.dealsListRequest()
-//        }
-//        self.navigationController?.present(vc, animated: false)
+
         let vc = DealsListFilterViewController.instantiate(fromAppStoryboard: .OrderAndChat)
 
                 // Load filter for current tab

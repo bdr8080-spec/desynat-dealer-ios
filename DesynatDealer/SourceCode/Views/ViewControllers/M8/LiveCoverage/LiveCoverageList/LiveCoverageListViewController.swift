@@ -128,28 +128,6 @@ class LiveCoverageListViewController: UIViewController {
            present(vc, animated: true)
     }
     
-//    private func handleMonthAndYearDatePicker() {
-//        let vc = MonthYearPickerViewController()
-//           vc.modalPresentationStyle = .pageSheet
-//
-//        if let sheet = vc.sheetPresentationController {
-//            sheet.detents = [
-//                .custom { _ in 280 } // or 220–250 for compact layout
-//            ]
-//            sheet.prefersGrabberVisible = true
-//            sheet.prefersEdgeAttachedInCompactHeight = true
-//            sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
-//        }
-//           vc.onDateSelected = { [weak self] selectedDate in
-//               guard let self = self else { return }
-//
-//               self.viewCalendar.setCurrentPage(selectedDate, animated: true)
-//               self.dateAndYearLabel.text = self.monthYearFormatter.string(from: selectedDate)
-//           }
-//
-//           present(vc, animated: true)
-//    }
-    
     private func editHandleMonthAndYearDatePicker() {
         let pickerVC = UIViewController()
         pickerVC.view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
@@ -201,18 +179,18 @@ class LiveCoverageListViewController: UIViewController {
     @objc private func centerDatePicked(_ sender: UIDatePicker) {
         let selectedDate = sender.date
 
-        // 1️⃣ Update FSCalendar
+        // Update FSCalendar
         viewCalendar.setCurrentPage(selectedDate, animated: true)
         viewCalendar.select(selectedDate)
 
-        // 2️⃣ Update labels
+        // Update labels
         dateAndYearLabel.text = monthYearFormatter.string(from: selectedDate) // November 2025
         dateLabelInCustomCalender.text = shortDateFormatterForCalender.string(from: selectedDate) // Mon, Nov 17
 
-        // 3️⃣ Store selected date for API
+        // Store selected date for API
         selectedDateString = apiDateFormatter.string(from: selectedDate) // "yyyy-MM-dd"
 
-        // 4️⃣ Dismiss picker automatically
+        // Dismiss picker automatically
         dismissDatePicker()
     }
     

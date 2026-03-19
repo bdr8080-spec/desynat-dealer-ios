@@ -72,6 +72,8 @@ class HomeViewController: UIViewController {
   }
   
   @IBAction func btnNotification(_ sender: Any) {
+      let vc = MyNotificationsListViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+      self.navigationController?.pushViewController(vc, animated: true)
   }
   
   @IBAction func btnProfile(_ sender: Any) {

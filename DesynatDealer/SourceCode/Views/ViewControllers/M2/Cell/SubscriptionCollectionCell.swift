@@ -18,6 +18,7 @@ class SubscriptionCollectionCell: UICollectionViewCell {
     @IBOutlet weak var lblDays: CustomLabelFont!
     @IBOutlet weak var dataTableView: UITableView!
     @IBOutlet weak var btnContinue: UIButton!
+    var purchasePlan: (() -> Void)?
     
     private var heading: [String] = []
     private var data: [String] = []
@@ -112,6 +113,7 @@ class SubscriptionCollectionCell: UICollectionViewCell {
         if let plan = planData {
             delegate?.didTapContinue(for: plan)
         }
+        purchasePlan?()
     }
     
 }

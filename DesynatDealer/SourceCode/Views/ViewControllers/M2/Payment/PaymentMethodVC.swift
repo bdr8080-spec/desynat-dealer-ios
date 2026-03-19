@@ -8,6 +8,7 @@
 enum PayFrom {
     case plan
     case banner
+    case mySubscriptionPlan
 }
 
 import UIKit
@@ -42,6 +43,8 @@ class PaymentMethodVC: UIViewController {
         case .plan:
             lblTotalAmt.text = "\(payAmount) KD"
         case .banner:
+            lblTotalAmt.text = "\(payAmount) KD"
+        case .mySubscriptionPlan:
             lblTotalAmt.text = "\(payAmount) KD"
         }
         
@@ -93,6 +96,8 @@ class PaymentMethodVC: UIViewController {
                         completePlanPurchase(transactionId: self.transactionIds ?? "", paymentStatus: 1, onlineTransactionId: details.transactionID)
                     case .banner:
                         bannerPayment(transactionId: details.transactionID, paymentStatus: 1, order_id: self.transactionIds ?? "")
+                    case .mySubscriptionPlan:
+                        print("Buy SubscriptionPlan")
                     }
                 } else {
                     showAlert(msg: "Please complete card payment")
@@ -111,6 +116,8 @@ class PaymentMethodVC: UIViewController {
                         return
                     }
                 }
+            case .mySubscriptionPlan:
+                print("SubScription Plan")
             }
             
         }
@@ -352,6 +359,8 @@ extension PaymentMethodVC {
                 completePlanPurchase(transactionId: self.transactionIds ?? "", paymentStatus: 1, onlineTransactionId: transactionID)
             case .banner:
                 bannerPayment(transactionId: transactionID, paymentStatus: 1, order_id: self.transactionIds ?? "")
+            case .mySubscriptionPlan:
+                print("buy Subscription plan")
             }
         }
     }

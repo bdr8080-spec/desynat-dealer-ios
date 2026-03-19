@@ -103,6 +103,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
       print("➡️ Navigate to Staff management")
       
     case "Subscription Plans":
+        let vc = MySubsciptionPlanViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+        self.navigationController?.pushViewController(vc, animated: true)
       print("➡️ Navigate to Subscription Plans")
       
     case "Banner management":
@@ -150,6 +152,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
       print("➡️ Navigate to Exchange Policy")
       
     case "Support":
+        let vc = SupportViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+        self.navigationController?.pushViewController(vc, animated: true)
       print("➡️ Navigate to Support")
       
     case "Settings":
