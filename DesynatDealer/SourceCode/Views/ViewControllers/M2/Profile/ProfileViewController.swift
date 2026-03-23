@@ -25,10 +25,11 @@ class ProfileViewController: UIViewController {
     SideMenuModel(title: "Banner management", image: "bannerMan"),
     SideMenuModel(title: "Deals management", image: "dealsMan"),
     SideMenuModel(title: "Live Coverage request", image: "liveCoverage"),
+    SideMenuModel(title: "Support", image: "support"),
+    SideMenuModel(title: "Refund management", image: "refundMan"),
     
     SideMenuModel(title: "Staff management", image: "staffMan"),
     SideMenuModel(title: "Subscription Plans", image: "subscriptionPlan"),
-    SideMenuModel(title: "Refund management", image: "refundMan"),
     SideMenuModel(title: "Terms & Condition", image: "termsCond"),
     SideMenuModel(title: "Return Policy", image: "returnPolicy"),
     SideMenuModel(title: "About Us", image: "aboutUS"),
@@ -36,7 +37,6 @@ class ProfileViewController: UIViewController {
     SideMenuModel(title: "Change Language", image: "chnageLangugae"),
     SideMenuModel(title: "Cancellation Policy", image: "cancellationPolicy"),
     SideMenuModel(title: "Exchange Policy", image: "exchnage"),
-    SideMenuModel(title: "Support", image: "support"),
     SideMenuModel(title: "Settings", image: "settings")]
   
   private lazy var viewModel = ProfileViewModel(hostVC: self)
@@ -120,6 +120,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         self.navigationController?.pushViewController(vc, animated: true)
       
     case "Refund management":
+        let vc = RefundManagementViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+        self.navigationController?.pushViewController(vc, animated: true)
       print("➡️ Navigate to Refund management")
       
     case "Inventory management ":
@@ -131,24 +133,42 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
       self.navigationController?.pushViewController(nextVC, animated: true)
       
     case "Terms & Condition":
-      print("➡️ Navigate to Terms & Condition")
+        let vc =  CMSViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+        vc.comingReason = .termsAndConditions
+        self.navigationController?.pushViewController(vc, animated: true)
+      //print("➡️ Navigate to Terms & Condition")
       
     case "Return Policy":
-      print("➡️ Navigate to Return Policy")
+        
+        let vc =  CMSViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+        vc.comingReason = .returnPolicy
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+      //print("➡️ Navigate to Return Policy")
       
     case "About Us":
+        let vc =  CMSViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+        vc.comingReason = .aboutUs
+        self.navigationController?.pushViewController(vc, animated: true)
       print("➡️ Navigate to About Us")
       
     case "FAQ’S":
-      print("➡️ Navigate to FAQ’s")
+      let nexVC = FAQViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+        self.navigationController?.pushViewController(nexVC, animated: true)
       
     case "Change Language":
       print("➡️ Navigate to Change Language")
       
     case "Cancellation Policy":
+        let vc =  CMSViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+        vc.comingReason = .cancellationPolicy
+        self.navigationController?.pushViewController(vc, animated: true)
       print("➡️ Navigate to Cancellation Policy")
       
     case "Exchange Policy":
+        let vc =  CMSViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+        vc.comingReason = .exchangePolicy
+        self.navigationController?.pushViewController(vc, animated: true)
       print("➡️ Navigate to Exchange Policy")
       
     case "Support":

@@ -25,16 +25,16 @@ class MyNotificationsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-//    func configData(data: NotificationsList?) {
-//        titleLabel.text = data?.titleEnglish
-//        descriptionLabel.text = data?.descriptionEnglish
-//        if data?.isRead == 1 {
-//            mainImageView.image = .selectedBellIcon
-//        } else {
-//            mainImageView.image = .unselectedBellIcon
-//        }
-//        sentTimeLabel.text = formatISODateToDayMonthYear(data?.createdAt ?? "")
-//    }
+    func configData(data: NotificationsList?) {
+        titleLabel.text = data?.titleEnglish
+        descriptionLabel.text = data?.descriptionEnglish
+        if data?.isRead == 1 {
+            mainImageView.image = .selectedBellIcon
+        } else {
+            mainImageView.image = .unselectedBellIcon
+        }
+        sentTimeLabel.text = formatISODateToDayMonthYear(data?.createdAt ?? "")
+    }
     
     private func formatISODateToDayMonthYear(_ isoDateString: String) -> String {
         let isoFormatter = ISO8601DateFormatter()

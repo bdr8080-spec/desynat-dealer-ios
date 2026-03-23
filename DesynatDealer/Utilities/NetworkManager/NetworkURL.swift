@@ -68,16 +68,16 @@ enum NetworkEndPoint: String {
     case bannerPayment                  = "/api/seller/complete-banner-payment"
     
     //M6
-  case ordersList                       = "/api/seller/all-orders"
-  case singleOrderDetails               = "/api/seller/single-orders-data"
-  case updateOrderStatus                = "/api/seller/update-single-order-status"
+    case ordersList                       = "/api/seller/all-orders"
+    case singleOrderDetails               = "/api/seller/single-orders-data"
+    case updateOrderStatus                = "/api/seller/update-single-order-status"
     //Chat
-  case getAllChatsRecord                = "/api/seller/all-chats-records"
-  case getSingleChats                   = "/api/seller/single-chats-records"
-  case qutationChatEdit                 = "/api/seller/Modify-single-chats-records"
-  case sendInMessageChat                = "/api/send-message-in-chats"
-  case updateReturnExchangeStatus       = "/api/seller/update-order-exchange-return-status"
-  
+    case getAllChatsRecord                = "/api/seller/all-chats-records"
+    case getSingleChats                   = "/api/seller/single-chats-records"
+    case qutationChatEdit                 = "/api/seller/Modify-single-chats-records"
+    case sendInMessageChat                = "/api/send-message-in-chats"
+    case updateReturnExchangeStatus       = "/api/seller/update-order-exchange-return-status"
+    
     
     //M7
     case getAllDealsList                = "/api/seller/view-deals"
@@ -92,6 +92,13 @@ enum NetworkEndPoint: String {
     case cancelLiveCoverageRequest      = "/api/seller/cancel_live_request"
     case sendLiveCoverageRequest        = "/api/seller/send_live_request"
     
+    
+    //M10
+    case getNotifications               = "/api/seller/get_my_notifications_list"
+    case markReadNotification           = "/api/seller/mark_notification_as_read"
+    case markAllReadNotification        = "/api/seller/mark_all_notification_as_read"
+    case myPlanList                     = "/api/seller/my_plans"
+    case renewSubcriptionPlanBuy        = "/api/seller/renew_subcription_plan_buy"
     
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"

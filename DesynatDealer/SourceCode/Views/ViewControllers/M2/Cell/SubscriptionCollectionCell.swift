@@ -67,7 +67,7 @@ class SubscriptionCollectionCell: UICollectionViewCell {
         planData = plan
         // Set top-level labels
         lblPlanHeading.text = plan.planNameEnglish ?? "N/A"
-        lblAmount.text = "AED \(plan.price ?? 0)"
+        lblAmount.text = CommonUtils.formatPrice(plan.price)//"AED \(plan.price ?? 0)"
         
         let durationText: String
         if let duration = plan.duration, let type = plan.durationType {
