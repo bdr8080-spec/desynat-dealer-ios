@@ -48,7 +48,7 @@ struct NotificationsList: Codable {
     let notificationType: String?
     let isRead: Int?
     let createdAt, updatedAt: String?
-    let receiverDetails: [ReceiverDetails]?
+//    let receiverDetails: [ReceiverDetails]?
     let senderDetails: SenderDetails?
 
     enum CodingKeys: String, CodingKey {
@@ -65,7 +65,7 @@ struct NotificationsList: Codable {
         case isRead = "is_read"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
-        case receiverDetails = "receiver_details"
+//        case receiverDetails = "receiver_details"
         case senderDetails = "sender_details"
     }
 }

@@ -9,7 +9,7 @@ import Foundation
 class MySubscriptionPlanViewModel {
     private var hostVc :  MySubsciptionPlanViewController?
     var transactionId: String?
-    var payAmt: Int?
+    var payAmt: Double?
     var durationOfPlan: String?
     var plansList: [GetPlansSubscriptionModel]? = []
     var myPurchasedPlansList: [MySubscriptionPlanList] = []
@@ -35,8 +35,24 @@ class MySubscriptionPlanViewModel {
             let vc = PaymentMethodVC.instantiate(fromAppStoryboard: .Main)
             vc.paymentFrom = .mySubscriptionPlan
             vc.transactionIds = result.transactionID ?? ""
-            vc.payAmount = self.payAmt ?? 0
+            vc.payAmount = self.payAmt ?? 0.0
             vc.durationOfPlan = self.durationOfPlan
+            self.hostVc?.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    func renewSubscriptionPlanApi(planId: Int, data: MySubscriptionPlanList?){
+        let param: [String: Any] = ["plan_id" : planId]
+        WebService.sharedInstance.renewSubscriptionPlanService(param: param) { (response) in
+            let vc = PaymentMethodVC.instantiate(fromAppStoryboard: .Main)
+            vc.paymentFrom = .mySubscriptionPlan
+            vc.transactionIds = data?.transactionID ?? ""
+            vc.payAmount = data?.planInfo?.price ?? 0.0
+            if let duration = data?.planInfo?.duration, let type = data?.planInfo?.durationType {
+                vc.durationOfPlan = "for \(duration) \(type == 1 ? "Month" : "Years")"
+            } else {
+                vc.durationOfPlan = "N/A"
+            }
             self.hostVc?.navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -46,13 +62,13 @@ class MySubscriptionPlanViewModel {
         guard !isFetching, hasMorePages else { return }
         
         isFetching = true
-        
+        self.hostVc?.noDataFoundLabel.isHidden = false
         if reset {
             currentPage = 1
             lastPage = 1
             hasMorePages = true
             myPurchasedPlansList.removeAll()
-            self.hostVc?.noDataFoundLabel.isHidden = false
+            
         }
         
         let params: [String: Any] = [
@@ -78,7 +94,7 @@ class MySubscriptionPlanViewModel {
         }
     }
     
-    func resetAndFetchStories() {
+    func resetAndFetchMyPlans() {
         currentPage = 1
         lastPage = 1
         isFetching = false

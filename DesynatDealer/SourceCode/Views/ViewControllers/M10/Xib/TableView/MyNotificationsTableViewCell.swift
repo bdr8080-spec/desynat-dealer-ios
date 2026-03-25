@@ -29,9 +29,9 @@ class MyNotificationsTableViewCell: UITableViewCell {
         titleLabel.text = data?.titleEnglish
         descriptionLabel.text = data?.descriptionEnglish
         if data?.isRead == 1 {
-            mainImageView.image = .selectedBellIcon
-        } else {
             mainImageView.image = .unselectedBellIcon
+        } else {
+            mainImageView.image = .selectedBellIcon
         }
         sentTimeLabel.text = formatISODateToDayMonthYear(data?.createdAt ?? "")
     }

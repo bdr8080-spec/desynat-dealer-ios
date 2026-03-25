@@ -148,7 +148,7 @@ class BannerDetailVC: UIViewController {
         let vc = PaymentMethodVC.instantiate(fromAppStoryboard: .Main)
         vc.paymentFrom = .banner
         vc.transactionIds = banners?.orderID ?? ""
-        vc.payAmount = Int(banners?.price ?? "") ?? 0
+        vc.payAmount = Double(banners?.price ?? "") ?? 0
         self.navigationController?.pushViewController(vc, animated: true)
     }
   

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24412" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Poppins-Medium.ttf">
+            <string>Poppins-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="RadioBtnCollectionViewCell" customModule="DesynatDealer" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="224" height="28"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="224" height="28"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W3Z-EY-L5u">
+                        <rect key="frame" x="0.0" y="0.0" width="224" height="28"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="opE-xA-gop">
+                                <rect key="frame" x="0.0" y="0.0" width="108" height="28"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manager" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1wO-LA-2Vf">
+                                        <rect key="frame" x="34" y="4.3333333333333339" width="64" height="19.666666666666664"/>
+                                        <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="radioUnselected" translatesAutoresizingMaskIntoConstraints="NO" id="duc-tw-XIc">
+                                        <rect key="frame" x="0.0" y="2" width="24" height="24"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="LfS-us-RXi"/>
+                                            <constraint firstAttribute="height" constant="24" id="h4d-xW-H0H"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="1wO-LA-2Vf" secondAttribute="trailing" constant="10" id="KOz-hS-JRw"/>
+                                    <constraint firstItem="1wO-LA-2Vf" firstAttribute="centerY" secondItem="duc-tw-XIc" secondAttribute="centerY" id="KVq-Xm-FfE"/>
+                                    <constraint firstAttribute="bottom" secondItem="duc-tw-XIc" secondAttribute="bottom" constant="2" id="TIt-Eu-Fkn"/>
+                                    <constraint firstItem="1wO-LA-2Vf" firstAttribute="leading" secondItem="duc-tw-XIc" secondAttribute="trailing" constant="10" id="YCs-TC-ZlA"/>
+                                    <constraint firstItem="duc-tw-XIc" firstAttribute="leading" secondItem="opE-xA-gop" secondAttribute="leading" id="ZNM-Mp-pOJ"/>
+                                    <constraint firstItem="duc-tw-XIc" firstAttribute="top" secondItem="opE-xA-gop" secondAttribute="top" constant="2" id="fx0-PO-E4I"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="opE-xA-gop" secondAttribute="bottom" id="2Aq-XS-fbb"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="opE-xA-gop" secondAttribute="trailing" constant="10" id="6XS-K4-5Tj"/>
+                            <constraint firstItem="opE-xA-gop" firstAttribute="leading" secondItem="W3Z-EY-L5u" secondAttribute="leading" id="jBH-y7-lpN"/>
+                            <constraint firstItem="opE-xA-gop" firstAttribute="top" secondItem="W3Z-EY-L5u" secondAttribute="top" id="xqm-Ea-pUs"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="W3Z-EY-L5u" secondAttribute="bottom" id="6gg-wT-GHi"/>
+                <constraint firstItem="W3Z-EY-L5u" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="MA4-5Q-Omv"/>
+                <constraint firstItem="W3Z-EY-L5u" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="SyI-CX-o58"/>
+                <constraint firstAttribute="trailing" secondItem="W3Z-EY-L5u" secondAttribute="trailing" id="eCr-uf-IWx"/>
+            </constraints>
+            <size key="customSize" width="224" height="30"/>
+            <connections>
+                <outlet property="imageView" destination="duc-tw-XIc" id="qtv-dW-F2U"/>
+                <outlet property="titleLbl" destination="1wO-LA-2Vf" id="2gB-hu-2dr"/>
+            </connections>
+            <point key="canvasLocation" x="56.488549618320612" y="87.323943661971839"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="radioUnselected" width="20" height="20"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

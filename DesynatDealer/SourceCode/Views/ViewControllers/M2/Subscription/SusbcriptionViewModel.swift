@@ -13,7 +13,7 @@ class SubscriptionPlaneViewModel: NSObject {
     private var hostVC: SubscriptionVC
     var plansList: [GetPlansSubscriptionModel]? = []
     var transactionId: String?
-    var payAmt: Int?
+    var payAmt: Double?
     var durationOfPlan: String?
     
     init(hostVC: SubscriptionVC) {
@@ -33,7 +33,7 @@ class SubscriptionPlaneViewModel: NSObject {
             let vc = PaymentMethodVC.instantiate(fromAppStoryboard: .Main)
             vc.paymentFrom = .plan
             vc.transactionIds = result.transactionID ?? ""
-            vc.payAmount = self.payAmt ?? 0
+            vc.payAmount = self.payAmt ?? 0.0
             vc.durationOfPlan = self.durationOfPlan
             self.hostVC.navigationController?.pushViewController(vc, animated: true)
         }

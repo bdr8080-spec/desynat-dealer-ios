@@ -59,7 +59,7 @@ extension  WebService{
     
     func markReadNotificationsService(param: [String :Any], completion:@escaping (_ user: EmptyModel)-> Void) {
         CommonUtils.showHud(show: true)
-        NetworkManager.shared.request(withAPI:.endpoint(.getNotifications), requestMethod: .post,requestParams: param,  requestModel: EmptyModel.self) { result, code in
+        NetworkManager.shared.request(withAPI:.endpoint(.markReadNotification), requestMethod: .post,requestParams: param,  requestModel: EmptyModel.self) { result, code in
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
@@ -75,7 +75,7 @@ extension  WebService{
     
     func markAllReadNotificationsService(param: [String :Any], completion:@escaping (_ user: EmptyModel)-> Void) {
         CommonUtils.showHud(show: true)
-        NetworkManager.shared.request(withAPI:.endpoint(.getNotifications), requestMethod: .post,requestParams: param,  requestModel: EmptyModel.self) { result, code in
+        NetworkManager.shared.request(withAPI:.endpoint(.markAllReadNotification), requestMethod: .post,requestParams: param,  requestModel: EmptyModel.self) { result, code in
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {

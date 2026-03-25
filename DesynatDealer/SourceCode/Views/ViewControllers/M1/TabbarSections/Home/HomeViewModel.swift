@@ -17,6 +17,17 @@ class HomeViewModel {
   init(hostVC: HomeViewController) {
     self.hostVC = hostVC
   }
+    
+    func getCountOfNotificationRequest(){
+        WebService.sharedInstance.getCountOfNotificationForService { [self] count in
+            if count > 0 {
+                self.hostVC.notificationCountView.isHidden = false
+                self.hostVC.notificationCountLabel.text = count.description
+            } else {
+                self.hostVC.notificationCountView.isHidden = true
+            }
+        }
+    }
   
   func statusUpdateAPI(completion: @escaping (Bool) -> Void) {
     WebService.sharedInstance.storeStatusUpdateService{ [weak self] response in

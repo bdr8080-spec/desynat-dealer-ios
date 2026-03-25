@@ -74,7 +74,7 @@ extension BannerManagemntVC: UITableViewDelegate, UITableViewDataSource {
             //vc.transactionIds = banner.orderID ?? ""
             vc.paymentFrom = .banner
             vc.transactionIds = banner.orderID ?? ""
-            vc.payAmount = Int(banner.price ?? "") ?? 0
+            vc.payAmount = Double(banner.price ?? "") ?? 0
             self.navigationController?.pushViewController(vc, animated: true)
         }
         return cell

@@ -44,7 +44,7 @@
                                             <action selector="btnDesynatShowDesign:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="ZcJ-K1-3Yn"/>
                                         </connections>
                                     </button>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2Hg-ce-U0c" customClass="CustomImageView" customModule="DesynatDealer" customModuleProvider="target">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userProfile" translatesAutoresizingMaskIntoConstraints="NO" id="2Hg-ce-U0c" customClass="CustomImageView" customModule="DesynatDealer" customModuleProvider="target">
                                         <rect key="frame" x="335" y="62" width="40" height="40"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="circleCorner" value="YES"/>
@@ -73,6 +73,39 @@
                                             <action selector="btnNotification:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="ZJg-vn-fW9"/>
                                         </connections>
                                     </button>
+                                    <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GCd-aF-uEX" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
+                                        <rect key="frame" x="305" y="62" width="20" height="20"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btnGradient" translatesAutoresizingMaskIntoConstraints="NO" id="OKj-VD-XoZ" customClass="CustomImageView" customModule="DesynatDealer" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="circleCorner" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ICL-p8-y6H">
+                                                <rect key="frame" x="2" y="2" width="16" height="16"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="ICL-p8-y6H" firstAttribute="leading" secondItem="GCd-aF-uEX" secondAttribute="leading" constant="2" id="5vD-b9-wGT"/>
+                                            <constraint firstAttribute="height" constant="20" id="8LP-PR-Yrv"/>
+                                            <constraint firstAttribute="trailing" secondItem="OKj-VD-XoZ" secondAttribute="trailing" id="BPU-W6-FUd"/>
+                                            <constraint firstItem="OKj-VD-XoZ" firstAttribute="leading" secondItem="GCd-aF-uEX" secondAttribute="leading" id="GmR-Sg-HUX"/>
+                                            <constraint firstItem="OKj-VD-XoZ" firstAttribute="top" secondItem="GCd-aF-uEX" secondAttribute="top" id="MnE-fW-var"/>
+                                            <constraint firstAttribute="bottom" secondItem="ICL-p8-y6H" secondAttribute="bottom" constant="2" id="bcC-a4-hy2"/>
+                                            <constraint firstAttribute="trailing" secondItem="ICL-p8-y6H" secondAttribute="trailing" constant="2" id="cjD-Dz-Z0M"/>
+                                            <constraint firstAttribute="bottom" secondItem="OKj-VD-XoZ" secondAttribute="bottom" id="j2r-fj-pkY"/>
+                                            <constraint firstAttribute="width" constant="20" id="pn9-VE-kPi"/>
+                                            <constraint firstItem="ICL-p8-y6H" firstAttribute="top" secondItem="GCd-aF-uEX" secondAttribute="top" constant="2" id="zJ6-fL-UNQ"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="circleCorner" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WSI-JB-hz8">
                                         <rect key="frame" x="240" y="62" width="40" height="40"/>
                                         <constraints>
@@ -102,11 +135,13 @@
                                     <constraint firstItem="6yq-d1-uO2" firstAttribute="leading" secondItem="WSI-JB-hz8" secondAttribute="trailing" constant="5" id="M0z-yR-d8E"/>
                                     <constraint firstItem="zU4-iY-7zz" firstAttribute="leading" secondItem="zgv-8y-BXH" secondAttribute="trailing" constant="1" id="Q5S-CD-3of"/>
                                     <constraint firstItem="6yq-d1-uO2" firstAttribute="centerY" secondItem="FSG-62-Plw" secondAttribute="centerY" id="Q8G-8J-c5m"/>
+                                    <constraint firstItem="6yq-d1-uO2" firstAttribute="trailing" secondItem="GCd-aF-uEX" secondAttribute="trailing" id="RE7-WW-odb"/>
                                     <constraint firstItem="zgv-8y-BXH" firstAttribute="leading" secondItem="r9S-L1-3tf" secondAttribute="leading" constant="16" id="Zoe-Gf-jQi"/>
                                     <constraint firstAttribute="trailing" secondItem="FSG-62-Plw" secondAttribute="trailing" constant="18" id="eqM-O6-2Mn"/>
                                     <constraint firstAttribute="bottom" secondItem="zgv-8y-BXH" secondAttribute="bottom" constant="28" id="mAt-l8-MOS"/>
                                     <constraint firstItem="FSG-62-Plw" firstAttribute="leading" secondItem="2Hg-ce-U0c" secondAttribute="leading" id="ouM-lV-zGO"/>
                                     <constraint firstItem="FSG-62-Plw" firstAttribute="trailing" secondItem="2Hg-ce-U0c" secondAttribute="trailing" id="s4q-mV-CdY"/>
+                                    <constraint firstItem="6yq-d1-uO2" firstAttribute="top" secondItem="GCd-aF-uEX" secondAttribute="top" id="tDU-S5-veR"/>
                                     <constraint firstAttribute="height" constant="129" id="vi0-2s-8eP"/>
                                     <constraint firstItem="FSG-62-Plw" firstAttribute="top" secondItem="2Hg-ce-U0c" secondAttribute="top" id="xAC-d5-zVV"/>
                                     <constraint firstItem="zU4-iY-7zz" firstAttribute="centerY" secondItem="zgv-8y-BXH" secondAttribute="centerY" id="xNY-Kd-V7B"/>
@@ -1353,6 +1388,8 @@
                         <outlet property="lblTotalProducts" destination="ccf-0T-cCk" id="QgR-Tj-aog"/>
                         <outlet property="lblTotalRevenue" destination="Dyd-Ux-Seo" id="EQ5-QR-tAa"/>
                         <outlet property="lblTotalStaff" destination="FaA-b9-m00" id="7cc-tS-2Fn"/>
+                        <outlet property="notificationCountLabel" destination="ICL-p8-y6H" id="6lr-Zm-Zpa"/>
+                        <outlet property="notificationCountView" destination="GCd-aF-uEX" id="RYc-NS-RPx"/>
                         <outlet property="txtChooseFromDate" destination="sy9-EL-TcD" id="pwg-O9-DbG"/>
                         <outlet property="txtChooseToDate" destination="LLU-FC-zP3" id="UDW-9q-nBD"/>
                         <outlet property="txtVisitorFromDate" destination="NX9-8G-iAe" id="7QL-pl-kfN"/>
@@ -2245,6 +2282,7 @@
         <image name="show" width="52.666667938232422" height="52.666667938232422"/>
         <image name="staff" width="40" height="40"/>
         <image name="toggle_on" width="40" height="22"/>
+        <image name="userProfile" width="32" height="32"/>
         <namedColor name="#B3B3B3">
             <color red="0.70196078431372544" green="0.70196078431372544" blue="0.70196078431372544" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

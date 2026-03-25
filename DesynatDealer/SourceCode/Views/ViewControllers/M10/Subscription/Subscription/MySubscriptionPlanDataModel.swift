@@ -72,9 +72,11 @@ struct PlanInfo: Codable {
     let id, countryID: Int?
     let planNameEnglish, planNameArabic: String?
     let duration, durationType: Int?
-    let newDuration, newDurationType: String?
+//    let newDurationType: String?
+//    let newDuration: String?
     let noOfVideos, noOfProducts, noOfHighlights, noOfEmployee: Int?
-    let stories, price, discountedPrice, commission: Int?
+    let stories, discountedPrice, commission: Int?
+    let price: Double?
     let commissionPercentage, status: Int?
     let createdAt, updatedAt: String?
 
@@ -85,8 +87,8 @@ struct PlanInfo: Codable {
         case planNameArabic = "plan_name_arabic"
         case duration
         case durationType = "duration_type"
-        case newDuration = "new_duration"
-        case newDurationType = "new_duration_type"
+//        case newDuration = "new_duration"
+//        case newDurationType = "new_duration_type"
         case noOfVideos = "no_of_videos"
         case noOfProducts = "no_of_products"
         case noOfHighlights = "no_of_highlights"

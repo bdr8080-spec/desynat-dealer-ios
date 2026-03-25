@@ -22,7 +22,7 @@ class PaymentMethodVC: UIViewController {
     @IBOutlet weak var viewPayment: MFPaymentCardView!
     @IBOutlet weak var cardSelectionImageView: UIImageView!
     
-    var payAmount: Int = 0
+    var payAmount: Double = 0.0
     var getFatoorahResponse: MFPaymentStatusResponse?
     var transactionIds: String?
     var durationOfPlan: String? = ""

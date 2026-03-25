@@ -100,6 +100,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     switch selectedItem {
       
     case "Staff management":
+        let vc =  StaffManagementViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+        self.navigationController?.pushViewController(vc, animated: true)
       print("➡️ Navigate to Staff management")
       
     case "Subscription Plans":

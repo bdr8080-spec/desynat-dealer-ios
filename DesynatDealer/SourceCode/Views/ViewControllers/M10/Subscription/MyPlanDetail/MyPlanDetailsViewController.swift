@@ -120,7 +120,7 @@ class MyPlanDetailsViewController: UIViewController {
             let vc = PaymentMethodVC.instantiate(fromAppStoryboard: .Main)
             vc.paymentFrom = .mySubscriptionPlan
             vc.transactionIds = self.planDetails?.transactionID ?? ""
-            vc.payAmount = self.planDetails?.planInfo?.price ?? 0
+            vc.payAmount = self.planDetails?.planInfo?.price ?? 0.0
             if let duration = self.planDetails?.planInfo?.duration, let type = self.planDetails?.planInfo?.durationType {
                 vc.durationOfPlan = "for \(duration) \(type == 1 ? "Month" : "Years")"
             } else {

@@ -41,7 +41,7 @@ class MySubsciptionPlanViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.getPlans()
-        viewModel.resetAndFetchStories()
+        
     }
     
     @IBAction func Backbtn(_ sender: Any) {
@@ -57,6 +57,7 @@ class MySubsciptionPlanViewController: UIViewController {
         // Show CollectionView
         subsciptionPlanCollectionView.isHidden = false
         myPlanTableView.isHidden = true
+        noDataFoundLabel.isHidden = true
     }
     
     @IBAction func myPlanBtn(_ sender: Any) {
@@ -69,6 +70,8 @@ class MySubsciptionPlanViewController: UIViewController {
         // Show TableView
         subsciptionPlanCollectionView.isHidden = true
         myPlanTableView.isHidden = false
+        noDataFoundLabel.isHidden = false
+        viewModel.resetAndFetchMyPlans()
     }
     
 }
@@ -101,9 +104,9 @@ extension MySubsciptionPlanViewController : UITableViewDelegate,UITableViewDataS
         let cell = tableView.dequeueReusableCell(withIdentifier: "myPlanTableViewCell", for: indexPath) as! myPlanTableViewCell
         let data = viewModel.myPurchasedPlansList[indexPath.row]
         cell.configData(data: data)
-//        cell.onRenewTapped = {[weak self] in
-//            viewModel.
-//        }
+        cell.onRenewTapped = {[weak self] in
+            self?.viewModel.renewSubscriptionPlanApi(planId: data.planInfo?.id ?? 0, data: data)
+        }
         return cell
     }
     
@@ -119,7 +122,7 @@ extension MySubsciptionPlanViewController: SubscriptionCollectionCellDelegate {
     func didTapContinue(for plan: GetPlansSubscriptionModel) {
         // Call your purchase plan API here
         print("User tapped continue for plan ID: \(plan.id ?? 0)")
-        viewModel.payAmt = Int(plan.price ?? 0)
+        viewModel.payAmt = plan.price ?? 0
         if let duration = plan.duration, let type = plan.durationType {
             viewModel.durationOfPlan = "for \(duration) \(type == 1 ? "Month" : "Years")"
         } else {

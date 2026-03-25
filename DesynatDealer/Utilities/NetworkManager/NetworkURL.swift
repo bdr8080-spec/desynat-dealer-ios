@@ -3,8 +3,8 @@ import Foundation
 let kisOnBoardingChecked = "isOnBoardingChecked"
 
 enum BaseURL {
-    static let development  = "http://157.241.119.72"
-    static let release      = "http://157.241.119.72"
+    static let development  =   "https://desynat.com"//"http://157.241.119.72"
+    static let release      = "https://desynat.com"//"http://157.241.119.72"
     
     static func value() -> String {
         switch BuildConfiguration.shared.environment {
@@ -99,6 +99,7 @@ enum NetworkEndPoint: String {
     case markAllReadNotification        = "/api/seller/mark_all_notification_as_read"
     case myPlanList                     = "/api/seller/my_plans"
     case renewSubcriptionPlanBuy        = "/api/seller/renew_subcription_plan_buy"
+    case countOfNotifcation             = "/api/seller/get_seller_notifications_count"
     
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"
