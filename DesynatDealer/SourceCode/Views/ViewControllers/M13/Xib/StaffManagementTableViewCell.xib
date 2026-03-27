@@ -79,9 +79,8 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Active" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nyl-1F-onL">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Active" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nyl-1F-onL">
                                 <rect key="frame" x="388.33333333333331" y="41" width="34.666666666666686" height="14.333333333333336"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                 <color key="textColor" red="0.1019607843" green="0.56470588239999997" blue="0.050980392159999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -107,6 +106,9 @@
                                         <rect key="frame" x="36" y="0.0" width="24" height="24"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" image="delete"/>
+                                        <connections>
+                                            <action selector="deleteBtnTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="2dl-dF-YsX"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Jw-oO-Yp4">
                                         <rect key="frame" x="72" y="0.0" width="40" height="22"/>
@@ -116,6 +118,9 @@
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="toggle_on"/>
+                                        <connections>
+                                            <action selector="toggleBtnTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="2kJ-PZ-XpP"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -127,9 +132,11 @@
                             <constraint firstItem="CPm-go-4V6" firstAttribute="leading" secondItem="1AR-pk-efQ" secondAttribute="leading" constant="15" id="5be-GC-yeL"/>
                             <constraint firstItem="bnY-fp-e3t" firstAttribute="top" secondItem="CPm-go-4V6" secondAttribute="top" id="A8d-fm-Bdn"/>
                             <constraint firstItem="iEO-O6-o4D" firstAttribute="top" secondItem="W1g-JI-bdr" secondAttribute="bottom" constant="10.333333333333329" id="HAf-pk-nNd"/>
+                            <constraint firstItem="Nyl-1F-onL" firstAttribute="top" secondItem="4Jw-oO-Yp4" secondAttribute="bottom" constant="4" id="RCq-U0-1ZT"/>
                             <constraint firstAttribute="trailing" secondItem="zDm-SJ-y0P" secondAttribute="trailing" constant="15" id="SC9-TW-wjE"/>
                             <constraint firstItem="iEO-O6-o4D" firstAttribute="bottom" secondItem="CPm-go-4V6" secondAttribute="bottom" constant="-2" id="TbZ-rc-QDH"/>
                             <constraint firstItem="W1g-JI-bdr" firstAttribute="leading" secondItem="huH-3N-3Rd" secondAttribute="leading" id="UiF-jf-XFe"/>
+                            <constraint firstItem="Nyl-1F-onL" firstAttribute="trailing" secondItem="4Jw-oO-Yp4" secondAttribute="trailing" id="W5I-s5-Sv8"/>
                             <constraint firstAttribute="bottom" secondItem="CPm-go-4V6" secondAttribute="bottom" constant="15" id="X8z-Ly-6bs"/>
                             <constraint firstItem="iEO-O6-o4D" firstAttribute="leading" secondItem="W1g-JI-bdr" secondAttribute="leading" id="k9o-4D-2Up"/>
                             <constraint firstItem="bnY-fp-e3t" firstAttribute="leading" secondItem="CPm-go-4V6" secondAttribute="trailing" constant="8" id="nVq-Qt-3Kc"/>
@@ -158,6 +165,15 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="activeStatusLbl" destination="Nyl-1F-onL" id="xKV-il-Fgr"/>
+                <outlet property="addedOnLbl" destination="Eza-PZ-hod" id="Etx-rJ-oot"/>
+                <outlet property="btnToggle" destination="4Jw-oO-Yp4" id="uyO-yb-U23"/>
+                <outlet property="designationLbl" destination="huH-3N-3Rd" id="8pu-db-xXE"/>
+                <outlet property="mobileNumberLbl" destination="W1g-JI-bdr" id="Ff8-hv-TfB"/>
+                <outlet property="nameLbl" destination="bnY-fp-e3t" id="Yvw-8h-A3h"/>
+                <outlet property="profileImageView" destination="CPm-go-4V6" id="goQ-1e-pbw"/>
+            </connections>
             <point key="canvasLocation" x="94.656488549618317" y="127.8169014084507"/>
         </tableViewCell>
     </objects>

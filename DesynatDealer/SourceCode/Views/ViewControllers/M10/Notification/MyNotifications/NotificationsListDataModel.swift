@@ -78,7 +78,8 @@ struct SenderDetails: Codable {
     let countryCode, mobile: String?
     let email: String?
     let emailVerifiedAt, otp: String?
-    let otpVerify, deviceType: String?
+    let otpVerify: String?
+//    let deviceType: String?
     let fcmToken: String?
     let createdAt: String?
     let updatedAt: String?
@@ -92,7 +93,7 @@ struct SenderDetails: Codable {
         case emailVerifiedAt = "email_verified_at"
         case otp
         case otpVerify = "otp_verify"
-        case deviceType = "device_type"
+//        case deviceType = "device_type"
         case fcmToken = "fcm_token"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
@@ -110,7 +111,8 @@ struct ReceiverDetails: Codable {
     let receiverDetailsLet, long: String?
     let countryID, zoneID: Int?
     let otp: String?
-    let otpVerify, deviceType: String?
+    let otpVerify: String?
+//    let deviceType: String?
     let deviceToken: String?
     let vehicleName, vehicleRegNo, documentInformation, status: String?
     let onDuty: String?
@@ -146,7 +148,7 @@ struct ReceiverDetails: Codable {
         case zoneID = "zone_id"
         case otp
         case otpVerify = "otp_verify"
-        case deviceType = "device_type"
+//        case deviceType = "device_type"
         case deviceToken = "device_token"
         case vehicleName = "vehicle_name"
         case vehicleRegNo = "vehicle_reg_no"

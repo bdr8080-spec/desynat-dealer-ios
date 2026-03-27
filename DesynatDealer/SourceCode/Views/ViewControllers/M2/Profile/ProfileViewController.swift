@@ -159,6 +159,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         self.navigationController?.pushViewController(nexVC, animated: true)
       
     case "Change Language":
+        let vc = ChangeLanguageViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+        self.navigationController?.pushViewController(vc, animated: true)
       print("➡️ Navigate to Change Language")
       
     case "Cancellation Policy":
@@ -179,6 +181,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
       print("➡️ Navigate to Support")
       
     case "Settings":
+        let vc = SettingViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+        self.navigationController?.pushViewController(vc, animated: true)
       print("➡️ Navigate to Settings")
       
     default:

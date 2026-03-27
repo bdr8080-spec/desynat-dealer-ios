@@ -128,7 +128,9 @@ class SummaryViewModel:NSObject{
 
     //Mark:->SubmitSummaryApi
     func submitSummaryApi(userId:String){
-        let param:[String:Any] = [ APIKeys.userId:userId]
+        let param:[String:Any] = [ APIKeys.userId:userId,
+                                   "device_type": 1,//0 web 1 ios 2 andriod
+                                   "fcm_token": kSharedUserDefaults.retrieveModelFor(key: .deviceToken, model: String.self) ?? ""]
         WebService.sharedInstance.submitSummaryService(withParams:param) { user in
             let vc = AccountCreationDoneViewController.instantiate(fromAppStoryboard: .Main)
             self.hostVC.navigationController?.pushViewController(vc, animated: true)

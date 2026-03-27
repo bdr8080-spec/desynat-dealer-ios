@@ -15,7 +15,7 @@ struct SummaryModel: Codable {
     let email: String?
     let password: String?
     let acceptTerms, otp, otpVerify: String?
-    let deviceType: String?
+//    let deviceType: String?
     let deviceToken: String?
     let adminVerify, storeInformation, bankInformation: String?
     let createdAt, updatedAt: String?
@@ -34,7 +34,7 @@ struct SummaryModel: Codable {
         case acceptTerms = "accept_terms"
         case otp
         case otpVerify = "otp_verify"
-        case deviceType = "device_type"
+//        case deviceType = "device_type"
         case deviceToken = "device_token"
         case adminVerify = "admin_verify"
         case storeInformation = "store_information"

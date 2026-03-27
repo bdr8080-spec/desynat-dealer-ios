@@ -31,6 +31,7 @@ class StaffManagementViewController: UIViewController {
     }
     @IBAction func addNewStaffBtnTapped(_ sender: Any) {
         let vc = AddNewStaffViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+        vc.comingReason = .addNewStaff
         self.navigationController?.pushViewController(vc, animated: true)
         }
     
@@ -45,5 +46,9 @@ extension StaffManagementViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: StaffManagementTableViewCell = tableView.dequeueReusableCell(withIdentifier: "StaffManagementTableViewCell", for: indexPath) as! StaffManagementTableViewCell
         return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = StaffDetailsViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }

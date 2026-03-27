@@ -242,7 +242,8 @@ struct UserDetails: Codable {
     let profileImage: String?
     let fullName, countryCode, mobile, email: String?
     let emailVerifiedAt, otp: String?
-    let otpVerify, deviceType: String?
+    let otpVerify: String?
+//    let otpVerify, deviceType: String?
     let deviceToken, userDetailsLet, long: String?
     let status, createdAt, updatedAt: String?
     
@@ -255,7 +256,7 @@ struct UserDetails: Codable {
         case emailVerifiedAt = "email_verified_at"
         case otp
         case otpVerify = "otp_verify"
-        case deviceType = "device_type"
+//        case deviceType = "device_type"
         case deviceToken = "device_token"
         case userDetailsLet = "let"
         case long, status

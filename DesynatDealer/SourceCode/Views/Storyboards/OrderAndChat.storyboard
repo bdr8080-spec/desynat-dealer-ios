@@ -3093,7 +3093,7 @@ Apartment, Kuwait</string>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bd6-xf-wKR" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="114.66666666666667" height="38"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8qv-o7-Xtx" customClass="CustomButton" customModule="DesynatDealer" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8qv-o7-Xtx" customClass="CustomButton" customModule="DesynatDealer" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="114.66666666666667" height="38"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
@@ -3131,7 +3131,7 @@ Apartment, Kuwait</string>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DUX-oL-Ey0" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
                                                 <rect key="frame" x="115.33333333333334" y="0.0" width="114.33333333333334" height="38"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p3A-KI-FkW" customClass="CustomButton" customModule="DesynatDealer" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p3A-KI-FkW" customClass="CustomButton" customModule="DesynatDealer" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="114.33333333333333" height="38"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
@@ -3173,7 +3173,7 @@ Apartment, Kuwait</string>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wjD-7U-yR5" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
                                                 <rect key="frame" x="230.33333333333334" y="0.0" width="114.66666666666666" height="38"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qyQ-CY-tF9" customClass="CustomButton" customModule="DesynatDealer" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qyQ-CY-tF9" customClass="CustomButton" customModule="DesynatDealer" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="114.66666666666667" height="38"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
@@ -3253,7 +3253,7 @@ Apartment, Kuwait</string>
                                                 </constraints>
                                             </imageView>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2WC-DD-4Gc">
-                                                <rect key="frame" x="51" y="0.0" width="224" height="38"/>
+                                                <rect key="frame" x="51" y="0.0" width="223" height="38"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                 <textInputTraits key="textInputTraits"/>
                                                 <userDefinedRuntimeAttributes>
@@ -3262,14 +3262,16 @@ Apartment, Kuwait</string>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SEq-C8-8Ys">
-                                                <rect key="frame" x="295" y="0.0" width="50" height="38"/>
+                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SEq-C8-8Ys">
+                                                <rect key="frame" x="294" y="2" width="51" height="34"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="38" id="cR8-vg-XTj"/>
-                                                    <constraint firstAttribute="width" constant="50" id="y0Y-4A-OJK"/>
+                                                    <constraint firstAttribute="width" secondItem="SEq-C8-8Ys" secondAttribute="height" multiplier="1.5:1" id="Xeu-Z5-C2U"/>
+                                                    <constraint firstAttribute="height" constant="34" id="cR8-vg-XTj"/>
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" image="filter"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="filter">
+                                                    <backgroundConfiguration key="background" cornerRadius="-5"/>
+                                                </buttonConfiguration>
                                                 <connections>
                                                     <action selector="micDidTapped:" destination="ZmN-LO-pa6" eventType="touchUpInside" id="147-2w-0JX"/>
                                                 </connections>
@@ -4408,10 +4410,10 @@ Apartment, Kuwait</string>
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

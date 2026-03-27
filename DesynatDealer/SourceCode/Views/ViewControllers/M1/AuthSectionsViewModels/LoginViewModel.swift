@@ -60,7 +60,9 @@ class LoginViewModel: NSObject {
             APIKeys.emailMobile:loginHostVC.emailTextField.text ?? "",
             APIKeys.password: loginHostVC.txtPassword.text ?? "",
             APIKeys.type:loginHostVC.type,
-            "lang": LanguageManager.currentLanguageCode
+            "lang": LanguageManager.currentLanguageCode,
+            "device_type": 1,//0 web 1 ios 2 andriod
+            "fcm_token": kSharedUserDefaults.retrieveModelFor(key: .deviceToken, model: String.self) ?? "",
         ]
         WebService.sharedInstance.loginService(withParams: params) { (response) in
             if response.storeInformation == "0" {

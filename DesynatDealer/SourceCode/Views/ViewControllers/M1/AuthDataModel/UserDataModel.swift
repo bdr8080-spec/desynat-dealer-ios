@@ -19,7 +19,7 @@ struct User: Codable {
     let acceptTerms: String?
     let otp: String?
     let otpVerify: String?
-    let deviceType: String?
+//    let deviceType: String?
     let deviceToken: String?
     let adminVerify: String?
     let storeInformation: String?
@@ -41,7 +41,7 @@ struct User: Codable {
         case acceptTerms = "accept_terms"
         case otp
         case otpVerify = "otp_verify"
-        case deviceType = "device_type"
+//        case deviceType = "device_type"
         case deviceToken = "device_token"
         case adminVerify = "admin_verify"
         case storeInformation = "store_information"

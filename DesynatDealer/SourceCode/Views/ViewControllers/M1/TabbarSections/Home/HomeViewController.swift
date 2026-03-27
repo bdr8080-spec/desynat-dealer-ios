@@ -63,7 +63,7 @@ class HomeViewController: UIViewController {
         )
         busyOnOffLabel.text = savedStatus == 1 ? "Busy/On" : "Busy/Off"
         viewModel.getUserProfile()
-//        viewModel.getCountOfNotificationRequest()
+        viewModel.getCountOfNotificationRequest()
     }
     
     @IBAction func btnDesynatShowDesign(_ sender: Any) {

@@ -9,6 +9,7 @@ import UIKit
 
 class AddNewStaffViewController: UIViewController {
     
+    // MARK: - IBOutlet
     @IBOutlet weak var roleSelectionCollectionView: UICollectionView!{
         didSet{
             roleSelectionCollectionView.dataSource = self
@@ -21,15 +22,25 @@ class AddNewStaffViewController: UIViewController {
             accessModuleTableView.registerCellFromNib(cellID: "AccessModuleTableViewCell")
         }
     }
+    
+    @IBOutlet weak var addBtnLbl: UILabel!
+    @IBOutlet weak var confirmPasswortTxtField: UITextField!
+    @IBOutlet weak var passwordTxtField: UITextField!
+    @IBOutlet weak var editStaffView: UIView!
+    @IBOutlet weak var addNewStaffView: CustomView!
+    @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     
+    
+    // MARK: - Variable
     let roles = ["Manager", "Officer", "Sales employee"]
-     var selectedRow: Int?
+    var selectedRow: Int?
     private var selectedRoleIndex: Int?
     private var selectedAccessModule: Int?
+    var  comingReason : comingFrom?
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        initialSetup()
     }
     
     override func viewWillLayoutSubviews() {
@@ -44,7 +55,32 @@ class AddNewStaffViewController: UIViewController {
     @IBAction func backbtn(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
+    @IBAction func passwordEyebtn(_ sender: UIButton) {
+        sender.isSelected.toggle()
+        passwordTxtField.isSecureTextEntry.toggle()
+    }
+    @IBAction func confirmPasswordEyebtn(_ sender: UIButton) {
+        sender.isSelected.toggle()
+        confirmPasswortTxtField.isSecureTextEntry.toggle()
+    }
     
+    // MARK: - Function
+    func initialSetup() {
+        switch comingReason {
+        case .addNewStaff:
+            titleLbl.text = "Add New Staff"
+            addNewStaffView.isHidden = false
+            editStaffView.isHidden = true
+            addBtnLbl.text = "ADD"
+        case .editStaff:
+            titleLbl.text = "Edit"
+            editStaffView.isHidden = false
+            addNewStaffView.isHidden = true
+            addBtnLbl.text = "Save changes"
+        case nil:
+            return
+        }
+    }
     
     
 }
@@ -79,19 +115,24 @@ extension AddNewStaffViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AccessModuleTableViewCell") as! AccessModuleTableViewCell
-        cell.rowIndex = indexPath.row
-        let isRowSelected = selectedRow == indexPath.row
-                cell.updateSelectionState(isSelected: isRowSelected)
-        cell.didSelectCollectionItem = { [weak self] collectionIndex in
-                    guard let self = self else { return }
-                
-                    self.selectedRow = indexPath.row
-
-                    self.selectedAccessModule = collectionIndex
-        
-                    self.accessModuleTableView.reloadData()
-                }
-        
+        //        cell.rowIndex = indexPath.row
+        if selectedRow == indexPath.row {
+            cell.selectedIndex = -1
+            cell.isOuterRowSelected = true
+            cell.radioimageView.image = .radioSelected
+            cell.collectionView.reloadData()
+        } else {
+            cell.selectedIndex = -1
+            cell.isOuterRowSelected = false
+            cell.radioimageView.image = .radioUnselected
+            cell.collectionView.reloadData()
+        }
+        //        cell.didSelectCollectionItem = { [weak self] collectionIndex in
+        //            guard let self = self else { return }
+        //            self.selectedRow = indexPath.row
+        //            self.selectedAccessModule = collectionIndex
+        //            self.accessModuleTableView.reloadData()
+        //        }
         return cell
     }
     
@@ -103,7 +144,10 @@ extension AddNewStaffViewController: UITableViewDataSource, UITableViewDelegate{
         viewWillLayoutSubviews()
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            selectedRow = indexPath.row
-            tableView.reloadData()
-        }
+        selectedRow = indexPath.row
+        tableView.reloadData()
+    }
+}
+enum comingFrom {
+    case addNewStaff, editStaff
 }

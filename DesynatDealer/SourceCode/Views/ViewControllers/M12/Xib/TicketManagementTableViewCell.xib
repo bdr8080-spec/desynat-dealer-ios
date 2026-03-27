@@ -31,26 +31,32 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LXd-cU-etc" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="42"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ticket Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ojm-Ux-HcM">
-                                        <rect key="frame" x="12" y="12.666666666666664" width="67" height="17"/>
-                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmF-FB-QkQ">
-                                        <rect key="frame" x="216.33333333333334" y="11.333333333333334" width="91.666666666666657" height="19.666666666666664"/>
-                                        <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="utG-WZ-vGN">
+                                        <rect key="frame" x="12" y="11" width="296" height="20"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ticket Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ojm-Ux-HcM">
+                                                <rect key="frame" x="0.0" y="0.0" width="143" height="20"/>
+                                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmF-FB-QkQ">
+                                                <rect key="frame" x="153" y="0.0" width="143" height="20"/>
+                                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="0NU-yM-2hY"/>
-                                    <constraint firstItem="wmF-FB-QkQ" firstAttribute="centerY" secondItem="ojm-Ux-HcM" secondAttribute="centerY" id="33B-VF-rDx"/>
-                                    <constraint firstItem="ojm-Ux-HcM" firstAttribute="centerY" secondItem="LXd-cU-etc" secondAttribute="centerY" id="Syq-Rz-mQH"/>
-                                    <constraint firstItem="ojm-Ux-HcM" firstAttribute="leading" secondItem="LXd-cU-etc" secondAttribute="leading" constant="12" id="Zzr-Ky-0iX"/>
-                                    <constraint firstAttribute="trailing" secondItem="wmF-FB-QkQ" secondAttribute="trailing" constant="12" id="cWW-XK-AIw"/>
+                                    <constraint firstItem="utG-WZ-vGN" firstAttribute="top" secondItem="LXd-cU-etc" secondAttribute="top" constant="11" id="0eP-gt-WB8"/>
+                                    <constraint firstAttribute="trailing" secondItem="utG-WZ-vGN" secondAttribute="trailing" constant="12" id="Mh3-95-hn7"/>
+                                    <constraint firstAttribute="bottom" secondItem="utG-WZ-vGN" secondAttribute="bottom" constant="11" id="b4M-XR-ayr"/>
+                                    <constraint firstItem="utG-WZ-vGN" firstAttribute="leading" secondItem="LXd-cU-etc" secondAttribute="leading" constant="12" id="f87-m3-iv3"/>
+                                    <constraint firstItem="utG-WZ-vGN" firstAttribute="centerY" secondItem="LXd-cU-etc" secondAttribute="centerY" id="wXT-6f-Sib"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="qe1-YK-yrv">
@@ -164,6 +170,13 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="resolvedOnLbl" destination="r7T-Y4-Eoq" id="f1B-sk-nfI"/>
+                <outlet property="statusLbl" destination="Fzu-25-uLU" id="HNd-rJ-idY"/>
+                <outlet property="ticketId" destination="33f-TN-2NG" id="ovz-YA-gin"/>
+                <outlet property="ticketRaisedOnLbl" destination="kYr-rW-Nqt" id="4Uy-qc-Nz3"/>
+                <outlet property="ticketTypeLbl" destination="wmF-FB-QkQ" id="rzl-X2-rLo"/>
+            </connections>
             <point key="canvasLocation" x="138.93129770992365" y="225.35211267605635"/>
         </tableViewCell>
     </objects>

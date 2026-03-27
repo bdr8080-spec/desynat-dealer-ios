@@ -18,7 +18,7 @@ struct SignUpModel: Codable {
     let email: String?
     let password: String?
     let acceptTerms: String?
-    let deviceType: String?
+//    let deviceType: String?
     let deviceToken: String?
     let otp: String?
     let updatedAt: String?
@@ -34,7 +34,7 @@ struct SignUpModel: Codable {
         case email
         case password
         case acceptTerms = "accept_terms"
-        case deviceType = "device_type"
+//        case deviceType = "device_type"
         case deviceToken = "device_token"
         case otp
         case updatedAt = "updated_at"

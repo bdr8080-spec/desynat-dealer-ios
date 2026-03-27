@@ -10,6 +10,7 @@ import UIKit
 class CMSViewController: UIViewController {
     
     @IBOutlet weak var titleLbl: UILabel!
+    @IBOutlet weak var webView: UIWebView!
     
     var titleText : String?
     var comingReason : ComingFrom?
@@ -17,6 +18,16 @@ class CMSViewController: UIViewController {
         super.viewDidLoad()
         titleLbl.text = titleText
         initialSetup()
+        let htmlString = """
+                <html>
+                <body>
+                <h1>Welcome</h1>
+                <p>This is WebView example</p>
+                </body>
+                </html>
+                """
+                
+                webView.loadHTMLString(htmlString, baseURL: nil)
         // Do any additional setup after loading the view.
     }
     
