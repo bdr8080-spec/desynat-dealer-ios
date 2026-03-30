@@ -36,8 +36,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         MFSettings.shared.configure(token: "SK_KWT_vVZlnnAqu8jRByOWaRPNId4ShzEDNt256dvnjebuyzo52dXjAfRx2ixW5umjWSUx", country: .kuwait, environment: MFEnvironment.test)
         let them = MFTheme(navigationTintColor: .white, navigationBarTintColor: .lightGray, navigationTitle: "Payment", cancelButtonTitle: "Cancel")
         MFSettings.shared.setTheme(theme: them)
-//        BadgeManager.shared.reset()
-//        UIApplication.shared.applicationIconBadgeNumber = 0
+        UNUserNotificationCenter.current().setBadgeCount(0, withCompletionHandler: nil)
+        //        BadgeManager.shared.reset()
+        //        UIApplication.shared.applicationIconBadgeNumber = 0
         return true
     }
     
@@ -63,7 +64,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         dropDown.selectionAction = {(index: Int, item: String) in
             print("Selected item: \(item) at index: \(index)")
             completion(index,item)
-            
         }
     }
     
@@ -123,11 +123,11 @@ extension AppDelegate:UNUserNotificationCenterDelegate {
         
         // Convert payload to JSON text
         if let jsonText = payload.toPrettyString() {
-//            showShareAlert(withText: jsonText)
+                        showShareAlert(withText: jsonText)
         }
         let badge = notification.request.content.badge?.intValue ?? 0
-
-                UNUserNotificationCenter.current().setBadgeCount(badge, withCompletionHandler: nil)
+        
+        UNUserNotificationCenter.current().setBadgeCount(badge, withCompletionHandler: nil)
         if #available(iOS 14.0, *) {
             completionHandler([.banner, .badge, .sound])
         } else {
@@ -141,14 +141,13 @@ extension AppDelegate:UNUserNotificationCenterDelegate {
         let payload = response.notification.request.content.userInfo
         
         if let jsonText = payload.toPrettyString() {
-//            showShareAlert(withText: jsonText)
+                        showShareAlert(withText: jsonText)
         }
-//        let badge = response.notification.request.content.badge?.intValue ?? 0
-//
-//                UNUserNotificationCenter.current().setBadgeCount(badge, withCompletionHandler: nil)
+        //        let badge = response.notification.request.content.badge?.intValue ?? 0
+        //
+        //                UNUserNotificationCenter.current().setBadgeCount(badge, withCompletionHandler: nil)
         completionHandler()
     }
-    
     
     func showShareAlert(withText text: String) {
         guard let topVC = topViewController() else { return }
