@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="SelectVideoFromGalleryCollectionViewCell" customModule="DesynatDealer" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="277" height="333"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="277" height="333"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K1c-PJ-Fn9" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="277" height="333"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bestSell" translatesAutoresizingMaskIntoConstraints="NO" id="8SM-lz-ZtW" customClass="CustomImageView" customModule="DesynatDealer" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="277" height="333"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play" translatesAutoresizingMaskIntoConstraints="NO" id="M8Z-8L-Dht">
+                                <rect key="frame" x="126.66666666666669" y="154.66666666666666" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="lxm-sw-t9w"/>
+                                    <constraint firstAttribute="height" constant="24" id="zqC-RQ-o59"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="radioUnselected" translatesAutoresizingMaskIntoConstraints="NO" id="UFl-xf-IT8">
+                                <rect key="frame" x="242" y="10" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="hTP-UM-Hsb"/>
+                                    <constraint firstAttribute="height" constant="25" id="xA9-Ku-WeS"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="M8Z-8L-Dht" firstAttribute="centerY" secondItem="K1c-PJ-Fn9" secondAttribute="centerY" id="1q9-yQ-aBS"/>
+                            <constraint firstItem="8SM-lz-ZtW" firstAttribute="top" secondItem="K1c-PJ-Fn9" secondAttribute="top" id="6z1-Lk-yUt"/>
+                            <constraint firstItem="8SM-lz-ZtW" firstAttribute="leading" secondItem="K1c-PJ-Fn9" secondAttribute="leading" id="KBC-cb-cbF"/>
+                            <constraint firstAttribute="bottom" secondItem="8SM-lz-ZtW" secondAttribute="bottom" id="TDY-cm-GoR"/>
+                            <constraint firstItem="M8Z-8L-Dht" firstAttribute="centerX" secondItem="K1c-PJ-Fn9" secondAttribute="centerX" id="VzL-fW-9Pq"/>
+                            <constraint firstAttribute="trailing" secondItem="UFl-xf-IT8" secondAttribute="trailing" constant="10" id="X8a-dl-9yD"/>
+                            <constraint firstItem="UFl-xf-IT8" firstAttribute="top" secondItem="K1c-PJ-Fn9" secondAttribute="top" constant="10" id="YeU-cu-qd9"/>
+                            <constraint firstAttribute="trailing" secondItem="8SM-lz-ZtW" secondAttribute="trailing" id="y2v-fn-tvp"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="K1c-PJ-Fn9" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="1N7-Up-NOS"/>
+                <constraint firstAttribute="bottom" secondItem="K1c-PJ-Fn9" secondAttribute="bottom" id="NuB-v4-SJe"/>
+                <constraint firstItem="K1c-PJ-Fn9" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="eCh-RO-b5L"/>
+                <constraint firstAttribute="trailing" secondItem="K1c-PJ-Fn9" secondAttribute="trailing" id="rak-rc-goM"/>
+            </constraints>
+            <size key="customSize" width="277" height="333"/>
+            <connections>
+                <outlet property="mainImageView" destination="8SM-lz-ZtW" id="RFQ-fd-XrH"/>
+                <outlet property="playPauseImageView" destination="M8Z-8L-Dht" id="98b-a3-07e"/>
+                <outlet property="selectedImageView" destination="UFl-xf-IT8" id="3xv-O5-9Ij"/>
+            </connections>
+            <point key="canvasLocation" x="277" y="62"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="bestSell" width="158" height="136"/>
+        <image name="play" width="24" height="24"/>
+        <image name="radioUnselected" width="20" height="20"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

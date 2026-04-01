@@ -1,4 +1,5 @@
 import Foundation
+import Photos
 import UIKit
 import SVProgressHUD
 import AVFoundation
@@ -33,7 +34,19 @@ class CommonUtils {
         let bottomPadding = window.safeAreaInsets.bottom
         return (topPadding, bottomPadding, topPadding + bottomPadding)
     }
-  
+    static func getThumbnail(asset: PHAsset, size: CGSize, completion: @escaping (UIImage?) -> Void) {
+        let imageManager = PHCachingImageManager()
+        let options = PHImageRequestOptions()
+        options.deliveryMode = .highQualityFormat
+        options.isSynchronous = false
+        
+        imageManager.requestImage(for: asset,
+                                  targetSize: size,
+                                  contentMode: .aspectFill,
+                                  options: options) { image, _ in
+            completion(image)
+        }
+    }
   static func getDictionary(_ dictData: Any?) -> Dictionary<String, Any> {
       guard let dict = dictData as? Dictionary<String, Any> else {
           guard let arr = dictData as? [Any] else {
@@ -44,7 +57,36 @@ class CommonUtils {
       return dict
   }
   
-  
+    static func generateThumbnail(url: URL, completion: @escaping (UIImage?) -> Void) {
+        let asset = AVAsset(url: url)
+        let imageGenerator = AVAssetImageGenerator(asset: asset)
+        imageGenerator.appliesPreferredTrackTransform = true
+        imageGenerator.requestedTimeToleranceBefore = .zero
+        imageGenerator.requestedTimeToleranceAfter = .zero
+        
+        // ── Most important change ──
+        let secondsToTry: Double = 1.5     // ← try 1.0, 1.5, 2.0, 3.0 — pick what looks best for your videos
+        let time = CMTime(seconds: secondsToTry, preferredTimescale: 600)
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            do {
+                let cgImage = try imageGenerator.copyCGImage(at: time, actualTime: nil)
+                let thumbnail = UIImage(cgImage: cgImage)
+                
+                DispatchQueue.main.async {
+                    completion(thumbnail)
+                }
+            } catch {
+                print("Thumbnail generation failed at \(secondsToTry)s → \(error)")
+                
+                // Fallback: try at 0.5s or just show placeholder
+                DispatchQueue.main.async {
+                    completion(UIImage(named: "placeholder"))
+                }
+            }
+        }
+    }
+    
   static func getModelFromAny<T:Decodable>(model:T.Type, data:Any, completion:(T)->()) {
       do {
           if let data = try? JSONSerialization.data(withJSONObject: data, options: .prettyPrinted) {
@@ -234,18 +276,6 @@ class CommonUtils {
     /// Get thumnail from video url
     /// - Parameter url: desired video url
     /// - Parameter completion: if found asset at url then will return uiimage else ll return nil
-    static func getThumbnailImage(forUrl url: URL, completion:@escaping(UIImage?)->()) {
-        let asset: AVAsset = AVAsset(url: url)
-        let imageGenerator = AVAssetImageGenerator(asset: asset)
-        imageGenerator.appliesPreferredTrackTransform = true
-        do {
-            let thumbnailImage = try imageGenerator.copyCGImage(at: CMTimeMake(value: 1, timescale: 60) ,
-                                                                actualTime: nil)
-            completion(UIImage(cgImage: thumbnailImage))
-        } catch _ {
-            completion(nil)
-        }
-    }
     
     static func openSetting() {
         if let url = URL(string: UIApplication.openSettingsURLString) {
@@ -295,6 +325,49 @@ class CommonUtils {
 //        }
 //        let pickerNavigationController = UINavigationController(rootViewController: picker)
 //        controller.present(pickerNavigationController, animated: true, completion: nil)
+//    }
+    
+//    static func getThumbnailImage(forUrl url: URL?, completion:@escaping(UIImage?)->()) {
+//        let asset: AVAsset = AVAsset(url: url)
+//        let imageGenerator = AVAssetImageGenerator(asset: asset)
+//        imageGenerator.appliesPreferredTrackTransform = true
+//        do {
+//            let thumbnailImage = try imageGenerator.copyCGImage(at: CMTimeMake(value: 1, timescale: 60) ,
+//                                                                actualTime: nil)
+//            completion(UIImage(cgImage: thumbnailImage))
+//        } catch _ {
+//            completion(nil)
+//        }
+//    }
+    
+//    static func generateThumbnail(url: URL, completion: @escaping (UIImage?) -> Void) {
+//        let asset = AVAsset(url: url)
+//        let imageGenerator = AVAssetImageGenerator(asset: asset)
+//        imageGenerator.appliesPreferredTrackTransform = true
+//        imageGenerator.requestedTimeToleranceBefore = .zero
+//        imageGenerator.requestedTimeToleranceAfter = .zero
+//        
+//        // ── Most important change ──
+//        let secondsToTry: Double = 1.5     // ← try 1.0, 1.5, 2.0, 3.0 — pick what looks best for your videos
+//        let time = CMTime(seconds: secondsToTry, preferredTimescale: 600)
+//        
+//        DispatchQueue.global(qos: .userInitiated).async {
+//            do {
+//                let cgImage = try imageGenerator.copyCGImage(at: time, actualTime: nil)
+//                let thumbnail = UIImage(cgImage: cgImage)
+//                
+//                DispatchQueue.main.async {
+//                    completion(thumbnail)
+//                }
+//            } catch {
+//                print("Thumbnail generation failed at \(secondsToTry)s → \(error)")
+//                
+//                // Fallback: try at 0.5s or just show placeholder
+//                DispatchQueue.main.async {
+//                    completion(UIImage(named: "placeholder"))
+//                }
+//            }
+//        }
 //    }
     
     static func getCode(dialCode:String) -> String {

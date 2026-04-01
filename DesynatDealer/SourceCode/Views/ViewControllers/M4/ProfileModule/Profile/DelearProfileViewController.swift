@@ -65,6 +65,7 @@ class DelearProfileViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     viewModel.getUserProfile()
+      viewModel.getMyHighLights()
   }
   
   override func viewWillLayoutSubviews() {
@@ -104,10 +105,19 @@ class DelearProfileViewController: UIViewController {
     let nextVC = EditProfileViewController.instantiate(fromAppStoryboard: .Profile)
     self.navigationController?.pushViewController(nextVC, animated: true)
   }
-  
+
+    @IBAction func addNewHighlightTapped(_ sender: Any) {
+        let  vc = AddNewHighlightViewController.instantiate(fromAppStoryboard: .Profile)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func addNewStoryDidTapped(_ sender: Any) {
+        let vc = AddNewStoryViewController.instantiate(fromAppStoryboard: .Profile)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
   func populateData() {
     let data = viewModel.userProfile
-    
     if let imageUrlString = data?.profilePic,
        let url = URL(string: imageUrlString) {
       userProfileImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
@@ -201,7 +211,7 @@ extension DelearProfileViewController: UICollectionViewDelegate, UICollectionVie
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     switch collectionView {
     case storiesCollectionView:
-      return 2
+        return viewModel.highlightList?.count ?? 0
     case reelsCollectionView:
       return 5
     default:
@@ -213,6 +223,13 @@ extension DelearProfileViewController: UICollectionViewDelegate, UICollectionVie
     switch collectionView {
     case storiesCollectionView:
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StoresDetailsCollectionViewCell", for: indexPath) as! StoresDetailsCollectionViewCell
+        let dict = self.viewModel.highlightList?[indexPath.row]
+        let url = URL(string: dict?.file ?? "")
+          
+            cell.mainImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            cell.mainImageView.sd_imageIndicator?.startAnimatingIndicator()
+            cell.mainImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
+        cell.lblTitle.text = dict?.title
       return cell
     case reelsCollectionView:
       if indexPath.row == 0 {
@@ -242,5 +259,17 @@ extension DelearProfileViewController: UICollectionViewDelegate, UICollectionVie
       return CGSize(width: 0, height: 0)
     }
   }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch collectionView {
+        case reelsCollectionView:
+            if indexPath.row == 0 {
+                let vc =  UploadNewReelViewController.instantiate(fromAppStoryboard: .Profile)
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        default:
+            print("Uplaod new reels")
+        }
+    }
+    
   
 }

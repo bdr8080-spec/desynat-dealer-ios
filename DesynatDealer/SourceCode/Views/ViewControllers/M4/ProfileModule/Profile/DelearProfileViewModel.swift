@@ -11,7 +11,8 @@ class DelearProfileViewModel {
   
   private var hostVC: DelearProfileViewController
   var userProfile: SellerProfileDataModel?
-  
+    var highlightList: [GetHighLightsDataModel]?
+    
   init(hostVC: DelearProfileViewController) {
     self.hostVC = hostVC
   }
@@ -21,6 +22,14 @@ class DelearProfileViewModel {
       guard let self else { return }
       userProfile = response
       hostVC.populateData()
+    }
+  }
+    
+    func getMyHighLights(){
+    WebService.sharedInstance.getMyHighLights { [weak self] response in
+      guard let self else { return }
+        highlightList = response
+        hostVC.storiesCollectionView.reloadData()
     }
   }
   

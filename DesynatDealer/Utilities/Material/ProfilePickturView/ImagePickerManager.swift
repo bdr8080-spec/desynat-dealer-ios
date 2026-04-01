@@ -74,12 +74,23 @@ class ImagePickerManager: NSObject, UIImagePickerControllerDelegate, UINavigatio
         
     }
     
-    func pickImage(_ viewController: UIViewController, _ callback: @escaping ((UIImage, String,URL?) -> ())) {
+    func pickImage(_ viewController: UIViewController,
+                   _ callback: @escaping ((UIImage, String, URL?) -> ())) {
+        
+        self.viewController = viewController
+        self.pickImageCallback = callback
+        
+        alert.popoverPresentationController?.sourceView = viewController.view
+        viewController.present(alert, animated: true)
+    }
+    
+    func imagePickerControllerpickImage(_ viewController: UIViewController, _ callback: @escaping ((UIImage, String,URL?) -> ())) {
         pickImageCallback = callback
         self.viewController = viewController
         alert.popoverPresentationController?.sourceView = self.viewController!.view
         viewController.present(alert, animated: true, completion: nil)
     }
+    
     
     func openCamera() {
         alert.dismiss(animated: true, completion: nil)
@@ -107,14 +118,35 @@ class ImagePickerManager: NSObject, UIImagePickerControllerDelegate, UINavigatio
         picker.dismiss(animated: true, completion: nil)
     }
     
+//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+//        picker.dismiss(animated: true, completion: nil)
+//        guard let image = info[.originalImage] as? UIImage else {
+//            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
+//        }
+//        //let fileName = (info[.imageURL] as? URL)?.lastPathComponent ?? ""
+//        let fileName = UUID().uuidString + ".jpg"
+//        pickImageCallback?(image, fileName,nil )
+//    }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
-        guard let image = info[.originalImage] as? UIImage else {
-            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
+        
+        // Check if it's a video first
+        if let videoURL = info[.mediaURL] as? URL {
+            // VIDEO
+            let fileName = UUID().uuidString + ".mov"
+            pickImageCallback?(UIImage(), fileName, videoURL)  // Pass empty UIImage + video URL
+            return
         }
-        //let fileName = (info[.imageURL] as? URL)?.lastPathComponent ?? ""
+        
+        // IMAGE
+        guard let image = info[.originalImage] as? UIImage else {
+            print("No image found in info: \(info)")
+            return
+        }
+        
         let fileName = UUID().uuidString + ".jpg"
-        pickImageCallback?(image, fileName,nil )
+        pickImageCallback?(image, fileName, nil)
     }
     
     @objc func imagePickerController(_ picker: UIImagePickerController, pickedImage: UIImage?) {
@@ -134,7 +166,103 @@ class ImagePickerManager: NSObject, UIImagePickerControllerDelegate, UINavigatio
 //        }
 //        let documentName = url.lastPathComponent
 //        pickImageCallback?(UIImage(), documentName,url )
+//    }z
+    
+    // MARK: - Media Picker (VIDEO ONLY)
+    func pickMedia(_ viewController: UIViewController, _ callback: @escaping ((UIImage, String, URL?) -> ())) {
+        self.viewController = viewController
+        self.pickImageCallback = callback
+        
+        let mediaAlert = UIAlertController(title: "Select Video", message: nil, preferredStyle: .actionSheet)
+        
+        let cameraAction = UIAlertAction(title: "Camera", style: .default) { _ in
+            self.openVideoCamera()
+        }
+        
+        let galleryAction = UIAlertAction(title: "Gallery", style: .default) { _ in
+            self.openVideoGallery()
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        mediaAlert.addAction(cameraAction)
+        mediaAlert.addAction(galleryAction)
+        mediaAlert.addAction(cancelAction)
+        
+        mediaAlert.popoverPresentationController?.sourceView = viewController.view
+        viewController.present(mediaAlert, animated: true)
+    }
+
+    private func openVideoCamera() {
+        guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
+            let alertController = UIAlertController(title: "Warning", message: "Camera not available", preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .default)
+            alertController.addAction(action)
+            viewController?.present(alertController, animated: true)
+            return
+        }
+        
+        picker.sourceType = .camera
+        picker.mediaTypes = ["public.movie"]  // VIDEO ONLY
+        picker.videoQuality = .typeHigh
+        picker.videoMaximumDuration = 60.0    // 60 seconds max
+        self.viewController!.present(picker, animated: true)
+    }
+
+    private func openVideoGallery() {
+        picker.sourceType = .photoLibrary
+        picker.mediaTypes = ["public.movie"]  // VIDEO ONLY
+        picker.videoMaximumDuration = 60.0    // 60 seconds max
+        self.viewController!.present(picker, animated: true)
+    }
+    
+    // MARK: - New Media Picker (Photo + Video)
+//    func pickMedia(_ viewController: UIViewController, _ callback: @escaping ((UIImage, String, URL?) -> ())) {
+//        self.viewController = viewController
+//        self.pickImageCallback = callback
+//        
+//        let mediaAlert = UIAlertController(title: "Select Media", message: nil, preferredStyle: .actionSheet)
+//        
+//        let cameraAction = UIAlertAction(title: "Camera", style: .default) { _ in
+//            self.openMediaCamera()
+//        }
+//        
+//        let galleryAction = UIAlertAction(title: "Gallery", style: .default) { _ in
+//            self.openMediaGallery()
+//        }
+//        
+//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+//        
+//        mediaAlert.addAction(cameraAction)
+//        mediaAlert.addAction(galleryAction)
+//        mediaAlert.addAction(cancelAction)
+//        
+//        mediaAlert.popoverPresentationController?.sourceView = viewController.view
+//        viewController.present(mediaAlert, animated: true)
 //    }
+//
+//    private func openMediaCamera() {
+//        guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
+//            let alertController = UIAlertController(title: "Warning", message: "Camera not available", preferredStyle: .alert)
+//            let action = UIAlertAction(title: "OK", style: .default)
+//            alertController.addAction(action)
+//            viewController?.present(alertController, animated: true)
+//            return
+//        }
+//        
+//        picker.sourceType = .camera
+//        picker.mediaTypes = ["public.image", "public.movie"]
+//        picker.videoQuality = .typeHigh
+//        self.viewController!.present(picker, animated: true)
+//    }
+//
+//    private func openMediaGallery() {
+//        picker.sourceType = .photoLibrary
+//        picker.mediaTypes = ["public.image", "public.movie"]
+//        self.viewController!.present(picker, animated: true)
+//    }
+    
+    
 }
 
 extension ImagePickerManager {

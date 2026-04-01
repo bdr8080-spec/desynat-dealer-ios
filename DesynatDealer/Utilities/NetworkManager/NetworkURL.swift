@@ -101,6 +101,14 @@ enum NetworkEndPoint: String {
     case renewSubcriptionPlanBuy        = "/api/seller/renew_subcription_plan_buy"
     case countOfNotifcation             = "/api/seller/get_seller_notifications_count"
     
+    //M11
+    case addNewStory                   = "/api/seller/add_story"
+    case addNewReels                   = "/api/seller/add_reels"
+    case addNewHighlights              = "/api/seller/add_highlights"
+    case uploadImageAndVideo           = "/api/uploadFile"
+    case getMyHighlight           = "/api/seller/get_my_highlights"
+    
+    
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"
     }
