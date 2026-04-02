@@ -60,6 +60,10 @@
                 <constraint firstAttribute="trailing" secondItem="eXy-0H-aIo" secondAttribute="trailing" id="YAe-5P-0B8"/>
             </constraints>
             <size key="customSize" width="200" height="233"/>
+            <connections>
+                <outlet property="mainImageView" destination="ghJ-bg-6F4" id="8zH-PI-skn"/>
+                <outlet property="playButton" destination="CWa-GD-4St" id="Czq-HG-2om"/>
+            </connections>
             <point key="canvasLocation" x="167.93893129770993" y="25"/>
         </collectionViewCell>
     </objects>

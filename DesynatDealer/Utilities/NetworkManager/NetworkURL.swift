@@ -107,6 +107,11 @@ enum NetworkEndPoint: String {
     case addNewHighlights              = "/api/seller/add_highlights"
     case uploadImageAndVideo           = "/api/uploadFile"
     case getMyHighlight           = "/api/seller/get_my_highlights"
+    case getMyReels           = "/api/seller/get_my_reels"
+    case deleteMyReels           = "/api/seller/delete_reel"
+    case updateMyReelsStatus           = "/api/seller/update_reel_status"
+    case editMyReels         = "/api/seller/update_reel"
+    case getMyStories         = "/api/seller/get_my_stories"
     
     
     func withBaseURL() -> String {

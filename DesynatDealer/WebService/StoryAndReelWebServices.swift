@@ -41,7 +41,7 @@ extension WebService {
     }
     func addNewHeightlightServices(param: [String :Any], completion:@escaping (_ user: EmptyModel)-> Void) {
         CommonUtils.showHud(show: true)
-        NetworkManager.shared.request(withAPI:.endpoint(.addNewStory), requestMethod: .post, requestParams: param, requestModel: EmptyModel.self) { result, code in
+        NetworkManager.shared.request(withAPI:.endpoint(.addNewHighlights), requestMethod: .post, requestParams: param, requestModel: EmptyModel.self) { result, code in
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
@@ -56,7 +56,87 @@ extension WebService {
     }
     func addNewReelsServices(param: [String :Any], completion:@escaping (_ user: EmptyModel)-> Void) {
         CommonUtils.showHud(show: true)
-        NetworkManager.shared.request(withAPI:.endpoint(.addNewStory), requestMethod: .post, requestParams: param, requestModel: EmptyModel.self) { result, code in
+        NetworkManager.shared.request(withAPI:.endpoint(.addNewReels), requestMethod: .post, requestParams: param, requestModel: EmptyModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func editMyReelsServices(param: [String :Any], completion:@escaping (_ user: EmptyModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.editMyReels), requestMethod: .post, requestParams: param, requestModel: EmptyModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func deleteReelsServices(param: [String :Any], completion:@escaping (_ user: EmptyModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.deleteMyReels), requestMethod: .post, requestParams: param, requestModel: EmptyModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func updateMyReelsStatusServices(param: [String :Any], completion:@escaping (_ user: GetMyReelsList)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.updateMyReelsStatus), requestMethod: .post, requestParams: param, requestModel: GetMyReelsList.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func getSellerStoryService(completion:@escaping (_ user:[SellerHighlightsModel])-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.getMyStories), requestMethod: .get, requestModel:[SellerHighlightsModel].self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func getAdminStoryService(completion:@escaping (_ user:[SellerHighlightsModel])-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.getMyStories), requestMethod: .get, requestModel:[SellerHighlightsModel].self) { result, code in
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {

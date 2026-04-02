@@ -8,6 +8,7 @@
 import Foundation
 class AddHighlightsViewModel{
     private var hostVc : AddNewHighlightViewController?
+    var highlightList: [GetHighLightsList]?
     init(hostVc: AddNewHighlightViewController? = nil) {
         self.hostVc = hostVc
     }
@@ -29,15 +30,21 @@ class AddHighlightsViewModel{
             self.uploadHighlight(imageUrl: url)
         }
     }
-
     
     func uploadHighlight(imageUrl: String) {
-      let param: [String: Any] = ["file": imageUrl]
+        let param: [String: Any] = ["file": imageUrl, "title": hostVc?.enternameTxtField.text?.trimmed() ?? ""]
       WebService.sharedInstance.addNewHeightlightServices(param: param){ [weak self] response in
         guard let self = self else { return }
         CommonUtils.showToast(message: "Highlight added successfully")
           self.hostVc?.navigationController?.popViewController(animated: true)
       }
+    }
+    
+    func getMyHighLights() {
+        WebService.sharedInstance.getMyAllHighLights() { [weak self] data in
+            guard let self = self else { return }
+            highlightList = data
+        }
     }
     
 }

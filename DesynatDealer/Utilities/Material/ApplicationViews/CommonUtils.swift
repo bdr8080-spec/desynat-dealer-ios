@@ -58,31 +58,32 @@ class CommonUtils {
   }
   
     static func generateThumbnail(url: URL, completion: @escaping (UIImage?) -> Void) {
-        let asset = AVAsset(url: url)
+        let asset = AVURLAsset(url: url)
         let imageGenerator = AVAssetImageGenerator(asset: asset)
         imageGenerator.appliesPreferredTrackTransform = true
-        imageGenerator.requestedTimeToleranceBefore = .zero
-        imageGenerator.requestedTimeToleranceAfter = .zero
+        imageGenerator.maximumSize = CGSize(width: 800, height: 800)
         
-        // ── Most important change ──
-        let secondsToTry: Double = 1.5     // ← try 1.0, 1.5, 2.0, 3.0 — pick what looks best for your videos
-        let time = CMTime(seconds: secondsToTry, preferredTimescale: 600)
+        let timesToTry: [Double] = [0.0, 1.0, 2.0, 3.0]
         
         DispatchQueue.global(qos: .userInitiated).async {
-            do {
-                let cgImage = try imageGenerator.copyCGImage(at: time, actualTime: nil)
-                let thumbnail = UIImage(cgImage: cgImage)
-                
-                DispatchQueue.main.async {
-                    completion(thumbnail)
+            for seconds in timesToTry {
+                let time = CMTime(seconds: seconds, preferredTimescale: 600)
+                do {
+                    let cgImage = try imageGenerator.copyCGImage(at: time, actualTime: nil)
+                    let thumbnail = UIImage(cgImage: cgImage)
+                    
+                    DispatchQueue.main.async {
+                        completion(thumbnail)
+                    }
+                    return
+                } catch {
+                    print("Thumbnail attempt at \(seconds)s failed: \(error.localizedDescription)")
                 }
-            } catch {
-                print("Thumbnail generation failed at \(secondsToTry)s → \(error)")
-                
-                // Fallback: try at 0.5s or just show placeholder
-                DispatchQueue.main.async {
-                    completion(UIImage(named: "placeholder"))
-                }
+            }
+            
+            // All failed
+            DispatchQueue.main.async {
+                completion(UIImage(named: "placeholder"))
             }
         }
     }

@@ -11,7 +11,7 @@ import Alamofire
 
 extension WebService {
     func signUpService(withParams dictParams: Dictionary<String, Any>,
-                      completion:@escaping (_ user:SignUpModel)-> Void) {
+                       completion:@escaping (_ user:SignUpModel)-> Void) {
         CommonUtils.showHud(show: true)
         NetworkManager.shared.request(withAPI:.endpoint(.createAccount), requestMethod: .post, requestParams: dictParams,encoding: JSONEncoding.default, requestModel:SignUpModel.self) { result, code in
             
@@ -25,8 +25,8 @@ extension WebService {
                 }
                 
                 //kSharedUserDefaults.saveValue(Key: .accessToken, value: String.getString(user.access_token))
-               // kSharedUserDefaults.saveModelFor(key: .user, value: user)
-              //  Global.shared.user = user
+                // kSharedUserDefaults.saveModelFor(key: .user, value: user)
+                //  Global.shared.user = user
                 CommonUtils.showToast(message: message ?? "OTP sent succesfully")
                 completion(user)
             }
@@ -34,7 +34,7 @@ extension WebService {
     }
     
     func otpVerificationService(withParams dictParams: Dictionary<String, Any>,
-                      completion:@escaping (_ user:User)-> Void) {
+                                completion:@escaping (_ user:User)-> Void) {
         CommonUtils.showHud(show: true)
         NetworkManager.shared.request(withAPI:.endpoint(.otpVerification), requestMethod: .post, requestParams: dictParams,encoding: JSONEncoding.default,requestModel:User.self) { result, code in
             
@@ -56,7 +56,7 @@ extension WebService {
     }
     
     func resendOtpService(withParams dictParams: Dictionary<String, Any>,
-                      completion:@escaping (_ user:User)-> Void) {
+                          completion:@escaping (_ user:User)-> Void) {
         CommonUtils.showHud(show: true)
         NetworkManager.shared.request(withAPI:.endpoint(.resendOtp), requestMethod: .post, requestParams: dictParams,encoding: JSONEncoding.default,requestModel:User.self) { result, code in
             
@@ -78,7 +78,7 @@ extension WebService {
     }
     
     func storeInformationService(withParams dictParams: Dictionary<String, Any>,
-                      completion:@escaping (_ user:StoreInfoModel)-> Void) {
+                                 completion:@escaping (_ user:StoreInfoModel)-> Void) {
         CommonUtils.showHud(show: true)
         NetworkManager.shared.request(withAPI:.endpoint(.storeInformation), requestMethod: .post, requestParams: dictParams,encoding: JSONEncoding.default,requestModel:StoreInfoModel.self) { result, code in
             
@@ -90,7 +90,7 @@ extension WebService {
                     }
                     return
                 }
-               // kSharedUserDefaults.saveValue(Key: .accessToken, value: String.getString(user.access_token))
+                // kSharedUserDefaults.saveValue(Key: .accessToken, value: String.getString(user.access_token))
                 print(user)
                 //kSharedUserDefaults.saveModelFor(key:.user, value: user)
                 CommonUtils.showToast(message: message ?? "Bank Store information Save succesfully")
@@ -122,7 +122,7 @@ extension WebService {
     }
     
     func summaryService(withParams dictParams: Dictionary<String, Any>,
-                      completion:@escaping (_ user:SummaryModel)-> Void) {
+                        completion:@escaping (_ user:SummaryModel)-> Void) {
         CommonUtils.showHud(show: true)
         NetworkManager.shared.request(withAPI:.endpoint(.summary), requestMethod: .post, requestParams: dictParams,encoding: JSONEncoding.default,requestModel:SummaryModel.self) { result, code in
             
@@ -134,17 +134,17 @@ extension WebService {
                     }
                     return
                 }
-               // kSharedUserDefaults.saveValue(Key: .accessToken, value: String.getString(user.access_token))
+                // kSharedUserDefaults.saveValue(Key: .accessToken, value: String.getString(user.access_token))
                 print(user)
-              //  kSharedUserDefaults.saveModelFor(key:.user, value: user)
-//                CommonUtils.showToast(message: message ?? "")
+                //  kSharedUserDefaults.saveModelFor(key:.user, value: user)
+                //                CommonUtils.showToast(message: message ?? "")
                 completion(user)
             }
         }
     }
     
     func submitSummaryService(withParams dictParams: Dictionary<String, Any>,
-                      completion:@escaping (_ user:User)-> Void) {
+                              completion:@escaping (_ user:User)-> Void) {
         CommonUtils.showHud(show: true)
         NetworkManager.shared.request(withAPI:.endpoint(.submitSummary), requestMethod: .post, requestParams: dictParams,encoding: JSONEncoding.default,requestModel:User.self) { result, code in
             
@@ -156,7 +156,7 @@ extension WebService {
                     }
                     return
                 }
-               // kSharedUserDefaults.saveValue(Key: .accessToken, value: String.getString(user.access_token))
+                // kSharedUserDefaults.saveValue(Key: .accessToken, value: String.getString(user.access_token))
                 print(user)
                 //kSharedUserDefaults.saveModelFor(key:.user, value: user)
                 CommonUtils.showToast(message: message ?? "")
@@ -188,7 +188,7 @@ extension WebService {
     }
     
     func forgotPasswordService(withParams dictParams: Dictionary<String, Any>,
-                      completion:@escaping (_ user:User)-> Void) {
+                               completion:@escaping (_ user:User)-> Void) {
         CommonUtils.showHud(show: true)
         NetworkManager.shared.request(withAPI:.endpoint(.forgotPassword), requestMethod: .post, requestParams: dictParams,encoding: JSONEncoding.default,requestModel:User.self) { result, code in
             
@@ -200,7 +200,7 @@ extension WebService {
                     }
                     return
                 }
-               // kSharedUserDefaults.saveValue(Key: .accessToken, value: String.getString(user.access_token))
+                // kSharedUserDefaults.saveValue(Key: .accessToken, value: String.getString(user.access_token))
                 print(user)
                 kSharedUserDefaults.saveModelFor(key:.user, value: user)
                 CommonUtils.showToast(message: "OTP sent succesfully")
@@ -210,7 +210,7 @@ extension WebService {
     }
     
     func createPasswordService(withParams dictParams: Dictionary<String, Any>,
-                      completion:@escaping (_ user:User)-> Void) {
+                               completion:@escaping (_ user:User)-> Void) {
         CommonUtils.showHud(show: true)
         NetworkManager.shared.request(withAPI:.endpoint(.createPassword), requestMethod: .post, requestParams: dictParams,encoding: JSONEncoding.default,requestModel:User.self) { result, code in
             
@@ -222,7 +222,7 @@ extension WebService {
                     }
                     return
                 }
-               // kSharedUserDefaults.saveValue(Key: .accessToken, value: String.getString(user.access_token))
+                // kSharedUserDefaults.saveValue(Key: .accessToken, value: String.getString(user.access_token))
                 print(user)
                 kSharedUserDefaults.saveModelFor(key:.user, value: user)
                 CommonUtils.showToast(message: message ?? "")
@@ -314,22 +314,22 @@ extension WebService {
             }
         }
     }
-  
-  func storeStatusUpdateService(completion: @escaping (StoreAvailabilityStatusModel) -> Void) {
-      CommonUtils.showHud(show: true)
-      NetworkManager.shared.request(withAPI: .endpoint(.updateStoreStatus), requestMethod: .get, requestModel: StoreAvailabilityStatusModel.self) { result, code in
-          CommonUtils.showHud(show: false)
-          self.evaluateWebServiceResponse(response: result) { response, message, error in
-              guard let response = response else {
-                  if let error {
-                      UIApplication.shared.topViewController()?.showAlert(msg: error)
-                  }
-                  return
-              }
-              completion(response)
-          }
-      }
-  }
+    
+    func storeStatusUpdateService(completion: @escaping (StoreAvailabilityStatusModel) -> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.updateStoreStatus), requestMethod: .get, requestModel: StoreAvailabilityStatusModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message, error in
+                guard let response = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(response)
+            }
+        }
+    }
     
     func getCountOfNotificationForService(completion:@escaping (_ user: Int)-> Void) {
         CommonUtils.showHud(show: true)
@@ -347,138 +347,138 @@ extension WebService {
             }
         }
     }
-  
-  func getCategoriesService(completion:@escaping (_ user:[CategoryDataModel])-> Void) {
-      CommonUtils.showHud(show: true)
-      NetworkManager.shared.request(withAPI:.endpoint(.getCategoryList), requestMethod: .get,requestModel:[CategoryDataModel].self) { result, code in
-          
-          CommonUtils.showHud(show: false)
-          self.evaluateWebServiceResponse(response: result) { response, message,error in
-              guard let user = response else {
-                  if let error {
-                      UIApplication.shared.topViewController()?.showAlert(msg: error)
-                  }
-                  return
-              }
-              completion(user)
-          }
-      }
-  }
-  
-  func getSubCategoriesService(param: [String:Any], completion:@escaping (_ user:[SubCategoryDataModel])-> Void) {
-      CommonUtils.showHud(show: true)
-      NetworkManager.shared.request(withAPI:.endpoint(.getSubCategoryList), requestMethod: .get, requestParams: param, requestModel:[SubCategoryDataModel].self) { result, code in
-          
-          CommonUtils.showHud(show: false)
-          self.evaluateWebServiceResponse(response: result) { response, message,error in
-              guard let user = response else {
-                  if let error {
-                      UIApplication.shared.topViewController()?.showAlert(msg: error)
-                  }
-                  return
-              }
-              completion(user)
-          }
-      }
-  }
-  
-  func getBrandService(completion:@escaping (_ user: [BrandsListDataModel])-> Void) {
-      CommonUtils.showHud(show: true)
-      NetworkManager.shared.request(withAPI:.endpoint(.getBrandsList), requestMethod: .get, requestModel:[BrandsListDataModel].self) { result, code in
-          
-          CommonUtils.showHud(show: false)
-          self.evaluateWebServiceResponse(response: result) { response, message,error in
-              guard let user = response else {
-                  if let error {
-                      UIApplication.shared.topViewController()?.showAlert(msg: error)
-                  }
-                  return
-              }
-              completion(user)
-          }
-      }
-  }
-  
-  func getColorsListService(completion:@escaping (_ user: [ColorsLisDataModel])-> Void) {
-      CommonUtils.showHud(show: true)
-      NetworkManager.shared.request(withAPI:.endpoint(.getColorsList), requestMethod: .get, requestModel:[ColorsLisDataModel].self) { result, code in
-          
-          CommonUtils.showHud(show: false)
-          self.evaluateWebServiceResponse(response: result) { response, message,error in
-              guard let user = response else {
-                  if let error {
-                      UIApplication.shared.topViewController()?.showAlert(msg: error)
-                  }
-                  return
-              }
-              completion(user)
-          }
-      }
-  }
-  
-  func getSizeListService(completion:@escaping (_ user: [SizeListDataModel])-> Void) {
-      CommonUtils.showHud(show: true)
-      NetworkManager.shared.request(withAPI:.endpoint(.getSizesList), requestMethod: .get, requestModel:[SizeListDataModel].self) { result, code in
-          CommonUtils.showHud(show: false)
-          self.evaluateWebServiceResponse(response: result) { response, message,error in
-              guard let user = response else {
-                  if let error {
-                      UIApplication.shared.topViewController()?.showAlert(msg: error)
-                  }
-                  return
-              }
-              completion(user)
-          }
-      }
-  }
-  
-  func addProductService(param: [String :Any], completion:@escaping (_ user: EmptyModel)-> Void) {
-      CommonUtils.showHud(show: true)
-      NetworkManager.shared.requestForAddingProduct(withAPI:.endpoint(.addProduct), requestMethod: .post, requestParams: param, requestModel:EmptyModel.self) { result, code in
-          CommonUtils.showHud(show: false)
-          self.evaluateWebServiceResponse(response: result) { response, message,error in
-              guard let user = response else {
-                  if let error {
-                      UIApplication.shared.topViewController()?.showAlert(msg: error)
-                  }
-                  return
-              }
-              completion(user)
-          }
-      }
-  }
-  
-  func getProductsListServices(param: [String :Any], completion:@escaping (_ user: ProductsListDataModel)-> Void) {
-      CommonUtils.showHud(show: true)
-      NetworkManager.shared.request(withAPI:.endpoint(.getProductsList), requestMethod: .post, requestParams: param, requestModel:ProductsListDataModel.self) { result, code in
-          CommonUtils.showHud(show: false)
-          self.evaluateWebServiceResponse(response: result) { response, message,error in
-              guard let user = response else {
-                  if let error {
-                      UIApplication.shared.topViewController()?.showAlert(msg: error)
-                  }
-                  return
-              }
-              completion(user)
-          }
-      }
-  }
-  
-  func updateProductActiveStatus(param: [String :Any], completion:@escaping (_ user: EmptyModel)-> Void) {
-      CommonUtils.showHud(show: true)
-      NetworkManager.shared.request(withAPI:.endpoint(.productsActiveStatus), requestMethod: .put, requestParams: param, requestModel:EmptyModel.self) { result, code in
-          CommonUtils.showHud(show: false)
-          self.evaluateWebServiceResponse(response: result) { response, message,error in
-              guard let user = response else {
-                  if let error {
-                      UIApplication.shared.topViewController()?.showAlert(msg: error)
-                  }
-                  return
-              }
-              completion(user)
-          }
-      }
-  }
+    
+    func getCategoriesService(completion:@escaping (_ user:[CategoryDataModel])-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.getCategoryList), requestMethod: .get,requestModel:[CategoryDataModel].self) { result, code in
+            
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func getSubCategoriesService(param: [String:Any], completion:@escaping (_ user:[SubCategoryDataModel])-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.getSubCategoryList), requestMethod: .get, requestParams: param, requestModel:[SubCategoryDataModel].self) { result, code in
+            
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func getBrandService(completion:@escaping (_ user: [BrandsListDataModel])-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.getBrandsList), requestMethod: .get, requestModel:[BrandsListDataModel].self) { result, code in
+            
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func getColorsListService(completion:@escaping (_ user: [ColorsLisDataModel])-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.getColorsList), requestMethod: .get, requestModel:[ColorsLisDataModel].self) { result, code in
+            
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func getSizeListService(completion:@escaping (_ user: [SizeListDataModel])-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.getSizesList), requestMethod: .get, requestModel:[SizeListDataModel].self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func addProductService(param: [String :Any], completion:@escaping (_ user: EmptyModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.requestForAddingProduct(withAPI:.endpoint(.addProduct), requestMethod: .post, requestParams: param, requestModel:EmptyModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func getProductsListServices(param: [String :Any], completion:@escaping (_ user: ProductsListDataModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.getProductsList), requestMethod: .post, requestParams: param, requestModel:ProductsListDataModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func updateProductActiveStatus(param: [String :Any], completion:@escaping (_ user: EmptyModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.productsActiveStatus), requestMethod: .put, requestParams: param, requestModel:EmptyModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
     
     func getProductDetailsService(param: [String:Any], completion:@escaping (_ user:ProductsList)-> Void) {
         CommonUtils.showHud(show: true)
@@ -512,166 +512,198 @@ extension WebService {
             }
         }
     }
-  
-  func editProductService(param: [String :Any], completion:@escaping (_ user: EmptyModel)-> Void) {
-      CommonUtils.showHud(show: true)
-      NetworkManager.shared.requestForAddingProduct(withAPI:.endpoint(.editProductsDetails), requestMethod: .post, requestParams: param, requestModel:EmptyModel.self) { result, code in
-          CommonUtils.showHud(show: false)
-          self.evaluateWebServiceResponse(response: result) { response, message,error in
-              guard let user = response else {
-                  if let error {
-                      UIApplication.shared.topViewController()?.showAlert(msg: error)
-                  }
-                  return
-              }
-              completion(user)
-          }
-      }
-  }
-  
-  func getDelearProfileService(completion: @escaping (User) -> Void) {
-      CommonUtils.showHud(show: true)
-      NetworkManager.shared.request(withAPI: .endpoint(.getSellerProfile), requestMethod: .post, requestModel: User.self) { result, code in
-          CommonUtils.showHud(show: false)
-          self.evaluateWebServiceResponse(response: result) { response, message, error in
-              guard let response = response else {
-                  if let error {
-                      UIApplication.shared.topViewController()?.showAlert(msg: error)
-                  }
-                  return
-              }
-              completion(response)
-          }
-      }
-  }
-  
-  func getUserProfile(completion: @escaping (SellerProfileDataModel) -> Void) {
-    CommonUtils.showHud(show: true)
-    NetworkManager.shared.request(withAPI: .endpoint(.getProfile), requestMethod: .get, requestModel: SellerProfileDataModel.self) { result, code in
-      CommonUtils.showHud(show: false)
-      self.evaluateWebServiceResponse(response: result) { response, message, error in
-        guard let response = response else {
-          if let error {
-            UIApplication.shared.topViewController()?.showAlert(msg: error)
-          }
-          return
-        }
-        completion(response)
-      }
-    }
-  }
     
-    func getMyHighLights(completion: @escaping ([GetHighLightsDataModel]) -> Void) {
-    CommonUtils.showHud(show: true)
-    NetworkManager.shared.request(withAPI: .endpoint(.getMyHighlight), requestMethod: .get, requestModel: [GetHighLightsDataModel].self) { result, code in
-      CommonUtils.showHud(show: false)
-      self.evaluateWebServiceResponse(response: result) { response, message, error in
-        guard let response = response else {
-          if let error {
-            UIApplication.shared.topViewController()?.showAlert(msg: error)
-          }
-          return
+    func editProductService(param: [String :Any], completion:@escaping (_ user: EmptyModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.requestForAddingProduct(withAPI:.endpoint(.editProductsDetails), requestMethod: .post, requestParams: param, requestModel:EmptyModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
         }
-        completion(response)
-      }
     }
-  }
-  
-  func updateStoreInformationRequest(param: [String: Any], completion: @escaping (EmptyModel) -> Void) {
-    CommonUtils.showHud(show: true)
-    NetworkManager.shared.request(withAPI: .endpoint(.updateStoreInformation), requestMethod: .post, requestParams: param, requestModel: EmptyModel.self) { result, code in
-      CommonUtils.showHud(show: false)
-      self.evaluateWebServiceResponse(response: result) { response, message, error in
-        guard let response = response else {
-          if let error {
-            UIApplication.shared.topViewController()?.showAlert(msg: error)
-          }
-          return
+    
+    func getDelearProfileService(completion: @escaping (User) -> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.getSellerProfile), requestMethod: .post, requestModel: User.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message, error in
+                guard let response = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(response)
+            }
         }
-        completion(response)
-      }
     }
-  }
-  
-  func updateBankInformationRequest(param: [String: Any], completion: @escaping (EmptyModel) -> Void) {
-    CommonUtils.showHud(show: true)
-    NetworkManager.shared.request(withAPI: .endpoint(.updateBankInformation), requestMethod: .post, requestParams: param, requestModel: EmptyModel.self) { result, code in
-      CommonUtils.showHud(show: false)
-      self.evaluateWebServiceResponse(response: result) { response, message, error in
-        guard let response = response else {
-          if let error {
-            UIApplication.shared.topViewController()?.showAlert(msg: error)
-          }
-          return
+    
+    func getUserProfile(completion: @escaping (SellerProfileDataModel) -> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.getProfile), requestMethod: .get, requestModel: SellerProfileDataModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message, error in
+                guard let response = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(response)
+            }
         }
-        completion(response)
-      }
     }
-  }
-  
-  func getInventoryListServices(param: [String :Any], completion:@escaping (_ user: InventoryListDataModel)-> Void) {
-      CommonUtils.showHud(show: true)
-      NetworkManager.shared.request(withAPI:.endpoint(.allInventoryList), requestMethod: .post, requestParams: param, requestModel:InventoryListDataModel.self) { result, code in
-          CommonUtils.showHud(show: false)
-          self.evaluateWebServiceResponse(response: result) { response, message,error in
-              guard let user = response else {
-                  if let error {
-                      UIApplication.shared.topViewController()?.showAlert(msg: error)
-                  }
-                  return
-              }
-              completion(user)
-          }
-      }
-  }
-  
-  func updateInventoryActiveStatus(param: [String :Any], completion:@escaping (_ user: EmptyModel)-> Void) {
-      CommonUtils.showHud(show: true)
-      NetworkManager.shared.request(withAPI:.endpoint(.productsActiveStatus), requestMethod: .put, requestParams: param, requestModel:EmptyModel.self) { result, code in
-          CommonUtils.showHud(show: false)
-          self.evaluateWebServiceResponse(response: result) { response, message,error in
-              guard let user = response else {
-                  if let error {
-                      UIApplication.shared.topViewController()?.showAlert(msg: error)
-                  }
-                  return
-              }
-              completion(user)
-          }
-      }
-  }
-  
-  func updateInventoryDetails(param: [String :Any], completion:@escaping (_ user: EmptyModel)-> Void) {
-      CommonUtils.showHud(show: true)
-      NetworkManager.shared.request(withAPI:.endpoint(.updateInventoryDetails), requestMethod: .put, requestParams: param, requestModel:EmptyModel.self) { result, code in
-          CommonUtils.showHud(show: false)
-          self.evaluateWebServiceResponse(response: result) { response, message,error in
-              guard let user = response else {
-                  if let error {
-                      UIApplication.shared.topViewController()?.showAlert(msg: error)
-                  }
-                  return
-              }
-              completion(user)
-          }
-      }
-  }
-  
-  func updateAffiliated(param: [String :Any], completion:@escaping (_ user: EmptyModel)-> Void) {
-      CommonUtils.showHud(show: true)
-      NetworkManager.shared.request(withAPI:.endpoint(.updateAffiliatedValue), requestMethod: .put, requestParams: param, requestModel:EmptyModel.self) { result, code in
-          CommonUtils.showHud(show: false)
-          self.evaluateWebServiceResponse(response: result) { response, message,error in
-              guard let user = response else {
-                  if let error {
-                      UIApplication.shared.topViewController()?.showAlert(msg: error)
-                  }
-                  return
-              }
-              completion(user)
-          }
-      }
-  }
+    
+    func getMyHighLights(param: [String: Any], completion: @escaping (GetHighLightsDataModel) -> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.getMyHighlight), requestMethod: .get,requestParams: param, requestModel: GetHighLightsDataModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message, error in
+                guard let response = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(response)
+            }
+        }
+    }
+    
+    func getMyAllHighLights(completion: @escaping ([GetHighLightsList]) -> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.getMyHighlight), requestMethod: .get, requestModel: [GetHighLightsList].self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message, error in
+                guard let response = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(response)
+            }
+        }
+    }
+    
+    func getMyReels(param: [String: Any], completion: @escaping (GetMyReelsDataModel) -> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.getMyReels), requestMethod: .get,requestParams: param, requestModel: GetMyReelsDataModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message, error in
+                guard let response = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(response)
+            }
+        }
+    }
+    
+    func updateStoreInformationRequest(param: [String: Any], completion: @escaping (EmptyModel) -> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.updateStoreInformation), requestMethod: .post, requestParams: param, requestModel: EmptyModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message, error in
+                guard let response = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(response)
+            }
+        }
+    }
+    
+    func updateBankInformationRequest(param: [String: Any], completion: @escaping (EmptyModel) -> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.updateBankInformation), requestMethod: .post, requestParams: param, requestModel: EmptyModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message, error in
+                guard let response = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(response)
+            }
+        }
+    }
+    
+    func getInventoryListServices(param: [String :Any], completion:@escaping (_ user: InventoryListDataModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.allInventoryList), requestMethod: .post, requestParams: param, requestModel:InventoryListDataModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func updateInventoryActiveStatus(param: [String :Any], completion:@escaping (_ user: EmptyModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.productsActiveStatus), requestMethod: .put, requestParams: param, requestModel:EmptyModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func updateInventoryDetails(param: [String :Any], completion:@escaping (_ user: EmptyModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.updateInventoryDetails), requestMethod: .put, requestParams: param, requestModel:EmptyModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func updateAffiliated(param: [String :Any], completion:@escaping (_ user: EmptyModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.updateAffiliatedValue), requestMethod: .put, requestParams: param, requestModel:EmptyModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
     
     func getBanners(param: [String :Any], completion:@escaping (_ user: [BannerModel])-> Void) {
         CommonUtils.showHud(show: true)
@@ -736,87 +768,87 @@ extension WebService {
             }
         }
     }
-  
-  func getOrdersListServices(param: [String :Any], completion:@escaping (_ user: OrdersListDataModel)-> Void) {
-      CommonUtils.showHud(show: true)
-      NetworkManager.shared.request(withAPI:.endpoint(.ordersList), requestMethod: .post, requestParams: param, requestModel:OrdersListDataModel.self) { result, code in
-          CommonUtils.showHud(show: false)
-          self.evaluateWebServiceResponse(response: result) { response, message,error in
-              guard let user = response else {
-                  if let error {
-                      UIApplication.shared.topViewController()?.showAlert(msg: error)
-                  }
-                  return
-              }
-              completion(user)
-          }
-      }
-  }
-  
-  func ordersDetails(param: [String :Any], completion:@escaping (_ user: OrdersListData)-> Void) {
-      CommonUtils.showHud(show: true)
-      NetworkManager.shared.request(withAPI: .endpoint(.singleOrderDetails), requestMethod: .post, requestParams: param, requestModel:OrdersListData.self) { result, code in
-          CommonUtils.showHud(show: false)
-          self.evaluateWebServiceResponse(response: result) { response, message,error in
-              guard let user = response else {
-                  if let error {
-                      UIApplication.shared.topViewController()?.showAlert(msg: error)
-                  }
-                  return
-              }
-              completion(user)
-          }
-      }
-  }
-  
-  func updateOrdersStatus(param: [String :Any], completion:@escaping (_ user: EmptyModel)-> Void) {
-      CommonUtils.showHud(show: true)
-      NetworkManager.shared.request(withAPI: .endpoint(.updateOrderStatus), requestMethod: .post, requestParams: param, requestModel:EmptyModel.self) { result, code in
-          CommonUtils.showHud(show: false)
-          self.evaluateWebServiceResponse(response: result) { response, message,error in
-              guard let user = response else {
-                  if let error {
-                      UIApplication.shared.topViewController()?.showAlert(msg: error)
-                  }
-                  return
-              }
-              completion(user)
-          }
-      }
-  }
-  
-  func updateOrdersStatusForExchnageAndReturn(param: [String :Any], completion:@escaping (_ user: EmptyModel)-> Void) {
-      CommonUtils.showHud(show: true)
-      NetworkManager.shared.request(withAPI: .endpoint(.updateReturnExchangeStatus), requestMethod: .post, requestParams: param, requestModel:EmptyModel.self) { result, code in
-          CommonUtils.showHud(show: false)
-          self.evaluateWebServiceResponse(response: result) { response, message,error in
-              guard let user = response else {
-                  if let error {
-                      UIApplication.shared.topViewController()?.showAlert(msg: error)
-                  }
-                  return
-              }
-              completion(user)
-          }
-      }
-  }
-  
-  //Chat Module
-  func getAllChatsList(param: [String: Any], completion:@escaping (_ user: [ChatInboxListModel])-> Void) {
-      CommonUtils.showHud(show: true)
-      NetworkManager.shared.request(withAPI: .endpoint(.getAllChatsRecord), requestMethod: .post, requestParams: param, requestModel:[ChatInboxListModel].self) { result, code in
-          CommonUtils.showHud(show: false)
-          self.evaluateWebServiceResponse(response: result) { response, message,error in
-              guard let user = response else {
-                  if let error {
-                      UIApplication.shared.topViewController()?.showAlert(msg: error)
-                  }
-                  return
-              }
-              completion(user)
-          }
-      }
-  }
+    
+    func getOrdersListServices(param: [String :Any], completion:@escaping (_ user: OrdersListDataModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.ordersList), requestMethod: .post, requestParams: param, requestModel:OrdersListDataModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func ordersDetails(param: [String :Any], completion:@escaping (_ user: OrdersListData)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.singleOrderDetails), requestMethod: .post, requestParams: param, requestModel:OrdersListData.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func updateOrdersStatus(param: [String :Any], completion:@escaping (_ user: EmptyModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.updateOrderStatus), requestMethod: .post, requestParams: param, requestModel:EmptyModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func updateOrdersStatusForExchnageAndReturn(param: [String :Any], completion:@escaping (_ user: EmptyModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.updateReturnExchangeStatus), requestMethod: .post, requestParams: param, requestModel:EmptyModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    //Chat Module
+    func getAllChatsList(param: [String: Any], completion:@escaping (_ user: [ChatInboxListModel])-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.getAllChatsRecord), requestMethod: .post, requestParams: param, requestModel:[ChatInboxListModel].self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
     
     func singleChatDetails(param: [String: Any], completion:@escaping (_ user: ChatDetailsDataModel)-> Void) {
         CommonUtils.showHud(show: true)

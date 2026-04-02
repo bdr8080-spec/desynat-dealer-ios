@@ -48,6 +48,8 @@ class AddNewHighlightViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchGalleryAssets()
+        viewModel.getMyHighLights()
+        enternameTxtField.delegate = self
     }
     
     // MARK: - Actions
@@ -307,10 +309,21 @@ extension AddNewHighlightViewController: UICollectionViewDelegate, UICollectionV
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
         // Highlight Name collection
+        // Highlight Name collection
         if collectionView == highlightNameCollectionView {
+
+            // 🔥 Dismiss keyboard first
+            view.endEditing(true)
+
             selectedRoleIndex = indexPath.row
-            dropDownimageView.isHidden = (indexPath.row != 1)
-            enternameTxtField.placeholder = indexPath.row == 0 ? "Select Name" : "Enter Name"
+
+            // Show dropdown only when selecting from previous
+            dropDownimageView.isHidden = (selectedRoleIndex != 0)
+
+            // Placeholder logic
+            enternameTxtField.placeholder =
+                selectedRoleIndex == 0 ? "Select Name" : "Enter Name"
+
             collectionView.reloadData()
             return
         }
@@ -520,5 +533,30 @@ extension AddNewHighlightViewController: UIImagePickerControllerDelegate, UINavi
         else if let videoURL = info[.mediaURL] as? URL {
             compressVideo(videoURL: videoURL, isCallingFromGallery: false)
         }
+    }
+}
+
+extension AddNewHighlightViewController: UITextFieldDelegate {
+
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+
+        // Only show dropdown when "Select from previous" is chosen
+        if selectedRoleIndex == 0 {
+
+            view.endEditing(true)
+
+            let categoryNames = viewModel.highlightList?.map { $0.title ?? "" } ?? []
+
+            kSharedAppDelegate.dropDown(
+                dataSource: categoryNames,
+                anchorView: textField
+            ) { [weak self] index, item in
+                self?.enternameTxtField.text = item
+            }
+
+            return false // don't open keyboard
+        }
+
+        return true // allow typing manually
     }
 }

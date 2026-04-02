@@ -59,7 +59,6 @@ class LiveCoverageListViewModel {
             }
             
             self.hasMoreData = !newData.isEmpty
-//            self.hasMoreData = newData.count == 2
             self.isLoading = false
             
             DispatchQueue.main.async {

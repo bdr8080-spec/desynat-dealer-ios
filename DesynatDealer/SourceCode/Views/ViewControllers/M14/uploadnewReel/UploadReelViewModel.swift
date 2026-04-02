@@ -30,21 +30,18 @@ class UploadReelViewModel {
     
     // MARK: - Upload Media
     func uploadMedia(fileData: Data, isImage: Bool) {
-        
         let mimeType: MultipartUpload.Mime = isImage ? .image : .Video
-        
         let uploadItem = MultipartUpload(
             fileName: "file",
             file: fileData,
-            mimeType: mimeType
-        )
-        
+            mimeType: mimeType)
         WebService.sharedInstance.uploadVideoAndImage(withParams: uploadItem) { [weak self] url, msg, code in
-            
             guard let self = self, !url.isEmpty else { return }
-            
-            // Upload reel after getting URL
-            self.uploadReel(mediaUrl: url)
+            if hostVc?.isComingForEdit == true {
+                self.editReel(mediaUrl: url)
+            } else {
+                self.uploadReel(mediaUrl: url)
+            }
         }
     }
     
@@ -52,13 +49,26 @@ class UploadReelViewModel {
     func uploadReel(mediaUrl: String) {
         let param: [String: Any] = [
             "file": mediaUrl,
-//            "caption": vc.captiontxtArea.text ?? ""
+            "caption": hostVc?.captiontxtArea.text ?? ""
         ]
-        
         WebService.sharedInstance.addNewReelsServices(param: param) { [weak self] response in
             guard let self = self else { return }
             
             CommonUtils.showToast(message: "Reel Uploaded Successfully")
+            self.hostVc?.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    func editReel(mediaUrl: String) {
+        let param: [String: Any] = [
+            "reel_id": hostVc?.reelsData?.id ?? 1,
+            "file": mediaUrl,
+            "caption": hostVc?.captiontxtArea.text ?? ""
+        ]
+        WebService.sharedInstance.editMyReelsServices(param: param) { [weak self] response in
+            guard let self = self else { return }
+            
+            CommonUtils.showToast(message: "Reel Updated Successfully")
             self.hostVc?.navigationController?.popViewController(animated: true)
         }
     }
