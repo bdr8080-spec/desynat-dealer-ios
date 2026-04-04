@@ -19,6 +19,7 @@ class DelearProfileViewModel {
     var highlightPage: Int = 1
     var highlightLoading = false
     var highlightHasMore = true
+//    var sellerStories: [SellerHighlightsModel] = []
     
     // REELS PAGINATION
     var reelsList: [GetMyReelsList]?
@@ -43,6 +44,25 @@ class DelearProfileViewModel {
         reelsLoading = false
     }
     
+    func getSelfStory() {
+        let param: [String: Any] = ["limit": 5, "page" : 1]
+       
+        WebService.sharedInstance.getSellerStoryServiceWithLimit(param: param) { list in
+//            self.sellerStories = list
+            let dataCount = list.data?.count ?? 0
+            if dataCount > 0{
+                self.hostVC.userProfileImageView.borderWidth = 1.5
+                self.hostVC.viewStoriesBtn.isUserInteractionEnabled = true
+            }else {
+                self.hostVC.userProfileImageView.borderWidth = 0
+                self.hostVC.viewStoriesBtn.isUserInteractionEnabled = false
+//                false
+            }
+            
+        }
+    }
+    
+
     // -----------------------------------------
     // MARK: GET USER PROFILE
     // -----------------------------------------

@@ -31,8 +31,23 @@ class AddHighlightsViewModel{
         }
     }
     
+    func uploadMediaForGettingThumbnailImageUrl(fileData: Data, isImage: Bool) {
+        let mimeType: MultipartUpload.Mime = isImage ? .image : .Video
+        let uploadItem = MultipartUpload(
+            fileName: "file",
+            file: fileData,
+            mimeType: mimeType)
+        WebService.sharedInstance.uploadVideoAndImage(withParams: uploadItem) { [weak self] url, msg, code in
+            guard let self = self, !url.isEmpty else { return }
+            hostVc?.thumbnailImage = url
+        }
+    }
+    
     func uploadHighlight(imageUrl: String) {
-        let param: [String: Any] = ["file": imageUrl, "title": hostVc?.enternameTxtField.text?.trimmed() ?? ""]
+        let param: [String: Any] = ["file": imageUrl,
+                                    "title": hostVc?.enternameTxtField.text?.trimmed() ?? "",
+                                    "thumbnail" : self.hostVc?.thumbnailImage ?? ""
+        ]
       WebService.sharedInstance.addNewHeightlightServices(param: param){ [weak self] response in
         guard let self = self else { return }
         CommonUtils.showToast(message: "Highlight added successfully")

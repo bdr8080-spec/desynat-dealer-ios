@@ -42,13 +42,14 @@ struct GetHighLightsList: Codable {
     let id, type, sellerID: Int?
     let file: String?
     let title: String?
+    let thumbnail:String?
     let status: Int?
     let createdAt, updatedAt: String?
 
     enum CodingKeys: String, CodingKey {
         case id, type
         case sellerID = "seller_id"
-        case file, title, status
+        case file, title, status, thumbnail
         case createdAt = "created_at"
         case updatedAt = "updated_at"
     }
@@ -87,7 +88,7 @@ struct GetMyReelsDataModel: Codable {
 // MARK: - GetMyReelsList
 struct GetMyReelsList: Codable {
     let id, type, sellerID: Int?
-    let file: String?
+    let file,thumbnail : String?
     let caption: String?
     let status: Int?
     let createdAt, updatedAt: String?
@@ -95,7 +96,7 @@ struct GetMyReelsList: Codable {
     enum CodingKeys: String, CodingKey {
         case id, type
         case sellerID = "seller_id"
-        case file, status, caption
+        case file, status, caption,thumbnail
         case createdAt = "created_at"
         case updatedAt = "updated_at"
     }

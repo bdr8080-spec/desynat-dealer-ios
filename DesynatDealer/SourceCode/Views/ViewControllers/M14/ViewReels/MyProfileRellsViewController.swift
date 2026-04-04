@@ -8,6 +8,7 @@
 import UIKit
 import AVFoundation
 import AVKit
+import SDWebImage
 
 class MyProfileRellsViewController: UIViewController {
 
@@ -24,6 +25,7 @@ class MyProfileRellsViewController: UIViewController {
     private lazy var viewModel = MyProfileRellsViewModel(hostVC: self)
     var reelsData: GetMyReelsList?
     private var videoURL: URL?
+    var thumbnailImage: String?
     
     // Loader
     private let activityIndicator = UIActivityIndicatorView(style: .medium)
@@ -54,6 +56,24 @@ class MyProfileRellsViewController: UIViewController {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
     }
+    func saveImageAndGetURLString(_ image: UIImage?) -> String? {
+        //  Check image exists
+        guard let image = image,
+              let data = image.jpegData(compressionQuality: 0.7) else {
+            return nil
+        }
+        
+        let fileName = "thumb_\(UUID().uuidString).jpg"
+        let fileURL = FileManager.default.temporaryDirectory.appendingPathComponent(fileName)
+        
+        do {
+            try data.write(to: fileURL)
+            return fileURL.absoluteString
+        } catch {
+            print("Error saving image:", error.localizedDescription)
+            return nil
+        }
+    }
     
     // MARK: - Config Data (For Existing Reel)
     func configData() {
@@ -71,72 +91,31 @@ class MyProfileRellsViewController: UIViewController {
             statusLabel.text = "Inactive"
         }
         
-        // Handle Media
-        guard let fileURLString = data.file,
-              let url = URL(string: fileURLString) else {
-            imageView.image = UIImage(named: "placeholder")
-            playVideoButton.isHidden = true
-            return
-        }
-        
-        let isVideo = fileURLString.lowercased().hasSuffix(".mp4") ||
-                      fileURLString.lowercased().contains(".mp4")
-        
+        let fileString = data.file ?? ""
+        let thumbnailString = data.thumbnail ?? ""
+ 
+        // Detect video
+        let isVideo = fileString.lowercased().contains(".mp4")
+ 
+        // Decide which URL to load
+        let finalURLString = isVideo ? thumbnailString : fileString
+        let url = URL(string: finalURLString)
         if isVideo {
-            videoURL = url
-            playVideoButton.isHidden = false
-            
-            // Show placeholder + Start Loader
-            imageView.image = UIImage(named: "placeholder")
-            activityIndicator.startAnimating()
-            
-            // Generate thumbnail with loader
-            generateVideoThumbnail(from: url) { [weak self] thumbnail in
-                DispatchQueue.main.async {
-                    self?.activityIndicator.stopAnimating()
-                    self?.imageView.image = thumbnail ?? UIImage(named: "placeholder")
-                }
-            }
-        } else {
-            // It's an Image
-            playVideoButton.isHidden = true
-            activityIndicator.stopAnimating() // just in case
-            imageView.sd_setImage(with: url,
-                                  placeholderImage: UIImage(named: "placeholder"),
-                                  options: [.retryFailed, .scaleDownLargeImages])
+            videoURL = URL(string: data.file ?? "")
         }
+        playVideoButton.isHidden = !isVideo
+        // Loader
+        imageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+        imageView.sd_imageIndicator?.startAnimatingIndicator()
+ 
+        // Set image
+        imageView.sd_setImage(
+            with: url,
+            placeholderImage: UIImage(named: "placeholder")
+        )
     }
-    
-    // MARK: - Reliable Async Thumbnail Generator
-    private func generateVideoThumbnail(from url: URL, completion: @escaping (UIImage?) -> Void) {
-        let asset = AVURLAsset(url: url)
-        let imageGenerator = AVAssetImageGenerator(asset: asset)
-        
-        imageGenerator.appliesPreferredTrackTransform = true
-        imageGenerator.maximumSize = CGSize(width: 800, height: 800)
-        
-        let times = [
-            CMTime.zero,
-            CMTime(seconds: 1, preferredTimescale: 600),
-            CMTime(seconds: 2, preferredTimescale: 600),
-            CMTime(seconds: 3, preferredTimescale: 600)
-        ]
-        
-        imageGenerator.generateCGImagesAsynchronously(forTimes: times.map { NSValue(time: $0) }) {
-            requestedTime, cgImage, actualTime, result, error in
-            
-            if let cgImage = cgImage, result == .succeeded {
-                let thumbnail = UIImage(cgImage: cgImage)
-                completion(thumbnail)
-                return
-            }
-            
-            if let error = error {
-                print("Thumbnail attempt at \(requestedTime.seconds)s failed: \(error.localizedDescription)")
-            }
-        }
-    }
-    
+
+
     // MARK: - Date Formatter (unchanged)
     func formatAddedOnDate(_ input: String) -> String {
         let formatter = DateFormatter()

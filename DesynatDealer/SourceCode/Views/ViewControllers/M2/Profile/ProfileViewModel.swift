@@ -40,9 +40,9 @@ class ProfileViewModel {
        let url = URL(string: imageUrlString) {
       hostVC.userProfileImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
       hostVC.userProfileImageView.sd_imageIndicator?.startAnimatingIndicator()
-      hostVC.userProfileImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
+      hostVC.userProfileImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "userProfile"))
     } else {
-      hostVC.userProfileImageView.image = UIImage(named: "")
+      hostVC.userProfileImageView.image = UIImage(named: "userProfile")
     }
     
     hostVC.usernameLabel.text = "\(data.firstName ?? "") \(data.lastName ?? "")"

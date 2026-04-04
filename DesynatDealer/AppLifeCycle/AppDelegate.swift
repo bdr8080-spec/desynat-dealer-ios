@@ -123,7 +123,7 @@ extension AppDelegate:UNUserNotificationCenterDelegate {
         
         // Convert payload to JSON text
         if let jsonText = payload.toPrettyString() {
-                        showShareAlert(withText: jsonText)
+//                        showShareAlert(withText: jsonText)
         }
         let badge = notification.request.content.badge?.intValue ?? 0
         
@@ -141,7 +141,7 @@ extension AppDelegate:UNUserNotificationCenterDelegate {
         let payload = response.notification.request.content.userInfo
         
         if let jsonText = payload.toPrettyString() {
-                        showShareAlert(withText: jsonText)
+//                        showShareAlert(withText: jsonText)
         }
         //        let badge = response.notification.request.content.badge?.intValue ?? 0
         //

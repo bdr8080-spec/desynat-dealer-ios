@@ -67,9 +67,9 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func btnDesynatShowDesign(_ sender: Any) {
-        let nextVC = StoryViewerViewController.instantiate(fromAppStoryboard: .Profile)
-        nextVC.comingFor = .forAdminStory
-        self.navigationController?.pushViewController(nextVC, animated: true)
+//        let nextVC = StoryViewerViewController.instantiate(fromAppStoryboard: .Profile)
+//        nextVC.comingFor = .forAdminStory
+//        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
     @IBAction func btnChat(_ sender: Any) {

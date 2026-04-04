@@ -20,7 +20,7 @@ class UploadReelViewModel {
         }
         
         // Media validation
-        if vc.selectedMediaData == nil {
+        if vc.selectedMediaData == nil && vc.existingMediaURL == nil {
             CommonUtils.showToast(message: "Please select image or video")
             return false
         }
@@ -45,12 +45,24 @@ class UploadReelViewModel {
         }
     }
     
+    func uploadMediaForGettingThumbnailImageUrl(fileData: Data, isImage: Bool) {
+        let mimeType: MultipartUpload.Mime = isImage ? .image : .Video
+        let uploadItem = MultipartUpload(
+            fileName: "file",
+            file: fileData,
+            mimeType: mimeType)
+        WebService.sharedInstance.uploadVideoAndImage(withParams: uploadItem) { [weak self] url, msg, code in
+            guard let self = self, !url.isEmpty else { return }
+            hostVc?.thumbnailImage = url
+        }
+    }
+    
     // MARK: - Final API
     func uploadReel(mediaUrl: String) {
         let param: [String: Any] = [
             "file": mediaUrl,
-            "caption": hostVc?.captiontxtArea.text ?? ""
-        ]
+            "caption": hostVc?.captiontxtArea.text ?? "",
+            "thumbnail" : hostVc?.thumbnailImage ?? ""]
         WebService.sharedInstance.addNewReelsServices(param: param) { [weak self] response in
             guard let self = self else { return }
             
@@ -63,13 +75,14 @@ class UploadReelViewModel {
         let param: [String: Any] = [
             "reel_id": hostVc?.reelsData?.id ?? 1,
             "file": mediaUrl,
-            "caption": hostVc?.captiontxtArea.text ?? ""
+            "caption": hostVc?.captiontxtArea.text ?? "",
+            "thumbnail" : hostVc?.thumbnailImage ?? ""
         ]
         WebService.sharedInstance.editMyReelsServices(param: param) { [weak self] response in
             guard let self = self else { return }
             
             CommonUtils.showToast(message: "Reel Updated Successfully")
-            self.hostVc?.navigationController?.popViewController(animated: true)
+            self.hostVc?.navigationController?.popToViewController(ofClass: DelearProfileViewController.self, animated: true)
         }
     }
 }

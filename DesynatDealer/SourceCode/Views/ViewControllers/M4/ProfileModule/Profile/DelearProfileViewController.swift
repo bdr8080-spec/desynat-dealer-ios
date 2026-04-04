@@ -10,6 +10,8 @@ import SDWebImage
 
 class DelearProfileViewController: UIViewController {
     
+    @IBOutlet weak var qrImageView: CustomImageView!
+    @IBOutlet weak var viewStoriesBtn: UIButton!
     @IBOutlet weak var bandDetailsView: CustomView!
     @IBOutlet weak var storeDocumentView: UIView!
     @IBOutlet weak var owberDocumentView: UIView!
@@ -69,6 +71,7 @@ class DelearProfileViewController: UIViewController {
             viewModel.getUserProfile()
             viewModel.getMyHighLights()
             viewModel.getMyReelsRequest()
+            viewModel.getSelfStory()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -133,9 +136,18 @@ class DelearProfileViewController: UIViewController {
            let url = URL(string: imageUrlString) {
             userProfileImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
             userProfileImageView.sd_imageIndicator?.startAnimatingIndicator()
-            userProfileImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
+            userProfileImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "userProfile"))
         } else {
-            userProfileImageView.image = UIImage(named: "")
+            userProfileImageView.image = UIImage(named: "userProfile")
+        }
+        
+        if let imageUrlString = data?.profileQR,
+           let url = URL(string: imageUrlString) {
+            qrImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            qrImageView.sd_imageIndicator?.startAnimatingIndicator()
+            qrImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "qrCode"))
+        } else {
+            qrImageView.image = UIImage(named: "qrCode")
         }
         
         if let storeImageUrl = data?.storeInfo?.storeImage,
@@ -254,11 +266,7 @@ extension DelearProfileViewController: UICollectionViewDelegate, UICollectionVie
         case storiesCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StoresDetailsCollectionViewCell", for: indexPath) as! StoresDetailsCollectionViewCell
             let dict = self.viewModel.highlightList?[indexPath.row]
-            let url = URL(string: dict?.file ?? "")
-            cell.mainImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-            cell.mainImageView.sd_imageIndicator?.startAnimatingIndicator()
-            cell.mainImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
-            cell.lblTitle.text = dict?.title
+            cell.configData(data: dict)
             return cell
         case reelsCollectionView:
             if indexPath.row == 0 {

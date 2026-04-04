@@ -15,18 +15,30 @@ class UploadPostViewController: UIViewController {
     
     var selectedImage: UIImage?
     var videoURL: URL?
+    var thumbnailImage: String?
     lazy var viewModel = UploadStoryViewModel(hostVc: self)
     override func viewDidLoad() {
         super.viewDidLoad()
         if let videoURL = videoURL {
             
-            CommonUtils.generateThumbnail(url: videoURL) { [weak self] image in
-                DispatchQueue.main.async {
-                    self?.imageView.image = image
-                    self?.playButton.isHidden = false   // ✅ SHOW BUTTON
-                }
-            }
+//            CommonUtils.generateThumbnail(url: videoURL) { [weak self] image in
+//                DispatchQueue.main.async {
+//                    guard let self = self, let image = image else { return }
+//                    
+//                    self.imageView.image = image
+//                    self.playButton.isHidden = false
+////                    self.thumbnailImage = self.saveImageAndGetURLString(image) ?? ""
+////                    print("============",self.thumbnailImage,"===================")
+//                    if let imageData = image.jpegData(compressionQuality: 0.7) {
+//                        self.viewModel.uploadMedia(fileData: imageData, isImage: true)
+//                    }
+//                }
+//            }
             
+            guard let data = selectedImage?.jpegData(compressionQuality: 0.25) else { return }
+            self.viewModel.uploadMediaForGettingThumbnailImageUrl(fileData: data, isImage: true)
+            self.imageView.image = selectedImage
+            self.playButton.isHidden = false
         } else {
             imageView.image = selectedImage
             playButton.isHidden = true   // ❌ HIDE BUTTON
@@ -65,6 +77,22 @@ class UploadPostViewController: UIViewController {
         
         present(vc, animated: true) {
             player.play()
+        }
+    }
+    func saveImageAndGetURLString(_ image: UIImage) -> String? {
+        guard let data = image.jpegData(compressionQuality: 0.7) else {
+            return nil
+        }
+        
+        let fileName = "thumb_\(UUID().uuidString).jpg"
+        let fileURL = FileManager.default.temporaryDirectory.appendingPathComponent(fileName)
+        
+        do {
+            try data.write(to: fileURL)
+            return fileURL.absoluteString   // ✅ URL string
+        } catch {
+            print("Error saving image:", error)
+            return nil
         }
     }
     func addTapGesture() {

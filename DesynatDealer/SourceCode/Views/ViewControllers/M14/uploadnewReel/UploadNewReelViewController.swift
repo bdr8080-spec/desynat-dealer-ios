@@ -8,6 +8,7 @@
 import UIKit
 import AVFoundation
 import AVKit
+import SDWebImage
 
 class UploadNewReelViewController: UIViewController {
     
@@ -19,6 +20,7 @@ class UploadNewReelViewController: UIViewController {
     @IBOutlet weak var buttonTitleLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     
+    
     // MARK: - Properties
     let imagePicker = ImagePickerManager()
     private lazy var viewModel = UploadReelViewModel(hostVc: self)
@@ -27,6 +29,8 @@ class UploadNewReelViewController: UIViewController {
     var videoURL: URL?
     var isComingForEdit: Bool = false
     var reelsData: GetMyReelsList?
+    var existingMediaURL: String?
+    var thumbnailImage: String?
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -57,9 +61,23 @@ class UploadNewReelViewController: UIViewController {
     
     // Final Upload
     @IBAction func uploadReelBtnTapped(_ sender: Any) {
+
         guard viewModel.isValid() else { return }
-        guard let data = selectedMediaData else { return }
-        viewModel.uploadMedia(fileData: data, isImage: false)
+        
+        // ✅ New media selected
+        if let data = selectedMediaData {
+            viewModel.uploadMedia(fileData: data, isImage: isImageSelected)
+        }
+        
+        // ✅ Edit without changing media
+        else if let url = existingMediaURL {
+            if isComingForEdit {
+                viewModel.editReel(mediaUrl: url)
+            } else {
+                viewModel.uploadReel(mediaUrl: url)
+            }
+        }
+        
     }
     
     @IBAction func playBtnOfVideo(_ sender: Any) {
@@ -79,7 +97,6 @@ class UploadNewReelViewController: UIViewController {
     }
     
     func configData() {
-        
         guard let data = reelsData,
               let fileURLString = data.file,
               let url = URL(string: fileURLString) else {
@@ -94,14 +111,20 @@ class UploadNewReelViewController: UIViewController {
             // VIDEO
             videoURL = url
             playVideoButton.isHidden = false
-            
+            thumbnailImage = data.thumbnail
             imageView.image = UIImage(named: "placeholder")
-            CommonUtils.generateThumbnail(url: url) { [weak self] thumbnail in
-                DispatchQueue.main.async {
-                    self?.imageView.image = thumbnail ?? UIImage(named: "placeholder")
-                }
+            imageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            imageView.sd_imageIndicator?.startAnimatingIndicator()
+            guard
+                let thumbnailLink = data.thumbnail,
+                let thumbnailURL = URL(string: thumbnailLink) else {
+                
+                return
             }
-            
+            imageView.sd_setImage(
+                with: thumbnailURL,
+                placeholderImage: UIImage(named: "placeholder")
+            )
         } else {
             // IMAGE
             videoURL = nil
@@ -114,7 +137,28 @@ class UploadNewReelViewController: UIViewController {
         }
         captiontxtArea.text = data.caption
         captiontxtArea.placeholderTextView = ""
-        selectedMediaData = stringToData(data.file ?? "")
+        
+        existingMediaURL = data.file
+        selectedMediaData = nil
+        // selectedMediaData = stringToData(data.file ?? "")
+    }
+    func saveImageAndGetURLString(_ image: UIImage?) -> String? {
+        //  Check image exists
+        guard let image = image,
+              let data = image.jpegData(compressionQuality: 0.7) else {
+            return nil
+        }
+        
+        let fileName = "thumb_\(UUID().uuidString).jpg"
+        let fileURL = FileManager.default.temporaryDirectory.appendingPathComponent(fileName)
+        
+        do {
+            try data.write(to: fileURL)
+            return fileURL.absoluteString
+        } catch {
+            print("Error saving image:", error.localizedDescription)
+            return nil
+        }
     }
     
     func stringToData(_ string: String) -> Data {
@@ -144,8 +188,10 @@ extension UploadNewReelViewController {
                     videoURL = url
                     playVideoButton.isHidden = false
                     // Generate thumbnail
-                    CommonUtils.generateThumbnail(url: url) { image in
-                        self.imageView.image = image ?? UIImage(named: "video_placeholder")
+                    CommonUtils.generateThumbnail(url: url) { thumbNailImage in
+                        self.imageView.image = thumbNailImage ?? UIImage(named: "video_placeholder")
+                        guard let data = thumbNailImage?.jpegData(compressionQuality: 0.25) else { return }
+                        self.viewModel.uploadMediaForGettingThumbnailImageUrl(fileData: data, isImage: true)
                     }
                     
                 } catch {

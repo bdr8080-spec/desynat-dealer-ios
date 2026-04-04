@@ -20,6 +20,7 @@ class AddNewStoryViewController: UIViewController {
     // MARK: - Property Decalaration
     var galleryAssets: [PHAsset] = []
     let imagePicker = ImagePickerManager()
+    var thumbnailImage: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +68,24 @@ class AddNewStoryViewController: UIViewController {
         } else {
             // Handle denied or restricted
             print("Access to photo library denied.")
+        }
+    }
+    func saveImageAndGetURLString(_ image: UIImage?) -> String? {
+        //  Check image exists
+        guard let image = image,
+              let data = image.jpegData(compressionQuality: 0.7) else {
+            return nil
+        }
+        
+        let fileName = "thumb_\(UUID().uuidString).jpg"
+        let fileURL = FileManager.default.temporaryDirectory.appendingPathComponent(fileName)
+        
+        do {
+            try data.write(to: fileURL)
+            return fileURL.absoluteString
+        } catch {
+            print("Error saving image:", error.localizedDescription)
+            return nil
         }
     }
     
@@ -153,13 +172,13 @@ extension AddNewStoryViewController: UICollectionViewDelegate, UICollectionViewD
             
             let videoURL = urlAsset.url
             
-            // ✅ Generate thumbnail
+            // Generate thumbnail
             CommonUtils.generateThumbnail(url: videoURL) { thumbnail in
                 
                 DispatchQueue.main.async {
                     let vc = UploadPostViewController.instantiate(fromAppStoryboard: .Profile)
                     vc.selectedImage = thumbnail
-                    
+                    self.thumbnailImage = self.saveImageAndGetURLString(thumbnail)
                     vc.videoURL = videoURL   // 🔥🔥 MOST IMPORTANT LINE
                     
                     self.navigationController?.pushViewController(vc, animated: true)

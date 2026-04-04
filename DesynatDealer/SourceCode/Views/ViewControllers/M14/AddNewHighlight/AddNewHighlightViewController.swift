@@ -43,6 +43,8 @@ class AddNewHighlightViewController: UIViewController {
     private var isImageSelected: Bool = true
     var selectedContentFromGallery = -1
     let imageManager = PHCachingImageManager()
+    var thumbnailImage: String?
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -141,6 +143,24 @@ class AddNewHighlightViewController: UIViewController {
             print("Access to photo library denied.")
         }
     }
+    func saveImageAndGetURLString(_ image: UIImage?) -> String? {
+        //  Check image exists
+        guard let image = image,
+              let data = image.jpegData(compressionQuality: 0.7) else {
+            return nil
+        }
+        
+        let fileName = "thumb_\(UUID().uuidString).jpg"
+        let fileURL = FileManager.default.temporaryDirectory.appendingPathComponent(fileName)
+        
+        do {
+            try data.write(to: fileURL)
+            return fileURL.absoluteString
+        } catch {
+            print("Error saving image:", error.localizedDescription)
+            return nil
+        }
+    }
 }
 
 // MARK: - UICollectionView
@@ -165,27 +185,6 @@ extension AddNewHighlightViewController: UICollectionViewDelegate, UICollectionV
         }
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SelectVideoFromGalleryCollectionViewCell", for: indexPath) as! SelectVideoFromGalleryCollectionViewCell
-        
-//        let asset = galleryAssets[indexPath.item]
-//        let cellSize = CGSize(width: cell.frame.width, height: cell.frame.height)
-//        
-//        CommonUtils.getThumbnail(asset: asset, size: cellSize) { image in
-//            DispatchQueue.main.async {
-//                cell.mainImageView.image = image
-//            }
-//        }
-//        
-//        // Optional: indicate if asset is video
-//        if asset.mediaType == .video {
-//            cell.playPauseImageView.isHidden = false // add a play icon in your cell
-//        } else {
-//            cell.playPauseImageView.isHidden = true
-//        }
-//        if selectedContentFromGallery == indexPath.row {
-//            cell.selectedImageView.image = .selectedCheckBox
-//        } else {
-//            cell.selectedImageView.image = .unslectedCheckbox
-//        }
         
         let asset = galleryAssets[indexPath.item]
         let cellSize = CGSize(width: cell.frame.width * UIScreen.main.scale,
@@ -230,82 +229,7 @@ extension AddNewHighlightViewController: UICollectionViewDelegate, UICollectionV
         return CGSize(width: width, height: 220)
     }
     
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        
-//        // Highlight Name Collection
-//        if collectionView == highlightNameCollectionView {
-//            
-//            selectedRoleIndex = indexPath.row
-//            
-//            if indexPath.row == 0 {
-//                dropDownimageView.isHidden = false
-//                enternameTxtField.placeholder = "Select Name"
-//                
-//                // hide gallery
-//                
-//            } else {
-//                dropDownimageView.isHidden = true
-//                enternameTxtField.placeholder = "Enter Name"
-//                // SHOW gallery
-//                // Fetch only once
-//                if galleryAssets.isEmpty {
-//                    fetchGalleryAssets()
-//                }
-//            }
-//            collectionView.reloadData()
-//        }
-//        
-//        // Content Collection (Gallery)
-//        else if collectionView == contentCollectionView {
-//            let asset = galleryAssets[indexPath.item]
-//
-//            if asset.mediaType == .image {
-//                handleImageAsset(asset)
-//            } else if asset.mediaType == .video {
-//                handleVideoAsset(asset)
-//            }
-//        }
-//    }
-    
-    // MARK: - UICollectionView Delegate
 
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        
-//        // Highlight Name Collection
-//        if collectionView == highlightNameCollectionView {
-//            
-//            selectedRoleIndex = indexPath.row
-//            
-//            if indexPath.row == 0 {
-//                dropDownimageView.isHidden = false
-//                enternameTxtField.placeholder = "Select Name"
-//                // Optionally hide gallery content if needed
-//            } else {
-//                dropDownimageView.isHidden = true
-//                enternameTxtField.placeholder = "Enter Name"
-//                
-//                if galleryAssets.isEmpty {
-//                    fetchGalleryAssets()
-//                }
-//            }
-//            collectionView.reloadData()
-//            return
-//        }
-//        
-//        // Content Collection (Gallery) - NEW BEHAVIOR
-//        guard collectionView == contentCollectionView else { return }
-//        
-//        let asset = galleryAssets[indexPath.item]
-//        
-//        if asset.mediaType == .image {
-//            handleSelectedImageAsset(asset)
-//        } else if asset.mediaType == .video {
-//            handleSelectedVideoAsset(asset)
-//        }
-//        selectedContentFromGallery = indexPath.item
-//        contentCollectionView.reloadData()
-//    }
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
         // Highlight Name collection
@@ -384,6 +308,33 @@ extension AddNewHighlightViewController: UICollectionViewDelegate, UICollectionV
         }
     }
 
+//    private func handleSelectedVideoAsset(_ asset: PHAsset) {
+//        
+//        let options = PHVideoRequestOptions()
+//        options.deliveryMode = .highQualityFormat
+//        
+//        PHImageManager.default().requestAVAsset(forVideo: asset, options: options) { [weak self] avAsset, _, _ in
+//            
+//            guard let self = self,
+//                  let urlAsset = avAsset as? AVURLAsset else { return }
+//            
+//            let videoURL = urlAsset.url
+//            
+//            // Generate thumbnail for display
+//            CommonUtils.generateThumbnail(url: videoURL) { [weak self] thumbNailImage in
+//                guard let self = self else { return }
+//                
+//                DispatchQueue.main.async {
+//                    // Store video URL for later compression/upload
+//                    self.videoURL = videoURL
+//                    guard let data = thumbNailImage?.jpegData(compressionQuality: 0.25) else { return }
+//                    self.viewModel.uploadMediaForGettingThumbnailImageUrl(fileData: data, isImage: true)
+//                    self.isImageSelected = false
+//                }
+//            }
+//        }
+//    }
+    
     private func handleSelectedVideoAsset(_ asset: PHAsset) {
         
         let options = PHVideoRequestOptions()
@@ -396,16 +347,30 @@ extension AddNewHighlightViewController: UICollectionViewDelegate, UICollectionV
             
             let videoURL = urlAsset.url
             
-            // Generate thumbnail for display
-            CommonUtils.generateThumbnail(url: videoURL) { [weak self] thumbnail in
+            // ✅ Load video data (FIX)
+            DispatchQueue.global(qos: .userInitiated).async {
+                do {
+                    let data = try Data(contentsOf: videoURL)
+                    
+                    DispatchQueue.main.async {
+                        self.selectedVideoData = data   // ✅ IMPORTANT FIX
+                        self.selectedImageData = nil
+                        self.isImageSelected = false
+                        self.videoURL = videoURL
+                    }
+                    
+                } catch {
+                    print("Error loading video data:", error)
+                }
+            }
+            
+            // Thumbnail
+            CommonUtils.generateThumbnail(url: videoURL) { [weak self] thumbNailImage in
                 guard let self = self else { return }
                 
                 DispatchQueue.main.async {
-                    // Store video URL for later compression/upload
-                    self.videoURL = videoURL
-                    
-                    // Compress video and prepare data
-                    self.compressVideo(videoURL: videoURL, isCallingFromGallery: true)
+                    guard let data = thumbNailImage?.jpegData(compressionQuality: 0.25) else { return }
+                    self.viewModel.uploadMediaForGettingThumbnailImageUrl(fileData: data, isImage: true)
                 }
             }
         }
@@ -434,6 +399,35 @@ extension AddNewHighlightViewController: UICollectionViewDelegate, UICollectionV
             }
         }
     }
+//    private func handleVideoAsset(_ asset: PHAsset) {
+//        
+//        let options = PHVideoRequestOptions()
+//        options.deliveryMode = .highQualityFormat
+//        
+//        PHImageManager.default().requestAVAsset(forVideo: asset, options: options) { [weak self] avAsset, _, _ in
+//            
+//            guard let self = self,
+//                  let urlAsset = avAsset as? AVURLAsset else { return }
+//            
+//            let videoURL = urlAsset.url
+//            let data = try Data(contentsOf: videoURL)
+//            self.isImageSelected = false
+//            self.selectedVideoData = data
+//            self.selectedImageData = nil
+//            self.videoURL = videoURL
+//            // ✅ Generate thumbnail
+//            CommonUtils.generateThumbnail(url: videoURL) { thumbnail in
+//                DispatchQueue.main.async {
+//                    let vc = UploadPostViewController.instantiate(fromAppStoryboard: .Profile)
+//                    vc.selectedImage = thumbnail
+//                    vc.videoURL = videoURL
+//                    self.navigationController?.pushViewController(vc, animated: true)
+//                }
+//            }
+//        }
+//    }
+    
+    
     private func handleVideoAsset(_ asset: PHAsset) {
         
         let options = PHVideoRequestOptions()
@@ -446,15 +440,32 @@ extension AddNewHighlightViewController: UICollectionViewDelegate, UICollectionV
             
             let videoURL = urlAsset.url
             
-            // ✅ Generate thumbnail
-            CommonUtils.generateThumbnail(url: videoURL) { thumbnail in
+            // ⚠️ Do heavy work in background
+            DispatchQueue.global(qos: .userInitiated).async {
                 
+                do {
+                    // ❌ Avoid loading full data if not required
+                    let data = try Data(contentsOf: videoURL)
+                    
+                    DispatchQueue.main.async {
+                        self.isImageSelected = false
+                        self.selectedVideoData = data
+                        self.selectedImageData = nil
+                        self.videoURL = videoURL
+                    }
+                    
+                } catch {
+                    print("Error loading video data:", error)
+                    return
+                }
+            }
+            
+            // ✅ Generate thumbnail (already async)
+            CommonUtils.generateThumbnail(url: videoURL) { thumbnail in
                 DispatchQueue.main.async {
                     let vc = UploadPostViewController.instantiate(fromAppStoryboard: .Profile)
                     vc.selectedImage = thumbnail
-                    
-                    vc.videoURL = videoURL   // 🔥🔥 MOST IMPORTANT LINE
-                    
+                    vc.videoURL = videoURL
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
             }
@@ -488,10 +499,12 @@ extension AddNewHighlightViewController: UICollectionViewDelegate, UICollectionV
                         self.selectedImageData = nil
                         self.videoURL = outputURL
                         
-                        CommonUtils.generateThumbnail(url: outputURL) { image in
+                        CommonUtils.generateThumbnail(url: outputURL) { thumbNailImage in
                             if !isCallingFromGallery {
                                 self.videoPlayButton.isHidden = false
-                                self.uploadedImage.image = image ?? UIImage(named: "video_placeholder")
+                                self.uploadedImage.image = thumbNailImage ?? UIImage(named: "video_placeholder")
+                                guard let data = thumbNailImage?.jpegData(compressionQuality: 0.25) else { return }
+                                self.viewModel.uploadMediaForGettingThumbnailImageUrl(fileData: data, isImage: true)
                             }
                         }
                     }

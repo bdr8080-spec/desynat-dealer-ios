@@ -20,6 +20,7 @@ struct SellerProfileDataModel: Codable {
     let isBlock: Int?
     let affilateCommission: String?
     let createdAt, updatedAt: String?
+    let profileQR, qrSellerUrl: String?
     let storeInfo: StoreInfo?
     let sellerBankDetails: SellerBankDetails?
 //    let subcriptionPlan: [String]?
@@ -52,6 +53,8 @@ struct SellerProfileDataModel: Codable {
         case subcriptionPlan = "subcription_plan"
         case ownerDocument = "owner_document"
         case storeDocument = "store_document"
+        case profileQR = "profile_qr"
+        case qrSellerUrl
     }
 }
 

@@ -22,5 +22,5 @@ struct AddStoryModel: Codable {
 }
 
 struct UploadFileDataModel: Codable {
-    let url: String
+    let url: String?
 }

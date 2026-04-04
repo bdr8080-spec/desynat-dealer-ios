@@ -116,7 +116,7 @@ class EditProfileViewController: UIViewController {
           self.userProfileImageUrl = imageURL.url ?? ""
           if let url = URL(string: imageURL.url ?? "") {
             self.userProfileImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-            self.userProfileImageView.sd_setImage(with: url,placeholderImage: UIImage(named: ""))
+            self.userProfileImageView.sd_setImage(with: url,placeholderImage: UIImage(named: "userProfile"))
           }
         }
       }
@@ -224,9 +224,9 @@ class EditProfileViewController: UIViewController {
       userProfileImageUrl = imageUrlString
       userProfileImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
       userProfileImageView.sd_imageIndicator?.startAnimatingIndicator()
-      userProfileImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
+      userProfileImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "userProfile"))
     } else {
-      userProfileImageView.image = UIImage(named: "")
+      userProfileImageView.image = UIImage(named: "userProfile")
     }
     firsNameTF.text = data?.firstName
     lastNameTF.text = data?.lastName
