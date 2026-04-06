@@ -1,4 +1,5 @@
 import Foundation
+import AVFoundation
 import Alamofire
 import UIKit
 
@@ -253,6 +254,168 @@ final class NetworkManager {
             completion(nil)
         }
     }
+//    public func requestMultiPartForVideoAndAudio<T: Decodable>(
+//        url: NetworkURL,
+//        assets: [MultipartUpload],
+//        param: Dictionary<String, Any>? = nil,
+//        model: T.Type,
+//        completion: @escaping ResultHandler<BaseResponse<T>>
+//    ) {
+//        guard NetworkReachabilityManager()?.isReachable == true else {
+//            completion(.failure(.noNetwork), nil)
+//            return
+//        }
+//        
+//        let header = getHeaders()
+//        
+//        var networkUrl = ""
+//        switch url {
+//        case .endpoint(let networkEndPoint):
+//            networkUrl = networkEndPoint.withBaseURL()
+//        case .custom(let string):
+//            networkUrl = BaseURL.value() + string
+//        }
+//        
+//        AF.upload(multipartFormData: { multipartFormData in
+//            
+//            let fieldName = "file"  // ← Backend requires this exact field name
+//            
+//            for uploadData in assets {
+//                var fileName: String
+//                var mimeTypeString: String
+//                var dataToUpload: Data?
+//                
+//                switch uploadData.mimeType {
+//                case .image:
+//                    mimeTypeString = "image/jpeg"
+//                    fileName = "\(UUID().uuidString).jpeg"
+//                    
+//                    // Support UIImage → Data
+//                    if let image = uploadData.file as? UIImage,
+//                       let imageData = image.jpegData(compressionQuality: 0.7) {
+//                        dataToUpload = imageData
+//                    }
+//                    // Support direct Data (your current usage)
+//                    else if let data = uploadData.file as? Data {
+//                        dataToUpload = data
+//                    }
+//                    
+//                case .Video:
+//                    mimeTypeString = "video/mp4"
+//                    fileName = "\(UUID().uuidString).mp4"
+//                    
+//                    // Prefer URL for large videos (memory efficient)
+//                    if let url = uploadData.file as? URL {
+//                        multipartFormData.append(
+//                            url,
+//                            withName: fieldName,
+//                            fileName: fileName,
+//                            mimeType: mimeTypeString
+//                        )
+//                        continue  // Skip data append below
+//                    }
+//                    // Fallback to Data
+//                    else if let data = uploadData.file as? Data {
+//                        dataToUpload = data
+//                        let bytes = data.count
+//                        let kb = Double(bytes) / 1024.0
+//                        let mb = kb / 1024.0
+//
+//                        print("Video Size:")
+//                        print("➡ Bytes: \(bytes)")
+//                        print("➡ KB: \(String(format: "%.2f", kb)) KB")
+//                        print("➡ MB: \(String(format: "%.2f", mb)) MB")
+//                        
+//                    }
+//                    
+//                case .pdf:
+//                    mimeTypeString = "application/pdf"
+//                    fileName = "\(UUID().uuidString).pdf"
+//                    
+//                    if let url = uploadData.file as? URL {
+//                        multipartFormData.append(
+//                            url,
+//                            withName: fieldName,
+//                            fileName: url.lastPathComponent,
+//                            mimeType: mimeTypeString
+//                        )
+//                        continue
+//                    } else if let data = uploadData.file as? Data {
+//                        dataToUpload = data
+//                    }
+//                    
+//                default:
+//                    completion(.failure(.custom(code: 999)), nil)
+//                    return
+//                }
+//                
+//                // If we have data to upload (image or video from Data)
+//                guard let data = dataToUpload else {
+//                    completion(.failure(.custom(code: 888)), nil)
+//                    return
+//                }
+//                
+//                multipartFormData.append(
+//                    data,
+//                    withName: fieldName,
+//                    fileName: fileName,
+//                    mimeType: mimeTypeString
+//                )
+//            }
+//            
+//            // Append additional text parameters if any
+//            if let param = param {
+//                for (key, value) in param {
+//                    if let stringValue = value as? String {
+//                        multipartFormData.append(stringValue.data(using: .utf8)!, withName: key)
+//                    } else if let intValue = value as? Int {
+//                        multipartFormData.append("\(intValue)".data(using: .utf8)!, withName: key)
+//                    } else if let arrayValue = value as? NSArray {
+//                        let arrayKey = key + "[]"
+//                        for element in arrayValue {
+//                            if let str = element as? String {
+//                                multipartFormData.append(str.data(using: .utf8)!, withName: arrayKey)
+//                            } else if let num = element as? Int {
+//                                multipartFormData.append("\(num)".data(using: .utf8)!, withName: arrayKey)
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//            
+//        }, to: networkUrl, headers: header)
+//        .responseDecodable(of: BaseResponse<T>.self) { response in
+//            
+//            printInConsole(response.debugDescription)
+//            let status = HTTPStatusCode(rawValue: response.response?.statusCode ?? 200) ?? .FORBIDDEN
+//            
+//            switch response.result {
+//            case .success(let result):
+//                if HTTPStatusCode.Sucess.contains(status) {
+//                    completion(.success(result), status)
+//                } else {
+//                    if status == .UNAUTHORIZED {
+//                        completion(.failure(.sessionExpired), status)
+//                    } else {
+//                        self.ErrorResponseHandle(response: response.data) { errResponse in
+//                            completion(.failure(.invalidResponse(errResponse)), status)
+//                        }
+//                    }
+//                }
+//            case .failure(let err):
+//                if status == .UNAUTHORIZED {
+//                    completion(.failure(.sessionExpired), status)
+//                } else if HTTPStatusCode.Failure.contains(status) {
+//                    self.ErrorResponseHandle(response: response.data) { errResponse in
+//                        completion(.failure(.invalidResponse(errResponse)), status)
+//                    }
+//                } else {
+//                    completion(.failure(.decoding(err)), status)
+//                }
+//            }
+//        }
+//    }
+    
     public func requestMultiPartForVideoAndAudio<T: Decodable>(
         url: NetworkURL,
         assets: [MultipartUpload],
@@ -277,7 +440,7 @@ final class NetworkManager {
         
         AF.upload(multipartFormData: { multipartFormData in
             
-            let fieldName = "file"  // ← Backend requires this exact field name
+            let fieldName = "file"
             
             for uploadData in assets {
                 var fileName: String
@@ -285,39 +448,87 @@ final class NetworkManager {
                 var dataToUpload: Data?
                 
                 switch uploadData.mimeType {
+                    
+                // --------------------------------------------
+                // MARK: IMAGE
+                // --------------------------------------------
                 case .image:
                     mimeTypeString = "image/jpeg"
                     fileName = "\(UUID().uuidString).jpeg"
                     
-                    // Support UIImage → Data
                     if let image = uploadData.file as? UIImage,
                        let imageData = image.jpegData(compressionQuality: 0.7) {
                         dataToUpload = imageData
                     }
-                    // Support direct Data (your current usage)
                     else if let data = uploadData.file as? Data {
                         dataToUpload = data
                     }
                     
+                // --------------------------------------------
+                // MARK: VIDEO (Compression Added Here)
+                // --------------------------------------------
                 case .Video:
                     mimeTypeString = "video/mp4"
                     fileName = "\(UUID().uuidString).mp4"
                     
-                    // Prefer URL for large videos (memory efficient)
+                    // If URL → compress synchronously
                     if let url = uploadData.file as? URL {
+                        
+                        let compressedURL = self.compressVideoSync(inputURL: url) ?? url
+                        
+                        // PRINT COMPRESSED SIZE
+                        if let size = try? Data(contentsOf: compressedURL).count {
+                            let kb = Double(size) / 1024.0
+                            let mb = kb / 1024.0
+                            print("📉 Compressed Video Size:")
+                            print("➡ Bytes: \(size)")
+                            print("➡ KB: \(String(format: "%.2f", kb)) KB")
+                            print("➡ MB: \(String(format: "%.2f", mb)) MB")
+                        }
+
                         multipartFormData.append(
-                            url,
+                            compressedURL,
                             withName: fieldName,
                             fileName: fileName,
                             mimeType: mimeTypeString
                         )
-                        continue  // Skip data append below
-                    }
-                    // Fallback to Data
-                    else if let data = uploadData.file as? Data {
-                        dataToUpload = data
+                        
+                        continue
                     }
                     
+                    // If Data → write temp file → compress
+                    else if let data = uploadData.file as? Data {
+                        
+                        let tempURL = FileManager.default
+                            .temporaryDirectory
+                            .appendingPathComponent("raw_\(UUID().uuidString).mp4")
+                        
+                        try? data.write(to: tempURL)
+                        
+                        let compressedURL = self.compressVideoSync(inputURL: tempURL) ?? tempURL
+                        
+                        // PRINT COMPRESSED SIZE
+                        if let size = try? Data(contentsOf: compressedURL).count {
+                            let kb = Double(size) / 1024.0
+                            let mb = kb / 1024.0
+                            print("📉 Compressed Video Size:")
+                            print("➡ Bytes: \(size)")
+                            print("➡ KB: \(String(format: "%.2f", kb)) KB")
+                            print("➡ MB: \(String(format: "%.2f", mb)) MB")
+                        }
+
+                        multipartFormData.append(
+                            compressedURL,
+                            withName: fieldName,
+                            fileName: fileName,
+                            mimeType: mimeTypeString
+                        )
+                        
+                        continue
+                    }
+                // --------------------------------------------
+                // MARK: PDF
+                // --------------------------------------------
                 case .pdf:
                     mimeTypeString = "application/pdf"
                     fileName = "\(UUID().uuidString).pdf"
@@ -339,21 +550,21 @@ final class NetworkManager {
                     return
                 }
                 
-                // If we have data to upload (image or video from Data)
-                guard let data = dataToUpload else {
+                // Append raw Data (only images & pdf)
+                if let data = dataToUpload {
+                    multipartFormData.append(
+                        data,
+                        withName: fieldName,
+                        fileName: fileName,
+                        mimeType: mimeTypeString
+                    )
+                } else {
                     completion(.failure(.custom(code: 888)), nil)
                     return
                 }
-                
-                multipartFormData.append(
-                    data,
-                    withName: fieldName,
-                    fileName: fileName,
-                    mimeType: mimeTypeString
-                )
             }
             
-            // Append additional text parameters if any
+            // TEXT PARAMS (unchanged)
             if let param = param {
                 for (key, value) in param {
                     if let stringValue = value as? String {
@@ -392,6 +603,7 @@ final class NetworkManager {
                         }
                     }
                 }
+                
             case .failure(let err):
                 if status == .UNAUTHORIZED {
                     completion(.failure(.sessionExpired), status)
@@ -405,7 +617,31 @@ final class NetworkManager {
             }
         }
     }
-      
+    
+    func compressVideoSync(inputURL: URL) -> URL? {
+        let asset = AVURLAsset(url: inputURL)
+        guard let export = AVAssetExportSession(asset: asset,
+                                                presetName: AVAssetExportPresetMediumQuality)
+        else { return nil }
+
+        let outputURL = FileManager.default.temporaryDirectory
+            .appendingPathComponent("compressed_\(UUID().uuidString).mp4")
+
+        export.outputURL = outputURL
+        export.outputFileType = .mp4
+        export.shouldOptimizeForNetworkUse = true
+
+        let semaphore = DispatchSemaphore(value: 0)
+
+        export.exportAsynchronously {
+            semaphore.signal()
+        }
+
+        // Block current thread, NOT main/UI thread.
+        semaphore.wait()
+
+        return export.status == .completed ? outputURL : nil
+    }
     
     private func getPrintableParamsFromJson(postData: Dictionary<String, Any>) -> String  {
         do {

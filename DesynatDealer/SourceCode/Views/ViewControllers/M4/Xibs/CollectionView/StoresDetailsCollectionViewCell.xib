@@ -37,7 +37,7 @@
                                         <color key="value" name="darkBrown"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="0.5"/>
+                                        <real key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="circleCorner" value="YES"/>
                                 </userDefinedRuntimeAttributes>

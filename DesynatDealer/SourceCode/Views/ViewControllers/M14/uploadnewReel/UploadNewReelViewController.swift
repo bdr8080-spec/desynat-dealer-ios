@@ -19,7 +19,8 @@ class UploadNewReelViewController: UIViewController {
     @IBOutlet weak var playVideoButton: UIButton!
     @IBOutlet weak var buttonTitleLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
-    
+    @IBOutlet weak var uploadContentButtonOutlet: UIButton!
+    @IBOutlet weak var editButtonOutlet: UIButton!
     
     // MARK: - Properties
     let imagePicker = ImagePickerManager()
@@ -42,9 +43,13 @@ class UploadNewReelViewController: UIViewController {
             configData()
             buttonTitleLabel.text = "Edit Reel"
             titleLabel.text = "Edit reel"
+            uploadContentButtonOutlet.isHidden = true
+            editButtonOutlet.isHidden = false
         } else {
             buttonTitleLabel.text = "Upload Reel"
             titleLabel.text = "Upload new reel"
+            uploadContentButtonOutlet.isHidden = false
+            editButtonOutlet.isHidden = true
         }
     }
     
@@ -67,6 +72,18 @@ class UploadNewReelViewController: UIViewController {
         // ✅ New media selected
         if let data = selectedMediaData {
             viewModel.uploadMedia(fileData: data, isImage: isImageSelected)
+            
+//            let data = try Data(contentsOf: url)
+
+            // 🔥 Print video size in MB/KB/Bytes
+            let bytes = data.count
+            let kb = Double(bytes) / 1024.0
+            let mb = kb / 1024.0
+
+            print("Video Size:")
+            print("➡ Bytes: \(bytes)")
+            print("➡ KB: \(String(format: "%.2f", kb)) KB")
+            print("➡ MB: \(String(format: "%.2f", mb)) MB")
         }
         
         // ✅ Edit without changing media
@@ -82,6 +99,10 @@ class UploadNewReelViewController: UIViewController {
     
     @IBAction func playBtnOfVideo(_ sender: Any) {
         playVideo()
+    }
+    
+    @IBAction func uplaodContentButtonDidTapped(_ sender: Any) {
+        showImagePickerOptions()
     }
     
     @objc func playVideo() {
@@ -181,8 +202,18 @@ extension UploadNewReelViewController {
             // VIDEO
             if let url = url {
                 do {
+//                    let data = try Data(contentsOf: url)
                     let data = try Data(contentsOf: url)
-                    
+
+                    // 🔥 Print video size in MB/KB/Bytes
+                    let bytes = data.count
+                    let kb = Double(bytes) / 1024.0
+                    let mb = kb / 1024.0
+
+                    print("Video Size:")
+                    print("➡ Bytes: \(bytes)")
+                    print("➡ KB: \(String(format: "%.2f", kb)) KB")
+                    print("➡ MB: \(String(format: "%.2f", mb)) MB")
                     self.selectedMediaData = data
                     self.isImageSelected = false
                     videoURL = url
@@ -198,6 +229,43 @@ extension UploadNewReelViewController {
                     print("Video error:", error)
                 }
             }
+//            if let url = url {
+//                // COMPRESS BEFORE LOADING DATA
+//                self.compressVideo(inputURL: url) { compressedURL in
+//                    guard let compressedURL = compressedURL else { return }
+//
+//                    do {
+//                        let data = try Data(contentsOf: compressedURL)
+//
+//                        // Print size
+//                        let bytes = data.count
+//                        let kb = Double(bytes) / 1024.0
+//                        let mb = kb / 1024.0
+//                        print("Compressed Video Size:")
+//                        print("➡ Bytes: \(bytes)")
+//                        print("➡ KB: \(String(format: "%.2f", kb)) KB")
+//                        print("➡ MB: \(String(format: "%.2f", mb)) MB")
+//
+//                        self.selectedMediaData = data
+//                        self.isImageSelected = false
+//                        self.videoURL = compressedURL
+//                        self.playVideoButton.isHidden = false
+//                        
+//                        // Thumbnail
+//                        CommonUtils.generateThumbnail(url: compressedURL) { thumbNailImage in
+//                            self.imageView.image = thumbNailImage ?? UIImage(named: "video_placeholder")
+//
+//                            guard let data = thumbNailImage?.jpegData(compressionQuality: 0.25) else { return }
+//                            self.viewModel.uploadMediaForGettingThumbnailImageUrl(fileData: data, isImage: true)
+//                        }
+//
+//                    } catch {
+//                        print("Video error:", error)
+//                    }
+//                }
+//
+//                return // avoid running IMAGE code
+//            }
             
             // IMAGE
             else {

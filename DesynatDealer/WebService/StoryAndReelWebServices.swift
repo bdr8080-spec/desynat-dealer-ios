@@ -152,7 +152,7 @@ extension WebService {
     
     func getAdminStoryService(completion:@escaping (_ user:[SellerHighlightsModel])-> Void) {
         CommonUtils.showHud(show: true)
-        NetworkManager.shared.request(withAPI: .endpoint(.getMyStories), requestMethod: .get, requestModel:[SellerHighlightsModel].self) { result, code in
+        NetworkManager.shared.request(withAPI: .endpoint(.getAdminStories), requestMethod: .get, requestModel: [SellerHighlightsModel].self) { result, code in
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {

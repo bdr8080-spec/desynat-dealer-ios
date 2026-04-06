@@ -28,6 +28,18 @@ class HomeViewModel {
             }
         }
     }
+    
+    func getAdminStory() {
+        WebService.sharedInstance.getAdminStoryService() { list in
+            if list.count > 0 {
+                self.hostVC.adminstoryImageView.image = .logo
+                self.hostVC.adminstoryButtonOutlet.isUserInteractionEnabled = true
+            } else{
+                self.hostVC.adminstoryImageView.image = .adminStroyEmpty
+                self.hostVC.adminstoryButtonOutlet.isUserInteractionEnabled = false
+            }
+        }
+    }
   
   func statusUpdateAPI(completion: @escaping (Bool) -> Void) {
     WebService.sharedInstance.storeStatusUpdateService{ [weak self] response in

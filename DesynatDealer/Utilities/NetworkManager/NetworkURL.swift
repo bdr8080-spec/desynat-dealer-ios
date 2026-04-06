@@ -112,10 +112,11 @@ enum NetworkEndPoint: String {
     case updateMyReelsStatus           = "/api/seller/update_reel_status"
     case editMyReels                   = "/api/seller/update_reel"
     case getMyStories                  = "/api/seller/get_my_stories"
+    case getAdminStories               = "/api/seller/get_Seller_admin_stories"
     case goLive                        = "/api/agora/token"
     case deleteHightLight              = "/api/seller/delete_highlight"
     case deleteStory                   = "/api/seller/delete_story"
-    case liveRoomRecordForAgroa                   = "/api/seller/live_room_records"
+    case liveRoomRecordForAgroa        = "/api/seller/live_room_records"
     
     
     func withBaseURL() -> String {

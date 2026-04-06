@@ -29,6 +29,7 @@ class AddNewHighlightViewController: UIViewController {
             contentCollectionView.registerCellFromNib(cellID: "SelectVideoFromGalleryCollectionViewCell")
         }
     }
+    @IBOutlet weak var noDataFoundLabel: UILabel!
     
     // MARK: - Properties
     
@@ -120,27 +121,76 @@ class AddNewHighlightViewController: UIViewController {
     
     // MARK: - Gallery Fetch
     
+//    func fetchGalleryAssets() {
+//        let status = PHPhotoLibrary.authorizationStatus()
+//        if status == .authorized || status == .limited {
+//            let fetchOptions = PHFetchOptions()
+//            fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+//            let allAssets = PHAsset.fetchAssets(with: fetchOptions)
+//            allAssets.enumerateObjects { asset, _, _ in
+//                self.galleryAssets.append(asset)
+//            }
+//            DispatchQueue.main.async {
+//                self.contentCollectionView.reloadData()
+//            }
+//        } else if status == .notDetermined {
+//            PHPhotoLibrary.requestAuthorization { newStatus in
+//                if newStatus == .authorized || newStatus == .limited {
+//                    self.fetchGalleryAssets()
+//                }
+//            }
+//        } else {
+//            // Handle denied or restricted
+//            print("Access to photo library denied.")
+//        }
+//    }
     func fetchGalleryAssets() {
         let status = PHPhotoLibrary.authorizationStatus()
-        if status == .authorized || status == .limited {
-            let fetchOptions = PHFetchOptions()
-            fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-            let allAssets = PHAsset.fetchAssets(with: fetchOptions)
-            allAssets.enumerateObjects { asset, _, _ in
-                self.galleryAssets.append(asset)
-            }
-            DispatchQueue.main.async {
-                self.contentCollectionView.reloadData()
-            }
-        } else if status == .notDetermined {
+
+        switch status {
+        case .authorized:
+            loadAssets()
+            
+        case .limited:
+            updateUI(for: .limitedAccess)
+            loadAssets()
+
+        case .notDetermined:
             PHPhotoLibrary.requestAuthorization { newStatus in
                 if newStatus == .authorized || newStatus == .limited {
                     self.fetchGalleryAssets()
+                } else {
+                    self.updateUI(for: .denied)
                 }
             }
+            
+        case .restricted, .denied:
+            updateUI(for: .denied)
+            
+        @unknown default:
+            updateUI(for: .denied)
+        }
+    }
+    
+    func loadAssets() {
+        galleryAssets.removeAll()
+
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+
+        let allAssets = PHAsset.fetchAssets(with: fetchOptions)
+        allAssets.enumerateObjects { asset, _, _ in
+            self.galleryAssets.append(asset)
+        }
+
+        if galleryAssets.isEmpty {
+            updateUI(for: .noData)
         } else {
-            // Handle denied or restricted
-            print("Access to photo library denied.")
+            updateUI(for: .hasData)
+        }
+
+        DispatchQueue.main.async {
+            self.contentCollectionView.reloadData()
         }
     }
     func saveImageAndGetURLString(_ image: UIImage?) -> String? {
@@ -545,6 +595,35 @@ extension AddNewHighlightViewController: UIImagePickerControllerDelegate, UINavi
         
         else if let videoURL = info[.mediaURL] as? URL {
             compressVideo(videoURL: videoURL, isCallingFromGallery: false)
+        }
+    }
+    
+    func updateUI(for state: GalleryState) {
+        DispatchQueue.main.async {
+            switch state {
+            case .loading:
+                self.noDataFoundLabel.isHidden = true
+                self.contentCollectionView.isHidden = true
+                
+            case .hasData:
+                self.noDataFoundLabel.isHidden = true
+                self.contentCollectionView.isHidden = false
+                
+            case .noData:
+                self.noDataFoundLabel.text = "No photos or videos found."
+                self.noDataFoundLabel.isHidden = false
+                self.contentCollectionView.isHidden = true
+                
+            case .limitedAccess:
+                self.noDataFoundLabel.text = "You have allowed limited access to your gallery.\nPlease select more photos."
+                self.noDataFoundLabel.isHidden = false
+                self.contentCollectionView.isHidden = false
+                
+            case .denied:
+                self.noDataFoundLabel.text = "Gallery permission denied.\nPlease allow access in Settings."
+                self.noDataFoundLabel.isHidden = false
+                self.contentCollectionView.isHidden = true
+            }
         }
     }
 }

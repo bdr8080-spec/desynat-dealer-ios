@@ -12,6 +12,7 @@ import SDWebImage
 
 class HomeViewController: UIViewController {
     
+    @IBOutlet weak var adminstoryImageView: UIImageView!
     @IBOutlet weak var userProfileImageView: CustomImageView!
     @IBOutlet weak var btnToggle: UIButton!
     @IBOutlet weak var txtChooseFromDate: UITextField!
@@ -39,6 +40,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var busyOnOffLabel: CustomLabelFont!
     @IBOutlet weak var notificationCountView: CustomView!
     @IBOutlet weak var notificationCountLabel: UILabel!
+    @IBOutlet weak var adminstoryButtonOutlet: UIButton!
     
     private let datePicker = UIDatePicker()
     private var activeTextField: UITextField?
@@ -64,12 +66,13 @@ class HomeViewController: UIViewController {
         busyOnOffLabel.text = savedStatus == 1 ? "Busy/On" : "Busy/Off"
         viewModel.getUserProfile()
         viewModel.getCountOfNotificationRequest()
+        viewModel.getAdminStory()
     }
     
     @IBAction func btnDesynatShowDesign(_ sender: Any) {
-//        let nextVC = StoryViewerViewController.instantiate(fromAppStoryboard: .Profile)
-//        nextVC.comingFor = .forAdminStory
-//        self.navigationController?.pushViewController(nextVC, animated: true)
+        let nextVC = StoryViewerViewController.instantiate(fromAppStoryboard: .Profile)
+        nextVC.comingFor = .forAdminStory
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
     @IBAction func btnChat(_ sender: Any) {

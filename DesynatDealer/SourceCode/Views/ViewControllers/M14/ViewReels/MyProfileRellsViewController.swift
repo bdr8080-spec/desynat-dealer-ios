@@ -111,7 +111,7 @@ class MyProfileRellsViewController: UIViewController {
         // Set image
         imageView.sd_setImage(
             with: url,
-            placeholderImage: UIImage(named: "placeholder")
+            placeholderImage: UIImage(named: "editUploaddReel")
         )
     }
 
