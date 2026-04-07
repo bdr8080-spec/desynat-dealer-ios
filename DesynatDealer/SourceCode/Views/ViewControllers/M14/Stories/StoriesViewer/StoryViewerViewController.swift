@@ -15,6 +15,8 @@ class StoryViewerViewController: UIViewController {
     @IBOutlet weak var storiesCollectionView: UICollectionView!
     @IBOutlet weak var topSliderCollectionView: UICollectionView!
     @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var uploadedTimeLabel: UILabel!
+    @IBOutlet weak var uploadedTimeView: CustomView!
     
     // MARK: - Variables
     var usersStory: [Story] = []
@@ -119,6 +121,8 @@ class StoryViewerViewController: UIViewController {
         if comingFor == .forSelfHighlight {
                 highlightTitleLabel.text = viewModel.sellerHighlight[safe: currentStoryIndex]?.title ?? ""
             }
+        uploadedTimeView.isHidden = false
+        uploadedTimeLabel.text = ContentUpladedTimeDuration(from: story.uploadedTime ?? "")
         // Get the NOW visible cell (after scroll completes)
         guard let cell = storiesCollectionView.visibleCells
             .compactMap({ $0 as? StorieDetailsCollectionViewCell })
@@ -127,7 +131,7 @@ class StoryViewerViewController: UIViewController {
         // Clean previous content
         cell.mainImageView.image = nil
         cell.mainImageView.layer.sublayers?.removeAll()
-        
+        CommonUtils.showHud(show: true)
         // Configure with completion callback
         configureCell(cell, with: story) { [weak self] in
             guard let self = self else { return }
@@ -250,6 +254,34 @@ class StoryViewerViewController: UIViewController {
         }
     }
     
+    private func ContentUpladedTimeDuration(from isoString: String) -> String {
+
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+
+        guard let date = formatter.date(from: isoString) else { return "" }
+
+        let secondsAgo = Int(Date().timeIntervalSince(date))
+
+        if secondsAgo < 60 {
+            return secondsAgo == 1 ? "1 sec ago" : "\(secondsAgo) sec ago"
+        }
+
+        let minutes = secondsAgo / 60
+        if minutes < 60 {
+            return minutes == 1 ? "1 min ago" : "\(minutes) min ago"
+        }
+
+        let hours = minutes / 60
+        if hours < 24 {
+            return hours == 1 ? "1 hr ago" : "\(hours) hr ago"
+        }
+
+        let days = hours / 24
+        if days == 1 { return "Yesterday" }
+        return "\(days) days ago"
+    }
+    
     private func invalidateProgressTimer() {
         progressTimer?.invalidate()
         progressTimer = nil
@@ -270,7 +302,7 @@ class StoryViewerViewController: UIViewController {
                 DispatchQueue.main.async { completion() }
                 return
             }
-            
+            CommonUtils.showHud(show: false)
             DispatchQueue.main.async {
                 cell.mainImageView.image = image
                 completion()
@@ -293,6 +325,7 @@ class StoryViewerViewController: UIViewController {
         playerLayer = AVPlayerLayer(player: player)
         playerLayer?.frame = cell.mainImageView.bounds
         playerLayer?.videoGravity = .resizeAspectFill
+        
         cell.mainImageView.layer.insertSublayer(playerLayer!, at: 0)
         
         // Listen for ready state BEFORE play
@@ -303,7 +336,7 @@ class StoryViewerViewController: UIViewController {
             name: .AVPlayerItemDidPlayToEndTime,
             object: player?.currentItem
         )
-        
+        CommonUtils.showHud(show: false)
         player?.play()
         
         // Call completion when video is ready (handled in observeValue)
@@ -371,7 +404,8 @@ class StoryViewerViewController: UIViewController {
                 return Story(
                     url: url,
                     isVideo: isVideo,
-                    duration: isVideo ? nil : 10.0
+                    duration: isVideo ? nil : 10.0,
+                    uploadedTime: item.createdAt
                 )
             }
             
@@ -410,7 +444,8 @@ class StoryViewerViewController: UIViewController {
                 return Story(
                     url: url,
                     isVideo: isVideo,
-                    duration: isVideo ? nil : 10.0
+                    duration: isVideo ? nil : 10.0,
+                    uploadedTime: item.createdAt
                 )
             }
             
@@ -449,7 +484,8 @@ class StoryViewerViewController: UIViewController {
                 return Story(
                     url: url,
                     isVideo: isVideo,
-                    duration: isVideo ? nil : 10.0
+                    duration: isVideo ? nil : 10.0,
+                    uploadedTime: item.createdAt
                 )
             }
             

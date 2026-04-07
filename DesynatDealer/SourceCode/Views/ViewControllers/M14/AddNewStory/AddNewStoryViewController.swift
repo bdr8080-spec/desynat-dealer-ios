@@ -48,30 +48,6 @@ class AddNewStoryViewController: UIViewController {
     }
     
     //MARK: Function's declaration
-//    func fetchGalleryAssets() {
-//        let status = PHPhotoLibrary.authorizationStatus()
-//        if status == .authorized || status == .limited {
-//            let fetchOptions = PHFetchOptions()
-//            fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-//            let allAssets = PHAsset.fetchAssets(with: fetchOptions)
-//            allAssets.enumerateObjects { asset, _, _ in
-//                self.galleryAssets.append(asset)
-//            }
-//            DispatchQueue.main.async {
-//                self.contentCollectionView.reloadData()
-//            }
-//        } else if status == .notDetermined {
-//            PHPhotoLibrary.requestAuthorization { newStatus in
-//                if newStatus == .authorized || newStatus == .limited {
-//                    self.fetchGalleryAssets()
-//                }
-//            }
-//        } else {
-//            // Handle denied or restricted
-//            print("Access to photo library denied.")
-//        }
-//    }
-    
     func fetchGalleryAssets() {
         let status = PHPhotoLibrary.authorizationStatus()
 
@@ -121,23 +97,28 @@ class AddNewStoryViewController: UIViewController {
             self.contentCollectionView.reloadData()
         }
     }
-    
-    func saveImageAndGetURLString(_ image: UIImage?) -> String? {
-        //  Check image exists
-        guard let image = image,
-              let data = image.jpegData(compressionQuality: 0.7) else {
-            return nil
-        }
+
+    func uploadMediaForGettingThumbnailImageUrl(
+        fileData: Data,
+        isImage: Bool,
+        completion: @escaping () -> Void
+    ) {
+        let mimeType: MultipartUpload.Mime = isImage ? .image : .Video
         
-        let fileName = "thumb_\(UUID().uuidString).jpg"
-        let fileURL = FileManager.default.temporaryDirectory.appendingPathComponent(fileName)
+        let uploadItem = MultipartUpload(
+            fileName: "file",
+            file: fileData,
+            mimeType: mimeType
+        )
         
-        do {
-            try data.write(to: fileURL)
-            return fileURL.absoluteString
-        } catch {
-            print("Error saving image:", error.localizedDescription)
-            return nil
+        WebService.sharedInstance.uploadVideoAndImage(withParams: uploadItem) { [weak self] url, msg, code in
+            guard let self = self, !url.isEmpty else { return }
+            
+            // ✅ Store in ViewController
+            self.thumbnailImage = url
+            
+            // ✅ VERY IMPORTANT
+            completion()
         }
     }
     
@@ -226,15 +207,23 @@ extension AddNewStoryViewController: UICollectionViewDelegate, UICollectionViewD
             
             // Generate thumbnail
             CommonUtils.generateThumbnail(url: videoURL) { thumbnail in
+//                guard let self = self else { return }
                 
                 DispatchQueue.main.async {
-                    let vc = UploadPostViewController.instantiate(fromAppStoryboard: .Profile)
-                    vc.selectedImage = thumbnail
-                    self.thumbnailImage = self.saveImageAndGetURLString(thumbnail)
-                    vc.videoURL = videoURL   // 🔥🔥 MOST IMPORTANT LINE
-                    
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    guard let data = thumbnail?.jpegData(compressionQuality: 0.25) else { return }
+                    self.uploadMediaForGettingThumbnailImageUrl(fileData: data, isImage: true) {
+                        DispatchQueue.main.async {
+                            let vc = UploadPostViewController.instantiate(fromAppStoryboard: .Profile)
+                            vc.selectedImage = thumbnail
+                            
+                            //self.thumbnailImage = self.saveImageAndGetURLString(thumbnail)
+                            vc.videoURL = videoURL   // 🔥🔥 MOST IMPORTANT LINE
+                            
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        }
+                    }
                 }
+                
             }
         }
     }
@@ -263,13 +252,17 @@ extension AddNewStoryViewController: UIImagePickerControllerDelegate, UINavigati
         else if let videoURL = info[.mediaURL] as? URL {
 
             CommonUtils.generateThumbnail(url: videoURL) { thumbnail in
-
-                DispatchQueue.main.async {
-                    let vc = UploadPostViewController.instantiate(fromAppStoryboard: .Profile)
-                    vc.selectedImage = thumbnail
-                    vc.videoURL = videoURL   // ✅ IMPORTANT
-
-                    self.navigationController?.pushViewController(vc, animated: true)
+                guard let data = thumbnail?.jpegData(compressionQuality: 0.25) else { return }
+                self.uploadMediaForGettingThumbnailImageUrl(fileData: data, isImage: true) {
+                    DispatchQueue.main.async {
+                        DispatchQueue.main.async {
+                            let vc = UploadPostViewController.instantiate(fromAppStoryboard: .Profile)
+                            vc.selectedImage = thumbnail
+                            vc.videoURL = videoURL   // ✅ IMPORTANT
+                            
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        }
+                    }
                 }
             }
         }

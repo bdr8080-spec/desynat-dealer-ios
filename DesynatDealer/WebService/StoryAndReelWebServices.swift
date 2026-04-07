@@ -120,7 +120,7 @@ extension WebService {
     
     func getSellerStoryService(completion:@escaping (_ user:[SellerHighlightsModel])-> Void) {
         CommonUtils.showHud(show: true)
-        NetworkManager.shared.request(withAPI: .endpoint(.getMyStories), requestMethod: .get, requestModel:[SellerHighlightsModel].self) { result, code in
+        NetworkManager.shared.request(withAPI: .endpoint(.getMystoriesForToday), requestMethod: .get, requestModel:[SellerHighlightsModel].self) { result, code in
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
@@ -134,21 +134,21 @@ extension WebService {
         }
     }
     
-    func getSellerStoryServiceWithLimit(param: [String :Any],completion:@escaping (_ user:SellerHighlightsDataModel)-> Void) {
-        CommonUtils.showHud(show: true)
-        NetworkManager.shared.request(withAPI: .endpoint(.getMyStories), requestMethod: .get, requestParams: param, requestModel:SellerHighlightsDataModel.self) { result, code in
-            CommonUtils.showHud(show: false)
-            self.evaluateWebServiceResponse(response: result) { response, message,error in
-                guard let user = response else {
-                    if let error {
-                        UIApplication.shared.topViewController()?.showAlert(msg: error)
-                    }
-                    return
-                }
-                completion(user)
-            }
-        }
-    }
+//    func getSellerStoryServiceWithLimit(param: [String :Any],completion:@escaping (_ user:SellerHighlightsDataModel)-> Void) {
+//        CommonUtils.showHud(show: true)
+//        NetworkManager.shared.request(withAPI: .endpoint(.getMystoriesForToday), requestMethod: .get, requestParams: param, requestModel:SellerHighlightsDataModel.self) { result, code in
+//            CommonUtils.showHud(show: false)
+//            self.evaluateWebServiceResponse(response: result) { response, message,error in
+//                guard let user = response else {
+//                    if let error {
+//                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+//                    }
+//                    return
+//                }
+//                completion(user)
+//            }
+//        }
+//    }
     
     func getAdminStoryService(completion:@escaping (_ user:[SellerHighlightsModel])-> Void) {
         CommonUtils.showHud(show: true)

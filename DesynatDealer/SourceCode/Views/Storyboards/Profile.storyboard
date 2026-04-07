@@ -3261,7 +3261,7 @@
                                                 </connections>
                                             </tableView>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="no request found" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wNR-f9-1bl">
-                                                <rect key="frame" x="127.66666666666667" y="576.66666666666663" width="137.66666666666657" height="100"/>
+                                                <rect key="frame" x="127.66666666666667" y="576.66666666666663" width="137.66666666666663" height="100"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="100" id="cUM-78-dVd"/>
                                                 </constraints>
@@ -5126,8 +5126,31 @@
                                     <outlet property="delegate" destination="hEw-wz-maE" id="B49-UK-jjK"/>
                                 </connections>
                             </collectionView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZFA-S3-3M7" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
+                                <rect key="frame" x="24" y="138" width="16" height="10"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r8A-NT-LJv">
+                                        <rect key="frame" x="8" y="5" width="0.0" height="0.0"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemGrayColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="r8A-NT-LJv" secondAttribute="trailing" constant="8" id="AsY-3C-26p"/>
+                                    <constraint firstItem="r8A-NT-LJv" firstAttribute="leading" secondItem="ZFA-S3-3M7" secondAttribute="leading" constant="8" id="CVD-Zd-lfB"/>
+                                    <constraint firstItem="r8A-NT-LJv" firstAttribute="top" secondItem="ZFA-S3-3M7" secondAttribute="top" constant="5" id="cFa-Ty-OUZ"/>
+                                    <constraint firstAttribute="bottom" secondItem="r8A-NT-LJv" secondAttribute="bottom" constant="5" id="oca-s4-sDt"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sQD-C6-G3b" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
-                                <rect key="frame" x="24.000000000000004" y="153" width="59.333333333333343" height="29.666666666666657"/>
+                                <rect key="frame" x="24.000000000000004" y="173" width="59.333333333333343" height="29.666666666666657"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Active" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sro-LM-Ntd">
                                         <rect key="frame" x="8" y="5" width="43.333333333333336" height="19.666666666666668"/>
@@ -5161,11 +5184,13 @@
                             <constraint firstItem="fBO-zE-GM0" firstAttribute="leading" secondItem="Lw1-Tv-Mx5" secondAttribute="leading" id="IIk-Hk-0Qv"/>
                             <constraint firstItem="wdE-6P-grp" firstAttribute="leading" secondItem="lal-4o-bE4" secondAttribute="trailing" constant="10" id="Mc9-dp-FmE"/>
                             <constraint firstItem="fBO-zE-GM0" firstAttribute="top" secondItem="Lw1-Tv-Mx5" secondAttribute="top" constant="-10" id="OCg-AV-Uap"/>
+                            <constraint firstItem="ZFA-S3-3M7" firstAttribute="leading" secondItem="sQD-C6-G3b" secondAttribute="leading" id="Qgp-Yu-thh"/>
+                            <constraint firstItem="sQD-C6-G3b" firstAttribute="top" secondItem="ZFA-S3-3M7" secondAttribute="bottom" constant="25" id="Yiw-zl-Kn4"/>
                             <constraint firstAttribute="bottom" secondItem="fBO-zE-GM0" secondAttribute="bottom" constant="-10" id="b9W-q1-uzd"/>
                             <constraint firstItem="lal-4o-bE4" firstAttribute="centerY" secondItem="wdE-6P-grp" secondAttribute="centerY" id="mgX-TO-lm9"/>
                             <constraint firstItem="WrZ-wE-17K" firstAttribute="trailing" secondItem="SDa-u4-wLG" secondAttribute="trailing" constant="10" id="rsi-yM-Djz"/>
                             <constraint firstItem="WrZ-wE-17K" firstAttribute="top" secondItem="SDa-u4-wLG" secondAttribute="top" id="s5H-wT-E1a"/>
-                            <constraint firstItem="sQD-C6-G3b" firstAttribute="top" secondItem="SDa-u4-wLG" secondAttribute="bottom" constant="25" id="yU0-LU-vjs"/>
+                            <constraint firstItem="ZFA-S3-3M7" firstAttribute="top" secondItem="SDa-u4-wLG" secondAttribute="bottom" constant="10" id="wwD-8n-f1j"/>
                         </constraints>
                     </view>
                     <connections>
@@ -5174,6 +5199,8 @@
                         <outlet property="highlightTitleView" destination="sQD-C6-G3b" id="6nU-Zm-l8W"/>
                         <outlet property="storiesCollectionView" destination="fBO-zE-GM0" id="luN-2z-qx8"/>
                         <outlet property="topSliderCollectionView" destination="SDa-u4-wLG" id="1CY-uO-Mtm"/>
+                        <outlet property="uploadedTimeLabel" destination="r8A-NT-LJv" id="obn-ib-h3P"/>
+                        <outlet property="uploadedTimeView" destination="ZFA-S3-3M7" id="wgm-9c-Sus"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="80R-ZL-9Vf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -5225,19 +5252,19 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBrownColor">
-            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray2Color">
-            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGrayColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

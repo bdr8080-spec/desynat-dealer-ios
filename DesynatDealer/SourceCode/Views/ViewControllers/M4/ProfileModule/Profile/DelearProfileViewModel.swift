@@ -45,11 +45,11 @@ class DelearProfileViewModel {
     }
     
     func getSelfStory() {
-        let param: [String: Any] = ["limit": 5, "page" : 1]
+//        let param: [String: Any] = ["limit": 5, "page" : 1]
        
-        WebService.sharedInstance.getSellerStoryServiceWithLimit(param: param) { list in
+        WebService.sharedInstance.getSellerStoryService() { list in
 //            self.sellerStories = list
-            let dataCount = list.data?.count ?? 0
+            let dataCount = list.count
             if dataCount > 0 {
 //                self.hostVC.userProfileImageView.borderWidth = 3
                 self.hostVC.viewStoriesBtn.setImage(.gradientBorder, for: .normal)
