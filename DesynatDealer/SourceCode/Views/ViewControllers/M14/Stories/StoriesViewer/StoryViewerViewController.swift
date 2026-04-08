@@ -1338,16 +1338,31 @@ extension StoryViewerViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
+//        if collectionView == topSliderCollectionView {
+//            let totalItems = CGFloat(usersStory.count)
+//            let spacing: CGFloat = 6.0
+//            let totalSpacing = spacing * (totalItems - 1)
+//            
+//            // Dynamic width: Equally divide available width
+//            let availableWidth = view.bounds.width - totalSpacing
+//            let itemWidth = availableWidth / totalItems
+//            
+//            return CGSize(width: max(itemWidth, 20), height: 4)
+//        }
+        
         if collectionView == topSliderCollectionView {
+            
             let totalItems = CGFloat(usersStory.count)
             let spacing: CGFloat = 6.0
             let totalSpacing = spacing * (totalItems - 1)
-            
-            // Dynamic width: Equally divide available width
-            let availableWidth = view.bounds.width - totalSpacing
-            let itemWidth = availableWidth / totalItems
-            
-            return CGSize(width: max(itemWidth, 20), height: 4)
+
+            let totalWidth = collectionView.bounds.width
+            let availableWidth = totalWidth - totalSpacing
+
+            var itemWidth = availableWidth / totalItems
+            itemWidth = floor(itemWidth * UIScreen.main.scale) / UIScreen.main.scale  // ← FIX
+
+            return CGSize(width: itemWidth, height: 4)
         }
         
         // Full screen story

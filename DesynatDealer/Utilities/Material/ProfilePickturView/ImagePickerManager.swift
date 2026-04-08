@@ -10,6 +10,7 @@ import UIKit
 
 class ImagePickerManager: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIDocumentPickerDelegate {
     
+    static let shared = ImagePickerManager()
     var picker = UIImagePickerController();
     var alert = UIAlertController(title: "Choose File", message: nil, preferredStyle: .actionSheet)
     var viewController: UIViewController?
@@ -18,68 +19,39 @@ class ImagePickerManager: NSObject, UIImagePickerControllerDelegate, UINavigatio
     
     override init(){
         super.init()
-        
-        
-        if kSharedAppDelegate.forOpenFilePickerView == "Coverimage"{
-            let cameraAction = UIAlertAction(title: "Camera", style: .default){
-                UIAlertAction in
-                self.openCamera()
-            }
-            let galleryAction = UIAlertAction(title: "Gallery", style: .default){
-                UIAlertAction in
-                self.openGallery()
-            }
-            
-//            let documentAction = UIAlertAction(title: "Pdf Document", style: .default) {
-//                UIAlertAction in
-//
-//                self.openDocumentPicker()
-//
-//            }
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel){
-                UIAlertAction in
-            }
-            picker.delegate = self
-            
-            alert.addAction(cameraAction)
-            alert.addAction(galleryAction)
-            alert.addAction(cancelAction)
-//            alert.addAction(documentAction)
-        }else {
-            let cameraAction = UIAlertAction(title: "Camera", style: .default){
-                UIAlertAction in
-                self.openCamera()
-            }
-            let galleryAction = UIAlertAction(title: "Gallery", style: .default){
-                UIAlertAction in
-                self.openGallery()
-            }
-            
-            let documentAction = UIAlertAction(title: "Pdf Document", style: .default) {
-                UIAlertAction in
-//                self.openDocumentPicker()
-                self.initializeDocument()
-
-            }
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel){
-                UIAlertAction in
-            }
-            picker.delegate = self
-            
-            alert.addAction(cameraAction)
-            alert.addAction(galleryAction)
-            alert.addAction(cancelAction)
-            //alert.addAction(documentAction)
-        }
-        
+        picker.delegate = self
     }
     
-    func pickImage(_ viewController: UIViewController,
-                   _ callback: @escaping ((UIImage, String, URL?) -> ())) {
+    private func setupAlert() {
+        alert = UIAlertController(title: "Choose File", message: nil, preferredStyle: .actionSheet)
         
+        let cameraAction = UIAlertAction(title: "Camera", style: .default) { _ in
+            self.openCamera()
+        }
+        
+        let galleryAction = UIAlertAction(title: "Gallery", style: .default) { _ in
+            self.openGallery()
+        }
+        
+        // ✅ PDF option — only if allowed
+        if allowPDFSelection {
+            let pdfAction = UIAlertAction(title: "PDF / Files", style: .default) { _ in
+                self.openDocumentPicker()
+            }
+            alert.addAction(pdfAction)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        alert.addAction(cameraAction)
+        alert.addAction(galleryAction)
+        alert.addAction(cancelAction)
+    }
+    
+    func pickImage(_ viewController: UIViewController, _ callback: @escaping ((UIImage, String, URL?) -> ())) {
+        pickImageCallback = callback
         self.viewController = viewController
-        self.pickImageCallback = callback
-        
+        setupAlert()
         alert.popoverPresentationController?.sourceView = viewController.view
         viewController.present(alert, animated: true)
     }
@@ -118,16 +90,6 @@ class ImagePickerManager: NSObject, UIImagePickerControllerDelegate, UINavigatio
         picker.dismiss(animated: true, completion: nil)
     }
     
-//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-//        picker.dismiss(animated: true, completion: nil)
-//        guard let image = info[.originalImage] as? UIImage else {
-//            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
-//        }
-//        //let fileName = (info[.imageURL] as? URL)?.lastPathComponent ?? ""
-//        let fileName = UUID().uuidString + ".jpg"
-//        pickImageCallback?(image, fileName,nil )
-//    }
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
         
@@ -152,21 +114,10 @@ class ImagePickerManager: NSObject, UIImagePickerControllerDelegate, UINavigatio
     @objc func imagePickerController(_ picker: UIImagePickerController, pickedImage: UIImage?) {
     }
     
-    // MARK: PDF SECTION
-//    func openDocumentPicker() {
-//        alert.dismiss(animated: true, completion: nil)
-//        let documentPicker = UIDocumentPickerViewController(documentTypes: [String(kUTTypePDF)], in: .import)
-//        documentPicker.delegate = self
-//        self.viewController?.present(documentPicker, animated: true, completion: nil)
-//    }
-//
-//    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-//        guard let url = urls.first else {
-//            return
-//        }
-//        let documentName = url.lastPathComponent
-//        pickImageCallback?(UIImage(), documentName,url )
-//    }z
+    func openDocumentPicker() {
+        alert.dismiss(animated: true)
+        initializeDocument()
+    }
     
     // MARK: - Media Picker (VIDEO ONLY)
     func pickMedia(_ viewController: UIViewController, _ callback: @escaping ((UIImage, String, URL?) -> ())) {
@@ -192,7 +143,7 @@ class ImagePickerManager: NSObject, UIImagePickerControllerDelegate, UINavigatio
         mediaAlert.popoverPresentationController?.sourceView = viewController.view
         viewController.present(mediaAlert, animated: true)
     }
-
+    
     private func openVideoCamera() {
         guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
             let alertController = UIAlertController(title: "Warning", message: "Camera not available", preferredStyle: .alert)
@@ -208,86 +159,32 @@ class ImagePickerManager: NSObject, UIImagePickerControllerDelegate, UINavigatio
         picker.videoMaximumDuration = 60.0    // 60 seconds max
         self.viewController!.present(picker, animated: true)
     }
-
+    
     private func openVideoGallery() {
         picker.sourceType = .photoLibrary
         picker.mediaTypes = ["public.movie"]  // VIDEO ONLY
         picker.videoMaximumDuration = 60.0    // 60 seconds max
         self.viewController!.present(picker, animated: true)
     }
-    
-    // MARK: - New Media Picker (Photo + Video)
-//    func pickMedia(_ viewController: UIViewController, _ callback: @escaping ((UIImage, String, URL?) -> ())) {
-//        self.viewController = viewController
-//        self.pickImageCallback = callback
-//        
-//        let mediaAlert = UIAlertController(title: "Select Media", message: nil, preferredStyle: .actionSheet)
-//        
-//        let cameraAction = UIAlertAction(title: "Camera", style: .default) { _ in
-//            self.openMediaCamera()
-//        }
-//        
-//        let galleryAction = UIAlertAction(title: "Gallery", style: .default) { _ in
-//            self.openMediaGallery()
-//        }
-//        
-//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-//        
-//        mediaAlert.addAction(cameraAction)
-//        mediaAlert.addAction(galleryAction)
-//        mediaAlert.addAction(cancelAction)
-//        
-//        mediaAlert.popoverPresentationController?.sourceView = viewController.view
-//        viewController.present(mediaAlert, animated: true)
-//    }
-//
-//    private func openMediaCamera() {
-//        guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
-//            let alertController = UIAlertController(title: "Warning", message: "Camera not available", preferredStyle: .alert)
-//            let action = UIAlertAction(title: "OK", style: .default)
-//            alertController.addAction(action)
-//            viewController?.present(alertController, animated: true)
-//            return
-//        }
-//        
-//        picker.sourceType = .camera
-//        picker.mediaTypes = ["public.image", "public.movie"]
-//        picker.videoQuality = .typeHigh
-//        self.viewController!.present(picker, animated: true)
-//    }
-//
-//    private func openMediaGallery() {
-//        picker.sourceType = .photoLibrary
-//        picker.mediaTypes = ["public.image", "public.movie"]
-//        self.viewController!.present(picker, animated: true)
-//    }
-    
-    
 }
 
 extension ImagePickerManager {
+    // MARK: - Document Picker
     private func initializeDocument() {
         let doc = UIDocumentPickerViewController(forOpeningContentTypes: [.pdf])
         doc.delegate = self
-        self.viewController?.present(doc, animated: true, completion: nil)
+        viewController?.present(doc, animated: true)
     }
     
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
         controller.dismiss(animated: true)
     }
     
-    public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         for url in urls {
-            for url in urls {
-                defer { url.stopAccessingSecurityScopedResource() }
-                guard url.startAccessingSecurityScopedResource() else {
-                    return
-                }
-                //                pickPDFCallback?(url)
-                pickImageCallback?(UIImage(), "",url )
-            }
-            
+            defer { url.stopAccessingSecurityScopedResource() }
+            guard url.startAccessingSecurityScopedResource() else { return }
+            pickImageCallback?(UIImage(), "", url)
         }
     }
-
 }
