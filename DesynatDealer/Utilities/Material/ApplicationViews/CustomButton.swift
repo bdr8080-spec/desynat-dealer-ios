@@ -148,3 +148,74 @@ class CustomButton: UIButton {
         return gradient
     }
 }
+enum GradiantDirection {
+    case leftToRight
+    case rightToLeft
+    case topToBottom
+    case bottomToTop
+}
+
+extension UIView {
+    @discardableResult
+    func applyGradient(colours: [UIColor], gradientDirection: GradiantDirection = .leftToRight, cornerRadius:CGFloat = 0.0,corners:CACornerMask = []) -> CAGradientLayer {
+        return self.applyGradient(colours: colours, locations: nil, gradientDirection:gradientDirection, cornerRadius: cornerRadius,corners: corners)
+    }
+    
+    @discardableResult
+    func applyGradient(colours: [UIColor], locations: [NSNumber]?, gradientDirection: GradiantDirection ,cornerRadius:CGFloat = 0.0,corners:CACornerMask) -> CAGradientLayer {
+        var gradient: CAGradientLayer = CAGradientLayer()
+        
+        switch gradientDirection {
+        case .topToBottom:
+            gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
+            gradient.endPoint = CGPoint(x: 0.0, y: 1.0)
+        case .bottomToTop:
+            gradient.startPoint = CGPoint(x: 1.0, y: 0.5)
+            gradient.endPoint = CGPoint(x: 0.0, y: 0.5)
+        case .leftToRight:
+            gradient.startPoint = CGPoint(x: 0.0, y: 0.5)
+            gradient.endPoint = CGPoint(x: 1.0, y: 0.5)
+        case .rightToLeft:
+            gradient.startPoint = CGPoint(x: 1.0, y: 0.5)
+            gradient.endPoint = CGPoint(x: 0.0, y: 0.5)
+        }
+        gradient.cornerRadius = cornerRadius
+        if (!corners.isEmpty) {
+            gradient.maskedCorners = corners
+        }
+        gradient.opacity = 1
+        gradient.frame = self.bounds
+        if let firstLayer = self.layer.sublayers?.first(where: {$0 is CAGradientLayer}) as? CAGradientLayer {
+            gradient = firstLayer
+        } else {
+            gradient.colors = colours.map { $0.cgColor }
+            gradient.locations = locations
+            self.layer.insertSublayer(gradient, at: 0)
+        }
+        return gradient
+    }
+    
+    func gLayerVisibility(opacity:Float = 1) {
+        if let layer = self.layer.sublayers?.first(where:{$0 is CAGradientLayer}) as? CAGradientLayer {
+            layer.opacity = opacity
+        }
+    }
+    func containGLayer(opacity:Float = 1) -> Bool {
+        if let gLayers = self.layer.sublayers?.filter({$0 is CAGradientLayer}) as? [CAGradientLayer],gLayers.count > 0 {
+            return true
+        }
+        return false
+    }
+    
+    func refreshGLayer() {
+        if let glayer = self.layer.sublayers?.first(where: {$0 is CAGradientLayer}) as? CAGradientLayer {
+            glayer.frame = self.bounds
+            glayer.cornerRadius = glayer.cornerRadius
+        }
+    }
+    func removeGLayer() {
+        if let index = self.layer.sublayers?.firstIndex(where: {$0 is CAGradientLayer}) {
+            self.layer.sublayers?.remove(at: index)
+        }
+    }
+}

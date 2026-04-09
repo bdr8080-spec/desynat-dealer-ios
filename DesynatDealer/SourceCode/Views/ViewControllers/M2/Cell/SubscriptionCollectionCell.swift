@@ -29,14 +29,42 @@ class SubscriptionCollectionCell: UICollectionViewCell {
         super.awakeFromNib()
         setupUI()
         registerXib()
+        gradientImageView.isHidden = true
+    }
+    
+    func applyGradientToHeading() {
+
+        let gradients: [[UIColor]] = [
+            [UIColor(hexString: "#2E8B57"), UIColor(hexString: "#006400")],
+            [UIColor(hexString: "#DFBF8F"), UIColor(hexString: "#6E4527")],
+            
+            [UIColor(hexString: "#1E90FF"), UIColor(hexString: "#00008B")],
+            [UIColor(hexString: "#FF6347"), UIColor(hexString: "#8B0000")],
+            [UIColor(hexString: "#8A2BE2"), UIColor(hexString: "#4B0082")],
+            [UIColor(hexString: "#FF69B4"), UIColor(hexString: "#C71585")],
+            [UIColor(hexString: "#FFD700"), UIColor(hexString: "#FFA500")]
+        ]
+
+        let index = tag % gradients.count   // each cell gets different color like your table
         
+        let colors = gradients[index]
+
+        DispatchQueue.main.async {
+            self.viewPlanHeading.layer.sublayers?.removeAll(where: { $0 is CAGradientLayer })
+            self.viewPlanHeading.applyGradient(
+                colours: colors,
+                gradientDirection: .leftToRight,
+                cornerRadius: 16,
+                corners: [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+            )
+        }
     }
     
     private func setupUI() {
-        gradientImageView.layer.cornerRadius = 20
-        gradientImageView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
-        gradientImageView.layer.masksToBounds = true
-        
+//        gradientImageView.layer.cornerRadius = 20
+//        gradientImageView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+//        gradientImageView.layer.masksToBounds = true
+//        
         mainContentView.layer.shadowColor = UIColor.black.cgColor
         mainContentView.layer.shadowOpacity = 0.2
         mainContentView.layer.shadowOffset = CGSize(width: 0, height: 2)
@@ -104,6 +132,8 @@ class SubscriptionCollectionCell: UICollectionViewCell {
             "",
             "\(plan.commissionPercentage ?? 0)%"
         ]
+        
+        applyGradientToHeading()
         
         dataTableView.reloadData()
     }

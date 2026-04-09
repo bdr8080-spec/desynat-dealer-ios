@@ -55,6 +55,20 @@ final class NetworkManager {
                         completion(.failure(.sessionExpired), status)
                     } else {
                         self.ErrorResponseHandle(response: response.data) { errResponse in
+                            if status == .NO_ACTIVE_PLAN {     // 👈 NEW CONDITION
+                                self.ErrorResponseHandle(response: response.data) { errResponse in
+                                        
+                                        // Show popup globally
+                                        DispatchQueue.main.async {
+                                            UIApplication.shared.topViewController()?
+                                                .showNoActivePlanToast(message: errResponse?.message ?? "")
+                                        }
+                                        
+                                        // DO NOT send failure — avoid double popup
+                                        return
+                                    }
+
+                            } 
                             completion(.failure(.invalidResponse(errResponse)), status)
                         }
                     }
@@ -62,6 +76,19 @@ final class NetworkManager {
             case .failure(let err):
                 if status == .UNAUTHORIZED {
                     completion(.failure(.sessionExpired), status)
+                } else if status == .NO_ACTIVE_PLAN {     // 👈 NEW CONDITION
+                    self.ErrorResponseHandle(response: response.data) { errResponse in
+                            
+                            // Show popup globally
+                            DispatchQueue.main.async {
+                                UIApplication.shared.topViewController()?
+                                    .showNoActivePlanToast(message: errResponse?.message ?? "")
+                            }
+                            
+                            // DO NOT send failure — avoid double popup
+                            return
+                        }
+
                 } else if HTTPStatusCode.Failure.contains(status) {
                     self.ErrorResponseHandle(response: response.data) { errResponse in
                         completion(.failure(.invalidResponse(errResponse)), status)
@@ -72,6 +99,8 @@ final class NetworkManager {
             }
         }
     }
+    
+    
     
     public func requestMultiPartForPdfImageVideoGif<T:Decodable> (url: NetworkURL,
                                                assets: [MultipartUpload],
@@ -175,6 +204,19 @@ final class NetworkManager {
             case .failure(let err):
                 if status == .UNAUTHORIZED {
                     completion(.failure(.sessionExpired), status)
+                } else if status == .NO_ACTIVE_PLAN {     // 👈 NEW CONDITION
+                    self.ErrorResponseHandle(response: response.data) { errResponse in
+                            
+                            // Show popup globally
+                            DispatchQueue.main.async {
+                                UIApplication.shared.topViewController()?
+                                    .showNoActivePlanToast(message: errResponse?.message ?? "")
+                            }
+                            
+                            // DO NOT send failure — avoid double popup
+                            return
+                        }
+
                 } else if HTTPStatusCode.Failure.contains(status) {
                     self.ErrorResponseHandle(response: response.data) { errResponse in
                         completion(.failure(.invalidResponse(errResponse)), status)
@@ -232,6 +274,19 @@ final class NetworkManager {
           case .failure(let err):
               if status == .UNAUTHORIZED {
                   completion(.failure(.sessionExpired), status)
+              } else if status == .NO_ACTIVE_PLAN {     // 👈 NEW CONDITION
+                  self.ErrorResponseHandle(response: response.data) { errResponse in
+                          
+                          // Show popup globally
+                          DispatchQueue.main.async {
+                              UIApplication.shared.topViewController()?
+                                  .showNoActivePlanToast(message: errResponse?.message ?? "")
+                          }
+                          
+                          // DO NOT send failure — avoid double popup
+                          return
+                      }
+
               } else if HTTPStatusCode.Failure.contains(status) {
                   self.ErrorResponseHandle(response: response.data) { errResponse in
                       completion(.failure(.invalidResponse(errResponse)), status)
@@ -331,6 +386,20 @@ final class NetworkManager {
                     }
                 }
             case .failure(let err):
+                if status == .NO_ACTIVE_PLAN {     // 👈 NEW CONDITION
+                self.ErrorResponseHandle(response: response.data) { errResponse in
+                        
+                        // Show popup globally
+                        DispatchQueue.main.async {
+                            UIApplication.shared.topViewController()?
+                                .showNoActivePlanToast(message: errResponse?.message ?? "")
+                        }
+                        
+                        // DO NOT send failure — avoid double popup
+                        return
+                    }
+
+            }
                 completion(.failure(.decoding(err)), status)
             }
         }
@@ -719,11 +788,37 @@ final class NetworkManager {
             case .failure(let err):
                 if status == .UNAUTHORIZED {
                     completion(.failure(.sessionExpired), status)
+                } else if status == .NO_ACTIVE_PLAN {     // 👈 NEW CONDITION
+                    self.ErrorResponseHandle(response: response.data) { errResponse in
+                            
+                            // Show popup globally
+                            DispatchQueue.main.async {
+                                UIApplication.shared.topViewController()?
+                                    .showNoActivePlanToast(message: errResponse?.message ?? "")
+                            }
+                            
+                            // DO NOT send failure — avoid double popup
+                            return
+                        }
+
                 } else if HTTPStatusCode.Failure.contains(status) {
                     self.ErrorResponseHandle(response: response.data) { errResponse in
                         completion(.failure(.invalidResponse(errResponse)), status)
                     }
                 } else {
+                    if status == .NO_ACTIVE_PLAN {     // 👈 NEW CONDITION
+                        self.ErrorResponseHandle(response: response.data) { errResponse in
+                            
+                            // Show popup globally
+                            DispatchQueue.main.async {
+                                UIApplication.shared.topViewController()?
+                                    .showNoActivePlanToast(message: errResponse?.message ?? "")
+                            }
+                            
+                            // DO NOT send failure — avoid double popup
+                            return
+                        }
+                    }
                     completion(.failure(.decoding(err)), status)
                 }
             }

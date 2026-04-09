@@ -36,6 +36,16 @@ class MySubsciptionPlanViewController: UIViewController {
         super.viewDidLoad()
         subsciptionPlanCollectionView.isHidden = false
         myPlanTableView.isHidden = true
+        let layout = CenteredFlowLayout()
+            layout.scrollDirection = .horizontal
+            layout.minimumLineSpacing = 20  // Cell gap
+            // Key: Match cell's 24pt leading/trailing asymmetry
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
+            
+            subsciptionPlanCollectionView.collectionViewLayout = layout
+            subsciptionPlanCollectionView.decelerationRate = .fast
+            subsciptionPlanCollectionView.isPagingEnabled = false
+            
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,7 +55,16 @@ class MySubsciptionPlanViewController: UIViewController {
     }
     
     @IBAction func Backbtn(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        subsciptionPlanCollectionView.isScrollEnabled = false
+            subsciptionPlanCollectionView.isUserInteractionEnabled = false
+            
+            // Stop momentum/animations
+            subsciptionPlanCollectionView.setContentOffset(.zero, animated: false)
+            subsciptionPlanCollectionView.layer.removeAllAnimations()
+            
+            DispatchQueue.main.async { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            }
     }
     
     @IBAction func subscribtionPlansbtn(_ sender: Any) {
@@ -83,15 +102,21 @@ extension MySubsciptionPlanViewController : UICollectionViewDelegate,UICollectio
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SubscriptionCollectionCell", for: indexPath) as! SubscriptionCollectionCell
+        cell.tag = indexPath.row
         let data = viewModel.plansList?[indexPath.row]
         cell.configData(data: data)
         cell.delegate = self
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.size.width - 40, height: collectionView.frame.size.height)
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+        return CGSize(width: collectionView.frame.width - 80,
+                      height: collectionView.frame.height)
     }
+
 }
 
 extension MySubsciptionPlanViewController : UITableViewDelegate,UITableViewDataSource{

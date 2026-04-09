@@ -17,6 +17,15 @@ class SubscriptionVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         registerXib()
+        let layout = CenteredFlowLayout()
+            layout.scrollDirection = .horizontal
+            layout.minimumLineSpacing = 20  // Cell gap
+            // Key: Match cell's 24pt leading/trailing asymmetry
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
+            
+        subscriptionCollView.collectionViewLayout = layout
+        subscriptionCollView.decelerationRate = .fast
+        subscriptionCollView.isPagingEnabled = false
         viewModel.getPlans()
     }
     
@@ -40,15 +49,22 @@ extension SubscriptionVC: UICollectionViewDelegate, UICollectionViewDataSource, 
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SubscriptionCollectionCell", for: indexPath) as! SubscriptionCollectionCell
+        cell.tag = indexPath.row
         let data = viewModel.plansList?[indexPath.row]
         cell.configData(data: data)
         cell.delegate = self
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.size.width - 40, height: collectionView.frame.size.height)
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+        return CGSize(width: collectionView.frame.width - 80,
+                      height: collectionView.frame.height)
     }
+    
+    
     
 }
 

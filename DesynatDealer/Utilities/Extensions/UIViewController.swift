@@ -383,3 +383,25 @@ extension UINavigationController {
 }
 
 
+extension UIViewController {
+
+    func showNoActivePlanToast(message: String) {
+
+        let alert = UIAlertController(
+            title: "No Active Plan",
+            message: message,
+            preferredStyle: .alert
+        )
+
+        // OK Button (Navigate)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+            let vc = MySubsciptionPlanViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+            self.navigationController?.pushViewController(vc, animated: true)
+        }))
+
+        // Cancel Button (Just close)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+
+        self.present(alert, animated: true)
+    }
+}

@@ -209,7 +209,7 @@ extension AddNewStoryViewController: UICollectionViewDelegate, UICollectionViewD
             CommonUtils.generateThumbnail(url: videoURL) { thumbnail in
 //                guard let self = self else { return }
                 
-                DispatchQueue.main.async {
+                 DispatchQueue.main.async {
                     guard let data = thumbnail?.jpegData(compressionQuality: 0.25) else { return }
                     self.uploadMediaForGettingThumbnailImageUrl(fileData: data, isImage: true) {
                         DispatchQueue.main.async {
