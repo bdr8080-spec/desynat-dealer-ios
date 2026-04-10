@@ -112,3 +112,76 @@ struct AgroaTokenDataModel: Codable {
         case channel, uid
     }
 }
+
+
+struct ShowLiveEvenetsDataModel: Codable {
+    let id: Int?
+    let timeslotId: Int?
+    let sellerId: Int?
+    let orderId: Int?
+    let adminVerify: Int?
+    let rejectReason: String?
+    let cancelReason: String?
+    let channelId: String?
+    let uid: UInt?  // 700773128
+    let liveToken: String?
+    let createdAt: String?
+    let updatedAt: String?
+    let sellerDetails: SellerDetails?
+    let timeslotDetails: TimeslotDetails?
+    
+    enum CodingKeys: String, CodingKey {
+        case id, uid
+        case timeslotId = "timeslot_id"
+        case sellerId = "seller_id"
+        case orderId = "order_id"
+        case adminVerify = "admin_verify"
+        case rejectReason = "reject_reason"
+        case cancelReason = "cancel_reason"
+        case channelId = "channel_id"
+        case liveToken = "liveToken"
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+        case sellerDetails = "seller_details"
+        case timeslotDetails = "timeslot_details"
+    }
+}
+
+struct SellerDetails: Codable {
+    let id: Int?
+    let profilePic: String?
+    let firstName, lastName, countryCode, mobile: String?
+    let email, password, acceptTerms, otp: String?
+    let otpVerify: String?
+//    let deviceType: String?
+    let deviceToken: String?
+    let adminVerify, storeInformation, bankInformation: String?
+    let rejectReason, lang: String?
+    let isBlock: Int?
+    let createdAt, updatedAt: String?
+    let storeInfo: StoreInfo?
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case profilePic = "profile_pic"
+        case firstName = "first_name"
+        case lastName = "last_name"
+        case countryCode = "country_code"
+        case mobile, email, password
+        case acceptTerms = "accept_terms"
+        case otp
+        case otpVerify = "otp_verify"
+//        case deviceType = "device_type"
+        case deviceToken = "device_token"
+        case adminVerify = "admin_verify"
+        case storeInformation = "store_information"
+        case bankInformation = "bank_information"
+        case rejectReason = "reject_reason"
+        case lang
+        case isBlock = "is_block"
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+        case storeInfo = "store_info"
+    }
+}
+ 

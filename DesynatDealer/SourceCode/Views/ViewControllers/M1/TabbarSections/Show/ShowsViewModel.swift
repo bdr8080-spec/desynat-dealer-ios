@@ -14,6 +14,7 @@ class ShowsViewModel {
     private var hostVC: ShowsViewController
     var AllLiveStraming: LiveStramingDataModel?
     var stramingData: AgroaTokenDataModel?
+    var liveEventListData: [ShowLiveEvenetsDataModel] = []
     
     init(hostVC: ShowsViewController) {
         self.hostVC = hostVC
@@ -34,7 +35,8 @@ class ShowsViewModel {
                 let hasCurrentRequests = !currentRequests.isEmpty
                 
                 // Hide "No Data" label if there are current requests
-                self.hostVC.noDataFoundLabel.isHidden = hasCurrentRequests
+//                self.hostVC.noDataFoundLabel.isHidden = hasCurrentRequests
+//                self.hostVC.btnGoLive.is
                 
                 // Main Request: If currentRequests is NOT empty → Call generate token API
                 if hasCurrentRequests {
@@ -86,6 +88,30 @@ class ShowsViewModel {
         WebService.sharedInstance.goToLiveStream(param: param) { [weak self] response in
             guard let self = self else { return }
             stramingData = response
+        }
+    }
+    
+    func generateLiveStramingTokenRequestForAsAudience(id: Int) {
+        let param: [String:Any] = ["id": id, "role": 1]
+        WebService.sharedInstance.goToLiveStream(param: param) { [weak self] response in
+            guard let self = self else { return }
+            let nextVC = JoinAnotherDelaerViewController.instantiate(fromAppStoryboard: .Home)
+            nextVC.isHost = false
+            nextVC.token = response.token
+            nextVC.uid = response.uid ?? UInt.random(in: 1...9999)
+            nextVC.appID = response.appID ?? ""
+            nextVC.channelName = response.channel ?? ""
+            nextVC.modalPresentationStyle = .fullScreen
+            self.hostVC.navigationController?.present(nextVC, animated: false)
+        }
+    }
+    
+    func dealerAllLiveRequest() {
+        WebService.sharedInstance.delaersLiveService(){ [weak self] response in
+            guard let self = self else { return }
+            liveEventListData = response
+            hostVC.listTableView.reloadData()
+            hostVC.noDataFoundLabel.isHidden = !response.isEmpty
         }
     }
     

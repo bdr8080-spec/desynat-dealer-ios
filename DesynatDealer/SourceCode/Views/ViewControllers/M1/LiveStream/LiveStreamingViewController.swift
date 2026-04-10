@@ -11,6 +11,8 @@ class LiveStreamingViewController: UIViewController {
     @IBOutlet weak var btnMute: UIButton!
     @IBOutlet weak var muteLabel: UILabel!
     @IBOutlet weak var btnEnd: UIButton!
+    @IBOutlet weak var lblUserCount: UILabel!
+    @IBOutlet weak var viewerCountView: CustomView!
     
     // MARK: - Agora
     var agoraKit: AgoraRtcEngineKit!
@@ -20,6 +22,7 @@ class LiveStreamingViewController: UIViewController {
     var uid: UInt = UInt.random(in: 1...9999)
     var isHost = false
     var isMuted = false
+    private var userCountTimer: Timer?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -38,6 +41,7 @@ class LiveStreamingViewController: UIViewController {
             btnGoLive.isHidden = true
         }
         joinChannel()
+        startUserCountTimer()
     }
     
     deinit {
@@ -102,6 +106,67 @@ class LiveStreamingViewController: UIViewController {
         AgoraRtcEngineKit.destroy()
     }
     
+    private func fetchTotalUsersFromAPI() {
+            let urlString = "https://api.agora.io/dev/v1/channel/user/\(appID)/\(channelName)"
+     
+            guard let url = URL(string: urlString) else {
+                print("❌ Invalid URL")
+                return
+            }
+     
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+            request.setValue("Basic MGRkZjAzNTkzMDJjNGUzYjk5NTI4MmI0NDQ3MGUyNWU6YzI1OGMyZTBlNTc4NDIwZmJkYjBlNDNiYWY1YjFlZTM=", forHTTPHeaderField: "Authorization")
+     
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                
+                if let data = data {
+                    print("🔍 RAW RESPONSE STRING:")
+                    print(String(data: data, encoding: .utf8) ?? "Unable to decode")
+                }
+     
+                if let error = error {
+                    print("❌ Error:", error.localizedDescription)
+                    return
+                }
+     
+                guard let data = data,
+                      let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+                    print("❌ JSON parse failed")
+                    return
+                }
+     
+                print("📌 Parsed JSON:", json)
+     
+                // FIX: Read values inside "data" dictionary
+                guard let dataObj = json["data"] as? [String: Any] else {
+                    print("❌ 'data' object missing")
+                    return
+                }
+     
+                let broadcasters = (dataObj["broadcasters"] as? [Any])?.count ?? 0
+                let audience = (dataObj["audience"] as? [Any])?.count ?? 0
+                let audienceTotal = dataObj["audience_total"] as? Int ?? audience
+     
+                let total =  audienceTotal
+//                let total = broadcasters + audienceTotal
+     
+                DispatchQueue.main.async {
+                    self.lblUserCount.text = "Viewers: \(total)"
+                    print("👥 TOTAL users: \(total) | Broadcasters: \(broadcasters) | Audience: \(audienceTotal)")
+                }
+     
+            }.resume()
+        }
+    // Timer & API (same for host/audience)
+      private func startUserCountTimer() {
+          userCountTimer?.invalidate()
+          userCountTimer = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true) { _ in
+              self.fetchTotalUsersFromAPI()
+          }
+          fetchTotalUsersFromAPI()  // Immediate fetch
+      }
+    
     // MARK: - ACTIONS
     @IBAction func btnOptions(_ sender: UIButton) {
         switch sender.tag {
@@ -158,6 +223,14 @@ extension LiveStreamingViewController: AgoraRtcEngineDelegate {
             self.clearVideoView()
         }
     }
+    
+//    func rtcEngine(_ engine: AgoraRtcEngineKit, reportRtcStats stats: AgoraChannelStats) {
+//            let totalUsers = Int(stats.userCount)
+//            DispatchQueue.main.async {
+//                self.lblUserCount.text = "Total Users: \(totalUsers)"
+//                print("👥 Total users in channel: \(totalUsers)")  // Optional log
+//            }
+//        }
     
     func rtcEngine(_ engine: AgoraRtcEngineKit, didOccurError errorCode: AgoraErrorCode) {
         print("❌ Agora Error: \(errorCode.rawValue)")
