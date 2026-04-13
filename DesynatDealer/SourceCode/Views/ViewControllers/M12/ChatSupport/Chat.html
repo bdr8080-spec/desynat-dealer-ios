@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- 🔒 Hide Tidio completely before it loads -->
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            background-color: white;
+        }
+
+        iframe[src*="tidio"],
+        #tidio-chat,
+        .tidio-chat {
+            display: none !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+        }
+    </style>
+
+    <!-- ✅ IMPORTANT: Use full https URL -->
+    <script src="https://code.tidio.co/na5y0weklpcd9uxhccfezplsfg0fggvk.js" async></script>
+</head>
+
+<body>
+
+<script>
+document.addEventListener("tidioChat-ready", function () {
+    if (!window.tidioChatApi) return;
+
+    // 👤 Set user data
+    window.tidioChatApi.setVisitorData({
+        name: "Rakhi Kumari",
+        email: "rakhi@email.com",
+        distinct_id: "user_rakhi@email.com",
+        role: "user"
+    });
+
+    // 🔥 Force open chat without showing button
+    setTimeout(function () {
+
+        // 👁 Show widget again (after hiding it initially)
+        const style = document.createElement('style');
+        style.innerHTML = `
+            iframe[src*="tidio"],
+            #tidio-chat,
+            .tidio-chat {
+                display: block !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+        `;
+        document.head.appendChild(style);
+
+        // 💬 Open chat directly
+        window.tidioChatApi.show();
+        window.tidioChatApi.open();
+
+    }, 800); // small delay ensures proper load
+});
+</script>
+
+</body>
+</html>
+

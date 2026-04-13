@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24412" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24765" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24743"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
@@ -1361,15 +1361,31 @@
                                     <constraint firstAttribute="trailing" secondItem="rhg-6g-69W" secondAttribute="trailing" id="yqf-F3-1Ce"/>
                                 </constraints>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j9f-aK-emV">
+                                <rect key="frame" x="313" y="644" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="Er2-5H-EvW"/>
+                                    <constraint firstAttribute="width" constant="60" id="R73-Xc-GKK"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="chat">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnChatSupportDidTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Xg8-7s-7OQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="r9S-L1-3tf" secondAttribute="trailing" id="AU0-yb-UiR"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="j9f-aK-emV" secondAttribute="trailing" constant="20" id="COi-lu-uYP"/>
                             <constraint firstItem="ObD-4s-UcQ" firstAttribute="top" secondItem="r9S-L1-3tf" secondAttribute="bottom" id="Sfa-Cm-has"/>
                             <constraint firstItem="ObD-4s-UcQ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Tds-Rl-Yvq"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="ObD-4s-UcQ" secondAttribute="trailing" id="d1s-O3-JbL"/>
                             <constraint firstItem="r9S-L1-3tf" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="eQe-ST-UFF"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="j9f-aK-emV" secondAttribute="bottom" constant="80" id="lUA-yi-3CK"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="ObD-4s-UcQ" secondAttribute="bottom" constant="10" id="rLv-if-xkm"/>
                             <constraint firstItem="r9S-L1-3tf" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="xMY-HR-Ip0"/>
                         </constraints>
@@ -2800,19 +2816,19 @@ the event</string>
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBrownColor">
-            <color red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.67450980392156867" green="0.49803921568627452" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGrayColor">
-            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPurpleColor">
-            <color red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.79607843137254897" green="0.18823529411764706" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.2196078431372549" blue="0.23529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
