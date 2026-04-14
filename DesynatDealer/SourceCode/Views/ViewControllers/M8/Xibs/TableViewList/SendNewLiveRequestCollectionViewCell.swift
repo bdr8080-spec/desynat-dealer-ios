@@ -19,24 +19,49 @@ class SendNewLiveRequestCollectionViewCell: UICollectionViewCell {
     }
     
     func configData(data: GetTimeSlotsDataModel?) { //10:30 AM TO 11:30 AM
-        titleLabel.text = "\(data?.from ?? "") TO \(data?.to ?? "")"//formatDateTime(date: data?.date ?? "", time: data?.from ?? "")
+//        titleLabel.text = "\(data?.from ?? "") TO \(data?.to ?? "")"//formatDateTime(date: data?.date ?? "", time: data?.from ?? "")
+        
+        let fromTime = customizeChangeDateFormatZone(
+            inputDate: data?.from ?? "",
+            inputFormat: "hh:mm a",
+            outputFormat: "h:mm a"
+        )
+
+        let toTime = customizeChangeDateFormatZone(
+            inputDate: data?.to ?? "",
+            inputFormat: "hh:mm a",
+            outputFormat: "h:mm a"
+        )
+
+        titleLabel.text = "\(fromTime) - \(toTime)"
     }
     
-    func formatDateTime(date: String, time: String) -> String? {
-        let combined = "\(date) \(time)"
+    func customizeChangeDateFormatZone(
+        inputDate: String,
+        inputFormat: String = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+        outputFormat: String = "hh:mm a"
+    ) -> String {
         
         let inputFormatter = DateFormatter()
-        inputFormatter.dateFormat = "yyyy-MM-dd hh:mm a"
+        inputFormatter.dateFormat = inputFormat
         inputFormatter.locale = Locale(identifier: "en_US_POSIX")
         
-        guard let dateObject = inputFormatter.date(from: combined) else {
-            return nil
+        // ✅ Server timezone (Kuwait)
+        inputFormatter.timeZone = TimeZone(identifier: "Asia/Kuwait")
+        
+        guard let date = inputFormatter.date(from: inputDate) else {
+            print("❌ Parse failed: \(inputDate)")
+            return ""
         }
         
         let outputFormatter = DateFormatter()
-        outputFormatter.dateFormat = "dd/MM/yyyy 'at' hh:mm a"
+        outputFormatter.dateFormat = outputFormat
+        outputFormatter.locale = Locale(identifier: "en_US_POSIX")
         
-        return outputFormatter.string(from: dateObject)
+        // ✅ Local timezone
+        outputFormatter.timeZone = TimeZone.current
+        
+        return outputFormatter.string(from: date)
     }
 
 }

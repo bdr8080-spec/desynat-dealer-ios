@@ -15,6 +15,10 @@ class ShowsViewModel {
     var AllLiveStraming: LiveStramingDataModel?
     var stramingData: AgroaTokenDataModel?
     var liveEventListData: [ShowLiveEvenetsDataModel] = []
+    var currentPage = 1
+    var lastPage = 1
+    var hasMorePages = true
+    var isFetching = false
     
     init(hostVC: ShowsViewController) {
         self.hostVC = hostVC
@@ -29,16 +33,8 @@ class ShowsViewModel {
             
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                
-                // Correct way to check currentRequests (based on your model)
                 let currentRequests = self.AllLiveStraming?.currentRequests ?? []
                 let hasCurrentRequests = !currentRequests.isEmpty
-                
-                // Hide "No Data" label if there are current requests
-//                self.hostVC.noDataFoundLabel.isHidden = hasCurrentRequests
-//                self.hostVC.btnGoLive.is
-                
-                // Main Request: If currentRequests is NOT empty → Call generate token API
                 if hasCurrentRequests {
                     self.generateLiveStramingTokenRequest(id: currentRequests.first?.id ?? 0)
                     self.hostVC.btnGoLive.isHidden = false
@@ -50,7 +46,6 @@ class ShowsViewModel {
                         fromTime: firstRequest?.timeslotDetails?.from,
                         toTime: firstRequest?.timeslotDetails?.to
                     )
-                    
                     hostVC.btnGoLive.isUserInteractionEnabled = isLive
                     hostVC.btnGoLive.alpha = isLive ? 1.0 : 0.5   // dim when disabled
                 } else{
@@ -61,26 +56,52 @@ class ShowsViewModel {
     }
     
     func isEventLive(dateString: String?, fromTime: String?, toTime: String?) -> Bool {
-            guard let dateString = dateString,
-                  let fromTime = fromTime,
-                  let toTime = toTime else { return false }
-     
-            let formatter = DateFormatter()
-            formatter.locale = Locale(identifier: "en_US_POSIX")
-            formatter.dateFormat = "yyyy-MM-dd hh:mm a"  // <-- IMPORTANT (12 hr + AM/PM)
-     
-            let startString = "\(dateString) \(fromTime)"
-            let endString = "\(dateString) \(toTime)"
-     
-            guard let startDate = formatter.date(from: startString),
-                  let endDate = formatter.date(from: endString) else {
-                print("Parsing failed for:", startString, endString)
-                return false
-            }
-     
-            let now = Date()
-            return now >= startDate && now <= endDate
+        guard let dateString = dateString,
+              let fromTime = fromTime,
+              let toTime = toTime else { return false }
+
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        
+        // ✅ Server timezone (Kuwait)
+        formatter.timeZone = TimeZone(identifier: "Asia/Kuwait")
+        formatter.dateFormat = "yyyy-MM-dd hh:mm a"
+
+        let startString = "\(dateString) \(fromTime)"
+        let endString = "\(dateString) \(toTime)"
+
+        guard let startDate = formatter.date(from: startString),
+              let endDate = formatter.date(from: endString) else {
+            print("Parsing failed:", startString, endString)
+            return false
         }
+
+        let now = Date() // local time but comparable correctly via absolute Date
+
+        return now >= startDate && now <= endDate
+    }
+    
+//    func isEventLive(dateString: String?, fromTime: String?, toTime: String?) -> Bool {
+//            guard let dateString = dateString,
+//                  let fromTime = fromTime,
+//                  let toTime = toTime else { return false }
+//     
+//            let formatter = DateFormatter()
+//            formatter.locale = Locale(identifier: "en_US_POSIX")
+//            formatter.dateFormat = "yyyy-MM-dd hh:mm a"  // <-- IMPORTANT (12 hr + AM/PM)
+//     
+//            let startString = "\(dateString) \(fromTime)"
+//            let endString = "\(dateString) \(toTime)"
+//     
+//            guard let startDate = formatter.date(from: startString),
+//                  let endDate = formatter.date(from: endString) else {
+//                print("Parsing failed for:", startString, endString)
+//                return false
+//            }
+//     
+//            let now = Date()
+//            return now >= startDate && now <= endDate
+//        }
     
     func generateLiveStramingTokenRequest(id: Int) {
         let param: [String:Any] = ["id": id,

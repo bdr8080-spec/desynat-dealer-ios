@@ -77,7 +77,7 @@ class MyNotificationsListViewModel {
     }
     
     func markAllReadNotificationsRequest() {
-        let param: [String:Any] = ["receiver_type": 1]
+        let param: [String:Any] = ["receiver_type": 3]
         WebService.sharedInstance.markAllReadNotificationsService(param: param) { [weak self] response in
             guard let self = self else { return }
             resetAndFetchStories()

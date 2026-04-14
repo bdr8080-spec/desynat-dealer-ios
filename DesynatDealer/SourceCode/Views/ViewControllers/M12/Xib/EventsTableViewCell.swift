@@ -43,112 +43,184 @@ class EventsTableViewCell: UITableViewCell {
         } else {
             userProfileImageView.image = UIImage(named: "userProfile")
         }
+        
+        let fromtime = customizeChangeDateFormatZone(
+            inputDate: data?.timeslotDetails?.from ?? "",
+            inputFormat: "hh:mm a",
+            outputFormat: "h:mm a"
+        )
+        
         let result = convertISOToDMY(data?.createdAt ?? "") ?? ""
         joinedOnLabel.text = "Joined on \(result)"
+//        let liveDateresult = convertDate(data?.timeslotDetails?.date ?? "")
+//        liveDateLabel.text = "Live Timing \(liveDateresult)"
         let liveDateresult = convertDate(data?.timeslotDetails?.date ?? "")
         liveDateLabel.text = "Live Timing \(liveDateresult)"
-        livetimeLabel.text = data?.timeslotDetails?.from ?? ""
+        livetimeLabel.text = fromtime
         countryNameLabel.text = data?.timeslotDetails?.countryInfo?.name ?? ""
+//        let isLive = isEventLive(
+//                dateString: data?.timeslotDetails?.date,
+//                fromTime: data?.timeslotDetails?.from,
+//                toTime: data?.timeslotDetails?.to
+//            )
+//            
+//            watchLiveButton.isUserInteractionEnabled = isLive
+//            watchLiveButton.alpha = isLive ? 1.0 : 0.5   // dim when disabled
+        
         let isLive = isEventLive(
-                dateString: data?.timeslotDetails?.date,
-                fromTime: data?.timeslotDetails?.from,
-                toTime: data?.timeslotDetails?.to
-            )
-            
-            watchLiveButton.isUserInteractionEnabled = isLive
-            watchLiveButton.alpha = isLive ? 1.0 : 0.5   // dim when disabled
+            dateString: data?.timeslotDetails?.date,
+            fromTime: data?.timeslotDetails?.from,
+            toTime: data?.timeslotDetails?.to
+        )
+
+        watchLiveButton.isUserInteractionEnabled = isLive
+        watchLiveButton.alpha = isLive ? 1.0 : 0.5
     }
     
 //    func isEventLive(dateString: String?, fromTime: String?, toTime: String?) -> Bool {
-//        
-//        guard let dateString = dateString,
-//              let fromTime = fromTime,
-//              let toTime = toTime else { return false }
-//        
-//        let formatter = DateFormatter()
-//        formatter.locale = Locale(identifier: "en_US_POSIX")
-//        
-//        // ✅ Your API format
-//        formatter.dateFormat = "yyyy-MM-dd hh:mm a"
-//        
-//        // ✅ Set Kuwait timezone (VERY IMPORTANT)
-//        let kuwaitTimeZone = TimeZone(identifier: "Asia/Kuwait")!
-//        formatter.timeZone = kuwaitTimeZone
-//        
-//        let fromDateString = "\(dateString) \(fromTime)"
-//        let toDateString = "\(dateString) \(toTime)"
-//        
-//        guard let startDate = formatter.date(from: fromDateString),
-//              let endDate = formatter.date(from: toDateString) else {
-//            print("Date parsing failed")
-//            return false
+//            guard let dateString = dateString,
+//                  let fromTime = fromTime,
+//                  let toTime = toTime else { return false }
+//     
+//            let formatter = DateFormatter()
+//            formatter.locale = Locale(identifier: "en_US_POSIX")
+//            formatter.dateFormat = "yyyy-MM-dd hh:mm a"  // <-- IMPORTANT (12 hr + AM/PM)
+//     
+//            let startString = "\(dateString) \(fromTime)"
+//            let endString = "\(dateString) \(toTime)"
+//     
+//            guard let startDate = formatter.date(from: startString),
+//                  let endDate = formatter.date(from: endString) else {
+//                print("Parsing failed for:", startString, endString)
+//                return false
+//            }
+//     
+//            let now = Date()
+//            return now >= startDate && now <= endDate
 //        }
-//        // ✅ Convert current device time to Kuwait time
-//        let now = Date()
-//        let nowInKuwait = Date(
-//            timeInterval: TimeInterval(kuwaitTimeZone.secondsFromGMT(for: now)),
-//            since: now
-//        )
-//        
-//        print("Start:", startDate)
-//        print("End:", endDate)
-//        print("Now (Kuwait):", nowInKuwait)
-//        
-//        return nowInKuwait >= startDate && nowInKuwait <= endDate
-//    }
-//
-    func isEventLive(dateString: String?, fromTime: String?, toTime: String?) -> Bool {
-            guard let dateString = dateString,
-                  let fromTime = fromTime,
-                  let toTime = toTime else { return false }
-     
-            let formatter = DateFormatter()
-            formatter.locale = Locale(identifier: "en_US_POSIX")
-            formatter.dateFormat = "yyyy-MM-dd hh:mm a"  // <-- IMPORTANT (12 hr + AM/PM)
-     
-            let startString = "\(dateString) \(fromTime)"
-            let endString = "\(dateString) \(toTime)"
-     
-            guard let startDate = formatter.date(from: startString),
-                  let endDate = formatter.date(from: endString) else {
-                print("Parsing failed for:", startString, endString)
-                return false
-            }
-     
-            let now = Date()
-            return now >= startDate && now <= endDate
-        }
-     
-    private func convertISOToDMY(_ isoString: String) -> String? {
-        // ISO8601 parser
-        let isoFormatter = ISO8601DateFormatter()
-        isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+    
+    func customizeChangeDateFormatZone(
+        inputDate: String,
+        inputFormat: String = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+        outputFormat: String = "hh:mm a"
+    ) -> String {
         
-        // Parse to Date
-        guard let date = isoFormatter.date(from: isoString) else {
-            return nil
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = inputFormat
+        inputFormatter.locale = Locale(identifier: "en_US_POSIX")
+        
+        // ✅ Server timezone (Kuwait)
+        inputFormatter.timeZone = TimeZone(identifier: "Asia/Kuwait")
+        
+        guard let date = inputFormatter.date(from: inputDate) else {
+            print("❌ Parse failed: \(inputDate)")
+            return ""
         }
         
-        // Output formatter
         let outputFormatter = DateFormatter()
-        outputFormatter.dateFormat = "dd/MM/yyyy"
+        outputFormatter.dateFormat = outputFormat
+        outputFormatter.locale = Locale(identifier: "en_US_POSIX")
+        
+        // ✅ Local timezone
+        outputFormatter.timeZone = TimeZone.current
         
         return outputFormatter.string(from: date)
     }
     
-    func convertDate(_ input: String) -> String {
-        let inputFormatter = DateFormatter()
-        inputFormatter.dateFormat = "yyyy-MM-dd"
-        inputFormatter.locale = Locale(identifier: "en_US_POSIX")
+    func isEventLive(dateString: String?, fromTime: String?, toTime: String?) -> Bool {
+        guard let dateString = dateString,
+              let fromTime = fromTime,
+              let toTime = toTime else { return false }
 
-        let outputFormatter = DateFormatter()
-        outputFormatter.dateFormat = "M/dd/yy"  // → 2/08/25 format
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        
+        // ✅ Server timezone (Kuwait)
+        formatter.timeZone = TimeZone(identifier: "Asia/Kuwait")
+        formatter.dateFormat = "yyyy-MM-dd hh:mm a"
 
-        if let date = inputFormatter.date(from: input) {
-            return outputFormatter.string(from: date)
+        let startString = "\(dateString) \(fromTime)"
+        let endString = "\(dateString) \(toTime)"
+
+        guard let startDate = formatter.date(from: startString),
+              let endDate = formatter.date(from: endString) else {
+            print("Parsing failed:", startString, endString)
+            return false
         }
 
-        return input  // fallback
+        let now = Date() // local time but comparable correctly via absolute Date
+
+        return now >= startDate && now <= endDate
     }
+    
+    func convertDate(_ input: String) -> String {
+        let inputFormatter = DateFormatter()
+        inputFormatter.locale = Locale(identifier: "en_US_POSIX")
+        
+        // ✅ Server timezone (Kuwait)
+        inputFormatter.timeZone = TimeZone(identifier: "Asia/Kuwait")
+        inputFormatter.dateFormat = "yyyy-MM-dd"
+
+        guard let date = inputFormatter.date(from: input) else {
+            return input
+        }
+
+        let outputFormatter = DateFormatter()
+        outputFormatter.locale = Locale(identifier: "en_US_POSIX")
+        
+        // ✅ Local timezone
+        outputFormatter.timeZone = TimeZone.current
+        outputFormatter.dateFormat = "dd/MM/yyyy"
+
+        return outputFormatter.string(from: date)
+    }
+    
+    private func convertISOToDMY(_ isoString: String) -> String? {
+        let isoFormatter = ISO8601DateFormatter()
+        isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+
+        guard let date = isoFormatter.date(from: isoString) else {
+            return nil
+        }
+
+        let outputFormatter = DateFormatter()
+        outputFormatter.locale = Locale(identifier: "en_US_POSIX")
+        outputFormatter.timeZone = TimeZone.current   // ✅ LOCAL TIME
+        outputFormatter.dateFormat = "dd/MM/yyyy"
+
+        return outputFormatter.string(from: date)
+    }
+     
+//    private func convertISOToDMY(_ isoString: String) -> String? {
+//        // ISO8601 parser
+//        let isoFormatter = ISO8601DateFormatter()
+//        isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+//        
+//        // Parse to Date
+//        guard let date = isoFormatter.date(from: isoString) else {
+//            return nil
+//        }
+//        
+//        // Output formatter
+//        let outputFormatter = DateFormatter()
+//        outputFormatter.dateFormat = "dd/MM/yyyy"
+//        
+//        return outputFormatter.string(from: date)
+//    }
+    
+//    func convertDate(_ input: String) -> String {
+//        let inputFormatter = DateFormatter()
+//        inputFormatter.dateFormat = "yyyy-MM-dd"
+//        inputFormatter.locale = Locale(identifier: "en_US_POSIX")
+//
+//        let outputFormatter = DateFormatter()
+//        outputFormatter.dateFormat = "M/dd/yy"  // → 2/08/25 format
+//
+//        if let date = inputFormatter.date(from: input) {
+//            return outputFormatter.string(from: date)
+//        }
+//
+//        return input  // fallback
+//    }
 
 }
