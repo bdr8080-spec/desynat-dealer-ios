@@ -15,9 +15,14 @@ class SupportChatViewController: UIViewController, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        CommonUtils.showHud(show: true)
         setupWebView()
+        
         if let savedUser: User = kSharedUserDefaults.retrieveModelFor(key: .user, model: User.self) {
             loadTidioHTML(user: savedUser)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            CommonUtils.showHud(show: false)
         }
     }
     
@@ -67,7 +72,7 @@ class SupportChatViewController: UIViewController, WKNavigationDelegate {
         </style>
         
         <!-- ✅ IMPORTANT: Use full https URL -->
-        <script src="https://code.tidio.co/na5y0weklpcd9uxhccfezplsfg0fggvk.js" async></script>
+        <script src="https://code.tidio.co/uxltmye9ysuvgaamvz0sisfhvdb1yctx.js" async></script>
         </head>
         
         <body>

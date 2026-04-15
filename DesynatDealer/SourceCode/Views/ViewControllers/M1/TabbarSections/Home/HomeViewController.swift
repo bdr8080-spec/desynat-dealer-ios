@@ -117,6 +117,11 @@ class HomeViewController: UIViewController {
         updateRadioSelection(for: statsButtons, selectedButton: sender)
     }
     
+    @IBAction func btnSupportChatDidTapped(_ sender: UIButton) {
+        let nextVC = SupportChatViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
     private func setUpButtons() {
         btnToggle.setImage(UIImage(named: "toggle_off"), for: .normal)
         updateRadioSelection(for: dateButtons, selectedButton: btnToday)

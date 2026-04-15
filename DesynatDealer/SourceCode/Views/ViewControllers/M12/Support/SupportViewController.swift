@@ -63,6 +63,7 @@ class SupportViewController: UIViewController {
         ticketManagementTableView.isHidden = true
         contactView.isHidden = false
         paginationBottomView.isHidden = true
+        noDataFoundLabel.isHidden = true
     }
     
     @IBAction func raiseTicketBtn(_ sender: Any) {

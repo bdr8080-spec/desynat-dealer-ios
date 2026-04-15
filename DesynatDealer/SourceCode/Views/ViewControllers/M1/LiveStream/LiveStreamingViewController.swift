@@ -36,7 +36,7 @@ class LiveStreamingViewController: UIViewController {
         } else {
             print("👀 Start as AUDIENCE")
             agoraKit.setClientRole(.audience)
-//            lblLive.isHidden = true
+            //            lblLive.isHidden = true
             btnSwitch.isHidden = true
             btnGoLive.isHidden = true
         }
@@ -44,8 +44,19 @@ class LiveStreamingViewController: UIViewController {
         startUserCountTimer()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        stopUserCountTimer()
+    }
+    
+    private func stopUserCountTimer() {
+        userCountTimer?.invalidate()
+        userCountTimer=nil
+    }
+    
     deinit {
         cleanupAgora()
+        stopUserCountTimer()
     }
     
     // MARK: - Agora Setup
@@ -58,7 +69,7 @@ class LiveStreamingViewController: UIViewController {
     }
     
     private func joinChannel() {
-      //  print("🔗 Joining: \(channelName) | uid: \(uid)")
+        //  print("🔗 Joining: \(channelName) | uid: \(uid)")
         agoraKit.joinChannel(byToken: token, channelId: channelName, info: nil, uid: uid) { channel, uid, elapsed in
             print("✅ Joined: \(channel) | uid: \(uid)")
         }
@@ -71,11 +82,11 @@ class LiveStreamingViewController: UIViewController {
     
     // MARK: - VIDEO SETUP
     private func clearVideoView() {
-       guard let view = videoView else {
+        guard let view = videoView else {
             print("❌ videoView is nil")
             return
         }
-       view.subviews.forEach { $0.removeFromSuperview() }
+        view.subviews.forEach { $0.removeFromSuperview() }
     }
     
     private func setupLocalVideo() {
@@ -107,65 +118,65 @@ class LiveStreamingViewController: UIViewController {
     }
     
     private func fetchTotalUsersFromAPI() {
-            let urlString = "https://api.agora.io/dev/v1/channel/user/\(appID)/\(channelName)"
-     
-            guard let url = URL(string: urlString) else {
-                print("❌ Invalid URL")
+        let urlString = "https://api.agora.io/dev/v1/channel/user/\(appID)/\(channelName)"
+        
+        guard let url = URL(string: urlString) else {
+            print("❌ Invalid URL")
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("Basic MGRkZjAzNTkzMDJjNGUzYjk5NTI4MmI0NDQ3MGUyNWU6YzI1OGMyZTBlNTc4NDIwZmJkYjBlNDNiYWY1YjFlZTM=", forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            if let data = data {
+                print("🔍 RAW RESPONSE STRING:")
+                print(String(data: data, encoding: .utf8) ?? "Unable to decode")
+            }
+            
+            if let error = error {
+                print("❌ Error:", error.localizedDescription)
                 return
             }
-     
-            var request = URLRequest(url: url)
-            request.httpMethod = "GET"
-            request.setValue("Basic MGRkZjAzNTkzMDJjNGUzYjk5NTI4MmI0NDQ3MGUyNWU6YzI1OGMyZTBlNTc4NDIwZmJkYjBlNDNiYWY1YjFlZTM=", forHTTPHeaderField: "Authorization")
-     
-            URLSession.shared.dataTask(with: request) { data, response, error in
-                
-                if let data = data {
-                    print("🔍 RAW RESPONSE STRING:")
-                    print(String(data: data, encoding: .utf8) ?? "Unable to decode")
-                }
-     
-                if let error = error {
-                    print("❌ Error:", error.localizedDescription)
-                    return
-                }
-     
-                guard let data = data,
-                      let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-                    print("❌ JSON parse failed")
-                    return
-                }
-     
-                print("📌 Parsed JSON:", json)
-     
-                // FIX: Read values inside "data" dictionary
-                guard let dataObj = json["data"] as? [String: Any] else {
-                    print("❌ 'data' object missing")
-                    return
-                }
-     
-                let broadcasters = (dataObj["broadcasters"] as? [Any])?.count ?? 0
-                let audience = (dataObj["audience"] as? [Any])?.count ?? 0
-                let audienceTotal = dataObj["audience_total"] as? Int ?? audience
-     
-                let total =  audienceTotal
-//                let total = broadcasters + audienceTotal
-     
-                DispatchQueue.main.async {
-                    self.lblUserCount.text = "Viewers: \(total)"
-                    print("👥 TOTAL users: \(total) | Broadcasters: \(broadcasters) | Audience: \(audienceTotal)")
-                }
-     
-            }.resume()
-        }
+            
+            guard let data = data,
+                  let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+                print("❌ JSON parse failed")
+                return
+            }
+            
+            print("📌 Parsed JSON:", json)
+            
+            // FIX: Read values inside "data" dictionary
+            guard let dataObj = json["data"] as? [String: Any] else {
+                print("❌ 'data' object missing")
+                return
+            }
+            
+            let broadcasters = (dataObj["broadcasters"] as? [Any])?.count ?? 0
+            let audience = (dataObj["audience"] as? [Any])?.count ?? 0
+            let audienceTotal = dataObj["audience_total"] as? Int ?? audience
+            
+            let total =  audienceTotal
+            //                let total = broadcasters + audienceTotal
+            
+            DispatchQueue.main.async {
+                self.lblUserCount.text = "Viewers: \(total)"
+                print("👥 TOTAL users: \(total) | Broadcasters: \(broadcasters) | Audience: \(audienceTotal)")
+            }
+            
+        }.resume()
+    }
     // Timer & API (same for host/audience)
-      private func startUserCountTimer() {
-          userCountTimer?.invalidate()
-          userCountTimer = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true) { _ in
-              self.fetchTotalUsersFromAPI()
-          }
-          fetchTotalUsersFromAPI()  // Immediate fetch
-      }
+    private func startUserCountTimer() {
+        userCountTimer?.invalidate()
+        userCountTimer = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true) { _ in
+            self.fetchTotalUsersFromAPI()
+        }
+        fetchTotalUsersFromAPI()  // Immediate fetch
+    }
     
     // MARK: - ACTIONS
     @IBAction func btnOptions(_ sender: UIButton) {
@@ -192,7 +203,7 @@ class LiveStreamingViewController: UIViewController {
         case 3:
             isMuted.toggle()
             agoraKit.muteLocalAudioStream(isMuted)
-//            btnMute.setTitle(isMuted ? "Unmute" : "Mute", for: .normal)
+            //            btnMute.setTitle(isMuted ? "Unmute" : "Mute", for: .normal)
             print("🎙️ Muted: \(isMuted)")
             muteLabel.text = isMuted ? "Unmute" : "Mute"
         case 4:
@@ -224,13 +235,13 @@ extension LiveStreamingViewController: AgoraRtcEngineDelegate {
         }
     }
     
-//    func rtcEngine(_ engine: AgoraRtcEngineKit, reportRtcStats stats: AgoraChannelStats) {
-//            let totalUsers = Int(stats.userCount)
-//            DispatchQueue.main.async {
-//                self.lblUserCount.text = "Total Users: \(totalUsers)"
-//                print("👥 Total users in channel: \(totalUsers)")  // Optional log
-//            }
-//        }
+    //    func rtcEngine(_ engine: AgoraRtcEngineKit, reportRtcStats stats: AgoraChannelStats) {
+    //            let totalUsers = Int(stats.userCount)
+    //            DispatchQueue.main.async {
+    //                self.lblUserCount.text = "Total Users: \(totalUsers)"
+    //                print("👥 Total users in channel: \(totalUsers)")  // Optional log
+    //            }
+    //        }
     
     func rtcEngine(_ engine: AgoraRtcEngineKit, didOccurError errorCode: AgoraErrorCode) {
         print("❌ Agora Error: \(errorCode.rawValue)")

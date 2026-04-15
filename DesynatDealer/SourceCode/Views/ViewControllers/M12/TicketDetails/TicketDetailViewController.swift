@@ -10,6 +10,7 @@ import SDWebImage
 
 class TicketDetailViewController: UIViewController {
 
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var ticketTypeLabel: UILabel!
     @IBOutlet weak var ticketIdLabel: UILabel!
     @IBOutlet weak var raisedOnDateLabel: UILabel!
@@ -62,7 +63,7 @@ class TicketDetailViewController: UIViewController {
         resolvedOnStackView.isHidden = (data.status != 1)
         resolvedOnDateLabel.text = convertServerDate(data.updatedAt ?? "")
         attachmentView.isHidden = (data.file?.isEmpty ?? true)
-        
+        titleLabel.text = data.title ?? ""
     }
     
     func statusType(status: Int) -> (text: String, color: UIColor) {
