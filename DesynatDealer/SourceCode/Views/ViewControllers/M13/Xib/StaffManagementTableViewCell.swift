@@ -19,27 +19,26 @@ class StaffManagementTableViewCell: UITableViewCell {
     @IBOutlet weak var profileImageView: CustomImageView!
     
     //MARK: Variable
-    var isOn: Bool = false
+    var isStatusToggled: (() -> Void)?
+    var isDeleteTapped: (() -> Void)?
+    var isEditTapped: (() -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     @IBAction func toggleBtnTapped(_ sender: Any) {
-        isOn.toggle() // switch true/false
-            let imageName = isOn ? "toggle_on" : "toggle_off"
-            btnToggle.setImage(UIImage(named: imageName), for: .normal)
+        isStatusToggled?()
     }
     
     @IBAction func deleteBtnTapped(_ sender: Any) {
-        
+        isDeleteTapped?()
     }
     
-    
+    @IBAction func editDidTapped(_ sender: Any) {
+        isEditTapped?()
+    }
 }

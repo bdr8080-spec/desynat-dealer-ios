@@ -20,6 +20,7 @@ class TicketDetailViewController: UIViewController {
     @IBOutlet weak var resolvedOnStackView: UIStackView!
     @IBOutlet weak var attachmentView: UIView!
     @IBOutlet weak var attachmentImageView: CustomImageView!
+    @IBOutlet weak var attachmnetButton: UIButton!
     
     var ticketDetails: SupportList?
     
@@ -64,6 +65,13 @@ class TicketDetailViewController: UIViewController {
         resolvedOnDateLabel.text = convertServerDate(data.updatedAt ?? "")
         attachmentView.isHidden = (data.file?.isEmpty ?? true)
         titleLabel.text = data.title ?? ""
+        if let file = data.file?.lowercased(),
+           file.hasSuffix(".pdf") {
+            attachmnetButton.isUserInteractionEnabled = true
+        } else {
+            attachmnetButton.isUserInteractionEnabled = false
+        }
+        attachmentImageView.enableFullscreenZoom()
     }
     
     func statusType(status: Int) -> (text: String, color: UIColor) {

@@ -8,7 +8,6 @@
 import UIKit
 
 class StaffDetailsViewController: UIViewController {
-
     
     // MARK: - IBOutlet
     @IBOutlet weak var eyeBtn: UIButton!
@@ -23,7 +22,7 @@ class StaffDetailsViewController: UIViewController {
     @IBOutlet weak var accessModuleTableView: UITableView!{
         didSet{
             accessModuleTableView.registerCellFromNib(cellID:
-            "AccessModuleTableViewCell")
+                                                        "AccessModuleTableViewCell")
         }
     }
     
@@ -36,14 +35,11 @@ class StaffDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         originalPassword = passwordLbl.text ?? ""
-        
         passwordLbl.setSecureText(originalPassword)
         eyeBtn.setImage(UIImage(named: "eyeClose"), for: .normal)
-        // Do any additional setup after loading the view.
     }
     
     // MARK: - Navigation
-
     @IBAction func backBtnTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -58,30 +54,24 @@ class StaffDetailsViewController: UIViewController {
         isActive.toggle()
         let imageName: String = isActive ? "toggle_on": "toggle_off"
         activeStatusbtn.setImage(UIImage(named: imageName), for: .normal)
-        
     }
     
     @IBAction func eyebtntapped(_ sender: Any) {
         isSecureTextEntry.toggle()
-            
         if isSecureTextEntry {
-                // 🔒 Hidden state
-                eyeBtn.setImage(UIImage(named: "eyeClose"), for: .normal)
-                passwordLbl.setSecureText(originalPassword)
-                
-            } else {
-                // 👁 Visible state
-                eyeBtn.setImage(UIImage(named: "eye_open"), for: .normal)
-                passwordLbl.text = originalPassword
-            }
+            eyeBtn.setImage(UIImage(named: "eyeClose"), for: .normal)
+            passwordLbl.setSecureText(originalPassword)
+        } else {
+            eyeBtn.setImage(UIImage(named: "eye_open"), for: .normal)
+            passwordLbl.text = originalPassword
+        }
     }
-    
 }
+
 extension StaffDetailsViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AccessModuleTableViewCell") as! AccessModuleTableViewCell
-        //        cell.rowIndex = indexPath.row
         if selectedRow == indexPath.row {
             cell.selectedIndex = -1
             cell.isOuterRowSelected = true
@@ -93,12 +83,6 @@ extension StaffDetailsViewController: UITableViewDataSource, UITableViewDelegate
             cell.radioimageView.image = .radioUnselected
             cell.collectionView.reloadData()
         }
-        //        cell.didSelectCollectionItem = { [weak self] collectionIndex in
-        //            guard let self = self else { return }
-        //            self.selectedRow = indexPath.row
-        //            self.selectedAccessModule = collectionIndex
-        //            self.accessModuleTableView.reloadData()
-        //        }
         return cell
     }
     

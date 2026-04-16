@@ -2111,7 +2111,7 @@
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadDocument1" translatesAutoresizingMaskIntoConstraints="NO" id="oHU-CD-pGr" customClass="CustomImageView" customModule="DesynatDealer" customModuleProvider="target">
+                                                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadDocument1" translatesAutoresizingMaskIntoConstraints="NO" id="oHU-CD-pGr" customClass="CustomImageView" customModule="DesynatDealer" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="24" width="164" height="120"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="120" id="DPL-U7-7MY"/>
@@ -2182,6 +2182,7 @@
                     <connections>
                         <outlet property="attachmentImageView" destination="oHU-CD-pGr" id="6hY-sE-iwf"/>
                         <outlet property="attachmentView" destination="You-Km-6W2" id="Nuk-Nu-Guf"/>
+                        <outlet property="attachmnetButton" destination="dki-N4-4wx" id="8OB-kI-fic"/>
                         <outlet property="descriptionLabel" destination="b6y-QZ-yIP" id="7RC-lO-Jb6"/>
                         <outlet property="raisedOnDateLabel" destination="3aV-qi-I2p" id="RHw-4d-wZb"/>
                         <outlet property="resolvedOnDateLabel" destination="Gsr-gh-QHx" id="y1k-r1-hTR"/>
@@ -5106,10 +5107,10 @@ your account?</string>
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
