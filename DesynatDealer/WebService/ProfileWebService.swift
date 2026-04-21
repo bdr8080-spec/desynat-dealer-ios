@@ -10,6 +10,7 @@ import Alamofire
 import UIKit
 
 extension WebService {
+    
     func uploadImage(withParams image: UIImage,
                      completion:@escaping (_ profileURL:UploadImageModel)-> Void) {
         CommonUtils.showHud(show: true)
@@ -25,6 +26,21 @@ extension WebService {
                 }
                 DispatchQueue.main.async {
                     completion(profileURLString)
+                }
+            }
+        }
+    }
+    
+    func uploadWithResolutionPromotional(withParams file:MultipartUpload,
+                                completion:@escaping (_ url:String, _ msg:String?, _ code:HTTPStatusCode?)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.requestMultiPartForPromotionalBanner(url: .endpoint(.uploadWithResolutionPromotional), assets: [file], model: UploadFileDataModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message, error in
+                if let url = response?.url {
+                    completion(url, message, code)
+                } else if let error {
+                    UIApplication.shared.topViewController()?.showAlert(msg: error)
                 }
             }
         }

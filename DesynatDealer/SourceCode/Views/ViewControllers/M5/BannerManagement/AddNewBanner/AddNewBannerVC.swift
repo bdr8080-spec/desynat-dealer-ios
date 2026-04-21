@@ -133,14 +133,14 @@ class AddNewBannerVC: UIViewController {
     
     @IBAction func btnUploadImg(_ sender: Any) {
         ImagePickerHelper.shared.showPickerController {  image , imageName in
+            self.imgBanner.image = image
             if let image = image {
-                WebService.sharedInstance.uploadImage(withParams: image) { imageURL in
-                    self.bannerImageUrl = imageURL.url ?? ""
-                    if let url = URL(string: imageURL.url ?? "") {
-                        self.imgBanner.sd_imageIndicator = SDWebImageActivityIndicator.gray
-                        self.imgBanner.sd_setImage(with: url,placeholderImage: UIImage(named: ""))
+                self.viewModel.uploadFullScreenBanner(file: image, isImage: true) { [weak self] uploadedUrl in
+                    guard let self = self else { return }
+                    DispatchQueue.main.async {
+                        self.bannerImageUrl = uploadedUrl
+                        
                     }
-                  
                 }
             }
         }

@@ -16,7 +16,7 @@ final class NetworkManager {
     ///   - param: Optional Value, pass paramater in dictionay format
     ///   - model: model to parse
     ///   - completion: ResultHandler, will provide sucess/failure
-    func request<T: Decodable>(withAPI apiName: NetworkURL, 
+    func request<T: Decodable>(withAPI apiName: NetworkURL,
                                requestMethod method: HTTPMethod = .get,
                                requestParams params: Dictionary<String, Any>? = nil,
                                encoding:ParameterEncoding? = URLEncoding.default,
@@ -57,18 +57,18 @@ final class NetworkManager {
                         self.ErrorResponseHandle(response: response.data) { errResponse in
                             if status == .NO_ACTIVE_PLAN {     // 👈 NEW CONDITION
                                 self.ErrorResponseHandle(response: response.data) { errResponse in
-                                        
-                                        // Show popup globally
-                                        DispatchQueue.main.async {
-                                            UIApplication.shared.topViewController()?
-                                                .showNoActivePlanToast(message: errResponse?.message ?? "")
-                                        }
-                                        
-                                        // DO NOT send failure — avoid double popup
-                                        return
+                                    
+                                    // Show popup globally
+                                    DispatchQueue.main.async {
+                                        UIApplication.shared.topViewController()?
+                                            .showNoActivePlanToast(message: errResponse?.message ?? "")
                                     }
-
-                            } 
+                                    
+                                    // DO NOT send failure — avoid double popup
+                                    return
+                                }
+                                
+                            }
                             completion(.failure(.invalidResponse(errResponse)), status)
                         }
                     }
@@ -78,17 +78,17 @@ final class NetworkManager {
                     completion(.failure(.sessionExpired), status)
                 } else if status == .NO_ACTIVE_PLAN {     // 👈 NEW CONDITION
                     self.ErrorResponseHandle(response: response.data) { errResponse in
-                            
-                            // Show popup globally
-                            DispatchQueue.main.async {
-                                UIApplication.shared.topViewController()?
-                                    .showNoActivePlanToast(message: errResponse?.message ?? "")
-                            }
-                            
-                            // DO NOT send failure — avoid double popup
-                            return
+                        
+                        // Show popup globally
+                        DispatchQueue.main.async {
+                            UIApplication.shared.topViewController()?
+                                .showNoActivePlanToast(message: errResponse?.message ?? "")
                         }
-
+                        
+                        // DO NOT send failure — avoid double popup
+                        return
+                    }
+                    
                 } else if HTTPStatusCode.Failure.contains(status) {
                     self.ErrorResponseHandle(response: response.data) { errResponse in
                         completion(.failure(.invalidResponse(errResponse)), status)
@@ -103,10 +103,10 @@ final class NetworkManager {
     
     
     public func requestMultiPartForPdfImageVideoGif<T:Decodable> (url: NetworkURL,
-                                               assets: [MultipartUpload],
-                                               param:Dictionary<String, Any>? = nil,
-                                               model: T.Type,
-                                               completion: @escaping ResultHandler<BaseResponse<T>>) {
+                                                                  assets: [MultipartUpload],
+                                                                  param:Dictionary<String, Any>? = nil,
+                                                                  model: T.Type,
+                                                                  completion: @escaping ResultHandler<BaseResponse<T>>) {
         guard NetworkReachabilityManager()?.isReachable == true else {
             completion(.failure(.noNetwork), nil)
             return
@@ -121,69 +121,69 @@ final class NetworkManager {
             networkUrl = BaseURL.value() + string
         }
         
-      AF.upload(multipartFormData: { multipartFormData in
-          assets.forEach { uploadData in
-              switch uploadData.mimeType {
-              case .image:
-                  if let file = uploadData.file as? UIImage, let imageData = file.jpegData(compressionQuality: 0.4) {
-                      multipartFormData.append(imageData, withName: uploadData.fileName, fileName: "\(UUID().uuidString).jpeg", mimeType: uploadData.mimeType.rawValue)
-                  } else {
-                      completion(.failure(.custom(code: 1)), nil)
-                  }
-
-              case .Video:
-                  if let file = uploadData.file as? URL {
-                      multipartFormData.append(file, withName: uploadData.fileName, fileName: "\(UUID().uuidString).mp4", mimeType: uploadData.mimeType.rawValue)
-                  } else {
-                      completion(.failure(.custom(code: 2)), nil)
-                  }
+        AF.upload(multipartFormData: { multipartFormData in
+            assets.forEach { uploadData in
+                switch uploadData.mimeType {
+                case .image:
+                    if let file = uploadData.file as? UIImage, let imageData = file.jpegData(compressionQuality: 0.4) {
+                        multipartFormData.append(imageData, withName: uploadData.fileName, fileName: "\(UUID().uuidString).jpeg", mimeType: uploadData.mimeType.rawValue)
+                    } else {
+                        completion(.failure(.custom(code: 1)), nil)
+                    }
+                    
+                case .Video:
+                    if let file = uploadData.file as? URL {
+                        multipartFormData.append(file, withName: uploadData.fileName, fileName: "\(UUID().uuidString).mp4", mimeType: uploadData.mimeType.rawValue)
+                    } else {
+                        completion(.failure(.custom(code: 2)), nil)
+                    }
+                    
+                case .gif:
+                    if let data = uploadData.file as? Data {
+                        multipartFormData.append(
+                            data,
+                            withName: uploadData.fileName,
+                            fileName: "\(UUID().uuidString).gif",
+                            mimeType: uploadData.mimeType.rawValue
+                        )
+                    } else {
+                        completion(.failure(.custom(code: 4)), nil)
+                    }
+                    
+                    
+                case .pdf:  // ← Add PDF support
+                    if let file = uploadData.file as? URL {
+                        multipartFormData.append(file, withName: uploadData.fileName, fileName: file.lastPathComponent, mimeType: "application/pdf")
+                    } else if let data = uploadData.file as? Data {
+                        multipartFormData.append(data, withName: uploadData.fileName, fileName: "\(UUID().uuidString).pdf", mimeType: "application/pdf")
+                    } else {
+                        completion(.failure(.custom(code: 3)), nil)
+                    }
+                }
                 
-              case .gif:
-                  if let data = uploadData.file as? Data {
-                      multipartFormData.append(
-                          data,
-                          withName: uploadData.fileName,
-                          fileName: "\(UUID().uuidString).gif",
-                          mimeType: uploadData.mimeType.rawValue
-                      )
-                  } else {
-                      completion(.failure(.custom(code: 4)), nil)
-                  }
-
-
-              case .pdf:  // ← Add PDF support
-                  if let file = uploadData.file as? URL {
-                      multipartFormData.append(file, withName: uploadData.fileName, fileName: file.lastPathComponent, mimeType: "application/pdf")
-                  } else if let data = uploadData.file as? Data {
-                      multipartFormData.append(data, withName: uploadData.fileName, fileName: "\(UUID().uuidString).pdf", mimeType: "application/pdf")
-                  } else {
-                      completion(.failure(.custom(code: 3)), nil)
-                  }
-              }
+                
+            }
             
-            
-          }
-
-          // Append other params
-          if let param {
-              for (key, value) in param {
-                  if let temp = value as? String {
-                      multipartFormData.append(temp.data(using: .utf8)!, withName: key)
-                  } else if let temp = value as? Int {
-                      multipartFormData.append("\(temp)".data(using: .utf8)!, withName: key)
-                  } else if let temp = value as? NSArray {
-                      temp.forEach { element in
-                          let keyObj = key + "[]"
-                          if let string = element as? String {
-                              multipartFormData.append(string.data(using: .utf8)!, withName: keyObj)
-                          } else if let num = element as? Int {
-                              multipartFormData.append("\(num)".data(using: .utf8)!, withName: keyObj)
-                          }
-                      }
-                  }
-              }
-          }
-      }, to: networkUrl, headers: header).responseDecodable(of: BaseResponse<T>.self) { response in
+            // Append other params
+            if let param {
+                for (key, value) in param {
+                    if let temp = value as? String {
+                        multipartFormData.append(temp.data(using: .utf8)!, withName: key)
+                    } else if let temp = value as? Int {
+                        multipartFormData.append("\(temp)".data(using: .utf8)!, withName: key)
+                    } else if let temp = value as? NSArray {
+                        temp.forEach { element in
+                            let keyObj = key + "[]"
+                            if let string = element as? String {
+                                multipartFormData.append(string.data(using: .utf8)!, withName: keyObj)
+                            } else if let num = element as? Int {
+                                multipartFormData.append("\(num)".data(using: .utf8)!, withName: keyObj)
+                            }
+                        }
+                    }
+                }
+            }
+        }, to: networkUrl, headers: header).responseDecodable(of: BaseResponse<T>.self) { response in
             
             printInConsole(response.debugDescription)
             let status = HTTPStatusCode(rawValue: response.response?.statusCode ?? 200) ?? .FORBIDDEN
@@ -206,17 +206,17 @@ final class NetworkManager {
                     completion(.failure(.sessionExpired), status)
                 } else if status == .NO_ACTIVE_PLAN {     // 👈 NEW CONDITION
                     self.ErrorResponseHandle(response: response.data) { errResponse in
-                            
-                            // Show popup globally
-                            DispatchQueue.main.async {
-                                UIApplication.shared.topViewController()?
-                                    .showNoActivePlanToast(message: errResponse?.message ?? "")
-                            }
-                            
-                            // DO NOT send failure — avoid double popup
-                            return
+                        
+                        // Show popup globally
+                        DispatchQueue.main.async {
+                            UIApplication.shared.topViewController()?
+                                .showNoActivePlanToast(message: errResponse?.message ?? "")
                         }
-
+                        
+                        // DO NOT send failure — avoid double popup
+                        return
+                    }
+                    
                 } else if HTTPStatusCode.Failure.contains(status) {
                     self.ErrorResponseHandle(response: response.data) { errResponse in
                         completion(.failure(.invalidResponse(errResponse)), status)
@@ -227,76 +227,76 @@ final class NetworkManager {
             }
         }
     }
-  
-  func requestForAddingProduct<T: Decodable>(withAPI apiName: NetworkURL,
-                             requestMethod method: HTTPMethod = .get,
-                             requestParams params: Dictionary<String, Any>? = nil,
-                             encoding:ParameterEncoding? = JSONEncoding.default,
-                             requestModel model: T.Type,kkk
-                             completion: @escaping ResultHandler<BaseResponse<T>>) {
-      
-      guard NetworkReachabilityManager()?.isReachable == true else {
-          completion(.failure(.noNetwork), nil)
-          return
-      }
-      
-      let header = getHeaders()
-      
-      var url = ""
-      switch apiName {
-      case .endpoint(let networkEndPoint):
-          url = networkEndPoint.withBaseURL()
-      case .custom(let string):
-          url = BaseURL.value() + string
-      }
-      let printableParams: String = self.getPrintableParamsFromJson(postData: params ?? [:])
-      printInConsole("Header: \(header)")
-      printInConsole("Connecting to Host with URL \(url) with parameters: \(printableParams)")
-      
-      AF.request(url, method: method, parameters: params, encoding: encoding ?? URLEncoding.default, headers: header){ $0.timeoutInterval = 20.0 }.responseDecodable(of: BaseResponse<T>.self) { response in
-          
-          printInConsole(response.debugDescription)
-          let status = HTTPStatusCode(rawValue: response.response?.statusCode ?? 200) ?? .FORBIDDEN
-          
-          switch response.result {
-          case .success(let result):
-              if HTTPStatusCode.Sucess.contains(status) {
-                  completion(.success(result), status)
-              } else {
-                  if status == .UNAUTHORIZED {
-                      completion(.failure(.sessionExpired), status)
-                  } else {
-                      self.ErrorResponseHandle(response: response.data) { errResponse in
-                          completion(.failure(.invalidResponse(errResponse)), status)
-                      }
-                  }
-              }
-          case .failure(let err):
-              if status == .UNAUTHORIZED {
-                  completion(.failure(.sessionExpired), status)
-              } else if status == .NO_ACTIVE_PLAN {     // 👈 NEW CONDITION
-                  self.ErrorResponseHandle(response: response.data) { errResponse in
-                          
-                          // Show popup globally
-                          DispatchQueue.main.async {
-                              UIApplication.shared.topViewController()?
-                                  .showNoActivePlanToast(message: errResponse?.message ?? "")
-                          }
-                          
-                          // DO NOT send failure — avoid double popup
-                          return
-                      }
-
-              } else if HTTPStatusCode.Failure.contains(status) {
-                  self.ErrorResponseHandle(response: response.data) { errResponse in
-                      completion(.failure(.invalidResponse(errResponse)), status)
-                  }
-              } else {
-                  completion(.failure(.decoding(err)), status)
-              }
-          }
-      }
-  }
+    
+    func requestForAddingProduct<T: Decodable>(withAPI apiName: NetworkURL,
+                                               requestMethod method: HTTPMethod = .get,
+                                               requestParams params: Dictionary<String, Any>? = nil,
+                                               encoding:ParameterEncoding? = JSONEncoding.default,
+                                               requestModel model: T.Type,kkk
+                                               completion: @escaping ResultHandler<BaseResponse<T>>) {
+        
+        guard NetworkReachabilityManager()?.isReachable == true else {
+            completion(.failure(.noNetwork), nil)
+            return
+        }
+        
+        let header = getHeaders()
+        
+        var url = ""
+        switch apiName {
+        case .endpoint(let networkEndPoint):
+            url = networkEndPoint.withBaseURL()
+        case .custom(let string):
+            url = BaseURL.value() + string
+        }
+        let printableParams: String = self.getPrintableParamsFromJson(postData: params ?? [:])
+        printInConsole("Header: \(header)")
+        printInConsole("Connecting to Host with URL \(url) with parameters: \(printableParams)")
+        
+        AF.request(url, method: method, parameters: params, encoding: encoding ?? URLEncoding.default, headers: header){ $0.timeoutInterval = 20.0 }.responseDecodable(of: BaseResponse<T>.self) { response in
+            
+            printInConsole(response.debugDescription)
+            let status = HTTPStatusCode(rawValue: response.response?.statusCode ?? 200) ?? .FORBIDDEN
+            
+            switch response.result {
+            case .success(let result):
+                if HTTPStatusCode.Sucess.contains(status) {
+                    completion(.success(result), status)
+                } else {
+                    if status == .UNAUTHORIZED {
+                        completion(.failure(.sessionExpired), status)
+                    } else {
+                        self.ErrorResponseHandle(response: response.data) { errResponse in
+                            completion(.failure(.invalidResponse(errResponse)), status)
+                        }
+                    }
+                }
+            case .failure(let err):
+                if status == .UNAUTHORIZED {
+                    completion(.failure(.sessionExpired), status)
+                } else if status == .NO_ACTIVE_PLAN {     // 👈 NEW CONDITION
+                    self.ErrorResponseHandle(response: response.data) { errResponse in
+                        
+                        // Show popup globally
+                        DispatchQueue.main.async {
+                            UIApplication.shared.topViewController()?
+                                .showNoActivePlanToast(message: errResponse?.message ?? "")
+                        }
+                        
+                        // DO NOT send failure — avoid double popup
+                        return
+                    }
+                    
+                } else if HTTPStatusCode.Failure.contains(status) {
+                    self.ErrorResponseHandle(response: response.data) { errResponse in
+                        completion(.failure(.invalidResponse(errResponse)), status)
+                    }
+                } else {
+                    completion(.failure(.decoding(err)), status)
+                }
+            }
+        }
+    }
     
     /// Request Multi part, upload Images/Videos
     /// - Parameters:
@@ -305,7 +305,120 @@ final class NetworkManager {
     ///   - model: model to parse
     ///   - handleErr: Wether Network Support will handle error on its own
     ///   - completion: ResultHandler, will provide sucess/failure
-    public func requestMultiPart<T:Decodable> (url: NetworkURL, 
+    ///
+    public func requestMultiPartForPromotionalBanner<T:Decodable> (url: NetworkURL,
+                                               assets: [MultipartUpload],
+                                               param:Dictionary<String, Any>? = nil,
+                                               model: T.Type,
+                                               completion: @escaping ResultHandler<BaseResponse<T>>) {
+        guard NetworkReachabilityManager()?.isReachable == true else {
+            completion(.failure(.noNetwork), nil)
+            return
+        }
+        let header = getHeaders()
+        
+        var networkUrl = ""
+        switch url {
+        case .endpoint(let networkEndPoint):
+            networkUrl = networkEndPoint.withBaseURL()
+        case .custom(let string):
+            networkUrl = BaseURL.value() + string
+        }
+        
+        AF.upload(multipartFormData: { multipartFormData in
+            assets.forEach { uploadData in
+                switch uploadData.mimeType {
+                case .image:
+                    if let file = uploadData.file as? UIImage, let imageData = file.jpegData(compressionQuality: 0.4) {
+                        multipartFormData.append(imageData, withName: uploadData.fileName, fileName: "\(UUID().uuidString).jpeg", mimeType: uploadData.mimeType.rawValue)
+                    } else {
+                        completion(.failure(.custom(code: 1)), nil)
+                    }
+                    
+                case .Video:
+                    if let file = uploadData.file as? URL {
+                        multipartFormData.append(file, withName: uploadData.fileName, fileName: "\(UUID().uuidString).mp4", mimeType: uploadData.mimeType.rawValue)
+                    } else {
+                        completion(.failure(.custom(code: 2)), nil)
+                    }
+                    
+                case .gif:
+                    if let data = uploadData.file as? Data {
+                        multipartFormData.append(
+                            data,
+                            withName: uploadData.fileName,
+                            fileName: "\(UUID().uuidString).gif",
+                            mimeType: uploadData.mimeType.rawValue
+                        )
+                    } else {
+                        completion(.failure(.custom(code: 4)), nil)
+                    }
+                    
+                    
+                case .pdf:  // ← Add PDF support
+                    if let file = uploadData.file as? URL {
+                        multipartFormData.append(file, withName: uploadData.fileName, fileName: file.lastPathComponent, mimeType: "application/pdf")
+                    } else if let data = uploadData.file as? Data {
+                        multipartFormData.append(data, withName: uploadData.fileName, fileName: "\(UUID().uuidString).pdf", mimeType: "application/pdf")
+                    } else {
+                        completion(.failure(.custom(code: 3)), nil)
+                    }
+                }
+                
+                
+            }
+            
+            // Append other params
+            if let param {
+                for (key, value) in param {
+                    if let temp = value as? String {
+                        multipartFormData.append(temp.data(using: .utf8)!, withName: key)
+                    } else if let temp = value as? Int {
+                        multipartFormData.append("\(temp)".data(using: .utf8)!, withName: key)
+                    } else if let temp = value as? NSArray {
+                        temp.forEach { element in
+                            let keyObj = key + "[]"
+                            if let string = element as? String {
+                                multipartFormData.append(string.data(using: .utf8)!, withName: keyObj)
+                            } else if let num = element as? Int {
+                                multipartFormData.append("\(num)".data(using: .utf8)!, withName: keyObj)
+                            }
+                        }
+                    }
+                }
+            }
+        }, to: networkUrl, headers: header).responseDecodable(of: BaseResponse<T>.self) { response in
+            
+            printInConsole(response.debugDescription)
+            let status = HTTPStatusCode(rawValue: response.response?.statusCode ?? 200) ?? .FORBIDDEN
+            
+            switch response.result {
+            case .success(let result):
+                if HTTPStatusCode.Sucess.contains(status) {
+                    completion(.success(result), status)
+                } else {
+                    if status == .UNAUTHORIZED {
+                        completion(.failure(.sessionExpired), status)
+                    } else {
+                        self.ErrorResponseHandle(response: response.data) { errResponse in
+                            completion(.failure(.invalidResponse(errResponse)), status)
+                        }
+                    }
+                }
+            case .failure(let err):
+                if status == .UNAUTHORIZED {
+                    completion(.failure(.sessionExpired), status)
+                } else if HTTPStatusCode.Failure.contains(status) {
+                    self.ErrorResponseHandle(response: response.data) { errResponse in
+                        completion(.failure(.invalidResponse(errResponse)), status)
+                    }
+                } else {
+                    completion(.failure(.decoding(err)), status)
+                }
+            }
+        }
+    }
+    public func requestMultiPart<T:Decodable> (url: NetworkURL,
                                                assets: [MultipartUpload],
                                                param:Dictionary<String, Any>? = nil,
                                                model: T.Type,
@@ -386,8 +499,10 @@ final class NetworkManager {
                     }
                 }
             case .failure(let err):
-                if status == .NO_ACTIVE_PLAN {     // 👈 NEW CONDITION
-                self.ErrorResponseHandle(response: response.data) { errResponse in
+                if status == .UNAUTHORIZED {
+                    completion(.failure(.sessionExpired), status)
+                } else if status == .NO_ACTIVE_PLAN {     // 👈 NEW CONDITION
+                    self.ErrorResponseHandle(response: response.data) { errResponse in
                         
                         // Show popup globally
                         DispatchQueue.main.async {
@@ -398,9 +513,14 @@ final class NetworkManager {
                         // DO NOT send failure — avoid double popup
                         return
                     }
-
-            }
-                completion(.failure(.decoding(err)), status)
+                    
+                } else if HTTPStatusCode.Failure.contains(status) {
+                    self.ErrorResponseHandle(response: response.data) { errResponse in
+                        completion(.failure(.invalidResponse(errResponse)), status)
+                    }
+                } else {
+                    completion(.failure(.decoding(err)), status)
+                }
             }
         }
     }
@@ -417,7 +537,7 @@ final class NetworkManager {
         if let sessionToken = kSharedUserDefaults.getStringFor(key: .sessionToken) {
             headers.add(name: "session_token", value: sessionToken)
         }
-    
+        
         return headers
     }
     
@@ -435,167 +555,167 @@ final class NetworkManager {
             completion(nil)
         }
     }
-//    public func requestMultiPartForVideoAndAudio<T: Decodable>(
-//        url: NetworkURL,
-//        assets: [MultipartUpload],
-//        param: Dictionary<String, Any>? = nil,
-//        model: T.Type,
-//        completion: @escaping ResultHandler<BaseResponse<T>>
-//    ) {
-//        guard NetworkReachabilityManager()?.isReachable == true else {
-//            completion(.failure(.noNetwork), nil)
-//            return
-//        }
-//        
-//        let header = getHeaders()
-//        
-//        var networkUrl = ""
-//        switch url {
-//        case .endpoint(let networkEndPoint):
-//            networkUrl = networkEndPoint.withBaseURL()
-//        case .custom(let string):
-//            networkUrl = BaseURL.value() + string
-//        }
-//        
-//        AF.upload(multipartFormData: { multipartFormData in
-//            
-//            let fieldName = "file"  // ← Backend requires this exact field name
-//            
-//            for uploadData in assets {
-//                var fileName: String
-//                var mimeTypeString: String
-//                var dataToUpload: Data?
-//                
-//                switch uploadData.mimeType {
-//                case .image:
-//                    mimeTypeString = "image/jpeg"
-//                    fileName = "\(UUID().uuidString).jpeg"
-//                    
-//                    // Support UIImage → Data
-//                    if let image = uploadData.file as? UIImage,
-//                       let imageData = image.jpegData(compressionQuality: 0.7) {
-//                        dataToUpload = imageData
-//                    }
-//                    // Support direct Data (your current usage)
-//                    else if let data = uploadData.file as? Data {
-//                        dataToUpload = data
-//                    }
-//                    
-//                case .Video:
-//                    mimeTypeString = "video/mp4"
-//                    fileName = "\(UUID().uuidString).mp4"
-//                    
-//                    // Prefer URL for large videos (memory efficient)
-//                    if let url = uploadData.file as? URL {
-//                        multipartFormData.append(
-//                            url,
-//                            withName: fieldName,
-//                            fileName: fileName,
-//                            mimeType: mimeTypeString
-//                        )
-//                        continue  // Skip data append below
-//                    }
-//                    // Fallback to Data
-//                    else if let data = uploadData.file as? Data {
-//                        dataToUpload = data
-//                        let bytes = data.count
-//                        let kb = Double(bytes) / 1024.0
-//                        let mb = kb / 1024.0
-//
-//                        print("Video Size:")
-//                        print("➡ Bytes: \(bytes)")
-//                        print("➡ KB: \(String(format: "%.2f", kb)) KB")
-//                        print("➡ MB: \(String(format: "%.2f", mb)) MB")
-//                        
-//                    }
-//                    
-//                case .pdf:
-//                    mimeTypeString = "application/pdf"
-//                    fileName = "\(UUID().uuidString).pdf"
-//                    
-//                    if let url = uploadData.file as? URL {
-//                        multipartFormData.append(
-//                            url,
-//                            withName: fieldName,
-//                            fileName: url.lastPathComponent,
-//                            mimeType: mimeTypeString
-//                        )
-//                        continue
-//                    } else if let data = uploadData.file as? Data {
-//                        dataToUpload = data
-//                    }
-//                    
-//                default:
-//                    completion(.failure(.custom(code: 999)), nil)
-//                    return
-//                }
-//                
-//                // If we have data to upload (image or video from Data)
-//                guard let data = dataToUpload else {
-//                    completion(.failure(.custom(code: 888)), nil)
-//                    return
-//                }
-//                
-//                multipartFormData.append(
-//                    data,
-//                    withName: fieldName,
-//                    fileName: fileName,
-//                    mimeType: mimeTypeString
-//                )
-//            }
-//            
-//            // Append additional text parameters if any
-//            if let param = param {
-//                for (key, value) in param {
-//                    if let stringValue = value as? String {
-//                        multipartFormData.append(stringValue.data(using: .utf8)!, withName: key)
-//                    } else if let intValue = value as? Int {
-//                        multipartFormData.append("\(intValue)".data(using: .utf8)!, withName: key)
-//                    } else if let arrayValue = value as? NSArray {
-//                        let arrayKey = key + "[]"
-//                        for element in arrayValue {
-//                            if let str = element as? String {
-//                                multipartFormData.append(str.data(using: .utf8)!, withName: arrayKey)
-//                            } else if let num = element as? Int {
-//                                multipartFormData.append("\(num)".data(using: .utf8)!, withName: arrayKey)
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//            
-//        }, to: networkUrl, headers: header)
-//        .responseDecodable(of: BaseResponse<T>.self) { response in
-//            
-//            printInConsole(response.debugDescription)
-//            let status = HTTPStatusCode(rawValue: response.response?.statusCode ?? 200) ?? .FORBIDDEN
-//            
-//            switch response.result {
-//            case .success(let result):
-//                if HTTPStatusCode.Sucess.contains(status) {
-//                    completion(.success(result), status)
-//                } else {
-//                    if status == .UNAUTHORIZED {
-//                        completion(.failure(.sessionExpired), status)
-//                    } else {
-//                        self.ErrorResponseHandle(response: response.data) { errResponse in
-//                            completion(.failure(.invalidResponse(errResponse)), status)
-//                        }
-//                    }
-//                }
-//            case .failure(let err):
-//                if status == .UNAUTHORIZED {
-//                    completion(.failure(.sessionExpired), status)
-//                } else if HTTPStatusCode.Failure.contains(status) {
-//                    self.ErrorResponseHandle(response: response.data) { errResponse in
-//                        completion(.failure(.invalidResponse(errResponse)), status)
-//                    }
-//                } else {
-//                    completion(.failure(.decoding(err)), status)
-//                }
-//            }
-//        }
-//    }
+    //    public func requestMultiPartForVideoAndAudio<T: Decodable>(
+    //        url: NetworkURL,
+    //        assets: [MultipartUpload],
+    //        param: Dictionary<String, Any>? = nil,
+    //        model: T.Type,
+    //        completion: @escaping ResultHandler<BaseResponse<T>>
+    //    ) {
+    //        guard NetworkReachabilityManager()?.isReachable == true else {
+    //            completion(.failure(.noNetwork), nil)
+    //            return
+    //        }
+    //
+    //        let header = getHeaders()
+    //
+    //        var networkUrl = ""
+    //        switch url {
+    //        case .endpoint(let networkEndPoint):
+    //            networkUrl = networkEndPoint.withBaseURL()
+    //        case .custom(let string):
+    //            networkUrl = BaseURL.value() + string
+    //        }
+    //
+    //        AF.upload(multipartFormData: { multipartFormData in
+    //
+    //            let fieldName = "file"  // ← Backend requires this exact field name
+    //
+    //            for uploadData in assets {
+    //                var fileName: String
+    //                var mimeTypeString: String
+    //                var dataToUpload: Data?
+    //
+    //                switch uploadData.mimeType {
+    //                case .image:
+    //                    mimeTypeString = "image/jpeg"
+    //                    fileName = "\(UUID().uuidString).jpeg"
+    //
+    //                    // Support UIImage → Data
+    //                    if let image = uploadData.file as? UIImage,
+    //                       let imageData = image.jpegData(compressionQuality: 0.7) {
+    //                        dataToUpload = imageData
+    //                    }
+    //                    // Support direct Data (your current usage)
+    //                    else if let data = uploadData.file as? Data {
+    //                        dataToUpload = data
+    //                    }
+    //
+    //                case .Video:
+    //                    mimeTypeString = "video/mp4"
+    //                    fileName = "\(UUID().uuidString).mp4"
+    //
+    //                    // Prefer URL for large videos (memory efficient)
+    //                    if let url = uploadData.file as? URL {
+    //                        multipartFormData.append(
+    //                            url,
+    //                            withName: fieldName,
+    //                            fileName: fileName,
+    //                            mimeType: mimeTypeString
+    //                        )
+    //                        continue  // Skip data append below
+    //                    }
+    //                    // Fallback to Data
+    //                    else if let data = uploadData.file as? Data {
+    //                        dataToUpload = data
+    //                        let bytes = data.count
+    //                        let kb = Double(bytes) / 1024.0
+    //                        let mb = kb / 1024.0
+    //
+    //                        print("Video Size:")
+    //                        print("➡ Bytes: \(bytes)")
+    //                        print("➡ KB: \(String(format: "%.2f", kb)) KB")
+    //                        print("➡ MB: \(String(format: "%.2f", mb)) MB")
+    //
+    //                    }
+    //
+    //                case .pdf:
+    //                    mimeTypeString = "application/pdf"
+    //                    fileName = "\(UUID().uuidString).pdf"
+    //
+    //                    if let url = uploadData.file as? URL {
+    //                        multipartFormData.append(
+    //                            url,
+    //                            withName: fieldName,
+    //                            fileName: url.lastPathComponent,
+    //                            mimeType: mimeTypeString
+    //                        )
+    //                        continue
+    //                    } else if let data = uploadData.file as? Data {
+    //                        dataToUpload = data
+    //                    }
+    //
+    //                default:
+    //                    completion(.failure(.custom(code: 999)), nil)
+    //                    return
+    //                }
+    //
+    //                // If we have data to upload (image or video from Data)
+    //                guard let data = dataToUpload else {
+    //                    completion(.failure(.custom(code: 888)), nil)
+    //                    return
+    //                }
+    //
+    //                multipartFormData.append(
+    //                    data,
+    //                    withName: fieldName,
+    //                    fileName: fileName,
+    //                    mimeType: mimeTypeString
+    //                )
+    //            }
+    //
+    //            // Append additional text parameters if any
+    //            if let param = param {
+    //                for (key, value) in param {
+    //                    if let stringValue = value as? String {
+    //                        multipartFormData.append(stringValue.data(using: .utf8)!, withName: key)
+    //                    } else if let intValue = value as? Int {
+    //                        multipartFormData.append("\(intValue)".data(using: .utf8)!, withName: key)
+    //                    } else if let arrayValue = value as? NSArray {
+    //                        let arrayKey = key + "[]"
+    //                        for element in arrayValue {
+    //                            if let str = element as? String {
+    //                                multipartFormData.append(str.data(using: .utf8)!, withName: arrayKey)
+    //                            } else if let num = element as? Int {
+    //                                multipartFormData.append("\(num)".data(using: .utf8)!, withName: arrayKey)
+    //                            }
+    //                        }
+    //                    }
+    //                }
+    //            }
+    //
+    //        }, to: networkUrl, headers: header)
+    //        .responseDecodable(of: BaseResponse<T>.self) { response in
+    //
+    //            printInConsole(response.debugDescription)
+    //            let status = HTTPStatusCode(rawValue: response.response?.statusCode ?? 200) ?? .FORBIDDEN
+    //
+    //            switch response.result {
+    //            case .success(let result):
+    //                if HTTPStatusCode.Sucess.contains(status) {
+    //                    completion(.success(result), status)
+    //                } else {
+    //                    if status == .UNAUTHORIZED {
+    //                        completion(.failure(.sessionExpired), status)
+    //                    } else {
+    //                        self.ErrorResponseHandle(response: response.data) { errResponse in
+    //                            completion(.failure(.invalidResponse(errResponse)), status)
+    //                        }
+    //                    }
+    //                }
+    //            case .failure(let err):
+    //                if status == .UNAUTHORIZED {
+    //                    completion(.failure(.sessionExpired), status)
+    //                } else if HTTPStatusCode.Failure.contains(status) {
+    //                    self.ErrorResponseHandle(response: response.data) { errResponse in
+    //                        completion(.failure(.invalidResponse(errResponse)), status)
+    //                    }
+    //                } else {
+    //                    completion(.failure(.decoding(err)), status)
+    //                }
+    //            }
+    //        }
+    //    }
     
     public func requestMultiPartForVideoAndAudio<T: Decodable>(
         url: NetworkURL,
@@ -630,9 +750,9 @@ final class NetworkManager {
                 
                 switch uploadData.mimeType {
                     
-                // --------------------------------------------
-                // MARK: IMAGE
-                // --------------------------------------------
+                    // --------------------------------------------
+                    // MARK: IMAGE
+                    // --------------------------------------------
                 case .image:
                     mimeTypeString = "image/jpeg"
                     fileName = "\(UUID().uuidString).jpeg"
@@ -645,9 +765,9 @@ final class NetworkManager {
                         dataToUpload = data
                     }
                     
-                // --------------------------------------------
-                // MARK: VIDEO (Compression Added Here)
-                // --------------------------------------------
+                    // --------------------------------------------
+                    // MARK: VIDEO (Compression Added Here)
+                    // --------------------------------------------
                 case .Video:
                     mimeTypeString = "video/mp4"
                     fileName = "\(UUID().uuidString).mp4"
@@ -666,7 +786,7 @@ final class NetworkManager {
                             print("➡ KB: \(String(format: "%.2f", kb)) KB")
                             print("➡ MB: \(String(format: "%.2f", mb)) MB")
                         }
-
+                        
                         multipartFormData.append(
                             compressedURL,
                             withName: fieldName,
@@ -697,7 +817,7 @@ final class NetworkManager {
                             print("➡ KB: \(String(format: "%.2f", kb)) KB")
                             print("➡ MB: \(String(format: "%.2f", mb)) MB")
                         }
-
+                        
                         multipartFormData.append(
                             compressedURL,
                             withName: fieldName,
@@ -707,9 +827,9 @@ final class NetworkManager {
                         
                         continue
                     }
-                // --------------------------------------------
-                // MARK: PDF
-                // --------------------------------------------
+                    // --------------------------------------------
+                    // MARK: PDF
+                    // --------------------------------------------
                 case .pdf:
                     mimeTypeString = "application/pdf"
                     fileName = "\(UUID().uuidString).pdf"
@@ -790,17 +910,17 @@ final class NetworkManager {
                     completion(.failure(.sessionExpired), status)
                 } else if status == .NO_ACTIVE_PLAN {     // 👈 NEW CONDITION
                     self.ErrorResponseHandle(response: response.data) { errResponse in
-                            
-                            // Show popup globally
-                            DispatchQueue.main.async {
-                                UIApplication.shared.topViewController()?
-                                    .showNoActivePlanToast(message: errResponse?.message ?? "")
-                            }
-                            
-                            // DO NOT send failure — avoid double popup
-                            return
+                        
+                        // Show popup globally
+                        DispatchQueue.main.async {
+                            UIApplication.shared.topViewController()?
+                                .showNoActivePlanToast(message: errResponse?.message ?? "")
                         }
-
+                        
+                        // DO NOT send failure — avoid double popup
+                        return
+                    }
+                    
                 } else if HTTPStatusCode.Failure.contains(status) {
                     self.ErrorResponseHandle(response: response.data) { errResponse in
                         completion(.failure(.invalidResponse(errResponse)), status)
@@ -830,23 +950,23 @@ final class NetworkManager {
         guard let export = AVAssetExportSession(asset: asset,
                                                 presetName: AVAssetExportPresetMediumQuality)
         else { return nil }
-
+        
         let outputURL = FileManager.default.temporaryDirectory
             .appendingPathComponent("compressed_\(UUID().uuidString).mp4")
-
+        
         export.outputURL = outputURL
         export.outputFileType = .mp4
         export.shouldOptimizeForNetworkUse = true
-
+        
         let semaphore = DispatchSemaphore(value: 0)
-
+        
         export.exportAsynchronously {
             semaphore.signal()
         }
-
+        
         // Block current thread, NOT main/UI thread.
         semaphore.wait()
-
+        
         return export.status == .completed ? outputURL : nil
     }
     

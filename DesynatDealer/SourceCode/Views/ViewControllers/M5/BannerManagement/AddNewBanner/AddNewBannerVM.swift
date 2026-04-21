@@ -68,6 +68,27 @@ class AddNewBannerVM: NSObject {
             self.hostVC.subcategoriesList = list
         }
     }
+    
+    func uploadFullScreenBanner(
+        file: Any,
+        isImage: Bool,
+        isGif: Bool = false,
+//        keyParam: [String: Any],
+        completion: @escaping(String) -> Void
+    ) {
+        let mime: MultipartUpload.Mime = isGif ? .gif : (isImage ? .image : .pdf)
+        
+        let param = MultipartUpload(
+            fileName: "image",
+            file: file,
+            mimeType: mime
+        )
+        
+        WebService.sharedInstance.uploadWithResolutionPromotional(withParams: param) {
+            url, msg, code in
+            completion(url)
+        }
+    }
   
   func getPrice(type: String) {
       let params: [String: Any] = [
