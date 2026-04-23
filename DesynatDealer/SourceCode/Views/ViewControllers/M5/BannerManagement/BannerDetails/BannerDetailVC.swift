@@ -45,6 +45,7 @@ class BannerDetailVC: UIViewController {
         } else {
             imgBanner.image = UIImage(named: "")
         }
+        imgBanner.enableFullscreenZoom()
         
         lblRequestedId.text = data?.orderID ?? "Nil"
         lblRequestedDate.text = formatBannerDate(data?.createdAt)

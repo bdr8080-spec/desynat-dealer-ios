@@ -18,7 +18,7 @@ class AddNewBannerVM: NSObject {
       let selectedBanner = hostVC.selectedImg
       let fromDate = hostVC.txtFromDate.text ?? ""
       let toDate = hostVC.txtToDate.text ?? ""
-      let bannerImg = hostVC.bannerImageUrl
+//      let bannerImg = hostVC.bannerImageUrl
       var errorMessage: AlertConstant = .none
 
       // 1️⃣ Banner position
@@ -34,14 +34,14 @@ class AddNewBannerVM: NSObject {
               errorMessage = .selectSubCategory
           }
       }
-
+//      hostVC.pickedImage == nil
       // 3️⃣ Common validations (for ALL banner types)
       if errorMessage == .none {
           if fromDate.isEmpty {
               errorMessage = .selectFromDate
           } else if toDate.isEmpty {
               errorMessage = .selectToDate
-          } else if bannerImg.isEmpty {
+          } else if hostVC.pickedImage == nil {
               errorMessage = .uploadBanner
           }
       }
@@ -73,7 +73,6 @@ class AddNewBannerVM: NSObject {
         file: Any,
         isImage: Bool,
         isGif: Bool = false,
-//        keyParam: [String: Any],
         completion: @escaping(String) -> Void
     ) {
         let mime: MultipartUpload.Mime = isGif ? .gif : (isImage ? .image : .pdf)

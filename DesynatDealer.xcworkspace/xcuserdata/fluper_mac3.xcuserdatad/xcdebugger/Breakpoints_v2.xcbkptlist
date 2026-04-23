@@ -7,314 +7,96 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "AC0EC2D1-7402-4B35-AEA8-F9899588EBE8"
+            uuid = "4BF39AE9-DE59-4FC0-BD79-11D2CD7CCB1E"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DesynatDealer/Utilities/NetworkManager/NetworkManager.swift"
+            filePath = "DesynatDealer/SourceCode/Views/ViewControllers/M5/BannerManagement/AddNewBanner/AddNewBannerVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "518"
-            endingLineNumber = "518"
-            landmarkName = "requestMultiPart(url:assets:param:model:completion:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "AC0EC2D1-7402-4B35-AEA8-F9899588EBE8 - d5bdf82d4479c19e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 @Sendable (Alamofire.DataResponse&lt;DesynatDealer.BaseResponse&lt;&#x3c4;_0_0&gt;, Alamofire.AFError&gt;) -&gt; () in DesynatDealer.NetworkManager.requestMultiPart&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(url: DesynatDealer.NetworkURL, assets: Swift.Array&lt;DesynatDealer.MultipartUpload&gt;, param: Swift.Optional&lt;Swift.Dictionary&lt;Swift.String, Any&gt;&gt;, model: &#x3c4;_0_0.Type, completion: (Swift.Result&lt;DesynatDealer.BaseResponse&lt;&#x3c4;_0_0&gt;, DesynatDealer.NetworkError&gt;, Swift.Optional&lt;DesynatDealer.HTTPStatusCode&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "DesynatDealer.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fluper_mac3/Documents/RakhiWorkspace/desynat-dealer-ios/DesynatDealer/Utilities/NetworkManager/NetworkManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "518"
-                  endingLineNumber = "518">
-               </Location>
-               <Location
-                  uuid = "AC0EC2D1-7402-4B35-AEA8-F9899588EBE8 - 68af75d4eef79b54"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #3 (Swift.Optional&lt;DesynatDealer.ErrorResponse&gt;) -&gt; () in closure #2 @Sendable (Alamofire.DataResponse&lt;DesynatDealer.BaseResponse&lt;&#x3c4;_0_0&gt;, Alamofire.AFError&gt;) -&gt; () in DesynatDealer.NetworkManager.requestMultiPart&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(url: DesynatDealer.NetworkURL, assets: Swift.Array&lt;DesynatDealer.MultipartUpload&gt;, param: Swift.Optional&lt;Swift.Dictionary&lt;Swift.String, Any&gt;&gt;, model: &#x3c4;_0_0.Type, completion: (Swift.Result&lt;DesynatDealer.BaseResponse&lt;&#x3c4;_0_0&gt;, DesynatDealer.NetworkError&gt;, Swift.Optional&lt;DesynatDealer.HTTPStatusCode&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "DesynatDealer.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fluper_mac3/Documents/RakhiWorkspace/desynat-dealer-ios/DesynatDealer/Utilities/NetworkManager/NetworkManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "519"
-                  endingLineNumber = "519">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "46288D7C-7613-46F2-9AA4-55ED07D13F56"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DesynatDealer/Utilities/NetworkManager/NetworkManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "519"
-            endingLineNumber = "519"
-            landmarkName = "requestMultiPart(url:assets:param:model:completion:)"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
+            landmarkName = "uploadBannerThenSubmit()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "35BD650B-3B45-4BFA-8BA0-E50BBB45BB03"
+            uuid = "429D1DD6-8BD9-4079-BA1E-07D088F9CE6F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DesynatDealer/Utilities/NetworkManager/NetworkManager.swift"
+            filePath = "DesynatDealer/SourceCode/Views/ViewControllers/M5/BannerManagement/AddNewBanner/AddNewBannerVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "517"
-            endingLineNumber = "517"
-            landmarkName = "requestMultiPart(url:assets:param:model:completion:)"
+            startingLineNumber = "193"
+            endingLineNumber = "193"
+            landmarkName = "uploadBannerThenSubmit()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B8272D10-ADA9-47E7-9CE4-86E8E9CD3784"
+            uuid = "DE6FF98F-CCA8-4833-B4CF-0A7E1B4FFAAD"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DesynatDealer/Utilities/NetworkManager/NetworkManager.swift"
+            filePath = "DesynatDealer/SourceCode/Views/ViewControllers/M5/BannerManagement/AddNewBanner/AddNewBannerVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "496"
-            endingLineNumber = "496"
-            landmarkName = "requestMultiPart(url:assets:param:model:completion:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "B8272D10-ADA9-47E7-9CE4-86E8E9CD3784 - d5bdf82d4479feb4"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 @Sendable (Alamofire.DataResponse&lt;DesynatDealer.BaseResponse&lt;&#x3c4;_0_0&gt;, Alamofire.AFError&gt;) -&gt; () in DesynatDealer.NetworkManager.requestMultiPart&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(url: DesynatDealer.NetworkURL, assets: Swift.Array&lt;DesynatDealer.MultipartUpload&gt;, param: Swift.Optional&lt;Swift.Dictionary&lt;Swift.String, Any&gt;&gt;, model: &#x3c4;_0_0.Type, completion: (Swift.Result&lt;DesynatDealer.BaseResponse&lt;&#x3c4;_0_0&gt;, DesynatDealer.NetworkError&gt;, Swift.Optional&lt;DesynatDealer.HTTPStatusCode&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "DesynatDealer.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fluper_mac3/Documents/RakhiWorkspace/desynat-dealer-ios/DesynatDealer/Utilities/NetworkManager/NetworkManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "496"
-                  endingLineNumber = "496">
-               </Location>
-               <Location
-                  uuid = "B8272D10-ADA9-47E7-9CE4-86E8E9CD3784 - 4d2096653086f180"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;DesynatDealer.ErrorResponse&gt;) -&gt; () in closure #2 @Sendable (Alamofire.DataResponse&lt;DesynatDealer.BaseResponse&lt;&#x3c4;_0_0&gt;, Alamofire.AFError&gt;) -&gt; () in DesynatDealer.NetworkManager.requestMultiPart&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(url: DesynatDealer.NetworkURL, assets: Swift.Array&lt;DesynatDealer.MultipartUpload&gt;, param: Swift.Optional&lt;Swift.Dictionary&lt;Swift.String, Any&gt;&gt;, model: &#x3c4;_0_0.Type, completion: (Swift.Result&lt;DesynatDealer.BaseResponse&lt;&#x3c4;_0_0&gt;, DesynatDealer.NetworkError&gt;, Swift.Optional&lt;DesynatDealer.HTTPStatusCode&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "DesynatDealer.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fluper_mac3/Documents/RakhiWorkspace/desynat-dealer-ios/DesynatDealer/Utilities/NetworkManager/NetworkManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "497"
-                  endingLineNumber = "497">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "0C9F0A9D-1311-4508-A49F-53AB271CBBCD"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DesynatDealer/Utilities/NetworkManager/NetworkManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "497"
-            endingLineNumber = "497"
-            landmarkName = "requestMultiPart(url:assets:param:model:completion:)"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
+            landmarkName = "btnSendRequest(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E97B6352-7D08-42B8-88C7-FAB974A4ECC0"
+            uuid = "3ABA5FD0-2CF3-4F7C-8953-DFD173A9E8CF"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DesynatDealer/Utilities/NetworkManager/NetworkManager.swift"
+            filePath = "DesynatDealer/SourceCode/Views/ViewControllers/M5/BannerManagement/AddNewBanner/AddNewBannerVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "493"
-            endingLineNumber = "493"
-            landmarkName = "requestMultiPart(url:assets:param:model:completion:)"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
+            landmarkName = "btnSendRequest(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "2AA4B8E6-A8E3-4786-BD56-6406BBAC96F0"
+            uuid = "EB7E98AF-6F86-45CF-96AB-DAD5053ACC8E"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DesynatDealer/Utilities/NetworkManager/NetworkManager.swift"
+            filePath = "DesynatDealer/SourceCode/Views/ViewControllers/M5/BannerManagement/AddNewBanner/AddNewBannerVM.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "490"
-            endingLineNumber = "490"
-            landmarkName = "requestMultiPart(url:assets:param:model:completion:)"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "uploadFullScreenBanner(file:isImage:isGif:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5F6F03CF-BED6-409D-BC57-5DD1560414D5"
+            uuid = "1434367D-BB82-4D6B-BE57-4A684264A064"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DesynatDealer/Utilities/NetworkManager/NetworkManager.swift"
+            filePath = "DesynatDealer/SourceCode/Views/ViewControllers/M5/BannerManagement/AddNewBanner/AddNewBannerVM.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "502"
-            endingLineNumber = "502"
-            landmarkName = "requestMultiPart(url:assets:param:model:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "BE33A04E-9540-47D2-970E-28AB80AC4C7C"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DesynatDealer/Utilities/NetworkManager/NetworkManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "504"
-            endingLineNumber = "504"
-            landmarkName = "requestMultiPart(url:assets:param:model:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "1E69D638-DD68-4EC5-B3BC-2D7B54EB2BF5"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DesynatDealer/Utilities/NetworkManager/NetworkManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "522"
-            endingLineNumber = "522"
-            landmarkName = "requestMultiPart(url:assets:param:model:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "7DA1C1FF-FEED-4E7C-A858-2234681A73CE"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DesynatDealer/WebService/ProfileWebService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
-            landmarkName = "uploadWithResolutionPromotional(withParams:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "32F7E446-B886-48C1-B71B-5FE20104CF63"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DesynatDealer/WebService/ProfileWebService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "uploadWithResolutionPromotional(withParams:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "D417C8B9-66E0-4AC4-8477-4EC6F2996BAA"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DesynatDealer/WebService/ProfileWebService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "uploadWithResolutionPromotional(withParams:completion:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "D417C8B9-66E0-4AC4-8477-4EC6F2996BAA - 48fe09cce1094589"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "DesynatDealer.WebService.uploadWithResolutionPromotional(withParams: DesynatDealer.MultipartUpload, completion: (Swift.String, Swift.Optional&lt;Swift.String&gt;, Swift.Optional&lt;DesynatDealer.HTTPStatusCode&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "DesynatDealer.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fluper_mac3/Documents/RakhiWorkspace/desynat-dealer-ios/DesynatDealer/WebService/ProfileWebService.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37">
-               </Location>
-               <Location
-                  uuid = "D417C8B9-66E0-4AC4-8477-4EC6F2996BAA - bb5913377cb344f4"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;DesynatDealer.BaseResponse&lt;DesynatDealer.UploadFileDataModel&gt;, DesynatDealer.NetworkError&gt;, Swift.Optional&lt;DesynatDealer.HTTPStatusCode&gt;) -&gt; () in DesynatDealer.WebService.uploadWithResolutionPromotional(withParams: DesynatDealer.MultipartUpload, completion: (Swift.String, Swift.Optional&lt;Swift.String&gt;, Swift.Optional&lt;DesynatDealer.HTTPStatusCode&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "DesynatDealer.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fluper_mac3/Documents/RakhiWorkspace/desynat-dealer-ios/DesynatDealer/WebService/ProfileWebService.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "38"
-                  endingLineNumber = "38">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "997F0613-4B73-4548-99F9-BC60752725B8"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DesynatDealer/WebService/ProfileWebService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
-            landmarkName = "uploadWithResolutionPromotional(withParams:completion:)"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "uploadFullScreenBanner(file:isImage:isGif:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

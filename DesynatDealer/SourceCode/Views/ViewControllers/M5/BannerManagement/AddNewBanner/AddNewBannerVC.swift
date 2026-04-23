@@ -9,7 +9,7 @@ import UIKit
 import SDWebImage
 
 class AddNewBannerVC: UIViewController {
-
+    
     @IBOutlet weak var img1: UIImageView!
     @IBOutlet weak var img2: UIImageView!
     @IBOutlet weak var img3: UIImageView!
@@ -34,6 +34,7 @@ class AddNewBannerVC: UIViewController {
     var selectedSubCategoriesId: Int? = -1
     var onBannerAdded: (() -> Void)?
     var pricePerDay: Int = 0
+    var pickedImage: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +47,7 @@ class AddNewBannerVC: UIViewController {
         defaultBtn.tag = 0
         btnSelectPosition(defaultBtn)
     }
-
+    
     private func resetRadio() {
         img1.image = UIImage(named: "radioUnselected")
         img2.image = UIImage(named: "radioUnselected")
@@ -83,7 +84,7 @@ class AddNewBannerVC: UIViewController {
         
         return Int(numericText) ?? 0
     }
-
+    
     @IBAction func btnBack(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -92,9 +93,9 @@ class AddNewBannerVC: UIViewController {
         resetRadio()
         txtFromDate.text = ""
         txtToDate.text = ""
-      lblTotalDays.text = "days"
-      lblTotalPrice.text = "0 KD"
-//        lblTotalPrice.text = "\(pricePerDay) KD"
+        lblTotalDays.text = "days"
+        lblTotalPrice.text = "0 KD"
+        //        lblTotalPrice.text = "\(pricePerDay) KD"
         
         var bannerType = "1"
         
@@ -135,13 +136,13 @@ class AddNewBannerVC: UIViewController {
         ImagePickerHelper.shared.showPickerController {  image , imageName in
             self.imgBanner.image = image
             if let image = image {
-                self.viewModel.uploadFullScreenBanner(file: image, isImage: true) { [weak self] uploadedUrl in
-                    guard let self = self else { return }
-                    DispatchQueue.main.async {
-                        self.bannerImageUrl = uploadedUrl
-                        
-                    }
-                }
+//                self.viewModel.uploadFullScreenBanner(file: image, isImage: true) { [weak self] uploadedUrl in
+//                    guard let self = self else { return }
+//                    DispatchQueue.main.async {
+//                        self.bannerImageUrl = uploadedUrl
+                        self.pickedImage = image
+//                    }
+//                }
             }
         }
     }
@@ -182,8 +183,25 @@ class AddNewBannerVC: UIViewController {
     
     @IBAction func btnSendRequest(_ sender: Any) {
         if viewModel.validation() {
-            viewModel.addBanner()
+            uploadBannerThenSubmit()
         }
+    }
+    
+    private func uploadBannerThenSubmit() {
+        // Image upload
+        if let image = pickedImage {
+            viewModel.uploadFullScreenBanner(
+                file: image,
+                isImage: true,
+            ) { [weak self] url in
+                self?.bannerImageUrl = url
+                self?.viewModel.addBanner()
+            }
+            return
+        }
+        
+        // Add flow safety
+        //        showAlert(msg: "Please select image")
     }
 }
 
@@ -211,107 +229,106 @@ extension AddNewBannerVC {
         }
     }
     
-  @objc private func doneDatePicker() {
-      let formatter = DateFormatter()
-      formatter.dateFormat = "dd/MM/yyyy"
-      
-      guard let activeTextField = activeTextField else { return }
-      
-      let selectedDate = datePicker.date
-      activeTextField.text = formatter.string(from: selectedDate)
-      view.endEditing(true)
-      
-      // ✅ Case: From date changed
-      if activeTextField == txtFromDate,
-         let toText = txtToDate.text,
-         !toText.isEmpty,
-         let toDate = formatter.date(from: toText) {
-          
-          // 🚫 From > To → invalidate To
-          if selectedDate > toDate {
-              txtToDate.text = ""
-              lblTotalDays.text = "days"
-              lblTotalPrice.text = "0 KD"
-              
-              // 🔁 Force user to select To Date again
-              DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                  self.txtToDate.becomeFirstResponder()
-              }
-              return
-          }
-      }
-      
-      // ✅ Calculate only when both dates are valid
-      calculateTotalDays()
-  }
-
-
+    @objc private func doneDatePicker() {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+        
+        guard let activeTextField = activeTextField else { return }
+        
+        let selectedDate = datePicker.date
+        activeTextField.text = formatter.string(from: selectedDate)
+        view.endEditing(true)
+        
+        // ✅ Case: From date changed
+        if activeTextField == txtFromDate,
+           let toText = txtToDate.text,
+           !toText.isEmpty,
+           let toDate = formatter.date(from: toText) {
+            
+            // 🚫 From > To → invalidate To
+            if selectedDate > toDate {
+                txtToDate.text = ""
+                lblTotalDays.text = "days"
+                lblTotalPrice.text = "0 KD"
+                
+                // 🔁 Force user to select To Date again
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.txtToDate.becomeFirstResponder()
+                }
+                return
+            }
+        }
+        
+        // ✅ Calculate only when both dates are valid
+        calculateTotalDays()
+    }
+    
+    
     
     @objc private func cancelDatePicker() {
         view.endEditing(true)
     }
-  
-  func calculateTotalDays() {
-      guard
-          let fromText = txtFromDate.text, !fromText.isEmpty,
-          let toText = txtToDate.text, !toText.isEmpty
-      else {
-          lblTotalDays.text = "days"
-          lblTotalPrice.text = "0 KD"
-          return
-      }
-      
-      let formatter = DateFormatter()
-      formatter.dateFormat = "dd/MM/yyyy"
-      
-      guard
-          let startDate = formatter.date(from: fromText),
-          let endDate = formatter.date(from: toText),
-          startDate <= endDate
-      else {
-          lblTotalDays.text = "days"
-          lblTotalPrice.text = "0 KD"
-          return
-      }
-      
-      let days = Calendar.current.dateComponents([.day], from: startDate, to: endDate).day ?? 0
-      let totalDays = days + 1   // inclusive
-      
-      lblTotalDays.text = "\(totalDays)"
-      lblTotalPrice.text = "\(totalDays * pricePerDay) KD"
-  }
-
+    
+    func calculateTotalDays() {
+        guard
+            let fromText = txtFromDate.text, !fromText.isEmpty,
+            let toText = txtToDate.text, !toText.isEmpty
+        else {
+            lblTotalDays.text = "days"
+            lblTotalPrice.text = "0 KD"
+            return
+        }
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+        
+        guard
+            let startDate = formatter.date(from: fromText),
+            let endDate = formatter.date(from: toText),
+            startDate <= endDate
+        else {
+            lblTotalDays.text = "days"
+            lblTotalPrice.text = "0 KD"
+            return
+        }
+        
+        let days = Calendar.current.dateComponents([.day], from: startDate, to: endDate).day ?? 0
+        let totalDays = days + 1   // inclusive
+        
+        lblTotalDays.text = "\(totalDays)"
+        lblTotalPrice.text = "\(totalDays * pricePerDay) KD"
+    }
+    
 }
 
 //TExtField Delegate
 extension AddNewBannerVC: UITextFieldDelegate {
-  func textFieldDidBeginEditing(_ textField: UITextField) {
-      activeTextField = textField
-      
-      let formatter = DateFormatter()
-      formatter.dateFormat = "dd/MM/yyyy"
-      
-      if textField == txtToDate,
-         let fromText = txtFromDate.text,
-         let fromDate = formatter.date(from: fromText) {
-          datePicker.minimumDate = fromDate
-      } else {
-          datePicker.minimumDate = Date()
-      }
-  }
-
-
-
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        activeTextField = textField
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+        
+        if textField == txtToDate,
+           let fromText = txtFromDate.text,
+           let fromDate = formatter.date(from: fromText) {
+            datePicker.minimumDate = fromDate
+        } else {
+            datePicker.minimumDate = Date()
+        }
+    }
+    
 }
 
 extension String {
     func toAPIDate() -> String {
         let inputFormatter = DateFormatter()
         inputFormatter.dateFormat = "dd/MM/yyyy"
-
+        
         let outputFormatter = DateFormatter()
         outputFormatter.dateFormat = "yyyy-MM-dd"
-
+        
         if let date = inputFormatter.date(from: self) {
             return outputFormatter.string(from: date)
         }

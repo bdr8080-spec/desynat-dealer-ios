@@ -34,7 +34,7 @@ extension WebService {
     func uploadWithResolutionPromotional(withParams file:MultipartUpload,
                                 completion:@escaping (_ url:String, _ msg:String?, _ code:HTTPStatusCode?)-> Void) {
         CommonUtils.showHud(show: true)
-        NetworkManager.shared.requestMultiPartForPromotionalBanner(url: .endpoint(.uploadWithResolutionPromotional), assets: [file], model: UploadFileDataModel.self) { result, code in
+        NetworkManager.shared.requestMultiPart(url: .endpoint(.uploadWithResolutionPromotional), assets: [file], model: UploadFileDataModel.self) { result, code in
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message, error in
                 if let url = response?.url {

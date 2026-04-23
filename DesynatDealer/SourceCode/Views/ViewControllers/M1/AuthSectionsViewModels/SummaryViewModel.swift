@@ -21,19 +21,14 @@ class SummaryViewModel:NSObject{
         let param:[String:Any] = [APIKeys.userId:userId]
         
         WebService.sharedInstance.summaryService(withParams:param) { user in
-//            self.hostVC.imgPersonalInfo.sd_setImage(with:URL(string:user.profilePic ?? ""), placeholderImage:nil)
-            
             self.hostVC.imgPersonalInfo.sd_imageIndicator = SDWebImageActivityIndicator.gray
-            self.hostVC.imgPersonalInfo.sd_setImage(
-                with: URL(string: user.profilePic ?? ""),
-                placeholderImage: nil
-            )
-            
+            self.hostVC.imgPersonalInfo.sd_setImage(with: URL(string: user.profilePic ?? ""),placeholderImage: nil)
+
             self.hostVC.lblFullName.text = "\(user.firstName ?? "") \(user.lastName ?? "")"
             self.hostVC.lblPhoneNumber.text = "\(user.countryCode ?? "")-\(user.mobile ?? "")"
             self.hostVC.lblMailId.text = user.email
             
-            self.hostVC.imgPersonalInfo.sd_setImage(with:URL(string:user.storeInfo?.storeImage ?? ""), placeholderImage:nil)
+            
             self.hostVC.lblStoreName.text = user.storeInfo?.storeName
 //            self.hostVC.lblAddress.text = user.storeInfo?.storeAddress
             let storeAddress = user.storeInfo?.storeAddress ?? ""
@@ -49,12 +44,8 @@ class SummaryViewModel:NSObject{
             self.hostVC.lblAddress.text = fullAddress.isEmpty ? "N/A" : fullAddress
             
             self.hostVC.lblStorePhoneNumber.text = "\(user.storeInfo?.countryCode ?? "")-\(user.storeInfo?.storePhone ?? "")"
-//            self.hostVC.imgStoreInfo.sd_setImage(with:URL(string:user.storeInfo?.storeImage ?? ""), placeholderImage:nil)
             self.hostVC.imgStoreInfo.sd_imageIndicator = SDWebImageActivityIndicator.gray
-            self.hostVC.imgStoreInfo.sd_setImage(
-                with: URL(string: user.storeInfo?.storeImage ?? ""),
-                placeholderImage: nil
-            )
+            self.hostVC.imgStoreInfo.sd_setImage(with: URL(string: user.storeInfo?.storeImage ?? ""),placeholderImage: nil)
 
             self.hostVC.lblStoreMailId.text = user.storeInfo?.storeMailID
             self.hostVC.lblBio.text = user.storeInfo?.bio

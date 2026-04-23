@@ -16,13 +16,21 @@ class FAQViewModel {
         self.hostVC = hostVC
     }
     
-    func getFAQRequest() {
+  //  func getFAQRequest() {
 //        let param: [String: Any] = ["type": hostVC.selectedUserType]
 //        WebService.shared.getFaqService(parameter: param) { [weak self] response in
 //            guard let self = self else { return }
 //            faqListData = response
 //            hostVC.listTableView.reloadData()
 //        }
+  //  }
+    func getFAQRequest() {
+        let param: [String: Any] = ["type": hostVC.selectedUserType]
+        WebService.sharedInstance.getFaqService(parameter: param) { [weak self] response in
+            guard let self = self else { return }
+            faqListData = response
+            hostVC.listTableView.reloadData()
+        }
     }
     
 }

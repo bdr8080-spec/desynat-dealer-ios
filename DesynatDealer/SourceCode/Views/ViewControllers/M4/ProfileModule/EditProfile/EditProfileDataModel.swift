@@ -26,6 +26,8 @@ struct SellerProfileDataModel: Codable {
 //    let subcriptionPlan: [String]?
     let subcriptionPlan: [SubcriptionPlan]?
     let ownerDocument, storeDocument: [Document]?
+    let notification:Int?
+    let appNotification:Int?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -55,6 +57,8 @@ struct SellerProfileDataModel: Codable {
         case storeDocument = "store_document"
         case profileQR = "profile_qr"
         case qrSellerUrl
+        case notification
+        case appNotification = "app_notification"
     }
 }
 

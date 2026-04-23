@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24412" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -2543,26 +2543,42 @@
                                     <constraint firstItem="z1w-Aw-Y6B" firstAttribute="leading" secondItem="WVO-HC-unp" secondAttribute="trailing" constant="2" id="oGw-bj-ORd"/>
                                 </constraints>
                             </view>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vd2-ji-gDh">
+                            <wkWebView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5sA-ug-6xk">
                                 <rect key="frame" x="24" y="178" width="345" height="606"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </webView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m4X-NJ-xcd">
+                                <rect key="frame" x="24" y="178" width="345" height="606"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="LEQ-gl-6Ur"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Vd2-ji-gDh" firstAttribute="top" secondItem="cla-7H-Ea2" secondAttribute="bottom" constant="20" id="8L9-C6-eUG"/>
-                            <constraint firstItem="LEQ-gl-6Ur" firstAttribute="trailing" secondItem="Vd2-ji-gDh" secondAttribute="trailing" constant="24" id="Kki-di-gvM"/>
+                            <constraint firstItem="m4X-NJ-xcd" firstAttribute="top" secondItem="5sA-ug-6xk" secondAttribute="top" id="135-5O-rCz"/>
+                            <constraint firstItem="LEQ-gl-6Ur" firstAttribute="bottom" secondItem="5sA-ug-6xk" secondAttribute="bottom" id="Ckx-FI-Onp"/>
+                            <constraint firstItem="LEQ-gl-6Ur" firstAttribute="trailing" secondItem="5sA-ug-6xk" secondAttribute="trailing" constant="24" id="NAw-mG-KNu"/>
                             <constraint firstItem="cla-7H-Ea2" firstAttribute="leading" secondItem="8pL-fy-1cf" secondAttribute="leading" id="O0R-EX-Wzu"/>
-                            <constraint firstItem="LEQ-gl-6Ur" firstAttribute="bottom" secondItem="Vd2-ji-gDh" secondAttribute="bottom" id="Rvx-Q0-9Ql"/>
-                            <constraint firstItem="Vd2-ji-gDh" firstAttribute="leading" secondItem="LEQ-gl-6Ur" secondAttribute="leading" constant="24" id="WX8-ZU-igv"/>
+                            <constraint firstItem="m4X-NJ-xcd" firstAttribute="bottom" secondItem="5sA-ug-6xk" secondAttribute="bottom" id="dje-qv-xE7"/>
+                            <constraint firstItem="m4X-NJ-xcd" firstAttribute="trailing" secondItem="5sA-ug-6xk" secondAttribute="trailing" id="f3U-Uv-NsJ"/>
+                            <constraint firstItem="5sA-ug-6xk" firstAttribute="top" secondItem="cla-7H-Ea2" secondAttribute="bottom" constant="20" id="hO0-nG-ei0"/>
+                            <constraint firstItem="5sA-ug-6xk" firstAttribute="leading" secondItem="LEQ-gl-6Ur" secondAttribute="leading" constant="24" id="kX9-De-hUu"/>
+                            <constraint firstItem="m4X-NJ-xcd" firstAttribute="leading" secondItem="5sA-ug-6xk" secondAttribute="leading" id="mcG-jC-gY4"/>
                             <constraint firstItem="LEQ-gl-6Ur" firstAttribute="trailing" secondItem="cla-7H-Ea2" secondAttribute="trailing" id="nq6-JB-fWt"/>
                             <constraint firstItem="cla-7H-Ea2" firstAttribute="top" secondItem="LEQ-gl-6Ur" secondAttribute="top" id="vLJ-Sv-Wqd"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="titleLbl" destination="z1w-Aw-Y6B" id="noR-j5-tVm"/>
-                        <outlet property="webView" destination="Vd2-ji-gDh" id="RSU-GI-zdk"/>
+                        <outlet property="webView" destination="m4X-NJ-xcd" id="z6g-a7-Jg7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3bW-VW-MD4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2871,6 +2887,9 @@
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="muq-ce-K3s">
                                                                 <rect key="frame" x="0.0" y="0.0" width="345" height="120"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <connections>
+                                                                    <action selector="addNewImageProfileDidTapped:" destination="CgJ-kf-fOr" eventType="touchUpInside" id="dsn-Bx-c4j"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -2925,6 +2944,9 @@
                                                                         <real key="value" value="12"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="changeImageProfileDidTapped:" destination="CgJ-kf-fOr" eventType="touchUpInside" id="N0I-rQ-dVS"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -3135,6 +3157,9 @@
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2aB-F0-OJx">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="68" height="40"/>
                                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                                <connections>
+                                                                                    <action selector="countryCodeDidTapped:" destination="CgJ-kf-fOr" eventType="touchUpInside" id="noc-4X-rR1"/>
+                                                                                </connections>
                                                                             </button>
                                                                         </subviews>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -3404,6 +3429,9 @@
                                                                                 <real key="value" value="1"/>
                                                                             </userDefinedRuntimeAttribute>
                                                                         </userDefinedRuntimeAttributes>
+                                                                        <connections>
+                                                                            <action selector="clearDidTapped:" destination="CgJ-kf-fOr" eventType="touchUpInside" id="xmX-PO-3ET"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clear" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ku-Gv-Esd">
                                                                         <rect key="frame" x="15" y="9.0000000000000018" width="135" height="19.666666666666671"/>
@@ -3440,6 +3468,9 @@
                                                                                 <real key="value" value="5"/>
                                                                             </userDefinedRuntimeAttribute>
                                                                         </userDefinedRuntimeAttributes>
+                                                                        <connections>
+                                                                            <action selector="addDidTapped:" destination="CgJ-kf-fOr" eventType="touchUpInside" id="JfO-V1-yBx"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ADD" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ia6-iI-WUF">
                                                                         <rect key="frame" x="15" y="9.0000000000000018" width="135" height="19.666666666666671"/>
@@ -3529,11 +3560,18 @@
                         <outlet property="addBtnLbl" destination="ia6-iI-WUF" id="4tK-ga-NDl"/>
                         <outlet property="addNewStaffView" destination="Pgd-uj-Q9U" id="nXh-rE-c6H"/>
                         <outlet property="confirmPasswortTxtField" destination="0Wv-VW-2C1" id="zgx-y8-aX8"/>
+                        <outlet property="countryCodeTF" destination="1zc-YM-Dta" id="BpJ-Db-N0u"/>
                         <outlet property="editStaffView" destination="2KG-Vb-0OO" id="R1D-k2-7og"/>
+                        <outlet property="emailTF" destination="Hxq-8f-Rc0" id="bvH-zr-xae"/>
+                        <outlet property="fullNameInArabicTF" destination="lMl-cA-tPQ" id="0sQ-eh-898"/>
+                        <outlet property="fullNameInEnglishTF" destination="K63-0w-0ek" id="fyg-3T-wCL"/>
+                        <outlet property="ivUploadBanner" destination="Zi5-rn-ITk" id="ZGa-Wu-cBy"/>
+                        <outlet property="mobileTF" destination="f7P-jG-aRY" id="fcV-wF-qD0"/>
                         <outlet property="passwordTxtField" destination="Fo1-1F-jkn" id="VAH-zo-OiN"/>
                         <outlet property="roleSelectionCollectionView" destination="xQc-aV-jjF" id="VSC-Z4-UTt"/>
                         <outlet property="tableViewHeightConstraint" destination="2rg-if-4Cp" id="0Vi-zq-8CR"/>
                         <outlet property="titleLbl" destination="K7X-P2-zQs" id="R9c-L2-AoP"/>
+                        <outlet property="userProfileImageView" destination="2vI-ES-g8w" id="NL7-3i-SbS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bl5-pJ-gdt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -4404,7 +4442,7 @@ your account?</string>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In-app notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FBO-uD-XfD" customClass="CustomLabelFont" customModule="DesynatUser">
-                                                <rect key="frame" x="40" y="14.333333333333345" width="261" height="19.666666666666671"/>
+                                                <rect key="frame" x="40" y="14.333333333333345" width="253" height="19.666666666666671"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -4412,11 +4450,11 @@ your account?</string>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="nun"/>
                                                 </userDefinedRuntimeAttributes>
                                             </label>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="toggle_on" translatesAutoresizingMaskIntoConstraints="NO" id="l4R-Mo-w45">
-                                                <rect key="frame" x="321" y="17.666666666666686" width="24" height="13"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="toggle_off" translatesAutoresizingMaskIntoConstraints="NO" id="l4R-Mo-w45">
+                                                <rect key="frame" x="313" y="15" width="32" height="18"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="13" id="D9u-9E-W5T"/>
-                                                    <constraint firstAttribute="width" constant="24" id="aSj-YX-Rw5"/>
+                                                    <constraint firstAttribute="height" constant="18" id="D9u-9E-W5T"/>
+                                                    <constraint firstAttribute="width" constant="32" id="aSj-YX-Rw5"/>
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y5P-iQ-yxk">
@@ -4455,7 +4493,7 @@ your account?</string>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Push notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVb-zQ-nNM" customClass="CustomLabelFont" customModule="DesynatUser">
-                                                <rect key="frame" x="40" y="14.333333333333316" width="261" height="19.666666666666671"/>
+                                                <rect key="frame" x="40" y="14.333333333333316" width="253" height="19.666666666666671"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -4464,10 +4502,10 @@ your account?</string>
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="toggle_on" translatesAutoresizingMaskIntoConstraints="NO" id="HQi-SA-ZsY">
-                                                <rect key="frame" x="321" y="17.666666666666629" width="24" height="13"/>
+                                                <rect key="frame" x="313" y="15" width="32" height="18"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="13" id="920-Jr-CBR"/>
-                                                    <constraint firstAttribute="width" constant="24" id="aGs-uG-LSc"/>
+                                                    <constraint firstAttribute="height" constant="18" id="920-Jr-CBR"/>
+                                                    <constraint firstAttribute="width" constant="32" id="aGs-uG-LSc"/>
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XE4-bd-ww1">
@@ -4564,8 +4602,10 @@ your account?</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="appnotificationbtn" destination="y5P-iQ-yxk" id="4Av-UP-h8M"/>
                         <outlet property="inAppToggleImageView" destination="l4R-Mo-w45" id="vuO-ya-Tb4"/>
                         <outlet property="pushNotificationToggleImageView" destination="HQi-SA-ZsY" id="LU3-Au-BYF"/>
+                        <outlet property="pushnotification" destination="XE4-bd-ww1" id="Qsp-Bz-ARy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yjc-a0-dvQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -5087,6 +5127,7 @@ your account?</string>
         <image name="search" width="20" height="20"/>
         <image name="settingnotification" width="28" height="28"/>
         <image name="support" width="24" height="24"/>
+        <image name="toggle_off" width="40" height="22"/>
         <image name="toggle_on" width="40" height="22"/>
         <image name="totalRefunds" width="45" height="45"/>
         <image name="update" width="24" height="24"/>

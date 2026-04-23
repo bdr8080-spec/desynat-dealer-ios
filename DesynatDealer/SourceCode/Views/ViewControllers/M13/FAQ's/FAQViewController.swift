@@ -19,6 +19,7 @@ class FAQViewController: UIViewController {
     // MARK: - Property Decalaration
     private var selectedIndexes: Set<Int> = []
     private lazy var viewModel = FAQViewModel(hostVC: self)
+    var selectedUserType = 2
     
     // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
@@ -39,7 +40,7 @@ class FAQViewController: UIViewController {
 extension FAQViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3//viewModel.faqListData?.count ?? 0
+        return viewModel.faqListData?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -51,8 +52,8 @@ extension FAQViewController: UITableViewDelegate, UITableViewDataSource {
             cell.descriptionView.isHidden = true
             cell.vectorImageView.image = .downVector
         }
-        //        let data = viewModel.faqListData?[indexPath.row]
-        //        cell.configData(data: data, index: indexPath.row)
+                let data = viewModel.faqListData?[indexPath.row]
+                cell.configData(data: data, index: indexPath.row)
         return cell
     }
     

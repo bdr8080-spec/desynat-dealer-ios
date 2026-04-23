@@ -10,26 +10,29 @@ import Foundation
 class StaffManagementViewModel {
     
     private var hostVC: StaffManagementViewController
-    //    var staffList: [staffList]
+    var staffList: [StaffDetails] = []
+    
     init(hostVC: StaffManagementViewController) {
         self.hostVC = hostVC
     }
     
-    func getAllStaffList() {
-        
+    func getAllStaffList(completion: @escaping ([StaffDetails]) -> Void) {
+        WebService.sharedInstance.getAllStaffListService(completion: { response in
+            self.staffList = response
+            completion(self.staffList)
+        })
     }
     
     func updateActiveStatus(param: [String: Any], completion: @escaping (Bool) -> Void) {
-        //      WebService.shared.updateStatusBoy(param: param){ response in
-        //        completion(true)
-        //      }
+        WebService.sharedInstance.updateActiveInactiveStaffDetailService(param, completion: { response in
+            completion(true)
+          })
     }
     
     func deleteStaff(param: [String: Any], completion: @escaping (Bool) -> Void) {
-        //      WebService.shared.updateStatusBoy(param: param){ response in
-        //        completion(true)
-//        getAllStaffList()
-        //      }
+        WebService.sharedInstance.deleteStaffService(param, completion: { response in
+            completion(true)
+          })
     }
     
     

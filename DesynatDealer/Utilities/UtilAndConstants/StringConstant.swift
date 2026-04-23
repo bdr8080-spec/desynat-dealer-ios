@@ -97,6 +97,11 @@ enum AlertConstant: String {
     case SelectTicketType           = "Please select ticket type"
     case entertitle                 = "Please enter title"
     case enterdescription           = "Please enter description"
+    case selectModule =  "Please select at least one module"
+    case selectRoleForNotification =  "Please select role"
+    case enterFullNameEnglish = "Please enter full name in english"
+        case enterFullNameArabic = "Please enter full name in Arabic"
+     
     
     func value() -> String {
         return self.rawValue

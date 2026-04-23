@@ -11,21 +11,24 @@ class NotificationViewController: UIViewController {
     
     @IBOutlet weak var pushNotificationToggleImageView: UIImageView!
     @IBOutlet weak var inAppToggleImageView: UIImageView!
+    @IBOutlet weak var appnotificationbtn: UIButton!
+    @IBOutlet weak var pushnotification: UIButton!
     
-    
-    var isAppNotification  : Bool = true
+    var isAppNotification = false
+    var isPushNotification = true
+    private lazy var viewModel =  NotificationViewModel(hostVC: self)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        viewModel.getProfile()
     }
     
     @IBAction func inappDidTapped(_ sender: Any) {
-        
+        viewModel.updateInAppNotificationSettingRequest()
     }
     
     @IBAction func pushDidTapped(_ sender: Any) {
-        
+        viewModel.updatePushNotificationSettingRequest()
     }
     
     @IBAction func deleteAccountDidTapped(_ sender: Any) {
@@ -48,5 +51,21 @@ class NotificationViewController: UIViewController {
         //            UserDefaults.standard.setValue("No", forKey:"isLogin")
         //        }
     }
+    
+    func populateData() {
+        
+    }
+    
+    // MARK: - UI Update
+    
+    func updateAppNotificationUI() {
+            let imageName = isAppNotification ? "toggle_on" : "toggle_off"
+        inAppToggleImageView.image = UIImage(named: imageName)
+        }
+        
+        func updatePushNotificationUI() {
+            let imageName = isPushNotification ? "toggle_on" : "toggle_off"
+            pushNotificationToggleImageView.image = UIImage(named: imageName)
+        }
     
 }

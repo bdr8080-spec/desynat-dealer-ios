@@ -122,6 +122,24 @@ enum NetworkEndPoint: String {
     case getRaiseTicket                = "/api/seller/get_raised_tickets"
     case getTicketsType                = "/api/ticket_types"
     case getDealersLiveList            = "/api/seller/other-seller-live-room-records"
+    //M13
+    case getContacts                     = "/api/contact_us"
+    case termsAndCondition               = "/api/terms_conditions"
+    case returnPolicy                    = "/api/return_policy"
+    case aboutUs                         = "/api/about_us"
+    case cancellationPolicy              = "/api/cancellation_policy"
+    case exchangePolicy                  = "/api/exchange_policy"
+    case getFAQ                          = "/api/faqs"
+    case pushNotificationOnOff           = "/api/seller/notification_on_off"
+    case inAppNotificationOnOff          = "/api/seller/app_notification_on_off"
+    
+    case getAllSeller          = "/api/seller/seller-all-menu"
+    case addSeller          = "/api/seller/add-new-staff"
+    case getSingleStaffDetail          = "/api/seller/view-single-staff-details"
+    case deleteStaff          = "/api/seller/staff-delete-staff"
+    case getAllRoles          = "/api/seller/new-staff-category-type"
+    case getAllStaff          = "/api/seller/All-staff-details"
+    case activeInactiveStaff = "/api/seller/staff-active-inactive"
     
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"

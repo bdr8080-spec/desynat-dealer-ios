@@ -30,6 +30,7 @@ class StaffManagementTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
+    
     @IBAction func toggleBtnTapped(_ sender: Any) {
         isStatusToggled?()
     }
@@ -40,5 +41,34 @@ class StaffManagementTableViewCell: UITableViewCell {
     
     @IBAction func editDidTapped(_ sender: Any) {
         isEditTapped?()
+    }
+    
+    func cellSetup(_ data:StaffDetails) {
+        self.nameLbl.text = data.firstName ?? ""
+        self.designationLbl.text = data.sellerCategory?.nameEn ?? ""
+        self.mobileNumberLbl.text = "\(data.countryCode ?? "")-\(data.mobile ?? "")"
+        if data.isBlock == 0 {
+            btnToggle.setImage(UIImage(named: "toggle_on"), for: .normal)
+            self.activeStatusLbl.text = "Active"
+        }else {
+            btnToggle.setImage(UIImage(named: "toggle_off"), for: .normal)
+            self.activeStatusLbl.text = "Inactive"
+        }
+        self.addedOnLbl.text = formatAddedOnDate(data.createdAt ?? "")
+    }
+    
+    func formatAddedOnDate(_ input: String) -> String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ"
+        guard let date = formatter.date(from: input) else {
+            return "Added On -"
+        }
+        let outputFormatter = DateFormatter()
+        outputFormatter.locale = Locale(identifier: "en_US_POSIX")
+        outputFormatter.dateFormat = "dd/MM/yyyy"
+        let formatted = outputFormatter.string(from: date)
+        return "Added On \(formatted)"
     }
 }
