@@ -28,6 +28,7 @@ class LiveCoverageListViewController: UIViewController {
     private var monthYearPicker: UIDatePicker?
     var liveRequestTimeslotISSelcted: Bool = true
     var selectedDateString: String? = ""
+    var hasActionPermission: Bool = false
     
     private lazy var selectedDateFormatterForLiveRequestTimeSlot: DateFormatter = {
         let formatter = DateFormatter()

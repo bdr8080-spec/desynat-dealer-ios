@@ -135,11 +135,13 @@ enum NetworkEndPoint: String {
     
     case getAllSeller          = "/api/seller/seller-all-menu"
     case addSeller          = "/api/seller/add-new-staff"
-    case getSingleStaffDetail          = "/api/seller/view-single-staff-details"
+    case editSeller          = "/api/seller/edit-new-staff"
+    case getSingleStaffDetail = "/api/seller/view-single-staff-details"
     case deleteStaff          = "/api/seller/staff-delete-staff"
     case getAllRoles          = "/api/seller/new-staff-category-type"
     case getAllStaff          = "/api/seller/All-staff-details"
     case activeInactiveStaff = "/api/seller/staff-active-inactive"
+    case getRefundOrder = "/api/seller/get_refund_orders"
     
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"

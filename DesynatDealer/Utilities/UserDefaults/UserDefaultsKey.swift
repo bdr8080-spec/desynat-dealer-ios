@@ -7,7 +7,8 @@
 
 
 import Foundation
-
+let KSubAdminHasDashboardAccess = "isSubAdminHasDashboardAccess"
+let KHasActionDashboardAccess   = "isHasActionDashboardAccess"
 /// User For User Default. Add Desired Key to save associated value in user default
 enum UserDefaultsKey : String {
     case deviceToken
@@ -21,13 +22,23 @@ enum UserDefaultsKey : String {
     case defaultLanguge
     case language
     case sessionToken
-  case storeAvailabilityStatus
+    case storeAvailabilityStatus
 }
 
 extension UserDefaults {
     
     func isOnBoardingChecked() -> Bool {
         return self.bool(forKey: kisOnBoardingChecked)
+    }
+    
+    func setSubAdminUserHasDashboardAccess(hasDashboardAccess: Bool) {
+        self.set(hasDashboardAccess, forKey: KSubAdminHasDashboardAccess)
+        self.synchronize()
+    }
+    
+    func setSubAdminActionDashboardAccess(hasActionDashboardAccess: Bool) {
+        self.set(hasActionDashboardAccess, forKey: KHasActionDashboardAccess)
+        self.synchronize()
     }
     
     func saveValue<T>(Key: UserDefaultsKey, value:T) {
@@ -103,6 +114,14 @@ extension UserDefaults {
         } else {
             completion(.failure(.noDataFound))
         }
+    }
+    
+    func isSubAdminUserHasDashboardAccess() -> Bool {
+        return self.bool(forKey: KSubAdminHasDashboardAccess)
+    }
+    
+    func isSubAdminHasActionDashboardAccess() -> Bool {
+        return self.bool(forKey: KHasActionDashboardAccess)
     }
 }
 

@@ -18,7 +18,7 @@ class ChangeLanguageViewController: UIViewController {
     // MARK: - Property Decalaration
     private var selectedLanguage: String = "en"
     var comingFromDashboard: Bool = false
-  //  var comingUserRole: UserRoleType = .normalUser
+    var hasActionPermission: Bool = false
     
     // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {

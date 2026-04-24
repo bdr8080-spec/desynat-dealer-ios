@@ -17,6 +17,7 @@ class CMSViewController: UIViewController {
     var comingReason : ComingFrom?
     var selectedUserType = 2
     private lazy var viewmodel = CMSViewModel(hostVC: self)
+    var hasActionPermission: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()

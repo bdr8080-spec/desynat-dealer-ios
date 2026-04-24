@@ -20,6 +20,7 @@ class FAQViewController: UIViewController {
     private var selectedIndexes: Set<Int> = []
     private lazy var viewModel = FAQViewModel(hostVC: self)
     var selectedUserType = 2
+    var hasActionPermission: Bool = false
     
     // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {

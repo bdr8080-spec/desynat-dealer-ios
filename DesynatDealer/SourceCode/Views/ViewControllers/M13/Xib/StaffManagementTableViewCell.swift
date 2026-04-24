@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class StaffManagementTableViewCell: UITableViewCell {
     
@@ -55,6 +56,14 @@ class StaffManagementTableViewCell: UITableViewCell {
             self.activeStatusLbl.text = "Inactive"
         }
         self.addedOnLbl.text = formatAddedOnDate(data.createdAt ?? "")
+        if let imageUrlString = data.profilePic,
+           let url = URL(string: imageUrlString) {
+            profileImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            profileImageView.sd_imageIndicator?.startAnimatingIndicator()
+            profileImageView.sd_setImage(with: url, placeholderImage: .userProfile)
+        } else {
+            profileImageView.image = .userProfile
+        }
     }
     
     func formatAddedOnDate(_ input: String) -> String {

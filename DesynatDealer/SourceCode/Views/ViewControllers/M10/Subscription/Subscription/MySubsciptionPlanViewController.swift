@@ -31,6 +31,7 @@ class MySubsciptionPlanViewController: UIViewController {
     }
     // MARK: - Variable
     private lazy var viewModel =  MySubscriptionPlanViewModel(hostVc: self)
+    var hasActionPermission: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -17,12 +17,11 @@ class AddNewStaffViewModel {
         self.hostVC = hostVC
     }
     
-    
-  func countryListApi(){
-    WebService.sharedInstance.countryListService { list in
-      self.countryListData = list
+    func countryListApi(){
+        WebService.sharedInstance.countryListService { list in
+            self.countryListData = list
+        }
     }
-  }
     
     func getAllAdminModulesRequest(completion: (() -> Void)? = nil) {
         WebService.sharedInstance.getAllSellerModulesService{ [weak self] response in
@@ -105,7 +104,7 @@ class AddNewStaffViewModel {
         return errorMessage == .none
     }
     
-
+    
     func addNewStaff() {
         let modulesArray = hostVC.moduleSelctedData.map { module in
             return [
@@ -121,9 +120,7 @@ class AddNewStaffViewModel {
                                     "country_code": hostVC.countryCode,
                                     "mobile": hostVC.mobileTF.text ?? "",
                                     "email": hostVC.emailTF.text ?? "",
-//                                    "country_id": hostVC.countryID,
                                     "password": hostVC.passwordTxtField.text ?? "",
-//                                    "confirm_password": hostVC.confirmPasswortTxtField.text ?? "",
                                     "select_category": hostVC.selectedRoleId,
                                     "menu_id": modulesArray]
         WebService.sharedInstance.addSellerModulesService(param){ [weak self] response in
@@ -145,16 +142,13 @@ class AddNewStaffViewModel {
         let param: [String: Any] = ["id": hostVC.staffDetails?.id ?? 0,
                                     "profile_pic": hostVC.selectedImageUrl,
                                     "full_name": hostVC.fullNameInEnglishTF.text ?? "",
-                                    "full_name_ar": hostVC.fullNameInArabicTF.text ?? "",
+                                    "name_ar": hostVC.fullNameInArabicTF.text ?? "",
                                     "country_code": hostVC.countryCode,
                                     "mobile": hostVC.mobileTF.text ?? "",
                                     "email": hostVC.emailTF.text ?? "",
-//                                    "country_id": hostVC.countryID,
                                     "password": hostVC.passwordTxtField.text ?? "",
-//                                    "confirm_password": hostVC.confirmPasswortTxtField.text ?? "",
                                     "select_category": hostVC.selectedRoleId,
                                     "menu_id": modulesArray]
-        print("param====>\(param)")
         WebService.sharedInstance.updateSellerModulesService(param){ [weak self] response in
             guard let self = self else { return }
             CommonUtils.showToast(message: "Staff is updated successfully")
@@ -162,10 +156,11 @@ class AddNewStaffViewModel {
         }
     }
     
-    func getAllRolesRequest(completion: (([GetAllStaffRoles]) -> Void)? = nil) {
+    func getAllRolesRequest() {
         WebService.sharedInstance.getAllRolesService{ [weak self] response in
             guard let self = self else { return }
-            completion?(response as? [GetAllStaffRoles] ?? [])
+            self.hostVC.roles = response
+            self.hostVC.roleSelectionCollectionView.reloadData()
         }
     }
 }

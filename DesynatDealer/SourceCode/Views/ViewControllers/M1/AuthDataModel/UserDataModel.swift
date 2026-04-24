@@ -9,6 +9,7 @@
 // MARK: - SellerData
 struct User: Codable {
     let id: Int?
+    let type: String?
     let profilePic: String?
     let firstName: String?
     let lastName: String?
@@ -28,9 +29,10 @@ struct User: Codable {
     let updatedAt: String?
     let accessToken:String?
     let subcriptionPlanCheck: String?
+    let roleAction: [RoleAction]?
     
     enum CodingKeys: String, CodingKey {
-        case id
+        case id, type
         case profilePic = "profile_pic"
         case firstName = "first_name"
         case lastName = "last_name"
@@ -50,5 +52,6 @@ struct User: Codable {
         case updatedAt = "updated_at"
         case accessToken = "accessToken"
         case subcriptionPlanCheck = "subcription_plan_check"
+        case roleAction = "role__action"
     }
 }

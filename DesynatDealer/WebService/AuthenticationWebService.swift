@@ -1028,7 +1028,7 @@ extension WebService {
     
     func updateSellerModulesService(_ param:[String:Any],completion: @escaping (EmptyModel) -> Void) {
         CommonUtils.showHud(show: true)
-        NetworkManager.shared.request(withAPI: .endpoint(.addSeller), requestMethod: .post, requestParams: param,encoding: JSONEncoding.default, requestModel: EmptyModel.self) { result, code in
+        NetworkManager.shared.request(withAPI: .endpoint(.editSeller), requestMethod: .post, requestParams: param,encoding: JSONEncoding.default, requestModel: EmptyModel.self) { result, code in
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
@@ -1106,9 +1106,9 @@ extension WebService {
         }
     }
     
-    func getAllStaffListService(completion: @escaping ([StaffDetails]) -> Void) {
+    func getAllStaffListService(param: [String:Any], completion: @escaping (StaffManagementDataModel) -> Void) {
         CommonUtils.showHud(show: true)
-        NetworkManager.shared.request(withAPI: .endpoint(.getAllStaff), requestMethod: .post, requestModel: [StaffDetails].self) { result, code in
+        NetworkManager.shared.request(withAPI: .endpoint(.getAllStaff), requestMethod: .post, requestParams: param, requestModel: StaffManagementDataModel.self) { result, code in
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message, error in
                 guard let response = response else {

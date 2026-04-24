@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class SideMenuTableViewCell: UITableViewCell {
 
@@ -14,13 +15,10 @@ class SideMenuTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     func configData(data: SideMenuModel) {
@@ -28,6 +26,29 @@ class SideMenuTableViewCell: UITableViewCell {
         mainImageView.image = UIImage(named: data.image)
     }
     
+    func configSubDealerData(data: RoleAction?) {
+        titleLabel.text = data?.sellermenu?.first?.title ?? ""
+        let iconPath = data?.sellermenu?.first?.icon ?? ""
+        guard !iconPath.isEmpty else {
+            mainImageView.image = .staffMan.withRenderingMode(.alwaysTemplate)
+            mainImageView.tintColor = UIColor.brown
+            return
+        }
+        let imageUrlString = "\(BaseURL.release)/\(iconPath)"
+        if let url = URL(string: imageUrlString) {
+            mainImageView.sd_imageIndicator =
+            SDWebImageActivityIndicator.gray
+            mainImageView.sd_setImage(with: url,placeholderImage: .staffMan) { [weak self] image, _, _, _ in
+                guard let self = self else { return }
+                self.mainImageView.image =
+                image?.withRenderingMode(.alwaysTemplate)
+                self.mainImageView.tintColor = UIColor.brown
+            }
+        } else {
+            mainImageView.image = .staffMan.withRenderingMode(.alwaysTemplate)
+            mainImageView.tintColor = UIColor.brown
+        }
+    }
 }
 
 

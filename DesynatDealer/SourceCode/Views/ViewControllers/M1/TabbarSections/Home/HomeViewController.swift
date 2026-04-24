@@ -86,8 +86,15 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func btnProfile(_ sender: Any) {
-        let vc = ProfileViewController.instantiate(fromAppStoryboard: .Profile)
-        self.navigationController?.pushViewController(vc, animated: true)
+        if let savedUser: User = kSharedUserDefaults.retrieveModelFor(key: .user, model: User.self) {
+            if savedUser.type == "0" {
+                let vc = ProfileViewController.instantiate(fromAppStoryboard: .Profile)
+                self.navigationController?.pushViewController(vc, animated: true)
+            } else {
+                let vc = SubDealerSideMenuViewController.instantiate(fromAppStoryboard: .Profile)
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
     }
     
     @IBAction func btnTapToggle(_ sender: Any) {

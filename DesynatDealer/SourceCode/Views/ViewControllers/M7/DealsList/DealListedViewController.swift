@@ -28,6 +28,7 @@ class DealListedViewController: UIViewController {
     var tabType: DealsListedType = .listedDeals
     private lazy var viewModel = DealListedViewModel(hostVC: self)
     private var searchWorkItem: DispatchWorkItem?
+    var hasActionPermission: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()

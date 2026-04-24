@@ -8,7 +8,8 @@
 import Foundation
 import Alamofire
 import UIKit
-extension WebService{
+extension WebService {
+    
     func getTermsConditionService(parameter:[String:Any],completion: @escaping(CMSTermsConditionDataModel) -> Void) {
         CommonUtils.showHud(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.termsAndCondition),requestMethod: .get, requestParams: parameter,requestModel: CMSTermsConditionDataModel.self) { result, code in
@@ -132,6 +133,22 @@ extension WebService{
                     return
                 }
                 completion(response)
+            }
+        }
+    }
+    
+    func getRefundManagementRequest(param: [String :Any], completion:@escaping (_ user: RefundManagementDataModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.getRefundOrder), requestMethod: .get, requestParams: param, requestModel: RefundManagementDataModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
             }
         }
     }

@@ -8,11 +8,13 @@
 import UIKit
 
 class SettingViewController: UIViewController {
-
+    
+    var hasActionPermission: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        
     }
     
 

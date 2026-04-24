@@ -15,6 +15,8 @@ import MFSDK
 import FirebaseCore
 import UserNotifications
 import FirebaseMessaging
+import SDWebImage
+import SDWebImageSVGCoder
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
@@ -37,8 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         let them = MFTheme(navigationTintColor: .white, navigationBarTintColor: .lightGray, navigationTitle: "Payment", cancelButtonTitle: "Cancel")
         MFSettings.shared.setTheme(theme: them)
         UNUserNotificationCenter.current().setBadgeCount(0, withCompletionHandler: nil)
-        //        BadgeManager.shared.reset()
-        //        UIApplication.shared.applicationIconBadgeNumber = 0
+        let SVGCoder = SDImageSVGCoder.shared
+        SDImageCodersManager.shared.addCoder(SVGCoder)
         return true
     }
     
@@ -122,9 +124,9 @@ extension AppDelegate:UNUserNotificationCenterDelegate {
         let payload = notification.request.content.userInfo
         
         // Convert payload to JSON text
-        if let jsonText = payload.toPrettyString() {
-//                        showShareAlert(withText: jsonText)
-        }
+        //        if let jsonText = payload.toPrettyString() {
+        //                        showShareAlert(withText: jsonText)
+        //        }
         let badge = notification.request.content.badge?.intValue ?? 0
         
         UNUserNotificationCenter.current().setBadgeCount(badge, withCompletionHandler: nil)
@@ -140,9 +142,9 @@ extension AppDelegate:UNUserNotificationCenterDelegate {
         
         let payload = response.notification.request.content.userInfo
         
-        if let jsonText = payload.toPrettyString() {
-//                        showShareAlert(withText: jsonText)
-        }
+        //        if let jsonText = payload.toPrettyString() {
+        //                        showShareAlert(withText: jsonText)
+        //        }
         //        let badge = response.notification.request.content.badge?.intValue ?? 0
         //
         //                UNUserNotificationCenter.current().setBadgeCount(badge, withCompletionHandler: nil)

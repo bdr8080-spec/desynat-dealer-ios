@@ -7,8 +7,37 @@
 
 import Foundation
 
+// MARK: - StaffManagementDataModel
+struct StaffManagementDataModel: Codable {
+    let currentPage: Int?
+    let data: [StaffDetails]?
+    let firstPageURL: String?
+    let from, lastPage: Int?
+    let lastPageURL: String?
+    let links: [Link]?
+    let nextPageURL: String?
+    let path: String?
+    let perPage: Int?
+    let prevPageURL: String?
+    let to, total: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case currentPage = "current_page"
+        case data
+        case firstPageURL = "first_page_url"
+        case from
+        case lastPage = "last_page"
+        case lastPageURL = "last_page_url"
+        case links
+        case nextPageURL = "next_page_url"
+        case path
+        case perPage = "per_page"
+        case prevPageURL = "prev_page_url"
+        case to, total
+    }
+}
+
 struct StaffDetails: Codable {
-    
     var id: Int?
     var type, parentID: String?
     var profilePic: String?
@@ -59,7 +88,7 @@ struct StaffDetails: Codable {
         case selectCategory = "select_category"
         case sellerCategory = "seller_category"
         case roleAction = "role__action"
-        case unhashedPassword
+        case unhashedPassword = "save_password"
         case status
     }
 }

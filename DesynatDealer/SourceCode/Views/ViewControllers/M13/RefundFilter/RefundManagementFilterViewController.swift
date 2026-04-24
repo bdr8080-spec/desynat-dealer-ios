@@ -23,23 +23,21 @@ class RefundManagementFilterViewController: UIViewController {
     
     let datePicker = UIDatePicker()
     private var activeTextField: UITextField?
-    var selectedFilter = OrderListFilterModel()
-    var onApplyFilter: ((OrderListFilterModel) -> Void)?
+    var selectedFilter = RefundManagementFilterModel()
+    var onApplyFilter: ((RefundManagementFilterModel) -> Void)?
     var onClearFilter: (() -> Void)?
     
-    private var filtersOptions = ["Delivered", "Return", "Exchange"]
-        private var selectedIndex: Int = -1
-          private let statusMapping: [ReturnStatus] = [
-            .delivered,
-            .returned,
-              .exchange
-          ]
+    private var filtersOptions = ["Cancelled", "Return", "Exchange"]
+    private var selectedIndex: Int = -1
+    private let statusMapping: [ReturnStatus] = [
+        .cancelled,
+        .returned,
+        .exchange
+    ]
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         handleUISetup()
         applyPreselectedData()
-        // Do any additional setup after loading the view.
     }
     
     
@@ -55,8 +53,18 @@ class RefundManagementFilterViewController: UIViewController {
     }
     
     @IBAction func applyDidTapped(_ sender: Any) {
+        var filter = RefundManagementFilterModel()
         
-        // onApplyFilter?(filter)
+        filter.fromDate = fromTextField.text?.isEmpty == false ? fromTextField.text : nil
+        filter.toDate   = toTextField.text?.isEmpty == false ? toTextField.text : nil
+        
+        if selectedIndex >= 0 && selectedIndex < statusMapping.count {
+            filter.refundStatus = statusMapping[selectedIndex]
+        } else {
+            filter.refundStatus = nil
+        }
+        
+        onApplyFilter?(filter)
         dismiss(animated: true)
     }
     private func handleUISetup() {
@@ -70,12 +78,12 @@ class RefundManagementFilterViewController: UIViewController {
         // Preselect date fields
         fromTextField.text = selectedFilter.fromDate
         toTextField.text = selectedFilter.toDate
-//                if let status = selectedFilter.orderDeliveryStatus,
-//                       let index = statusMapping.firstIndex(of: status) {
-//                        selectedIndex = index
-//                    } else {
-//                        selectedIndex = -1
-//                    }
+        if let status = selectedFilter.refundStatus,
+           let index = statusMapping.firstIndex(of: status) {
+            selectedIndex = index
+        } else {
+            selectedIndex = -1
+        }
         
         filtersTableView.reloadData()
     }
@@ -90,16 +98,16 @@ extension RefundManagementFilterViewController:  UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FiltersOptionsTableViewCell", for: indexPath) as! FiltersOptionsTableViewCell
         cell.titleLabel.text = filtersOptions[indexPath.row]
-//            if selectedIndex == indexPath.row {
-//              cell.mainImageView.image = .filledCheckbox//UIImage(named: "filledCheckbox")
-//            } else {
-//              cell.mainImageView.image = .checkBox//UIImage(named: "checkBox")
-//            }
+        if selectedIndex == indexPath.row {
+            cell.mainImageView.image = .filledCheckbox//UIImage(named: "filledCheckbox")
+        } else {
+            cell.mainImageView.image = .checkBox//UIImage(named: "checkBox")
+        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //selectedIndex = indexPath.row
+        selectedIndex = indexPath.row
         filtersTableView.reloadData()
     }
     
@@ -187,11 +195,11 @@ extension RefundManagementFilterViewController: UITextFieldDelegate {
     }
 }
 struct ReturnListFilterModel {
-  var returnStatus: ReturnStatus?
-  var fromDate: String?
-  var toDate: String?
-  
-  var isEmpty: Bool {
-    return returnStatus == nil && fromDate == nil && toDate == nil
-  }
+    var returnStatus: ReturnStatus?
+    var fromDate: String?
+    var toDate: String?
+    
+    var isEmpty: Bool {
+        return returnStatus == nil && fromDate == nil && toDate == nil
+    }
 }

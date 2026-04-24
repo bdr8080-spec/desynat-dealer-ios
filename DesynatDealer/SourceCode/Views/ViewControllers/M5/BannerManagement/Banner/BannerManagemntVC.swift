@@ -21,6 +21,7 @@ class BannerManagemntVC: UIViewController {
     lazy private var viewModel = BannerManagementVM(hostVC: self)
     private var searchWorkItem: DispatchWorkItem?
     var bannerData: [BannerModel] = []
+    var hasActionPermission: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()

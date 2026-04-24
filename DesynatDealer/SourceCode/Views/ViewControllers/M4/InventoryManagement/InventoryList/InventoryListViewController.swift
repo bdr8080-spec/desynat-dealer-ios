@@ -34,7 +34,8 @@ class InventoryListViewController: UIViewController {
   private lazy var viewModel = InventoryListViewModel(hostVC: self)
   var appliedFilter = AppliedFilter()
   private var searchWorkItem: DispatchWorkItem?
-  
+    var hasActionPermission: Bool = false
+    
   override func viewDidLoad() {
     super.viewDidLoad()
     viewModel.getBrandListApi()

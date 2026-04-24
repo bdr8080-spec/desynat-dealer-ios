@@ -13,7 +13,8 @@ class AffiliatedCommisionViewController: UIViewController {
   
   private lazy var viewModel = AffiliatedCommisionViewModel(hostVC: self)
   var commissionValue: String? = ""
-  
+    var hasActionPermission: Bool = false
+    
   override func viewDidLoad() {
     super.viewDidLoad()
     commissionTF.delegate = self

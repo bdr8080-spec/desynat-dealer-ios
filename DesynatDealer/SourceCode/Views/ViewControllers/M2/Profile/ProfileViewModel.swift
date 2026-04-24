@@ -12,9 +12,9 @@ import SDWebImage
 
 class ProfileViewModel {
     
-  private var hostVC: ProfileViewController
-  var userProfile: SellerProfileDataModel?
-  
+    private var hostVC: ProfileViewController
+    var userProfile: SellerProfileDataModel?
+    
     init(hostVC: ProfileViewController) {
         self.hostVC = hostVC
     }
@@ -26,27 +26,26 @@ class ProfileViewModel {
             UserDefaults.standard.setValue("No", forKey:"isLogin")
         }
     }
-  
-  func getUserProfile(){
-    WebService.sharedInstance.getUserProfile { [weak self] response in
-      guard let self else { return }
-      userProfile = response
-      populateData(data: response)
-    }
-  }
-  
-  func populateData(data: SellerProfileDataModel) {
-    if let imageUrlString = data.profilePic,
-       let url = URL(string: imageUrlString) {
-      hostVC.userProfileImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-      hostVC.userProfileImageView.sd_imageIndicator?.startAnimatingIndicator()
-      hostVC.userProfileImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "userProfile"))
-    } else {
-      hostVC.userProfileImageView.image = UIImage(named: "userProfile")
+    
+    func getUserProfile(){
+        WebService.sharedInstance.getUserProfile { [weak self] response in
+            guard let self else { return }
+            userProfile = response
+            populateData(data: response)
+        }
     }
     
-    hostVC.usernameLabel.text = "\(data.firstName ?? "") \(data.lastName ?? "")"
-    hostVC.userEmailLabel.text = data.email
-  }
-
+    func populateData(data: SellerProfileDataModel) {
+        if let imageUrlString = data.profilePic,
+           let url = URL(string: imageUrlString) {
+            hostVC.userProfileImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            hostVC.userProfileImageView.sd_imageIndicator?.startAnimatingIndicator()
+            hostVC.userProfileImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "userProfile"))
+        } else {
+            hostVC.userProfileImageView.image = UIImage(named: "userProfile")
+        }
+        
+        hostVC.usernameLabel.text = "\(data.firstName ?? "") \(data.lastName ?? "")"
+        hostVC.userEmailLabel.text = data.email
+    }
 }

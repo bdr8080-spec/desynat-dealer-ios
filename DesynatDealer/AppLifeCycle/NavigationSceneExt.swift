@@ -44,6 +44,12 @@ extension SceneDelegate {
         self.navigateTo(vc: vc)
     }
     
+    public func navigateToSideMenuVc() {
+        let vc = SubDealerSideMenuViewController.instantiate(fromAppStoryboard: .Profile)
+        vc.isNeedToHideBackButton = true
+        navigateTo(vc: vc)
+    }
+    
     public func navigateToBankInfo(userId: String) {
         let vc = UploadDocumnetViewController.instantiate(fromAppStoryboard: .Main)
         vc.userId = userId
