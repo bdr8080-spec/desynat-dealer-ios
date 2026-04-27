@@ -86,13 +86,13 @@ class OrderDetailsViewController: UIViewController {
     var orderDetails: OrdersListData?
     private let deliveryStatus: [String: String] = ["Shipped": "2.1"]
     private let returnDeliveryRequest: [String: String] = ["Accept": "1","Reject": "2"]
+    var hasActionPermission: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
         storeRatingCosmisView.settings.fillMode = .precise
         customerRatingView.settings.fillMode = .precise
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -311,8 +311,8 @@ class OrderDetailsViewController: UIViewController {
                 case "1": //Pending
                     orderStatusLabel.text = "Confirmed"
                     orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
-                    updateStatusView.isHidden = false
-                    statusView.isHidden = false
+                    updateStatusView.isHidden = !hasActionPermission
+                    statusView.isHidden = !hasActionPermission
                     
                     if data.assignStatus == "1" || data.rEApprove == "1" {
                         orderStatusLabel.text = "On The Way"
@@ -330,8 +330,8 @@ class OrderDetailsViewController: UIViewController {
                 case "2": //Ongoing
                     orderStatusLabel.text = "Ongoing"
                     orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
-                    updateStatusView.isHidden = false
-                    statusView.isHidden = false
+                    updateStatusView.isHidden = !hasActionPermission
+                    statusView.isHidden = !hasActionPermission
                     
                 case "3": //Delivered
                     orderStatusLabel.text = "Delivered"
@@ -342,8 +342,8 @@ class OrderDetailsViewController: UIViewController {
                             orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
                             returnDetailsView.isHidden = false
                             returnReasonView.isHidden = false
-                            updateStatusView.isHidden = false
-                            statusView.isHidden = false
+                            updateStatusView.isHidden = !hasActionPermission
+                            statusView.isHidden = !hasActionPermission
                             lblReturnExchangeHeading.text = "Return Details"
                             lblReturnExchangeId.text = "Return Id"
                         } else if data.returnType == "2" {
@@ -351,8 +351,8 @@ class OrderDetailsViewController: UIViewController {
                             orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
                             returnDetailsView.isHidden = false
                             returnReasonView.isHidden = false
-                            updateStatusView.isHidden = true
-                            statusView.isHidden = false
+                            updateStatusView.isHidden = !hasActionPermission
+                            statusView.isHidden = !hasActionPermission
                             lblReturnExchangeHeading.text = "Exchange Details"
                             lblReturnExchangeId.text = "Exchange Id"
                         }
@@ -385,8 +385,8 @@ class OrderDetailsViewController: UIViewController {
                     orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
                     returnDetailsView.isHidden = false
                     returnReasonView.isHidden = false
-                    updateStatusView.isHidden = false
-                    statusView.isHidden = false
+                    updateStatusView.isHidden = !hasActionPermission
+                    statusView.isHidden = !hasActionPermission
                     
                 case "7": //Picked
                     orderStatusLabel.text = "On The Way "
@@ -435,8 +435,8 @@ class OrderDetailsViewController: UIViewController {
                 case "1": //Pending
                     orderStatusLabel.text = "Confirmed"
                     orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
-                    updateStatusView.isHidden = false
-                    statusView.isHidden = false
+                    updateStatusView.isHidden = !hasActionPermission
+                    statusView.isHidden = !hasActionPermission
                     
                     if data.assignStatus == "1" || data.rEApprove == "1" {
                         orderStatusLabel.text = "On The Way"
@@ -455,8 +455,8 @@ class OrderDetailsViewController: UIViewController {
                 case "2": //Ongoing, Picked
                     orderStatusLabel.text = "Ongoing"
                     orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
-                    updateStatusView.isHidden = false
-                    statusView.isHidden = false
+                    updateStatusView.isHidden = !hasActionPermission
+                    statusView.isHidden = !hasActionPermission
                     
                 case "3": //Delivered
                     orderStatusLabel.text = "Delivered"
@@ -467,8 +467,8 @@ class OrderDetailsViewController: UIViewController {
                             orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
                             returnDetailsView.isHidden = false
                             returnReasonView.isHidden = false
-                            updateStatusView.isHidden = false
-                            statusView.isHidden = false
+                            updateStatusView.isHidden = !hasActionPermission
+                            statusView.isHidden = !hasActionPermission
                             lblReturnExchangeHeading.text = "Return Details"
                             lblReturnExchangeId.text = "Return Id"
                         } else if data.returnType == "2" {
@@ -476,8 +476,8 @@ class OrderDetailsViewController: UIViewController {
                             orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
                             returnDetailsView.isHidden = true
                             returnReasonView.isHidden = false
-                            updateStatusView.isHidden = false
-                            statusView.isHidden = false
+                            updateStatusView.isHidden = !hasActionPermission
+                            statusView.isHidden = !hasActionPermission
                             lblReturnExchangeHeading.text = "Exchange Details"
                             lblReturnExchangeId.text = "Exchange Id"
                         }
@@ -508,8 +508,8 @@ class OrderDetailsViewController: UIViewController {
                     orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
                     returnDetailsView.isHidden = false
                     returnReasonView.isHidden = false
-                    updateStatusView.isHidden = false
-                    statusView.isHidden = false
+                    updateStatusView.isHidden = !hasActionPermission
+                    statusView.isHidden = !hasActionPermission
                     
                 case "7": //Picked
                     orderStatusLabel.text = "On The Way "

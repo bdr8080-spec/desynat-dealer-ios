@@ -96,7 +96,8 @@ struct StaffDetails: Codable {
 // MARK: - RoleAction
 struct RoleAction: Codable {
     var id: Int?
-    var sellerID, menuID: String?
+    var sellerID: String?
+    var menuID: Int?
     var canView, canAction: Int?
     var createdAt, updatedAt: String?
     var sellermenu: [Sellermenu]?

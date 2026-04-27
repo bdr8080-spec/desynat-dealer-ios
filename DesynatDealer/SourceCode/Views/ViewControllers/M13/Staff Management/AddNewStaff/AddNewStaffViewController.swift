@@ -37,6 +37,11 @@ class AddNewStaffViewController: UIViewController {
     @IBOutlet weak var countryCodeTF: UITextField!
     @IBOutlet weak var emailTF: UITextField!
     @IBOutlet weak var mobileTF: UITextField!
+    @IBOutlet weak var roleLabel: UILabel!
+    @IBOutlet weak var changePassowrdStackView: UIStackView!
+    @IBOutlet weak var accessModuleLabel: UILabel!
+    @IBOutlet weak var accessModierView: UIView!
+    @IBOutlet weak var extraSpaceView: UIView!
     
     // MARK: - Variable
     var selectedRoleId: Int = -1
@@ -125,10 +130,13 @@ class AddNewStaffViewController: UIViewController {
     
     @IBAction func addDidTapped(_ sender: Any) {
         if viewModel.validFields() {
-            if comingReason == .editStaff {
-                viewModel.editStaffDetails()
-            } else {
+            switch comingReason {
+            case .addNewStaff:
                 viewModel.addNewStaff()
+            case .editStaff:
+                viewModel.editStaffDetails()
+            case .selfProfileUpdate:
+                viewModel.editStaffDetails()
             }
         }
     }
@@ -148,11 +156,23 @@ class AddNewStaffViewController: UIViewController {
             addNewStaffView.isHidden = false
             editStaffView.isHidden = true
             addBtnLbl.text = "ADD"
+            extraSpaceView.isHidden = true
         case .editStaff:
             titleLbl.text = "Edit"
             editStaffView.isHidden = false
             addNewStaffView.isHidden = true
             addBtnLbl.text = "Save changes"
+            extraSpaceView.isHidden = true
+        case .selfProfileUpdate:
+            titleLbl.text = "Profile Details"
+            editStaffView.isHidden = false
+            addNewStaffView.isHidden = true
+            addBtnLbl.text = "Save changes"
+            roleLabel.isHidden = true
+            roleSelectionCollectionView.isHidden = true
+            changePassowrdStackView.isHidden = true
+            accessModierView.isHidden = true
+            extraSpaceView.isHidden = false
         }
     }
     
@@ -188,7 +208,7 @@ class AddNewStaffViewController: UIViewController {
         
         if let permissions = staffDetails?.roleAction {
             for permission in permissions {
-                guard let moduleId = Int(permission.menuID ?? "0") else { continue }
+                guard let moduleId = permission.menuID else { continue }
                 
                 // Only add if this module exists in the current adminModulesListData
                 if viewModel.dealerSellersListData.contains(where: { $0.id == moduleId }) {
@@ -203,7 +223,9 @@ class AddNewStaffViewController: UIViewController {
         }
         accessModuleTableView.reloadData()
         DispatchQueue.main.async {
-            self.tableViewHeightConstraint.constant = self.accessModuleTableView.contentSize.height
+            if self.comingReason != .selfProfileUpdate {
+                self.tableViewHeightConstraint.constant = self.accessModuleTableView.contentSize.height
+            }
         }
     }
 }
@@ -356,7 +378,7 @@ extension AddNewStaffViewController: UITextFieldDelegate {
 }
 
 enum comingFrom {
-    case addNewStaff, editStaff
+    case addNewStaff, editStaff, selfProfileUpdate
 }
 struct ModulSelctedData: Codable  {
     var moduleId: Int

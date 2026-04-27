@@ -30,6 +30,7 @@ class SupportViewController: UIViewController {
     @IBOutlet weak var supportEmailLabe: UILabel!
     @IBOutlet weak var supportPhoneLabel: UILabel!
     @IBOutlet weak var paginationBottomView: UIView!
+    @IBOutlet weak var plusButtonview: UIView!
     
     private lazy var viewModel = SupportViewModel(hostVC: self)
     private var searchWorkItem: DispatchWorkItem?
@@ -43,6 +44,7 @@ class SupportViewController: UIViewController {
         contactView.isHidden = false
         paginationBottomView.isHidden = true
         noDataFoundLabel.isHidden = true
+        plusButtonview.isHidden = !hasActionPermission
     }
     
     override func viewWillAppear(_ animated: Bool) {

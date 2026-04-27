@@ -30,6 +30,8 @@ struct User: Codable {
     let accessToken:String?
     let subcriptionPlanCheck: String?
     let roleAction: [RoleAction]?
+    let ParentAccessToken: String?
+    
     
     enum CodingKeys: String, CodingKey {
         case id, type
@@ -53,5 +55,6 @@ struct User: Codable {
         case accessToken = "accessToken"
         case subcriptionPlanCheck = "subcription_plan_check"
         case roleAction = "role__action"
+        case ParentAccessToken
     }
 }

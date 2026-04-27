@@ -37,7 +37,7 @@ class ShowsViewModel {
                 let hasCurrentRequests = !currentRequests.isEmpty
                 if hasCurrentRequests {
                     self.generateLiveStramingTokenRequest(id: currentRequests.first?.id ?? 0)
-                    self.hostVC.btnGoLive.isHidden = false
+                    self.hostVC.btnGoLive.isHidden = !hostVC.hasActionPermission
                     
                     let firstRequest = currentRequests.first
 

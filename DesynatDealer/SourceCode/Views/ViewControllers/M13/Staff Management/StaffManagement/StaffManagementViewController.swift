@@ -18,6 +18,7 @@ class StaffManagementViewController: UIViewController {
             tableView.registerCellFromNib(cellID: "StaffManagementTableViewCell")
         }
     }
+    @IBOutlet weak var plusButtonAction: UIButton!
     
     private lazy var viewModel = StaffManagementViewModel(hostVC: self)
     private var searchWorkItem: DispatchWorkItem?
@@ -29,6 +30,7 @@ class StaffManagementViewController: UIViewController {
         viewModel.hasMoreData = true
         viewModel.getAllStaffList()
         serachTF.delegate = self
+        plusButtonAction.isHidden = !hasActionPermission
     }
     
     // MARK: - Navigation
@@ -79,7 +81,7 @@ extension StaffManagementViewController: UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: StaffManagementTableViewCell = tableView.dequeueReusableCell(withIdentifier: "StaffManagementTableViewCell", for: indexPath) as! StaffManagementTableViewCell
-        cell.cellSetup(viewModel.staffList[indexPath.row])
+        cell.cellSetup(viewModel.staffList[indexPath.row], hasActionPermission: hasActionPermission)
         cell.isStatusToggled = { [weak self] in
                     self?.toggleReasonStatus(at: indexPath)
                 }
@@ -87,6 +89,7 @@ extension StaffManagementViewController: UITableViewDelegate, UITableViewDataSou
             guard let self = self else { return }
             let vc = StaffDetailsViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
             vc.staffID = viewModel.staffList[indexPath.row].id
+            vc.hasActionPermission = hasActionPermission
             self.navigationController?.pushViewController(vc, animated: true)
         }
         cell.isDeleteTapped = { [weak self] in
@@ -113,6 +116,12 @@ extension StaffManagementViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if !hasActionPermission {
+            let vc = StaffDetailsViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+            vc.staffID = viewModel.staffList[indexPath.row].id
+            vc.hasActionPermission = hasActionPermission
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
         
     }
     

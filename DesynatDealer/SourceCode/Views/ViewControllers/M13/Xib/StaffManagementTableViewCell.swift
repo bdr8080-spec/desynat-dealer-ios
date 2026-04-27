@@ -18,6 +18,9 @@ class StaffManagementTableViewCell: UITableViewCell {
     @IBOutlet weak var addedOnLbl: UILabel!
     @IBOutlet weak var activeStatusLbl: UILabel!
     @IBOutlet weak var profileImageView: CustomImageView!
+    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var buttonActionstackView: UIStackView!
+    @IBOutlet weak var deleteButton: UIButton!
     
     //MARK: Variable
     var isStatusToggled: (() -> Void)?
@@ -44,7 +47,11 @@ class StaffManagementTableViewCell: UITableViewCell {
         isEditTapped?()
     }
     
-    func cellSetup(_ data:StaffDetails) {
+    func cellSetup(_ data:StaffDetails, hasActionPermission: Bool) {
+        editButton.isHidden = !hasActionPermission
+        deleteButton.isHidden = !hasActionPermission
+        btnToggle.isUserInteractionEnabled = hasActionPermission
+        
         self.nameLbl.text = data.firstName ?? ""
         self.designationLbl.text = data.sellerCategory?.nameEn ?? ""
         self.mobileNumberLbl.text = "\(data.countryCode ?? "")-\(data.mobile ?? "")"

@@ -39,23 +39,6 @@ class ProductsCollectionViewCell: UICollectionViewCell {
         detailsView.layer.masksToBounds = true
     }
     
-//    override func prepareForReuse() {
-//        super.prepareForReuse()
-//
-//        mainImageView.image = nil
-//        titleLabel.text = nil
-//        ratingLabel.text = "(0)"
-//        ratingView.rating = 0
-//        finalPriceLabel.text = nil
-//        actualPriceLabel.text = nil
-//        discountPriceLabel.text = nil
-//        totalSoldLabel.text = nil
-//
-//        deleteButton.isHidden = true
-//        checkboxButton.isHidden = true
-//        totalSoldView.isHidden = true
-//    }
-    
     @IBAction func likeButtonTapped(_ sender: UIButton) {
       wishlistButtonTapped?()
     }
@@ -72,15 +55,15 @@ class ProductsCollectionViewCell: UICollectionViewCell {
         shareButtonTapped?()
     }
     
-    func configData(type: DealsListedType) {
+    func configData(type: DealsListedType, hasActionPermission: Bool) {
         deleteButton.isHidden = true
         checkboxButton.isHidden = true
         totalSoldView.isHidden = true
         switch type {
         case .listedDeals:
-            checkboxButton.isHidden = false
+            checkboxButton.isHidden = !hasActionPermission
         case .enrolled:
-            deleteButton.isHidden = false
+            deleteButton.isHidden = !hasActionPermission
         case .expired:
             totalSoldView.isHidden = false
         }
@@ -96,24 +79,16 @@ class ProductsCollectionViewCell: UICollectionViewCell {
             mainImageView.image = UIImage(named: "")
         }
         titleLabel.text = data?.productNameEn
-        if let ratingString = data?.avgProductRating {//, let rating = Double(ratingString) {
+        if let ratingString = data?.avgProductRating {
             ratingView.rating = Double(Int(ratingString))
-//            let ratingInt = Int(ratingString) ?? 0
             ratingLabel.text = "(\(ratingString))"
         } else {
-            ratingView.rating = 0.0 // default value if conversion fails
+            ratingView.rating = 0.0
             ratingLabel.text = "(\(0))"
         }
 
         finalPriceLabel.text = "\(data?.productVariants?.first?.finalPrice ?? "") KD"
         CommonUtils.setStrikethrough(label: actualPriceLabel, text: "\(data?.productVariants?.first?.actualPrice ?? "") KD")
-//        let discountType = data?.productVariants?.first?.discountType ?? "1"
-//        if discountType == "1" {
-//          discountPriceLabel.text = "\(data?.productVariants?.first?.discountValue ?? "")% Off"
-//        } else {
-//            discountPriceLabel.text = "\(data?.productVariants?.first?.discountValue ?? "") KD Off"
-//        }
-        
         CommonUtils.updateDiscountPercentageLabel(discountPriceLabel,
                                                   actualAmountLabel: actualPriceLabel,
                                                   discountType: data?.productVariants?.first?.discountType,
@@ -130,25 +105,16 @@ class ProductsCollectionViewCell: UICollectionViewCell {
             mainImageView.image = UIImage(named: "")
         }
         titleLabel.text = data?.productDetails?.productNameEn
-        if let ratingString = data?.productDetails?.avgProductRating { //}, let rating = Double(ratingString) {
+        if let ratingString = data?.productDetails?.avgProductRating {
             ratingView.rating = Double(Int(ratingString))
-//            let ratingInt = Int(ratingString) ?? 0
             ratingLabel.text = "(\(ratingString))"
         } else {
-            ratingView.rating = 0.0 // default value if conversion fails
+            ratingView.rating = 0.0
             ratingLabel.text = "(\(0))"
         }
 
         finalPriceLabel.text = "\(data?.productDetails?.productVariants?.first?.finalPrice ?? "") KD"
         CommonUtils.setStrikethrough(label: actualPriceLabel, text: "\(data?.productDetails?.productVariants?.first?.actualPrice ?? "") KD")
-        //    iscountPriceLabel.text = "\(data?.productVariants?.first?.discountValue ?? "") KD"
-//        let discountType = data?.productDetails?.productVariants?.first?.discountType ?? "1"
-//        if discountType == "1" {
-//            discountPriceLabel.text = "\(data?.productDetails?.productVariants?.first?.discountValue ?? "")% Off"
-//        } else {
-//            discountPriceLabel.text = "\(data?.productDetails?.productVariants?.first?.discountValue ?? "") KD Off"
-//        }
-        
         CommonUtils.updateDiscountPercentageLabel(discountPriceLabel,
                                                   actualAmountLabel: actualPriceLabel,
                                                   discountType: data?.productDetails?.productVariants?.first?.discountType,

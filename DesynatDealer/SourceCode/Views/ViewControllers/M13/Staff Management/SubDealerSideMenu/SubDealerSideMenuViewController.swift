@@ -26,7 +26,8 @@ class SubDealerSideMenuViewController: UIViewController {
         return viewModel.userProfile?.roleAction?
             .filter {
                 let id = $0.sellermenu?.first?.id ?? 0
-                return ![1, 2, 6, 8].contains(id)
+//                return ![1, 2, 6, 8].contains(id)
+                return ![1].contains(id)
             } ?? []
     }
     
@@ -58,7 +59,9 @@ class SubDealerSideMenuViewController: UIViewController {
     }
     
     @IBAction func viewProfileAction(_ sender: Any) {
-        let nextVC = DelearProfileViewController.instantiate(fromAppStoryboard: .Profile)
+        let nextVC = StaffDetailsViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+        nextVC.staffID = viewModel.userProfile?.id
+        nextVC.comingForSelfProfileUpdate = true
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
@@ -91,99 +94,118 @@ extension SubDealerSideMenuViewController: UITableViewDelegate, UITableViewDataS
         let hasPermission = filteredPermissions[indexPath.row].canAction == 1
         
         switch selectedItem {
-        case "12": //Staff management
+        case 2: //Products management (Done)
+            let vc =  ProductsViewController.instantiate(fromAppStoryboard: .Home)
+            vc.hasActionPermission = hasPermission
+            vc.comingFromTabbar = false
+            self.navigationController?.pushViewController(vc, animated: true)
+            
+        case 6: // Order management
+            let vc =  OrdersViewController.instantiate(fromAppStoryboard: .Home)
+            vc.hasActionPermission = hasPermission
+            vc.comingFromTabbar = false
+            self.navigationController?.pushViewController(vc, animated: true)
+            
+        case 8: // Live management
+            let vc =  ShowsViewController.instantiate(fromAppStoryboard: .Home)
+            vc.hasActionPermission = hasPermission
+            vc.comingFromTabbar = false
+            self.navigationController?.pushViewController(vc, animated: true)
+            
+        case 12: //Staff management (Done)
             let vc =  StaffManagementViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
             vc.hasActionPermission = hasPermission
             self.navigationController?.pushViewController(vc, animated: true)
             
-        case "10": //Subscription Plans
+        case 10: //Subscription Plans (Done)
             let vc = MySubsciptionPlanViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
             vc.hasActionPermission = hasPermission
             self.navigationController?.pushViewController(vc, animated: true)
             
-        case "5": //Banner management
+        case 5: //Banner management (Done)
             let vc = BannerManagemntVC.instantiate(fromAppStoryboard: .BannerManagement)
             vc.hasActionPermission = hasPermission
             self.navigationController?.pushViewController(vc, animated: true)
             
-        case "9": //Live Coverage request
+        case 9: //Live Coverage request (Done)
             let nextVC = LiveCoverageListViewController.instantiate(fromAppStoryboard: .Profile)
             nextVC.hasActionPermission = hasPermission
             self.navigationController?.pushViewController(nextVC, animated: true)
             
-        case "7": //Deals management
+        case 7: //Deals management (Done)
             let vc = DealListedViewController.instantiate(fromAppStoryboard: .OrderAndChat)
             vc.hasActionPermission = hasPermission
             self.navigationController?.pushViewController(vc, animated: true)
             
-        case "19": //Refund management
+        case 19: //Refund management (Done)
             let vc = RefundManagementViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
             vc.hasActionPermission = hasPermission
             self.navigationController?.pushViewController(vc, animated: true)
             print("➡️ Navigate to Refund management")
             
-        case "3": //Inventory management
+        case 3: //Inventory management (Done)
             let nextVC = InventoryListViewController.instantiate(fromAppStoryboard: .InventoryAffilate)
             nextVC.hasActionPermission = hasPermission
             self.navigationController?.pushViewController(nextVC, animated: true)
-        case "4": //Affiliated Commission
+            
+        case 4: //Affiliated Commission (Done)
             let nextVC = AffiliatedCommisionViewController.instantiate(fromAppStoryboard: .InventoryAffilate)
             nextVC.commissionValue = viewModel.userProfile?.affilateCommission
             nextVC.hasActionPermission = hasPermission
             self.navigationController?.pushViewController(nextVC, animated: true)
             
-        case "13": //Terms & Condition
+        case 13: //Terms & Condition (Done)
             let vc =  CMSViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
             vc.comingReason = .termsAndConditions
             vc.hasActionPermission = hasPermission
             self.navigationController?.pushViewController(vc, animated: true)
             
-        case "16": //Return Policy
+        case 16: //Return Policy (Done)
             let vc =  CMSViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
             vc.comingReason = .returnPolicy
             vc.hasActionPermission = hasPermission
             self.navigationController?.pushViewController(vc, animated: true)
             
-        case "14": //About Us
+        case 14: //About Us (Done)
             let vc =  CMSViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
             vc.comingReason = .aboutUs
             vc.hasActionPermission = hasPermission
             self.navigationController?.pushViewController(vc, animated: true)
             
-        case "15": //FAQ’S
+        case 15: //FAQ’S (Done)
             let nextVC = FAQViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
             nextVC.hasActionPermission = hasPermission
             self.navigationController?.pushViewController(nextVC, animated: true)
             
-        case "Change Language":
+        case 21: //"Change Language":
             let vc = ChangeLanguageViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
             vc.hasActionPermission = hasPermission
             self.navigationController?.pushViewController(vc, animated: true)
             
-        case "18": //Cancellation Policy
+        case 18: //Cancellation Policy (Done)
             let vc =  CMSViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
             vc.comingReason = .cancellationPolicy
             vc.hasActionPermission = hasPermission
             self.navigationController?.pushViewController(vc, animated: true)
             
-        case "17": //Exchange Policy
+        case 17: //Exchange Policy (Done)
             let vc =  CMSViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
             vc.comingReason = .exchangePolicy
             vc.hasActionPermission = hasPermission
             self.navigationController?.pushViewController(vc, animated: true)
             
-        case "11": //Support
+        case 11: //Support (Done)
             let vc = SupportViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
             vc.hasActionPermission = hasPermission
             self.navigationController?.pushViewController(vc, animated: true)
             
-        case "20": //Settings
+        case 20: //Settings
             let vc = SettingViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
             vc.hasActionPermission = hasPermission
             self.navigationController?.pushViewController(vc, animated: true)
             
         default:
-            print("⚠️ Unknown option selected: \(selectedItem ?? "")")
+            print("⚠️ Unknown option selected: \(selectedItem ?? 0)")
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }

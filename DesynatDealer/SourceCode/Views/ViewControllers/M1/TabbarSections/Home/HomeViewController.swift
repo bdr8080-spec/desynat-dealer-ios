@@ -54,6 +54,7 @@ class HomeViewController: UIViewController {
         setUpTextFields()
         setUpButtons()
         setUpChart()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -133,15 +134,6 @@ class HomeViewController: UIViewController {
         btnToggle.setImage(UIImage(named: "toggle_off"), for: .normal)
         updateRadioSelection(for: dateButtons, selectedButton: btnToday)
         updateRadioSelection(for: statsButtons, selectedButton: btnTotalOrderConversion)
-    }
-    
-    func showProfileImage() {
-        if let storeImageUrl = viewModel.userProfile?.profilePic,
-           let url = URL(string: storeImageUrl) {
-            userProfileImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-            userProfileImageView.sd_imageIndicator?.startAnimatingIndicator()
-            userProfileImageView.sd_setImage(with: url, placeholderImage: .userProfile)
-        }
     }
     
     private func updateRadioSelection(for buttons: [UIButton], selectedButton: UIButton) {

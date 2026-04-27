@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24412" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -166,7 +166,10 @@
                 <outlet property="activeStatusLbl" destination="Nyl-1F-onL" id="xKV-il-Fgr"/>
                 <outlet property="addedOnLbl" destination="Eza-PZ-hod" id="Etx-rJ-oot"/>
                 <outlet property="btnToggle" destination="4Jw-oO-Yp4" id="uyO-yb-U23"/>
+                <outlet property="buttonActionstackView" destination="zDm-SJ-y0P" id="WDs-5S-6x7"/>
+                <outlet property="deleteButton" destination="XqZ-FS-wMy" id="wkL-b0-Bqh"/>
                 <outlet property="designationLbl" destination="huH-3N-3Rd" id="8pu-db-xXE"/>
+                <outlet property="editButton" destination="C57-3N-ajg" id="NTN-Qx-40P"/>
                 <outlet property="mobileNumberLbl" destination="W1g-JI-bdr" id="Ff8-hv-TfB"/>
                 <outlet property="nameLbl" destination="bnY-fp-e3t" id="Yvw-8h-A3h"/>
                 <outlet property="profileImageView" destination="CPm-go-4V6" id="goQ-1e-pbw"/>

@@ -22,6 +22,7 @@ class LiveCoverageListViewController: UIViewController {
     }
     @IBOutlet weak var searchTF: UITextField!
     @IBOutlet weak var mainScrollView: UIScrollView!
+    @IBOutlet weak var editButtonView: UIButton!
     
     private var searchWorkItem: DispatchWorkItem?
     private lazy var viewModel = LiveCoverageListViewModel(hostVC: self)
@@ -60,6 +61,7 @@ class LiveCoverageListViewController: UIViewController {
         configureCalendar()
         selectTodayDate()
         mainScrollView.delegate = self
+        editButtonView.isHidden = !hasActionPermission
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,20 +70,7 @@ class LiveCoverageListViewController: UIViewController {
     }
     
     @IBAction func editDidTapped(_ sender: Any) {
-//        handleEditAction()
         editHandleMonthAndYearDatePicker()
-//        let nextVC = SendNewLiveRequestViewController.instantiate(fromAppStoryboard: .Profile)
-//        nextVC.selectedDateString = selectedDateString
-//        nextVC.onSendTapped = { [weak self] in
-//            guard let self = self else { return }
-//            let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
-//            vc.comingReason = .liveRequest
-//            vc.callBackDismiss = {
-//                print("Success dismissed")
-//            }
-//            self.present(vc, animated: true)
-//        }
-//        self.present(nextVC, animated: true)
     }
     
     @IBAction func btnCalenderBackTap(_ sender: Any) {
@@ -253,7 +242,7 @@ extension LiveCoverageListViewController: UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LiveCoverageRequestTableViewCell", for: indexPath) as! LiveCoverageRequestTableViewCell
         let data = viewModel.liveRequestList[indexPath.row]
-        cell.configData(data: data)
+        cell.configData(data: data, hasActionPermission: hasActionPermission)
         cell.onCancelRequest = {
             let nextVC = CancelSendRequestViewController.instantiate(fromAppStoryboard: .Profile)
             nextVC.timeSlotsId = data.id
@@ -322,7 +311,9 @@ extension LiveCoverageListViewController: FSCalendarDelegate, FSCalendarDataSour
         
         calendar.reloadData()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            self.handleEditAction()
+            if self.hasActionPermission {
+                self.handleEditAction()
+            }
         }
     }
     

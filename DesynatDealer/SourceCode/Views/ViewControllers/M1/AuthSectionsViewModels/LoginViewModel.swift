@@ -98,12 +98,12 @@ class LoginViewModel: NSObject {
             } else {
                 UserDefaults.standard.setValue("Yes", forKey:"isLogin")
                 DispatchQueue.main.async {
-                    if response.roleAction?.first?.menuID == "1" {
+                    if response.roleAction?.first?.menuID == 1 {
                         kSharedUserDefaults.setSubAdminUserHasDashboardAccess(hasDashboardAccess: true)
-                        if response.roleAction?.first?.menuID == "1" && response.roleAction?.first?.canAction == 1 {
+                        if response.roleAction?.first?.menuID == 1 && response.roleAction?.first?.canAction == 1 {
                             kSharedUserDefaults.setSubAdminActionDashboardAccess(hasActionDashboardAccess: true)
                         }
-                        kSharedSceneDelegate.navigateToDealerHomeVc()
+                        kSharedSceneDelegate.navigateToDashboardHomeVc()
                     } else {
                         kSharedSceneDelegate.navigateToSideMenuVc()
                     }

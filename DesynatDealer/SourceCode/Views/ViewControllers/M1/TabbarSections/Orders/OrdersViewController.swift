@@ -26,15 +26,18 @@ class OrdersViewController: UIViewController {
             ordersTableView.registerCellFromNib(cellID: "OrdersListTableViewCell")
         }
     }
-    
-    //  var orderCategoryType: OrderCategoryType = .normalOrders
+    @IBOutlet weak var backButton: UIButton!
+
     private var searchWorkItem: DispatchWorkItem?
     var selectedTab: OrderSelectedTabType = .all
     private lazy var viewModel = OrdersViewModel(hostVC: self)
+    var hasActionPermission: Bool = true
+    var comingFromTabbar: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         searchTF.delegate = self
+        backButton.isHidden = comingFromTabbar
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,6 +62,9 @@ class OrdersViewController: UIViewController {
     //    orderCategoryType = .customizedOrders
     //    viewModel.getAllOrders()
     //  }
+    @IBAction func backDidTapped(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
     
     @IBAction func filterDidTapped(_ sender: Any) {
         let vc = OrdersfilterViewController.instantiate(fromAppStoryboard: .OrderAndChat)
@@ -151,7 +157,7 @@ extension OrdersViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let nextVC = OrderDetailsViewController.instantiate(fromAppStoryboard: .OrderAndChat)
-        
+        nextVC.hasActionPermission = hasActionPermission
         switch selectedTab {
         case .all:
             nextVC.orderId = viewModel.ordersListData?.allOrder?[indexPath.row].id ?? 0

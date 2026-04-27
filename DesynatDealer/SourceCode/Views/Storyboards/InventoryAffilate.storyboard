@@ -962,6 +962,7 @@
                         <outlet property="colorsCollectionView" destination="OZf-LL-2ei" id="YOS-ru-ncy"/>
                         <outlet property="descriptionLAbel" destination="1QW-eX-Iv1" id="eah-6i-73D"/>
                         <outlet property="discountPriceALbel" destination="1Xp-Fj-Ihh" id="fPJ-X3-Ugq"/>
+                        <outlet property="editInvertoryView" destination="XSA-ZA-Zhl" id="ZvL-2f-rlq"/>
                         <outlet property="finalPriceLabel" destination="YMP-Cy-5Ou" id="2w9-OS-mxB"/>
                         <outlet property="imagesPageController" destination="Em7-ov-iil" id="8tK-9l-vIm"/>
                         <outlet property="priceSeparatorLabel" destination="lHt-9L-Onz" id="2GA-x5-Xbq"/>
@@ -1657,7 +1658,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bottomButtonView" destination="gy2-7x-bZd" id="xTi-qY-Nbj"/>
                         <outlet property="commissionTF" destination="SgU-AT-os9" id="Tsg-cD-0iz"/>
+                        <outlet property="editButton" destination="jJr-PR-0ZJ" id="DHz-JP-dZd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ToP-b5-s7K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

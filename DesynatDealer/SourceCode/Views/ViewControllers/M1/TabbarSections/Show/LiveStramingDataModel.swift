@@ -38,9 +38,6 @@ import Foundation
 //    }
 //}
 
-
-
-
 struct LiveStramingDataModel: Codable {
     let currentRequests: [CurrentRequest]?
     let futureRequests: [CurrentRequest]?

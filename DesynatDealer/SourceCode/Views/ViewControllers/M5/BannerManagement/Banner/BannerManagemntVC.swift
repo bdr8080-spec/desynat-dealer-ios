@@ -17,6 +17,7 @@ class BannerManagemntVC: UIViewController {
     @IBOutlet weak var txtSearch: UITextField!
     @IBOutlet weak var bannerTableView: UITableView!
     @IBOutlet weak var lblNoData: UILabel!
+    @IBOutlet weak var plusButton: UIButton!
     
     lazy private var viewModel = BannerManagementVM(hostVC: self)
     private var searchWorkItem: DispatchWorkItem?
@@ -27,6 +28,7 @@ class BannerManagemntVC: UIViewController {
         super.viewDidLoad()
         registerXib()
         txtSearch.delegate = self
+        plusButton.isHidden  = !hasActionPermission
     }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -69,7 +71,7 @@ extension BannerManagemntVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BannerMgmtTableCell", for: indexPath) as! BannerMgmtTableCell
         let banner = bannerData[indexPath.row]
-        cell.configure(with: banner)
+        cell.configure(with: banner, hasActionPermission: hasActionPermission)
         cell.onPayTap = {
             let vc = PaymentMethodVC.instantiate(fromAppStoryboard: .Main)
             //vc.transactionIds = banner.orderID ?? ""
@@ -84,6 +86,7 @@ extension BannerManagemntVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = BannerDetailVC.instantiate(fromAppStoryboard: .BannerManagement)
         vc.banners = bannerData[indexPath.row]
+        vc.hasActionPermission  = hasActionPermission
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

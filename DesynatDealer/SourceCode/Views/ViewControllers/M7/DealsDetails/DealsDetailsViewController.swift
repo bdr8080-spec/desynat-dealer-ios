@@ -36,6 +36,7 @@ class DealsDetailsViewController: UIViewController {
     var dealID: Int? = 0
     private var searchWorkItem: DispatchWorkItem?
     var selectedProductIDs: Set<Int> = []
+    var hasActionPermission: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +68,7 @@ class DealsDetailsViewController: UIViewController {
     @IBAction func addMoreDidTapped(_ sender: Any) {
         let nextVC = AddMoreProductsViewController.instantiate(fromAppStoryboard: .OrderAndChat)
         nextVC.dealID = viewModel.dealData?.id
+        nextVC.hasActionPermission = hasActionPermission
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
@@ -96,9 +98,9 @@ class DealsDetailsViewController: UIViewController {
         totalRevenueView.isHidden = true
         switch tabType {
         case .listedDeals:
-            addToDealsView.isHidden = false
+            addToDealsView.isHidden = !hasActionPermission
         case .enrolled:
-            addMoreProdutsView.isHidden = false
+            addMoreProdutsView.isHidden = !hasActionPermission
         case .expired:
             totalRevenueView.isHidden = false
         }
@@ -207,7 +209,7 @@ extension DealsDetailsViewController: UICollectionViewDelegate, UICollectionView
             withReuseIdentifier: "ProductsCollectionViewCell",
             for: indexPath
         ) as! ProductsCollectionViewCell
-        cell.configData(type: tabType)
+        cell.configData(type: tabType, hasActionPermission: hasActionPermission)
         switch tabType {
         case .listedDeals:
             cell.configDealData(data: viewModel.remainingProduct?[indexPath.row])
@@ -223,21 +225,7 @@ extension DealsDetailsViewController: UICollectionViewDelegate, UICollectionView
          case .expired:
             cell.configDealDataForAddedProduct(data: viewModel.addedProducts?[indexPath.row])
         }
-//        cell.checkboxButtonTapped = { [weak self] in
-//            guard let self = self else { return }
-//            let productData = self.viewModel.remainingProduct?[indexPath.row]
-//            guard let productID = productData?.id else { return }
-//            
-//            // Toggle selection
-//            if self.selectedProductIDs.contains(productID) {
-//                self.selectedProductIDs.remove(productID)
-//                cell.checkboxButton.setImage(UIImage(named: "filledCheckbox"), for: .normal)
-//            } else {
-//                self.selectedProductIDs.insert(productID)
-//                cell.checkboxButton.setImage(UIImage(named: "checkBox"), for: .normal)
-//            }
-//        }
-        
+
         cell.checkboxButtonTapped = { [weak self] in
             guard let self = self else { return }
             guard let productID = self.viewModel.remainingProduct?[indexPath.row].id else { return }

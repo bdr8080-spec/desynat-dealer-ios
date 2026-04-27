@@ -24,11 +24,13 @@ class BannerDetailVC: UIViewController {
     @IBOutlet weak var lblSubCategory: CustomLabelFont!
     
     var banners: BannerModel?
+    var hasActionPermission: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setData()
+        
     }
     
     private func setupUI() {
@@ -65,7 +67,7 @@ class BannerDetailVC: UIViewController {
             case "0":
                 lblRequestedStatus.text = "Confirmed"
                 lblRequestedStatus.textColor = UIColor(hex: "#68CA44")
-                viewBtnPay.isHidden = false
+                viewBtnPay.isHidden = !hasActionPermission
               
             case "1":
 //                lblRequestedStatus.text = "Active"

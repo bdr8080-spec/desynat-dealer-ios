@@ -40,6 +40,15 @@ class SubDealerSideMenuViewModel {
             DispatchQueue.main.async {
                 self.userProfile = response
                 self.populateData(data: response)
+                if response.roleAction?.first?.menuID == 1 {
+                    kSharedUserDefaults.setSubAdminUserHasDashboardAccess(hasDashboardAccess: true)
+                    if response.roleAction?.first?.menuID == 1 && response.roleAction?.first?.canAction == 1 {
+                        kSharedUserDefaults.setSubAdminActionDashboardAccess(hasActionDashboardAccess: true)
+                    }
+                } else if response.roleAction?.first?.menuID != 1 {
+                    kSharedUserDefaults.setSubAdminUserHasDashboardAccess(hasDashboardAccess: false)
+                    kSharedUserDefaults.setSubAdminActionDashboardAccess(hasActionDashboardAccess: false)
+                }
             }
         })
     }

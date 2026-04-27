@@ -29,6 +29,7 @@ class InventoryDetailsViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var editInvertoryView: UIView!
     @IBOutlet weak var colorsCollectionView: UICollectionView! {
         didSet {
             colorsCollectionView.registerCellFromNib(cellID: "ProductColoursCollectionViewCell")
@@ -50,10 +51,12 @@ class InventoryDetailsViewController: UIViewController {
     var coloursList: [ColorsLisDataModel] = []
     var sizesList: [SizeListDataModel] = []
     private var selectedVariant: ProductVariant?
+    var hasActionPermission: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        statusButton.isUserInteractionEnabled = hasActionPermission
+        editInvertoryView.isHidden = !hasActionPermission
     }
     
     override func viewWillAppear(_ animated: Bool) {

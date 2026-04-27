@@ -104,6 +104,7 @@ extension MySubsciptionPlanViewController : UICollectionViewDelegate,UICollectio
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SubscriptionCollectionCell", for: indexPath) as! SubscriptionCollectionCell
         cell.tag = indexPath.row
+        cell.btnContinue.isHidden = !hasActionPermission
         let data = viewModel.plansList?[indexPath.row]
         cell.configData(data: data)
         cell.delegate = self
@@ -129,8 +130,8 @@ extension MySubsciptionPlanViewController : UITableViewDelegate,UITableViewDataS
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "myPlanTableViewCell", for: indexPath) as! myPlanTableViewCell
         let data = viewModel.myPurchasedPlansList[indexPath.row]
-        cell.configData(data: data)
-        cell.onRenewTapped = {[weak self] in
+        cell.configData(data: data, hasActionPermission: hasActionPermission)
+        cell.onRenewTapped = { [weak self] in
             self?.viewModel.renewSubscriptionPlanApi(planId: data.planInfo?.id ?? 0, data: data)
         }
         return cell
@@ -139,6 +140,7 @@ extension MySubsciptionPlanViewController : UITableViewDelegate,UITableViewDataS
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = MyPlanDetailsViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
         vc.planDetails = viewModel.myPurchasedPlansList[indexPath.row]
+        vc.hasActionPermission = hasActionPermission
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

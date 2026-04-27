@@ -57,6 +57,7 @@ class ProductDetailViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var buttonActionStackView: UIStackView!
     @IBOutlet weak var colorsCollectionView: UICollectionView! {
         didSet {
             colorsCollectionView.registerCellFromNib(cellID: "ProductColoursCollectionViewCell")
@@ -91,11 +92,12 @@ class ProductDetailViewController: UIViewController {
     var sizesList: [SizeListDataModel] = []
     private var selectedVariant: ProductVariant?
     private var sizeChartUrl :String? = ""
-    
+    var hasActionPermission: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        buttonActionStackView.isHidden = !hasActionPermission
+        statusButton.isUserInteractionEnabled = hasActionPermission
     }
     
     override func viewWillAppear(_ animated: Bool) {

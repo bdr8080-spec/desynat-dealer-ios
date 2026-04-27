@@ -23,6 +23,7 @@ class MyPlanDetailsViewController: UIViewController {
     
     var planDetails: MySubscriptionPlanList?
     var isToRenewPlan: Bool = false
+    var hasActionPermission: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +66,7 @@ class MyPlanDetailsViewController: UIViewController {
             statusLabel.textColor = .black
             planButtonTitleLabel.text = "Renew Plan"
             isToRenewPlan = true
-            buttonView.isHidden = false
+            buttonView.isHidden = !hasActionPermission
         }
         lblPlan.text = data?.planInfo?.planNameEnglish
         lblPurchasedOn.text = formatDate(data?.createdAt ?? "")

@@ -101,42 +101,51 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
       
     case "Staff management":
         let vc =  StaffManagementViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+        vc.hasActionPermission = true
         self.navigationController?.pushViewController(vc, animated: true)
       print("➡️ Navigate to Staff management")
       
     case "Subscription Plans":
         let vc = MySubsciptionPlanViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+        vc.hasActionPermission = true
         self.navigationController?.pushViewController(vc, animated: true)
       print("➡️ Navigate to Subscription Plans")
       
     case "Banner management":
         let vc = BannerManagemntVC.instantiate(fromAppStoryboard: .BannerManagement)
+        vc.hasActionPermission = true
         self.navigationController?.pushViewController(vc, animated: true)
       
     case "Live Coverage request":
         let nextVC = LiveCoverageListViewController.instantiate(fromAppStoryboard: .Profile)
+        nextVC.hasActionPermission = true
         self.navigationController?.pushViewController(nextVC, animated: true)
         
     case "Deals management":
         let vc = DealListedViewController.instantiate(fromAppStoryboard: .OrderAndChat)
+        vc.hasActionPermission = true
         self.navigationController?.pushViewController(vc, animated: true)
       
     case "Refund management":
         let vc = RefundManagementViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+        vc.hasActionPermission = true
         self.navigationController?.pushViewController(vc, animated: true)
       print("➡️ Navigate to Refund management")
       
     case "Inventory management ":
       let nextVC = InventoryListViewController.instantiate(fromAppStoryboard: .InventoryAffilate)
+        nextVC.hasActionPermission = true
       self.navigationController?.pushViewController(nextVC, animated: true)
     case "Affiliated Commission":
       let nextVC = AffiliatedCommisionViewController.instantiate(fromAppStoryboard: .InventoryAffilate)
+        nextVC.hasActionPermission = true
       nextVC.commissionValue = viewModel.userProfile?.affilateCommission
       self.navigationController?.pushViewController(nextVC, animated: true)
       
     case "Terms & Condition":
         let vc =  CMSViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
         vc.comingReason = .termsAndConditions
+        vc.hasActionPermission = true
         self.navigationController?.pushViewController(vc, animated: true)
       //print("➡️ Navigate to Terms & Condition")
       
@@ -144,6 +153,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         
         let vc =  CMSViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
         vc.comingReason = .returnPolicy
+        vc.hasActionPermission = true
         self.navigationController?.pushViewController(vc, animated: true)
         
       //print("➡️ Navigate to Return Policy")
@@ -151,37 +161,44 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     case "About Us":
         let vc =  CMSViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
         vc.comingReason = .aboutUs
+        vc.hasActionPermission = true
         self.navigationController?.pushViewController(vc, animated: true)
       print("➡️ Navigate to About Us")
       
     case "FAQ’S":
       let nexVC = FAQViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+        nexVC.hasActionPermission = true
         self.navigationController?.pushViewController(nexVC, animated: true)
       
     case "Change Language":
         let vc = ChangeLanguageViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+        vc.hasActionPermission = true
         self.navigationController?.pushViewController(vc, animated: true)
       print("➡️ Navigate to Change Language")
       
     case "Cancellation Policy":
         let vc =  CMSViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
         vc.comingReason = .cancellationPolicy
+        vc.hasActionPermission = true
         self.navigationController?.pushViewController(vc, animated: true)
       print("➡️ Navigate to Cancellation Policy")
       
     case "Exchange Policy":
         let vc =  CMSViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
         vc.comingReason = .exchangePolicy
+        vc.hasActionPermission = true
         self.navigationController?.pushViewController(vc, animated: true)
       print("➡️ Navigate to Exchange Policy")
       
     case "Support":
         let vc = SupportViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+        vc.hasActionPermission = true
         self.navigationController?.pushViewController(vc, animated: true)
       print("➡️ Navigate to Support")
       
     case "Settings":
         let vc = SettingViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+        vc.hasActionPermission = true
         self.navigationController?.pushViewController(vc, animated: true)
       print("➡️ Navigate to Settings")
       

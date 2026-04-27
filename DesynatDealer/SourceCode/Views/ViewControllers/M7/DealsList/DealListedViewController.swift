@@ -200,6 +200,7 @@ extension DealListedViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let nextVC = DealsDetailsViewController.instantiate(fromAppStoryboard: .OrderAndChat)
         nextVC.tabType = tabType
+        nextVC.hasActionPermission = hasActionPermission
         switch tabType {
         case .listedDeals:
             nextVC.dealID = viewModel.listedDeal?[indexPath.row].id ?? 0

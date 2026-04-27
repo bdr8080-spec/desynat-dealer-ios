@@ -38,6 +38,11 @@ extension SceneDelegate {
         navigateTo(vc: vc)
     }
     
+    public func navigateToDashboardHomeVc() {
+        let vc = HomeViewController.instantiate(fromAppStoryboard: .Home)
+        navigateTo(vc: vc)
+    }
+    
     public func navigateToStoreInfo(userId: Int) {
         let vc = StoreInformationViewController.instantiate(fromAppStoryboard: .Main)
         vc.userId = userId

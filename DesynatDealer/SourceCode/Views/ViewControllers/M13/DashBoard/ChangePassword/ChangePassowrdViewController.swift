@@ -16,6 +16,7 @@ class ChangePassowrdViewController: UIViewController {
     
     // MARK: - Property Decalaration
     private lazy var viewModel = ChangePassowrdViewModel(hostVC:self)
+    var hasActionPermission: Bool = false
     
     // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {

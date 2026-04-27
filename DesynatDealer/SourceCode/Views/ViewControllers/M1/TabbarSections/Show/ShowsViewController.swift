@@ -9,6 +9,7 @@ import UIKit
 
 class ShowsViewController: UIViewController {
     
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var listTableView: UITableView! {
         didSet {
             listTableView.registerCellFromNib(cellID: "EventsTableViewCell")
@@ -16,10 +17,14 @@ class ShowsViewController: UIViewController {
     }
     @IBOutlet weak var btnGoLive: CustomButton!
     @IBOutlet weak var noDataFoundLabel: UILabel!
+    
     private lazy var vieWModel = ShowsViewModel(hostVC: self)
+    var hasActionPermission: Bool = true
+    var comingFromTabbar: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        backButton.isHidden = comingFromTabbar
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,6 +35,10 @@ class ShowsViewController: UIViewController {
     
     @IBAction func goLiveTapped(_ sender: Any) {
         vieWModel.navigateToNextScreen(response: vieWModel.stramingData)
+    }
+    
+    @IBAction func backDidTapped(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
     
 }

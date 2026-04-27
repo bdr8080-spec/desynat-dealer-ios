@@ -34,7 +34,7 @@ class BannerMgmtTableCell: UITableViewCell {
         imgBanner.layer.masksToBounds = true
     }
     
-    func configure(with data: BannerModel) {
+    func configure(with data: BannerModel, hasActionPermission: Bool) {
         if let imageUrlString = data.uploadBanner, let url = URL(string: imageUrlString) {
           imgBanner.sd_imageIndicator = SDWebImageActivityIndicator.gray
           imgBanner.sd_imageIndicator?.startAnimatingIndicator()
@@ -68,7 +68,7 @@ class BannerMgmtTableCell: UITableViewCell {
             case "0":
                 lblStatus.text = "Confirmed"
                 lblStatus.textColor = UIColor(hex: "#68CA44")
-                viewBtnPay.isHidden = false
+                viewBtnPay.isHidden = !hasActionPermission
                 viewRejectDate.isHidden = true
                 viewRejectReason.isHidden = true
                 

@@ -22,6 +22,7 @@ class AddMoreProductsViewController: UIViewController {
     private var searchWorkItem: DispatchWorkItem?
     var selectedProductIDs: Set<Int> = []
     private lazy var viewModel = AddMoreProductsViewModel(hostVC: self)
+    var hasActionPermission: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +65,7 @@ extension AddMoreProductsViewController: UICollectionViewDelegate, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductsCollectionViewCell", for: indexPath) as! ProductsCollectionViewCell
-        cell.configData(type: .listedDeals)
+        cell.configData(type: .listedDeals, hasActionPermission: hasActionPermission)
         cell.configDealData(data: dealDetails?[indexPath.row])
         let productID = dealDetails?[indexPath.row].id ?? 0
 

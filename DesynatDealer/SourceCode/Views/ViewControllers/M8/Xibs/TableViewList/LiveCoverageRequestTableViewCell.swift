@@ -38,7 +38,7 @@ class LiveCoverageRequestTableViewCell: UITableViewCell {
         onCancelRequest?()
     }
     
-    func configData(data: LiveCoverageRequestList?) {
+    func configData(data: LiveCoverageRequestList?, hasActionPermission: Bool) {
         requestIDLabel.text = "#\(data?.orderID ?? 0)"
         requestedOnLabel.text = formatDateRequestDate(data?.createdAt)
         let adminVerifyStaus = data?.adminVerify ?? 0
@@ -89,7 +89,7 @@ class LiveCoverageRequestTableViewCell: UITableViewCell {
         default:
             statusLabel.text = "Pending"
             statusLabel.textColor = UIColor(hexString: "#E28F12")
-            cancelRequestView.isHidden = false
+            cancelRequestView.isHidden = !hasActionPermission
         }
         
         liveRequestDateLabel.text = formatDateTime(date: data?.timeslotDetails?.date ?? "", time: data?.timeslotDetails?.from ?? "")

@@ -9,6 +9,7 @@ import UIKit
 
 class NotificationViewController: UIViewController {
     
+    @IBOutlet weak var deleteAccountButtonView: CustomView!
     @IBOutlet weak var pushNotificationToggleImageView: UIImageView!
     @IBOutlet weak var inAppToggleImageView: UIImageView!
     @IBOutlet weak var appnotificationbtn: UIButton!
@@ -17,10 +18,14 @@ class NotificationViewController: UIViewController {
     var isAppNotification = false
     var isPushNotification = true
     private lazy var viewModel =  NotificationViewModel(hostVC: self)
+    var hasActionPermission: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.getProfile()
+        appnotificationbtn.isUserInteractionEnabled = hasActionPermission
+        pushnotification.isUserInteractionEnabled = hasActionPermission
+        deleteAccountButtonView.isHidden = !hasActionPermission
     }
     
     @IBAction func inappDidTapped(_ sender: Any) {

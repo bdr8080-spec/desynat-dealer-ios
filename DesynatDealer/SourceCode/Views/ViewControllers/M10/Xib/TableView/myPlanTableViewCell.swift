@@ -43,7 +43,7 @@ class myPlanTableViewCell: UITableViewCell {
         onRenewTapped?()
     }
     
-    func configData(data: MySubscriptionPlanList?) {
+    func configData(data: MySubscriptionPlanList?, hasActionPermission: Bool) {
         if let type = data?.planInfo?.durationType, type == 1 {
             durationLabel.text = "Monthly"
         } else {
@@ -57,7 +57,7 @@ class myPlanTableViewCell: UITableViewCell {
         } else {
             statusLabel.text = "Expired"
             statusLabel.textColor = .black
-            renewStackView.isHidden = false
+            renewStackView.isHidden = !hasActionPermission
         }
         lblPurchasedOn.text = formatDate(data?.createdAt ?? "")
         lblAmount.text = CommonUtils.formatPriceStringInput("\(data?.planInfo?.price ?? 0)")

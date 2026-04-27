@@ -27,6 +27,8 @@ class StaffDetailsViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var editButton: UIButton!
+    
     // MARK: - Variable
     private lazy var viewModel = StaffDetailsViewModel(hostVC: self)
     var isActive: Bool = false
@@ -35,10 +37,18 @@ class StaffDetailsViewController: UIViewController {
     var selectedRow: Int?
     var moduleSelctedData: [ModulSelctedData] = []
     var staffID: Int? = 0
+    var hasActionPermission: Bool = false
+    var comingForSelfProfileUpdate: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupPasswordUI()
+        editButton.isHidden = !hasActionPermission
+        activeStatusbtn.isUserInteractionEnabled = hasActionPermission
+        if comingForSelfProfileUpdate {
+            activeStatusbtn.isUserInteractionEnabled = false
+            editButton.isHidden = false
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,7 +63,11 @@ class StaffDetailsViewController: UIViewController {
     
     @IBAction func editProfileBtntapped(_ sender: Any) {
         let vc = AddNewStaffViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
-        vc.comingReason = .editStaff
+        if comingForSelfProfileUpdate {
+            vc.comingReason = .selfProfileUpdate
+        } else {
+            vc.comingReason = .editStaff
+        }
         vc.staffDetails = viewModel.staffDetails
         self.navigationController?.pushViewController(vc, animated: true)
     }
