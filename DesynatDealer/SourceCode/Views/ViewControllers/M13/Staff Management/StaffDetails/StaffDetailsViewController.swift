@@ -27,6 +27,7 @@ class StaffDetailsViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var accessModuleLabel: UILabel!
     @IBOutlet weak var editButton: UIButton!
     
     // MARK: - Variable
@@ -48,6 +49,10 @@ class StaffDetailsViewController: UIViewController {
         if comingForSelfProfileUpdate {
             activeStatusbtn.isUserInteractionEnabled = false
             editButton.isHidden = false
+            accessModuleLabel.isHidden = true
+            accessModuleTableView.isHidden = true
+            activeStatusbtn.isHidden = true
+            isActiveLbl.isHidden = true
         }
     }
     
@@ -145,6 +150,8 @@ class StaffDetailsViewController: UIViewController {
     private func updateStatusUI() {
         let isBlocked = (viewModel.staffDetails?.isBlock ?? 0) == 1
         isActiveLbl.text = isBlocked ? "Inactive" : "Active"
+        isActiveLbl.text = isBlocked ? "Inactive" : "Active"
+        isActiveLbl.textColor = isBlocked ? UIColor(hex: "E80B26") : UIColor(hex: "1A900D")
         activeStatusbtn.setImage(isBlocked ? .toggleOff : .toggleOn, for: .normal)
     }
 }

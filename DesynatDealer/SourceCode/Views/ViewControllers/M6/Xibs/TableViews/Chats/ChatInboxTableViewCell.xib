@@ -63,22 +63,22 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="mq9-A3-eFZ">
-                                <rect key="frame" x="81" y="0.6666666666666643" width="97.333333333333314" height="86.666666666666686"/>
+                                <rect key="frame" x="81" y="4" width="97.333333333333314" height="80.333333333333329"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max jacobson" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dlb-fs-ZDR">
-                                        <rect key="frame" x="0.0" y="0.0" width="97.333333333333329" height="19.666666666666668"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="97.333333333333329" height="16.333333333333332"/>
                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                         <color key="textColor" red="0.14901960784313725" green="0.14901960784313725" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thank you, bro!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="raJ-3f-w47">
-                                        <rect key="frame" x="0.0" y="19.666666666666664" width="97.333333333333329" height="17"/>
+                                        <rect key="frame" x="0.0" y="16.333333333333332" width="97.333333333333329" height="14"/>
                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                         <color key="textColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g2i-ma-hre">
-                                        <rect key="frame" x="0.0" y="36.666666666666671" width="97.333333333333329" height="50"/>
+                                        <rect key="frame" x="0.0" y="30.333333333333336" width="97.333333333333329" height="50.000000000000007"/>
                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                         <color key="textColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -86,10 +86,10 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a8q-my-1Hf" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
-                                <rect key="frame" x="306" y="-1.6666666666666661" width="91" height="24.333333333333329"/>
+                                <rect key="frame" x="313.33333333333331" y="1.3333333333333339" width="83.666666666666686" height="21.666666666666664"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quotation Sent" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iXs-pO-7rA">
-                                        <rect key="frame" x="8" y="5.3333333333333321" width="75" height="14"/>
+                                        <rect key="frame" x="8" y="4.9999999999999991" width="67.666666666666671" height="11.666666666666664"/>
                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="10"/>
                                         <color key="textColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -108,16 +108,51 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EBP-8m-JrL" customClass="CustomView" customModule="DesynatDealer">
+                                <rect key="frame" x="372" y="28" width="20" height="20"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btnGradient" translatesAutoresizingMaskIntoConstraints="NO" id="ZUO-ib-BcO" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="circleCorner" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OrQ-oK-IwK">
+                                        <rect key="frame" x="2" y="2" width="16" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="OrQ-oK-IwK" firstAttribute="top" secondItem="EBP-8m-JrL" secondAttribute="top" constant="2" id="60p-3A-tW1"/>
+                                    <constraint firstItem="ZUO-ib-BcO" firstAttribute="leading" secondItem="EBP-8m-JrL" secondAttribute="leading" id="GWK-Mb-tuy"/>
+                                    <constraint firstAttribute="trailing" secondItem="OrQ-oK-IwK" secondAttribute="trailing" constant="2" id="ZWa-HU-1hG"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZUO-ib-BcO" secondAttribute="trailing" id="ZxC-oy-Vf8"/>
+                                    <constraint firstAttribute="bottom" secondItem="OrQ-oK-IwK" secondAttribute="bottom" constant="2" id="azc-IF-DZ8"/>
+                                    <constraint firstItem="ZUO-ib-BcO" firstAttribute="top" secondItem="EBP-8m-JrL" secondAttribute="top" id="e5B-FB-tWc"/>
+                                    <constraint firstAttribute="height" constant="20" id="gO3-l4-1fN"/>
+                                    <constraint firstAttribute="width" constant="20" id="gXT-NJ-tt9"/>
+                                    <constraint firstItem="OrQ-oK-IwK" firstAttribute="leading" secondItem="EBP-8m-JrL" secondAttribute="leading" constant="2" id="mmT-rf-y69"/>
+                                    <constraint firstAttribute="bottom" secondItem="ZUO-ib-BcO" secondAttribute="bottom" id="p9v-T3-B6T"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="circleCorner" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="mq9-A3-eFZ" firstAttribute="centerY" secondItem="7dd-cg-VI7" secondAttribute="centerY" id="4Pu-ya-MQG"/>
                             <constraint firstItem="7dd-cg-VI7" firstAttribute="centerY" secondItem="Zzp-Ll-1ey" secondAttribute="centerY" id="SFN-9g-6LK"/>
+                            <constraint firstItem="EBP-8m-JrL" firstAttribute="top" secondItem="a8q-my-1Hf" secondAttribute="bottom" constant="5" id="bZA-lO-etK"/>
                             <constraint firstItem="a8q-my-1Hf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mq9-A3-eFZ" secondAttribute="trailing" constant="10" id="jfw-mj-XSc"/>
                             <constraint firstItem="mq9-A3-eFZ" firstAttribute="leading" secondItem="7dd-cg-VI7" secondAttribute="trailing" constant="15" id="kdg-HD-hu5"/>
                             <constraint firstItem="7dd-cg-VI7" firstAttribute="top" secondItem="Zzp-Ll-1ey" secondAttribute="top" constant="15" id="ntl-ly-Rpk"/>
                             <constraint firstItem="7dd-cg-VI7" firstAttribute="leading" secondItem="Zzp-Ll-1ey" secondAttribute="leading" constant="8" id="oYu-eP-p9T"/>
                             <constraint firstItem="a8q-my-1Hf" firstAttribute="centerY" secondItem="dlb-fs-ZDR" secondAttribute="centerY" id="uTn-lD-VKY"/>
+                            <constraint firstAttribute="trailing" secondItem="EBP-8m-JrL" secondAttribute="trailing" constant="20" id="xYb-sl-J0y"/>
                             <constraint firstAttribute="trailing" secondItem="a8q-my-1Hf" secondAttribute="trailing" constant="15" id="ya2-dz-7Uy"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
@@ -142,9 +177,11 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="messageCountLabel" destination="OrQ-oK-IwK" id="LDY-aE-QJb"/>
                 <outlet property="messageLabel" destination="raJ-3f-w47" id="afC-iD-hjH"/>
                 <outlet property="messageTypeLabel" destination="iXs-pO-7rA" id="gmI-cq-zcJ"/>
                 <outlet property="messageTypeStatusView" destination="a8q-my-1Hf" id="WRq-iv-zLF"/>
+                <outlet property="messagecountView" destination="EBP-8m-JrL" id="fKw-FQ-Hwl"/>
                 <outlet property="timeLabel" destination="g2i-ma-hre" id="HcR-3g-1oL"/>
                 <outlet property="userProfileImageView" destination="Z3L-Uo-ahH" id="gMn-e4-Xe2"/>
                 <outlet property="usernameLabel" destination="dlb-fs-ZDR" id="JYT-Ka-rRg"/>
@@ -153,6 +190,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="btnGradient" width="343" height="38"/>
         <image name="userProfile" width="32" height="32"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

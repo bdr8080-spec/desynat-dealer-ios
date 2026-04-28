@@ -23,6 +23,7 @@ class CMSViewController: UIViewController {
         super.viewDidLoad()
         titleLbl.text = titleText
         initialSetup()
+        webView.scrollView.showsVerticalScrollIndicator = false
     }
     
     // MARK: - Navigation

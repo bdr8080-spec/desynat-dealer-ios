@@ -58,10 +58,13 @@ class StaffManagementTableViewCell: UITableViewCell {
         if data.isBlock == 0 {
             btnToggle.setImage(UIImage(named: "toggle_on"), for: .normal)
             self.activeStatusLbl.text = "Active"
+            self.activeStatusLbl.textColor = UIColor(hex: "1A900D")
         }else {
             btnToggle.setImage(UIImage(named: "toggle_off"), for: .normal)
             self.activeStatusLbl.text = "Inactive"
+            self.activeStatusLbl.textColor = UIColor(hex: "E80B26")
         }
+//        isActiveLbl.textColor = isBlocked ? UIColor(hex: "1A900D") : UIColor(hex: "E80B26")
         self.addedOnLbl.text = formatAddedOnDate(data.createdAt ?? "")
         if let imageUrlString = data.profilePic,
            let url = URL(string: imageUrlString) {

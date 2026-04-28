@@ -34,6 +34,28 @@ class ChatEnquiryViewModel {
         }
     }
     
+    func readChatMessagesRequest() {
+        let param: [String: Any] = ["unique_id": chatDetailsUniqueId]
+        WebService.sharedInstance.markAllchatThread(param: param) { [weak self] response in
+            print("Done")
+        }
+    }
+    
+    func sendNotificationDetails(message: String) {
+        let param: [String: Any] = ["sender_id": quotationData?.sellerID ?? 0,
+                                    "sender_type": 3, //1-admin,2-user,3-seller,4-affiliate,5-driver
+                                    "receiver_id": quotationData?.userID ?? 0,
+                                    "receiver_type": 2, //1-admin,2-user,3-seller,4-affiliate,5-driver
+                                    "title_english": message,
+                                    "description_english": "You have a new message",
+                                    "notification_type": "chat_message"]
+        WebService.sharedInstance.sendNotificationDetails(param: param) { [weak self] response in
+            DispatchQueue.main.async { [weak self] in
+                print("send")
+            }
+        }
+    }
+    
     func checkForEnquiryChat() {
         let ref = self.chatDB.child(chatDetailsUniqueId)
         self.chatReference = ref
@@ -103,7 +125,7 @@ class ChatEnquiryViewModel {
             let isoDate = formatter.string(from: Date())
             let chat = Chat(
                 uniqueId: self.chatDetailsUniqueId,
-                senderId: String(id),
+                senderId: String(self.quotationData?.sellerID ?? 0),//String(id),
                 type: type,
                 message: msg,
                 messageAr: arabicText,

@@ -56,6 +56,7 @@ class ChatViewController: UIViewController {
         super.viewDidLoad()
         viewModel.delegate = self
         IQKeyboardManager.shared.disabledDistanceHandlingClasses = [ChatViewController.self]
+        viewModel.readChatMessagesRequest()
         self.viewModel.callBackRefresh = {
             self.handleUIUpdate()
             self.baseScrollView.setNeedsDisplay()
@@ -109,6 +110,7 @@ class ChatViewController: UIViewController {
             guard let image else { return }
             WebService.sharedInstance.uploadImage(withParams: image) { [weak self] imageURL in
                 self?.handleSendMessage(msg: imageURL.url ?? "", type: "1")
+                self?.viewModel.sendNotificationDetails(message: "New Attachment")
             }
         }
     }
@@ -120,6 +122,7 @@ class ChatViewController: UIViewController {
         }
         self.sendMessageTF.text = nil
         handleSendMessage(msg: txt, type: "0")
+        viewModel.sendNotificationDetails(message: txt)
     }
     
     private func updateNoChatUI() {

@@ -31,69 +31,152 @@ class AddNewStaffViewModel {
         }
     }
     
+//    func validFields() -> Bool {
+//        var errorMessage: AlertConstant = .none
+//        
+//        if hostVC.selectedImageUrl.isEmpty {
+//            errorMessage = .SelectProfileImage
+//        }
+//        
+//        let fullNameInEnglish = String.getString(hostVC.fullNameInEnglishTF.text).trimmingCharacters(in: .whitespacesAndNewlines)
+//        if errorMessage == .none {
+//            if fullNameInEnglish.isEmpty {
+//                errorMessage = .enterFullNameEnglish
+//            }
+//        }
+//        
+//        let fullNameInArabic = String.getString(hostVC.fullNameInArabicTF.text).trimmingCharacters(in: .whitespacesAndNewlines)
+//        if errorMessage == .none {
+//            if fullNameInArabic.isEmpty {
+//                errorMessage = .enterFullNameArabic
+//            }
+//        }
+//        
+//        let emailId = String.getString(hostVC.emailTF.text).trimmingCharacters(in: .whitespacesAndNewlines)
+//        if emailId.isEmpty {
+//            errorMessage = .EnterEmail
+//        }else if !emailId.isValidEmail() {
+//            errorMessage = .EnterValidEmailAddress
+//        }
+//        
+//        let mobile = String.getString(hostVC.mobileTF.text).trimmingCharacters(in: .whitespacesAndNewlines)
+//        if mobile.isEmpty {
+//            errorMessage = .EnterMobileNumber
+//        }else if !mobile.isValidPhoneNumber() {
+//            errorMessage = .validMobileNumber
+//        }
+//        
+//        if hostVC.selectedRoleId == -1 {
+//            errorMessage = .selectRoleForNotification
+//        }
+//        
+//        let password = String.getString(hostVC.passwordTxtField.text).trimmingCharacters(in: .whitespacesAndNewlines)
+//        if errorMessage == .none {
+//            if password.isEmpty {
+//                errorMessage = .EnterPassword
+//            }
+//        }
+//        
+//        let confirmPassword = String.getString(hostVC.confirmPasswortTxtField.text).trimmingCharacters(in: .whitespacesAndNewlines)
+//        if errorMessage == .none {
+//            if confirmPassword.isEmpty {
+//                errorMessage = .EnterConfirmPassword
+//            }
+//        }
+//        
+//        if errorMessage == .none {
+//            if password != confirmPassword {
+//                errorMessage = .PasswordNotMatched
+//            }
+//        }
+//        
+//        if errorMessage == .none {
+//            if hostVC.moduleSelctedData.isEmpty {
+//                errorMessage = .selectModule
+//            }
+//        }
+//        
+//        if errorMessage != .none {
+//            hostVC.showAlert(msg: errorMessage.rawValue)
+//        }
+//        
+//        hostVC.view.endEditing(true)
+//        return errorMessage == .none
+//    }
+    
     func validFields() -> Bool {
+        
         var errorMessage: AlertConstant = .none
         
         if hostVC.selectedImageUrl.isEmpty {
             errorMessage = .SelectProfileImage
         }
         
-        let fullNameInEnglish = String.getString(hostVC.fullNameInEnglishTF.text).trimmingCharacters(in: .whitespacesAndNewlines)
-        if errorMessage == .none {
-            if fullNameInEnglish.isEmpty {
-                errorMessage = .enterFullNameEnglish
-            }
+        let fullNameInEnglish = String.getString(
+            hostVC.fullNameInEnglishTF.text
+        ).trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if errorMessage == .none && fullNameInEnglish.isEmpty {
+            errorMessage = .enterFullNameEnglish
         }
         
-        let fullNameInArabic = String.getString(hostVC.fullNameInArabicTF.text).trimmingCharacters(in: .whitespacesAndNewlines)
-        if errorMessage == .none {
-            if fullNameInArabic.isEmpty {
-                errorMessage = .enterFullNameArabic
-            }
+        let fullNameInArabic = String.getString(
+            hostVC.fullNameInArabicTF.text
+        ).trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if errorMessage == .none && fullNameInArabic.isEmpty {
+            errorMessage = .enterFullNameArabic
         }
         
-        let emailId = String.getString(hostVC.emailTF.text).trimmingCharacters(in: .whitespacesAndNewlines)
-        if emailId.isEmpty {
+        let emailId = String.getString(
+            hostVC.emailTF.text
+        ).trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if errorMessage == .none && emailId.isEmpty {
             errorMessage = .EnterEmail
-        }else if !emailId.isValidEmail() {
+        } else if errorMessage == .none && !emailId.isValidEmail() {
             errorMessage = .EnterValidEmailAddress
         }
         
-        let mobile = String.getString(hostVC.mobileTF.text).trimmingCharacters(in: .whitespacesAndNewlines)
-        if mobile.isEmpty {
+        let mobile = String.getString(
+            hostVC.mobileTF.text
+        ).trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if errorMessage == .none && mobile.isEmpty {
             errorMessage = .EnterMobileNumber
-        }else if !mobile.isValidPhoneNumber() {
+        } else if errorMessage == .none && !mobile.isValidPhoneNumber() {
             errorMessage = .validMobileNumber
         }
         
-        if hostVC.selectedRoleId == -1 {
+        if errorMessage == .none &&
+            hostVC.selectedRoleId == -1 {
             errorMessage = .selectRoleForNotification
         }
         
-        let password = String.getString(hostVC.passwordTxtField.text).trimmingCharacters(in: .whitespacesAndNewlines)
-        if errorMessage == .none {
-            if password.isEmpty {
-                errorMessage = .EnterPassword
-            }
+        let password = String.getString(
+            hostVC.passwordTxtField.text
+        ).trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if errorMessage == .none && password.isEmpty {
+            errorMessage = .EnterPassword
         }
         
-        let confirmPassword = String.getString(hostVC.confirmPasswortTxtField.text).trimmingCharacters(in: .whitespacesAndNewlines)
-        if errorMessage == .none {
-            if confirmPassword.isEmpty {
-                errorMessage = .EnterConfirmPassword
-            }
+        let confirmPassword = String.getString(
+            hostVC.confirmPasswortTxtField.text
+        ).trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if errorMessage == .none && confirmPassword.isEmpty {
+            errorMessage = .EnterConfirmPassword
         }
         
-        if errorMessage == .none {
-            if password != confirmPassword {
-                errorMessage = .PasswordNotMatched
-            }
+        if errorMessage == .none &&
+            password != confirmPassword {
+            errorMessage = .PasswordNotMatched
         }
         
-        if errorMessage == .none {
-            if hostVC.moduleSelctedData.isEmpty {
-                errorMessage = .selectModule
-            }
+        if errorMessage == .none &&
+            hostVC.moduleSelctedData.isEmpty {
+            errorMessage = .selectModule
         }
         
         if errorMessage != .none {
@@ -101,6 +184,7 @@ class AddNewStaffViewModel {
         }
         
         hostVC.view.endEditing(true)
+        
         return errorMessage == .none
     }
     

@@ -74,9 +74,11 @@ enum NetworkEndPoint: String {
     //Chat
     case getAllChatsRecord                = "/api/seller/all-chats-records"
     case getSingleChats                   = "/api/seller/single-chats-records"
+    case markAllchatThread                = "/api/seller/mark_all_chat_msg_as_read"
     case qutationChatEdit                 = "/api/seller/Modify-single-chats-records"
     case sendInMessageChat                = "/api/send-message-in-chats"
     case updateReturnExchangeStatus       = "/api/seller/update-order-exchange-return-status"
+    case sendNotification                 = "/api/sendPushNotificationApp"
     
     
     //M7

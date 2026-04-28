@@ -230,7 +230,7 @@ class AddNewStaffViewController: UIViewController {
     }
 }
 
-extension AddNewStaffViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout,UICollectionViewDelegate {
+extension AddNewStaffViewController: UICollectionViewDataSource,UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return roles.count
@@ -249,9 +249,9 @@ extension AddNewStaffViewController: UICollectionViewDataSource, UICollectionVie
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         let text = roles[indexPath.row].nameAr
-        let font = UIFont(name: "Poppins-Medium", size: 14) ?? UIFont.systemFont(ofSize: 14)
+        let font = UIFont(name: "Poppins-Medium", size: 10) ?? UIFont.systemFont(ofSize: 10)
         let width = (text as! NSString).size(withAttributes: [.font: font]).width
-        return CGSize(width: width + 16, height: 24)
+        return CGSize(width: width + 2, height: 24)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
