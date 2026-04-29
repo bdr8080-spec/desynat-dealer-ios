@@ -38,6 +38,7 @@ class OrdersViewController: UIViewController {
         super.viewDidLoad()
         searchTF.delegate = self
         backButton.isHidden = comingFromTabbar
+        viewModel.readNewOrderCountApi()
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -144,6 +144,8 @@ enum NetworkEndPoint: String {
     case getAllStaff          = "/api/seller/All-staff-details"
     case activeInactiveStaff = "/api/seller/staff-active-inactive"
     case getRefundOrder = "/api/seller/get_refund_orders"
+    case getNewOrderCount   = "/api/seller/order_notification_unread_count"
+    case readNewOrderCount   = "/api/seller/mark_all_order_notification"
     
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"

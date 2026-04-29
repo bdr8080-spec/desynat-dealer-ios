@@ -11,12 +11,20 @@ class TabBarVC: UIViewController {
     
     @IBOutlet weak var containerView: UIView!
     @IBOutlet var tabButtons: [UIButton]!
-
+    @IBOutlet weak var orderCountLabel: UILabel!
+    @IBOutlet weak var orderCountView: CustomView!
+    
     var initialTabIndex: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         updateTabSelection(forTag: initialTabIndex)
+        //        NotificationCenter.default.addObserver(self, selector: #selector(handleGetNewOrdersDetailsApi), name: NSNotification.Name("ItemRemovedFromBag"), object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getNewOrdersCountApi()
     }
     
     @IBAction func tabBarAction(_ sender: UIButton) {
@@ -27,7 +35,7 @@ class TabBarVC: UIViewController {
         loadSubview(forTag: tag)
         setUserButtonImages(selectedTag: tag)
     }
-
+    
     private func setUserButtonImages(selectedTag: Int) {
         let unselectedImages = ["homeUnselected", "productsUnselected", "show", "ordersUnselected", "paymentsUnselected"]
         let selectedImages = ["homeSelected", "productsSelected", "show", "ordersSelected", "paymentsSelected"]
@@ -37,20 +45,35 @@ class TabBarVC: UIViewController {
             button.setImage(UIImage(named: imageName), for: .normal)
         }
     }
+    
+    @objc func handleGetNewOrdersDetailsApi() {
+        getNewOrdersCountApi()
+    }
+    
+    func getNewOrdersCountApi(){
+        WebService.sharedInstance.getOrdersCountDetails { [self] count in
+            if count > 0 {
+                self.orderCountView.isHidden = false
+                self.orderCountLabel.text = "\(count)"
+            } else {
+                self.orderCountView.isHidden = true
+            }
+        }
+    }
 }
 
 // MARK: - Load Child VC
 extension TabBarVC {
     func loadSubview(forTag tag: Int) {
         guard let containerView = containerView else { return }
-
+        
         // Remove existing child view
         for child in children {
             child.willMove(toParent: nil)
             child.view.removeFromSuperview()
             child.removeFromParent()
         }
-
+        
         // Load new child view controller
         let childVC: UIViewController
         switch tag {
@@ -67,7 +90,7 @@ extension TabBarVC {
         default:
             return
         }
-
+        
         addChild(childVC)
         childVC.view.frame = containerView.bounds
         containerView.addSubview(childVC.view)
