@@ -330,9 +330,9 @@ extension WebService {
         }
     }
     
-    func getCountOfNotificationForService(completion:@escaping (_ user: Int)-> Void) {
+    func getCountOfNotificationForService(completion:@escaping (_ user: NotificationCountDataModel)-> Void) {
         CommonUtils.showHud(show: true)
-        NetworkManager.shared.request(withAPI: .endpoint(.countOfNotifcation), requestMethod: .get,requestModel: Int.self) { result, code in
+        NetworkManager.shared.request(withAPI: .endpoint(.countOfNotifcation), requestMethod: .get,requestModel: NotificationCountDataModel.self) { result, code in
             
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in

@@ -19,12 +19,21 @@ class HomeViewModel {
     }
     
     func getCountOfNotificationRequest(){
-        WebService.sharedInstance.getCountOfNotificationForService { [self] count in
-            if count > 0 {
+        WebService.sharedInstance.getCountOfNotificationForService { [self] response in
+            let notificationCount = response.notificationCount ?? 0
+            if notificationCount > 0 {
                 self.hostVC.notificationCountView.isHidden = false
-                self.hostVC.notificationCountLabel.text = count.description
+                self.hostVC.notificationCountLabel.text = notificationCount.description
             } else {
                 self.hostVC.notificationCountView.isHidden = true
+            }
+            
+            let chatUnreadCount = response.chatUnreadCount ?? 0
+            if chatUnreadCount > 0 {
+                self.hostVC.messageCountView.isHidden = false
+                self.hostVC.unreadMessageCountLabel.text = chatUnreadCount.description
+            } else {
+                self.hostVC.messageCountView.isHidden = true
             }
         }
     }

@@ -41,6 +41,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var notificationCountView: CustomView!
     @IBOutlet weak var notificationCountLabel: UILabel!
     @IBOutlet weak var adminstoryButtonOutlet: UIButton!
+    @IBOutlet weak var messageCountView: CustomView!
+    @IBOutlet weak var unreadMessageCountLabel: UILabel!
     
     private let datePicker = UIDatePicker()
     private var activeTextField: UITextField?
