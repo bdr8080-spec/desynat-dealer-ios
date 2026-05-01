@@ -47,21 +47,21 @@ class LiveCoverageRequestTableViewCell: UITableViewCell {
         cancelRequestView.isHidden = true
         switch adminVerifyStaus {
         case 3:
-            statusLabel.text = "Cancelled"
+            statusLabel.text = "Cancelled".localiz()
             statusLabel.textColor = UIColor(hexString: "#D53B36")
             rejectedDateView.isHidden = false
             rejectedView.isHidden = false
-            rejectedOnTitleLabel.text = "Cancelled On"
-            rejectedREasonTitleLabel.text = "Cancelled Reason"
+            rejectedOnTitleLabel.text = "Cancelled On".localiz()
+            rejectedREasonTitleLabel.text = "Cancelled Reason".localiz()
             rejectedDateLabel.text = formatDateRequestDate(data?.updatedAt)
             rejectedReaonLabel.text = data?.cancelReason
         case 2:
-            statusLabel.text = "Rejected"
+            statusLabel.text = "Rejected".localiz()
             statusLabel.textColor = UIColor(hexString: "#D53B36")
             rejectedDateView.isHidden = false
             rejectedView.isHidden = false
-            rejectedOnTitleLabel.text = "Rejected On"
-            rejectedREasonTitleLabel.text = "Rejected Reason"
+            rejectedOnTitleLabel.text = "Rejected On".localiz()
+            rejectedREasonTitleLabel.text = "Rejected Reason".localiz()
             rejectedDateLabel.text = formatDateRequestDate(data?.updatedAt)
             rejectedReaonLabel.text = data?.rejectReason
         case 1:
@@ -85,9 +85,9 @@ class LiveCoverageRequestTableViewCell: UITableViewCell {
             }
 
             // Update status
-            statusLabel.text = isTimeslotOver ? "Completed" : "Confirmed"
+            statusLabel.text = isTimeslotOver ? "Completed".localiz() : "Confirmed".localiz()
         default:
-            statusLabel.text = "Pending"
+            statusLabel.text = "Pending".localiz()
             statusLabel.textColor = UIColor(hexString: "#E28F12")
             cancelRequestView.isHidden = !hasActionPermission
         }

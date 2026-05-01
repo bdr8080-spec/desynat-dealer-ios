@@ -149,8 +149,8 @@ class StaffDetailsViewController: UIViewController {
     
     private func updateStatusUI() {
         let isBlocked = (viewModel.staffDetails?.isBlock ?? 0) == 1
-        isActiveLbl.text = isBlocked ? "Inactive" : "Active"
-        isActiveLbl.text = isBlocked ? "Inactive" : "Active"
+        isActiveLbl.text = isBlocked ? "Inactive".localiz() : "Active".localiz()
+        isActiveLbl.text = isBlocked ? "Inactive".localiz() : "Active".localiz()
         isActiveLbl.textColor = isBlocked ? UIColor(hex: "E80B26") : UIColor(hex: "1A900D")
         activeStatusbtn.setImage(isBlocked ? .toggleOff : .toggleOn, for: .normal)
     }

@@ -34,6 +34,7 @@ class RefundManagementFilterViewController: UIViewController {
         .returned,
         .exchange
     ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         handleUISetup()
@@ -97,7 +98,7 @@ extension RefundManagementFilterViewController:  UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FiltersOptionsTableViewCell", for: indexPath) as! FiltersOptionsTableViewCell
-        cell.titleLabel.text = filtersOptions[indexPath.row]
+        cell.titleLabel.text = filtersOptions[indexPath.row].localiz()
         if selectedIndex == indexPath.row {
             cell.mainImageView.image = .filledCheckbox//UIImage(named: "filledCheckbox")
         } else {
@@ -123,9 +124,9 @@ extension RefundManagementFilterViewController {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         
-        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneDatePicker))
+        let doneButton = UIBarButtonItem(title: "Done".localiz(), style: .done, target: self, action: #selector(doneDatePicker))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker))
+        let cancelButton = UIBarButtonItem(title: "Cancel".localiz(), style: .plain, target: self, action: #selector(cancelDatePicker))
         toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         
         fromTextField.inputView = datePicker
@@ -163,10 +164,10 @@ extension RefundManagementFilterViewController {
     }
     
     private func showValidationAlert() {
-        let alert = UIAlertController(title: "Invalid Date",
-                                      message: "To Date cannot be earlier than From Date.",
+        let alert = UIAlertController(title: "Invalid Date".localiz(),
+                                      message: "To Date cannot be earlier than From Date.".localiz(),
                                       preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        alert.addAction(UIAlertAction(title: "OK".localiz(), style: .default))
         self.present(alert, animated: true)
     }
     

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24765" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24743"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -1597,6 +1597,7 @@
                         <outlet property="emailIdLabel" destination="RUx-wj-0qI" id="67k-Mx-fMN"/>
                         <outlet property="exchangeSizeLabel" destination="QbB-gy-afu" id="oXv-8f-fGl"/>
                         <outlet property="exchangeView" destination="gki-Xj-rgu" id="IKk-Yx-KLt"/>
+                        <outlet property="lblDetailsTitle" destination="vac-l5-IWK" id="u8t-gH-r26"/>
                         <outlet property="lblItemPrice" destination="rYe-xz-Kna" id="EHt-95-c6h"/>
                         <outlet property="lblItemPriceAmt" destination="8KS-Eb-UGH" id="bG2-7t-bG9"/>
                         <outlet property="lblReturnExchangeHeading" destination="tw8-Jl-GxT" id="z69-ah-c8K"/>
@@ -4012,7 +4013,7 @@ Apartment, Kuwait</string>
                                 </connections>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="no product found" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eb1-fN-1gY">
-                                <rect key="frame" x="126.33333333333333" y="439.66666666666669" width="140.33333333333337" height="22.666666666666686"/>
+                                <rect key="frame" x="126.33333333333333" y="439.66666666666669" width="140.33333333333343" height="22.666666666666686"/>
                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>

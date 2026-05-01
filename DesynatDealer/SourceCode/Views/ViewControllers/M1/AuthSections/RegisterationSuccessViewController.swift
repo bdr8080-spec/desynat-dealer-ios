@@ -27,23 +27,23 @@ class RegisterationSuccessViewController: UIViewController {
   private func initialSetup() {
     switch comingReason {
     case .passwordUpdated:
-      descriptionLabel.text = "Password Reset\nsuccessfully!"
+        descriptionLabel.text = "Password Reset\nsuccessfully!".localiz()
     case .accountCreated:
-      descriptionLabel.text = "Thank you for sinning up\nwith DESYNAT"
+        descriptionLabel.text = "Thank you for sinning up\nwith DESYNAT".localiz()
     case .planPurchased:
-      descriptionLabel.text = "Plan purchased successfully!"
+        descriptionLabel.text = "Plan purchased successfully!".localiz()
     case .bannerPlanPurchased:
-      descriptionLabel.text = "Banner plan purchased succesfully!"
+        descriptionLabel.text = "Banner plan purchased succesfully!".localiz()
     case .affiliatedCommission:
-      descriptionLabel.text = "Commisson saved"
+        descriptionLabel.text = "Commisson saved".localiz()
     case .sendQuotation:
-      descriptionLabel.text = "Quotation Sent\nsuccessfully!"
+        descriptionLabel.text = "Quotation Sent\nsuccessfully!".localiz()
     case .modifyQuotation:
-      descriptionLabel.text = "Modified\nsuccessfully!"
+        descriptionLabel.text = "Modified\nsuccessfully!".localiz()
     case .dealAdded:
-      descriptionLabel.text = "Items added to deals\nsuccessfully!"
+        descriptionLabel.text = "Items added to deals\nsuccessfully!".localiz()
     case .liveRequest:
-        descriptionLabel.text = "Request Sent\nSuccessfully!"
+        descriptionLabel.text = "Request Sent\nSuccessfully!".localiz()
     }
   }
   

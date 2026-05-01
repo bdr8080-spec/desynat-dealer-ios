@@ -86,9 +86,9 @@ class ProductsCollectionViewCell: UICollectionViewCell {
             ratingView.rating = 0.0
             ratingLabel.text = "(\(0))"
         }
-
-        finalPriceLabel.text = "\(data?.productVariants?.first?.finalPrice ?? "") KD"
-        CommonUtils.setStrikethrough(label: actualPriceLabel, text: "\(data?.productVariants?.first?.actualPrice ?? "") KD")
+        let text = "KD".localiz()
+        finalPriceLabel.text = "\(data?.productVariants?.first?.finalPrice ?? "") \(text)"
+        CommonUtils.setStrikethrough(label: actualPriceLabel, text: "\(data?.productVariants?.first?.actualPrice ?? "") \(text)")
         CommonUtils.updateDiscountPercentageLabel(discountPriceLabel,
                                                   actualAmountLabel: actualPriceLabel,
                                                   discountType: data?.productVariants?.first?.discountType,
@@ -112,9 +112,9 @@ class ProductsCollectionViewCell: UICollectionViewCell {
             ratingView.rating = 0.0
             ratingLabel.text = "(\(0))"
         }
-
-        finalPriceLabel.text = "\(data?.productDetails?.productVariants?.first?.finalPrice ?? "") KD"
-        CommonUtils.setStrikethrough(label: actualPriceLabel, text: "\(data?.productDetails?.productVariants?.first?.actualPrice ?? "") KD")
+        let text = "KD".localiz()
+        finalPriceLabel.text = "\(data?.productDetails?.productVariants?.first?.finalPrice ?? "") \(text)"
+        CommonUtils.setStrikethrough(label: actualPriceLabel, text: "\(data?.productDetails?.productVariants?.first?.actualPrice ?? "") \(text)")
         CommonUtils.updateDiscountPercentageLabel(discountPriceLabel,
                                                   actualAmountLabel: actualPriceLabel,
                                                   discountType: data?.productDetails?.productVariants?.first?.discountType,

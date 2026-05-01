@@ -27,7 +27,7 @@ class CMSViewModel {
         WebService.sharedInstance.getReturnPolicyService(parameter: param) { [weak self] response in
             guard let self = self else { return }
             cmsDetailsData = response
-            CommonUtils.loadHTMLContent(response.contentEnglish ?? "N/A", webView: hostVC.webView)
+            CommonUtils.loadHTMLContent(response.contentEnglish ?? "N/A".localiz(), webView: hostVC.webView)
         }
     }
     
@@ -36,7 +36,7 @@ class CMSViewModel {
         WebService.sharedInstance.getAboutUsPolicyService(parameter: param) { [weak self] response in
             guard let self = self else { return }
             cmsDetailsData = response
-            CommonUtils.loadHTMLContent(response.contentEnglish ?? "N/A", webView: hostVC.webView)
+            CommonUtils.loadHTMLContent(response.contentEnglish ?? "N/A".localiz(), webView: hostVC.webView)
         }
     }
     
@@ -45,7 +45,7 @@ class CMSViewModel {
         WebService.sharedInstance.getCancellationPolicyService(parameter: param) { [weak self] response in
             guard let self = self else { return }
             cmsDetailsData = response
-            CommonUtils.loadHTMLContent(response.contentEnglish ?? "N/A", webView: hostVC.webView)
+            CommonUtils.loadHTMLContent(response.contentEnglish ?? "N/A".localiz(), webView: hostVC.webView)
         }
     }
     
@@ -54,7 +54,7 @@ class CMSViewModel {
         WebService.sharedInstance.getExchangePolicyService(parameter: param) { [weak self] response in
             guard let self = self else { return }
             cmsDetailsData = response
-            CommonUtils.loadHTMLContent(response.contentEnglish ?? "N/A", webView: hostVC.webView)
+            CommonUtils.loadHTMLContent(response.contentEnglish ?? "N/A".localiz(), webView: hostVC.webView)
         }
     }
     func getTermsAndConditionRequest() {
@@ -62,7 +62,7 @@ class CMSViewModel {
         WebService.sharedInstance.getTermsConditionService(parameter: param) { [weak self] response in
             guard let self = self else { return }
             cmsDetailsData = response
-            CommonUtils.loadHTMLContent(response.contentEnglish ?? "N/A", webView: hostVC.webView)
+            CommonUtils.loadHTMLContent(response.contentEnglish ?? "N/A".localiz(), webView: hostVC.webView)
         }
     }
 }

@@ -56,7 +56,13 @@ class HomeViewController: UIViewController {
         setUpTextFields()
         setUpButtons()
         setUpChart()
-        
+        btnToday.setTitle("   Today".localiz(), for: .normal)
+        btnThisWeek.setTitle("   This week".localiz(), for: .normal)
+        btnThisMonth.setTitle("   This Month".localiz(), for: .normal)
+        txtChooseToDate.placeholder = "To   //  //".localiz()
+        txtVisitorToDate.placeholder = "To   //  //".localiz()
+        txtChooseFromDate.placeholder = "From   //  //".localiz()
+        txtVisitorFromDate.placeholder = "From   //  //".localiz()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,7 +72,7 @@ class HomeViewController: UIViewController {
             UIImage(named: savedStatus == 1 ? "toggle_on" : "toggle_off"),
             for: .normal
         )
-        busyOnOffLabel.text = savedStatus == 1 ? "Busy/On" : "Busy/Off"
+        busyOnOffLabel.text = savedStatus == 1 ? "Busy/On".localiz() : "Busy/Off".localiz()
         viewModel.getUserProfile()
         viewModel.getCountOfNotificationRequest()
         viewModel.getAdminStory()
@@ -106,13 +112,13 @@ class HomeViewController: UIViewController {
             if success {
                 if let status = viewModel.storeAvailabilityModel?.storeAvailability {
                     if status == 1 {
-                        busyOnOffLabel.text = "Busy/On"
+                        busyOnOffLabel.text = "Busy/On".localiz()
                         btnToggle.setImage(UIImage(named: "toggle_on"), for: .normal)
-                        CommonUtils.showToast(message: "Store has been activated Successfully")
+                        CommonUtils.showToast(message: "Store has been activated Successfully".localiz())
                     } else {
-                        busyOnOffLabel.text = "Busy/Off"
+                        busyOnOffLabel.text = "Busy/Off".localiz()
                         btnToggle.setImage(UIImage(named: "toggle_off"), for: .normal)
-                        CommonUtils.showToast(message: "Store has been Deactivated Successfully")
+                        CommonUtils.showToast(message: "Store has been Deactivated Successfully".localiz())
                     }
                 }
             }
@@ -152,7 +158,7 @@ class HomeViewController: UIViewController {
         lineChartView.frame = viewChart.bounds
         lineChartView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         viewChart.addSubview(lineChartView)
-        let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"]
+        let months = ["Jan".localiz(), "Feb".localiz(), "Mar".localiz(), "Apr".localiz(), "May".localiz(), "Jun".localiz(), "Jul".localiz(), "Aug".localiz(), "Sep".localiz()]
         let values: [Double] = [50, 200, 100, 400, 300, 220, 180, 250, 320]
         
         var entries: [ChartDataEntry] = []
@@ -200,9 +206,9 @@ extension HomeViewController {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         
-        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneDatePicker))
+        let doneButton = UIBarButtonItem(title: "Done".localiz(), style: .done, target: self, action: #selector(doneDatePicker))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker))
+        let cancelButton = UIBarButtonItem(title: "Cancel".localiz(), style: .plain, target: self, action: #selector(cancelDatePicker))
         toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         
         let textFields = [txtChooseFromDate, txtChooseToDate, txtVisitorFromDate, txtVisitorToDate]

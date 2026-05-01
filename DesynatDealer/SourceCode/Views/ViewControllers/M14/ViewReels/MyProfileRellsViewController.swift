@@ -85,10 +85,10 @@ class MyProfileRellsViewController: UIViewController {
         // Status
         if data.status == 1 {
             toggleButtonOutlet.setImage(.toggleOn, for: .normal)
-            statusLabel.text = "Active"
+            statusLabel.text = "Active".localiz()
         } else {
             toggleButtonOutlet.setImage(.toggleOff, for: .normal)
-            statusLabel.text = "Inactive"
+            statusLabel.text = "Inactive".localiz()
         }
         
         let fileString = data.file ?? ""
@@ -124,7 +124,7 @@ class MyProfileRellsViewController: UIViewController {
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ"
         
         guard let date = formatter.date(from: input) else {
-            return "Added On -"
+            return "Added On -".localiz()
         }
         
         let outputFormatter = DateFormatter()
@@ -132,7 +132,8 @@ class MyProfileRellsViewController: UIViewController {
         outputFormatter.dateFormat = "dd/MM/yyyy"
         
         let formatted = outputFormatter.string(from: date)
-        return "Added On \(formatted)"
+        let text = "Added On".localiz()
+        return "\(text) \(formatted)"
     }
     
     // MARK: - Actions (unchanged)
@@ -162,7 +163,7 @@ class MyProfileRellsViewController: UIViewController {
     }
     
     @IBAction func deleteDidTapped(_ sender: Any) {
-        self.showConfirmationAlert(msg: "Are you sure you want to delete this reel?") { [weak self] in
+        self.showConfirmationAlert(msg: "Are you sure you want to delete this reel?".localiz()) { [weak self] in
             guard let self = self else { return }
             self.viewModel.deleteReel()
         }

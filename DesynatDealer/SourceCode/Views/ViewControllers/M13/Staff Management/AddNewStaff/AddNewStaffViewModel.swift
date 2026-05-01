@@ -180,7 +180,7 @@ class AddNewStaffViewModel {
         }
         
         if errorMessage != .none {
-            hostVC.showAlert(msg: errorMessage.rawValue)
+            hostVC.showAlert(msg: errorMessage.rawValue.localiz())
         }
         
         hostVC.view.endEditing(true)
@@ -209,7 +209,7 @@ class AddNewStaffViewModel {
                                     "menu_id": modulesArray]
         WebService.sharedInstance.addSellerModulesService(param){ [weak self] response in
             guard let self = self else { return }
-            CommonUtils.showToast(message: "Staff is added successfully")
+            CommonUtils.showToast(message: "Staff is added successfully".localiz())
             self.hostVC.navigationController?.popViewController(animated: true)
         }
     }
@@ -235,7 +235,7 @@ class AddNewStaffViewModel {
                                     "menu_id": modulesArray]
         WebService.sharedInstance.updateSellerModulesService(param){ [weak self] response in
             guard let self = self else { return }
-            CommonUtils.showToast(message: "Staff is updated successfully")
+            CommonUtils.showToast(message: "Staff is updated successfully".localiz())
             self.hostVC.navigationController?.popViewController(animated: true)
         }
     }

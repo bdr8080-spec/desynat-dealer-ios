@@ -90,7 +90,8 @@ class OTPViewController: UIViewController {
         remainingTime = 90
         resendView.isHidden = true
         timerView.isHidden = false
-        labelTimer.text = "00:90 Sec"
+        let text = "Sec".localiz()
+        labelTimer.text = "00:90 \(text)"
         
         otpTimer?.invalidate()
         otpTimer = Timer.scheduledTimer(timeInterval: 1.0,
@@ -102,7 +103,8 @@ class OTPViewController: UIViewController {
     
     @objc func updateTimer() {
         remainingTime -= 1
-        labelTimer.text = "\(String(format: "00:%02d", remainingTime)) Sec"
+        let text = "Sec".localiz()
+        labelTimer.text = "\(String(format: "00:%02d", remainingTime)) \(text)"
         if remainingTime <= 0 {
             otpTimer?.invalidate()
             otpTimer = nil
@@ -180,7 +182,7 @@ extension OTPViewController {
         let otpText = [textField1, textField2, textField3, textField4, textField5, textField6].compactMap { $0?.text }.joined()
         
         if otpText.count < 6 {
-            showAlert(msg: "Please enter 6-digit otp")
+            showAlert(msg: "Please enter 6-digit otp".localiz())
             return false
         }
         

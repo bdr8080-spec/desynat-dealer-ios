@@ -41,7 +41,7 @@ class AddMoreProductsViewController: UIViewController {
     
     @IBAction func addToDealsDidTapped(_ sender: Any) {
         guard !selectedProductIDs.isEmpty else {
-            self.showAlert(msg: "Please select at least one product")
+            self.showAlert(msg: "Please select at least one product".localiz())
             return
         }
         let selectedIDsArray = Array(selectedProductIDs)

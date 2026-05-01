@@ -50,11 +50,11 @@ class RefundManagementTableViewCell: UITableViewCell {
         let paymentMethod = data?.order?.paymentMethod ?? "1"
         switch paymentMethod {
         case "1":
-            paymentModeLbl.text = "Online"
+            paymentModeLbl.text = "Online".localiz()
         case "2":
-            paymentModeLbl.text = "Wallet"
+            paymentModeLbl.text = "Wallet".localiz()
         default:
-            paymentModeLbl.text = "Via COD"
+            paymentModeLbl.text = "Via COD".localiz()
         }
         requestesOnLbl.text = formatDateString(data?.order?.updatedAt ?? "", returnFormat: "dd/MM/yyyy")
         returnReasonLbl.text = data?.returnReason ?? data?.cancelReason ?? data?.cancelReason ?? ""

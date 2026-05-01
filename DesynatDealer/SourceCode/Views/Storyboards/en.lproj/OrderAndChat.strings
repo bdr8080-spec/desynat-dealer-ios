@@ -1,0 +1,453 @@
+
+/* Class = "UILabel"; text = "Apply"; ObjectID = "0Ci-KM-aBE"; */
+"0Ci-KM-aBE.text" = "Apply";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "0JH-XZ-mBn"; */
+"0JH-XZ-mBn.text" = "-";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "0o3-Mk-udh"; */
+"0o3-Mk-udh.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "13f-Lh-Q19"; */
+"13f-Lh-Q19.text" = "-";
+
+/* Class = "UILabel"; text = "400 KD"; ObjectID = "1Ek-2O-07g"; */
+"1Ek-2O-07g.text" = "400 KD";
+
+/* Class = "UILabel"; text = "Quoted Price "; ObjectID = "1Xl-9c-SIT"; */
+"1Xl-9c-SIT.text" = "Quoted Price ";
+
+/* Class = "UILabel"; text = "Product Review"; ObjectID = "1kf-p8-K0Z"; */
+"1kf-p8-K0Z.text" = "Product Review";
+
+/* Class = "UILabel"; text = "Delivery Fees"; ObjectID = "1oA-HM-o8L"; */
+"1oA-HM-o8L.text" = "Delivery Fees";
+
+/* Class = "UILabel"; text = "Add to Deals"; ObjectID = "1rk-RW-Qd0"; */
+"1rk-RW-Qd0.text" = "Add to Deals";
+
+/* Class = "UITextField"; placeholder = "Search"; ObjectID = "2WC-DD-4Gc"; */
+"2WC-DD-4Gc.placeholder" = "Search";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "45S-kJ-UKx"; */
+"45S-kJ-UKx.text" = "-";
+
+/* Class = "UILabel"; text = "Apply"; ObjectID = "4df-7w-y6o"; */
+"4df-7w-y6o.text" = "Apply";
+
+/* Class = "UILabel"; text = "Filter by Date"; ObjectID = "5e7-e4-Bu9"; */
+"5e7-e4-Bu9.text" = "Filter by Date";
+
+/* Class = "UILabel"; text = "Sub Total"; ObjectID = "5fB-Ma-l9f"; */
+"5fB-Ma-l9f.text" = "Sub Total";
+
+/* Class = "UILabel"; text = "Total"; ObjectID = "64S-9o-heP"; */
+"64S-9o-heP.text" = "Total";
+
+/* Class = "UILabel"; text = "Per Item Price"; ObjectID = "6KS-Ww-Cab"; */
+"6KS-Ww-Cab.text" = "Per Item Price";
+
+/* Class = "UILabel"; text = "Listed Deals"; ObjectID = "6bx-Jo-HjN"; */
+"6bx-Jo-HjN.text" = "Listed Deals";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "6ly-5R-X2u"; */
+"6ly-5R-X2u.text" = "-";
+
+/* Class = "UILabel"; text = "Sub-Category"; ObjectID = "6zF-Pz-ZY2"; */
+"6zF-Pz-ZY2.text" = "Sub-Category";
+
+/* Class = "UITextField"; placeholder = "From   //  //"; ObjectID = "7RK-g4-Oha"; */
+"7RK-g4-Oha.placeholder" = "From   //  //";
+
+/* Class = "UILabel"; text = "Sector 63, Bismilla\nApartment, Kuwait"; ObjectID = "7qB-eV-C0A"; */
+"7qB-eV-C0A.text" = "Sector 63, Bismilla\nApartment, Kuwait";
+
+/* Class = "UITextField"; placeholder = "Eg 20 KD"; ObjectID = "8FB-rm-2Sc"; */
+"8FB-rm-2Sc.placeholder" = "Eg 20 KD";
+
+/* Class = "UILabel"; text = "1054.0 KD"; ObjectID = "8KS-Eb-UGH"; */
+"8KS-Eb-UGH.text" = "1054.0 KD";
+
+/* Class = "UILabel"; text = "1054.0 KD"; ObjectID = "8O8-vy-W4C"; */
+"8O8-vy-W4C.text" = "1054.0 KD";
+
+/* Class = "UILabel"; text = "400 KD"; ObjectID = "98M-Dd-kaR"; */
+"98M-Dd-kaR.text" = "400 KD";
+
+/* Class = "UILabel"; text = "Select Product"; ObjectID = "98d-r6-qD8"; */
+"98d-r6-qD8.text" = "Select Product";
+
+/* Class = "UILabel"; text = "Filter"; ObjectID = "9Cg-fD-HTZ"; */
+"9Cg-fD-HTZ.text" = "Filter";
+
+/* Class = "UILabel"; text = "Reason"; ObjectID = "9K7-R8-cAb"; */
+"9K7-R8-cAb.text" = "Reason";
+
+/* Class = "UILabel"; text = "lorem ipsum dolor sit amet, sectetur adipisicing elit, sed do eiusmod . "; ObjectID = "AEs-mq-vKS"; */
+"AEs-mq-vKS.text" = "lorem ipsum dolor sit amet, sectetur adipisicing elit, sed do eiusmod . ";
+
+/* Class = "UILabel"; text = "Custom details"; ObjectID = "BWc-89-AcC"; */
+"BWc-89-AcC.text" = "Custom details";
+
+/* Class = "UILabel"; text = "210"; ObjectID = "BZW-53-H7V"; */
+"BZW-53-H7V.text" = "210";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "Blk-ZR-xpS"; */
+"Blk-ZR-xpS.text" = "-";
+
+/* Class = "UIButton"; normalTitle = "View Request"; ObjectID = "C9k-R2-SDl"; */
+"C9k-R2-SDl.normalTitle" = "View Request";
+
+/* Class = "UILabel"; text = "By Card"; ObjectID = "COO-YH-uzr"; */
+"COO-YH-uzr.text" = "By Card";
+
+/* Class = "UILabel"; text = "Address"; ObjectID = "Dmv-yw-vRh"; */
+"Dmv-yw-vRh.text" = "Address";
+
+/* Class = "UILabel"; text = "no product found"; ObjectID = "Eb1-fN-1gY"; */
+"Eb1-fN-1gY.text" = "no product found";
+
+/* Class = "UILabel"; text = "1054.0 KD"; ObjectID = "Eo8-4a-d3X"; */
+"Eo8-4a-d3X.text" = "1054.0 KD";
+
+/* Class = "UILabel"; text = "Total Quantity"; ObjectID = "FnT-LW-ibE"; */
+"FnT-LW-ibE.text" = "Total Quantity";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "Frl-9g-7fC"; */
+"Frl-9g-7fC.text" = "-";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "HRV-k6-9md"; */
+"HRV-k6-9md.text" = "-";
+
+/* Class = "UITextField"; placeholder = "Search"; ObjectID = "JYP-Li-zD1"; */
+"JYP-Li-zD1.placeholder" = "Search";
+
+/* Class = "UILabel"; text = "no product found"; ObjectID = "L2P-dk-Xmo"; */
+"L2P-dk-Xmo.text" = "no product found";
+
+/* Class = "UILabel"; text = "210"; ObjectID = "LbP-gX-FbN"; */
+"LbP-gX-FbN.text" = "210";
+
+/* Class = "UITextField"; placeholder = "Status"; ObjectID = "Lde-IC-q3l"; */
+"Lde-IC-q3l.placeholder" = "Status";
+
+/* Class = "UILabel"; text = "Customer Details"; ObjectID = "Lec-MK-EVy"; */
+"Lec-MK-EVy.text" = "Customer Details";
+
+/* Class = "UILabel"; text = "Total Quantity"; ObjectID = "M7n-jm-snZ"; */
+"M7n-jm-snZ.text" = "Total Quantity";
+
+/* Class = "UILabel"; text = "Total Amount"; ObjectID = "M9x-Gs-XC8"; */
+"M9x-Gs-XC8.text" = "Total Amount";
+
+/* Class = "UILabel"; text = "Date & Time"; ObjectID = "Mpp-Xz-hWT"; */
+"Mpp-Xz-hWT.text" = "Date & Time";
+
+/* Class = "UILabel"; text = "Starts On"; ObjectID = "Mvi-LK-ym5"; */
+"Mvi-LK-ym5.text" = "Starts On";
+
+/* Class = "UILabel"; text = "Active"; ObjectID = "MzF-8J-ZDa"; */
+"MzF-8J-ZDa.text" = "Active";
+
+/* Class = "UILabel"; text = "Per Item Price"; ObjectID = "N98-aE-DYg"; */
+"N98-aE-DYg.text" = "Per Item Price";
+
+/* Class = "UILabel"; text = "Paid By Customer"; ObjectID = "NKh-fF-U0L"; */
+"NKh-fF-U0L.text" = "Paid By Customer";
+
+/* Class = "UILabel"; text = "Custom details"; ObjectID = "O2d-tI-3nb"; */
+"O2d-tI-3nb.text" = "Custom details";
+
+/* Class = "UILabel"; text = "Delivery Charges"; ObjectID = "OFZ-9T-4Nb"; */
+"OFZ-9T-4Nb.text" = "Delivery Charges";
+
+/* Class = "UITextField"; placeholder = "To   //  //"; ObjectID = "PMs-YL-9tg"; */
+"PMs-YL-9tg.placeholder" = "To   //  //";
+
+/* Class = "UILabel"; text = "Add to Deals"; ObjectID = "PZx-Sm-Grx"; */
+"PZx-Sm-Grx.text" = "Add to Deals";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "Pp1-0b-4PL"; */
+"Pp1-0b-4PL.text" = "-";
+
+/* Class = "UILabel"; text = "M"; ObjectID = "QbB-gy-afu"; */
+"QbB-gy-afu.text" = "M";
+
+/* Class = "UILabel"; text = "1054.0 KD"; ObjectID = "Qqg-BK-p2H"; */
+"Qqg-BK-p2H.text" = "1054.0 KD";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "RFh-BJ-bTO"; */
+"RFh-BJ-bTO.text" = "-";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "RUx-wj-0qI"; */
+"RUx-wj-0qI.text" = "-";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "Ras-Hm-DZE"; */
+"Ras-Hm-DZE.text" = "-";
+
+/* Class = "UILabel"; text = "lorem ipsum dolor sit amet, consectetur adipisici elit,  sed do eiusmod tempor incididunt ut labore et dolore  magna aliqua. Ut enim ad"; ObjectID = "Rjk-xf-bm9"; */
+"Rjk-xf-bm9.text" = "lorem ipsum dolor sit amet, consectetur adipisici elit,  sed do eiusmod tempor incididunt ut labore et dolore  magna aliqua. Ut enim ad";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "SEq-C8-8Ys"; */
+"SEq-C8-8Ys.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "From   //  //"; ObjectID = "SFj-d4-jj4"; */
+"SFj-d4-jj4.placeholder" = "From   //  //";
+
+/* Class = "UILabel"; text = "Total Revenue Generated"; ObjectID = "SOE-3W-lXh"; */
+"SOE-3W-lXh.text" = "Total Revenue Generated";
+
+/* Class = "UITextField"; placeholder = "Search"; ObjectID = "SbR-ar-zbg"; */
+"SbR-ar-zbg.placeholder" = "Search";
+
+/* Class = "UILabel"; text = "Expired"; ObjectID = "Se0-Cf-5tn"; */
+"Se0-Cf-5tn.text" = "Expired";
+
+/* Class = "UILabel"; text = "Request Id #23618"; ObjectID = "T6r-Pa-Rzu"; */
+"T6r-Pa-Rzu.text" = "Request Id #23618";
+
+/* Class = "UILabel"; text = "Tax "; ObjectID = "TIY-6U-yS8"; */
+"TIY-6U-yS8.text" = "Tax ";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "TRg-bX-udv"; */
+"TRg-bX-udv.text" = "-";
+
+/* Class = "UILabel"; text = "Chat"; ObjectID = "TXe-8h-a4T"; */
+"TXe-8h-a4T.text" = "Chat";
+
+/* Class = "UILabel"; text = "1054.0 KD"; ObjectID = "TsI-gP-F73"; */
+"TsI-gP-F73.text" = "1054.0 KD";
+
+/* Class = "UILabel"; text = "Exchange Size"; ObjectID = "UNA-Pr-RfF"; */
+"UNA-Pr-RfF.text" = "Exchange Size";
+
+/* Class = "UITextField"; placeholder = "Eg 20 KD"; ObjectID = "Uaj-32-gmB"; */
+"Uaj-32-gmB.placeholder" = "Eg 20 KD";
+
+/* Class = "UILabel"; text = "Order ID"; ObjectID = "Ub9-bo-j8F"; */
+"Ub9-bo-j8F.text" = "Order ID";
+
+/* Class = "UILabel"; text = "Paid"; ObjectID = "VLO-VK-ODJ"; */
+"VLO-VK-ODJ.text" = "Paid";
+
+/* Class = "UILabel"; text = "Tax"; ObjectID = "VaN-sg-ciN"; */
+"VaN-sg-ciN.text" = "Tax";
+
+/* Class = "UILabel"; text = "Filter by Date"; ObjectID = "W4N-e9-qhW"; */
+"W4N-e9-qhW.text" = "Filter by Date";
+
+/* Class = "UILabel"; text = "Store Review"; ObjectID = "WT8-aG-XjU"; */
+"WT8-aG-XjU.text" = "Store Review";
+
+/* Class = "UILabel"; text = "400 KD"; ObjectID = "WxW-FH-3ZN"; */
+"WxW-FH-3ZN.text" = "400 KD";
+
+/* Class = "UILabel"; text = "Tax"; ObjectID = "X5u-GS-aae"; */
+"X5u-GS-aae.text" = "Tax";
+
+/* Class = "UILabel"; text = "1054.0 KD"; ObjectID = "XaG-sl-0JQ"; */
+"XaG-sl-0JQ.text" = "1054.0 KD";
+
+/* Class = "UILabel"; text = "Phone :"; ObjectID = "XiP-Ld-AJQ"; */
+"XiP-Ld-AJQ.text" = "Phone :";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "Y2O-W6-aBa"; */
+"Y2O-W6-aBa.text" = "-";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "YkK-VO-Iv3"; */
+"YkK-VO-Iv3.text" = "-";
+
+/* Class = "UILabel"; text = "No Chat found"; ObjectID = "Z2w-aN-mcf"; */
+"Z2w-aN-mcf.text" = "No Chat found";
+
+/* Class = "UILabel"; text = "Clear"; ObjectID = "ZGW-h3-v0q"; */
+"ZGW-h3-v0q.text" = "Clear";
+
+/* Class = "UILabel"; text = "Order Type "; ObjectID = "a9f-yA-6W6"; */
+"a9f-yA-6W6.text" = "Order Type ";
+
+/* Class = "UILabel"; text = "lorem ipsum dolor sit amet, consectetur adipisici elit,  sed do eiusmod tempor incididunt ut labore et dolore  magna aliqua. Ut enim ad"; ObjectID = "aJA-3T-UV0"; */
+"aJA-3T-UV0.text" = "lorem ipsum dolor sit amet, consectetur adipisici elit,  sed do eiusmod tempor incididunt ut labore et dolore  magna aliqua. Ut enim ad";
+
+/* Class = "UILabel"; text = "Listed Deals"; ObjectID = "aaS-8E-a22"; */
+"aaS-8E-a22.text" = "Listed Deals";
+
+/* Class = "UILabel"; text = "Enrolled"; ObjectID = "adA-Xo-o28"; */
+"adA-Xo-o28.text" = "Enrolled";
+
+/* Class = "UILabel"; text = "Payment Summary"; ObjectID = "azL-MK-K5t"; */
+"azL-MK-K5t.text" = "Payment Summary";
+
+/* Class = "UILabel"; text = "Size"; ObjectID = "bZt-IW-GMy"; */
+"bZt-IW-GMy.text" = "Size";
+
+/* Class = "UILabel"; text = "From"; ObjectID = "bdT-wt-Smr"; */
+"bdT-wt-Smr.text" = "From";
+
+/* Class = "UILabel"; text = "5 items"; ObjectID = "bkQ-K7-8lK"; */
+"bkQ-K7-8lK.text" = "5 items";
+
+/* Class = "UILabel"; text = "Filter"; ObjectID = "cIO-db-9Lu"; */
+"cIO-db-9Lu.text" = "Filter";
+
+/* Class = "UILabel"; text = "Coupon Applied"; ObjectID = "ccs-st-oBM"; */
+"ccs-st-oBM.text" = "Coupon Applied";
+
+/* Class = "UILabel"; text = "Clear"; ObjectID = "cfn-dD-PUa"; */
+"cfn-dD-PUa.text" = "Clear";
+
+/* Class = "UITextField"; placeholder = "Eg 20 KD"; ObjectID = "dT5-G7-089"; */
+"dT5-G7-089.placeholder" = "Eg 20 KD";
+
+/* Class = "UIButton"; normalTitle = "View Request"; ObjectID = "dwE-9v-wCQ"; */
+"dwE-9v-wCQ.normalTitle" = "View Request";
+
+/* Class = "UITextField"; placeholder = "Search"; ObjectID = "eFG-XU-ocv"; */
+"eFG-XU-ocv.placeholder" = "Search";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "emK-Pr-MOM"; */
+"emK-Pr-MOM.text" = "-";
+
+/* Class = "UITextField"; placeholder = "Type here..."; ObjectID = "eo0-7g-lcU"; */
+"eo0-7g-lcU.placeholder" = "Type here...";
+
+/* Class = "UILabel"; text = "no deals found"; ObjectID = "etM-nK-D3s"; */
+"etM-nK-D3s.text" = "no deals found";
+
+/* Class = "UILabel"; text = "Discount"; ObjectID = "fJV-LZ-kJs"; */
+"fJV-LZ-kJs.text" = "Discount";
+
+/* Class = "UILabel"; text = "Requested on"; ObjectID = "g42-Ot-3Zr"; */
+"g42-Ot-3Zr.text" = "Requested on";
+
+/* Class = "UILabel"; text = "Customer Rating"; ObjectID = "gQ8-ft-44r"; */
+"gQ8-ft-44r.text" = "Customer Rating";
+
+/* Class = "UILabel"; text = "Zone"; ObjectID = "gaQ-68-QQ8"; */
+"gaQ-68-QQ8.text" = "Zone";
+
+/* Class = "UILabel"; text = "1054.0 KD"; ObjectID = "i4i-QF-IHu"; */
+"i4i-QF-IHu.text" = "1054.0 KD";
+
+/* Class = "UILabel"; text = "Saved 20 KD"; ObjectID = "ir1-62-4gJ"; */
+"ir1-62-4gJ.text" = "Saved 20 KD";
+
+/* Class = "UILabel"; text = "Category"; ObjectID = "j2l-WL-A82"; */
+"j2l-WL-A82.text" = "Category";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "j6U-ja-HJk"; */
+"j6U-ja-HJk.text" = "-";
+
+/* Class = "UILabel"; text = "Clear"; ObjectID = "jqd-3n-mmV"; */
+"jqd-3n-mmV.text" = "Clear";
+
+/* Class = "UILabel"; text = "1054.0 KD"; ObjectID = "jz9-hV-WL7"; */
+"jz9-hV-WL7.text" = "1054.0 KD";
+
+/* Class = "UILabel"; text = "Transaction id"; ObjectID = "kwB-BZ-K5J"; */
+"kwB-BZ-K5J.text" = "Transaction id";
+
+/* Class = "UILabel"; text = "Mail Id :"; ObjectID = "l7q-In-KXj"; */
+"l7q-In-KXj.text" = "Mail Id :";
+
+/* Class = "UILabel"; text = "Update Status"; ObjectID = "lWm-s2-pTK"; */
+"lWm-s2-pTK.text" = "Update Status";
+
+/* Class = "UILabel"; text = "Send Quotation"; ObjectID = "m3f-kC-Uk8"; */
+"m3f-kC-Uk8.text" = "Send Quotation";
+
+/* Class = "UILabel"; text = "Request Id #23618"; ObjectID = "mSu-pl-Y85"; */
+"mSu-pl-Y85.text" = "Request Id #23618";
+
+/* Class = "UILabel"; text = "Products"; ObjectID = "mmn-tn-MXT"; */
+"mmn-tn-MXT.text" = "Products";
+
+/* Class = "UILabel"; text = "Total Quantity"; ObjectID = "mr5-gw-6tJ"; */
+"mr5-gw-6tJ.text" = "Total Quantity";
+
+/* Class = "UILabel"; text = "Sector 63, Bismilla\nApartment, Kuwait"; ObjectID = "nEw-92-OmL"; */
+"nEw-92-OmL.text" = "Sector 63, Bismilla\nApartment, Kuwait";
+
+/* Class = "UILabel"; text = "Admin Commission"; ObjectID = "ot9-IJ-Yhg"; */
+"ot9-IJ-Yhg.text" = "Admin Commission";
+
+/* Class = "UILabel"; text = "Listed Deals"; ObjectID = "p72-AN-S4M"; */
+"p72-AN-S4M.text" = "Listed Deals";
+
+/* Class = "UILabel"; text = "0 KD"; ObjectID = "pQl-zZ-TMR"; */
+"pQl-zZ-TMR.text" = "0 KD";
+
+/* Class = "UILabel"; text = "Delivery Fees\n"; ObjectID = "r50-W7-ufn"; */
+"r50-W7-ufn.text" = "Delivery Fees\n";
+
+/* Class = "UILabel"; text = "Item Price"; ObjectID = "rYe-xz-Kna"; */
+"rYe-xz-Kna.text" = "Item Price";
+
+/* Class = "UILabel"; text = "Add More Products"; ObjectID = "s0O-pM-DIP"; */
+"s0O-pM-DIP.text" = "Add More Products";
+
+/* Class = "UILabel"; text = "Total Amount"; ObjectID = "sDw-aX-woV"; */
+"sDw-aX-woV.text" = "Total Amount";
+
+/* Class = "UILabel"; text = "Custom details"; ObjectID = "sIV-Rk-3Eh"; */
+"sIV-Rk-3Eh.text" = "Custom details";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "sx3-sP-Mgb"; */
+"sx3-sP-Mgb.text" = "-";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "tDh-Gp-fSk"; */
+"tDh-Gp-fSk.text" = "-";
+
+/* Class = "UILabel"; text = "400 KD"; ObjectID = "tFD-DG-6ha"; */
+"tFD-DG-6ha.text" = "400 KD";
+
+/* Class = "UILabel"; text = "Filter"; ObjectID = "tLh-Da-WAi"; */
+"tLh-Da-WAi.text" = "Filter";
+
+/* Class = "UILabel"; text = "Send Quotation"; ObjectID = "tVw-Vc-sec"; */
+"tVw-Vc-sec.text" = "Send Quotation";
+
+/* Class = "UILabel"; text = "Return Details"; ObjectID = "tw8-Jl-GxT"; */
+"tw8-Jl-GxT.text" = "Return Details";
+
+/* Class = "UILabel"; text = "Return Id"; ObjectID = "u0o-IH-YGB"; */
+"u0o-IH-YGB.text" = "Return Id";
+
+/* Class = "UILabel"; text = "lorem ipsum dolor sit amet, sectetur adipisicing elit, sed do eiusmod . "; ObjectID = "uCj-dc-A1h"; */
+"uCj-dc-A1h.text" = "lorem ipsum dolor sit amet, sectetur adipisicing elit, sed do eiusmod . ";
+
+/* Class = "UILabel"; text = "Apply"; ObjectID = "uWg-z0-jGE"; */
+"uWg-z0-jGE.text" = "Apply";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "v0e-cg-9VD"; */
+"v0e-cg-9VD.text" = "-";
+
+/* Class = "UILabel"; text = "Delivery Address "; ObjectID = "vWB-WA-HUz"; */
+"vWB-WA-HUz.text" = "Delivery Address ";
+
+/* Class = "UILabel"; text = " Details"; ObjectID = "vac-l5-IWK"; */
+"vac-l5-IWK.text" = " Details";
+
+/* Class = "UILabel"; text = "lorem ipsum dolor sit amet, consectetur adipisici elit,  sed do eiusmod tempor incididunt ut labore et dolore  magna aliqua. Ut enim ad"; ObjectID = "vcH-bm-T2S"; */
+"vcH-bm-T2S.text" = "lorem ipsum dolor sit amet, consectetur adipisici elit,  sed do eiusmod tempor incididunt ut labore et dolore  magna aliqua. Ut enim ad";
+
+/* Class = "UILabel"; text = "Discounted %"; ObjectID = "vwc-6p-kZz"; */
+"vwc-6p-kZz.text" = "Discounted %";
+
+/* Class = "UITextField"; placeholder = "To   //  //"; ObjectID = "vyR-W2-sXo"; */
+"vyR-W2-sXo.placeholder" = "To   //  //";
+
+/* Class = "UILabel"; text = "Address"; ObjectID = "x7x-vk-46G"; */
+"x7x-vk-46G.text" = "Address";
+
+/* Class = "UILabel"; text = "lorem ipsum dolor sit amet, consectetur adipisici elit,  sed do eiusmod tempor incididunt ut labore et dolore  magna aliqua. Ut enim ad"; ObjectID = "xsf-aY-WJm"; */
+"xsf-aY-WJm.text" = "lorem ipsum dolor sit amet, consectetur adipisici elit,  sed do eiusmod tempor incididunt ut labore et dolore  magna aliqua. Ut enim ad";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "y7X-f9-qCj"; */
+"y7X-f9-qCj.text" = "-";
+
+/* Class = "UITextField"; placeholder = "Eg 20 KD"; ObjectID = "yK0-8y-4Jj"; */
+"yK0-8y-4Jj.placeholder" = "Eg 20 KD";
+
+/* Class = "UILabel"; text = "Confirm & Send "; ObjectID = "ztQ-2Z-CtV"; */
+"ztQ-2Z-CtV.text" = "Confirm & Send ";

@@ -5,6 +5,7 @@
 ////  Created by Developer on 18/12/23.
 ////
 //
+
 import Foundation
 import UIKit
 
@@ -24,7 +25,6 @@ extension SceneDelegate {
     public func navigateToLoginVC() {
         navigateTo(vc: LoginViewController.instantiate(fromAppStoryboard: .Main))
     }
-    
     
     public func navigateToViewDetailsVC(userId: String) {
         let vc = SummaryViewController.instantiate(fromAppStoryboard: .Main)
@@ -68,7 +68,7 @@ extension SceneDelegate {
     }
 
     func logoutUser() {
-        kSharedUserDefaults.clearAllData(except: [.deviceToken,.userLocation,.selectedLanguage,.defaultLanguge,.language])
+        kSharedUserDefaults.clearAllData(except: [.deviceToken,.userLocation,.selectedLanguage,.defaultLanguage,.language])
         Global.shared.user = nil
         self.navigateToLoginVC()
         UserDefaults.standard.setValue("true", forKey: "isOnBoardingChecked")

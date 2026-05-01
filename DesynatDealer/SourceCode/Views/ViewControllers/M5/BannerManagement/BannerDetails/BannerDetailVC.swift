@@ -49,7 +49,7 @@ class BannerDetailVC: UIViewController {
         }
         imgBanner.enableFullscreenZoom()
         
-        lblRequestedId.text = data?.orderID ?? "Nil"
+        lblRequestedId.text = data?.orderID ?? "Nil".localiz()
         lblRequestedDate.text = formatBannerDate(data?.createdAt)
         
         let adminStatus = data?.adminVerify ?? ""
@@ -58,14 +58,14 @@ class BannerDetailVC: UIViewController {
         //Status
         switch adminStatus {
         case "0": //Pending
-            lblRequestedStatus.text = "Pending"
+            lblRequestedStatus.text = "Pending".localiz()
             lblRequestedStatus.textColor = UIColor(hex: "#E28F12")
             viewBtnPay.isHidden = true
 
         case "1": //Approved
             switch paymentStatus {
             case "0":
-                lblRequestedStatus.text = "Confirmed"
+                lblRequestedStatus.text = "Confirmed".localiz()
                 lblRequestedStatus.textColor = UIColor(hex: "#68CA44")
                 viewBtnPay.isHidden = !hasActionPermission
               
@@ -82,30 +82,30 @@ class BannerDetailVC: UIViewController {
                           
                           if today < start {
                               // ✅ Future banner
-                            lblRequestedStatus.text = "Confirmed"
+                              lblRequestedStatus.text = "Confirmed".localiz()
                             lblRequestedStatus.textColor = UIColor(hex: "#68CA44")
                               
                           } else if isDate(today, between: start, and: end) {
                               // ✅ Currently active
-                            lblRequestedStatus.text = "Active"
+                              lblRequestedStatus.text = "Active".localiz()
                             lblRequestedStatus.textColor = UIColor(hex: "#C4A176")
                               
                           } else if today > end {
                               // ✅ Expired banner
-                            lblRequestedStatus.text = "Expired"
+                              lblRequestedStatus.text = "Expired".localiz()
                             lblRequestedStatus.textColor = UIColor(hex: "#9E9E9E")
                           }
                           
                       } else {
                           // Fallback
-                        lblRequestedStatus.text = "Confirmed"
+                          lblRequestedStatus.text = "Confirmed".localiz()
                         lblRequestedStatus.textColor = UIColor(hex: "#68CA44")
                       }
                       
               viewBtnPay.isHidden = true
                 
             case "2":
-                lblRequestedStatus.text = "Rejected"
+                lblRequestedStatus.text = "Rejected".localiz()
                 lblRequestedStatus.textColor = UIColor(hex: "#D53B36")
                 viewBtnPay.isHidden = true
                 
@@ -114,7 +114,7 @@ class BannerDetailVC: UIViewController {
             }
             
         case "2": //Rejected
-            lblRequestedStatus.text = "Rejected"
+            lblRequestedStatus.text = "Rejected".localiz()
             lblRequestedStatus.textColor = UIColor(hex: "#D53B36")
             viewBtnPay.isHidden = true
         
@@ -126,21 +126,22 @@ class BannerDetailVC: UIViewController {
         // Banner position
         switch data?.bannerPosition {
         case "1":
-            lblBannerPosition.text = "Home Top"
+            lblBannerPosition.text = "Home Top".localiz()
         case "2":
-            lblBannerPosition.text = "Home Banner"
+            lblBannerPosition.text = "Home Banner".localiz()
         case "3":
             viewSubCategory.isHidden = false
-            lblBannerPosition.text = "Category"
+            lblBannerPosition.text = "Category".localiz()
             lblSubCategory.text = data?.subcategoryDetails?.nameEnglish ?? ""
         default:
-            lblBannerPosition.text = "Nil"
+            lblBannerPosition.text = "Nil".localiz()
         }
         
         lblFromDate.text = formatDate(data?.startDate)
         lblToDate.text = formatDate(data?.endDate)
         lblTotalDays.text = data?.totalDays ?? "0"
-        lblTotalPrice.text = "\(data?.price ?? "0") KD"
+        let text = "KD".localiz()
+        lblTotalPrice.text = "\(data?.price ?? "0") \(text)"
     }
     
     @IBAction func btnBack(_ sender: Any) {

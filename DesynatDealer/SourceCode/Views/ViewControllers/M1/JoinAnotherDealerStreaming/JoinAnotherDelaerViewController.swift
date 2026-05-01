@@ -9,7 +9,7 @@ import UIKit
 import AgoraRtcKit
 
 class JoinAnotherDelaerViewController: UIViewController {
-
+    
     // MARK: - OUTLETS
     @IBOutlet weak var videoView: UIView!
     @IBOutlet weak var lblLive: UILabel!

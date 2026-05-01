@@ -34,8 +34,10 @@ extension UITableViewCell {
         // Use this square → fully tintable solid square
         let coloredSquare = "■"
         let dot = "●"
-        
-        let fullText = "Size: \(size)  \(dot)  Color: \(coloredSquare)  \(dot)  Qnt: \(quantity)"
+        let text = "Size".localiz()
+        let text1 = "Color:".localiz()
+        let text2 = "Qnt:".localiz()
+        let fullText = "\(text) \(size)  \(dot)  \(text1) \(coloredSquare)  \(dot)  \(text2) \(quantity)"
         
         let attributedString = NSMutableAttributedString(
             string: fullText,
@@ -76,8 +78,9 @@ extension UITableViewCell {
         // Use this square → fully tintable solid square
         let coloredSquare = "■"
         let dot = "●"
-        
-        let fullText = "Size: \(size)  \(dot)  Color: \(coloredSquare)"
+        let text = "Size".localiz()
+        let text1 = "Color:".localiz()
+        let fullText = "\(text) \(size)  \(dot)  \(text1) \(coloredSquare)"
         
         let attributedString = NSMutableAttributedString(
             string: fullText,

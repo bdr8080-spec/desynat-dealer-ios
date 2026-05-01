@@ -319,7 +319,7 @@ class AddNewProductViewController: UIViewController {
     }
     
     @IBAction func deleteDidTapped(_ sender: Any) {
-        self.showConfirmationAlert(msg: "Are you sure you want to delete this product?"){ [weak self] in
+        self.showConfirmationAlert(msg: "Are you sure you want to delete this product?".localiz()){ [weak self] in
             guard let self = self else { return }
             viewModel.deleteProductDetailsService()
         }
@@ -387,12 +387,12 @@ class AddNewProductViewController: UIViewController {
         switch comingReason {
         case .forAddingProduct:
             cancelView.isHidden = true
-            titleLabel.text = "Add new product"
-            addButtonLabel.text = "Add Product"
+            titleLabel.text = "Add new product".localiz()
+            addButtonLabel.text = "Add Product".localiz()
         case .forEditProduct:
             cancelView.isHidden = false
-            titleLabel.text = "Edit product"
-            addButtonLabel.text = "Edit Product"
+            titleLabel.text = "Edit product".localiz()
+            addButtonLabel.text = "Edit Product".localiz()
             viewModel.getProductDetailsService()
         }
         let textFields: [UITextField] = [
@@ -442,11 +442,11 @@ class AddNewProductViewController: UIViewController {
     }
     
     func setupTextViewPlaceholder() {
-        descriptionEngTextView.text = "Write Here"
+        descriptionEngTextView.text = "Write Here".localiz()
         descriptionEngTextView.textColor = .lightGray
         descriptionEngTextView.delegate = self
         
-        descriptionArabicTextView.text = "Write Here"
+        descriptionArabicTextView.text = "Write Here".localiz()
         descriptionArabicTextView.textColor = .lightGray
         descriptionArabicTextView.delegate = self
     }
@@ -911,7 +911,7 @@ extension AddNewProductViewController: UITextFieldDelegate {
                 let maxVal = Int(maxCartQuantityTF.text ?? "") ?? 0
                 let minVal = Int(currentText) ?? 0
                 if minVal > maxVal && maxVal != 0 {
-                    CommonUtils.showToast(message: "Min quantity cannot be greater than Max quantity")
+                    CommonUtils.showToast(message: "Min quantity cannot be greater than Max quantity".localiz())
                     return false
                 }
             }
@@ -926,7 +926,7 @@ extension AddNewProductViewController: UITextFieldDelegate {
             
             for scalar in string.unicodeScalars {
                 if !allowedSet.contains(scalar) {
-                    CommonUtils.showToast(message: "Please switch to Arabic keyboard")
+                    CommonUtils.showToast(message: "Please switch to Arabic keyboard".localiz())
                     return false
                 }
             }
@@ -958,7 +958,7 @@ extension AddNewProductViewController: UITextFieldDelegate {
         let minVal = Int(minCartQuantityTF.text ?? "") ?? 0
         let maxVal = Int(maxCartQuantityTF.text ?? "") ?? 0
         if minVal >= maxVal && maxVal != 0 {
-            CommonUtils.showToast(message: "Min Cart Quantity must be smaller than Max Cart Quantity")
+            CommonUtils.showToast(message: "Min Cart Quantity must be smaller than Max Cart Quantity".localiz())
         }
     }
     
@@ -976,9 +976,9 @@ extension AddNewProductViewController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
             if textView == descriptionEngTextView {
-                textView.text = "Write Here"
+                textView.text = "Write Here".localiz()
             } else if textView == descriptionArabicTextView {
-                textView.text = "Write Here"
+                textView.text = "Write Here".localiz()
             }
             textView.textColor = .lightGray
         }
@@ -1000,7 +1000,7 @@ extension AddNewProductViewController: UITextViewDelegate {
                 .union(.whitespaces)
             for scalar in text.unicodeScalars {
                 if !allowedSet.contains(scalar) {
-                    CommonUtils.showToast(message: "Please switch to Arabic keyboard")
+                    CommonUtils.showToast(message: "Please switch to Arabic keyboard".localiz())
                     return false
                 }
             }

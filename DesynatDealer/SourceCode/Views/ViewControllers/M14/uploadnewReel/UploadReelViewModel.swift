@@ -10,18 +10,16 @@ class UploadReelViewModel {
     
     // MARK: - Validation
     func isValid() -> Bool {
-        
         guard let vc = hostVc else { return false }
-        
         // Caption validation
         if vc.captiontxtArea.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            CommonUtils.showToast(message: "Please enter caption")
+            CommonUtils.showToast(message: "Please enter caption".localiz())
             return false
         }
         
         // Media validation
         if vc.selectedMediaData == nil && vc.existingMediaURL == nil {
-            CommonUtils.showToast(message: "Please select image or video")
+            CommonUtils.showToast(message: "Please select image or video".localiz())
             return false
         }
         
@@ -66,7 +64,7 @@ class UploadReelViewModel {
         WebService.sharedInstance.addNewReelsServices(param: param) { [weak self] response in
             guard let self = self else { return }
             
-            CommonUtils.showToast(message: "Reel Uploaded Successfully")
+            CommonUtils.showToast(message: "Reel Uploaded Successfully".localiz())
             self.hostVc?.navigationController?.popViewController(animated: true)
         }
     }
@@ -81,7 +79,7 @@ class UploadReelViewModel {
         WebService.sharedInstance.editMyReelsServices(param: param) { [weak self] response in
             guard let self = self else { return }
             
-            CommonUtils.showToast(message: "Reel Updated Successfully")
+            CommonUtils.showToast(message: "Reel Updated Successfully".localiz())
             self.hostVc?.navigationController?.popToViewController(ofClass: DelearProfileViewController.self, animated: true)
         }
     }

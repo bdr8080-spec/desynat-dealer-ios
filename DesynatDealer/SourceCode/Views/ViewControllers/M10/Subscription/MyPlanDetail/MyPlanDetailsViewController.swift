@@ -49,22 +49,22 @@ class MyPlanDetailsViewController: UIViewController {
     private func configData(data: MySubscriptionPlanList?) {
         let durationText: String
         if let duration = data?.planInfo?.duration, let type = data?.planInfo?.durationType {
-            durationText = "\(duration) \(type == 1 ? "Month" : "Years")"
+            durationText = "\(duration) \(type == 1 ? "Month".localiz() : "Years".localiz())"
         } else {
-            durationText = "N/A"
+            durationText = "N/A".localiz()
         }
         lblDuration.text = durationText
         
         if data?.isExpired == "0" {
-            statusLabel.text = "Active"
+            statusLabel.text = "Active".localiz()
             statusLabel.textColor = .darkBrown
-            planButtonTitleLabel.text = "Upgrade Plan"
+            planButtonTitleLabel.text = "Upgrade Plan".localiz()
             isToRenewPlan = false
             buttonView.isHidden = true
         } else {
-            statusLabel.text = "Expired"
+            statusLabel.text = "Expired".localiz()
             statusLabel.textColor = .black
-            planButtonTitleLabel.text = "Renew Plan"
+            planButtonTitleLabel.text = "Renew Plan".localiz()
             isToRenewPlan = true
             buttonView.isHidden = !hasActionPermission
         }
@@ -123,9 +123,10 @@ class MyPlanDetailsViewController: UIViewController {
             vc.transactionIds = self.planDetails?.transactionID ?? ""
             vc.payAmount = self.planDetails?.planInfo?.price ?? 0.0
             if let duration = self.planDetails?.planInfo?.duration, let type = self.planDetails?.planInfo?.durationType {
-                vc.durationOfPlan = "for \(duration) \(type == 1 ? "Month" : "Years")"
+                let text = "for".localiz()
+                vc.durationOfPlan = "\(text) \(duration) \(type == 1 ? "Month".localiz() : "Years".localiz())"
             } else {
-                vc.durationOfPlan = "N/A"
+                vc.durationOfPlan = "N/A".localiz()
             }
             self.navigationController?.pushViewController(vc, animated: true)
         }

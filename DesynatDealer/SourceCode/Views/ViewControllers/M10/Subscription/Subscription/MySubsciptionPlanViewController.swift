@@ -152,9 +152,10 @@ extension MySubsciptionPlanViewController: SubscriptionCollectionCellDelegate {
         print("User tapped continue for plan ID: \(plan.id ?? 0)")
         viewModel.payAmt = plan.price ?? 0
         if let duration = plan.duration, let type = plan.durationType {
-            viewModel.durationOfPlan = "for \(duration) \(type == 1 ? "Month" : "Years")"
+            let text = "for".localiz()
+            viewModel.durationOfPlan = "\(text) \(duration) \(type == 1 ? "Month".localiz() : "Years".localiz())"
         } else {
-            viewModel.durationOfPlan = "N/A"
+            viewModel.durationOfPlan = "N/A".localiz()
         }
         viewModel.purchasePlan(planID: plan.id ?? 0)
     }

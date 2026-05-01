@@ -19,7 +19,7 @@ class MyProfileRellsViewModel {
         let param: [String: Any] = ["reel_id": hostVC.reelsData?.id ?? 0]
         WebService.sharedInstance.deleteReelsServices(param: param) { [weak self] response in
             guard let self = self else { return }
-            CommonUtils.showToast(message: "Reel deleted Successfully")
+            CommonUtils.showToast(message: "Reel deleted Successfully".localiz())
             self.hostVC.navigationController?.popViewController(animated: true)
         }
     }
@@ -31,9 +31,9 @@ class MyProfileRellsViewModel {
             self.hostVC.reelsData = response
             self.hostVC.configData()
             if response.status == 1 {
-                CommonUtils.showToast(message: "Reel activated successfully")
+                CommonUtils.showToast(message: "Reel activated successfully".localiz())
             } else {
-                CommonUtils.showToast(message: "Reel deactivated successfully")
+                CommonUtils.showToast(message: "Reel deactivated successfully".localiz())
             }
         }
     }

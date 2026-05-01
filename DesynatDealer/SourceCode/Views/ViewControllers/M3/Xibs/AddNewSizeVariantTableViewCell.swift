@@ -172,10 +172,10 @@ class AddNewSizeVariantTableViewCell: UITableViewCell {
   
   private func updateDiscountPlaceholder() {
     if discountTypeisPercentage {
-      discountPriceTF.placeholder = "E.g. 10%"
+        discountPriceTF.placeholder = "E.g. 10%".localiz()
       discountPriceTF.keyboardType = .numberPad
     } else {
-      discountPriceTF.placeholder = "E.g. 1200 KD"
+        discountPriceTF.placeholder = "E.g. 1200 KD".localiz()
       discountPriceTF.keyboardType = .numberPad
     }
   }
@@ -193,30 +193,30 @@ extension AddNewSizeVariantTableViewCell {
       return text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true
     }
     
-    if isEmpty(sizeTF.text) { return "Please select size" }
+      if isEmpty(sizeTF.text) { return "Please select size".localiz() }
     
     if isWomenCategory {
-      if isEmpty(bustTF.text)        { return "Please enter bust" }
-      if isEmpty(waistTF.text)       { return "Please enter waist" }
-      if isEmpty(hipTF.text)         { return "Please enter hip" }
-      if isEmpty(shoulderTF.text)      { return "Please enter shoulder" }
-      if isEmpty(sleeveLengthTF.text){ return "Please enter sleeve length" }
-      if isEmpty(lengthTF.text)      { return "Please enter length" }
+        if isEmpty(bustTF.text)        { return "Please enter bust".localiz() }
+        if isEmpty(waistTF.text)       { return "Please enter waist".localiz() }
+        if isEmpty(hipTF.text)         { return "Please enter hip".localiz() }
+        if isEmpty(shoulderTF.text)      { return "Please enter shoulder".localiz() }
+        if isEmpty(sleeveLengthTF.text){ return "Please enter sleeve length".localiz() }
+        if isEmpty(lengthTF.text)      { return "Please enter length".localiz() }
     }
     
-    if isEmpty(totalStocksTF.text) { return "Please enter total stocks" }
+      if isEmpty(totalStocksTF.text) { return "Please enter total stocks".localiz() }
     
-    if isEmpty(skuLimitTF.text) { return "Please enter SKU limit" }
+      if isEmpty(skuLimitTF.text) { return "Please enter SKU limit".localiz() }
     
-    if isEmpty(actualPriceTF.text) { return "Please enter actual price" }
+      if isEmpty(actualPriceTF.text) { return "Please enter actual price".localiz() }
     
     if isEmpty(discountPriceTF.text) {
       return discountTypeisPercentage
-      ? "Please enter discount percentage"
-      : "Please enter discount fixed price"
+        ? "Please enter discount percentage".localiz()
+        : "Please enter discount fixed price".localiz()
     }
     
-    if isEmpty(finalPriceTF.text) { return "Final price is missing" }
+      if isEmpty(finalPriceTF.text) { return "Final price is missing".localiz() }
     return ""
   }
   
@@ -354,7 +354,7 @@ extension AddNewSizeVariantTableViewCell: UITextFieldDelegate {
       
       // Limit digits
       if newText.count > 7 {
-        CommonUtils.showToast(message: "Price cannot exceed 7 digits")
+          CommonUtils.showToast(message: "Price cannot exceed 7 digits".localiz())
         return false
       }
       
@@ -397,14 +397,14 @@ extension AddNewSizeVariantTableViewCell: UITextFieldDelegate {
       // Block typing if Total Stocks empty
       let totalText = totalStocksTF.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
       guard let totalStocks = Int(totalText), totalStocks > 0 else {
-        CommonUtils.showToast(message: "Please enter total stocks first")
+          CommonUtils.showToast(message: "Please enter total stocks first".localiz())
         return false
       }
       
       // Block typing if SKU > Total Stocks
       if let updatedSKU = Int(updatedText), updatedSKU > totalStocks {
         //              showToast("SKU cannot exceed total stocks (\(totalStocks))")
-        CommonUtils.showToast(message: "Sku limit can not be greater than Total stocks ")
+          CommonUtils.showToast(message: "Sku limit can not be greater than Total stocks ".localiz())
         return false
       }
       
@@ -445,7 +445,7 @@ extension AddNewSizeVariantTableViewCell: UITextFieldDelegate {
       
       if textField === actualPriceTF || textField === finalPriceTF {
         if updatedText.count > 7 {
-          CommonUtils.showToast(message: "Price cannot exceed 7 digits")
+            CommonUtils.showToast(message: "Price cannot exceed 7 digits".localiz())
           return false
         }
       }
@@ -475,7 +475,7 @@ extension AddNewSizeVariantTableViewCell: UITextFieldDelegate {
     if textField == totalStocksTF {
       if rawText.count > 6 {
         textField.text = String(rawText.prefix(6))
-        CommonUtils.showToast(message: "Total stocks cannot exceed 6 digits")
+          CommonUtils.showToast(message: "Total stocks cannot exceed 6 digits".localiz())
       }
       return
     }
@@ -485,24 +485,25 @@ extension AddNewSizeVariantTableViewCell: UITextFieldDelegate {
       
       if totalStocks == 0 {
         textField.text = ""
-        CommonUtils.showToast(message: "Please enter total stocks first")
+          CommonUtils.showToast(message: "Please enter total stocks first".localiz())
       } else if value > totalStocks {
         textField.text = "\(totalStocks)"
-        CommonUtils.showToast(message: "SKU Limit cannot exceed total stocks (\(totalStocks))")
+          let text = "SKU Limit cannot exceed total stocks".localiz()
+        CommonUtils.showToast(message: "\(text) (\(totalStocks))")
       }
       return
     }
     if textField == discountPriceTF && discountTypeisPercentage {
       if value > 100 {
         textField.text = "100"
-        CommonUtils.showToast(message: "Discount percentage cannot exceed 100%")
+          CommonUtils.showToast(message: "Discount percentage cannot exceed 100%".localiz())
       }
       return
     }
     if textField == actualPriceTF || textField == finalPriceTF {
       if rawText.count > 7 {
         textField.text = String(rawText.prefix(7))
-        CommonUtils.showToast(message: "Price cannot exceed 7 digits")
+          CommonUtils.showToast(message: "Price cannot exceed 7 digits".localiz())
       }
     }
   }

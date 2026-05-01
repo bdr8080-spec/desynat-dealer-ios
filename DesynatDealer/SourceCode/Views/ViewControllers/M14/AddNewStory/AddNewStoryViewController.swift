@@ -280,17 +280,17 @@ extension AddNewStoryViewController: UIImagePickerControllerDelegate, UINavigati
                 self.contentCollectionView.isHidden = false
                 
             case .noData:
-                self.noDataFoundLabel.text = "No photos or videos found."
+                self.noDataFoundLabel.text = "No photos or videos found.".localiz()
                 self.noDataFoundLabel.isHidden = false
                 self.contentCollectionView.isHidden = true
                 
             case .limitedAccess:
-                self.noDataFoundLabel.text = "You have allowed limited access to your gallery.\nPlease select more photos."
+                self.noDataFoundLabel.text = "You have allowed limited access to your gallery.\nPlease select more photos.".localiz()
                 self.noDataFoundLabel.isHidden = false
                 self.contentCollectionView.isHidden = false
                 
             case .denied:
-                self.noDataFoundLabel.text = "Gallery permission denied.\nPlease allow access in Settings."
+                self.noDataFoundLabel.text = "Gallery permission denied.\nPlease allow access in Settings.".localiz()
                 self.noDataFoundLabel.isHidden = false
                 self.contentCollectionView.isHidden = true
             }

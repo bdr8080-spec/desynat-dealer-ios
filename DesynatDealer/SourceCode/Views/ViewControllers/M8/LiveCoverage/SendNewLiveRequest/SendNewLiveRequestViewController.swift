@@ -51,7 +51,7 @@ class SendNewLiveRequestViewController: UIViewController {
     
     @IBAction func sendRequestDidTapped(_ sender: Any) {
         guard let selectedIndexID = selectedIndexID else {
-                showAlert(msg: "Please select time slot")
+            showAlert(msg: "Please select time slot".localiz())
                 return
             }
         viewModel.sendTimeSlotsRequest(timeslotId: selectedIndexID)
@@ -112,7 +112,7 @@ extension SendNewLiveRequestViewController {
         toolbar.sizeToFit()
         
         let cancelButton = UIBarButtonItem(
-            title: "Cancel",
+            title: "Cancel".localiz(),
             style: .plain,
             target: self,
             action: #selector(cancelDatePicker)
@@ -125,7 +125,7 @@ extension SendNewLiveRequestViewController {
         )
         
         let doneButton = UIBarButtonItem(
-            title: "Done",
+            title: "Done".localiz(),
             style: .done,
             target: self,
             action: #selector(doneDatePicker)

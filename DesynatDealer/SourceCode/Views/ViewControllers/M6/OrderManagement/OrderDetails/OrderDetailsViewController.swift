@@ -78,14 +78,15 @@ class OrderDetailsViewController: UIViewController {
     
     @IBOutlet weak var reviewStackView: UIStackView!
     @IBOutlet weak var lblReturnExchangeHeading: CustomLabelFont!
+    @IBOutlet weak var lblDetailsTitle: UILabel!
     @IBOutlet weak var lblReturnExchangeId: CustomLabelFont!
     
     var orderCategoryType: OrderCategoryType = .normalOrders
     lazy var viewModel = OrderDetailsViewModel(hostVC: self)
     var orderId: Int = 0
     var orderDetails: OrdersListData?
-    private let deliveryStatus: [String: String] = ["Shipped": "2.1"]
-    private let returnDeliveryRequest: [String: String] = ["Accept": "1","Reject": "2"]
+    private let deliveryStatus: [String: String] = ["Shipped".localiz(): "2.1"]
+    private let returnDeliveryRequest: [String: String] = ["Accept".localiz(): "1","Reject".localiz(): "2"]
     var hasActionPermission: Bool = true
     
     override func viewDidLoad() {
@@ -93,6 +94,7 @@ class OrderDetailsViewController: UIViewController {
         setUpUI()
         storeRatingCosmisView.settings.fillMode = .precise
         customerRatingView.settings.fillMode = .precise
+        lblDetailsTitle.text = "Details".localiz()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -122,14 +124,14 @@ class OrderDetailsViewController: UIViewController {
         if orderDetails?.returnType == "1" || orderDetails?.returnType == "2" { // return and exchange
             guard let selectedStatus = statusTF.text?.trimmed(),
                   let apiStatus = returnDeliveryRequest[selectedStatus] else {
-                CommonUtils.showToast(message: "Please update the status")
+                CommonUtils.showToast(message: "Please update the status".localiz())
                 return
             }
             viewModel.orderStatusRequestForExchangeAndReturn(status: apiStatus)
         } else {
             guard let selectedStatus = statusTF.text?.trimmed(),
                   let apiStatus = deliveryStatus[selectedStatus] else {
-                CommonUtils.showToast(message: "Please update the status")
+                CommonUtils.showToast(message: "Please update the status".localiz())
                 return
             }
             
@@ -159,11 +161,11 @@ class OrderDetailsViewController: UIViewController {
         let formattedDate = formatDateString(data.order?.updatedAt ?? "") ?? ""
         dateAndTimeLabel.text = formattedDate
         if data.orderType == "1" {
-            orderTypeLabel.text = "Normal"
+            orderTypeLabel.text = "Normal".localiz()
             customDetailsView.isHidden = true
             customOrderView.isHidden = true
         } else {
-            orderTypeLabel.text = "Custom"
+            orderTypeLabel.text = "Custom".localiz()
             customOrderView.isHidden = false
             customDetailsView.isHidden = false
         }
@@ -191,16 +193,17 @@ class OrderDetailsViewController: UIViewController {
         let paymentMethod = data.order?.paymentMethod ?? "1"
         switch paymentMethod {
         case "1":
-            paidByLabel.text = "Online"
+            paidByLabel.text = "Online".localiz()
             transactionStackView.isHidden = false
         case "2":
-            paidByLabel.text = "Wallet"
+            paidByLabel.text = "Wallet".localiz()
             transactionStackView.isHidden = false
         default:
-            paidByLabel.text = "Via COD"
+            paidByLabel.text = "Via COD".localiz()
             transactionStackView.isHidden = true
         }
-        totalItemLabel.text = "\(data.quantity ?? 1) item"
+        let text = "item".localiz()
+        totalItemLabel.text = "\(data.quantity ?? 1) \(text)"
         let promocodeValue = data.promocodeValue ?? ""
         if !promocodeValue.isEmpty {
             couponAppliedStackView.isHidden = false
@@ -218,10 +221,10 @@ class OrderDetailsViewController: UIViewController {
         
         let price = Double(priceString) ?? 0
         let totalPrice = price * Double(quantity)
-        
-        lblItemPrice.text = "Item Price (\(CommonUtils.formatPriceStringInput(priceString)) x \(quantity))"
+        let text1 = "Item Price".localiz()
+        lblItemPrice.text = "\(text1) (\(CommonUtils.formatPriceStringInput(priceString)) x \(quantity))"
         lblItemPriceAmt.text = CommonUtils.formatPriceStringInput(String(totalPrice))
-        discountOnMRpLabel.text = CommonUtils.formatPriceStringInput(data.order?.discountMrp ?? "", currency: "KD")
+        discountOnMRpLabel.text = CommonUtils.formatPriceStringInput(data.order?.discountMrp ?? "", currency: "KD".localiz())
         
         if orderCategoryType == .normalOrders {
             let totalAmount = totalPrice + toDouble(data.shippingFees) + toDouble(data.tax)
@@ -302,25 +305,25 @@ class OrderDetailsViewController: UIViewController {
                 switch deliveryStatus {
                 case "0":
                     if data.rEApprove == "1" {
-                        orderStatusLabel.text = "Return Conf."
+                        orderStatusLabel.text = "Return Conf.".localiz()
                         orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
                         returnDetailsView.isHidden = false
                         returnReasonView.isHidden = false
                     }
                     
                 case "1": //Pending
-                    orderStatusLabel.text = "Confirmed"
+                    orderStatusLabel.text = "Confirmed".localiz()
                     orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
                     updateStatusView.isHidden = !hasActionPermission
                     statusView.isHidden = !hasActionPermission
                     
                     if data.assignStatus == "1" || data.rEApprove == "1" {
-                        orderStatusLabel.text = "On The Way"
+                        orderStatusLabel.text = "On The Way".localiz()
                         orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
                         updateStatusView.isHidden = true
                         statusView.isHidden = true
                         if data.returnType == "1" && data.rEApprove == "1" && data.assignStatus == "0"{
-                            orderStatusLabel.text = "Return Accepted"
+                            orderStatusLabel.text = "Return Accepted".localiz()
                             orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
                             updateStatusView.isHidden = true
                             statusView.isHidden = true
@@ -328,47 +331,47 @@ class OrderDetailsViewController: UIViewController {
                     }
                     
                 case "2": //Ongoing
-                    orderStatusLabel.text = "Ongoing"
+                    orderStatusLabel.text = "Ongoing".localiz()
                     orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
                     updateStatusView.isHidden = !hasActionPermission
                     statusView.isHidden = !hasActionPermission
                     
                 case "3": //Delivered
-                    orderStatusLabel.text = "Delivered"
+                    orderStatusLabel.text = "Delivered".localiz()
                     orderStatusLabel.textColor = UIColor(hex: "#16B364")
                     if data.returnType == "1" || data.returnType == "2" {
                         if data.returnType == "1" {
-                            orderStatusLabel.text = "Return Req."
+                            orderStatusLabel.text = "Return Req.".localiz()
                             orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
                             returnDetailsView.isHidden = false
                             returnReasonView.isHidden = false
                             updateStatusView.isHidden = !hasActionPermission
                             statusView.isHidden = !hasActionPermission
-                            lblReturnExchangeHeading.text = "Return Details"
-                            lblReturnExchangeId.text = "Return Id"
+                            lblReturnExchangeHeading.text = "Return Details".localiz()
+                            lblReturnExchangeId.text = "Return Id".localiz()
                         } else if data.returnType == "2" {
-                            orderStatusLabel.text = "Exchange Req."
+                            orderStatusLabel.text = "Exchange Req.".localiz()
                             orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
                             returnDetailsView.isHidden = false
                             returnReasonView.isHidden = false
                             updateStatusView.isHidden = !hasActionPermission
                             statusView.isHidden = !hasActionPermission
-                            lblReturnExchangeHeading.text = "Exchange Details"
-                            lblReturnExchangeId.text = "Exchange Id"
+                            lblReturnExchangeHeading.text = "Exchange Details".localiz()
+                            lblReturnExchangeId.text = "Exchange Id".localiz()
                         }
                         if data.rEApprove == "1" {
-                            orderStatusLabel.text = "Completed"
+                            orderStatusLabel.text = "Completed".localiz()
                             orderStatusLabel.textColor = UIColor(hex: "#16B364")
                             updateStatusView.isHidden = true
                             statusView.isHidden = true
                             if data.returnType == "2" {
-                                orderStatusLabel.text = "Exchange Req Accepted"
+                                orderStatusLabel.text = "Exchange Req Accepted".localiz()
                                 orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
                                 updateStatusView.isHidden = true
                                 statusView.isHidden = true
                             }
                         } else if data.rEApprove == "2" {
-                            orderStatusLabel.text = "Rejected"
+                            orderStatusLabel.text = "Rejected".localiz()
                             orderStatusLabel.textColor = UIColor(hex: "#E70000")
                             updateStatusView.isHidden = true
                             statusView.isHidden = true
@@ -376,12 +379,12 @@ class OrderDetailsViewController: UIViewController {
                     }
                     
                 case "4": //Cancelled
-                    orderStatusLabel.text = "Cancelled"
+                    orderStatusLabel.text = "Cancelled".localiz()
                     orderStatusLabel.textColor = UIColor(hex: "#E70000")
                     returnReasonView.isHidden = false
                     
                 case "5": // Return
-                    orderStatusLabel.text = "Return Req."
+                    orderStatusLabel.text = "Return Req.".localiz()
                     orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
                     returnDetailsView.isHidden = false
                     returnReasonView.isHidden = false
@@ -389,13 +392,13 @@ class OrderDetailsViewController: UIViewController {
                     statusView.isHidden = !hasActionPermission
                     
                 case "7": //Picked
-                    orderStatusLabel.text = "On The Way "
+                    orderStatusLabel.text = "On The Way ".localiz()
                     orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
                     updateStatusView.isHidden = true
                     statusView.isHidden = true
                     
                 case "9": // Exchange
-                    orderStatusLabel.text = "Exchange Req."
+                    orderStatusLabel.text = "Exchange Req.".localiz()
                     orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
                     returnDetailsView.isHidden = false
                     exchangeView.isHidden = false
@@ -403,12 +406,12 @@ class OrderDetailsViewController: UIViewController {
                     returnReasonView.isHidden = false
                     
                 case "2.1": //Shipped
-                    orderStatusLabel.text = "Shipped"
+                    orderStatusLabel.text = "Shipped".localiz()
                     orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
                     updateStatusView.isHidden = true
                     statusView.isHidden = true
                     if data.assignStatus == "1" {
-                        orderStatusLabel.text = "On The Way"
+                        orderStatusLabel.text = "On The Way".localiz()
                         orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
                         updateStatusView.isHidden = true
                         statusView.isHidden = true
@@ -418,7 +421,7 @@ class OrderDetailsViewController: UIViewController {
                     return
                 }
             } else if paymentStatus == "3" {
-                orderStatusLabel.text = "Cancelled"
+                orderStatusLabel.text = "Cancelled".localiz()
                 orderStatusLabel.textColor = UIColor(hex: "#E70000")
                 returnReasonView.isHidden = false
             }
@@ -427,24 +430,24 @@ class OrderDetailsViewController: UIViewController {
                 switch deliveryStatus {
                 case "0":
                     if data.rEApprove == "1" {
-                        orderStatusLabel.text = "Return Conf."
+                        orderStatusLabel.text = "Return Conf.".localiz()
                         orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
                         returnDetailsView.isHidden = false
                         returnReasonView.isHidden = false
                     }
                 case "1": //Pending
-                    orderStatusLabel.text = "Confirmed"
+                    orderStatusLabel.text = "Confirmed".localiz()
                     orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
                     updateStatusView.isHidden = !hasActionPermission
                     statusView.isHidden = !hasActionPermission
                     
                     if data.assignStatus == "1" || data.rEApprove == "1" {
-                        orderStatusLabel.text = "On The Way"
+                        orderStatusLabel.text = "On The Way".localiz()
                         orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
                         updateStatusView.isHidden = true
                         statusView.isHidden = true
                         if data.returnType == "1" && data.rEApprove == "1" && data.assignStatus == "0"{
-                            orderStatusLabel.text = "Return Accepted"
+                            orderStatusLabel.text = "Return Accepted".localiz()
                             orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
                             updateStatusView.isHidden = true
                             statusView.isHidden = true
@@ -453,58 +456,58 @@ class OrderDetailsViewController: UIViewController {
                     
                     
                 case "2": //Ongoing, Picked
-                    orderStatusLabel.text = "Ongoing"
+                    orderStatusLabel.text = "Ongoing".localiz()
                     orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
                     updateStatusView.isHidden = !hasActionPermission
                     statusView.isHidden = !hasActionPermission
                     
                 case "3": //Delivered
-                    orderStatusLabel.text = "Delivered"
+                    orderStatusLabel.text = "Delivered".localiz()
                     orderStatusLabel.textColor = UIColor(hex: "#16B364")
                     if data.returnType == "1" || data.returnType == "2" {
                         if data.returnType == "1" {
-                            orderStatusLabel.text = "Return Req."
+                            orderStatusLabel.text = "Return Req.".localiz()
                             orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
                             returnDetailsView.isHidden = false
                             returnReasonView.isHidden = false
                             updateStatusView.isHidden = !hasActionPermission
                             statusView.isHidden = !hasActionPermission
-                            lblReturnExchangeHeading.text = "Return Details"
-                            lblReturnExchangeId.text = "Return Id"
+                            lblReturnExchangeHeading.text = "Return Details".localiz()
+                            lblReturnExchangeId.text = "Return Id".localiz()
                         } else if data.returnType == "2" {
-                            orderStatusLabel.text = "Exchange Req."
+                            orderStatusLabel.text = "Exchange Req.".localiz()
                             orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
                             returnDetailsView.isHidden = true
                             returnReasonView.isHidden = false
                             updateStatusView.isHidden = !hasActionPermission
                             statusView.isHidden = !hasActionPermission
-                            lblReturnExchangeHeading.text = "Exchange Details"
-                            lblReturnExchangeId.text = "Exchange Id"
+                            lblReturnExchangeHeading.text = "Exchange Details".localiz()
+                            lblReturnExchangeId.text = "Exchange Id".localiz()
                         }
                         if data.rEApprove == "1" {
-                            orderStatusLabel.text = "Completed"
+                            orderStatusLabel.text = "Completed".localiz()
                             orderStatusLabel.textColor = UIColor(hex: "#16B364")
                             updateStatusView.isHidden = true
                             statusView.isHidden = true
                             if data.returnType == "2" {
-                                orderStatusLabel.text = "Exchange Req Accepted"
+                                orderStatusLabel.text = "Exchange Req Accepted".localiz()
                                 orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
                                 updateStatusView.isHidden = true
                                 statusView.isHidden = true
                             }
                         } else if data.rEApprove == "2" {
-                            orderStatusLabel.text = "Rejected"
+                            orderStatusLabel.text = "Rejected".localiz()
                             orderStatusLabel.textColor = UIColor(hex: "#E70000")
                             updateStatusView.isHidden = true
                             statusView.isHidden = true
                         }
                     }
                 case "4", "8":
-                    orderStatusLabel.text = "Cancelled"
+                    orderStatusLabel.text = "Cancelled".localiz()
                     orderStatusLabel.textColor = UIColor(hex: "#E70000")
                     returnReasonView.isHidden = false
                 case "5": // Return
-                    orderStatusLabel.text = "Return Req."
+                    orderStatusLabel.text = "Return Req.".localiz()
                     orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
                     returnDetailsView.isHidden = false
                     returnReasonView.isHidden = false
@@ -512,13 +515,13 @@ class OrderDetailsViewController: UIViewController {
                     statusView.isHidden = !hasActionPermission
                     
                 case "7": //Picked
-                    orderStatusLabel.text = "On The Way "
+                    orderStatusLabel.text = "On The Way ".localiz()
                     orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
                     updateStatusView.isHidden = true
                     statusView.isHidden = true
                     
                 case "9": // Exchange
-                    orderStatusLabel.text = "Exchange Req."
+                    orderStatusLabel.text = "Exchange Req.".localiz()
                     orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
                     returnDetailsView.isHidden = false
                     exchangeView.isHidden = false
@@ -526,12 +529,12 @@ class OrderDetailsViewController: UIViewController {
                     returnReasonView.isHidden = false
                     
                 case "2.1": //Shipped
-                    orderStatusLabel.text = "Shipped"
+                    orderStatusLabel.text = "Shipped".localiz()
                     orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
                     updateStatusView.isHidden = true
                     statusView.isHidden = true
                     if data.assignStatus == "1" {
-                        orderStatusLabel.text = "On The Way"
+                        orderStatusLabel.text = "On The Way".localiz()
                         orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
                         updateStatusView.isHidden = true
                         statusView.isHidden = true
@@ -541,7 +544,7 @@ class OrderDetailsViewController: UIViewController {
                     return
                 }
             } else if paymentStatus == "2" {
-                orderStatusLabel.text = "Cancelled"
+                orderStatusLabel.text = "Cancelled".localiz()
                 orderStatusLabel.textColor = UIColor(hex: "#E70000")
                 returnReasonView.isHidden = false
             }

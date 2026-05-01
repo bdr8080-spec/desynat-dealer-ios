@@ -51,11 +51,13 @@ class EventsTableViewCell: UITableViewCell {
         )
         
         let result = convertISOToDMY(data?.createdAt ?? "") ?? ""
-        joinedOnLabel.text = "Joined on \(result)"
+        let text = "Joined on".localiz()
+        joinedOnLabel.text = "\(text) \(result)"
 //        let liveDateresult = convertDate(data?.timeslotDetails?.date ?? "")
 //        liveDateLabel.text = "Live Timing \(liveDateresult)"
         let liveDateresult = convertDate(data?.timeslotDetails?.date ?? "")
-        liveDateLabel.text = "Live Timing \(liveDateresult)"
+        let text1 = "Live Timing".localiz()
+        liveDateLabel.text = "\(text1) \(liveDateresult)"
         livetimeLabel.text = fromtime
         countryNameLabel.text = data?.timeslotDetails?.countryInfo?.name ?? ""
 //        let isLive = isEventLive(

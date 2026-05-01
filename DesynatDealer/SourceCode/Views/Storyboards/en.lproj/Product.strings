@@ -1,0 +1,345 @@
+
+/* Class = "UILabel"; text = "Affiliated Product?"; ObjectID = "0e0-YF-Cwd"; */
+"0e0-YF-Cwd.text" = "Affiliated Product?";
+
+/* Class = "UIButton"; normalTitle = "  No"; ObjectID = "179-x6-OoN"; */
+"179-x6-OoN.normalTitle" = "  No";
+
+/* Class = "UILabel"; text = "Product Name"; ObjectID = "1gM-E6-BRu"; */
+"1gM-E6-BRu.text" = "Product Name";
+
+/* Class = "UITextField"; placeholder = "Enter Brand name"; ObjectID = "1ui-Go-Mip"; */
+"1ui-Go-Mip.placeholder" = "Enter Brand name";
+
+/* Class = "UILabel"; text = "Other"; ObjectID = "3M8-so-OtT"; */
+"3M8-so-OtT.text" = "Other";
+
+/* Class = "UIButton"; normalTitle = "  No"; ObjectID = "3iI-xy-IQf"; */
+"3iI-xy-IQf.normalTitle" = "  No";
+
+/* Class = "UITextField"; placeholder = "Eg. 15 days"; ObjectID = "4s7-ty-gC5"; */
+"4s7-ty-gC5.placeholder" = "Eg. 15 days";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "5aY-sh-vCJ"; */
+"5aY-sh-vCJ.text" = "-";
+
+/* Class = "UILabel"; text = "Hip"; ObjectID = "5me-1C-es8"; */
+"5me-1C-es8.text" = "Hip";
+
+/* Class = "UILabel"; text = "(1)"; ObjectID = "5qp-KB-lgF"; */
+"5qp-KB-lgF.text" = "(1)";
+
+/* Class = "UILabel"; text = "Bust  "; ObjectID = "7UQ-4C-BWd"; */
+"7UQ-4C-BWd.text" = "Bust  ";
+
+/* Class = "UILabel"; text = "If Yes, Total days for Exchangeable "; ObjectID = "7Z7-JH-bOm"; */
+"7Z7-JH-bOm.text" = "If Yes, Total days for Exchangeable ";
+
+/* Class = "UIButton"; normalTitle = "Size Guide"; ObjectID = "7ww-Do-SIV"; */
+"7ww-Do-SIV.normalTitle" = "Size Guide";
+
+/* Class = "UILabel"; text = "Upload Size Chart"; ObjectID = "8Cu-Fz-6p7"; */
+"8Cu-Fz-6p7.text" = "Upload Size Chart";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "8SO-s3-bQu"; */
+"8SO-s3-bQu.text" = "-";
+
+/* Class = "UILabel"; text = "In Arabic"; ObjectID = "AAd-g6-iiz"; */
+"AAd-g6-iiz.text" = "In Arabic";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "AeU-iD-hw7"; */
+"AeU-iD-hw7.text" = "-";
+
+/* Class = "UILabel"; text = "In English"; ObjectID = "BAZ-vG-x61"; */
+"BAZ-vG-x61.text" = "In English";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "Bj1-Ig-kLj"; */
+"Bj1-Ig-kLj.text" = "-";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Bv9-HP-iGe"; */
+"Bv9-HP-iGe.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Available Size"; ObjectID = "CWp-81-NPp"; */
+"CWp-81-NPp.text" = "Available Size";
+
+/* Class = "UITextField"; placeholder = "Select Sub Category"; ObjectID = "CxB-uH-eHd"; */
+"CxB-uH-eHd.placeholder" = "Select Sub Category";
+
+/* Class = "UILabel"; text = "0 Bought"; ObjectID = "Cym-eb-6zj"; */
+"Cym-eb-6zj.text" = "0 Bought";
+
+/* Class = "UILabel"; text = "Active"; ObjectID = "D5H-jC-DiA"; */
+"D5H-jC-DiA.text" = "Active";
+
+/* Class = "UILabel"; text = "Cash on delivery allowed?"; ObjectID = "DdY-Y9-bSG"; */
+"DdY-Y9-bSG.text" = "Cash on delivery allowed?";
+
+/* Class = "UILabel"; text = "Specification"; ObjectID = "F6x-r9-IOt"; */
+"F6x-r9-IOt.text" = "Specification";
+
+/* Class = "UILabel"; text = "Ready to ship?"; ObjectID = "FDn-sJ-hch"; */
+"FDn-sJ-hch.text" = "Ready to ship?";
+
+/* Class = "UILabel"; text = "Add Product"; ObjectID = "Fij-Lj-we5"; */
+"Fij-Lj-we5.text" = "Add Product";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "Fm3-TR-3MB"; */
+"Fm3-TR-3MB.text" = "-";
+
+/* Class = "UILabel"; text = "Is it an Affiliated Product?\n"; ObjectID = "G64-Id-ch3"; */
+"G64-Id-ch3.text" = "Is it an Affiliated Product?\n";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "GJg-7V-GTb"; */
+"GJg-7V-GTb.text" = "-";
+
+/* Class = "UILabel"; text = "Cash on delivery allowed?"; ObjectID = "Gpf-3G-Xk4"; */
+"Gpf-3G-Xk4.text" = "Cash on delivery allowed?";
+
+/* Class = "UILabel"; text = "Cancel"; ObjectID = "HNx-AN-K0d"; */
+"HNx-AN-K0d.text" = "Cancel";
+
+/* Class = "UILabel"; text = "Description"; ObjectID = "I3L-w3-xHJ"; */
+"I3L-w3-xHJ.text" = "Description";
+
+/* Class = "UIButton"; normalTitle = "  No"; ObjectID = "JBj-zl-hfW"; */
+"JBj-zl-hfW.normalTitle" = "  No";
+
+/* Class = "UILabel"; text = "Product Name"; ObjectID = "JRh-DY-o4Z"; */
+"JRh-DY-o4Z.text" = "Product Name";
+
+/* Class = "UILabel"; text = "Set Min. cart quantity"; ObjectID = "JVh-ia-LlJ"; */
+"JVh-ia-LlJ.text" = "Set Min. cart quantity";
+
+/* Class = "UILabel"; text = "Select Brand"; ObjectID = "JX9-Ny-LwL"; */
+"JX9-Ny-LwL.text" = "Select Brand";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "Jed-wk-cdk"; */
+"Jed-wk-cdk.text" = "-";
+
+/* Class = "UIButton"; normalTitle = "  Yes"; ObjectID = "K3w-Zx-BXA"; */
+"K3w-Zx-BXA.normalTitle" = "  Yes";
+
+/* Class = "UITextField"; placeholder = "Enter Product Name"; ObjectID = "KSJ-wI-Ew6"; */
+"KSJ-wI-Ew6.placeholder" = "Enter Product Name";
+
+/* Class = "UILabel"; text = "Is this product exchangable?"; ObjectID = "L9W-sH-KXA"; */
+"L9W-sH-KXA.text" = "Is this product exchangable?";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "LG5-Zj-dsl"; */
+"LG5-Zj-dsl.text" = "-";
+
+/* Class = "UILabel"; text = "|"; ObjectID = "LXy-9C-IeJ"; */
+"LXy-9C-IeJ.text" = "|";
+
+/* Class = "UILabel"; text = "Apply"; ObjectID = "N96-G1-y8J"; */
+"N96-G1-y8J.text" = "Apply";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "NMs-J3-sqG"; */
+"NMs-J3-sqG.text" = "-";
+
+/* Class = "UILabel"; text = "0 KD "; ObjectID = "Nuo-pC-0UK"; */
+"Nuo-pC-0UK.text" = "0 KD ";
+
+/* Class = "UIButton"; normalTitle = "  Yes"; ObjectID = "OMe-mA-a2a"; */
+"OMe-mA-a2a.normalTitle" = "  Yes";
+
+/* Class = "UILabel"; text = "More Color"; ObjectID = "OfE-Jz-0qp"; */
+"OfE-Jz-0qp.text" = "More Color";
+
+/* Class = "UILabel"; text = "Customized product?"; ObjectID = "PNw-BW-JoA"; */
+"PNw-BW-JoA.text" = "Customized product?";
+
+/* Class = "UILabel"; text = "Length"; ObjectID = "Ptn-wp-W01"; */
+"Ptn-wp-W01.text" = "Length";
+
+/* Class = "UITextField"; placeholder = "Enter Brand name"; ObjectID = "QQQ-sw-fS5"; */
+"QQQ-sw-fS5.placeholder" = "Enter Brand name";
+
+/* Class = "UITextField"; placeholder = "Eg. 15 days"; ObjectID = "RRu-EJ-cic"; */
+"RRu-EJ-cic.placeholder" = "Eg. 15 days";
+
+/* Class = "UILabel"; text = "Edit"; ObjectID = "RaN-dL-AKJ"; */
+"RaN-dL-AKJ.text" = "Edit";
+
+/* Class = "UILabel"; text = "Sleeve length "; ObjectID = "Rbk-LJ-aBC"; */
+"Rbk-LJ-aBC.text" = "Sleeve length ";
+
+/* Class = "UILabel"; text = "Total Stocks"; ObjectID = "S8p-1p-pSy"; */
+"S8p-1p-pSy.text" = "Total Stocks";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "U2z-wI-3XU"; */
+"U2z-wI-3XU.text" = "-";
+
+/* Class = "UILabel"; text = "Description"; ObjectID = "UtR-md-r9e"; */
+"UtR-md-r9e.text" = "Description";
+
+/* Class = "UILabel"; text = "Delete"; ObjectID = "WWu-yF-Mgw"; */
+"WWu-yF-Mgw.text" = "Delete";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "XRU-7X-qiT"; */
+"XRU-7X-qiT.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "Xpg-sF-Lbt"; */
+"Xpg-sF-Lbt.text" = "-";
+
+/* Class = "UILabel"; text = "Review & ratings allowed ?"; ObjectID = "Yeb-fx-Ctp"; */
+"Yeb-fx-Ctp.text" = "Review & ratings allowed ?";
+
+/* Class = "UITextField"; placeholder = "Enter Product Name"; ObjectID = "YkR-Kp-D11"; */
+"YkR-Kp-D11.placeholder" = "Enter Product Name";
+
+/* Class = "UITextField"; placeholder = "Select Brand"; ObjectID = "ZbP-4O-Gdn"; */
+"ZbP-4O-Gdn.placeholder" = "Select Brand";
+
+/* Class = "UILabel"; text = "Description"; ObjectID = "ZoA-mg-Xgb"; */
+"ZoA-mg-Xgb.text" = "Description";
+
+/* Class = "UILabel"; text = "Filter"; ObjectID = "Zqf-NR-rcM"; */
+"Zqf-NR-rcM.text" = "Filter";
+
+/* Class = "UILabel"; text = "Waist"; ObjectID = "aF5-uu-R6K"; */
+"aF5-uu-R6K.text" = "Waist";
+
+/* Class = "UILabel"; text = "Other"; ObjectID = "b8L-ec-shw"; */
+"b8L-ec-shw.text" = "Other";
+
+/* Class = "UILabel"; text = "Add new product"; ObjectID = "bFq-lC-H2I"; */
+"bFq-lC-H2I.text" = "Add new product";
+
+/* Class = "UILabel"; text = "Is this a Customized product?"; ObjectID = "bad-eZ-PRd"; */
+"bad-eZ-PRd.text" = "Is this a Customized product?";
+
+/* Class = "UIButton"; normalTitle = "  Yes"; ObjectID = "bbQ-ID-mJ6"; */
+"bbQ-ID-mJ6.normalTitle" = "  Yes";
+
+/* Class = "UILabel"; text = "If Yes, Total days for returning"; ObjectID = "bka-Kh-1Et"; */
+"bka-Kh-1Et.text" = "If Yes, Total days for returning";
+
+/* Class = "UIButton"; normalTitle = "  No"; ObjectID = "bo9-fv-1ZI"; */
+"bo9-fv-1ZI.normalTitle" = "  No";
+
+/* Class = "UIButton"; normalTitle = "  Yes"; ObjectID = "bpf-Zd-BK6"; */
+"bpf-Zd-BK6.normalTitle" = "  Yes";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "cOe-n2-izY"; */
+"cOe-n2-izY.text" = "-";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "dmJ-at-uHc"; */
+"dmJ-at-uHc.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "eFO-cP-Qrb"; */
+"eFO-cP-Qrb.text" = "-";
+
+/* Class = "UILabel"; text = "Is this product returnable ?"; ObjectID = "eaC-CA-bOm"; */
+"eaC-CA-bOm.text" = "Is this product returnable ?";
+
+/* Class = "UITextField"; placeholder = "Eg. 32"; ObjectID = "fxi-mH-1iW"; */
+"fxi-mH-1iW.placeholder" = "Eg. 32";
+
+/* Class = "UILabel"; text = "SKU Limit"; ObjectID = "gN7-P6-W7x"; */
+"gN7-P6-W7x.text" = "SKU Limit";
+
+/* Class = "UILabel"; text = "More Color"; ObjectID = "gUI-Nc-jev"; */
+"gUI-Nc-jev.text" = "More Color";
+
+/* Class = "UILabel"; text = "inclusive of all taxes"; ObjectID = "h2X-zc-dek"; */
+"h2X-zc-dek.text" = "inclusive of all taxes";
+
+/* Class = "UILabel"; text = "Shoulder "; ObjectID = "hVw-Aw-xZx"; */
+"hVw-Aw-xZx.text" = "Shoulder ";
+
+/* Class = "UILabel"; text = "Customers Ratings"; ObjectID = "j4d-iu-eqe"; */
+"j4d-iu-eqe.text" = "Customers Ratings";
+
+/* Class = "UIButton"; normalTitle = "  No"; ObjectID = "jwA-WX-DYT"; */
+"jwA-WX-DYT.normalTitle" = "  No";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "k8k-Fo-i4Z"; */
+"k8k-Fo-i4Z.text" = "-";
+
+/* Class = "UILabel"; text = "SKU Limit"; ObjectID = "kLX-4M-k2b"; */
+"kLX-4M-k2b.text" = "SKU Limit";
+
+/* Class = "UILabel"; text = "Return allowed ?"; ObjectID = "kME-tF-llw"; */
+"kME-tF-llw.text" = "Return allowed ?";
+
+/* Class = "UILabel"; text = "In English"; ObjectID = "lQl-7H-zEz"; */
+"lQl-7H-zEz.text" = "In English";
+
+/* Class = "UILabel"; text = "In Arabic"; ObjectID = "lhl-AI-1Rz"; */
+"lhl-AI-1Rz.text" = "In Arabic";
+
+/* Class = "UILabel"; text = "Add Another Variant"; ObjectID = "mJj-c0-Lzk"; */
+"mJj-c0-Lzk.text" = "Add Another Variant";
+
+/* Class = "UILabel"; text = "Size Chart"; ObjectID = "nad-yk-zTq"; */
+"nad-yk-zTq.text" = "Size Chart";
+
+/* Class = "UILabel"; text = "Review & ratings allowed ? "; ObjectID = "oDu-Sm-P5u"; */
+"oDu-Sm-P5u.text" = "Review & ratings allowed ? ";
+
+/* Class = "UIButton"; normalTitle = "  No"; ObjectID = "oxA-8J-QIO"; */
+"oxA-8J-QIO.normalTitle" = "  No";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "pCy-ZX-bMk"; */
+"pCy-ZX-bMk.text" = "-";
+
+/* Class = "UILabel"; text = "In English"; ObjectID = "pHg-sB-lbQ"; */
+"pHg-sB-lbQ.text" = "In English";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "pTR-h4-GaA"; */
+"pTR-h4-GaA.text" = "-";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "pcH-vE-GlN"; */
+"pcH-vE-GlN.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "0 KD"; ObjectID = "qOQ-Od-ac7"; */
+"qOQ-Od-ac7.text" = "0 KD";
+
+/* Class = "UIButton"; normalTitle = "  Yes"; ObjectID = "qef-QS-A1q"; */
+"qef-QS-A1q.normalTitle" = "  Yes";
+
+/* Class = "UILabel"; text = "Ready to ship?"; ObjectID = "sG0-jT-7V4"; */
+"sG0-jT-7V4.text" = "Ready to ship?";
+
+/* Class = "UITextField"; placeholder = "Eg. 20"; ObjectID = "sR1-Vm-b3p"; */
+"sR1-Vm-b3p.placeholder" = "Eg. 20";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "u6R-g2-cGp"; */
+"u6R-g2-cGp.text" = "-";
+
+/* Class = "UIButton"; normalTitle = "View All"; ObjectID = "uMd-Ys-Q30"; */
+"uMd-Ys-Q30.normalTitle" = "View All";
+
+/* Class = "UIButton"; normalTitle = "  Yes"; ObjectID = "uOZ-iU-5kF"; */
+"uOZ-iU-5kF.normalTitle" = "  Yes";
+
+/* Class = "UILabel"; text = "Clear"; ObjectID = "uda-6K-TOf"; */
+"uda-6K-TOf.text" = "Clear";
+
+/* Class = "UILabel"; text = "Exchange allowed ?"; ObjectID = "vPR-MT-S7d"; */
+"vPR-MT-S7d.text" = "Exchange allowed ?";
+
+/* Class = "UILabel"; text = "Select Category "; ObjectID = "wHG-1f-ino"; */
+"wHG-1f-ino.text" = "Select Category ";
+
+/* Class = "UILabel"; text = "Sub Category "; ObjectID = "wfN-TJ-VkQ"; */
+"wfN-TJ-VkQ.text" = "Sub Category ";
+
+/* Class = "UIButton"; normalTitle = "  Yes"; ObjectID = "x9Q-cB-Ot0"; */
+"x9Q-cB-Ot0.normalTitle" = "  Yes";
+
+/* Class = "UILabel"; text = "Set Max. cart quantity"; ObjectID = "x9r-9z-Foi"; */
+"x9r-9z-Foi.text" = "Set Max. cart quantity";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "xOS-Id-w4v"; */
+"xOS-Id-w4v.text" = "-";
+
+/* Class = "UILabel"; text = "Specifications"; ObjectID = "yAp-L5-uuA"; */
+"yAp-L5-uuA.text" = "Specifications";
+
+/* Class = "UILabel"; text = "In Arabic"; ObjectID = "yrX-Z0-QeR"; */
+"yrX-Z0-QeR.text" = "In Arabic";
+
+/* Class = "UIButton"; normalTitle = "  No"; ObjectID = "zWS-7H-GzT"; */
+"zWS-7H-GzT.normalTitle" = "  No";

@@ -2,6 +2,7 @@ import Foundation
 import UIKit
 
 class WebService {
+    
     static let sharedInstance = WebService()
     
     typealias ResultHandler<T:Decodable> = (Result<T, NetworkError>) -> Void
@@ -21,7 +22,7 @@ class WebService {
                     completion?(nil, nil, err.localizedDescription)
                 }
             case .sessionExpired:
-                UIApplication.shared.topViewController()?.showAlert(msg: AlertConstant.sessionExpired.value(), completion: {
+                UIApplication.shared.topViewController()?.showAlert(msg: AlertConstant.sessionExpired.value().localiz(), completion: {
                     print("logout")
                     //kSharedSceneDelegate.logoutUser()
                 })

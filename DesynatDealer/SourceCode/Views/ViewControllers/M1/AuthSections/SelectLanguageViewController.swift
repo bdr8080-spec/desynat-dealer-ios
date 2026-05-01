@@ -13,9 +13,10 @@ class SelectLanguageViewController: UIViewController {
     @IBOutlet weak var englishView: CustomView!
     @IBOutlet weak var imgArabic: UIImageView!
     @IBOutlet weak var imgEnglish: UIImageView!
+    @IBOutlet weak var lblDesclaimer: UILabel!
     
     var comingFirstTime: Bool = true
-    private var selectedLanguage: String = "en"
+    var selectedLanguage: Languages = .en
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,9 @@ class SelectLanguageViewController: UIViewController {
         } else {
             comingFirstTime = true
         }
+        self.lblDesclaimer.text = "Choose the language and continue to get the experience the app in your preferred language.".localiz()
+        selectedLanguage = AppLanguageManager.shared.currentLanguage
+        selectLanguage(isEnglishSelected: selectedLanguage != .ar)
     }
     
     private func showNotificationPermission() {
@@ -35,7 +39,6 @@ class SelectLanguageViewController: UIViewController {
         }
         self.present(vc, animated: true)
     }
-
     private func showMediaPermission() {
         let vc = MediaPermissionViewController.instantiate(fromAppStoryboard: .Main)
         vc.onPermissionCompletion = {
@@ -43,26 +46,46 @@ class SelectLanguageViewController: UIViewController {
         }
         self.present(vc, animated: true)
     }
-
+    private func selectLanguage(isEnglishSelected: Bool) {
+        let selectedColor = UIColor(named: "darkBrown")?.cgColor
+        let deselectedColor = UIColor.lightGray.cgColor
+        
+        // English
+        englishView.layer.borderColor = isEnglishSelected ? selectedColor : deselectedColor
+        imgEnglish.image = UIImage(named: isEnglishSelected ? "radioSelected" : "radioUnselected")
+        
+        // Arabic
+        arabicView.layer.borderColor = isEnglishSelected ? deselectedColor : selectedColor
+        imgArabic.image = UIImage(named: isEnglishSelected ? "radioUnselected" : "radioSelected")
+    }
     
+    private func applyLanguageChange() {
+        AppLanguageManager.shared.setLanguage(language: selectedLanguage)
+        if selectedLanguage == .ar {
+            UIView.appearance().semanticContentAttribute = .forceRightToLeft
+        } else {
+            UIView.appearance().semanticContentAttribute = .forceLeftToRight
+        }
+        refreshUI()
+    }
+    
+    private func refreshUI() {
+        let nextVC = SelectLanguageViewController.instantiate(fromAppStoryboard: .Main)
+        self.navigationController?.setViewControllers([nextVC], animated: false)
+    }
     @IBAction func btnSelectLanguage(_ sender: UIButton) {
         if sender.tag == 0 {
-            selectedLanguage = "en"
-            imgArabic.image = UIImage(named: "radioUnselected")
-            imgEnglish.image = UIImage(named: "radioSelected")
-            arabicView.layer.borderColor = UIColor.lightGray.cgColor
-            englishView.layer.borderColor = UIColor(named: "darkBrown")?.cgColor
+            selectedLanguage = .en
+            selectLanguage(isEnglishSelected: true)
         } else {
-            selectedLanguage = "ar"
-            imgArabic.image = UIImage(named: "radioSelected")
-            imgEnglish.image = UIImage(named: "radioUnselected")
-            arabicView.layer.borderColor = UIColor(named: "darkBrown")?.cgColor
-            englishView.layer.borderColor = UIColor.lightGray.cgColor
+            selectedLanguage = .ar
+            selectLanguage(isEnglishSelected: false)
         }
+        applyLanguageChange()
     }
     
     @IBAction func btnTapContinue(_ sender: Any) {
-        UserDefaults.standard.setValue(selectedLanguage, forKey: "AppLanguage")
+        AppLanguageManager.shared.setLanguage(language: selectedLanguage)
         if comingFirstTime {
             let vc = WelcomeScreenViewController.instantiate(fromAppStoryboard: .Main)
             self.navigationController?.pushViewController(vc, animated: true)
@@ -70,5 +93,4 @@ class SelectLanguageViewController: UIViewController {
             kSharedSceneDelegate.navigateToLoginVC()
         }
     }
-
 }

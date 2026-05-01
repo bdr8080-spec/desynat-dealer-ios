@@ -45,12 +45,12 @@ class ProductListTableViewCell: UITableViewCell {
     }
         if isCustomOrder {
             priceLabel.text = CommonUtils.formatPriceStringInput(data?.chatRoomrecords?.totalAmount)
-            quantityLabel.text = "Per Item Price"
+            quantityLabel.text = "Per Item Price".localiz()
             let priceString = data?.amount ?? "0"
             perItemPriceLabel.text = CommonUtils.formatPriceStringInput(priceString)
         } else {
             priceLabel.text = CommonUtils.formatPrice(totalPrice)
-            quantityLabel.text = "Quantity"
+            quantityLabel.text = "Quantity".localiz()
             let priceString = data?.amount ?? "0"
             perItemPriceLabel.text = "\(CommonUtils.formatPriceStringInput(priceString)) x \(data?.quantity ?? 1)"
         }

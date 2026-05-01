@@ -36,13 +36,14 @@ class PaymentMethodVC: UIViewController {
         super.viewDidLoad()
         isCardIsSlecteed = true
         lblMonth.text = durationOfPlan
+        let text = "KD".localiz()
         switch paymentFrom {
         case .plan:
-            lblTotalAmt.text = "\(payAmount) KD"
+            lblTotalAmt.text = "\(payAmount) \(text)"
         case .banner:
-            lblTotalAmt.text = "\(payAmount) KD"
+            lblTotalAmt.text = "\(payAmount) \(text)"
          case .mySubscriptionPlan:
-          lblTotalAmt.text = "\(payAmount) KD"
+          lblTotalAmt.text = "\(payAmount) \(text)"
         }
         
     }
@@ -73,7 +74,7 @@ class PaymentMethodVC: UIViewController {
     
     @IBAction func btnPay(_ sender: Any) {
         guard selectedPaymentMethodID != nil || isCardIsSlecteed else {
-            showAlert(msg: "Please select a payment option")
+            showAlert(msg: "Please select a payment option".localiz())
             return
         }
         
@@ -198,7 +199,7 @@ extension PaymentMethodVC {
                 completion(paymentStatus, invoiceId, nil)
                 
                 let transactionID = paymentStatus.invoiceTransactions?.first?.transactionID ?? ""
-                let paymentGateway = paymentStatus.invoiceTransactions?.first?.paymentGateway ?? "VisaPay"
+                let paymentGateway = paymentStatus.invoiceTransactions?.first?.paymentGateway ?? "VisaPay".localiz()
                 
                 DispatchQueue.main.async {
                     self.paymentTransactionDetails = (transactionID, invoiceId ?? "", paymentGateway)
@@ -231,7 +232,7 @@ extension PaymentMethodVC {
             case .success(let paymentStatus):
                 print("Payment successful with invoiceId: \(invoiceId ?? "N/A")")
                 let transactionID = paymentStatus.invoiceTransactions?.first?.transactionID ?? ""
-                let paymentGateway = paymentStatus.invoiceTransactions?.first?.paymentGateway ?? "card"
+                let paymentGateway = paymentStatus.invoiceTransactions?.first?.paymentGateway ?? "card".localiz()
                 paymentTransactionDetails = (transactionID, invoiceId ?? "", paymentGateway)
                 paymentCompleted = true
                 self.handlePaymentCompletion(transactionID: transactionID, invoiceId: invoiceId ?? "", gateway: paymentGateway)
@@ -239,7 +240,8 @@ extension PaymentMethodVC {
                 //        viewModel.payForAddingCard(transactionId: transactionID)
             case .failure(let error):
                 print("Payment Error: \(error.errorDescription)")
-                self.showAlert(msg: "Payment Failed: \(error.errorDescription)")
+                let text = "Payment Failed:".localiz()
+                self.showAlert(msg: "\(text) \(error.errorDescription)")
             }
         }
     }
@@ -265,9 +267,9 @@ extension PaymentMethodVC {
         var configure = MFCardConfigureBuilder.default
         // but you can create yours
         // set placeholders
-        configure.setPlaceholder(MFCardPlaceholder(cardHolderNamePlaceholder: "Name", cardNumberPlaceholder: "Number", expiryDatePlaceholder: "MM / YY", cvvPlaceholder: "CVV"))
+        configure.setPlaceholder(MFCardPlaceholder(cardHolderNamePlaceholder: "Name".localiz(), cardNumberPlaceholder: "Number".localiz(), expiryDatePlaceholder: "MM / YY".localiz(), cvvPlaceholder: "CVV".localiz()))
         // set labels
-        configure.setLabel(MFCardLabel(cardHolderNameLabel: "Card holder name", cardNumberLabel: "Card number", expiryDateLabel: "MM / YY", cvvLabel: "CVV", showLabels: true, fontWeight: .normal))
+        configure.setLabel(MFCardLabel(cardHolderNameLabel: "Card holder name".localiz(), cardNumberLabel: "Card number".localiz(), expiryDateLabel: "MM / YY".localiz(), cvvLabel: "CVV".localiz(), showLabels: true, fontWeight: .normal))
         // set theme
         let theme = MFCardTheme(inputColor: .black, labelColor: .black, errorColor: .red, borderColor: .black)
         theme.language = .english // select .arabic for rtl vie

@@ -102,7 +102,7 @@ class InventoryDetailsViewController: UIViewController {
                 // Refresh UI
                 if let updatedUser = self.viewModel.productDetails {
                     self.configData(data: updatedUser)
-                    let message = newStatus == 1 ? "Product has been activated Successfully" : "Product has been Deactivated Successfully"
+                    let message = newStatus == 1 ? "Product has been activated Successfully".localiz() : "Product has been Deactivated Successfully".localiz()
                     CommonUtils.showToast(message: message)
                 }
             }
@@ -112,7 +112,7 @@ class InventoryDetailsViewController: UIViewController {
     func configData(data: ProductsList) {
         // MARK: - Basic Product info
         //      titlePageLabel.text = data.brand?.nameEnglish ?? ""
-        if data.brand?.nameEnglish == "Other" {
+        if data.brand?.nameEnglish == "Other".localiz() {
             productNameLabel.text = data.otherEn
             titlePageLabel.text = data.otherEn
         } else {
@@ -124,10 +124,10 @@ class InventoryDetailsViewController: UIViewController {
         ratingCountLabel.text = " (\(data.reviewRating ?? "0"))"
         // Status
         if data.productActiveStatus == 1 {
-            statusLabel.text = "Active"
+            statusLabel.text = "Active".localiz()
             statusButton.setImage(UIImage(named: "toggle_on"), for: .normal)
         } else {
-            statusLabel.text = "Inactive"
+            statusLabel.text = "Inactive".localiz()
             statusButton.setImage(UIImage(named: "toggle_off"), for: .normal)
         }
         
@@ -189,8 +189,9 @@ class InventoryDetailsViewController: UIViewController {
             productImageCollectionView.setContentOffset(CGPoint.zero, animated: false)
             productImageCollectionView.reloadData()
         }
-        finalPriceLabel.text = "\(variant.finalPrice ?? "0") KD"
-        CommonUtils.setStrikethrough(label: actualPriceLAbel, text: "\(variant.actualPrice ?? "0") KD")
+        let text = "KD".localiz()
+        finalPriceLabel.text = "\(variant.finalPrice ?? "0") \(text)"
+        CommonUtils.setStrikethrough(label: actualPriceLAbel, text: "\(variant.actualPrice ?? "0") \(text)")
         
         CommonUtils.updateDiscountPercentageLabel(discountPriceALbel,
                                                   actualAmountLabel: actualPriceLAbel,

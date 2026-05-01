@@ -108,10 +108,12 @@ class ProductsViewController: UIViewController {
         let allCount = viewModel.productsListData?.allProductData?.count ?? 0
         let activeCount = viewModel.productsListData?.activeProduct?.count ?? 0
         let inactiveCount = viewModel.productsListData?.inactiveProduct?.count ?? 0
-        
-        allTitleLabel.text = "All (\(allCount))"
-        activeTitleLabel.text = "Active (\(activeCount))"
-        inactiveLabel.text = "Inactive (\(inactiveCount))"
+        let text1 = "All".localiz()
+        let text2 = "Active".localiz()
+        let text3 = "Inactive".localiz()
+        allTitleLabel.text = "\(text1) (\(allCount))"
+        activeTitleLabel.text = "\(text2) (\(activeCount))"
+        inactiveLabel.text = "\(text3) (\(inactiveCount))"
     }
     
     func updateStatusLocally(at index: Int) {

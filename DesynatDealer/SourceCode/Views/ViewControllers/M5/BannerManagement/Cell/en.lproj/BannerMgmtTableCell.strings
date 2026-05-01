@@ -1,0 +1,39 @@
+
+/* Class = "UILabel"; text = "Rejected on"; ObjectID = "3gb-rB-Xzz"; */
+"3gb-rB-Xzz.text" = "Rejected on";
+
+/* Class = "UILabel"; text = "Status"; ObjectID = "5kb-HO-btX"; */
+"5kb-HO-btX.text" = "Status";
+
+/* Class = "UILabel"; text = " #5372821"; ObjectID = "7K3-mi-AWm"; */
+"7K3-mi-AWm.text" = " #5372821";
+
+/* Class = "UILabel"; text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod"; ObjectID = "7hX-5i-g0c"; */
+"7hX-5i-g0c.text" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod";
+
+/* Class = "UILabel"; text = "400 KD"; ObjectID = "9O7-OO-HE3"; */
+"9O7-OO-HE3.text" = "400 KD";
+
+/* Class = "UILabel"; text = "Requested On"; ObjectID = "GnN-y2-3GG"; */
+"GnN-y2-3GG.text" = "Requested On";
+
+/* Class = "UILabel"; text = "Request Id"; ObjectID = "Iif-Ha-wA3"; */
+"Iif-Ha-wA3.text" = "Request Id";
+
+/* Class = "UILabel"; text = "Confirmed"; ObjectID = "PCT-7n-J20"; */
+"PCT-7n-J20.text" = "Confirmed";
+
+/* Class = "UILabel"; text = "Total Amount"; ObjectID = "Ssf-bK-tEW"; */
+"Ssf-bK-tEW.text" = "Total Amount";
+
+/* Class = "UIButton"; normalTitle = "Pay Now"; ObjectID = "WDg-9O-L2T"; */
+"WDg-9O-L2T.normalTitle" = "Pay Now";
+
+/* Class = "UILabel"; text = "Rejected Reason"; ObjectID = "YXQ-8F-p7M"; */
+"YXQ-8F-p7M.text" = "Rejected Reason";
+
+/* Class = "UILabel"; text = "21/09/2025 at 10:15 AM"; ObjectID = "f7d-nY-A2E"; */
+"f7d-nY-A2E.text" = "21/09/2025 at 10:15 AM";
+
+/* Class = "UILabel"; text = "21/09/2025 at 10:15 AM"; ObjectID = "qzX-aS-HJl"; */
+"qzX-aS-HJl.text" = "21/09/2025 at 10:15 AM";

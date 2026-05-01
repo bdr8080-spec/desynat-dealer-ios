@@ -16,7 +16,6 @@ class PaymentFilterViewController: UIViewController {
             filtersTableView.registerCellFromNib(cellID: "FiltersOptionsTableViewCell")
         }
     }
-    
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var toTextField: UITextField!
     @IBOutlet weak var fromTextField: UITextField!
@@ -123,9 +122,9 @@ extension PaymentFilterViewController {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         
-        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneDatePicker))
+        let doneButton = UIBarButtonItem(title: "Done".localiz(), style: .done, target: self, action: #selector(doneDatePicker))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker))
+        let cancelButton = UIBarButtonItem(title: "Cancel".localiz(), style: .plain, target: self, action: #selector(cancelDatePicker))
         toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         
         fromTextField.inputView = datePicker
@@ -163,10 +162,10 @@ extension PaymentFilterViewController {
     }
     
     private func showValidationAlert() {
-        let alert = UIAlertController(title: "Invalid Date",
-                                      message: "To Date cannot be earlier than From Date.",
+        let alert = UIAlertController(title: "Invalid Date".localiz(),
+                                      message: "To Date cannot be earlier than From Date.".localiz(),
                                       preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        alert.addAction(UIAlertAction(title: "OK".localiz(), style: .default))
         self.present(alert, animated: true)
     }
     

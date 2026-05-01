@@ -20,7 +20,7 @@ class ProfileViewController: UIViewController {
   }
   
   private var sideMenuData: [SideMenuModel] = [
-    SideMenuModel(title: "Inventory management ", image: "inventory"),
+    SideMenuModel(title: "Inventory management", image: "inventory"),
     SideMenuModel(title: "Affiliated Commission", image: "affiliated"),
     SideMenuModel(title: "Banner management", image: "bannerMan"),
     SideMenuModel(title: "Deals management", image: "dealsMan"),
@@ -43,7 +43,6 @@ class ProfileViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -56,13 +55,12 @@ class ProfileViewController: UIViewController {
     updateTableHeight()
   }
   
-  
   @IBAction func backDidTapped(_ sender: Any) {
     self.navigationController?.popViewController(animated: true)
   }
   
   @IBAction func btnTapLogout(_ sender: UIButton) {
-    self.showConfirmationAlert(msg: "Are you sure you want to logout?"){ [weak self] in
+      self.showConfirmationAlert(msg: "Are you sure you want to logout?".localiz()){ [weak self] in
       guard let self = self else { return }
       self.viewModel.logoutAPI()
     }
@@ -78,8 +76,6 @@ class ProfileViewController: UIViewController {
       self.sideMenuHeightConstaint.constant = self.sideMenuTableView.contentSize.height
     }
   }
-  
-  
 }
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
@@ -96,60 +92,60 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let selectedItem = sideMenuData[indexPath.row].title
+      let selectedItem = sideMenuData[indexPath.row].title.localiz()
     switch selectedItem {
       
-    case "Staff management":
+    case "Staff management".localiz():
         let vc =  StaffManagementViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
         vc.hasActionPermission = true
         self.navigationController?.pushViewController(vc, animated: true)
       print("➡️ Navigate to Staff management")
       
-    case "Subscription Plans":
+    case "Subscription Plans".localiz():
         let vc = MySubsciptionPlanViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
         vc.hasActionPermission = true
         self.navigationController?.pushViewController(vc, animated: true)
       print("➡️ Navigate to Subscription Plans")
       
-    case "Banner management":
+    case "Banner management".localiz():
         let vc = BannerManagemntVC.instantiate(fromAppStoryboard: .BannerManagement)
         vc.hasActionPermission = true
         self.navigationController?.pushViewController(vc, animated: true)
       
-    case "Live Coverage request":
+    case "Live Coverage request".localiz():
         let nextVC = LiveCoverageListViewController.instantiate(fromAppStoryboard: .Profile)
         nextVC.hasActionPermission = true
         self.navigationController?.pushViewController(nextVC, animated: true)
         
-    case "Deals management":
+    case "Deals management".localiz():
         let vc = DealListedViewController.instantiate(fromAppStoryboard: .OrderAndChat)
         vc.hasActionPermission = true
         self.navigationController?.pushViewController(vc, animated: true)
       
-    case "Refund management":
+    case "Refund management".localiz():
         let vc = RefundManagementViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
         vc.hasActionPermission = true
         self.navigationController?.pushViewController(vc, animated: true)
       print("➡️ Navigate to Refund management")
       
-    case "Inventory management ":
+    case "Inventory management".localiz():
       let nextVC = InventoryListViewController.instantiate(fromAppStoryboard: .InventoryAffilate)
         nextVC.hasActionPermission = true
       self.navigationController?.pushViewController(nextVC, animated: true)
-    case "Affiliated Commission":
+    case "Affiliated Commission".localiz():
       let nextVC = AffiliatedCommisionViewController.instantiate(fromAppStoryboard: .InventoryAffilate)
         nextVC.hasActionPermission = true
       nextVC.commissionValue = viewModel.userProfile?.affilateCommission
       self.navigationController?.pushViewController(nextVC, animated: true)
       
-    case "Terms & Condition":
+    case "Terms & Condition".localiz():
         let vc =  CMSViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
         vc.comingReason = .termsAndConditions
         vc.hasActionPermission = true
         self.navigationController?.pushViewController(vc, animated: true)
       //print("➡️ Navigate to Terms & Condition")
       
-    case "Return Policy":
+    case "Return Policy".localiz():
         
         let vc =  CMSViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
         vc.comingReason = .returnPolicy
@@ -158,45 +154,45 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         
       //print("➡️ Navigate to Return Policy")
       
-    case "About Us":
+    case "About Us".localiz():
         let vc =  CMSViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
         vc.comingReason = .aboutUs
         vc.hasActionPermission = true
         self.navigationController?.pushViewController(vc, animated: true)
       print("➡️ Navigate to About Us")
       
-    case "FAQ’S":
+    case "FAQ’S".localiz():
       let nexVC = FAQViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
         nexVC.hasActionPermission = true
         self.navigationController?.pushViewController(nexVC, animated: true)
       
-    case "Change Language":
+    case "Change Language".localiz():
         let vc = ChangeLanguageViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
         vc.hasActionPermission = true
         self.navigationController?.pushViewController(vc, animated: true)
       print("➡️ Navigate to Change Language")
       
-    case "Cancellation Policy":
+    case "Cancellation Policy".localiz():
         let vc =  CMSViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
         vc.comingReason = .cancellationPolicy
         vc.hasActionPermission = true
         self.navigationController?.pushViewController(vc, animated: true)
       print("➡️ Navigate to Cancellation Policy")
       
-    case "Exchange Policy":
+    case "Exchange Policy".localiz():
         let vc =  CMSViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
         vc.comingReason = .exchangePolicy
         vc.hasActionPermission = true
         self.navigationController?.pushViewController(vc, animated: true)
       print("➡️ Navigate to Exchange Policy")
       
-    case "Support":
+    case "Support".localiz():
         let vc = SupportViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
         vc.hasActionPermission = true
         self.navigationController?.pushViewController(vc, animated: true)
       print("➡️ Navigate to Support")
       
-    case "Settings":
+    case "Settings".localiz():
         let vc = SettingViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
         vc.hasActionPermission = true
         self.navigationController?.pushViewController(vc, animated: true)

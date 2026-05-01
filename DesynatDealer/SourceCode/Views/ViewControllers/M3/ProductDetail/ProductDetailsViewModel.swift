@@ -36,7 +36,7 @@ class ProductDetailsViewModel {
         let param: [String: Any] = ["product_id" :hostVC.productId]
         WebService.sharedInstance.deleteProductDetailsService(param: param){ [weak self] response in
       guard let self = self else { return }
-            CommonUtils.showToast(message: "Product has been deleted successfully")
+            CommonUtils.showToast(message: "Product has been deleted successfully".localiz())
             DispatchQueue.main.async {
                 self.hostVC.navigationController?.popViewController(animated: true)
             }

@@ -64,8 +64,8 @@ class StaffManagementViewController: UIViewController {
                         let updatedStatus = self.viewModel.staffList[indexPath.row].isBlock ?? 0
                         
                         let msg = updatedStatus == 0
-                        ? "Staff has been unblocked successfully"
-                        : "Staff has been blocked successfully"
+                        ? "Staff has been unblocked successfully".localiz()
+                        : "Staff has been blocked successfully".localiz()
                         
                         CommonUtils.showToast(message: msg)
                     }
@@ -94,7 +94,7 @@ extension StaffManagementViewController: UITableViewDelegate, UITableViewDataSou
         }
         cell.isDeleteTapped = { [weak self] in
             guard let self = self else { return }
-            self.showConfirmationAlert(msg: "Are you sure you want to delete this staff?") { [weak self] in
+            self.showConfirmationAlert(msg: "Are you sure you want to delete this staff?".localiz()) { [weak self] in
                 guard let self = self else { return }
                 let indexPath = indexPath
                 let staffToDelete = self.viewModel.staffList[indexPath.row]
@@ -105,7 +105,7 @@ extension StaffManagementViewController: UITableViewDelegate, UITableViewDataSou
                         DispatchQueue.main.async {
                             self.tableView.deleteRows(at: [indexPath], with: .automatic)
                             self.noDataFoundLabel.isHidden = !self.viewModel.staffList.isEmpty
-                            CommonUtils.showToast(message: "Staff deleted successfully")
+                            CommonUtils.showToast(message: "Staff deleted successfully".localiz())
                         }
                     }
                 }

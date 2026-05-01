@@ -31,7 +31,7 @@ class AffiliatedCommisionViewController: UIViewController {
         
         // Check if value has changed
         if currentValue == (commissionValue ?? "") {
-            CommonUtils.showToast(message: "No changes made to the commission value")
+            CommonUtils.showToast(message: "No changes made to the commission value".localiz())
             return
         }
         if viewModel.validCommissionFields() {
@@ -91,7 +91,7 @@ extension AffiliatedCommisionViewController: UITextFieldDelegate {
         if textField == commissionTF {
             if value > 100 {
                 textField.text = "100"
-                CommonUtils.showToast(message: "Affiliated Commission percentage cannot exceed 100%")
+                CommonUtils.showToast(message: "Affiliated Commission percentage cannot exceed 100%".localiz())
             }
             return
         }

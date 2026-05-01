@@ -94,14 +94,15 @@ class SubscriptionCollectionCell: UICollectionViewCell {
         guard let plan = data else { return }
         planData = plan
         // Set top-level labels
-        lblPlanHeading.text = plan.planNameEnglish ?? "N/A"
+        lblPlanHeading.text = plan.planNameEnglish ?? "N/A".localiz()
         lblAmount.text = CommonUtils.formatPrice(plan.price)//"AED \(plan.price ?? 0)"
         
         let durationText: String
         if let duration = plan.duration, let type = plan.durationType {
-            durationText = "for \(duration) \(type == 1 ? "Month" : "Years")"
+            let text = "for".localiz()
+            durationText = "\(text) \(duration) \(type == 1 ? "Month".localiz() : "Years".localiz())"
         } else {
-            durationText = "N/A"
+            durationText = "N/A".localiz()
         }
         lblDays.text = durationText
         
@@ -118,9 +119,9 @@ class SubscriptionCollectionCell: UICollectionViewCell {
         // Handle "Stories" — show "Open" if 0, otherwise "Close"
         let storiesStatus: String
         if (plan.stories ?? 0) == 0 {
-            storiesStatus = "Open"
+            storiesStatus = "Open".localiz()
         } else {
-            storiesStatus = "Close"
+            storiesStatus = "Close".localiz()
         }
         
         // Prepare data

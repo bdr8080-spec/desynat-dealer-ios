@@ -197,9 +197,9 @@ class DelearProfileViewController: UIViewController {
         
         let type = data?.sellerBankDetails?.accountType ?? "0"
         if type == "0" {
-            accountTypeLabel.text = "Personal"
+            accountTypeLabel.text = "Personal".localiz()
         } else {
-            accountTypeLabel.text = "Business"
+            accountTypeLabel.text = "Business".localiz()
         }
         
         if let iban = data?.sellerBankDetails?.iban, !iban.isEmpty {

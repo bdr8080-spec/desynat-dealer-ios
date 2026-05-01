@@ -50,7 +50,7 @@ class AddHighlightsViewModel{
         ]
       WebService.sharedInstance.addNewHeightlightServices(param: param){ [weak self] response in
         guard let self = self else { return }
-        CommonUtils.showToast(message: "Highlight added successfully")
+          CommonUtils.showToast(message: "Highlight added successfully".localiz())
           self.hostVc?.navigationController?.popViewController(animated: true)
       }
     }

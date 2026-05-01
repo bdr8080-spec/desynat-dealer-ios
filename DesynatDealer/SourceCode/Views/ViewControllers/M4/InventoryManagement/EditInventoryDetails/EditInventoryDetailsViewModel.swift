@@ -45,16 +45,17 @@ class EditInventoryDetailsViewModel {
       let skuText = hostVC?.skuLimitTF.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
       
       if isEmpty(totalText) {
-          return "Please enter total stocks"
+          return "Please enter total stocks".localiz()
       }
       
       if isEmpty(skuText) {
-          return "Please enter SKU limit"
+          return "Please enter SKU limit".localiz()
       }
       
       // Validate SKU Limit <= Total Stocks
       if let totalStocks = Int(totalText), let skuLimit = Int(skuText), skuLimit > totalStocks {
-          return "SKU limit cannot be greater than total stocks (\(totalStocks))"
+          let text = "SKU limit cannot be greater than total stocks".localiz()
+          return "\(text) (\(totalStocks))"
       }
       
       return ""
@@ -68,7 +69,7 @@ class EditInventoryDetailsViewModel {
                                 "sku": hostVC?.skuLimitTF.text ?? ""]
       WebService.sharedInstance.updateInventoryDetails(param: param){ response in
         DispatchQueue.main.async {
-          CommonUtils.showToast(message: "Inventory updated succesfully")
+            CommonUtils.showToast(message: "Inventory updated succesfully".localiz())
           self.hostVC?.navigationController?.popToViewController(ofClass: InventoryListViewController.self, animated: true)
         }
       }

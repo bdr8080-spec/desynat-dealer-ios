@@ -45,17 +45,17 @@ class myPlanTableViewCell: UITableViewCell {
     
     func configData(data: MySubscriptionPlanList?, hasActionPermission: Bool) {
         if let type = data?.planInfo?.durationType, type == 1 {
-            durationLabel.text = "Monthly"
+            durationLabel.text = "Monthly".localiz()
         } else {
-            durationLabel.text = "Yearly"
+            durationLabel.text = "Yearly".localiz()
         }
         
         if data?.isExpired == "0" {
-            statusLabel.text = "Active"
+            statusLabel.text = "Active".localiz()
             statusLabel.textColor = .darkBrown
             renewStackView.isHidden = true
         } else {
-            statusLabel.text = "Expired"
+            statusLabel.text = "Expired".localiz()
             statusLabel.textColor = .black
             renewStackView.isHidden = !hasActionPermission
         }

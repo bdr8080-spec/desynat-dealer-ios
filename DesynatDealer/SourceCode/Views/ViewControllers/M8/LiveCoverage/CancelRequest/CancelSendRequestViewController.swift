@@ -38,7 +38,7 @@ class CancelSendRequestViewController: UIViewController {
         if !reason.isEmpty {
             viewModel.cancelLiveCoverageRequest(reason: reason)
         } else {
-            showAlert(msg: "Please enter reason")
+            showAlert(msg: "Please enter reason".localiz())
         }
     }
     

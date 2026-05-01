@@ -65,7 +65,7 @@ class DealsDetailsViewModel {
                                      "id": productIs]
         WebService.sharedInstance.deleteProductsInDeal(param: params){ response in
             DispatchQueue.main.async { [self] in
-                CommonUtils.showToast(message: "Item remove from deals succesfully!")
+                CommonUtils.showToast(message: "Item remove from deals succesfully!".localiz())
                 self.dealDetailsRequest()
             }
         }

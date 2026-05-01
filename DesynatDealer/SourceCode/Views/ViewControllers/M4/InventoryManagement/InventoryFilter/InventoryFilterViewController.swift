@@ -64,7 +64,7 @@ class InventoryFilterViewController: UIViewController {
     }
     
     filtersOptions = [
-      FilterSection(header: "Filter by Brand", options: brandOptions)
+        FilterSection(header: "Filter by Brand".localiz(), options: brandOptions)
     ]
     
     filterTableView.reloadData()

@@ -21,12 +21,14 @@ class TicketDetailViewController: UIViewController {
     @IBOutlet weak var attachmentView: UIView!
     @IBOutlet weak var attachmentImageView: CustomImageView!
     @IBOutlet weak var attachmnetButton: UIButton!
+    @IBOutlet weak var lblDetailsTitle: UILabel!
     
     var ticketDetails: SupportList?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configData()
+        lblDetailsTitle.text = "Details".localiz()
     }
 
     // MARK: - Navigation

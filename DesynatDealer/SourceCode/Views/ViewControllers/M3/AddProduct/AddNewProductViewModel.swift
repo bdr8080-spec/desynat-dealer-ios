@@ -92,13 +92,13 @@ class AddNewProductViewModel: NSObject {
             errorMessage = .productNameEnEmpty
         } else if productNameAr.isEmpty {
             errorMessage = .productNameArEmpty
-        } else if descriptionEn.isEmpty || descriptionEn == "Write Here" {
+        } else if descriptionEn.isEmpty || descriptionEn == "Write Here".localiz() {
             errorMessage = .descriptionEnEmpty
-        } else if descriptionAr.isEmpty || descriptionAr == "Write Here" {
+        } else if descriptionAr.isEmpty || descriptionAr == "Write Here".localiz() {
             errorMessage = .descriptionArEmpty
         }
         else if hostVC.prepareSpecificationData() == nil {
-            hostVC.showAlert(msg: "Please fill all required fields for each specification")
+            hostVC.showAlert(msg: "Please fill all required fields for each specification".localiz())
             return false
         }
         
@@ -114,7 +114,7 @@ class AddNewProductViewModel: NSObject {
             
             // Check if variantArray is empty
             if hostVC.variantArray.isEmpty {
-                hostVC.showAlert(msg: "Please add at least one variant")
+                hostVC.showAlert(msg: "Please add at least one variant".localiz())
                 return false
             }
             
@@ -128,7 +128,8 @@ class AddNewProductViewModel: NSObject {
                 // Validate variant level fields
                 let error = cell.validateFieldsWithErrors()
                 if !error.isEmpty {
-                    hostVC.showAlert(msg: "Variant \(index + 1): \(error)")
+                    let text = "Variant".localiz()
+                    hostVC.showAlert(msg: "\(text) \(index + 1): \(error)")
                     return false
                 }
                 
@@ -139,7 +140,10 @@ class AddNewProductViewModel: NSObject {
                 // Check each size variant individually
                 for (sizeIndex, sizeModel) in cell.variant.sizeVariants.enumerated() {
                     if sizeModel.isAnyFieldEmpty(isWomenCategory: hostVC.isWomenCategory) {
-                        hostVC.showAlert(msg: "Variant \(index + 1), Size \(sizeIndex + 1): Please fill all size fields")
+                        let text = "Variant".localiz()
+                        let text1 = "Size".localiz()
+                        let text2 = "Variant".localiz()
+                        hostVC.showAlert(msg: "\(text) \(index + 1), \(text1) \(sizeIndex + 1): \(text2)")
                         return false
                     }
                 }
@@ -147,7 +151,7 @@ class AddNewProductViewModel: NSObject {
             return false
         }
         else if hostVC.prepareVariantData(isWomenCategory: hostVC.isWomenCategory).isEmpty {
-            hostVC.showAlert(msg: "Please fill all required fields for each variant")
+            hostVC.showAlert(msg: "Please fill all required fields for each variant".localiz())
             return false
         }
 
@@ -188,7 +192,7 @@ class AddNewProductViewModel: NSObject {
         
         // If products array is empty, show a warning and do not call API
         guard !productsData.isEmpty else {
-            CommonUtils.showToast(message: "Please add at least one product variant with image and mandatory fields")
+            CommonUtils.showToast(message: "Please add at least one product variant with image and mandatory fields".localiz())
             return
         }
         
@@ -226,7 +230,7 @@ class AddNewProductViewModel: NSObject {
         params["Products"] = productsData
         // Call API
         WebService.sharedInstance.addProductService(param: params) { response in
-            CommonUtils.showToast(message: "Product is added successfully")
+            CommonUtils.showToast(message: "Product is added successfully".localiz())
             DispatchQueue.main.async { [weak self] in
                 guard let self else { return }
                 self.hostVC.navigationController?.popViewController(animated: true)
@@ -238,7 +242,7 @@ class AddNewProductViewModel: NSObject {
         let param: [String: Any] = ["product_id" :hostVC.productId ?? 0]
         WebService.sharedInstance.deleteProductDetailsService(param: param){ [weak self] response in
             guard let self = self else { return }
-            CommonUtils.showToast(message: "Product has been deleted successfully")
+            CommonUtils.showToast(message: "Product has been deleted successfully".localiz())
             DispatchQueue.main.async {
                 //                self.hostVC.navigationController?.popViewController(animated: true)
                 self.hostVC.navigationController?.popToRootViewController(animated: true)
@@ -290,7 +294,7 @@ class AddNewProductViewModel: NSObject {
         params["Products"] = productsData
         
         WebService.sharedInstance.editProductService(param: params) { (response) in
-            CommonUtils.showToast(message: "Product is updated successfully")
+            CommonUtils.showToast(message: "Product is updated successfully".localiz())
             DispatchQueue.main.async { [weak self] in
                 guard let self else { return }
                 self.hostVC.navigationController?.popViewController(animated: true)

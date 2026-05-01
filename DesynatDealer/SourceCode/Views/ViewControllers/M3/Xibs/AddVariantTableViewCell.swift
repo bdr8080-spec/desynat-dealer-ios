@@ -299,7 +299,8 @@ extension AddVariantTableViewCell: AddNewSizeVariantDelegate {
       
       let error = cell.validateFieldsWithErrors(isWomenCategory: isWomenIsSelected)
       if !error.isEmpty {
-        CommonUtils.showToast(message: "Please fill all required fields in size row \(row + 1)")
+          let text = "Please fill all required fields in size row".localiz()
+        CommonUtils.showToast(message: "\(text) \(row + 1)")
         return
       }
     }
@@ -383,11 +384,11 @@ extension AddVariantTableViewCell {
     }
     
     // Variant level checks
-    if imageURLs.isEmpty { return "Please upload image" }
-    if isEmpty(colorTF.text) { return "Please select colour" }
+      if imageURLs.isEmpty { return "Please upload image".localiz() }
+      if isEmpty(colorTF.text) { return "Please select colour".localiz() }
     
     // SIZE LEVEL VALIDATION
-    if sizeVariants.isEmpty { return "Please add at least one size" }
+      if sizeVariants.isEmpty { return "Please add at least one size".localiz() }
     
     for (index, size) in sizeVariants.enumerated() {
       let indexPath = IndexPath(row: index, section: 0)

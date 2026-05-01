@@ -257,7 +257,7 @@ class CommonUtils {
     
     static func formatDeliveryCharges(_ deliveryFees: Double?) -> String {
         if deliveryFees == 0 {
-            return "Free Delivery"
+            return "Free Delivery".localiz()
         } else {
             return formatPrice(deliveryFees) // Assuming formatPrice(_:) returns a formatted string like "$10.00"
         }

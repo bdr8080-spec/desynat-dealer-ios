@@ -43,6 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         UNUserNotificationCenter.current().setBadgeCount(0, withCompletionHandler: nil)
         let SVGCoder = SDImageSVGCoder.shared
         SDImageCodersManager.shared.addCoder(SVGCoder)
+        AppLanguageManager.shared.defaultLanguage = .en
         return true
     }
     

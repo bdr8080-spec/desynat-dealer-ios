@@ -49,16 +49,16 @@ class ListedDealsTableViewCell: UITableViewCell {
             if let status = categorizeDeal(from: data?.from ?? "", to: data?.to ?? "") {
                 statusLabel.isHidden = false
                 if status == .upcoming {
-                    statusLabel.text = "Upcoming"
+                    statusLabel.text = "Upcoming".localiz()
                     statusLabel.textColor = .black
                 } else {
-                    statusLabel.text = "Active"
+                    statusLabel.text = "Active".localiz()
                     statusLabel.textColor = UIColor(hex: "#A27D57")
                 }
             }
         case .expired:
             detailsStackView.isHidden = false
-            statusLabel.text = "Expired"
+            statusLabel.text = "Expired".localiz()
             statusLabel.textColor = .red
         }
         configDealData(data: data)
@@ -73,8 +73,8 @@ class ListedDealsTableViewCell: UITableViewCell {
         } else {
             mainImageView.image = UIImage(named: "")
         }
-        
-        starstFromLabel.text = "Starts From - \(friendlyStartDate(from: data?.from ?? "") ?? "")"
+        let text = "Starts From".localiz()
+        starstFromLabel.text = "\(text) - \(friendlyStartDate(from: data?.from ?? "") ?? "")"
         startsOnLabel.text = friendlyStartDate(from: data?.from ?? "")
         let fromDate = convertDateFormat(data?.from ?? "")
         let endDate = convertDateFormat(data?.to ?? "")

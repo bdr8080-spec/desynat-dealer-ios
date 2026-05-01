@@ -22,7 +22,7 @@ class SideMenuTableViewCell: UITableViewCell {
     }
     
     func configData(data: SideMenuModel) {
-        titleLabel.text = data.title
+        titleLabel.text = data.title.localiz()
         mainImageView.image = UIImage(named: data.image)
     }
     

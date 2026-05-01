@@ -57,7 +57,7 @@ class StaffDetailsViewModel {
         WebService.sharedInstance.deleteStaffService(param, completion: { [weak self] response in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                CommonUtils.showToast(message: "Profile is deleted successfully")
+                CommonUtils.showToast(message: "Profile is deleted successfully".localiz())
                 self.hostVC.navigationController?.popViewController(animated: true)
             }
         })

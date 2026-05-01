@@ -264,22 +264,26 @@ class StoryViewerViewController: UIViewController {
         let secondsAgo = Int(Date().timeIntervalSince(date))
 
         if secondsAgo < 60 {
-            return secondsAgo == 1 ? "1 sec ago" : "\(secondsAgo) sec ago"
+            let text = "sec ago".localiz()
+            return secondsAgo == 1 ? "1 sec ago".localiz() : "\(secondsAgo) \(text)"
         }
 
         let minutes = secondsAgo / 60
         if minutes < 60 {
-            return minutes == 1 ? "1 min ago" : "\(minutes) min ago"
+            let text = "min ago".localiz()
+            return minutes == 1 ? "1 min ago".localiz() : "\(minutes) \(text)"
         }
 
         let hours = minutes / 60
         if hours < 24 {
-            return hours == 1 ? "1 hr ago" : "\(hours) hr ago"
+            let text = "hr ago".localiz()
+            return hours == 1 ? "1 hr ago".localiz() : "\(hours) \(text)"
         }
 
         let days = hours / 24
-        if days == 1 { return "Yesterday" }
-        return "\(days) days ago"
+        if days == 1 { return "Yesterday".localiz() }
+        let text = "days ago".localiz()
+        return "\(days) \(text)"
     }
     
     private func invalidateProgressTimer() {

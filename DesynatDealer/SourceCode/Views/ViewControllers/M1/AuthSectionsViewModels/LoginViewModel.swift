@@ -81,7 +81,7 @@ class LoginViewModel: NSObject {
                     self.loginHostVC.navigationController?.pushViewController(vc, animated: true)
                 } else if response.adminVerify == "1" {
                     kSharedSceneDelegate.navigateToLoginVC()
-                    CommonUtils.showToast(message: "Your account registration is under review")
+                    CommonUtils.showToast(message: "Your account registration is under review".localiz())
                 } else if response.adminVerify == "2" {
                     UserDefaults.standard.setValue("Yes", forKey:"isLogin")
                     kSharedUserDefaults.setSubAdminActionDashboardAccess(hasActionDashboardAccess: true)

@@ -55,8 +55,8 @@ class AddNewBannerVC: UIViewController {
     }
     
     private func resetCategoryData() {
-        lblCategory.text = "Select Category"
-        lblSubCategory.text = "Select Sub-Category"
+        lblCategory.text = "Select Category".localiz()
+        lblSubCategory.text = "Select Sub-Category".localiz()
         selectedCategoryId = nil
         selectedSubCategoriesId = nil
         subcategoriesList.removeAll()
@@ -72,7 +72,8 @@ class AddNewBannerVC: UIViewController {
         guard let pricePerDay = Int(priceOnly) else { return }
         
         let totalPrice = days * pricePerDay
-        lblTotalPrice.text = "\(totalPrice) KD"
+        let text = "KD".localiz()
+        lblTotalPrice.text = "\(totalPrice) \(text)"
     }
     
     func getNumericBannerAmount() -> Int {
@@ -93,7 +94,7 @@ class AddNewBannerVC: UIViewController {
         resetRadio()
         txtFromDate.text = ""
         txtToDate.text = ""
-        lblTotalDays.text = "days"
+        lblTotalDays.text = "days".localiz()
         lblTotalPrice.text = "0 KD"
         //        lblTotalPrice.text = "\(pricePerDay) KD"
         
@@ -162,13 +163,13 @@ class AddNewBannerVC: UIViewController {
     @IBAction func subCatgeoryAction(_ sender: UIButton) {
         
         guard let _ = selectedCategoryId else {
-            showAlert(msg: "Please select the category first")
+            showAlert(msg: "Please select the category first".localiz())
             return
         }
         
         //If no subcategories available
         guard !subcategoriesList.isEmpty else {
-            showAlert(msg: "No subcategories available")
+            showAlert(msg: "No subcategories available".localiz())
             return
         }
         
@@ -216,9 +217,9 @@ extension AddNewBannerVC {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         
-        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneDatePicker))
+        let doneButton = UIBarButtonItem(title: "Done".localiz(), style: .done, target: self, action: #selector(doneDatePicker))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker))
+        let cancelButton = UIBarButtonItem(title: "Cancel".localiz(), style: .plain, target: self, action: #selector(cancelDatePicker))
         toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         
         let textFields = [txtFromDate, txtToDate]
@@ -248,8 +249,8 @@ extension AddNewBannerVC {
             // 🚫 From > To → invalidate To
             if selectedDate > toDate {
                 txtToDate.text = ""
-                lblTotalDays.text = "days"
-                lblTotalPrice.text = "0 KD"
+                lblTotalDays.text = "days".localiz()
+                lblTotalPrice.text = "0 KD".localiz()
                 
                 // 🔁 Force user to select To Date again
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -274,8 +275,8 @@ extension AddNewBannerVC {
             let fromText = txtFromDate.text, !fromText.isEmpty,
             let toText = txtToDate.text, !toText.isEmpty
         else {
-            lblTotalDays.text = "days"
-            lblTotalPrice.text = "0 KD"
+            lblTotalDays.text = "days".localiz()
+            lblTotalPrice.text = "0 KD".localiz()
             return
         }
         
@@ -287,8 +288,8 @@ extension AddNewBannerVC {
             let endDate = formatter.date(from: toText),
             startDate <= endDate
         else {
-            lblTotalDays.text = "days"
-            lblTotalPrice.text = "0 KD"
+            lblTotalDays.text = "days".localiz()
+            lblTotalPrice.text = "0 KD".localiz()
             return
         }
         
@@ -296,7 +297,8 @@ extension AddNewBannerVC {
         let totalDays = days + 1   // inclusive
         
         lblTotalDays.text = "\(totalDays)"
-        lblTotalPrice.text = "\(totalDays * pricePerDay) KD"
+        let text = "KD".localiz()
+        lblTotalPrice.text = "\(totalDays * pricePerDay) \(text)"
     }
     
 }

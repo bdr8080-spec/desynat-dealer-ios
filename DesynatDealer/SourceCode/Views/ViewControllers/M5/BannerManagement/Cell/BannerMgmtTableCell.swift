@@ -43,8 +43,9 @@ class BannerMgmtTableCell: UITableViewCell {
           imgBanner.image = UIImage(named: "")
         }
         
-        lblRequestedId.text = data.orderID ?? "Nil"
-        lblTotalAmount.text = "\(data.price ?? "0") KD"
+        lblRequestedId.text = data.orderID ?? "Nil".localiz()
+        let text = "KD".localiz()
+        lblTotalAmount.text = "\(data.price ?? "0") \(text)"
         lblRequestedOn.text = formatDate(data.createdAt)
         
         
@@ -56,7 +57,7 @@ class BannerMgmtTableCell: UITableViewCell {
         
         switch adminStatus {
         case "0": //Pending
-            lblStatus.text = "Pending"
+            lblStatus.text = "Pending".localiz()
             lblStatus.textColor = UIColor(hex: "#E28F12")
             viewBtnPay.isHidden = true
             viewRejectDate.isHidden = true
@@ -66,7 +67,7 @@ class BannerMgmtTableCell: UITableViewCell {
         case "1": //Approved
             switch paymentStatus {
             case "0":
-                lblStatus.text = "Confirmed"
+                lblStatus.text = "Confirmed".localiz()
                 lblStatus.textColor = UIColor(hex: "#68CA44")
                 viewBtnPay.isHidden = !hasActionPermission
                 viewRejectDate.isHidden = true
@@ -88,23 +89,23 @@ class BannerMgmtTableCell: UITableViewCell {
                           
                           if today < start {
                               // ✅ Future banner
-                              lblStatus.text = "Confirmed"
+                              lblStatus.text = "Confirmed".localiz()
                               lblStatus.textColor = UIColor(hex: "#68CA44")
                               
                           } else if isDate(today, between: start, and: end) {
                               // ✅ Currently active
-                              lblStatus.text = "Active"
+                              lblStatus.text = "Active".localiz()
                               lblStatus.textColor = UIColor(hex: "#C4A176")
                               
                           } else if today > end {
                               // ✅ Expired banner
-                              lblStatus.text = "Expired"
+                              lblStatus.text = "Expired".localiz()
                               lblStatus.textColor = UIColor(hex: "#9E9E9E")
                           }
                           
                       } else {
                           // Fallback
-                          lblStatus.text = "Confirmed"
+                          lblStatus.text = "Confirmed".localiz()
                           lblStatus.textColor = UIColor(hex: "#68CA44")
                       }
                       
@@ -113,26 +114,26 @@ class BannerMgmtTableCell: UITableViewCell {
                       viewRejectReason.isHidden = true
                 
             case "2":
-                lblStatus.text = "Rejected"
+                lblStatus.text = "Rejected".localiz()
                 lblStatus.textColor = UIColor(hex: "#D53B36")
                 viewBtnPay.isHidden = true
                 viewRejectDate.isHidden = false
                 viewRejectReason.isHidden = false
                 //lblRejectedOn.text = data.re
-                lblRejectReason.text = data.cancelledReason ?? "Nil"
+                lblRejectReason.text = data.cancelledReason ?? "Nil".localiz()
                 
             default:
                 return
             }
             
         case "2": //Rejected
-            lblStatus.text = "Rejected"
+            lblStatus.text = "Rejected".localiz()
             lblStatus.textColor = UIColor(hex: "#D53B36")
             viewBtnPay.isHidden = true
             viewRejectDate.isHidden = false
             viewRejectReason.isHidden = false
             //lblRejectedOn.text = data.re
-            lblRejectReason.text = data.cancelledReason ?? "Nil"
+            lblRejectReason.text = data.cancelledReason ?? "Nil".localiz()
         
         default:
             return

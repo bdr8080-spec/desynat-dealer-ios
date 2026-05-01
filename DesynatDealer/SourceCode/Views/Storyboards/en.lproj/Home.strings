@@ -1,0 +1,264 @@
+
+/* Class = "UILabel"; text = "no data found"; ObjectID = "01K-q4-hNz"; */
+"01K-q4-hNz.text" = "no data found";
+
+/* Class = "UILabel"; text = "Orders"; ObjectID = "0Ph-Wd-Pch"; */
+"0Ph-Wd-Pch.text" = "Orders";
+
+/* Class = "UILabel"; text = "Total Products"; ObjectID = "2vO-9s-NDG"; */
+"2vO-9s-NDG.text" = "Total Products";
+
+/* Class = "UIButton"; normalTitle = "Leave"; ObjectID = "5l8-xu-cFh"; */
+"5l8-xu-cFh.normalTitle" = "Leave";
+
+/* Class = "UILabel"; text = "Visitor analytics"; ObjectID = "7Ug-d6-2mU"; */
+"7Ug-d6-2mU.text" = "Visitor analytics";
+
+/* Class = "UILabel"; text = "In- Active"; ObjectID = "8UF-WS-8kg"; */
+"8UF-WS-8kg.text" = "In- Active";
+
+/* Class = "UIButton"; normalTitle = "   Today"; ObjectID = "8nn-5f-dnV"; */
+"8nn-5f-dnV.normalTitle" = "   Today";
+
+/* Class = "UILabel"; text = "51"; ObjectID = "9YR-L9-A4m"; */
+"9YR-L9-A4m.text" = "51";
+
+/* Class = "UILabel"; text = "Leave"; ObjectID = "9mc-DT-ZA1"; */
+"9mc-DT-ZA1.text" = "Leave";
+
+/* Class = "UILabel"; text = "120"; ObjectID = "AUO-iF-Elg"; */
+"AUO-iF-Elg.text" = "120";
+
+/* Class = "UITextField"; placeholder = "From   //  //"; ObjectID = "Aew-5f-Ubn"; */
+"Aew-5f-Ubn.placeholder" = "From   //  //";
+
+/* Class = "UILabel"; text = "Completed"; ObjectID = "BUq-b3-WXz"; */
+"BUq-b3-WXz.text" = "Completed";
+
+/* Class = "UILabel"; text = "All Transactions"; ObjectID = "CF4-16-itM"; */
+"CF4-16-itM.text" = "All Transactions";
+
+/* Class = "UILabel"; text = "Total Revenue Generated"; ObjectID = "CN2-yU-cuq"; */
+"CN2-yU-cuq.text" = "Total Revenue Generated";
+
+/* Class = "UILabel"; text = "Clear"; ObjectID = "CYv-yx-6Wq"; */
+"CYv-yx-6Wq.text" = "Clear";
+
+/* Class = "UILabel"; text = "0 KD"; ObjectID = "Dyd-Ux-Seo"; */
+"Dyd-Ux-Seo.text" = "0 KD";
+
+/* Class = "UILabel"; text = "(14)"; ObjectID = "E3F-HT-lRy"; */
+"E3F-HT-lRy.text" = "(14)";
+
+/* Class = "UILabel"; text = "0 KD"; ObjectID = "ERM-08-OeS"; */
+"ERM-08-OeS.text" = "0 KD";
+
+/* Class = "UILabel"; text = "Active"; ObjectID = "F3A-eO-c3K"; */
+"F3A-eO-c3K.text" = "Active";
+
+/* Class = "UILabel"; text = "Cancelled"; ObjectID = "F6o-l8-FKb"; */
+"F6o-l8-FKb.text" = "Cancelled";
+
+/* Class = "UILabel"; text = "Wait for the host to start \nthe event"; ObjectID = "FPe-JS-OOv"; */
+"FPe-JS-OOv.text" = "Wait for the host to start \nthe event";
+
+/* Class = "UILabel"; text = "(06)"; ObjectID = "FaA-b9-m00"; */
+"FaA-b9-m00.text" = "(06)";
+
+/* Class = "UILabel"; text = "Go Live"; ObjectID = "FaD-jc-hYy"; */
+"FaD-jc-hYy.text" = "Go Live";
+
+/* Class = "UILabel"; text = "No Orders Found"; ObjectID = "Fan-rm-U1X"; */
+"Fan-rm-U1X.text" = "No Orders Found";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "ICL-p8-y6H"; */
+"ICL-p8-y6H.text" = "0";
+
+/* Class = "UILabel"; text = "New"; ObjectID = "IHX-bh-ygV"; */
+"IHX-bh-ygV.text" = "New";
+
+/* Class = "UILabel"; text = "Customized"; ObjectID = "Ifw-Hz-Itx"; */
+"Ifw-Hz-Itx.text" = "Customized";
+
+/* Class = "UILabel"; text = "120"; ObjectID = "KX1-O4-kKJ"; */
+"KX1-O4-kKJ.text" = "120";
+
+/* Class = "UILabel"; text = "Live"; ObjectID = "KbU-FL-xlt"; */
+"KbU-FL-xlt.text" = "Live";
+
+/* Class = "UITextField"; placeholder = "To   //  //"; ObjectID = "LLU-FC-zP3"; */
+"LLU-FC-zP3.placeholder" = "To   //  //";
+
+/* Class = "UITextField"; placeholder = "From   //  //"; ObjectID = "NX9-8G-iAe"; */
+"NX9-8G-iAe.placeholder" = "From   //  //";
+
+/* Class = "UILabel"; text = "Busy/On"; ObjectID = "Ng8-cD-gdo"; */
+"Ng8-cD-gdo.text" = "Busy/On";
+
+/* Class = "UILabel"; text = "Ongoing (3)"; ObjectID = "Nls-pP-OHZ"; */
+"Nls-pP-OHZ.text" = "Ongoing (3)";
+
+/* Class = "UIButton"; normalTitle = "End"; ObjectID = "Nms-14-RlT"; */
+"Nms-14-RlT.normalTitle" = "End";
+
+/* Class = "UILabel"; text = "Mute"; ObjectID = "PEp-k7-Nu0"; */
+"PEp-k7-Nu0.text" = "Mute";
+
+/* Class = "UIButton"; normalTitle = "  Total Customer visits"; ObjectID = "RzL-zZ-eRD"; */
+"RzL-zZ-eRD.normalTitle" = "  Total Customer visits";
+
+/* Class = "UILabel"; text = "Viewers: 1"; ObjectID = "Sfy-nO-jpj"; */
+"Sfy-nO-jpj.text" = "Viewers: 1";
+
+/* Class = "UILabel"; text = "In- Active"; ObjectID = "TAj-FH-OtG"; */
+"TAj-FH-OtG.text" = "In- Active";
+
+/* Class = "UIButton"; normalTitle = "Go Live"; ObjectID = "TIq-l0-iWA"; */
+"TIq-l0-iWA.normalTitle" = "Go Live";
+
+/* Class = "UIButton"; normalTitle = "Go Live"; ObjectID = "U6K-2T-Yez"; */
+"U6K-2T-Yez.normalTitle" = "Go Live";
+
+/* Class = "UILabel"; text = "Ongoing"; ObjectID = "UgH-KH-Qs4"; */
+"UgH-KH-Qs4.text" = "Ongoing";
+
+/* Class = "UIButton"; normalTitle = "   This week"; ObjectID = "Us0-q0-Egf"; */
+"Us0-q0-Egf.normalTitle" = "   This week";
+
+/* Class = "UILabel"; text = "Total Revenue"; ObjectID = "WEF-yr-EFx"; */
+"WEF-yr-EFx.text" = "Total Revenue";
+
+/* Class = "UILabel"; text = "Viewers: 1"; ObjectID = "X24-N6-js6"; */
+"X24-N6-js6.text" = "Viewers: 1";
+
+/* Class = "UILabel"; text = "Apply"; ObjectID = "X7o-Jw-N5A"; */
+"X7o-Jw-N5A.text" = "Apply";
+
+/* Class = "UILabel"; text = "Product Management"; ObjectID = "Ye2-JR-w8K"; */
+"Ye2-JR-w8K.text" = "Product Management";
+
+/* Class = "UILabel"; text = "Choose date"; ObjectID = "Zb7-cm-cVw"; */
+"Zb7-cm-cVw.text" = "Choose date";
+
+/* Class = "UILabel"; text = "120"; ObjectID = "Zgd-W0-Ge5"; */
+"Zgd-W0-Ge5.text" = "120";
+
+/* Class = "UILabel"; text = "Total Orders"; ObjectID = "aIm-cr-tNM"; */
+"aIm-cr-tNM.text" = "Total Orders";
+
+/* Class = "UILabel"; text = "All(12)"; ObjectID = "aKU-pf-Wsl"; */
+"aKU-pf-Wsl.text" = "All(12)";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "anT-Qn-vN5"; */
+"anT-Qn-vN5.text" = "0";
+
+/* Class = "UITextField"; placeholder = "To   //  //"; ObjectID = "azH-tM-VKY"; */
+"azH-tM-VKY.placeholder" = "To   //  //";
+
+/* Class = "UITextField"; placeholder = "Search"; ObjectID = "c04-ci-B1E"; */
+"c04-ci-B1E.placeholder" = "Search";
+
+/* Class = "UILabel"; text = "Past (36)"; ObjectID = "cZw-qi-aiR"; */
+"cZw-qi-aiR.text" = "Past (36)";
+
+/* Class = "UILabel"; text = "(125)"; ObjectID = "ccf-0T-cCk"; */
+"ccf-0T-cCk.text" = "(125)";
+
+/* Class = "UILabel"; text = "All"; ObjectID = "dVt-8A-cZ2"; */
+"dVt-8A-cZ2.text" = "All";
+
+/* Class = "UILabel"; text = "Export"; ObjectID = "e1N-Hs-JYq"; */
+"e1N-Hs-JYq.text" = "Export";
+
+/* Class = "UILabel"; text = "Store availability"; ObjectID = "eWw-dg-Znz"; */
+"eWw-dg-Znz.text" = "Store availability";
+
+/* Class = "UILabel"; text = "Live"; ObjectID = "eZY-IR-Ud7"; */
+"eZY-IR-Ud7.text" = "Live";
+
+/* Class = "UILabel"; text = "Active"; ObjectID = "gdD-Wz-EAN"; */
+"gdD-Wz-EAN.text" = "Active";
+
+/* Class = "UILabel"; text = "Normal"; ObjectID = "giO-DU-IOB"; */
+"giO-DU-IOB.text" = "Normal";
+
+/* Class = "UILabel"; text = "Mute"; ObjectID = "hBk-Kv-IS2"; */
+"hBk-Kv-IS2.text" = "Mute";
+
+/* Class = "UIButton"; normalTitle = "Switch"; ObjectID = "hYs-bv-dhn"; */
+"hYs-bv-dhn.normalTitle" = "Switch";
+
+/* Class = "UILabel"; text = "Payments"; ObjectID = "iP4-JA-Mjz"; */
+"iP4-JA-Mjz.text" = "Payments";
+
+/* Class = "UITextField"; placeholder = "Search"; ObjectID = "iW5-Ma-UTU"; */
+"iW5-Ma-UTU.placeholder" = "Search";
+
+/* Class = "UIButton"; normalTitle = "Mute"; ObjectID = "jOy-uV-cub"; */
+"jOy-uV-cub.normalTitle" = "Mute";
+
+/* Class = "UILabel"; text = "51"; ObjectID = "jck-5u-qWE"; */
+"jck-5u-qWE.text" = "51";
+
+/* Class = "UILabel"; text = "Total Staffs"; ObjectID = "kVx-zO-eF7"; */
+"kVx-zO-eF7.text" = "Total Staffs";
+
+/* Class = "UILabel"; text = "Filter by Date"; ObjectID = "kXc-To-egO"; */
+"kXc-To-egO.text" = "Filter by Date";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "kar-jn-FIx"; */
+"kar-jn-FIx.text" = "0";
+
+/* Class = "UIButton"; normalTitle = "Switch"; ObjectID = "knb-hn-SfM"; */
+"knb-hn-SfM.normalTitle" = "Switch";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "nFc-JF-RYs"; */
+"nFc-JF-RYs.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "Search"; ObjectID = "nYw-Tf-H7i"; */
+"nYw-Tf-H7i.placeholder" = "Search";
+
+/* Class = "UIButton"; normalTitle = "  Total Order Conversion"; ObjectID = "p9Y-Ri-g7D"; */
+"p9Y-Ri-g7D.normalTitle" = "  Total Order Conversion";
+
+/* Class = "UILabel"; text = "Active"; ObjectID = "puG-T4-Awd"; */
+"puG-T4-Awd.text" = "Active";
+
+/* Class = "UIButton"; normalTitle = "Switch"; ObjectID = "q33-tD-Q7a"; */
+"q33-tD-Q7a.normalTitle" = "Switch";
+
+/* Class = "UILabel"; text = "120"; ObjectID = "qbR-Ju-9WG"; */
+"qbR-Ju-9WG.text" = "120";
+
+/* Class = "UIButton"; normalTitle = "   This Month"; ObjectID = "sPt-tN-Osq"; */
+"sPt-tN-Osq.normalTitle" = "   This Month";
+
+/* Class = "UILabel"; text = "51"; ObjectID = "sds-sK-aT6"; */
+"sds-sK-aT6.text" = "51";
+
+/* Class = "UITextField"; placeholder = "From   //  //"; ObjectID = "sy9-EL-TcD"; */
+"sy9-EL-TcD.placeholder" = "From   //  //";
+
+/* Class = "UILabel"; text = "No Result found "; ObjectID = "uSq-Yh-a1Q"; */
+"uSq-Yh-a1Q.text" = "No Result found ";
+
+/* Class = "UILabel"; text = "No live events available"; ObjectID = "uxP-HK-aP7"; */
+"uxP-HK-aP7.text" = "No live events available";
+
+/* Class = "UILabel"; text = "Filter"; ObjectID = "wbD-RG-S6a"; */
+"wbD-RG-S6a.text" = "Filter";
+
+/* Class = "UITextField"; placeholder = "To   //  //"; ObjectID = "wr9-2Q-h65"; */
+"wr9-2Q-h65.placeholder" = "To   //  //";
+
+/* Class = "UIButton"; normalTitle = "Go Live"; ObjectID = "yBl-hm-S2z"; */
+"yBl-hm-S2z.normalTitle" = "Go Live";
+
+/* Class = "UILabel"; text = "51"; ObjectID = "ygJ-5q-ewo"; */
+"ygJ-5q-ewo.text" = "51";
+
+/* Class = "UILabel"; text = "Inactive"; ObjectID = "zbc-kT-N5d"; */
+"zbc-kT-N5d.text" = "Inactive";
+
+/* Class = "UILabel"; text = "My Payouts"; ObjectID = "zp7-z0-Fa9"; */
+"zp7-z0-Fa9.text" = "My Payouts";

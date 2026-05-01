@@ -51,17 +51,16 @@ class StaffManagementTableViewCell: UITableViewCell {
         editButton.isHidden = !hasActionPermission
         deleteButton.isHidden = !hasActionPermission
         btnToggle.isUserInteractionEnabled = hasActionPermission
-        
         self.nameLbl.text = data.firstName ?? ""
         self.designationLbl.text = data.sellerCategory?.nameEn ?? ""
         self.mobileNumberLbl.text = "\(data.countryCode ?? "")-\(data.mobile ?? "")"
         if data.isBlock == 0 {
             btnToggle.setImage(UIImage(named: "toggle_on"), for: .normal)
-            self.activeStatusLbl.text = "Active"
+            self.activeStatusLbl.text = "Active".localiz()
             self.activeStatusLbl.textColor = UIColor(hex: "1A900D")
         }else {
             btnToggle.setImage(UIImage(named: "toggle_off"), for: .normal)
-            self.activeStatusLbl.text = "Inactive"
+            self.activeStatusLbl.text = "Inactive".localiz()
             self.activeStatusLbl.textColor = UIColor(hex: "E80B26")
         }
 //        isActiveLbl.textColor = isBlocked ? UIColor(hex: "1A900D") : UIColor(hex: "E80B26")
@@ -82,12 +81,13 @@ class StaffManagementTableViewCell: UITableViewCell {
         formatter.timeZone = TimeZone(secondsFromGMT: 0)
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ"
         guard let date = formatter.date(from: input) else {
-            return "Added On -"
+            return "Added On -".localiz()
         }
         let outputFormatter = DateFormatter()
         outputFormatter.locale = Locale(identifier: "en_US_POSIX")
         outputFormatter.dateFormat = "dd/MM/yyyy"
         let formatted = outputFormatter.string(from: date)
-        return "Added On \(formatted)"
+        let text = "Added On".localiz()
+        return "\(text) \(formatted)"
     }
 }

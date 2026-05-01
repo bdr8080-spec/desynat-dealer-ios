@@ -52,7 +52,7 @@ class SubDealerSideMenuViewController: UIViewController {
     }
     
     @IBAction func btnTapLogout(_ sender: UIButton) {
-        self.showConfirmationAlert(msg: "Are you sure you want to logout?"){ [weak self] in
+        self.showConfirmationAlert(msg: "Are you sure you want to logout?".localiz()){ [weak self] in
             guard let self = self else { return }
             self.viewModel.logoutAPI()
         }
@@ -94,6 +94,11 @@ extension SubDealerSideMenuViewController: UITableViewDelegate, UITableViewDataS
         let hasPermission = filteredPermissions[indexPath.row].canAction == 1
         
         switch selectedItem {
+//        case 2: //Payment management (Done)
+//            let vc =  PaymentsViewController.instantiate(fromAppStoryboard: .Home)
+//            vc.hasActionPermission = hasPermission
+//            vc.comingFromTabbar = false
+//            self.navigationController?.pushViewController(vc, animated: true)
         case 2: //Products management (Done)
             let vc =  ProductsViewController.instantiate(fromAppStoryboard: .Home)
             vc.hasActionPermission = hasPermission

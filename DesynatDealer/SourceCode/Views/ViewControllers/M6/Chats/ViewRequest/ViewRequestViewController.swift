@@ -35,7 +35,8 @@ class ViewRequestViewController: UIViewController {
   }
   
   func bindData() {
-    requestIDLabel.text = "Request Id #\(quotationData?.id ?? 0)"
+      let text = "Request Id".localiz()
+    requestIDLabel.text = "\(text) #\(quotationData?.id ?? 0)"
     totalQuantityLabel.text = quotationData?.quantity
     productTableView.reloadData()
     adressLabel.text = buildFullAddress(from: quotationData?.deliveryDetails)

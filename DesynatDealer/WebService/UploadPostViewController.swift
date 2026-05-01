@@ -17,6 +17,7 @@ class UploadPostViewController: UIViewController {
     var videoURL: URL?
     var thumbnailImage: String?
     lazy var viewModel = UploadStoryViewModel(hostVc: self)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if let videoURL = videoURL {

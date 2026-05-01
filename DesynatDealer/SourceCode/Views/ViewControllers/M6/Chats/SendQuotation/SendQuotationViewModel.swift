@@ -22,14 +22,15 @@ class SendQuotationViewModel {
     func validateQuotationFields() -> Bool {
         
         let fields: [(UITextField?, String)] = [
-            (hostVC.itemPriceTF, "Item price"),
+            (hostVC.itemPriceTF, "Item price".localiz()),
 //            (hostVC.taxTF, "Tax"),
 //            (hostVC.shippingFeesTF, "Delivery fees"),
-            (hostVC.totalAmountTF, "Total amount")]
+            (hostVC.totalAmountTF, "Total amount".localiz())]
         
         for (field, name) in fields {
             guard let text = field?.text, !text.trimmingCharacters(in: .whitespaces).isEmpty else {
-                hostVC.showAlert(msg: "Please enter \(name)")
+                let text = "Please enter".localiz()
+                hostVC.showAlert(msg: "\(text) \(name)")
                 field?.becomeFirstResponder()
                 return false
             }

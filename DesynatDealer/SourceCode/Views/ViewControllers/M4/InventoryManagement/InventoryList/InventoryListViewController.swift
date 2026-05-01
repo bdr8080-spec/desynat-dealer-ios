@@ -130,10 +130,12 @@ class InventoryListViewController: UIViewController {
         let allCount = viewModel.productsListData?.allProductData?.count ?? 0
         let activeCount = viewModel.productsListData?.activeProduct?.count ?? 0
         let inactiveCount = viewModel.productsListData?.inactiveProduct?.count ?? 0
-        
-        allTitleLabel.text = "All (\(allCount))"
-        activeTitleLabel.text = "Active (\(activeCount))"
-        inactiveLabel.text = "Inactive (\(inactiveCount))"
+        let text = "All".localiz()
+        let text1 = "Active".localiz()
+        let text2 = "Inactive".localiz()
+        allTitleLabel.text = "\(text) (\(allCount))"
+        activeTitleLabel.text = "\(text1) (\(activeCount))"
+        inactiveLabel.text = "\(text2) (\(inactiveCount))"
     }
     
     func updateStatusLocally(at index: Int) {

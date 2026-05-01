@@ -65,22 +65,22 @@ class AddNewHighlightViewController: UIViewController {
         
         guard let name = enternameTxtField.text?.trimmed(), !name.isEmpty else {
             if selectedRoleIndex == 0 {
-                CommonUtils.showToast(message: "Please select name")
+                CommonUtils.showToast(message: "Please select name".localiz())
             } else {
-                CommonUtils.showToast(message: "Please enter name")
+                CommonUtils.showToast(message: "Please enter name".localiz())
             }
             return
         }
         if isImageSelected {
             guard let imageData = selectedImageData else {
-                CommonUtils.showToast(message: "Please select an image")
+                CommonUtils.showToast(message: "Please select an image".localiz())
                 return
             }
             viewModel.uploadMedia(fileData: imageData, isImage: true)
             
         } else {
             guard let videoData = selectedVideoData else {
-                CommonUtils.showToast(message: "Please select a video")
+                CommonUtils.showToast(message: "Please select a video".localiz())
                 return
             }
             viewModel.uploadMedia(fileData: videoData, isImage: false)
@@ -228,7 +228,7 @@ extension AddNewHighlightViewController: UICollectionViewDelegate, UICollectionV
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RadioBtnCollectionViewCell", for: indexPath) as! RadioBtnCollectionViewCell
             
-            cell.titleLbl.text = highlightname[indexPath.row]
+            cell.titleLbl.text = highlightname[indexPath.row].localiz()
             cell.updateSelectionState(isSelected: selectedRoleIndex == indexPath.row)
             
             return cell
@@ -296,7 +296,7 @@ extension AddNewHighlightViewController: UICollectionViewDelegate, UICollectionV
 
             // Placeholder logic
             enternameTxtField.placeholder =
-                selectedRoleIndex == 0 ? "Select Name" : "Enter Name"
+                selectedRoleIndex == 0 ? "Select Name".localiz() : "Enter Name".localiz()
 
             collectionView.reloadData()
             return
@@ -610,17 +610,17 @@ extension AddNewHighlightViewController: UIImagePickerControllerDelegate, UINavi
                 self.contentCollectionView.isHidden = false
                 
             case .noData:
-                self.noDataFoundLabel.text = "No photos or videos found."
+                self.noDataFoundLabel.text = "No photos or videos found.".localiz()
                 self.noDataFoundLabel.isHidden = false
                 self.contentCollectionView.isHidden = true
                 
             case .limitedAccess:
-                self.noDataFoundLabel.text = "You have allowed limited access to your gallery.\nPlease select more photos."
+                self.noDataFoundLabel.text = "You have allowed limited access to your gallery.\nPlease select more photos.".localiz()
                 self.noDataFoundLabel.isHidden = false
                 self.contentCollectionView.isHidden = false
                 
             case .denied:
-                self.noDataFoundLabel.text = "Gallery permission denied.\nPlease allow access in Settings."
+                self.noDataFoundLabel.text = "Gallery permission denied.\nPlease allow access in Settings.".localiz()
                 self.noDataFoundLabel.isHidden = false
                 self.contentCollectionView.isHidden = true
             }

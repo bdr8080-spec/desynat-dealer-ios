@@ -139,9 +139,9 @@ extension BannerFilterVC {
     let toolbar = UIToolbar()
     toolbar.sizeToFit()
     
-    let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneDatePicker))
+      let doneButton = UIBarButtonItem(title: "Done".localiz(), style: .done, target: self, action: #selector(doneDatePicker))
     let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-    let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker))
+      let cancelButton = UIBarButtonItem(title: "Cancel".localiz(), style: .plain, target: self, action: #selector(cancelDatePicker))
     toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
     
     let textFields = [txtFromDate, txtToDate]

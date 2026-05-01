@@ -57,7 +57,7 @@ class UploadStoryViewModel: ObservableObject {
                                     "thumbnail" : self.hostVc?.thumbnailImage ?? "" ]
       WebService.sharedInstance.addNewStoryServices(param: param){ [weak self] response in
         guard let self = self else { return }
-        CommonUtils.showToast(message: "Story Uploaded Succesfully")
+          CommonUtils.showToast(message: "Story Uploaded Succesfully".localiz())
           self.hostVc?.navigationController?.popToViewController(ofClass: DelearProfileViewController.self, animated: true)
       }
     }

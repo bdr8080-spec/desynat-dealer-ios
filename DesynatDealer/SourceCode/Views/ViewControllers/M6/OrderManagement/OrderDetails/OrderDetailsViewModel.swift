@@ -31,7 +31,7 @@ class OrderDetailsViewModel {
                                 "status": status]
       WebService.sharedInstance.updateOrdersStatus(param: param){ response in
         DispatchQueue.main.async {
-          CommonUtils.showToast(message: "Status is updated")
+            CommonUtils.showToast(message: "Status is updated".localiz())
           self.orderDetailRequest()
         }
 

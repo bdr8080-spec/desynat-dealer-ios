@@ -31,29 +31,29 @@ class ChangePassowrdViewController: UIViewController {
     
     @IBAction func changePasswordBtnAction(_ sender: Any) {
         guard let oldPassword = txtOldPassword.text, !oldPassword.isEmpty else {
-            showAlert(msg: "Please enter old password")
+            showAlert(msg: "Please enter old password".localiz())
             return
         }
         
         guard let newPassword = txtNewPass.text, !newPassword.isEmpty else {
-            showAlert(msg: "Please enter new password")
+            showAlert(msg: "Please enter new password".localiz())
             return
         }
         
         // Password format validation
         if !newPassword.isValidPassword() {
-            showAlert(msg: "Password must be at least 8 characters long and contain letters and numbers")
+            showAlert(msg: "Password must be at least 8 characters long and contain letters and numbers".localiz())
             return
         }
         
         guard let confirmPassword = txtConfirmPass.text, !confirmPassword.isEmpty else {
-            showAlert(msg: "Please enter confirm password")
+            showAlert(msg: "Please enter confirm password".localiz())
             return
         }
         
         // Match new & confirm password
         if newPassword != confirmPassword {
-            showAlert(msg: "Passwords do not match")
+            showAlert(msg: "Passwords do not match".localiz())
             return
         }
     }

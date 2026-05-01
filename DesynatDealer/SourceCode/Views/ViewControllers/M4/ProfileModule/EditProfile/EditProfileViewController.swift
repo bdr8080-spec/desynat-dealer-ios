@@ -68,7 +68,7 @@ class EditProfileViewController: UIViewController {
     bankDetailsLabel.textColor = UIColor.black
     personalInfoButtn.setImage(UIImage(named: "btnGradient"), for: .normal)
     personalLabel.textColor = UIColor.white
-    titleLabel.text = "Edit"
+      titleLabel.text = "Edit".localiz()
     personalInfoStackView.isHidden = false
     bankDetailsStackView.isHidden = true
   }
@@ -78,7 +78,7 @@ class EditProfileViewController: UIViewController {
     personalLabel.textColor = UIColor.black
     bandDetailsButton.setImage(UIImage(named: "btnGradient"), for: .normal)
     bankDetailsLabel.textColor = UIColor.white
-    titleLabel.text = "Edit Bank Details"
+      titleLabel.text = "Edit Bank Details".localiz()
     personalInfoStackView.isHidden = true
     bankDetailsStackView.isHidden = false
   }

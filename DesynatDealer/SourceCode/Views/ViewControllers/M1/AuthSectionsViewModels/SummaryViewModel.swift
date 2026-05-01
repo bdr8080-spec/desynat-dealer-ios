@@ -41,7 +41,7 @@ class SummaryViewModel:NSObject{
                 .joined(separator: ", ")
 
             // Set the label
-            self.hostVC.lblAddress.text = fullAddress.isEmpty ? "N/A" : fullAddress
+            self.hostVC.lblAddress.text = fullAddress.isEmpty ? "N/A".localiz() : fullAddress
             
             self.hostVC.lblStorePhoneNumber.text = "\(user.storeInfo?.countryCode ?? "")-\(user.storeInfo?.storePhone ?? "")"
             self.hostVC.imgStoreInfo.sd_imageIndicator = SDWebImageActivityIndicator.gray
@@ -85,9 +85,9 @@ class SummaryViewModel:NSObject{
             
             let type = user.sellerBankDetails?.accountType ?? "0"
             if type == "0" {
-                self.hostVC.lblAccountType.text = "Personal"
+                self.hostVC.lblAccountType.text = "Personal".localiz()
             } else {
-                self.hostVC.lblAccountType.text = "Business"
+                self.hostVC.lblAccountType.text = "Business".localiz()
             }
             
             if let iban = user.sellerBankDetails?.iban, !iban.isEmpty {

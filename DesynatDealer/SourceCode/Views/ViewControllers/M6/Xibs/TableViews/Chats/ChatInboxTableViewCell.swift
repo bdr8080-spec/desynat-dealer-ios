@@ -26,7 +26,6 @@ class ChatInboxTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
         // Configure the view for the selected state
     }
     
@@ -54,7 +53,7 @@ class ChatInboxTableViewCell: UITableViewCell {
         //    let productRequest = data?.productRequest ?? "1"
         let actiontype = data?.action ?? "1"
         if msgType == "1" {
-            messageLabel.text = "Sent an attachment"
+            messageLabel.text = "Sent an attachment".localiz()
         } else {
             messageLabel.text = data?.lastChat ?? ""
         }
@@ -64,21 +63,21 @@ class ChatInboxTableViewCell: UITableViewCell {
             messageTypeStatusView.isHidden = false
             switch actiontype {
             case "0":
-                messageTypeLabel.text = "New"
+                messageTypeLabel.text = "New".localiz()
                 messageTypeLabel.textColor = UIColor(hex: "#EA9413") // orange
                 messageTypeStatusView.backgroundColor = UIColor(hex: "#EA9413")?.withAlphaComponent(0.25)
                 
             case "2":
-                messageTypeLabel.text = "Quotation Sent"
+                messageTypeLabel.text = "Quotation Sent".localiz()
                 messageTypeLabel.textColor = UIColor(hex: "#172B85") // dark blue
                 messageTypeStatusView.backgroundColor = UIColor(hex: "#172B85")?.withAlphaComponent(0.08)
                 
             case "5":
-                messageTypeLabel.text = "Quotation Accepted"
+                messageTypeLabel.text = "Quotation Accepted".localiz()
                 messageTypeLabel.textColor = UIColor(hex: "#16B364") // green
                 messageTypeStatusView.backgroundColor = UIColor(hex: "#16B364")?.withAlphaComponent(0.08)
                 if data?.productBuyStatus == "1" {
-                    messageTypeLabel.text = "Placed"
+                    messageTypeLabel.text = "Placed".localiz()
                     messageTypeLabel.textColor = UIColor(hex: "#16B364") // green
                     messageTypeStatusView.backgroundColor = UIColor(hex: "#16B364")?.withAlphaComponent(0.08)
                 }
@@ -116,12 +115,14 @@ class ChatInboxTableViewCell: UITableViewCell {
         
         // Today
         if calendar.isDateInToday(date) {
-            return "Today \(timeFormatter.string(from: date))"
+            let text = "Today".localiz()
+            return "\(text) \(timeFormatter.string(from: date))"
         }
         
         // Yesterday
         if calendar.isDateInYesterday(date) {
-            return "Yesterday \(timeFormatter.string(from: date))"
+            let text = "Yesterday".localiz()
+            return "\(text) \(timeFormatter.string(from: date))"
         }
         
         // Older dates

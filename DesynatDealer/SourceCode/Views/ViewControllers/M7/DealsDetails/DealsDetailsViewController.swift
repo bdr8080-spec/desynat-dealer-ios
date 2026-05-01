@@ -74,7 +74,7 @@ class DealsDetailsViewController: UIViewController {
     
     @IBAction func addToDealsDidTapped(_ sender: Any) {
         guard !selectedProductIDs.isEmpty else {
-            self.showAlert(msg: "Please select at least one product.")
+            self.showAlert(msg: "Please select at least one product.".localiz())
             return
         }
         let selectedIDsArray = Array(selectedProductIDs)
@@ -243,7 +243,7 @@ extension DealsDetailsViewController: UICollectionViewDelegate, UICollectionView
         cell.deleteButtonTapped = { [weak self] in
             guard let self = self,
                   let productID = self.viewModel.addedProducts?[indexPath.row].id else { return }
-            self.showConfirmationAlert(msg: "Are you sure you want to remove this product?"){ [weak self] in
+            self.showConfirmationAlert(msg: "Are you sure you want to remove this product?".localiz()){ [weak self] in
                 guard let self = self else { return }
                 self.viewModel.deleteProductsRequest(productIs: productID)
             }

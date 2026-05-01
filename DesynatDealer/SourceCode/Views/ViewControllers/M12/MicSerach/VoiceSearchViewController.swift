@@ -31,7 +31,7 @@ class VoiceSearchViewController: UIViewController {
     // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleLabel.text = "Listening..."
+        titleLabel.text = "Listening...".localiz()
         requestPermissions()
         if isListening {
             stopListening()
@@ -66,7 +66,7 @@ class VoiceSearchViewController: UIViewController {
         // Reset everything
         DispatchQueue.main.async {
             self.micImageView.image = UIImage(named: "micListing") // original mic image
-            self.titleLabel.text = "Listening..."
+            self.titleLabel.text = "Listening...".localiz()
         }
         hasFinishedListening = false
         latestSpokenText = ""

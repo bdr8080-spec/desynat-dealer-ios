@@ -62,7 +62,8 @@ class ProductManagementTableViewCell: UITableViewCell {
       productNameLabel.text = data.brand?.nameEnglish
     }
     descriptionLabel.text = data.productNameEn
-    stockLabel.text = " \(data.stock ?? "In Stock") "
+      let text = "In Stock".localiz()
+    stockLabel.text = " \(data.stock ?? text) "
     if let imageUrlString = data.productVariants?.first?.variantImage?.first,
        let url = URL(string: imageUrlString) {
       productImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
@@ -73,8 +74,9 @@ class ProductManagementTableViewCell: UITableViewCell {
     }
     
     ratingLabel.text = "(\(data.reviewRating ?? "0"))"
-    orifinalPriceLabel.text = "\(data.productVariants?.first?.finalPrice ?? "") KD"
-    CommonUtils.setStrikethrough(label: dirscountPriceLabel, text: "\(data.productVariants?.first?.actualPrice ?? "") KD")
+      let text1 = "KD".localiz()
+    orifinalPriceLabel.text = "\(data.productVariants?.first?.finalPrice ?? "") \(text1)"
+    CommonUtils.setStrikethrough(label: dirscountPriceLabel, text: "\(data.productVariants?.first?.actualPrice ?? "") \(text1)")
     
 //    let discountType = data.productVariants?.first?.discountType ?? "1"
 //    if discountType == "1" {
@@ -87,14 +89,14 @@ class ProductManagementTableViewCell: UITableViewCell {
                                                 discountType: data.productVariants?.first?.discountType,
                                                 discountValue: data.productVariants?.first?.discountValue)
     if data.productActiveStatus == 1 {
-      statusLabel.text = "Active"
+        statusLabel.text = "Active".localiz()
       statusButton.setImage(UIImage(named: "toggle_on"), for: .normal)
     } else {
-      statusLabel.text = "Inactive"
+        statusLabel.text = "Inactive".localiz()
       statusButton.setImage(UIImage(named: "toggle_off"), for: .normal)
     }
-    
-    addedOnDateLaebl.text = "Added on- \(convertDate(data.createdAt ?? ""))"
+      let text2 = "Added on-".localiz()
+    addedOnDateLaebl.text = "\(text2) \(convertDate(data.createdAt ?? ""))"
   }
   
   
@@ -109,7 +111,7 @@ class ProductManagementTableViewCell: UITableViewCell {
     if let date = inputFormatter.date(from: input) {
       return outputFormatter.string(from: date)
     } else {
-      return "Invalid date"
+        return "Invalid date".localiz()
     }
   }
   

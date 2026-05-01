@@ -142,7 +142,7 @@ class AddNewStaffViewController: UIViewController {
     }
     
     @IBAction func clearDidTapped(_ sender: Any) {
-        self.showConfirmationAlert(msg: "Are you sure you want to cancel this changes?"){ [weak self] in
+        self.showConfirmationAlert(msg: "Are you sure you want to cancel this changes?".localiz()){ [weak self] in
             guard let self = self else { return }
             self.navigationController?.popViewController(animated: true)
         }
@@ -152,22 +152,22 @@ class AddNewStaffViewController: UIViewController {
     func initialSetup() {
         switch comingReason {
         case .addNewStaff:
-            titleLbl.text = "Add New Staff"
+            titleLbl.text = "Add New Staff".localiz()
             addNewStaffView.isHidden = false
             editStaffView.isHidden = true
-            addBtnLbl.text = "ADD"
+            addBtnLbl.text = "ADD".localiz()
             extraSpaceView.isHidden = true
         case .editStaff:
-            titleLbl.text = "Edit"
+            titleLbl.text = "Edit".localiz()
             editStaffView.isHidden = false
             addNewStaffView.isHidden = true
-            addBtnLbl.text = "Save changes"
+            addBtnLbl.text = "Save changes".localiz()
             extraSpaceView.isHidden = true
         case .selfProfileUpdate:
-            titleLbl.text = "Profile Details"
+            titleLbl.text = "Profile Details".localiz()
             editStaffView.isHidden = false
             addNewStaffView.isHidden = true
-            addBtnLbl.text = "Save changes"
+            addBtnLbl.text = "Save changes".localiz()
             roleLabel.isHidden = true
             roleSelectionCollectionView.isHidden = true
             changePassowrdStackView.isHidden = true
@@ -341,13 +341,13 @@ extension AddNewStaffViewController: UITextFieldDelegate {
         if string.isEmpty { return true }
         if textField == fullNameInEnglishTF {
             if !isAllowedEnglish(currentText) {
-                CommonUtils.showToast(message: "Please switch to English keyboard")
+                CommonUtils.showToast(message: "Please switch to English keyboard".localiz())
                 return false
             }
         }
         if textField == fullNameInArabicTF {
             if !isAllowedArabic(currentText) {
-                CommonUtils.showToast(message: "Please switch to Arabic keyboard")
+                CommonUtils.showToast(message: "Please switch to Arabic keyboard".localiz())
                 return false
             }
             return true

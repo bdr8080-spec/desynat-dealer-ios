@@ -1,0 +1,159 @@
+
+/* Class = "UILabel"; text = "Apply"; ObjectID = "0L4-O6-tPP"; */
+"0L4-O6-tPP.text" = "Apply";
+
+/* Class = "UILabel"; text = "20% off"; ObjectID = "1Xp-Fj-Ihh"; */
+"1Xp-Fj-Ihh.text" = "20% off";
+
+/* Class = "UILabel"; text = "SKU Limit"; ObjectID = "2Sj-GG-9ee"; */
+"2Sj-GG-9ee.text" = "SKU Limit";
+
+/* Class = "UILabel"; text = "Save Changes"; ObjectID = "4Af-eG-0Nm"; */
+"4Af-eG-0Nm.text" = "Save Changes";
+
+/* Class = "UILabel"; text = "Available Size"; ObjectID = "7fO-3S-QZr"; */
+"7fO-3S-QZr.text" = "Available Size";
+
+/* Class = "UILabel"; text = "Men"; ObjectID = "7kS-6D-oqs"; */
+"7kS-6D-oqs.text" = "Men";
+
+/* Class = "UILabel"; text = "KD 240"; ObjectID = "88m-L2-k6t"; */
+"88m-L2-k6t.text" = "KD 240";
+
+/* Class = "UILabel"; text = "SKU Limit"; ObjectID = "Aiq-gZ-f6u"; */
+"Aiq-gZ-f6u.text" = "SKU Limit";
+
+/* Class = "UILabel"; text = "KD 239"; ObjectID = "CNf-Oj-k6P"; */
+"CNf-Oj-k6P.text" = "KD 239";
+
+/* Class = "UILabel"; text = "Save Changes"; ObjectID = "FL1-98-2jz"; */
+"FL1-98-2jz.text" = "Save Changes";
+
+/* Class = "UILabel"; text = "gngng"; ObjectID = "G3Z-cy-Hky"; */
+"G3Z-cy-Hky.text" = "gngng";
+
+/* Class = "UILabel"; text = "Inactive"; ObjectID = "KYy-nl-wQ7"; */
+"KYy-nl-wQ7.text" = "Inactive";
+
+/* Class = "UILabel"; text = "Active"; ObjectID = "Kr5-MI-Rj9"; */
+"Kr5-MI-Rj9.text" = "Active";
+
+/* Class = "UILabel"; text = "inclusive of all taxes"; ObjectID = "L7M-Ee-IT5"; */
+"L7M-Ee-IT5.text" = "inclusive of all taxes";
+
+/* Class = "UILabel"; text = "Color"; ObjectID = "Mfe-Ol-suj"; */
+"Mfe-Ol-suj.text" = "Color";
+
+/* Class = "UILabel"; text = "kids"; ObjectID = "NB5-bK-Mke"; */
+"NB5-bK-Mke.text" = "kids";
+
+/* Class = "UILabel"; text = "More Color"; ObjectID = "OBc-9V-oNF"; */
+"OBc-9V-oNF.text" = "More Color";
+
+/* Class = "UILabel"; text = "Inventory Management"; ObjectID = "QZW-od-dMP"; */
+"QZW-od-dMP.text" = "Inventory Management";
+
+/* Class = "UILabel"; text = "Women"; ObjectID = "Qsd-bQ-cwg"; */
+"Qsd-bQ-cwg.text" = "Women";
+
+/* Class = "UITextField"; placeholder = "Eg. 5%"; ObjectID = "SgU-AT-os9"; */
+"SgU-AT-os9.placeholder" = "Eg. 5%";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "T1l-BY-87U"; */
+"T1l-BY-87U.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Set Commission % for affiliated  customer"; ObjectID = "Tzm-AD-Aj9"; */
+"Tzm-AD-Aj9.text" = "Set Commission % for affiliated  customer";
+
+/* Class = "UITextField"; placeholder = "Eg .1000 "; ObjectID = "ULR-it-xyR"; */
+"ULR-it-xyR.placeholder" = "Eg .1000 ";
+
+/* Class = "UILabel"; text = "KD 240"; ObjectID = "YMP-Cy-5Ou"; */
+"YMP-Cy-5Ou.text" = "KD 240";
+
+/* Class = "UILabel"; text = "Clear"; ObjectID = "ZLg-gK-imh"; */
+"ZLg-gK-imh.text" = "Clear";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "aD4-Ou-9Zp"; */
+"aD4-Ou-9Zp.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "(123K)"; ObjectID = "bSc-kj-6UQ"; */
+"bSc-kj-6UQ.text" = "(123K)";
+
+/* Class = "UILabel"; text = "Edit Inventory"; ObjectID = "cF1-ed-CZh"; */
+"cF1-ed-CZh.text" = "Edit Inventory";
+
+/* Class = "UILabel"; text = "All"; ObjectID = "cJm-oC-Jnl"; */
+"cJm-oC-Jnl.text" = "All";
+
+/* Class = "UILabel"; text = "KD 239"; ObjectID = "cok-XQ-Nee"; */
+"cok-XQ-Nee.text" = "KD 239";
+
+/* Class = "UILabel"; text = "Total Stocks"; ObjectID = "dXU-mV-HDg"; */
+"dXU-mV-HDg.text" = "Total Stocks";
+
+/* Class = "UILabel"; text = "Filter"; ObjectID = "f0i-kX-1Ue"; */
+"f0i-kX-1Ue.text" = "Filter";
+
+/* Class = "UILabel"; text = "(123K)"; ObjectID = "gQX-dE-stA"; */
+"gQX-dE-stA.text" = "(123K)";
+
+/* Class = "UILabel"; text = "SKU Limit"; ObjectID = "gwD-eW-AJS"; */
+"gwD-eW-AJS.text" = "SKU Limit";
+
+/* Class = "UILabel"; text = "Inactive"; ObjectID = "hkz-7x-ovr"; */
+"hkz-7x-ovr.text" = "Inactive";
+
+/* Class = "UILabel"; text = "|"; ObjectID = "jVV-1d-sWy"; */
+"jVV-1d-sWy.text" = "|";
+
+/* Class = "UILabel"; text = "Available Size"; ObjectID = "kqc-4v-Thx"; */
+"kqc-4v-Thx.text" = "Available Size";
+
+/* Class = "UILabel"; text = "Affiliated Commission"; ObjectID = "l75-Rr-TI4"; */
+"l75-Rr-TI4.text" = "Affiliated Commission";
+
+/* Class = "UILabel"; text = "|"; ObjectID = "lHt-9L-Onz"; */
+"lHt-9L-Onz.text" = "|";
+
+/* Class = "UILabel"; text = "20% off"; ObjectID = "pAu-Pf-NZU"; */
+"pAu-Pf-NZU.text" = "20% off";
+
+/* Class = "UILabel"; text = "inclusive of all taxes"; ObjectID = "pDl-z0-DJh"; */
+"pDl-z0-DJh.text" = "inclusive of all taxes";
+
+/* Class = "UITextField"; placeholder = "Search"; ObjectID = "pe9-dK-2FX"; */
+"pe9-dK-2FX.placeholder" = "Search";
+
+/* Class = "UILabel"; text = "Inactive"; ObjectID = "skM-mX-yFq"; */
+"skM-mX-yFq.text" = "Inactive";
+
+/* Class = "UIButton"; normalTitle = "Size Guide"; ObjectID = "tnn-HA-rcD"; */
+"tnn-HA-rcD.normalTitle" = "Size Guide";
+
+/* Class = "UITextField"; placeholder = "Eg .1000 "; ObjectID = "u2w-8H-lYp"; */
+"u2w-8H-lYp.placeholder" = "Eg .1000 ";
+
+/* Class = "UILabel"; text = "fgbfb"; ObjectID = "uOf-eh-Vey"; */
+"uOf-eh-Vey.text" = "fgbfb";
+
+/* Class = "UILabel"; text = "gnfnfn"; ObjectID = "uhV-vk-H59"; */
+"uhV-vk-H59.text" = "gnfnfn";
+
+/* Class = "UIButton"; normalTitle = "Size Guide"; ObjectID = "v5g-j5-UhM"; */
+"v5g-j5-UhM.normalTitle" = "Size Guide";
+
+/* Class = "UILabel"; text = "More Color"; ObjectID = "vhh-VX-KZV"; */
+"vhh-VX-KZV.text" = "More Color";
+
+/* Class = "UILabel"; text = "Total Stocks"; ObjectID = "vuz-CN-fJP"; */
+"vuz-CN-fJP.text" = "Total Stocks";
+
+/* Class = "UILabel"; text = "Color"; ObjectID = "w4d-aR-UIK"; */
+"w4d-aR-UIK.text" = "Color";
+
+/* Class = "UILabel"; text = "No Result found "; ObjectID = "wDW-YI-ABU"; */
+"wDW-YI-ABU.text" = "No Result found ";
+
+/* Class = "UILabel"; text = "More Color"; ObjectID = "xZB-dZ-5Vm"; */
+"xZB-dZ-5Vm.text" = "More Color";

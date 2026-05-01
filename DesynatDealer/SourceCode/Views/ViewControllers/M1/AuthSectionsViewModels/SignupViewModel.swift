@@ -81,7 +81,7 @@ class SignupViewModel: NSObject {
         }
         
         if errorMessage != .none {
-            hostVC.showAlert(msg: errorMessage.rawValue)
+            hostVC.showAlert(msg: errorMessage.rawValue.localiz())
         }
         
         hostVC.view.endEditing(true)

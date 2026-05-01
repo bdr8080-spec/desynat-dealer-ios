@@ -98,8 +98,8 @@ class ProductManagementFilterViewController: UIViewController {
     }
     
     filtersOptions = [
-      FilterSection(header: "Filter by Category", options: categoryOptions),
-      FilterSection(header: "Filter by Brand", options: brandOptions)
+        FilterSection(header: "Filter by Category".localiz(), options: categoryOptions),
+        FilterSection(header: "Filter by Brand".localiz(), options: brandOptions)
     ]
     
     filterTableView.reloadData()

@@ -47,13 +47,13 @@ extension AddSpecificationTableViewCell {
     var errors: String = ""
     
     if nameEngTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-      errors = "Enter name in english"
+        errors = "Enter name in english".localiz()
     }else if nameARTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-      errors = "Enter name in arabic"
+        errors = "Enter name in arabic".localiz()
     }else if featuresEngTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-      errors = "Enter feature in english"
+        errors = "Enter feature in english".localiz()
     }else if featuresARTF.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
-      errors = "Enter feature in arabic"
+        errors = "Enter feature in arabic".localiz()
     }
     return errors
   }
@@ -81,7 +81,7 @@ extension AddSpecificationTableViewCell: UITextFieldDelegate {
       
       for scalar in string.unicodeScalars {
         if !allowedSet.contains(scalar) {
-          CommonUtils.showToast(message: "Please switch to Arabic keyboard")
+            CommonUtils.showToast(message: "Please switch to Arabic keyboard".localiz())
           return false
         }
       }

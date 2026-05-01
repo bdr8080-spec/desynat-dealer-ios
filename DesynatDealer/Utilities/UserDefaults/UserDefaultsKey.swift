@@ -19,7 +19,7 @@ enum UserDefaultsKey : String {
     case documents
     case address
     case selectedLanguage
-    case defaultLanguge
+    case defaultLanguage
     case language
     case sessionToken
     case storeAvailabilityStatus

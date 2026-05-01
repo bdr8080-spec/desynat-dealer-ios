@@ -49,9 +49,10 @@ class MySubscriptionPlanViewModel {
             vc.transactionIds = data?.transactionID ?? ""
             vc.payAmount = data?.planInfo?.price ?? 0.0
             if let duration = data?.planInfo?.duration, let type = data?.planInfo?.durationType {
-                vc.durationOfPlan = "for \(duration) \(type == 1 ? "Month" : "Years")"
+                let text = "for".localiz()
+                vc.durationOfPlan = "\(text) \(duration) \(type == 1 ? "Month".localiz() : "Years".localiz())"
             } else {
-                vc.durationOfPlan = "N/A"
+                vc.durationOfPlan = "N/A".localiz()
             }
             self.hostVc?.navigationController?.pushViewController(vc, animated: true)
         }

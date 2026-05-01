@@ -66,7 +66,7 @@ class EditProfileViewModel {
       "user_id": userProfile?.id ?? 0,
       "upload_proof": hostVC.bankProofUrl]
     WebService.sharedInstance.updateBankInformationRequest(param:param) { user in
-      CommonUtils.showToast(message: "Bank Detail Updated Succesfully")
+        CommonUtils.showToast(message: "Bank Detail Updated Succesfully".localiz())
       DispatchQueue.main.async {
         self.hostVC.navigationController?.popViewController(animated: true)
       }
@@ -176,7 +176,7 @@ class EditProfileViewModel {
       "let": hostVC.lat ?? 0.0,
       "long": hostVC.long ?? 0.0]
     WebService.sharedInstance.updateStoreInformationRequest(param:param) { user in
-      CommonUtils.showToast(message: "Profile Updated Succesfully")
+        CommonUtils.showToast(message: "Profile Updated Succesfully".localiz())
       DispatchQueue.main.async {
         self.hostVC.navigationController?.popViewController(animated: true)
       }

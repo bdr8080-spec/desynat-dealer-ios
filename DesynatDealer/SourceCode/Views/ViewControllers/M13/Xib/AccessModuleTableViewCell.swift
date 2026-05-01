@@ -52,7 +52,7 @@ extension AccessModuleTableViewCell: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RadioBtnCollectionViewCell",for: indexPath) as! RadioBtnCollectionViewCell
-        cell.titleLbl.text = accessmoduleType[indexPath.row]
+        cell.titleLbl.text = accessmoduleType[indexPath.row].localiz()
         if indexPath.row == 0 {
             cell.imageView.image = viewSelected ? .radioSelected : .radioUnselected
         } else {

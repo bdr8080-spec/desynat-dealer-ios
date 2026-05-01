@@ -84,12 +84,12 @@ class SendQuotationViewController: UIViewController {
         headerView.clipsToBounds = true
         switch comingReason {
         case .quotationSentForFirstTime:
-            titleLabel.text = "Send Quotation"
-            buttonTitleLabel.text = "Confirm & Send "
+            titleLabel.text = "Send Quotation".localiz()
+            buttonTitleLabel.text = "Confirm & Send ".localiz()
             viewButtonOutlet.isHidden = true
         default:
-            titleLabel.text = "Modify Quotation"
-            buttonTitleLabel.text = "Confirm & Modify"
+            titleLabel.text = "Modify Quotation".localiz()
+            buttonTitleLabel.text = "Confirm & Modify".localiz()
             viewButtonOutlet.isHidden = false
             itemPriceTF.text = CommonUtils.formatPriceAmount(quotationData?.price)
             shippingFeesTF.text = CommonUtils.formatPriceAmount(quotationData?.shipping)

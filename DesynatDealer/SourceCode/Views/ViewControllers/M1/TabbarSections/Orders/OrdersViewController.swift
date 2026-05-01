@@ -120,9 +120,12 @@ class OrdersViewController: UIViewController {
         let allCount = viewModel.ordersListData?.allOrder?.count ?? 0
         let activeCount = viewModel.ordersListData?.ongoingOrder?.count ?? 0
         let inactiveCount = viewModel.ordersListData?.pastOrder?.count ?? 0
-        allLabel.text = "All (\(allCount))"
-        ongoingLabel.text = "Ongoing (\(activeCount))"
-        pastLabel.text = "Past (\(inactiveCount))"
+        let text1 = "All".localiz()
+        let text2 = "Ongoing".localiz()
+        let text3 = "Past".localiz()
+        allLabel.text = "\(text1) (\(allCount))"
+        ongoingLabel.text = "\(text2) (\(activeCount))"
+        pastLabel.text = "\(text3) (\(inactiveCount))"
     }
     
 }

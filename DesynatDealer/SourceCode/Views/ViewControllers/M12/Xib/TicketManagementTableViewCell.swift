@@ -37,7 +37,7 @@ class TicketManagementTableViewCell: UITableViewCell {
     
     func statusType(status: Int) -> (text: String, color: UIColor) {
         let state = TicketStatus(rawValue: status)
-        return (state?.text ?? "Unknown", state?.color ?? .gray)
+        return (state?.text ?? "Unknown".localiz(), state?.color ?? .gray)
     }
     
     func convertServerDate(_ isoString: String) -> String {

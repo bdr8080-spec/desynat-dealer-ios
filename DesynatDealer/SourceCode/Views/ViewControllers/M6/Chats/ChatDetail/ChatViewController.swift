@@ -110,14 +110,14 @@ class ChatViewController: UIViewController {
             guard let image else { return }
             WebService.sharedInstance.uploadImage(withParams: image) { [weak self] imageURL in
                 self?.handleSendMessage(msg: imageURL.url ?? "", type: "1")
-                self?.viewModel.sendNotificationDetails(message: "New Attachment")
+                self?.viewModel.sendNotificationDetails(message: "New Attachment".localiz())
             }
         }
     }
     
     @IBAction func sendMessageDidTapped(_ sender: Any) {
         guard let txt = self.sendMessageTF.text?.trimmingCharacters(in: .whitespacesAndNewlines), !txt.isEmpty else {
-            self.showAlert(msg: "Please Enter Text to Send Message")
+            self.showAlert(msg: "Please Enter Text to Send Message".localiz())
             return
         }
         self.sendMessageTF.text = nil
@@ -161,7 +161,8 @@ class ChatViewController: UIViewController {
             requestIdLabel.isHidden = false
             priceDetailsView.isHidden = true
             viewRequestButonOutlet.isHidden = true
-            requestIdLabel.text = "Request Id #\(quotationData?.id ?? 0)"
+            let text = "Request Id".localiz()
+            requestIdLabel.text = "\(text) #\(quotationData?.id ?? 0)"
             totalQuantityLabel.text = quotationData?.quantity
             productTableView.reloadData()
             adressLabel.text = viewModel.buildFullAddress(from: quotationData?.deliveryDetails)
@@ -193,7 +194,7 @@ class ChatViewController: UIViewController {
                 productDetailsView.isHidden = true
                 viewRequestButonOutlet.isHidden = false
                 priceDetailsView.isHidden = false
-                sendQuotationButtonLabel.text = "Modify Quotation"
+                sendQuotationButtonLabel.text = "Modify Quotation".localiz()
             case "5":
                 productTableView.isHidden = false
                 requetsStackView.isHidden = false
@@ -292,16 +293,16 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
             cell.lblStatus.isHidden = true
             if actionType == "2" {
                 cell.lblStatus.isHidden = false
-                cell.lblStatus.text = "Pending"
+                cell.lblStatus.text = "Pending".localiz()
                 cell.lblStatus.textColor = UIColor(hexString: "#FF5F1B")
             } else if actionType == "5" {
                 cell.lblStatus.isHidden = false
-                cell.lblStatus.text = "Accepted"
+                cell.lblStatus.text = "Accepted".localiz()
                 cell.lblStatus.textColor = UIColor(hexString: "#68CA44")
                 priceDetailsView.isHidden = false
                 if orderPlace != nil {
                     cell.lblStatus.isHidden = false
-                    cell.lblStatus.text = "Placed"
+                    cell.lblStatus.text = "Placed".localiz()
                     cell.lblStatus.textColor = UIColor(hexString: "#68CA44")
                 }
             }

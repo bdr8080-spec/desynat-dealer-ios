@@ -81,6 +81,8 @@ class ProductDetailViewController: UIViewController {
             ratingsTableView.registerCellFromNib(cellID: "ProductRatingTableViewCell")
         }
     }
+    @IBOutlet weak var lblReviewRatingTitle: UILabel!
+    @IBOutlet weak var lblIsItAffTitle: UILabel!
     
     private var selectedColourIndex = 0
     private var selectedSizeIndex = 0
@@ -96,6 +98,8 @@ class ProductDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.lblReviewRatingTitle.text = "Review & ratings allowed ?".localiz()
+        self.lblIsItAffTitle.text = "Is it an Affiliated Product?".localiz()
         buttonActionStackView.isHidden = !hasActionPermission
         statusButton.isUserInteractionEnabled = hasActionPermission
     }
@@ -133,7 +137,7 @@ class ProductDetailViewController: UIViewController {
     }
     
     @IBAction func deleteDidTapped(_ sender: Any) {
-        self.showConfirmationAlert(msg: "Are you sure you want to delete this product?"){ [weak self] in
+        self.showConfirmationAlert(msg: "Are you sure you want to delete this product?".localiz()){ [weak self] in
             guard let self = self else { return }
             viewModel.deleteProductDetailsService()
         }
@@ -153,7 +157,7 @@ class ProductDetailViewController: UIViewController {
                 // Refresh UI
                 if let updatedUser = self.viewModel.productDetails {
                     self.configData(data: updatedUser)
-                    let message = newStatus == 1 ? "Product has been activated Successfully" : "Product has been Deactivated Successfully"
+                    let message = newStatus == 1 ? "Product has been activated Successfully".localiz() : "Product has been Deactivated Successfully".localiz()
                     CommonUtils.showToast(message: message)
                 }
             }
@@ -179,12 +183,13 @@ class ProductDetailViewController: UIViewController {
         
         descriptionLAbel.text = data.productNameEn ?? "-"
         descriptionLabel.text = data.descriptionEn ?? "-"
-        addedOnLabel.text = "Added on - \(convertDate(data.createdAt ?? ""))"
+        let text = "Added on -".localiz()
+        addedOnLabel.text = "\(text) \(convertDate(data.createdAt ?? ""))"
         brandCategoryLabel.text = data.category?.name ?? ""//"\(data.brand?.nameEnglish ?? "")  (\(data.category?.name ?? ""))"
         ratingCountLabel.text = " (\(data.reviewRating ?? "0"))"
         sizeChartUrl = data.uploadSizeChart
-        let categoryName = data.category?.name ?? "Women"
-        if categoryName == "Women" {
+        let categoryName = data.category?.name ?? "Women".localiz()
+        if categoryName == "Women".localiz() {
             womenDetailsView.isHidden = false
             bustView.isHidden = false
             hipView.isHidden = false
@@ -205,10 +210,10 @@ class ProductDetailViewController: UIViewController {
         }
         // Status
         if data.productActiveStatus == 1 {
-            statusLabel.text = "Active"
+            statusLabel.text = "Active".localiz()
             statusButton.setImage(UIImage(named: "toggle_on"), for: .normal)
         } else {
-            statusLabel.text = "Inactive"
+            statusLabel.text = "Inactive".localiz()
             statusButton.setImage(UIImage(named: "toggle_off"), for: .normal)
         }
         
@@ -218,8 +223,9 @@ class ProductDetailViewController: UIViewController {
         customizableLabel.text = data.customizedProduct == "1" ? "Yes" : "No"
         affiliatedLabel.text = data.affiliatedProduct == "1" ? "Yes" : "No"
         ratingReviewALlowedLabel.text = data.reviewRating == "1" ? "Yes" : "No"
-        returnAllowedLAbel.text = data.productReturn == "1" ? "\(data.returnDays ?? "") days" : "No"
-        exchnageAllowedLAbel.text = data.productExchangable == "1" ? "\(data.exchangableDays ?? "") days" : "No"
+        let text1 = "days".localiz()
+        returnAllowedLAbel.text = data.productReturn == "1" ? "\(data.returnDays ?? "") \(text1)" : "No"
+        exchnageAllowedLAbel.text = data.productExchangable == "1" ? "\(data.exchangableDays ?? "") \(text)" : "No"
         
         // In configData
         productVariants = data.productVariants ?? []
@@ -305,8 +311,9 @@ class ProductDetailViewController: UIViewController {
         //    } else {
         //      discountPriceALbel.text = "\(variant.discountValue ?? "") KD Off"
         //    }
-        finalPriceLabel.text = "\(variant.finalPrice ?? "0") KD"
-        CommonUtils.setStrikethrough(label: actualPriceLAbel, text: "\(variant.actualPrice ?? "0") KD")
+        let text = "KD".localiz()
+        finalPriceLabel.text = "\(variant.finalPrice ?? "0") \(text)"
+        CommonUtils.setStrikethrough(label: actualPriceLAbel, text: "\(variant.actualPrice ?? "0") \(text)")
         
         CommonUtils.updateDiscountPercentageLabel(discountPriceALbel,
                                                   actualAmountLabel: actualPriceLAbel,
@@ -353,7 +360,7 @@ class ProductDetailViewController: UIViewController {
         if let date = inputFormatter.date(from: input) {
             return outputFormatter.string(from: date)
         } else {
-            return "Invalid date"
+            return "Invalid date".localiz()
         }
     }
     
