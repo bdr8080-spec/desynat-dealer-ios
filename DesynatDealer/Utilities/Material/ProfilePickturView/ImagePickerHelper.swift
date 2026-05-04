@@ -22,7 +22,7 @@ class ImagePickerHelper: NSObject {
     static var shared : ImagePickerHelper = ImagePickerHelper()
     var picker = UIImagePickerController()
     
-    // MARK:- Action Sheet
+    //MARK: - Action Sheet
     
     func showActionSheet(withTitle title: String?, withAlertMessage message: String?, withOptions options: [String], handler:@escaping (_ selectedIndex: Int) -> Void) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
@@ -34,7 +34,7 @@ class ImagePickerHelper: NSObject {
             alert.addAction(anyAction)
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel){ (action) -> Void in
+        let cancelAction = UIAlertAction(title: "Cancel".localiz(), style: .cancel){ (action) -> Void in
             return handler(-1)
         }
         alert.addAction(cancelAction)
@@ -67,7 +67,7 @@ class ImagePickerHelper: NSObject {
 //    }
 
     func showPickerController(onlyImagePicker: Bool? = false, _ handler: PickerImage) {
-        self.showActionSheet(withTitle: "Choose Option", withAlertMessage: nil, withOptions: ["Take Picture", "Open Gallery"]) { (selectedIndex: Int) in
+        self.showActionSheet(withTitle: "Choose Option".localiz(), withAlertMessage: nil, withOptions: ["Take Picture".localiz(), "Open Gallery".localiz()]) { (selectedIndex: Int) in
             switch selectedIndex {
             case OpenMediaType.camera.rawValue:
                 self.checkCameraPermission { (granted) in
@@ -107,10 +107,10 @@ class ImagePickerHelper: NSObject {
     }
 
     private func showCameraPermissionAlert() {
-        let alert = UIAlertController(title: "Camera Permission Denied",
-                                      message: "Please allow the camera permission from Phone Settings.",
+        let alert = UIAlertController(title: "Camera Permission Denied".localiz(),
+                                      message: "Please allow the camera permission from Phone Settings.".localiz(),
                                       preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK".localiz(), style: .default, handler: nil))
         if let topController = UIApplication.shared.keyWindow?.rootViewController {
             topController.present(alert, animated: true, completion: nil)
         }
@@ -166,9 +166,9 @@ class ImagePickerHelper: NSObject {
     
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         if error != nil {
-            UIApplication.shared.topViewController()?.showAlert(msg: "Photos not Saved ")
+            UIApplication.shared.topViewController()?.showAlert(msg: "Photos not Saved ".localiz())
         } else {
-            UIApplication.shared.topViewController()?.showAlert(msg: "Your altered image has been saved to your photos. ")
+            UIApplication.shared.topViewController()?.showAlert(msg: "Your altered image has been saved to your photos. ".localiz())
         }
     }
 }

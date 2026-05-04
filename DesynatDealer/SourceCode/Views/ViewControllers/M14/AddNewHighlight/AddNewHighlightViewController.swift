@@ -12,30 +12,26 @@ import AVKit
 class AddNewHighlightViewController: UIViewController {
     
     // MARK: - IBOutlet
-    
     @IBOutlet weak var videoPlayButton: UIButton!
     @IBOutlet weak var dropDownimageView: UIImageView!
     @IBOutlet weak var enternameTxtField: UITextField!
     @IBOutlet weak var uploadedImage: CustomImageView!
-    
     @IBOutlet weak var highlightNameCollectionView: UICollectionView! {
         didSet {
             highlightNameCollectionView.registerCellFromNib(cellID: "RadioBtnCollectionViewCell")
         }
     }
-    
     @IBOutlet weak var contentCollectionView: UICollectionView! {
         didSet {
             contentCollectionView.registerCellFromNib(cellID: "SelectVideoFromGalleryCollectionViewCell")
         }
     }
     @IBOutlet weak var noDataFoundLabel: UILabel!
+    @IBOutlet weak var lblAddToHightlightTitle: UILabel!
     
     // MARK: - Properties
-    
     var galleryAssets: [PHAsset] = []
     var highlightname = ["Select from previous", "Add new"]
-    
     private var selectedRoleIndex: Int? = 0
     private lazy var viewModel = AddHighlightsViewModel(hostVc: self)
     var videoURL: URL?
@@ -47,12 +43,12 @@ class AddNewHighlightViewController: UIViewController {
     var thumbnailImage: String?
     
     // MARK: - Life Cycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchGalleryAssets()
         viewModel.getMyHighLights()
         enternameTxtField.delegate = self
+        lblAddToHightlightTitle.text = "Add to Highlight".localiz()
     }
     
     // MARK: - Actions

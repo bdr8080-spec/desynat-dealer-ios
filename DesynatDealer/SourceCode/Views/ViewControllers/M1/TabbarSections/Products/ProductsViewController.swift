@@ -22,7 +22,7 @@ class ProductsViewController: UIViewController {
             productTableView.registerCellFromNib(cellID: "ProductManagementTableViewCell")
         }
     }
-    @IBOutlet weak var backButtonOutlet: UIButton!
+    @IBOutlet weak var backButtonOutlet: RTLButton!
     @IBOutlet weak var plusButton: UIButton!
     
     var selectedTab: ProductTabType = .all

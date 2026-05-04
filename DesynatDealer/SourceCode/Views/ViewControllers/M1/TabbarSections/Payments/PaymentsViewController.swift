@@ -24,7 +24,7 @@ class PaymentsViewController: UIViewController {
             paymentHistoryTableview.registerCellFromNib(cellID: "MyPayoutsTableViewCell")
         }
     }
-    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var backButton: RTLButton!
     
     // MARK: - Property Decalaration
     private lazy var viewModel = PaymentsViewModel(hostVC: self)

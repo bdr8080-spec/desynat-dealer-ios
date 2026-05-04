@@ -18,6 +18,7 @@ class ProfileViewController: UIViewController {
       sideMenuTableView.registerCellFromNib(cellID: "SideMenuTableViewCell")
     }
   }
+  @IBOutlet weak var lblAppVersion: UILabel!
   
   private var sideMenuData: [SideMenuModel] = [
     SideMenuModel(title: "Inventory management", image: "inventory"),
@@ -48,6 +49,9 @@ class ProfileViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     viewModel.getUserProfile()
+      let text = "App Version".localiz()
+      let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+      lblAppVersion.text = "\(text) \(appVersion ?? "")"
   }
   
   override func viewDidLayoutSubviews() {
@@ -204,7 +208,4 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     tableView.deselectRow(at: indexPath, animated: true)
   }
-  
 }
-
-

@@ -62,6 +62,8 @@ class AddNewProductViewController: UIViewController {
     @IBOutlet weak var yesCashOnDelivery: UIButton!
     @IBOutlet weak var noCashOnDelivery: UIButton!
     @IBOutlet weak var sizeChartImageView: CustomImageView!
+    @IBOutlet weak var lblSelectCatTitle: UILabel!
+    @IBOutlet weak var lblSubCAteTitle: UILabel!
     
     private lazy var viewModel = AddNewProductViewModel(hostVC: self)
     var comingReason: ComingReasonAtAddToProduct = .forAddingProduct
@@ -126,6 +128,8 @@ class AddNewProductViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        lblSelectCatTitle.text = "Select Category".localiz()
+        lblSubCAteTitle.text = "Sub Category".localiz()
         viewModel.getCategoriesListApi()
         viewModel.getBrandListApi()
         viewModel.getColoursListApi()
@@ -779,7 +783,6 @@ extension AddNewProductViewController: UICollectionViewDelegate, UICollectionVie
         } else {
             cell.slecedImageView.image = UIImage(named: "radioUnselected")
         }
-        
         return cell
     }
     

@@ -9,7 +9,7 @@ import UIKit
 
 class ShowsViewController: UIViewController {
     
-    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var backButton: RTLButton!
     @IBOutlet weak var listTableView: UITableView! {
         didSet {
             listTableView.registerCellFromNib(cellID: "EventsTableViewCell")

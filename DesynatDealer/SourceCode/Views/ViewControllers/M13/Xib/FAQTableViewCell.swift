@@ -24,8 +24,12 @@ class FAQTableViewCell: UITableViewCell {
     }
     
     func configData(data: FAQListDataModel?, index: Int) {
-        titleLabel.text = "Q\(index + 1).\(data?.questionEnglish ?? "")"
-        decsriptionLabel.text = data?.answerEnglish
+        if AppLanguageManager.shared.currentLanguage != .ar {
+            titleLabel.text = "Q\(index + 1).\(data?.questionEnglish ?? "")"
+            decsriptionLabel.text = data?.answerEnglish
+        }else {
+            titleLabel.text = "س\(index + 1).\(data?.questionArabic ?? "")"
+            decsriptionLabel.text = data?.answerArabic
+        }
     }
-    
 }

@@ -11,6 +11,7 @@ import SDWebImage
 class ProductDetailImageCollectionViewCell: UICollectionViewCell {
   
   @IBOutlet weak var mainImageView: UIImageView!
+  @IBOutlet weak var stackView: UIStackView!
   
   var imageURL: String?
   
@@ -31,7 +32,6 @@ class ProductDetailImageCollectionViewCell: UICollectionViewCell {
       mainImageView.image = UIImage(named: "")
     }
 //    mainImageView.enableFullscreenZoom()
-
   }
   
 }

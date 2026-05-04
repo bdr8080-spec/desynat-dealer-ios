@@ -350,7 +350,6 @@ extension WebService {
     func getCategoriesService(completion:@escaping (_ user:[CategoryDataModel])-> Void) {
         CommonUtils.showHud(show: true)
         NetworkManager.shared.request(withAPI:.endpoint(.getCategoryList), requestMethod: .get,requestModel:[CategoryDataModel].self) { result, code in
-            
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {

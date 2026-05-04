@@ -83,6 +83,7 @@ class ProductDetailViewController: UIViewController {
     }
     @IBOutlet weak var lblReviewRatingTitle: UILabel!
     @IBOutlet weak var lblIsItAffTitle: UILabel!
+    @IBOutlet weak var lblSpecificationTitle: UILabel!
     
     private var selectedColourIndex = 0
     private var selectedSizeIndex = 0
@@ -99,6 +100,7 @@ class ProductDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.lblReviewRatingTitle.text = "Review & ratings allowed ?".localiz()
+        self.lblSpecificationTitle.text = "Specification".localiz()
         self.lblIsItAffTitle.text = "Is it an Affiliated Product?".localiz()
         buttonActionStackView.isHidden = !hasActionPermission
         statusButton.isUserInteractionEnabled = hasActionPermission

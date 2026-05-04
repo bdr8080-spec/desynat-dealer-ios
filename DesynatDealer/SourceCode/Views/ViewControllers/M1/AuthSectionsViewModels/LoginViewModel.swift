@@ -47,7 +47,7 @@ class LoginViewModel: NSObject {
         }
         
         if errorMessage != .none {
-            loginHostVC.showAlert(msg: errorMessage.rawValue)
+            loginHostVC.showAlert(msg: errorMessage.rawValue.localiz())
         }
         
         loginHostVC.view.endEditing(true)

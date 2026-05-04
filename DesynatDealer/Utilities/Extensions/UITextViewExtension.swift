@@ -41,7 +41,7 @@ extension UITextView: UITextViewDelegate {
         }
     }
     
-    private var placeholderLabel: UILabel? {
+    var placeholderLabel: UILabel? {
         get { return objc_getAssociatedObject(self, &kPlaceholderLabelKey) as? UILabel }
         set { objc_setAssociatedObject(self, &kPlaceholderLabelKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
     }

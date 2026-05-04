@@ -42,6 +42,7 @@ class AddNewStaffViewController: UIViewController {
     @IBOutlet weak var accessModuleLabel: UILabel!
     @IBOutlet weak var accessModierView: UIView!
     @IBOutlet weak var extraSpaceView: UIView!
+    @IBOutlet weak var btnChngImg: CustomButton!
     
     // MARK: - Variable
     var selectedRoleId: Int = -1
@@ -59,6 +60,9 @@ class AddNewStaffViewController: UIViewController {
         super.viewDidLoad()
         fullNameInEnglishTF.delegate = self
         fullNameInArabicTF.delegate = self
+        self.btnChngImg.setTitle("Change Image".localiz(), for: .normal)
+        self.fullNameInEnglishTF.placeholder = "Enter Full  name".localiz()
+        self.fullNameInArabicTF.placeholder = "Enter Full  name".localiz()
         initialSetup()
         viewModel.countryListApi()
         viewModel.getAllRolesRequest()

@@ -40,10 +40,23 @@ class TabBarVC: UIViewController {
         let unselectedImages = ["homeUnselected", "productsUnselected", "show", "ordersUnselected", "paymentsUnselected"]
         let selectedImages = ["homeSelected", "productsSelected", "show", "ordersSelected", "paymentsSelected"]
         
-        for button in tabButtons {
-            let imageName = (button.tag == selectedTag) ? selectedImages[button.tag] : unselectedImages[button.tag]
-            button.setImage(UIImage(named: imageName), for: .normal)
-        }
+        let unselectedArImages = ["homeUnselectedAr", "productsUnselectedAr", "show", "ordersUnselectedAr", "paymentsUnselectedAr"]
+        let selectedArImages = ["homeSelectedAr", "productsSelectedAr", "show", "ordersSelectedAr", "paymentsSelectedAr"]
+        
+//        for button in tabButtons {
+//            let imageName = (button.tag == selectedTag) ? selectedImages[button.tag] : unselectedImages[button.tag]
+//            button.setImage(UIImage(named: imageName), for: .normal)
+//        }
+        
+        let isArabic = AppLanguageManager.shared.currentLanguage == .ar
+                let currentUnselected = isArabic ? unselectedArImages : unselectedImages
+                let currentSelected = isArabic ? selectedArImages : selectedImages
+                
+                for button in tabButtons {
+                    let imageName = (button.tag == selectedTag) ? currentSelected[button.tag] : currentUnselected[button.tag]
+                    button.setImage(UIImage(named: imageName), for: .normal)
+                }
+         
     }
     
     @objc func handleGetNewOrdersDetailsApi() {

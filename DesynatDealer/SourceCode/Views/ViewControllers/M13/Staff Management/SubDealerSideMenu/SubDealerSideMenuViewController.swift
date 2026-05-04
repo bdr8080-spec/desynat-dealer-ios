@@ -19,6 +19,7 @@ class SubDealerSideMenuViewController: UIViewController {
         }
     }
     @IBOutlet weak var backDidTapped: UIButton!
+    @IBOutlet weak var lblAppVersion: UILabel!
     
     private lazy var viewModel = SubDealerSideMenuViewModel(hostVC: self)
     var isNeedToHideBackButton: Bool = false
@@ -39,6 +40,9 @@ class SubDealerSideMenuViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.getUserProfile()
+        let text = "App Version".localiz()
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        lblAppVersion.text = "\(text) \(appVersion ?? "")"
     }
     
     override func viewDidLayoutSubviews() {
@@ -92,7 +96,6 @@ extension SubDealerSideMenuViewController: UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedItem = filteredPermissions[indexPath.row].menuID
         let hasPermission = filteredPermissions[indexPath.row].canAction == 1
-        
         switch selectedItem {
 //        case 2: //Payment management (Done)
 //            let vc =  PaymentsViewController.instantiate(fromAppStoryboard: .Home)

@@ -40,7 +40,7 @@ class NotificationViewController: UIViewController {
         let nextVC = DeleteAccountViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
         nextVC.onYesTapped = { [weak self] in
             guard let self = self else { return }
-            self.deleteAccountRequest()
+            self.viewModel.deleteAccountApi()
         }
         self.navigationController?.present(nextVC, animated: true)
     }
@@ -49,28 +49,16 @@ class NotificationViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    func deleteAccountRequest(){
-        //        WebService.sharedInstance.logoutService() { (response) in
-        //            kSharedSceneDelegate.logoutUser()
-        //            kSharedSceneDelegate.navigateToLoginVc()
-        //            UserDefaults.standard.setValue("No", forKey:"isLogin")
-        //        }
-    }
-    
-    func populateData() {
-        
-    }
+    func populateData() {}
     
     // MARK: - UI Update
-    
     func updateAppNotificationUI() {
-            let imageName = isAppNotification ? "toggle_on" : "toggle_off"
+        let imageName = isAppNotification ? "toggle_on" : "toggle_off"
         inAppToggleImageView.image = UIImage(named: imageName)
-        }
-        
-        func updatePushNotificationUI() {
-            let imageName = isPushNotification ? "toggle_on" : "toggle_off"
-            pushNotificationToggleImageView.image = UIImage(named: imageName)
-        }
+    }
     
+    func updatePushNotificationUI() {
+        let imageName = isPushNotification ? "toggle_on" : "toggle_off"
+        pushNotificationToggleImageView.image = UIImage(named: imageName)
+    }
 }

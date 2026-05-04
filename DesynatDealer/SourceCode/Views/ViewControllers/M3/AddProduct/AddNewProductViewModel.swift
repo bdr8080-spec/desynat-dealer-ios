@@ -176,7 +176,7 @@ class AddNewProductViewModel: NSObject {
         
         // FINAL ERROR CHECK
         if errorMessage != .none {
-            hostVC.showAlert(msg: errorMessage.rawValue)
+            hostVC.showAlert(msg: errorMessage.rawValue.localiz())
             return false
         }
         

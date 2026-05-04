@@ -12,6 +12,7 @@ class SettingViewController: UIViewController {
     @IBOutlet weak var changePasswordView: UIView!
     @IBOutlet weak var deleteAccountView: CustomView!
     
+    private lazy var viewModel = SettingsViewModel(hostVC: self)
     var hasActionPermission: Bool = false
     
     override func viewDidLoad() {
@@ -19,7 +20,16 @@ class SettingViewController: UIViewController {
         deleteAccountView.isHidden = !hasActionPermission
         changePasswordView.isHidden = !hasActionPermission
     }
+    
     // MARK: - Navigation
+    @IBAction func deleteAccTapped(_ sender: Any) {
+        let nextVC = DeleteAccountViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+        nextVC.onYesTapped = { [weak self] in
+            guard let self = self else { return }
+            viewModel.deleteAccountApi()
+        }
+        self.navigationController?.present(nextVC, animated: true)
+    }
     
     @IBAction func NotificationBtnTapped(_ sender: Any) {
         let vc = NotificationViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)

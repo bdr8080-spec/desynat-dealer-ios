@@ -189,7 +189,6 @@ class AddVariantTableViewCell: UITableViewCell {
 }
 
 extension AddVariantTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-  
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return displayImages.count
   }
@@ -199,19 +198,21 @@ extension AddVariantTableViewCell: UICollectionViewDelegate, UICollectionViewDat
     cell.mainImageView.layer.cornerRadius = 12
     cell.mainImageView.contentMode = .scaleAspectFill
     cell.mainImageView.clipsToBounds = true
-    
+      cell.stackView.isHidden = true
     if indexPath.item == 0 {
-      cell.mainImageView.image = UIImage(named: "uploadProductImage")
+        //        cell.mainImageView.image = UIImage(named: "uploadProductImage")
+      cell.mainImageView.image = UIImage(named: "dashedBorder")
+        cell.stackView.isHidden = false
     } else {
       let realIndex = indexPath.item - 1
       if realIndex < images.count {
         cell.mainImageView.image = images[realIndex]
       } else {
-        cell.mainImageView.image = UIImage(named: "uploadProductImage")
+//        cell.mainImageView.image = UIImage(named: "uploadProductImage")
+          cell.mainImageView.image = UIImage(named: "dashedBorder")
+            cell.stackView.isHidden = false
       }
     }
-    
-    
     return cell
   }
   
@@ -222,7 +223,7 @@ extension AddVariantTableViewCell: UICollectionViewDelegate, UICollectionViewDat
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: 162, height: 120)
+    return CGSize(width: 164, height: 120)
   }
 }
 
@@ -264,7 +265,6 @@ extension AddVariantTableViewCell: UITableViewDelegate, UITableViewDataSource {
     cell.isWomenIsSelected = isWomenIsSelected
     cell.delegate = self
     cell.deleteButtonOutlet.isHidden = sizeVariants.count <= 1
-    
     if indexPath.row == 0 {
       cell.deleteButtonOutlet.isHidden = true
       cell.priceView.backgroundColor = UIColor(named: "#FFF7EA")
@@ -272,31 +272,23 @@ extension AddVariantTableViewCell: UITableViewDelegate, UITableViewDataSource {
       cell.deleteButtonOutlet.isHidden = false
     }
     cell.sizesList = self.sizesList
-    
     cell.onSizeButtonTap = { [weak self] in
       guard let self = self else { return }
       guard let indexPath = self.sizeVariantTableView.indexPath(for: cell) else { return }
-      
       let sizeVariantCell = cell as? AddNewSizeVariantTableViewCell
       guard let textField = sizeVariantCell?.sizeTF else { return }
-      
       self.showSizeDropdown(from: textField, for: indexPath)
     }
-    
     return cell
   }
-  
-  
 }
 
 extension AddVariantTableViewCell: AddNewSizeVariantDelegate {
   
   func addNewSizeTapped(from cell: AddNewSizeVariantTableViewCell) {
-    
     // 1. Validate ALL existing rows
     for row in 0..<sizeVariants.count {
       guard let cell = sizeVariantTableView.cellForRow(at: IndexPath(row: row, section: 0)) as? AddNewSizeVariantTableViewCell else { continue }
-      
       let error = cell.validateFieldsWithErrors(isWomenCategory: isWomenIsSelected)
       if !error.isEmpty {
           let text = "Please fill all required fields in size row".localiz()
@@ -304,7 +296,6 @@ extension AddVariantTableViewCell: AddNewSizeVariantDelegate {
         return
       }
     }
-    
     // 2. Save data of LAST ROW
     let lastIndex = sizeVariants.count - 1
     if let lastCell = sizeVariantTableView.cellForRow(at: IndexPath(row: lastIndex, section: 0)) as? AddNewSizeVariantTableViewCell {
@@ -323,21 +314,17 @@ extension AddVariantTableViewCell: AddNewSizeVariantDelegate {
       variant.finalPrice = lastCell.finalPriceTF.text ?? ""
       variant.discountValue = lastCell.discountPriceTF.text ?? ""
       variant.discountTypeIsPercentage = lastCell.discountTypeisPercentage
-      
       sizeVariants[lastIndex] = variant
     }
-    
     // 3. Append new blank variant
     let newSpec = SizeVariant()
     sizeVariants.append(newSpec)
-    
     let newIndexPath = IndexPath(row: sizeVariants.count - 1, section: 0)
     sizeVariantTableView.performBatchUpdates({
       sizeVariantTableView.insertRows(at: [newIndexPath], with: .automatic)
     }) { _ in
       self.sizeVariantTableView.scrollToRow(at: newIndexPath, at: .bottom, animated: true)
     }
-    
     // 4. Notify parent
     self.notifyParentIfNeeded()
   }

@@ -28,7 +28,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mjg-Gj-Lzc">
                                 <rect key="frame" x="0.0" y="118" width="393" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AoC-xu-Nbr">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AoC-xu-Nbr" customClass="RTLButton" customModule="DesynatDealer" customModuleProvider="target">
                                         <rect key="frame" x="24" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="3B3-tZ-6B9"/>
@@ -987,6 +987,7 @@
                         <outlet property="imagesPageController" destination="YGr-Ud-myn" id="jDo-he-3J4"/>
                         <outlet property="lblIsItAffTitle" destination="G64-Id-ch3" id="80D-fu-dIz"/>
                         <outlet property="lblReviewRatingTitle" destination="oDu-Sm-P5u" id="eCo-LB-TJu"/>
+                        <outlet property="lblSpecificationTitle" destination="F6x-r9-IOt" id="hHM-Lg-6ig"/>
                         <outlet property="lengthLabel" destination="GJg-7V-GTb" id="Fu3-xq-uuu"/>
                         <outlet property="lengthStackView" destination="nT7-hm-jOd" id="drH-Ny-rx7"/>
                         <outlet property="priceSeparatorLabel" destination="LXy-9C-IeJ" id="hOz-md-ANm"/>
@@ -1033,7 +1034,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xp1-EP-fNn">
                                 <rect key="frame" x="0.0" y="118" width="393" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mTX-R9-3Rh">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mTX-R9-3Rh" customClass="RTLButton" customModule="DesynatDealer" customModuleProvider="target">
                                         <rect key="frame" x="24" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="eJp-y8-zoe"/>
@@ -2481,7 +2482,24 @@
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadSizeChart" translatesAutoresizingMaskIntoConstraints="NO" id="zeG-Tp-lF1" customClass="CustomImageView" customModule="DesynatDealer" customModuleProvider="target">
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="q5h-ay-Ero">
+                                                                <rect key="frame" x="144.66666666666666" y="65" width="103.66666666666666" height="70"/>
+                                                                <subviews>
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="upload" translatesAutoresizingMaskIntoConstraints="NO" id="zab-ow-Ht2">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="103.66666666666667" height="49"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="49" id="YZQ-cu-RMC"/>
+                                                                        </constraints>
+                                                                    </imageView>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upload size chart" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IIe-3f-4tl">
+                                                                        <rect key="frame" x="0.0" y="53" width="103.66666666666667" height="17"/>
+                                                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
+                                                                        <color key="textColor" red="0.52941176469999995" green="0.36078431370000003" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bannerDashed" translatesAutoresizingMaskIntoConstraints="NO" id="zeG-Tp-lF1" customClass="CustomImageView" customModule="DesynatDealer" customModuleProvider="target">
                                                                 <rect key="frame" x="25" y="40" width="343" height="120"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="zeG-Tp-lF1" secondAttribute="height" multiplier="343:120" id="CfL-FR-C8a"/>
@@ -2507,6 +2525,7 @@
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
+                                                            <constraint firstItem="q5h-ay-Ero" firstAttribute="centerY" secondItem="zeG-Tp-lF1" secondAttribute="centerY" id="8Ay-9S-auj"/>
                                                             <constraint firstItem="zeG-Tp-lF1" firstAttribute="top" secondItem="8Cu-Fz-6p7" secondAttribute="bottom" constant="5" id="8N7-Xz-OBz"/>
                                                             <constraint firstItem="8Cu-Fz-6p7" firstAttribute="leading" secondItem="ksU-kb-RYQ" secondAttribute="leading" constant="24" id="AGe-E3-bny"/>
                                                             <constraint firstAttribute="bottom" secondItem="zeG-Tp-lF1" secondAttribute="bottom" id="H0R-k2-R7F"/>
@@ -2517,6 +2536,7 @@
                                                             <constraint firstItem="Bv9-HP-iGe" firstAttribute="top" secondItem="zeG-Tp-lF1" secondAttribute="top" id="XbG-7I-9eW"/>
                                                             <constraint firstItem="Bv9-HP-iGe" firstAttribute="leading" secondItem="zeG-Tp-lF1" secondAttribute="leading" id="ars-Dk-TEe"/>
                                                             <constraint firstAttribute="trailing" secondItem="8Cu-Fz-6p7" secondAttribute="trailing" constant="24" id="f5W-6n-tdQ"/>
+                                                            <constraint firstItem="q5h-ay-Ero" firstAttribute="centerX" secondItem="zeG-Tp-lF1" secondAttribute="centerX" id="gvY-K8-yas"/>
                                                             <constraint firstItem="Bv9-HP-iGe" firstAttribute="bottom" secondItem="zeG-Tp-lF1" secondAttribute="bottom" id="qMo-zL-gIE"/>
                                                         </constraints>
                                                     </view>
@@ -2668,6 +2688,8 @@
                         <outlet property="descriptionEngTextView" destination="vDr-gj-0AQ" id="Fee-yn-ZT8"/>
                         <outlet property="exchagableDaysView" destination="1tN-m7-qMh" id="nBb-cG-SSy"/>
                         <outlet property="exchangableTF" destination="4s7-ty-gC5" id="pod-RU-8gu"/>
+                        <outlet property="lblSelectCatTitle" destination="wHG-1f-ino" id="iV5-oi-dFF"/>
+                        <outlet property="lblSubCAteTitle" destination="wfN-TJ-VkQ" id="W0V-ej-Yjs"/>
                         <outlet property="maxCartQuantityTF" destination="sR1-Vm-b3p" id="Z6V-2p-62O"/>
                         <outlet property="minCartQuantityTF" destination="fxi-mH-1iW" id="gW3-Ey-f6v"/>
                         <outlet property="noAffiliatedProduct" destination="jwA-WX-DYT" id="dqs-TA-Php"/>
@@ -2980,6 +3002,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="bannerDashed" width="343" height="120"/>
         <image name="btnGradient" width="343" height="38"/>
         <image name="cross" width="18" height="19.333333969116211"/>
         <image name="down_arrow" width="20" height="20"/>
@@ -2991,7 +3014,7 @@
         <image name="radioUnselected" width="20" height="20"/>
         <image name="share" width="20" height="20"/>
         <image name="toggle_on" width="40" height="22"/>
-        <image name="uploadSizeChart" width="343" height="120"/>
+        <image name="upload" width="49" height="49"/>
         <namedColor name="darkBrown">
             <color red="0.43137254901960786" green="0.27058823529411763" blue="0.15294117647058825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

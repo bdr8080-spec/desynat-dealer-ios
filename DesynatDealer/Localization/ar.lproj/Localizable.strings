@@ -129,6 +129,7 @@
 "Password" = "كلمة المرور";
 "Notification Permission" = "إذن الإشعارات";
 "Mobile number" = "رقم الجوال";
+"Mobile Number" = "رقم الجوال";
 "Allow" = "السماح";
 "Store Phone Number" = "رقم هاتف المتجر";
 "Select language" = "اختر اللغة";
@@ -654,8 +655,8 @@
 "Eg. 20" = "مثال: 20";
 "Set Max. cart quantity" = "تحديد الحد الأقصى لكمية السلة";
 "Is this product returnable ?" = "هل يمكن إرجاع هذا المنتج؟";
-" Yes" = " نعم";
-" No" = " لا";
+"  Yes" = " نعم";
+"  No" = " لا";
 "If Yes, Total days for returning" = "إذا نعم، إجمالي أيام الإرجاع";
 "Eg. 15 days" = "مثال: 15 يوم";
 "Is this product exchangable?" = "هل يمكن استبدال هذا المنتج؟";
@@ -675,8 +676,8 @@
 "Total Stocks" = "إجمالي المخزون";
 "Actual Price" = "السعر الفعلي";
 "Discounted Price" = "السعر بعد الخصم";
-" Percentage" = " نسبة مئوية";
-" Fixed Price" = " سعر ثابت";
+"  Percentage" = " نسبة مئوية";
+"  Fixed Price" = " سعر ثابت";
 "Final Price" = "السعر النهائي";
 "Change Password" = "تغيير كلمة المرور";
 "Notifications" = "الإشعارات";
@@ -719,7 +720,7 @@
 "View Profile" = "عرض الملف الشخصي";
 "kids" = "أطفال";
 "Men" = "رجال";
-"Set Commission % for affiliated customer" = "تحديد نسبة العمولة للعميل التابع";
+"Set Commission % for affiliated  customer" = "تحديد نسبة العمولة للعميل التابع";
 "Enrolled" = "مشترك";
 "Listed Deals" = "العروض المدرجة";
 "no deals found" = "لا توجد عروض";
@@ -747,3 +748,207 @@
 "Enter Description" = "أدخل الوصف";
 "Refund Management" = "إدارة الاسترجاع";
 "Staff Management" = "إدارة الموظفين";
+
+"FAQ's" = "الأسئلة الشائعة";
+"My Plans" = "خططي";
+"Purchased On" = "تم الشراء في";
+"Purchased on" = "تم الشراء في";
+"Amount" = "المبلغ";
+"Plan" = "الخطة";
+"Access Module" = "وحدات الوصول";
+"Change Image" = "تغيير الصورة";
+"Save Changes" = "حفظ التغييرات";
+
+"Specification" = "المواصفات";
+"Feature" = "الميزة";
+"Fabric" = "القماش";
+"Woolen" = "صوفي";
+
+"App Version" = "إصدار التطبيق";
+"Please select sub-category" = "يرجى اختيار الفئة الفرعية";
+
+"Network connection failed. Please check your internet and try again." = "فشل الاتصال بالشبكة. يرجى التحقق من اتصال الإنترنت والمحاولة مرة أخرى.";
+"No status code found" = "لم يتم العثور على رمز الحالة";
+"No response data" = "لا توجد بيانات استجابة";
+"Something went wrong" = "حدث خطأ ما";
+"No data found" = "لم يتم العثور على بيانات";
+"Unable to decode data" = "تعذر فك تشفير البيانات";
+" Your session has expired. Please log in again." = "انتهت صلاحية الجلسة الخاصة بك. يرجى تسجيل الدخول مرة أخرى.";
+"Mime type and file are not of same data type" = "نوع MIME والملف ليسا من نفس نوع البيانات";
+"Video Mime type and file are not URL" = "نوع MIME للفيديو والملف ليسا رابط URL";
+"Failed to decode response" = "فشل في فك تشفير الاستجابة";
+
+"Please Enter Mobile Number or Email Address" = "يرجى إدخال رقم الجوال أو عنوان البريد الإلكتروني";
+" Please Enter Email Address" = "يرجى إدخال عنوان البريد الإلكتروني";
+"Please Enter Mobile Number" = "يرجى إدخال رقم الجوال";
+" Please Enter Valid Email Address" = "يرجى إدخال عنوان بريد إلكتروني صالح";
+"Please enter valid mobile number" = "يرجى إدخال رقم جوال صالح";
+"Please Enter Valid Email ID or Mobile Number" = "يرجى إدخال بريد إلكتروني صالح أو رقم جوال";
+"Please enter password" = "يرجى إدخال كلمة المرور";
+"Password must be at least 8 characters long, include 1 uppercase, 1 lowercase, and 1 special character" = "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل، وتتضمن حرفًا كبيرًا وحرفًا صغيرًا ورمزًا خاصًا واحدًا";
+"Please enter new password" = "يرجى إدخال كلمة مرور جديدة";
+"Please enter confirm password" = "يرجى إدخال تأكيد كلمة المرور";
+"Password does not match" = "كلمة المرور غير متطابقة";
+"Please upload profile image" = "يرجى تحميل صورة الملف الشخصي";
+"Please Enter First name" = "يرجى إدخال الاسم الأول";
+"Please Enter Last name" = "يرجى إدخال اسم العائلة";
+"Please accept the Terms & Conditions to continue" = "يرجى الموافقة على الشروط والأحكام للمتابعة";
+"Please enter store name" = "يرجى إدخال اسم المتجر";
+"Please enter store address" = "يرجى إدخال عنوان المتجر";
+"Please enter address line 1" = "يرجى إدخال سطر العنوان الأول";
+"Please enter address line 2" = "يرجى إدخال سطر العنوان الثاني";
+"Please enter phone number" = "يرجى إدخال رقم الهاتف";
+"Please enter valid store phone number" = "يرجى إدخال رقم هاتف متجر صالح";
+"Please enter Store Email Address" = "يرجى إدخال البريد الإلكتروني للمتجر";
+"Please enter valid store email address" = "يرجى إدخال بريد إلكتروني صالح للمتجر";
+"Please enter store bio" = "يرجى إدخال نبذة عن المتجر";
+"Please upload store image" = "يرجى تحميل صورة المتجر";
+"Please upload owner document 1" = "يرجى تحميل مستند المالك 1";
+"Please upload owner document 2" = "يرجى تحميل مستند المالك 2";
+"Please upload store document 1" = "يرجى تحميل مستند المتجر 1";
+"Please upload store document 2" = "يرجى تحميل مستند المتجر 2";
+"Please upload proof of account" = "يرجى تحميل إثبات الحساب";
+"Please select an account type" = "يرجى اختيار نوع الحساب";
+"Please enter IBAN number" = "يرجى إدخال رقم الآيبان";
+"Please enter SWIFT/BIC number" = "يرجى إدخال رقم SWIFT/BIC";
+"Please enter bank name" = "يرجى إدخال اسم البنك";
+"Please enter account holder name" = "يرجى إدخال اسم صاحب الحساب";
+"Please enter store phone number" = "يرجى إدخال رقم هاتف المتجر";
+"Please choose Country" = "يرجى اختيار الدولة";
+"Please enter Affiliated Commission" = "يرجى إدخال عمولة الشراكة";
+
+"Please select category" = "يرجى اختيار الفئة";
+"Please select sub-category" = "يرجى اختيار الفئة الفرعية";
+"Please select brand" = "يرجى اختيار العلامة التجارية";
+"Please enter other brand name in english" = "يرجى إدخال اسم علامة تجارية أخرى باللغة الإنجليزية";
+"Please enter other brand name in arabic" = "يرجى إدخال اسم علامة تجارية أخرى باللغة العربية";
+"Please enter product name in english" = "يرجى إدخال اسم المنتج باللغة الإنجليزية";
+"Please enter product name in arabic" = "يرجى إدخال اسم المنتج باللغة العربية";
+"Please enter description in english" = "يرجى إدخال الوصف باللغة الإنجليزية";
+"Please enter description in arabic" = "يرجى إدخال الوصف باللغة العربية";
+"Please enter min. cart quantity" = "يرجى إدخال الحد الأدنى لكمية السلة";
+"Please enter max. cart quantity" = "يرجى إدخال الحد الأقصى لكمية السلة";
+"Please enter total days for returning" = "يرجى إدخال عدد الأيام المسموح بها للإرجاع";
+"Please enter total days for exchangable" = "يرجى إدخال عدد الأيام المسموح بها للاستبدال";
+"Please upload size chart" = "يرجى تحميل جدول المقاسات";
+"Max quantity cannot be less than Min quantity" = "لا يمكن أن تكون الكمية القصوى أقل من الكمية الدنيا";
+
+"Please select banner position" = "يرجى اختيار موضع البانر";
+"Please select start date" = "يرجى اختيار تاريخ البدء";
+"Please select end date" = "يرجى اختيار تاريخ الانتهاء";
+"Please upload banner image" = "يرجى تحميل صورة البانر";
+
+"Please upload attachment" = "يرجى تحميل المرفق";
+"Please select ticket type" = "يرجى اختيار نوع التذكرة";
+"Please enter title" = "يرجى إدخال العنوان";
+"Please enter description" = "يرجى إدخال الوصف";
+"Please select at least one module" = "يرجى اختيار وحدة واحدة على الأقل";
+"Please select role" = "يرجى اختيار الدور";
+"Please enter full name in english" = "يرجى إدخال الاسم الكامل باللغة الإنجليزية";
+"Please enter full name in Arabic" = "يرجى إدخال الاسم الكامل باللغة العربية";
+
+"Banner Management" = "إدارة البانر";
+"Add new Banner" = "إضافة بانر جديد";
+"Select banner position" = "اختر موضع البانر";
+"Home Top" = "أعلى الصفحة الرئيسية";
+"Home Bottom" = "أسفل الصفحة الرئيسية";
+"Category" = "الفئة";
+"Select Category" = "اختر الفئة";
+"Select Sub-Category" = "اختر الفئة الفرعية";
+"Total days" = "إجمالي الأيام";
+"Upload Banner" = "تحميل البانر";
+"Total Price" = "السعر الإجمالي";
+"Send Request" = "إرسال الطلب";
+"SELECT PAYMENT METHOD" = "اختر طريقة الدفع";
+"Credit/ Debit Card" = "بطاقة ائتمان / خصم";
+
+"Enter Full name" = "يرجى إدخال الاسم الكامل";
+"Enter email id" = "يرجى إدخال البريد الإلكتروني";
+"Enter Mobile Number" = "يرجى إدخال رقم الجوال";
+"Email Id" = "البريد الإلكتروني";
+"Role" = "الدور";
+
+"Choose File" = "اختر ملف";
+"Camera" = "الكاميرا";
+"Gallery" = "المعرض";
+"PDF / Files" = "ملفات / PDF";
+"Cancel" = "إلغاء";
+"Warning" = "تحذير";
+"You don't have camera" = "لا يوجد لديك كاميرا";
+"Ok" = "موافق";
+"Select Video" = "اختر فيديو";
+"Camera" = "الكاميرا";
+"Gallery" = "المعرض";
+"Cancel" = "إلغاء";
+"Camera not available" = "الكاميرا غير متاحة";
+
+"Personal Info" = "المعلومات الشخصية";
+"IBAN Number" = "رقم الآيبان";
+"SWIFT/BIC" = "رمز سويفت/BIC";
+"Enter SWIFT/BIC" = "يرجى إدخال رمز سويفت/BIC";
+
+"Number of Products:" = "عدد المنتجات:";
+"Number of Videos (Reels):" = "عدد مقاطع الفيديو (ريلز):";
+"Number of Highlights:" = "عدد الهايلايت:";
+"Stories:" = "القصص:";
+"Commission:" = "العمولة:";
+"store Employees" = "موظفو المتجر";
+
+"Live Request" = "طلب مباشر";
+"Your past requests" = "طلباتك السابقة";
+"Live Coverage" = "تغطية مباشرة";
+"Banner position" = "موضع البانر";
+"Total Days" = "إجمالي الأيام";
+"Pay now" = "ادفع الآن";
+"Select Duration" = "اختر المدة";
+"Upload new reel" = "رفع ريل جديد";
+"Caption" = "التسمية";
+"Write caption here..." = "اكتب التسمية هنا...";
+"Upload Reel" = "رفع ريل";
+"Add to Highlight" = "إضافة إلى الهايلايت";
+
+"Duration" = "المدة";
+"Payment method" = "طريقة الدفع";
+"Eg. 299.00 KD" = "مثال: 299.00 د.ك";
+"Eg. 3200" = "مثال: 3200";
+"Eg. 2500 KD" = "مثال: 2500 د.ك";
+
+"Document 1" = "المستند 1";
+"Document 2" = "المستند 2";
+"Upload Store Image" = "تحميل صورة المتجر";
+"(Bank Statement or Bank Letter,PDF/JPG/PNG ≤ 5MB)" = "(كشف حساب بنكي أو خطاب من البنك، PDF/JPG/PNG بحجم ≤ 5MB)";
+"Upload Profile Photo" = "تحميل صورة الملف الشخصي";
+
+"No Active Plan" = "لا توجد خطة نشطة";
+"Welcome back !" = "مرحباً بعودتك!";
+
+"Expired on" = "تنتهي الصلاحية في";
+"Upload Image" = "تحميل صورة";
+"Enter Full  name" = "يرجى إدخال الاسم الكامل";
+
+"Upload Product Images" = "تحميل صور المنتج";
+"Upload size chart" = "تحميل جدول المقاسات";
+
+"My Notifications" = "إشعاراتي";
+"Read All" = "قراءة الكل";
+"no product found" = "لم يتم العثور على منتجات";
+"No Result found" = "لم يتم العثور على نتائج";
+"No Orders Found" = "لم يتم العثور على طلبات";
+"No live events available" = "لا توجد فعاليات مباشرة متاحة";
+"no data found" = "لم يتم العثور على بيانات";
+"No Result found " = "لم يتم العثور على نتائج";
+"No Banner found" = "لم يتم العثور على بانر";
+"No Chat found" = "لم يتم العثور على محادثات";
+"no deals found" = "لم يتم العثور على عروض";
+"no product found" = "لم يتم العثور على منتجات";
+"no request found" = "لم يتم العثور على طلبات";
+"no slots found" = "لم يتم العثور على مواعيد";
+"Document" = "مستند";
+
+"Owner's Documents" = "مستندات المالك";
+"Chat" = "الدردشة";
+"Back" = "رجوع";
+"Proof Of Documents" = "إثبات المستندات";
+"Write caption here..." = "اكتب التسمية هنا...";
+"Upload Now" = "تحميل الآن";
+"IBAN" = "الآيبان";

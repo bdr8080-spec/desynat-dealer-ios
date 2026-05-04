@@ -26,7 +26,7 @@ class OrdersViewController: UIViewController {
             ordersTableView.registerCellFromNib(cellID: "OrdersListTableViewCell")
         }
     }
-    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var backButton: RTLButton!
 
     private var searchWorkItem: DispatchWorkItem?
     var selectedTab: OrderSelectedTabType = .all

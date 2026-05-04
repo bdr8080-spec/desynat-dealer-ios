@@ -56,6 +56,7 @@ class ChangePassowrdViewController: UIViewController {
             showAlert(msg: "Passwords do not match".localiz())
             return
         }
+        self.viewModel.changePasswordApi()
     }
     
     @IBAction func btnTapEyeOldPass(_ sender:UIButton) {

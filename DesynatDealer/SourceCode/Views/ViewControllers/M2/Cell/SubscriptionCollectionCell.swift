@@ -105,14 +105,14 @@ class SubscriptionCollectionCell: UICollectionViewCell {
             durationText = "N/A".localiz()
         }
         lblDays.text = durationText
-        
+        let text = "store Employees".localiz()
         // Prepare headings
         heading = [
             "Number of Products:",
             "Number of Videos (Reels):",
             "Number of Highlights:",
             "Stories:",
-            "\(plan.noOfEmployee ?? 0) store Employees",
+            "\(plan.noOfEmployee ?? 0) \(text)",
             "Commission:"
         ]
         
@@ -157,7 +157,7 @@ extension SubscriptionCollectionCell: UITableViewDelegate, UITableViewDataSource
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SubscriptionDataTableCell", for: indexPath) as! SubscriptionDataTableCell
             cell.selectionStyle = .none
-            cell.lblTitle.text = heading[indexPath.row]
+            cell.lblTitle.text = heading[indexPath.row].localiz()
             cell.lblData.text = data[indexPath.row]
             return cell
         }

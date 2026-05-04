@@ -15,7 +15,6 @@ class RaiseTicketViewController: UIViewController {
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var attachmentImageView: CustomImageView!
     
-    
     private lazy var viewModel = RaiseTicketViewModel(hostVC: self)
     var selectedImageUrl: String? = ""
     var selectedTicketTypeIndex: Int = -1
@@ -25,6 +24,14 @@ class RaiseTicketViewController: UIViewController {
         super.viewDidLoad()
         setUpUI()
         viewModel.ticketTypeListApi()
+        descriptionTextView.placeholderLabel?.text = "Enter Description".localiz()
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            descriptionTextView.placeholderLabel?.textAlignment = .right
+            descriptionTextView.textAlignment = .right
+        }else {
+            descriptionTextView.placeholderLabel?.textAlignment = .left
+            descriptionTextView.textAlignment = .left
+        }
     }
     
     // MARK: - Navigation

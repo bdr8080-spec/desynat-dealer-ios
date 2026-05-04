@@ -95,10 +95,9 @@ class ProductManagementTableViewCell: UITableViewCell {
         statusLabel.text = "Inactive".localiz()
       statusButton.setImage(UIImage(named: "toggle_off"), for: .normal)
     }
-      let text2 = "Added on-".localiz()
+      let text2 = "Added on -".localiz()
     addedOnDateLaebl.text = "\(text2) \(convertDate(data.createdAt ?? ""))"
   }
-  
   
   func convertDate(_ input: String) -> String {
     let inputFormatter = DateFormatter()
@@ -114,12 +113,9 @@ class ProductManagementTableViewCell: UITableViewCell {
         return "Invalid date".localiz()
     }
   }
-  
-  
 }
 
 extension ProductManagementTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-  
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return coloursList?.count ?? 0
   }
@@ -140,4 +136,3 @@ extension ProductManagementTableViewCell: UICollectionViewDelegate, UICollection
     return CGSize(width: 18, height: 18)
   }
 }
-

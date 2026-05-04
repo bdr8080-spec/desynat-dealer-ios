@@ -19,7 +19,6 @@ class CustomButton: UIButton {
         }
     }
     @IBInspectable
-    /// Corner radius of view; also inspectable from Storyboard.
     public var cornerRadius: CGFloat {
         get {
             return layer.cornerRadius
@@ -148,6 +147,43 @@ class CustomButton: UIButton {
         return gradient
     }
 }
+
+class RTLButton: UIButton {
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        applyRTL()
+    }
+    
+    private func applyRTL() {
+        if AppLanguageManager.shared.isRightToLeft {
+            self.semanticContentAttribute = .forceRightToLeft
+            self.imageView?.transform = CGAffineTransform(scaleX: -1, y: 1)
+        } else {
+            self.semanticContentAttribute = .forceLeftToRight
+            self.imageView?.transform = .identity
+        }
+    }
+}
+
+class RTLImage: UIImageView {
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        applyRTL()
+    }
+    
+    private func applyRTL() {
+        if AppLanguageManager.shared.isRightToLeft {
+            self.semanticContentAttribute = .forceRightToLeft
+            self.transform = CGAffineTransform(scaleX: -1, y: 1)
+        } else {
+            self.semanticContentAttribute = .forceLeftToRight
+            self.transform = .identity
+        }
+    }
+}
+
 enum GradiantDirection {
     case leftToRight
     case rightToLeft

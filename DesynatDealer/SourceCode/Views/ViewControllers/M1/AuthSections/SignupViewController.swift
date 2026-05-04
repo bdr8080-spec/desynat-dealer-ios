@@ -36,6 +36,20 @@ class SignupViewController: UIViewController {
         viewModel.countryListApi()
     }
     
+    @IBAction func policiesTapped(_ sender: Any) {
+        let vc =  CMSViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+        vc.comingReason = .termsAndConditions
+        vc.hasActionPermission = false
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func tNCTapped(_ sender: Any) {
+        let vc =  CMSViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+        vc.comingReason = .termsAndConditions
+        vc.hasActionPermission = false
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     @IBAction func conitnueDidTapped(_ sender: Any) {
         if viewModel.validFields() {
             viewModel.signUpApi()

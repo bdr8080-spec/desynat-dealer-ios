@@ -1645,7 +1645,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="24H-7d-P9T">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="24H-7d-P9T" customClass="RTLButton" customModule="DesynatDealer" customModuleProvider="target">
                                 <rect key="frame" x="24" y="109.33333333333331" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="9ij-0I-rH1"/>
@@ -1878,8 +1878,8 @@
                                     <outlet property="delegate" destination="YMa-Yn-v0P" id="8J6-48-Mlo"/>
                                 </connections>
                             </tableView>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Result found " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uSq-Yh-a1Q">
-                                <rect key="frame" x="131.33333333333337" y="519" width="130.66666666666663" height="22.666666666666629"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Result found" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uSq-Yh-a1Q">
+                                <rect key="frame" x="133.33333333333334" y="519" width="126.33333333333334" height="22.666666666666629"/>
                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -1928,7 +1928,7 @@
                         <outlet property="activeTitleLabel" destination="gdD-Wz-EAN" id="OyA-Re-aDL"/>
                         <outlet property="allBottomLabel" destination="BPY-SU-Dxw" id="n0w-0b-99q"/>
                         <outlet property="allTitleLabel" destination="dVt-8A-cZ2" id="eY6-xS-nub"/>
-                        <outlet property="backButtonOutlet" destination="24H-7d-P9T" id="7r1-ML-dZ2"/>
+                        <outlet property="backButtonOutlet" destination="24H-7d-P9T" id="hhw-1K-Wek"/>
                         <outlet property="inactiveBottomLabel" destination="cNQ-CW-Xjt" id="zNd-x8-7dd"/>
                         <outlet property="inactiveLabel" destination="zbc-kT-N5d" id="dcV-oP-6i9"/>
                         <outlet property="noResultFoundLabel" destination="uSq-Yh-a1Q" id="T0U-ne-heZ"/>
@@ -1952,7 +1952,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bea-ai-3Rm">
                                 <rect key="frame" x="0.0" y="118.00000000000001" width="393" height="42.666666666666671"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HiH-8D-jav">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HiH-8D-jav" customClass="RTLButton" customModule="DesynatDealer" customModuleProvider="target">
                                         <rect key="frame" x="24" y="1.3333333333333286" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="6Qr-FG-sdq"/>
@@ -2335,7 +2335,7 @@
                     <connections>
                         <outlet property="allBottomLabel" destination="vuW-Pr-a0g" id="RCB-UE-pT5"/>
                         <outlet property="allLabel" destination="aKU-pf-Wsl" id="cHn-Fr-xRS"/>
-                        <outlet property="backButton" destination="HiH-8D-jav" id="KkX-aZ-3fY"/>
+                        <outlet property="backButton" destination="HiH-8D-jav" id="7nb-rv-mhq"/>
                         <outlet property="customizedLabel" destination="Ifw-Hz-Itx" id="fmn-iA-evd"/>
                         <outlet property="noDataFoundLabel" destination="Fan-rm-U1X" id="VRh-na-oyV"/>
                         <outlet property="normalLabel" destination="giO-DU-IOB" id="7eK-zB-p5r"/>
@@ -2626,7 +2626,7 @@
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B5X-0S-SKo">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B5X-0S-SKo" customClass="RTLButton" customModule="DesynatDealer" customModuleProvider="target">
                                 <rect key="frame" x="24" y="107.66666666666667" width="40" height="40.000000000000014"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="7bn-JU-pOA"/>
@@ -2663,7 +2663,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="backButton" destination="B5X-0S-SKo" id="SR1-Yz-Ldl"/>
+                        <outlet property="backButton" destination="B5X-0S-SKo" id="jSL-Dr-wLf"/>
                         <outlet property="btnGoLive" destination="U6K-2T-Yez" id="dcK-fl-AbY"/>
                         <outlet property="listTableView" destination="x86-Ke-Rqh" id="9hV-b2-shb"/>
                         <outlet property="noDataFoundLabel" destination="uxP-HK-aP7" id="nwP-5S-vAL"/>
@@ -3228,7 +3228,7 @@ the event</string>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="423-Lf-V3W">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="423-Lf-V3W" customClass="RTLButton" customModule="DesynatDealer" customModuleProvider="target">
                                         <rect key="frame" x="24" y="78.666666666666671" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="byb-E5-rFl"/>
@@ -3271,7 +3271,7 @@ the event</string>
                     <connections>
                         <outlet property="allTransactionButton" destination="90i-7i-QEU" id="tyi-ss-d86"/>
                         <outlet property="allTrasnactionLabel" destination="CF4-16-itM" id="ymz-vM-xLQ"/>
-                        <outlet property="backButton" destination="423-Lf-V3W" id="Ze1-Ar-POp"/>
+                        <outlet property="backButton" destination="423-Lf-V3W" id="rS5-g8-hec"/>
                         <outlet property="myPayoutButton" destination="o7e-5H-wiY" id="Smy-5h-hmr"/>
                         <outlet property="myPayoutLabel" destination="zp7-z0-Fa9" id="0TP-M3-Qi3"/>
                         <outlet property="noDataFoundLabel" destination="01K-q4-hNz" id="xwB-JL-HCI"/>
@@ -3631,7 +3631,7 @@ the event</string>
             <color red="0.090196078431372548" green="0.090196078431372548" blue="0.090196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="AccentColor">
-            <color red="1" green="0.79199999570846558" blue="0.15700000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.4309999942779541" green="0.27099999785423279" blue="0.15299999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="darkBrown">
             <color red="0.43137254901960786" green="0.27058823529411763" blue="0.15294117647058825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

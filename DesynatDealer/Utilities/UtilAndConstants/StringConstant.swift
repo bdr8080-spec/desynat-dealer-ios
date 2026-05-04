@@ -13,7 +13,7 @@ enum StringConstant: String {
     case cancel                     = "Cancel"
     
     func value() -> String {
-        return self.rawValue
+        return self.rawValue.localiz()
     }
 }
 
@@ -104,7 +104,7 @@ enum AlertConstant: String {
      
     
     func value() -> String {
-        return self.rawValue
+        return self.rawValue.localiz()
     }
 }
 

@@ -38,7 +38,7 @@ class MyProfileRellsViewController: UIViewController {
     }
     
     private func setupUI() {
-        captionView.layer.cornerRadius = 8
+        captionView.layer.cornerRadius = 12
         captionView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         captionView.clipsToBounds = true
         

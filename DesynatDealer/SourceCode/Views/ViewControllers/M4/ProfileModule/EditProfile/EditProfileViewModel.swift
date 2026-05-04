@@ -50,7 +50,7 @@ class EditProfileViewModel {
       errorMessage = .UploadAccountHolderImage
     }
     if errorMessage != .none {
-      hostVC.showAlert(msg: errorMessage.rawValue)
+        hostVC.showAlert(msg: errorMessage.rawValue.localiz())
     }
     hostVC.view.endEditing(true)
     return errorMessage == .none
@@ -151,7 +151,7 @@ class EditProfileViewModel {
     
     // Show alert if needed
     if errorMessage != .none {
-      hostVC.showAlert(msg: errorMessage.rawValue)
+        hostVC.showAlert(msg: errorMessage.rawValue.localiz())
     }
     
     hostVC.view.endEditing(true)

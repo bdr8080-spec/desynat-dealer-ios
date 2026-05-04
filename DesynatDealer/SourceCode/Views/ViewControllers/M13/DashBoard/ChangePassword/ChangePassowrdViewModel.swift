@@ -25,7 +25,4 @@ class ChangePassowrdViewModel:NSObject{
             self.hostVC.navigationController?.popViewController(animated: true)
         }
     }
-    
-    
-    
 }

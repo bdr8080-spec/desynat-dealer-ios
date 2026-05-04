@@ -36,18 +36,18 @@ class UploadNewReelViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        captionView.layer.cornerRadius = 8
+        captionView.layer.cornerRadius = 12
         captionView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         captionView.clipsToBounds = true
         if isComingForEdit {
             configData()
-            buttonTitleLabel.text = "Edit Reel"
-            titleLabel.text = "Edit reel"
+            buttonTitleLabel.text = "Edit Reel".localiz()
+            titleLabel.text = "Edit reel".localiz()
             uploadContentButtonOutlet.isHidden = true
             editButtonOutlet.isHidden = false
         } else {
-            buttonTitleLabel.text = "Upload Reel"
-            titleLabel.text = "Upload new reel"
+            buttonTitleLabel.text = "Upload Reel".localiz()
+            titleLabel.text = "Upload new reel".localiz()
             uploadContentButtonOutlet.isHidden = false
             editButtonOutlet.isHidden = true
         }

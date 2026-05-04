@@ -57,13 +57,13 @@ extension UIViewController {
             )
 
             // Yes Action
-            let yesButton = UIAlertAction(title: "Yes", style: .default) { _ in
+            let yesButton = UIAlertAction(title: "Yes".localiz(), style: .default) { _ in
                 UIViewController.isAlertVisible = false
                 completion?()
             }
 
             // Cancel Action (red color)
-            let cancelButton = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+            let cancelButton = UIAlertAction(title: "Cancel".localiz(), style: .cancel) { _ in
                 UIViewController.isAlertVisible = false
             }
 
@@ -388,19 +388,19 @@ extension UIViewController {
     func showNoActivePlanToast(message: String) {
 
         let alert = UIAlertController(
-            title: "No Active Plan",
+            title: "No Active Plan".localiz(),
             message: message,
             preferredStyle: .alert
         )
 
         // OK Button (Navigate)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+        alert.addAction(UIAlertAction(title: "OK".localiz(), style: .default, handler: { _ in
             let vc = MySubsciptionPlanViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
             self.navigationController?.pushViewController(vc, animated: true)
         }))
 
         // Cancel Button (Just close)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Cancel".localiz(), style: .cancel, handler: nil))
 
         self.present(alert, animated: true)
     }
