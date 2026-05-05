@@ -50,6 +50,20 @@ class HomeViewController: UIViewController {
     private var statsButtons: [UIButton] { [btnTotalOrderConversion, btnTotalCustomerVisits]}
     private var lineChartView = LineChartView()
     private lazy var viewModel = HomeViewModel(hostVC: self)
+    var selectedFilterType: Int = -1
+    private let displayFormatter: DateFormatter = {
+        let df = DateFormatter()
+        df.dateFormat = "dd/MM/yyyy"
+        df.locale = Locale(identifier: "en_US_POSIX")
+        return df
+    }()
+    private let apiFormatter: DateFormatter = {
+        let df = DateFormatter()
+        df.dateFormat = "yyyy-MM-dd"
+        df.locale = Locale(identifier: "en_US_POSIX")
+        return df
+    }()
+    var selectedGraphType: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,6 +90,7 @@ class HomeViewController: UIViewController {
         viewModel.getUserProfile()
         viewModel.getCountOfNotificationRequest()
         viewModel.getAdminStory()
+        viewModel.getDashboardApi(filterType: selectedFilterType, fromDate: "", toDate: "", dateAnalyticsFrom: "", dateAnalyticsTo: "")
     }
     
     @IBAction func btnDesynatShowDesign(_ sender: Any) {
@@ -126,7 +141,7 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func btnSelectDate(_ sender: UIButton) {
-        updateRadioSelection(for: dateButtons, selectedButton: sender)
+        updateRadioSelectionDashboard(for: dateButtons, selectedButton: sender)
     }
     
     @IBAction func btnChooseVisits(_ sender: UIButton) {
@@ -140,32 +155,102 @@ class HomeViewController: UIViewController {
     
     private func setUpButtons() {
         btnToggle.setImage(UIImage(named: "toggle_off"), for: .normal)
-        updateRadioSelection(for: dateButtons, selectedButton: btnToday)
+//        updateRadioSelection(for: dateButtons, selectedButton: btnToday)
         updateRadioSelection(for: statsButtons, selectedButton: btnTotalOrderConversion)
     }
     
+//    private func updateRadioSelection(for buttons: [UIButton], selectedButton: UIButton) {
+//        for button in buttons {
+//            if button == selectedButton {
+//                button.setImage(UIImage(named: "radio_select_brown"), for: .normal)
+//                selectedGraphType = button.tag
+//                setUpChart()
+//            } else {
+//                button.setImage(UIImage(named: "radio_unselect_brown"), for: .normal)
+//            }
+//        }
+//    }
     private func updateRadioSelection(for buttons: [UIButton], selectedButton: UIButton) {
-        for button in buttons {
-            if button == selectedButton {
-                button.setImage(UIImage(named: "radio_select_brown"), for: .normal)
-            } else {
-                button.setImage(UIImage(named: "radio_unselect_brown"), for: .normal)
-            }
+        if selectedButton.isSelected {
+            selectedButton.isSelected = false
+            selectedButton.setImage(UIImage(named: "radio_unselect_brown"), for: .normal)
+            selectedGraphType = -1
+            setUpChart()
+            return
         }
+        for button in buttons {
+            button.isSelected = (button == selectedButton)
+            button.setImage(
+                UIImage(named: button.isSelected ? "radio_select_brown" : "radio_unselect_brown"),
+                for: .normal
+            )
+        }
+        selectedGraphType = selectedButton.tag
+        setUpChart()
     }
     
-    private func setUpChart() {
+//    private func updateRadioSelectionDashboard(for buttons: [UIButton], selectedButton: UIButton) {
+//        for button in buttons {
+//            if button == selectedButton {
+//                button.setImage(UIImage(named: "radio_select_brown"), for: .normal)
+//                selectedFilterType = button.tag + 1
+//                viewModel.getDashboardApi(filterType: button.tag + 1, fromDate: "", toDate: "", dateAnalyticsFrom: "", dateAnalyticsTo: "")
+//            } else {
+//                button.setImage(UIImage(named: "radio_unselect_brown"), for: .normal)
+//            }
+//        }
+//    }
+    
+    private func updateRadioSelectionDashboard(for buttons: [UIButton], selectedButton: UIButton) {
+        if selectedButton.isSelected {
+            selectedButton.isSelected = false
+            selectedButton.setImage(UIImage(named: "radio_unselect_brown"), for: .normal)
+            selectedFilterType = 0
+            return
+        }
+        for button in buttons {
+            button.isSelected = (button == selectedButton)
+            button.setImage(
+                UIImage(named: button.isSelected ? "radio_select_brown" : "radio_unselect_brown"),
+                for: .normal
+            )
+        }
+        selectedFilterType = selectedButton.tag + 1
+//        viewModel.getDashboardApi(
+//            filterType: selectedFilterType,
+//            fromDate: "",
+//            toDate: "",
+//            dateAnalyticsFrom: "",
+//            dateAnalyticsTo: ""
+//        )
+        callDashboardAPIIfValid()
+    }
+    
+    func setUpChart() {
         lineChartView.frame = viewChart.bounds
         lineChartView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         viewChart.addSubview(lineChartView)
-        let months = ["Jan".localiz(), "Feb".localiz(), "Mar".localiz(), "Apr".localiz(), "May".localiz(), "Jun".localiz(), "Jul".localiz(), "Aug".localiz(), "Sep".localiz()]
-        let values: [Double] = [50, 200, 100, 400, 300, 220, 180, 250, 320]
-        
+        var months = [String]()
+        var values: [Int] = []
+        if selectedGraphType == 0 {
+            months.removeAll()
+            values.removeAll()
+            self.viewModel.dashBoardData?.orderAnalytics?.forEach { data in
+                months.append(data.month ?? "")
+                values.append(data.orders ?? 0)
+            }
+        }else {
+            months.removeAll()
+            values.removeAll()
+            self.viewModel.dashBoardData?.visitorAnalytics?.forEach { data in
+                months.append(data.month ?? "")
+                values.append(data.totalVisitors ?? 0)
+            }
+        }
         var entries: [ChartDataEntry] = []
         for (index, value) in values.enumerated() {
-            entries.append(ChartDataEntry(x: Double(index), y: value))
+            entries.append(ChartDataEntry(x: Double(index), y: Double(value)))
         }
-        
         let set = LineChartDataSet(entries: entries, label: "")
         set.mode = .linear
         set.lineWidth = 1.2
@@ -195,22 +280,25 @@ class HomeViewController: UIViewController {
     }
 }
 
-// Date Picker
 extension HomeViewController {
+    private func convertToDate(_ string: String) -> Date? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.date(from: string)
+    }
+    
     private func setUpTextFields() {
         datePicker.preferredDatePickerStyle = .wheels
         datePicker.datePickerMode = .date
         datePicker.minimumDate = nil
+        datePicker.maximumDate = Date()
         datePicker.backgroundColor = .white
-        
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
-        
         let doneButton = UIBarButtonItem(title: "Done".localiz(), style: .done, target: self, action: #selector(doneDatePicker))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let cancelButton = UIBarButtonItem(title: "Cancel".localiz(), style: .plain, target: self, action: #selector(cancelDatePicker))
         toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
-        
         let textFields = [txtChooseFromDate, txtChooseToDate, txtVisitorFromDate, txtVisitorToDate]
         textFields.forEach { textField in
             textField?.inputView = datePicker
@@ -219,33 +307,121 @@ extension HomeViewController {
         }
     }
     
+    //    @objc private func doneDatePicker() {
+    //        let formatter = DateFormatter()
+    //        formatter.dateFormat = "dd/MM/yyyy"
+    //        let formatter1 = DateFormatter()
+    //        formatter1.dateFormat = "yyyy-MM-dd"
+    //        guard let activeTextField = activeTextField else { return }
+    //        // Apply selected date
+    //        activeTextField.text = formatter.string(from: datePicker.date)
+    //        view.endEditing(true)
+    //        switch activeTextField {
+    //        case txtChooseFromDate:
+    //            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+    //                self.txtChooseToDate.becomeFirstResponder()
+    //            }
+    //
+    //        case txtVisitorFromDate:
+    //            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+    //                self.txtVisitorToDate.becomeFirstResponder()
+    //            }
+    //        default:
+    //            break
+    //        }
+    //    }
+    
     @objc private func doneDatePicker() {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM/yyyy"
-        
-        guard let activeTextField = activeTextField else { return }
-        
-        // Apply selected date
-        activeTextField.text = formatter.string(from: datePicker.date)
+        if activeTextField == txtChooseFromDate {
+            let selectedDate = datePicker.date
+            txtChooseFromDate.text = formatter.string(from: selectedDate)
+            if let toText = txtChooseToDate.text,
+               let toDate = convertToDate(toText),
+               toDate < selectedDate {
+                txtChooseToDate.text = ""
+            }
+        }
+        else if activeTextField == txtChooseToDate {
+            let selectedDate = datePicker.date
+            txtChooseToDate.text = formatter.string(from: selectedDate)
+        }
+        if activeTextField == txtVisitorFromDate {
+            let selectedDate = datePicker.date
+            txtVisitorFromDate.text = formatter.string(from: selectedDate)
+            if let toText = txtVisitorToDate.text,
+               let toDate = convertToDate(toText),
+               toDate < selectedDate {
+                txtVisitorToDate.text = ""
+            }
+        }
+        else if activeTextField == txtVisitorToDate {
+            let selectedDate = datePicker.date
+            txtVisitorToDate.text = formatter.string(from: selectedDate)
+        }
         view.endEditing(true)
-        
-        // Handle automatic focus movement
-        switch activeTextField {
-        case txtChooseFromDate:
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                self.txtChooseToDate.becomeFirstResponder()
-            }
-            
-        case txtVisitorFromDate:
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                self.txtVisitorToDate.becomeFirstResponder()
-            }
-            
-        default:
-            break
+        if let from = txtChooseFromDate.text,
+           let to = txtChooseToDate.text,
+           !from.isEmpty, !to.isEmpty {
+            callDashboardAPIIfValid()
+        }
+        if let from = txtVisitorFromDate.text,
+           let to = txtVisitorToDate.text,
+           !from.isEmpty, !to.isEmpty {
+            callDashboardAPIIfValid()
         }
     }
     
+    func callDashboardAPIIfValid() {
+        var fromDate = ""
+        var toDate = ""
+        var analyticsFrom = ""
+        var analyticsTo = ""
+        if let text = txtChooseFromDate.text,
+           let date = displayFormatter.date(from: text) {
+            fromDate = apiFormatter.string(from: date)
+        }
+        if let text = txtChooseToDate.text,
+           let date = displayFormatter.date(from: text) {
+            toDate = apiFormatter.string(from: date)
+        }
+        if let text = txtVisitorFromDate.text,
+           let date = displayFormatter.date(from: text) {
+            analyticsFrom = apiFormatter.string(from: date)
+        }
+        if let text = txtVisitorToDate.text,
+           let date = displayFormatter.date(from: text) {
+            analyticsTo = apiFormatter.string(from: date)
+        }
+        if let from = displayFormatter.date(from: txtChooseFromDate.text ?? ""),
+           let to = displayFormatter.date(from: txtChooseToDate.text ?? ""),
+           from > to {
+            CommonUtils.showToast(message: "From date cannot be greater than To date".localiz())
+            return
+        }
+        if let from = displayFormatter.date(from: txtVisitorFromDate.text ?? ""),
+           let to = displayFormatter.date(from: txtVisitorToDate.text ?? ""),
+           from > to {
+            CommonUtils.showToast(message: "From date cannot be greater than To date".localiz())
+            return
+        }
+        if (fromDate.isEmpty && !toDate.isEmpty) || (!fromDate.isEmpty && toDate.isEmpty) {
+            CommonUtils.showToast(message: "Select both From and To dates".localiz())
+            return
+        }
+        if (analyticsFrom.isEmpty && !analyticsTo.isEmpty) || (!analyticsFrom.isEmpty && analyticsTo.isEmpty) {
+            CommonUtils.showToast(message: "Select both Visitor dates".localiz())
+            return
+        }
+        viewModel.getDashboardApi(
+            filterType: selectedFilterType,
+            fromDate: fromDate,
+            toDate: toDate,
+            dateAnalyticsFrom: analyticsFrom,
+            dateAnalyticsTo: analyticsTo
+        )
+    }
     @objc private func cancelDatePicker() {
         view.endEditing(true)
     }
@@ -254,17 +430,35 @@ extension HomeViewController {
 //TExtField Delegate
 extension HomeViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        //        activeTextField = textField
+        //        let formatter = DateFormatter()
+        //        formatter.dateFormat = "dd/MM/yyyy"
+        //        if textField == txtChooseToDate, let fromDateText = txtChooseFromDate.text, let fromDate = formatter.date(from: fromDateText) {
+        //            datePicker.minimumDate = fromDate
+        //        } else if textField == txtVisitorToDate, let fromDateText = txtVisitorFromDate.text, let fromDate = formatter.date(from: fromDateText) {
+        //            datePicker.minimumDate = fromDate
+        //        } else {
+        //            datePicker.minimumDate = nil
+        //        }
         activeTextField = textField
-        
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd/MM/yyyy"
-        
-        if textField == txtChooseToDate, let fromDateText = txtChooseFromDate.text, let fromDate = formatter.date(from: fromDateText) {
-            datePicker.minimumDate = fromDate
-        } else if textField == txtVisitorToDate, let fromDateText = txtVisitorFromDate.text, let fromDate = formatter.date(from: fromDateText) {
-            datePicker.minimumDate = fromDate
-        } else {
+        updateDatePickerRange()
+    }
+    private func updateDatePickerRange() {
+        if activeTextField == txtChooseFromDate {
+            // From date: no restriction (or max = today)
             datePicker.minimumDate = nil
+            datePicker.maximumDate = Date()
+        }
+        else if activeTextField == txtChooseToDate {
+            // If from date exists → restrict to date
+            if let fromText = txtChooseFromDate.text,
+               let fromDate = convertToDate(fromText) {
+                datePicker.minimumDate = fromDate
+            } else {
+                // If no from date selected → block future selection until today logic
+                datePicker.minimumDate = nil
+            }
+            datePicker.maximumDate = Date()
         }
     }
 }

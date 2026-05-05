@@ -952,3 +952,6 @@
 "Write caption here..." = "اكتب التسمية هنا...";
 "Upload Now" = "تحميل الآن";
 "IBAN" = "الآيبان";
+"Select both From and To dates" = "يرجى اختيار تاريخي من وإلى";
+"Select both Visitor dates" = "يرجى اختيار تاريخي الزوار (من وإلى)";
+"From date cannot be greater than To date" = "لا يمكن أن يكون تاريخ من أكبر من تاريخ إلى";

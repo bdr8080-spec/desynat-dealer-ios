@@ -8,7 +8,9 @@
 import Foundation
 import UIKit
 import Alamofire
+
 extension WebService {
+    
     func uploadVideoAndImage(withParams file:MultipartUpload,
                     completion:@escaping (_ url:String, _ msg:String?, _ code:HTTPStatusCode?)-> Void) {
         CommonUtils.showHud(show: true)
@@ -39,6 +41,7 @@ extension WebService {
             }
         }
     }
+    
     func addNewHeightlightServices(param: [String :Any], completion:@escaping (_ user: EmptyModel)-> Void) {
         CommonUtils.showHud(show: true)
         NetworkManager.shared.request(withAPI:.endpoint(.addNewHighlights), requestMethod: .post, requestParams: param, requestModel: EmptyModel.self) { result, code in
@@ -201,6 +204,22 @@ extension WebService {
     func raiseTicketForNormalUserService(param: [String:Any], completion:@escaping (_ user: EmptyModel)-> Void) {
         CommonUtils.showHud(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.raiseTicket), requestMethod: .post, requestParams: param, requestModel: EmptyModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func sellerDashboardService(param: [String:Any],completion:@escaping (_ user: DashboardData)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.sellerDashboard), requestMethod: .get,requestParams: param, requestModel: DashboardData.self) { result, code in
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {

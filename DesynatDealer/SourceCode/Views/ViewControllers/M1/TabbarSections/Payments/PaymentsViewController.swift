@@ -87,10 +87,26 @@ class PaymentsViewController: UIViewController {
         navigationController?.present(vc, animated: false)
     }
     
+    @IBAction func exportTapped(_ sender: Any) {
+        var csv = "Name,Email,Phone,Country,Joined On,Wallet Balance,Status\n"
+//                for user in viewModel.usersListData {
+//                    let name = user.fullName ?? ""
+//                    let email = user.email ?? ""
+//                    let phone = "\(user.countryCode ?? "")-\(user.mobile ?? "")"
+//                    let country = user.countryInfo?.name ?? ""
+//                    let joined = user.createdAt ?? ""
+//                    let wallet = user.walletInfo?.amount ?? "0"
+//                    let status = user.status == "1" ? "Active" : "Blocked"
+//                    let row = "\(name),\(email),\(phone),\(country),\(joined),\(wallet),\(status)\n"
+//                    csv.append(row)
+//                }
+                CSVExporter.exportCSV(fileName: "User Management", csvString: csv, vc: self)
+         
+    }
+    
     @IBAction func refreshDidTapped(_ sender: Any) {
         viewModel.getWalletHistory()
     }
-
 }
 
 // MARK: - TABLE VIEW METHODS

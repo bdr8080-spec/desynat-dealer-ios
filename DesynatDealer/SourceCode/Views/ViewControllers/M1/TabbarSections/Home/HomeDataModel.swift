@@ -48,3 +48,47 @@ struct NotificationCountDataModel: Codable {
         case chatUnreadCount = "chat_unread_count"
     }
 }
+
+// MARK: - Dashboard Data
+struct DashboardData: Codable {
+    var totalRevenue: String?
+    var totalProducts, totalActiveProducts, totalInactiveProducts, totalOrders: Int?
+    var totalNewOrders, totalOngoingOrders, totalCompletedOrders, totalCancelledOrders: Int?
+    var totalStaff, totalActiveStaff, totalInactiveStaff: Int?
+    var orderAnalytics: [DashboardOrderAnalytic]?
+    var visitorAnalytics: [DashboardVisitorAnalytic]?
+    
+    enum CodingKeys: String, CodingKey {
+        case totalRevenue = "total_revenue"
+        case totalProducts = "total_products"
+        case totalActiveProducts = "total_active_products"
+        case totalInactiveProducts = "total_inactive_products"
+        case totalOrders = "total_orders"
+        case totalNewOrders = "total_new_orders"
+        case totalOngoingOrders = "total_ongoing_orders"
+        case totalCompletedOrders = "total_completed_orders"
+        case totalCancelledOrders = "total_cancelled_orders"
+        case totalStaff = "total_staff"
+        case totalActiveStaff = "total_active_staff"
+        case totalInactiveStaff = "total_inactive_staff"
+        case orderAnalytics = "order_analytics"
+        case visitorAnalytics = "visitor_analytics"
+    }
+}
+
+// MARK: - OrderAnalytic
+struct DashboardOrderAnalytic: Codable {
+    var month: String?
+    var orders: Int?
+}
+
+// MARK: - VisitorAnalytic
+struct DashboardVisitorAnalytic: Codable {
+    var month: String?
+    var totalVisitors: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case month
+        case totalVisitors = "total_visitors"
+    }
+}

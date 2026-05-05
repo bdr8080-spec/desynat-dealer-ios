@@ -13,9 +13,54 @@ class HomeViewModel {
     
     private var hostVC: HomeViewController
     var storeAvailabilityModel: StoreAvailabilityStatusModel?
+    var dashBoardData:DashboardData?
     
     init(hostVC: HomeViewController) {
         self.hostVC = hostVC
+    }
+    
+    func getDashboardApi(filterType:Int?,fromDate:String?,toDate:String?,dateAnalyticsFrom:String?,dateAnalyticsTo:String?) {
+        var param = [String:Any]()
+        if filterType ?? 0 > 0 {
+           param = ["filter":filterType ?? 0]
+        }
+//        if fromDate != "" && toDate != "" {
+//            param = ["from_date":fromDate ?? "",
+//                                        "to_date":toDate ?? ""]
+//        }
+//        if dateAnalyticsTo != "" && dateAnalyticsFrom != "" {
+//            param = ["from_date_analytics":dateAnalyticsFrom ?? "",
+//                                        "to_date_analytics":dateAnalyticsTo ?? ""]
+//        }
+        
+        if let from = fromDate, let to = toDate, !from.isEmpty, !to.isEmpty {
+            param["from_date"] = from
+            param["to_date"] = to
+        } else if let filter = filterType, filter > 0 {
+//            param["filter"] = filter
+        }
+        
+        if let aFrom = dateAnalyticsFrom, let aTo = dateAnalyticsTo, !aFrom.isEmpty, !aTo.isEmpty {
+            param["from_date_analytics"] = aFrom
+            param["to_date_analytics"] = aTo
+        }
+        WebService.sharedInstance.sellerDashboardService(param: param) { data in
+            self.dashBoardData = data
+            let text = "KD".localiz()
+            self.hostVC.lblTotalRevenue.text = "\(self.dashBoardData?.totalRevenue ?? "") \(text)"
+            self.hostVC.lblActiveProducts.text = "\(self.dashBoardData?.totalActiveProducts ?? 0)"
+            self.hostVC.lblInActiveProducts.text = "\(self.dashBoardData?.totalInactiveProducts ?? 0)"
+            self.hostVC.lblCompletedOrders.text = "\(self.dashBoardData?.totalCompletedOrders ?? 0)"
+            self.hostVC.lblCancelledOrders.text = "\(self.dashBoardData?.totalCancelledOrders ?? 0)"
+            self.hostVC.lblActiveStaff.text = "\(self.dashBoardData?.totalActiveStaff ?? 0)"
+            self.hostVC.lblInActiveStaff.text = "\(self.dashBoardData?.totalInactiveStaff ?? 0)"
+            self.hostVC.lblNewOrders.text = "\(self.dashBoardData?.totalNewOrders ?? 0)"
+            self.hostVC.lblOngoingOrders.text = "\(self.dashBoardData?.totalOngoingOrders ?? 0)"
+            self.hostVC.lblTotalProducts.text = "(\(self.dashBoardData?.totalProducts ?? 0))"
+            self.hostVC.lblTotalOrders.text = "(\(self.dashBoardData?.totalOrders ?? 0))"
+            self.hostVC.lblTotalStaff.text = "(\(self.dashBoardData?.totalStaff ?? 0))"
+            self.hostVC.setUpChart()
+        }
     }
     
     func getCountOfNotificationRequest(){
@@ -27,7 +72,6 @@ class HomeViewModel {
             } else {
                 self.hostVC.notificationCountView.isHidden = true
             }
-            
             let chatUnreadCount = response.chatUnreadCount ?? 0
             if chatUnreadCount > 0 {
                 self.hostVC.messageCountView.isHidden = false
@@ -102,5 +146,4 @@ class HomeViewModel {
             }
         })
     }
-    
 }
