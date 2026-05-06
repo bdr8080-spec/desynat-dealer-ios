@@ -62,8 +62,80 @@ class RefundManagementViewController: UIViewController {
             self.viewModel.hasMoreData = true
             self.viewModel.getAllRefundManagementRequest()
         }
-        
         navigationController?.present(vc, animated: false)
+    }
+    
+    @IBAction func exportBtn(_ sender: Any) {
+        var csv = "Order Date,Customer Name,Refund ID,Total Amount,Total Commission,Payment Mode,Requested On,Return Reason\n"
+        for item in viewModel.refundRequestList {
+            let orderDate = customizeChangeDateFormatZone(
+                inputDate: item.createdAt ?? "",
+                inputFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+                outputFormat: "dd/MM/yyyy 'at' hh:mm a"
+            )
+            let customerName = item.order?.deliveryDetails?.name ?? ""
+            let refundId = "#\(item.id ?? 0)"
+            let totalAmount = CommonUtils.formatPriceStringInput(item.order?.totalAmount)
+            let affiliateCommission = Double(item.affiliateCommission ?? "0") ?? 0
+            let adminCommission = Double(item.adminCommission ?? "0") ?? 0
+            let totalCommission = CommonUtils.formatPrice(affiliateCommission + adminCommission)
+            let paymentMethod = item.order?.paymentMethod ?? "1"
+            let paymentMode: String
+            switch paymentMethod {
+            case "1":
+                paymentMode = "Online"
+            case "2":
+                paymentMode = "Wallet"
+            default:
+                paymentMode = "Via COD"
+            }
+            let requestedOn = formatDateString(
+                item.order?.updatedAt ?? "",
+                returnFormat: "dd/MM/yyyy"
+            )
+            let reason = item.returnReason ?? item.cancelReason ?? item.cancelReason ?? ""
+            let row = "\"\(orderDate)\",\"\(customerName)\",\"\(refundId)\",\"\(totalAmount)\",\"\(totalCommission)\",\"\(paymentMode)\",\"\(requestedOn)\",\"\(reason)\"\n"
+            csv.append(row)
+        }
+        CSVExporter.exportCSV(fileName: "RefundManagement", csvString: csv, vc: self)
+    }
+    
+    func formatDateString(_ dateString: String, returnFormat: String) -> String {
+        let inputFormatter = ISO8601DateFormatter()
+        inputFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        
+        guard let date = inputFormatter.date(from: dateString) else {
+            return ""
+        }
+        
+        let outputFormatter = DateFormatter()
+        outputFormatter.dateFormat = returnFormat
+        outputFormatter.locale = Locale(identifier: "en_US_POSIX")
+        
+        return outputFormatter.string(from: date)
+    }
+    
+    func customizeChangeDateFormatZone(
+        inputDate: String,
+        inputFormat: String = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'",
+        outputFormat: String = "dd/MM/yyyy 'at' hh:mm a"
+    ) -> String {
+        
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = inputFormat
+        inputFormatter.locale = Locale(identifier: "en_US_POSIX")
+        inputFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+        
+        guard let date = inputFormatter.date(from: inputDate) else {
+            return ""
+        }
+        
+        let outputFormatter = DateFormatter()
+        outputFormatter.dateFormat = outputFormat
+        outputFormatter.locale = Locale(identifier: "en_US_POSIX")
+        outputFormatter.timeZone = TimeZone(identifier: "Asia/Kuwait")
+        
+        return outputFormatter.string(from: date)
     }
 }
 

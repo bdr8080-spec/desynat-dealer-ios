@@ -14,6 +14,7 @@
 //
 
 import Foundation
+
 class CMSViewModel {
     private var hostVC: CMSViewController
     var cmsDetailsData: CMSTermsConditionDataModel?
