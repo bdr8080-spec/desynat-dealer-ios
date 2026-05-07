@@ -429,6 +429,11 @@ final class NetworkManager {
             headers.add(name: "session_token", value: sessionToken)
         }
         
+        headers.add(
+            name: "Accept-Language",
+            value: AppLanguageManager.shared.currentLanguage == .ar ? "ar" : "en"
+        )
+        
         return headers
     }
     
@@ -446,7 +451,7 @@ final class NetworkManager {
             completion(nil)
         }
     }
-
+    
     public func requestMultiPartForVideoAndAudio<T: Decodable>(
         url: NetworkURL,
         assets: [MultipartUpload],

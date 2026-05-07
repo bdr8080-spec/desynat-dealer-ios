@@ -96,7 +96,7 @@ extension PaymentFilterViewController:  UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FiltersOptionsTableViewCell", for: indexPath) as! FiltersOptionsTableViewCell
-        cell.titleLabel.text = filtersOptions[indexPath.row]
+        cell.titleLabel.text = filtersOptions[indexPath.row].localiz()
         if selectedIndex == indexPath.row {
             cell.mainImageView.image = .filledCheckbox//UIImage(named: "filledCheckbox")
         } else {
@@ -118,7 +118,11 @@ extension PaymentFilterViewController {
         datePicker.datePickerMode = .date
         datePicker.minimumDate = nil
         datePicker.backgroundColor = .white
-        
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            datePicker.locale = Locale(identifier: "ar")
+        } else {
+            datePicker.locale = Locale(identifier: "en_US")
+        }
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         

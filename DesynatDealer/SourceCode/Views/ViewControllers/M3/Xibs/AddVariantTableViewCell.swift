@@ -48,6 +48,7 @@ class AddVariantTableViewCell: UITableViewCell {
   
   override func awakeFromNib() {
     super.awakeFromNib()
+      titleLabel.text = "Variant 1".localiz()
     registerCell()
     self.sizeVariantTableView.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
   }

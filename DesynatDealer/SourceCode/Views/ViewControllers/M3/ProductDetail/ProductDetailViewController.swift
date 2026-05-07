@@ -84,6 +84,7 @@ class ProductDetailViewController: UIViewController {
     @IBOutlet weak var lblReviewRatingTitle: UILabel!
     @IBOutlet weak var lblIsItAffTitle: UILabel!
     @IBOutlet weak var lblSpecificationTitle: UILabel!
+    @IBOutlet weak var sizeGuideButton: UIButton!
     
     private var selectedColourIndex = 0
     private var selectedSizeIndex = 0
@@ -104,6 +105,7 @@ class ProductDetailViewController: UIViewController {
         self.lblIsItAffTitle.text = "Is it an Affiliated Product?".localiz()
         buttonActionStackView.isHidden = !hasActionPermission
         statusButton.isUserInteractionEnabled = hasActionPermission
+        sizeGuideButton.setTitle("Size Guide".localiz(), for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -174,24 +176,39 @@ class ProductDetailViewController: UIViewController {
     
     func configData(data: ProductsList) {
         // MARK: - Basic Product info
-        //      titlePageLabel.text = data.brand?.nameEnglish ?? ""
-        if data.brand?.nameEnglish == "Other" {
-            productNameLabel.text = data.otherEn
-            titlePageLabel.text = data.otherEn
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            if data.brand?.nameEnglish == "Other" {
+                productNameLabel.text = data.otherAr
+                titlePageLabel.text = data.otherAr
+            } else {
+                productNameLabel.text = data.brand?.nameArabic
+                titlePageLabel.text = data.brand?.nameArabic
+            }
+            
+            descriptionLAbel.text = data.productNameAr ?? "-"
+            descriptionLabel.text = data.descriptionAr ?? "-"
+            brandCategoryLabel.text = data.category?.nameAr ?? ""
         } else {
-            productNameLabel.text = data.brand?.nameEnglish
-            titlePageLabel.text = data.brand?.nameEnglish
+            if data.brand?.nameEnglish == "Other" {
+                productNameLabel.text = data.otherEn
+                titlePageLabel.text = data.otherEn
+            } else {
+                productNameLabel.text = data.brand?.nameEnglish
+                titlePageLabel.text = data.brand?.nameEnglish
+            }
+            
+            descriptionLAbel.text = data.productNameEn ?? "-"
+            descriptionLabel.text = data.descriptionEn ?? "-"
+            brandCategoryLabel.text = data.category?.name ?? ""
         }
         
-        descriptionLAbel.text = data.productNameEn ?? "-"
-        descriptionLabel.text = data.descriptionEn ?? "-"
         let text = "Added on -".localiz()
         addedOnLabel.text = "\(text) \(convertDate(data.createdAt ?? ""))"
-        brandCategoryLabel.text = data.category?.name ?? ""//"\(data.brand?.nameEnglish ?? "")  (\(data.category?.name ?? ""))"
+        //"\(data.brand?.nameEnglish ?? "")  (\(data.category?.name ?? ""))"
         ratingCountLabel.text = " (\(data.reviewRating ?? "0"))"
         sizeChartUrl = data.uploadSizeChart
-        let categoryName = data.category?.name ?? "Women".localiz()
-        if categoryName == "Women".localiz() {
+        let categoryName = data.category?.name ?? "Women"
+        if categoryName == "Women" {
             womenDetailsView.isHidden = false
             bustView.isHidden = false
             hipView.isHidden = false
@@ -220,14 +237,14 @@ class ProductDetailViewController: UIViewController {
         }
         
         // MARK: - Switch Labels (YES / NO)
-        cashOnDeliveryLabel.text = data.cashOnDelivery == "1" ? "Yes" : "No"
-        readyToShipLabel.text = data.readyToShip == "1" ? "Yes" : "No"
-        customizableLabel.text = data.customizedProduct == "1" ? "Yes" : "No"
-        affiliatedLabel.text = data.affiliatedProduct == "1" ? "Yes" : "No"
-        ratingReviewALlowedLabel.text = data.reviewRating == "1" ? "Yes" : "No"
+        cashOnDeliveryLabel.text = data.cashOnDelivery == "1" ? "Yes".localiz() : "No".localiz()
+        readyToShipLabel.text = data.readyToShip == "1" ? "Yes".localiz() : "No".localiz()
+        customizableLabel.text = data.customizedProduct == "1" ? "Yes".localiz() : "No".localiz()
+        affiliatedLabel.text = data.affiliatedProduct == "1" ? "Yes".localiz() : "No".localiz()
+        ratingReviewALlowedLabel.text = data.reviewRating == "1" ? "Yes".localiz() : "No".localiz()
         let text1 = "days".localiz()
-        returnAllowedLAbel.text = data.productReturn == "1" ? "\(data.returnDays ?? "") \(text1)" : "No"
-        exchnageAllowedLAbel.text = data.productExchangable == "1" ? "\(data.exchangableDays ?? "") \(text)" : "No"
+        returnAllowedLAbel.text = data.productReturn == "1" ? "\(data.returnDays ?? "") \(text1)" : "No".localiz()
+        exchnageAllowedLAbel.text = data.productExchangable == "1" ? "\(data.exchangableDays ?? "") \(text)" : "No".localiz()
         
         // In configData
         productVariants = data.productVariants ?? []
@@ -313,9 +330,9 @@ class ProductDetailViewController: UIViewController {
         //    } else {
         //      discountPriceALbel.text = "\(variant.discountValue ?? "") KD Off"
         //    }
-        let text = "KD".localiz()
-        finalPriceLabel.text = "\(variant.finalPrice ?? "0") \(text)"
-        CommonUtils.setStrikethrough(label: actualPriceLAbel, text: "\(variant.actualPrice ?? "0") \(text)")
+//        let text = "KD".localiz()
+        finalPriceLabel.text = CommonUtils.formatPriceStringInput(variant.finalPrice ?? "0")
+        CommonUtils.setStrikethrough(label: actualPriceLAbel, text: CommonUtils.formatPriceStringInput(variant.actualPrice ?? "0"))
         
         CommonUtils.updateDiscountPercentageLabel(discountPriceALbel,
                                                   actualAmountLabel: actualPriceLAbel,

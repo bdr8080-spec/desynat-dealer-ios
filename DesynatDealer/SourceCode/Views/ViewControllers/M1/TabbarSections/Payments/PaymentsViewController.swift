@@ -10,7 +10,6 @@ import UIKit
 class PaymentsViewController: UIViewController {
 
     // MARK: - IBOutlet's
-    
     @IBOutlet weak var allTransactionButton: CustomButton!
     @IBOutlet weak var allTrasnactionLabel: UILabel!
     @IBOutlet weak var myPayoutButton: CustomButton!
@@ -121,12 +120,13 @@ extension PaymentsViewController: UITableViewDataSource, UITableViewDelegate {
         case .allTrasanctions:
             let cell = tableView.dequeueReusableCell(withIdentifier: "PaymentsHistoryTableViewCell", for: indexPath) as! PaymentsHistoryTableViewCell
 //            let data = viewModel.paymentListData?.orders?.data?[indexPath.row]
-//            cell.configData(data: data)
+            cell.configData()
             return cell
         case .myPayouts:
             let cell = tableView.dequeueReusableCell(withIdentifier: "MyPayoutsTableViewCell", for: indexPath) as! MyPayoutsTableViewCell
 //            let data = viewModel.paymentListData?.orders?.data?[indexPath.row]
 //            cell.configData(data: data)
+            cell.configData()
             return cell
         }
         

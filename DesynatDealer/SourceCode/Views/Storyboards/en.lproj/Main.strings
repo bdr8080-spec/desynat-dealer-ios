@@ -411,7 +411,7 @@
 "nCb-gq-UJo.text" = "Mail Id";
 
 /* Class = "UILabel"; text = "Welcome back ! "; ObjectID = "nS8-XT-bgz"; */
-"nS8-XT-bgz.text" = "Welcome back ! ";
+"nS8-XT-bgz.text" = "Welcome back !";
 
 /* Class = "UIButton"; normalTitle = "Sign up"; ObjectID = "nWR-W7-6Qa"; */
 "nWR-W7-6Qa.normalTitle" = "Sign up";

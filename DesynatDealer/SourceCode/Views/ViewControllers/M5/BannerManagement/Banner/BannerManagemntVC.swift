@@ -74,7 +74,6 @@ extension BannerManagemntVC: UITableViewDelegate, UITableViewDataSource {
         cell.configure(with: banner, hasActionPermission: hasActionPermission)
         cell.onPayTap = {
             let vc = PaymentMethodVC.instantiate(fromAppStoryboard: .Main)
-            //vc.transactionIds = banner.orderID ?? ""
             vc.paymentFrom = .banner
             vc.transactionIds = banner.orderID ?? ""
             vc.payAmount = Double(banner.price ?? "") ?? 0

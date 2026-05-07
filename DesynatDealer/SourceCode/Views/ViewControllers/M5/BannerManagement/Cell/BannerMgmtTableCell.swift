@@ -44,8 +44,8 @@ class BannerMgmtTableCell: UITableViewCell {
         }
         
         lblRequestedId.text = data.orderID ?? "Nil".localiz()
-        let text = "KD".localiz()
-        lblTotalAmount.text = "\(data.price ?? "0") \(text)"
+//        let text = "KD".localiz()
+        lblTotalAmount.text = CommonUtils.formatPriceStringInput(data.price ?? "0")
         lblRequestedOn.text = formatDate(data.createdAt)
         
         
@@ -164,6 +164,7 @@ class BannerMgmtTableCell: UITableViewCell {
 
 extension BannerMgmtTableCell {
     private func formatDate(_ dateString: String?) -> String {
+        
         guard let dateString = dateString else { return "-" }
         
         let inputFormatter = DateFormatter()
@@ -176,10 +177,21 @@ extension BannerMgmtTableCell {
         }
         
         let outputFormatter = DateFormatter()
-        outputFormatter.locale = Locale(identifier: "en_US_POSIX")
         outputFormatter.timeZone = TimeZone.current
-        outputFormatter.dateFormat = "dd/MM/yyyy 'at' hh:mm a"
         
-        return outputFormatter.string(from: date)
+        // ✅ Localize month + AM/PM + digits
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            outputFormatter.locale = Locale(identifier: "ar")
+        } else {
+            outputFormatter.locale = Locale(identifier: "en_US_POSIX")
+        }
+        
+        outputFormatter.dateFormat = "dd MMM yyyy 'at' hh:mm a"
+        
+        let localizedAt = "at".localiz()
+        
+        return outputFormatter
+            .string(from: date)
+            .replacingOccurrences(of: "at", with: localizedAt)
     }
 }

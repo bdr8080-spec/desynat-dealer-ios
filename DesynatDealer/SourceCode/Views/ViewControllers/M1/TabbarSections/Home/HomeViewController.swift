@@ -155,21 +155,21 @@ class HomeViewController: UIViewController {
     
     private func setUpButtons() {
         btnToggle.setImage(UIImage(named: "toggle_off"), for: .normal)
-//        updateRadioSelection(for: dateButtons, selectedButton: btnToday)
+        //        updateRadioSelection(for: dateButtons, selectedButton: btnToday)
         updateRadioSelection(for: statsButtons, selectedButton: btnTotalOrderConversion)
     }
     
-//    private func updateRadioSelection(for buttons: [UIButton], selectedButton: UIButton) {
-//        for button in buttons {
-//            if button == selectedButton {
-//                button.setImage(UIImage(named: "radio_select_brown"), for: .normal)
-//                selectedGraphType = button.tag
-//                setUpChart()
-//            } else {
-//                button.setImage(UIImage(named: "radio_unselect_brown"), for: .normal)
-//            }
-//        }
-//    }
+    //    private func updateRadioSelection(for buttons: [UIButton], selectedButton: UIButton) {
+    //        for button in buttons {
+    //            if button == selectedButton {
+    //                button.setImage(UIImage(named: "radio_select_brown"), for: .normal)
+    //                selectedGraphType = button.tag
+    //                setUpChart()
+    //            } else {
+    //                button.setImage(UIImage(named: "radio_unselect_brown"), for: .normal)
+    //            }
+    //        }
+    //    }
     private func updateRadioSelection(for buttons: [UIButton], selectedButton: UIButton) {
         if selectedButton.isSelected {
             selectedButton.isSelected = false
@@ -189,17 +189,17 @@ class HomeViewController: UIViewController {
         setUpChart()
     }
     
-//    private func updateRadioSelectionDashboard(for buttons: [UIButton], selectedButton: UIButton) {
-//        for button in buttons {
-//            if button == selectedButton {
-//                button.setImage(UIImage(named: "radio_select_brown"), for: .normal)
-//                selectedFilterType = button.tag + 1
-//                viewModel.getDashboardApi(filterType: button.tag + 1, fromDate: "", toDate: "", dateAnalyticsFrom: "", dateAnalyticsTo: "")
-//            } else {
-//                button.setImage(UIImage(named: "radio_unselect_brown"), for: .normal)
-//            }
-//        }
-//    }
+    //    private func updateRadioSelectionDashboard(for buttons: [UIButton], selectedButton: UIButton) {
+    //        for button in buttons {
+    //            if button == selectedButton {
+    //                button.setImage(UIImage(named: "radio_select_brown"), for: .normal)
+    //                selectedFilterType = button.tag + 1
+    //                viewModel.getDashboardApi(filterType: button.tag + 1, fromDate: "", toDate: "", dateAnalyticsFrom: "", dateAnalyticsTo: "")
+    //            } else {
+    //                button.setImage(UIImage(named: "radio_unselect_brown"), for: .normal)
+    //            }
+    //        }
+    //    }
     
     private func updateRadioSelectionDashboard(for buttons: [UIButton], selectedButton: UIButton) {
         if selectedButton.isSelected {
@@ -216,13 +216,13 @@ class HomeViewController: UIViewController {
             )
         }
         selectedFilterType = selectedButton.tag + 1
-//        viewModel.getDashboardApi(
-//            filterType: selectedFilterType,
-//            fromDate: "",
-//            toDate: "",
-//            dateAnalyticsFrom: "",
-//            dateAnalyticsTo: ""
-//        )
+        //        viewModel.getDashboardApi(
+        //            filterType: selectedFilterType,
+        //            fromDate: "",
+        //            toDate: "",
+        //            dateAnalyticsFrom: "",
+        //            dateAnalyticsTo: ""
+        //        )
         callDashboardAPIIfValid()
     }
     
@@ -236,14 +236,16 @@ class HomeViewController: UIViewController {
             months.removeAll()
             values.removeAll()
             self.viewModel.dashBoardData?.orderAnalytics?.forEach { data in
-                months.append(data.month ?? "")
+//                months.append(data.month ?? "")
+                months.append(CommonUtils.localizedMonth(data.month ?? ""))
                 values.append(data.orders ?? 0)
             }
         }else {
             months.removeAll()
             values.removeAll()
             self.viewModel.dashBoardData?.visitorAnalytics?.forEach { data in
-                months.append(data.month ?? "")
+//                months.append(data.month ?? "")
+                months.append(CommonUtils.localizedMonth(data.month ?? ""))
                 values.append(data.totalVisitors ?? 0)
             }
         }
@@ -293,6 +295,11 @@ extension HomeViewController {
         datePicker.minimumDate = nil
         datePicker.maximumDate = Date()
         datePicker.backgroundColor = .white
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            datePicker.locale = Locale(identifier: "ar")
+        } else {
+            datePicker.locale = Locale(identifier: "en_US")
+        }
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         let doneButton = UIBarButtonItem(title: "Done".localiz(), style: .done, target: self, action: #selector(doneDatePicker))
@@ -306,30 +313,6 @@ extension HomeViewController {
             textField?.delegate = self
         }
     }
-    
-    //    @objc private func doneDatePicker() {
-    //        let formatter = DateFormatter()
-    //        formatter.dateFormat = "dd/MM/yyyy"
-    //        let formatter1 = DateFormatter()
-    //        formatter1.dateFormat = "yyyy-MM-dd"
-    //        guard let activeTextField = activeTextField else { return }
-    //        // Apply selected date
-    //        activeTextField.text = formatter.string(from: datePicker.date)
-    //        view.endEditing(true)
-    //        switch activeTextField {
-    //        case txtChooseFromDate:
-    //            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-    //                self.txtChooseToDate.becomeFirstResponder()
-    //            }
-    //
-    //        case txtVisitorFromDate:
-    //            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-    //                self.txtVisitorToDate.becomeFirstResponder()
-    //            }
-    //        default:
-    //            break
-    //        }
-    //    }
     
     @objc private func doneDatePicker() {
         let formatter = DateFormatter()
@@ -430,16 +413,6 @@ extension HomeViewController {
 //TExtField Delegate
 extension HomeViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        //        activeTextField = textField
-        //        let formatter = DateFormatter()
-        //        formatter.dateFormat = "dd/MM/yyyy"
-        //        if textField == txtChooseToDate, let fromDateText = txtChooseFromDate.text, let fromDate = formatter.date(from: fromDateText) {
-        //            datePicker.minimumDate = fromDate
-        //        } else if textField == txtVisitorToDate, let fromDateText = txtVisitorFromDate.text, let fromDate = formatter.date(from: fromDateText) {
-        //            datePicker.minimumDate = fromDate
-        //        } else {
-        //            datePicker.minimumDate = nil
-        //        }
         activeTextField = textField
         updateDatePickerRange()
     }

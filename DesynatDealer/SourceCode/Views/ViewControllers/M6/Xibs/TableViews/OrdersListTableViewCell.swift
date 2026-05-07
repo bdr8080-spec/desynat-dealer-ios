@@ -53,9 +53,13 @@ class OrdersListTableViewCell: UITableViewCell {
     } else {
       productImageView.image = UIImage(named: "")
     }
-    productDetailsLabel.text = "\(data?.productDetails?.productNameEn ?? "") (\(data?.variationDetails?.size?.name ?? ""))"
-    quantityLabel.text = "\(data?.quantity ?? 1)"
+      if AppLanguageManager.shared.currentLanguage == .ar {
+          productDetailsLabel.text = "\(data?.productDetails?.productNameAr ?? "") (\(data?.variationDetails?.size?.name ?? ""))"
+      } else {
+          productDetailsLabel.text = "\(data?.productDetails?.productNameEn ?? "") (\(data?.variationDetails?.size?.name ?? ""))"
+      }
     
+    quantityLabel.text = "\(data?.quantity ?? 1)"
     addressLabel.text =
     self.buildFullAddress(from: data?.order?.deliveryDetails)
     let paymentMethod = data?.order?.paymentMethod ?? "1"

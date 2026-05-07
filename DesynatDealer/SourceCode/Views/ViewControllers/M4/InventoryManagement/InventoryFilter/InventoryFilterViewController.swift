@@ -52,23 +52,29 @@ class InventoryFilterViewController: UIViewController {
   }
   
   // MARK: - Prepare Filter List
-  func prepareFilters() {
-    
-    // BRAND - Multiple selection
-    let brandOptions = brandsList.map {
-      FilterOption(
-        id: "\($0.id ?? 0)",
-        title: $0.nameEnglish ?? "",
-        isSelected: selectedBrandIDs.contains("\($0.id ?? 0)")
-      )
+    func prepareFilters() {
+        
+        // BRAND - Multiple selection
+        let brandOptions = brandsList.map {
+            
+            FilterOption(
+                id: "\($0.id ?? 0)",
+                title: AppLanguageManager.shared.currentLanguage == .ar
+                ? ($0.nameArabic ?? "")
+                : ($0.nameEnglish ?? ""),
+                isSelected: selectedBrandIDs.contains("\($0.id ?? 0)")
+            )
+        }
+        
+        filtersOptions = [
+            FilterSection(
+                header: "Filter by Brand".localiz(),
+                options: brandOptions
+            )
+        ]
+        
+        filterTableView.reloadData()
     }
-    
-    filtersOptions = [
-        FilterSection(header: "Filter by Brand".localiz(), options: brandOptions)
-    ]
-    
-    filterTableView.reloadData()
-  }
   
   
   func registerXib() {

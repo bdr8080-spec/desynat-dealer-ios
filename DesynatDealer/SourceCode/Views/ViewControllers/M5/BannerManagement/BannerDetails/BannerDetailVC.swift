@@ -140,8 +140,8 @@ class BannerDetailVC: UIViewController {
         lblFromDate.text = formatDate(data?.startDate)
         lblToDate.text = formatDate(data?.endDate)
         lblTotalDays.text = data?.totalDays ?? "0"
-        let text = "KD".localiz()
-        lblTotalPrice.text = "\(data?.price ?? "0") \(text)"
+//        let text = "KD".localiz()
+        lblTotalPrice.text = CommonUtils.formatPriceStringInput(data?.price ?? "0")
     }
     
     @IBAction func btnBack(_ sender: Any) {

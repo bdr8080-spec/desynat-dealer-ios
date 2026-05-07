@@ -36,14 +36,14 @@ class PaymentMethodVC: UIViewController {
         super.viewDidLoad()
         isCardIsSlecteed = true
         lblMonth.text = durationOfPlan
-        let text = "KD".localiz()
+//        let text = "KD".localiz()
         switch paymentFrom {
         case .plan:
-            lblTotalAmt.text = "\(payAmount) \(text)"
+            lblTotalAmt.text = CommonUtils.formatPrice(payAmount)
         case .banner:
-            lblTotalAmt.text = "\(payAmount) \(text)"
+            lblTotalAmt.text = CommonUtils.formatPrice(payAmount)
          case .mySubscriptionPlan:
-          lblTotalAmt.text = "\(payAmount) \(text)"
+          lblTotalAmt.text = CommonUtils.formatPrice(payAmount)
         }
         
     }
@@ -81,18 +81,6 @@ class PaymentMethodVC: UIViewController {
         if isCardIsSlecteed {
             switch paymentFrom {
             case .plan, .mySubscriptionPlan :
-//                if paymentCompleted, let details = paymentTransactionDetails {
-//                    switch paymentFrom {
-//                    case .plan:
-//                        completePlanPurchase(transactionId: self.transactionIds ?? "", paymentStatus: 1, onlineTransactionId: details.transactionID)
-//                    case .banner:
-//                        bannerPayment(transactionId: details.transactionID, paymentStatus: 1, order_id: self.transactionIds ?? "")
-//                        //                    case .mySubscriptionPlan:
-//                        //                        print("Buy SubscriptionPlan")
-//                    }
-//                } else {
-//                    showAlert(msg: "Please complete card payment")
-//                }
                 let supplierId = String(Int.random(in: 1000...9999))
                 cardSelectionImageView.image = UIImage(named: "radioSelected")
                 isCardIsSlecteed = true
@@ -124,8 +112,6 @@ class PaymentMethodVC: UIViewController {
                         return
                     }
                 }
-                //            case .mySubscriptionPlan:
-                //                print("SubScription Plan")
             }
             
         }
@@ -236,8 +222,6 @@ extension PaymentMethodVC {
                 paymentTransactionDetails = (transactionID, invoiceId ?? "", paymentGateway)
                 paymentCompleted = true
                 self.handlePaymentCompletion(transactionID: transactionID, invoiceId: invoiceId ?? "", gateway: paymentGateway)
-                
-                //        viewModel.payForAddingCard(transactionId: transactionID)
             case .failure(let error):
                 print("Payment Error: \(error.errorDescription)")
                 let text = "Payment Failed:".localiz()

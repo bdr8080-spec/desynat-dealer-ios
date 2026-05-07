@@ -444,7 +444,7 @@
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome back ! " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nS8-XT-bgz">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome back !" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nS8-XT-bgz">
                                                 <rect key="frame" x="20" y="41" width="353" height="31"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="22"/>
                                                 <color key="textColor" name="darkBrown"/>
@@ -3800,7 +3800,7 @@ tempor</string>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Credit/ Debit Card" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tmn-eS-Fgr" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
-                                                        <rect key="frame" x="94" y="14.333333333333345" width="130" height="19.666666666666664"/>
+                                                        <rect key="frame" x="94" y="14.333333333333345" width="130" height="19.666666666666671"/>
                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -6348,7 +6348,7 @@ you for your patience. Team Desynat App</string>
         <image name="card" width="34" height="24.333333969116211"/>
         <image name="country" width="20.333333969116211" height="31"/>
         <image name="currentLocationBrown" width="21" height="21"/>
-        <image name="dashedBorder" width="165" height="120"/>
+        <image name="dashedBorder" width="164" height="120"/>
         <image name="done" width="90" height="89.666664123535156"/>
         <image name="down_arrow" width="20" height="20"/>
         <image name="email" width="22" height="22"/>
@@ -6389,7 +6389,7 @@ you for your patience. Team Desynat App</string>
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -21,12 +21,10 @@ class ChatInboxTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
     }
     
     func configData(data: ChatInboxListModel?) {
@@ -39,9 +37,8 @@ class ChatInboxTableViewCell: UITableViewCell {
             userProfileImageView.image = UIImage(named: "userProfile")
         }
         usernameLabel.text = data?.userDetails?.fullName
-        //messageLabel.text = data?.lastChat ?? "Sent an attachment"
         timeLabel.text = formattedChatTime(from: data?.updatedAt ?? "")
-        let messageType = data?.type ?? "1" // normal msg, customization send
+        let messageType = data?.type ?? "1"
         let msgType = data?.messageType ?? "0"
         let unreadMesageCount = data?.unreadCount ?? 0
         if unreadMesageCount > 0 {
@@ -50,12 +47,15 @@ class ChatInboxTableViewCell: UITableViewCell {
         } else {
             messagecountView.isHidden = true
         }
-        //    let productRequest = data?.productRequest ?? "1"
         let actiontype = data?.action ?? "1"
         if msgType == "1" {
             messageLabel.text = "Sent an attachment".localiz()
         } else {
-            messageLabel.text = data?.lastChat ?? ""
+            if AppLanguageManager.shared.currentLanguage == .ar {
+                messageLabel.text = data?.lastChat ?? ""
+            } else {
+                messageLabel.text = data?.lastChat ?? ""
+            }
         }
         if messageType == "1" {
             messageTypeStatusView.isHidden = true
@@ -88,6 +88,47 @@ class ChatInboxTableViewCell: UITableViewCell {
         }
     }
     
+//    func formattedChatTime(from isoString: String) -> String {
+//        
+//        // Parse ISO string
+//        let isoFormatter = ISO8601DateFormatter()
+//        isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+//        
+//        guard let date = isoFormatter.date(from: isoString) else {
+//            return ""
+//        }
+//        
+//        let calendar = Calendar.current
+//        //      let now = Date()
+//        
+//        // Time formatter
+//        let timeFormatter = DateFormatter()
+//        timeFormatter.locale = Locale.current
+//        timeFormatter.timeZone = .current
+//        timeFormatter.dateFormat = "h:mm a"
+//        
+//        // Date formatter (fallback)
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.locale = Locale.current
+//        dateFormatter.timeZone = .current
+//        dateFormatter.dateFormat = "dd/MM/yy, h:mm a"
+//        
+//        // Today
+//        if calendar.isDateInToday(date) {
+//            let text = "Today".localiz()
+//            return "\(text) \(timeFormatter.string(from: date))"
+//        }
+//        
+//        // Yesterday
+//        if calendar.isDateInYesterday(date) {
+//            let text = "Yesterday".localiz()
+//            return "\(text) \(timeFormatter.string(from: date))"
+//        }
+//        
+//        // Older dates
+//        return dateFormatter.string(from: date)
+//    }
+    
     func formattedChatTime(from isoString: String) -> String {
         
         // Parse ISO string
@@ -99,19 +140,25 @@ class ChatInboxTableViewCell: UITableViewCell {
         }
         
         let calendar = Calendar.current
-        //      let now = Date()
         
         // Time formatter
         let timeFormatter = DateFormatter()
-        timeFormatter.locale = Locale.current
         timeFormatter.timeZone = .current
         timeFormatter.dateFormat = "h:mm a"
         
-        // Date formatter (fallback)
+        // Date formatter
         let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale.current
         dateFormatter.timeZone = .current
         dateFormatter.dateFormat = "dd/MM/yy, h:mm a"
+        
+        // ✅ Localize AM/PM + numbers
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            timeFormatter.locale = Locale(identifier: "ar")
+            dateFormatter.locale = Locale(identifier: "ar")
+        } else {
+            timeFormatter.locale = Locale(identifier: "en_US_POSIX")
+            dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        }
         
         // Today
         if calendar.isDateInToday(date) {
@@ -128,6 +175,4 @@ class ChatInboxTableViewCell: UITableViewCell {
         // Older dates
         return dateFormatter.string(from: date)
     }
-    
-    
 }

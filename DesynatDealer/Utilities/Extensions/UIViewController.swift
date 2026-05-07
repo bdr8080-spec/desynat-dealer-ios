@@ -228,6 +228,7 @@ extension UIViewController {
     }
     
     func formatBannerDate(_ dateString: String?) -> String {
+        
         guard let dateString = dateString else { return "-" }
         
         let isoFormatter = ISO8601DateFormatter()
@@ -241,11 +242,22 @@ extension UIViewController {
         }
         
         let outputFormatter = DateFormatter()
-        outputFormatter.dateFormat = "dd/MM/yyyy 'at' hh:mm a"
-        outputFormatter.amSymbol = "AM"
-        outputFormatter.pmSymbol = "PM"
+        outputFormatter.timeZone = .current
         
-        return outputFormatter.string(from: date)
+        // ✅ Localize language
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            outputFormatter.locale = Locale(identifier: "ar")
+        } else {
+            outputFormatter.locale = Locale(identifier: "en_US_POSIX")
+        }
+        
+        outputFormatter.dateFormat = "dd MMM yyyy 'at' hh:mm a"
+        
+        let localizedAt = "at".localiz()
+        
+        return outputFormatter
+            .string(from: date)
+            .replacingOccurrences(of: "at", with: localizedAt)
     }
 
     

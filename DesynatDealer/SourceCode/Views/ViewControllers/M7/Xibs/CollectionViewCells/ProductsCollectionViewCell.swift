@@ -10,7 +10,7 @@ import Cosmos
 import SDWebImage
 
 class ProductsCollectionViewCell: UICollectionViewCell {
-
+    
     @IBOutlet weak var detailsView: CustomView!
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var checkboxButton: UIButton!
@@ -40,7 +40,7 @@ class ProductsCollectionViewCell: UICollectionViewCell {
     }
     
     @IBAction func likeButtonTapped(_ sender: UIButton) {
-      wishlistButtonTapped?()
+        wishlistButtonTapped?()
     }
     
     @IBAction func checkboxDidTapped(_ sender: Any) {
@@ -86,9 +86,9 @@ class ProductsCollectionViewCell: UICollectionViewCell {
             ratingView.rating = 0.0
             ratingLabel.text = "(\(0))"
         }
-        let text = "KD".localiz()
-        finalPriceLabel.text = "\(data?.productVariants?.first?.finalPrice ?? "") \(text)"
-        CommonUtils.setStrikethrough(label: actualPriceLabel, text: "\(data?.productVariants?.first?.actualPrice ?? "") \(text)")
+        //        let text = "KD".localiz()
+        finalPriceLabel.text = CommonUtils.formatPriceStringInput(data?.productVariants?.first?.finalPrice ?? "")
+        CommonUtils.setStrikethrough(label: actualPriceLabel, text: CommonUtils.formatPriceStringInput(data?.productVariants?.first?.actualPrice ?? ""))
         CommonUtils.updateDiscountPercentageLabel(discountPriceLabel,
                                                   actualAmountLabel: actualPriceLabel,
                                                   discountType: data?.productVariants?.first?.discountType,
@@ -112,13 +112,13 @@ class ProductsCollectionViewCell: UICollectionViewCell {
             ratingView.rating = 0.0
             ratingLabel.text = "(\(0))"
         }
-        let text = "KD".localiz()
-        finalPriceLabel.text = "\(data?.productDetails?.productVariants?.first?.finalPrice ?? "") \(text)"
-        CommonUtils.setStrikethrough(label: actualPriceLabel, text: "\(data?.productDetails?.productVariants?.first?.actualPrice ?? "") \(text)")
+        //        let text = "KD".localiz()
+        finalPriceLabel.text = CommonUtils.formatPriceStringInput(data?.productDetails?.productVariants?.first?.finalPrice ?? "")
+        CommonUtils.setStrikethrough(label: actualPriceLabel, text: CommonUtils.formatPriceStringInput(data?.productDetails?.productVariants?.first?.actualPrice ?? ""))
         CommonUtils.updateDiscountPercentageLabel(discountPriceLabel,
                                                   actualAmountLabel: actualPriceLabel,
                                                   discountType: data?.productDetails?.productVariants?.first?.discountType,
                                                   discountValue: data?.productDetails?.productVariants?.first?.discountValue)
     }
-
+    
 }

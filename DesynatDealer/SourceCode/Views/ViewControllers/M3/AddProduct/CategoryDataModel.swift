@@ -11,7 +11,7 @@ import UIKit
 // MARK: - CategoryDataModel
 struct CategoryDataModel: Codable {
     let id: Int?
-    let name, description: String?
+    let name,nameAr, description: String?
     let image: String?
     let status: Int?
     let colorCode, createdAt, updatedAt: String?
@@ -21,6 +21,7 @@ struct CategoryDataModel: Codable {
         case colorCode = "color_code"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+        case nameAr = "name_ar"
     }
 }
 

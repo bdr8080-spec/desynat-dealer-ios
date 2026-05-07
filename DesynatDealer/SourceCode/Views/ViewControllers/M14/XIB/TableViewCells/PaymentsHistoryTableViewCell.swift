@@ -19,14 +19,18 @@ class PaymentsHistoryTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
-    func configData(data: OrdersDataPaymentList?) {
-        transactionIdLabel.text = "#\(data?.id ?? 0)"
+//    func configData(data: OrdersDataPaymentList?) {
+    func configData() {
+        transactionIdLabel.text = "#923"//"#\(data?.id ?? 0)"
+        dateAndTimeLabel.text = formatDate("2024-08-21T07:30:00.000000Z")
+        paymentModeLabel.text = "Card".localiz()
 //        myEarningLabel.text = CommonUtils.formatPriceStringInput(data?.affiliateCommission)
 //        purchasedLabel.text = data?.userDetails?.fullName
 //        productNameLabel.text = data?.productDetails?.productNameEn
@@ -164,6 +168,7 @@ class PaymentsHistoryTableViewCell: UITableViewCell {
 //    }
     
     func formatDate(_ isoDate: String) -> String {
+        
         let inputFormatter = DateFormatter()
         inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'"
         inputFormatter.timeZone = TimeZone(secondsFromGMT: 0)
@@ -174,10 +179,22 @@ class PaymentsHistoryTableViewCell: UITableViewCell {
         }
         
         let outputFormatter = DateFormatter()
-        outputFormatter.dateFormat = "dd/MM/yyyy 'at' hh:mm a"
         outputFormatter.timeZone = TimeZone.current
         
-        return outputFormatter.string(from: date)
+        // ✅ Localize month + AM/PM + digits
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            outputFormatter.locale = Locale(identifier: "ar")
+        } else {
+            outputFormatter.locale = Locale(identifier: "en_US_POSIX")
+        }
+        
+        outputFormatter.dateFormat = "dd MMM yyyy 'at' hh:mm a"
+        
+        let localizedAt = "at".localiz()
+        
+        return outputFormatter
+            .string(from: date)
+            .replacingOccurrences(of: "at", with: localizedAt)
     }
     
 }

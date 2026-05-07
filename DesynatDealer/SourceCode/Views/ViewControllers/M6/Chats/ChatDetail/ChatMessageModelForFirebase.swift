@@ -25,11 +25,11 @@ struct Chat: Equatable, Codable {
     var by: String? // "user" or "seller"
     var read: Int?  // 0 unread, 1 read
     var times: String? // ISO8601 string
-
+    
     static func == (lhs: Chat, rhs: Chat) -> Bool {
         return lhs.senderId == rhs.senderId && lhs.times == rhs.times
     }
-
+    
     func getCreatedOn() -> Date? {
         guard let times = times else { return nil }
         let formatter = ISO8601DateFormatter()
@@ -37,20 +37,28 @@ struct Chat: Equatable, Codable {
         return formatter.date(from: times)
     }
     
+    //    func localizedMessage() -> String {
+    //            switch AppLanguage.current {
+    //            case .arabic:
+    //                return messageAr ?? message ?? ""
+    //            case .english:
+    //                return message ?? ""
+    //            }
+    //        }
+    
     func localizedMessage() -> String {
-            switch AppLanguage.current {
-            case .arabic:
-                return messageAr ?? message ?? ""
-            case .english:
-                return message ?? ""
-            }
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            return messageAr ?? message ?? ""
+        } else {
+            return message ?? ""
         }
-
+    }
+    
     func toBackendDictionary(uniqueId: String) -> [String: Any] {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
         let isoDate = times ?? formatter.string(from: Date())
-
+        
         return [
             "user_id": senderId ?? "",
             "unique_id": uniqueId,

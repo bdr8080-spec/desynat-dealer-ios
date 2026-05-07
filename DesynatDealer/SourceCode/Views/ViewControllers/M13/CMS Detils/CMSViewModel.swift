@@ -5,14 +5,6 @@
 //  Created by  shailendra singh on 22/04/26.
 //
 
-
-//
-//  CMSViewModel.swift
-//  DesynatUser
-//
-//  Created by  shailendra singh on 17/04/26.
-//
-
 import Foundation
 
 class CMSViewModel {

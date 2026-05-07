@@ -43,9 +43,9 @@ class OrderForChatTableViewCell: UITableViewCell {
 //    } else {
 //      discountPriceLabel.text = "\(data?.discountValue ?? "") KD Off"
 //    }
-      let text = "KD".localiz()
-    finalPriceLabel.text = "\(data?.finalPrice ?? "") \(text)"
-    CommonUtils.setStrikethrough(label: actualPriceLabel, text: "\(data?.actualPrice ?? "0") \(text)")
+//      let text = "KD".localiz()
+    finalPriceLabel.text = CommonUtils.formatPriceStringInput(data?.finalPrice ?? "")
+    CommonUtils.setStrikethrough(label: actualPriceLabel, text: CommonUtils.formatPriceStringInput(data?.actualPrice ?? "0"))
       
       CommonUtils.updateDiscountPercentageLabel(discountPriceLabel,
                                                 actualAmountLabel: actualPriceLabel,

@@ -111,16 +111,29 @@ class InventoryDetailsViewController: UIViewController {
     
     func configData(data: ProductsList) {
         // MARK: - Basic Product info
-        //      titlePageLabel.text = data.brand?.nameEnglish ?? ""
-        if data.brand?.nameEnglish == "Other".localiz() {
-            productNameLabel.text = data.otherEn
-            titlePageLabel.text = data.otherEn
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            if data.brand?.nameEnglish == "Other".localiz() {
+                productNameLabel.text = data.otherAr
+                titlePageLabel.text = data.otherAr
+            } else {
+                productNameLabel.text = data.brand?.nameArabic
+                titlePageLabel.text = data.brand?.nameArabic
+            }
+            descriptionLAbel.text = data.productNameAr ?? "-"
+            brandCategoryLabel.text = data.category?.nameAr ?? ""
         } else {
-            productNameLabel.text = data.brand?.nameEnglish
-            titlePageLabel.text = data.brand?.nameEnglish
+            if data.brand?.nameEnglish == "Other".localiz() {
+                productNameLabel.text = data.otherEn
+                titlePageLabel.text = data.otherEn
+            } else {
+                productNameLabel.text = data.brand?.nameEnglish
+                titlePageLabel.text = data.brand?.nameEnglish
+            }
+            descriptionLAbel.text = data.productNameEn ?? "-"
+            brandCategoryLabel.text = data.category?.name ?? ""
         }
-        descriptionLAbel.text = data.productNameEn ?? "-"
-        brandCategoryLabel.text = data.category?.name ?? ""
+        
+        
         ratingCountLabel.text = " (\(data.reviewRating ?? "0"))"
         // Status
         if data.productActiveStatus == 1 {
@@ -189,9 +202,9 @@ class InventoryDetailsViewController: UIViewController {
             productImageCollectionView.setContentOffset(CGPoint.zero, animated: false)
             productImageCollectionView.reloadData()
         }
-        let text = "KD".localiz()
-        finalPriceLabel.text = "\(variant.finalPrice ?? "0") \(text)"
-        CommonUtils.setStrikethrough(label: actualPriceLAbel, text: "\(variant.actualPrice ?? "0") \(text)")
+//        let text = "KD".localiz()
+        finalPriceLabel.text = CommonUtils.formatPriceStringInput(variant.finalPrice ?? "0")
+        CommonUtils.setStrikethrough(label: actualPriceLAbel, text: CommonUtils.formatPriceStringInput(variant.actualPrice ?? "0"))
         
         CommonUtils.updateDiscountPercentageLabel(discountPriceALbel,
                                                   actualAmountLabel: actualPriceLAbel,

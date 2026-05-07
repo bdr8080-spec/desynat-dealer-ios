@@ -64,7 +64,7 @@ extension ChatFilterViewController:  UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FiltersOptionsTableViewCell", for: indexPath) as! FiltersOptionsTableViewCell
-        cell.titleLabel.text = filtersOptions[indexPath.row]
+        cell.titleLabel.text = filtersOptions[indexPath.row].localiz()
         if selectedIndex == indexPath.row {
             cell.mainImageView.image = .filledCheckbox
         } else {

@@ -224,7 +224,7 @@ class OrderDetailsViewController: UIViewController {
         let text1 = "Item Price".localiz()
         lblItemPrice.text = "\(text1) (\(CommonUtils.formatPriceStringInput(priceString)) x \(quantity))"
         lblItemPriceAmt.text = CommonUtils.formatPriceStringInput(String(totalPrice))
-        discountOnMRpLabel.text = CommonUtils.formatPriceStringInput(data.order?.discountMrp ?? "", currency: "KD".localiz())
+        discountOnMRpLabel.text = CommonUtils.formatPriceStringInput(data.order?.discountMrp ?? "")
         
         if orderCategoryType == .normalOrders {
             let totalAmount = totalPrice + toDouble(data.shippingFees) + toDouble(data.tax)
@@ -275,16 +275,33 @@ class OrderDetailsViewController: UIViewController {
     }
     
     private func formatDateString(_ isoDate: String) -> String? {
+        
         let isoFormatter = DateFormatter()
         isoFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ"
         isoFormatter.locale = Locale(identifier: "en_US_POSIX")
         isoFormatter.timeZone = TimeZone(secondsFromGMT: 0)
-        guard let date = isoFormatter.date(from: isoDate) else { return nil }
+        
+        guard let date = isoFormatter.date(from: isoDate) else {
+            return nil
+        }
+        
         let displayFormatter = DateFormatter()
-        displayFormatter.dateFormat = "dd/MM/yyyy 'at' h:mm a" // 12-hour format
-        displayFormatter.locale = Locale(identifier: "en_US_POSIX")
-        displayFormatter.timeZone = TimeZone.current // local time
-        return displayFormatter.string(from: date)
+        displayFormatter.timeZone = TimeZone.current
+        
+        // ✅ Localize month + AM/PM + Arabic digits
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            displayFormatter.locale = Locale(identifier: "ar")
+        } else {
+            displayFormatter.locale = Locale(identifier: "en_US_POSIX")
+        }
+        
+        displayFormatter.dateFormat = "dd MMM yyyy 'at' h:mm a"
+        
+        let localizedAt = "at".localiz()
+        
+        return displayFormatter
+            .string(from: date)
+            .replacingOccurrences(of: "at", with: localizedAt)
     }
     
     private func orderStatus() {

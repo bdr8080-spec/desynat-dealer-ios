@@ -54,6 +54,7 @@ class ChatViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewRequestButonOutlet.setTitle("View Request".localiz(), for: .normal)
         viewModel.delegate = self
         IQKeyboardManager.shared.disabledDistanceHandlingClasses = [ChatViewController.self]
         viewModel.readChatMessagesRequest()

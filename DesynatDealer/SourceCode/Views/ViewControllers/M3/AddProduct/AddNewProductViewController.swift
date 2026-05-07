@@ -241,26 +241,53 @@ class AddNewProductViewController: UIViewController {
     }
     
     @IBAction func subCatgeoryAction(_ sender: UIButton) {
+//        let subCategoryNames = viewModel.subcategoriesList.map { subcategories -> String in
+//            let list = subcategories.nameEnglish ?? ""
+//            return "\(list)"
+//        }
+//        kSharedAppDelegate.dropDown(dataSource: subCategoryNames, anchorView: sender) { index, item in
+//            let selectedsubCategory = self.viewModel.subcategoriesList[index]
+//            self.subCatgeoryTF.text = selectedsubCategory.nameEnglish ?? ""
+//            self.selectedSubCategoriesId = selectedsubCategory.id
+//        }
+        
         let subCategoryNames = viewModel.subcategoriesList.map { subcategories -> String in
-            let list = subcategories.nameEnglish ?? ""
-            return "\(list)"
+            if AppLanguageManager.shared.currentLanguage == .ar {
+                return subcategories.nameArabic ?? ""
+            } else {
+                return subcategories.nameEnglish ?? ""
+            }
         }
-        kSharedAppDelegate.dropDown(dataSource: subCategoryNames, anchorView: sender) { index, item in
+        kSharedAppDelegate.dropDown(dataSource: subCategoryNames,anchorView: sender) { index, item in
             let selectedsubCategory = self.viewModel.subcategoriesList[index]
-            self.subCatgeoryTF.text = selectedsubCategory.nameEnglish ?? ""
+            if AppLanguageManager.shared.currentLanguage == .ar {
+                self.subCatgeoryTF.text = selectedsubCategory.nameArabic ?? ""
+            } else {
+                self.subCatgeoryTF.text = selectedsubCategory.nameEnglish ?? ""
+            }
             self.selectedSubCategoriesId = selectedsubCategory.id
         }
     }
     
     @IBAction func brandListAction(_ sender: UIButton) {
         let brandNames = viewModel.brandsList.map { brands -> String in
-            let list = brands.nameEnglish ?? ""
-            return "\(list)"
+            if AppLanguageManager.shared.currentLanguage == .ar {
+                return brands.nameArabic ?? ""
+            } else {
+                return brands.nameEnglish ?? ""
+            }
         }
-        kSharedAppDelegate.dropDown(dataSource: brandNames, anchorView: sender) { index, item in
+        kSharedAppDelegate.dropDown(dataSource: brandNames,anchorView: sender) { index, item in
             let selectedsubCategory = self.viewModel.brandsList[index]
-            self.selectedBrandTF.text = selectedsubCategory.nameEnglish ?? ""
+            if AppLanguageManager.shared.currentLanguage == .ar {
+                self.selectedBrandTF.text = selectedsubCategory.nameArabic ?? ""
+            } else {
+                self.selectedBrandTF.text = selectedsubCategory.nameEnglish ?? ""
+            }
+            
             self.selectedBrandId = selectedsubCategory.id
+            
+            // ✅ Check using English key from API
             if (selectedsubCategory.nameEnglish?.lowercased() == "other") {
                 self.otherStackView.isHidden = false
             } else {
@@ -315,7 +342,7 @@ class AddNewProductViewController: UIViewController {
                     self.selectedSizeChartImageUrl = imageURL.url ?? ""
                     if let url = URL(string: imageURL.url ?? "") {
                         self.sizeChartImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-                        self.sizeChartImageView.sd_setImage(with: url,placeholderImage: UIImage(named: "user_ic"))
+                        self.sizeChartImageView.sd_setImage(with: url,placeholderImage: UIImage(named: "bannerDashed"))
                     }
                 }
             }
@@ -531,10 +558,16 @@ class AddNewProductViewController: UIViewController {
         categoriesCollectionView.reloadData()
         
         selectedSubCategoriesId = Int(data.subcategoryID ?? "0")
-        subCatgeoryTF.text = data.category?.description
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            subCatgeoryTF.text = data.subcategory?.nameArabic
+            selectedBrandTF.text = data.brand?.nameArabic
+        } else {
+            subCatgeoryTF.text = data.subcategory?.nameEnglish
+            selectedBrandTF.text = data.brand?.nameEnglish
+        }
         
         selectedBrandId = Int(data.brandID ?? "0")
-        selectedBrandTF.text = data.brand?.nameEnglish
+        
         
         otherStackView.isHidden = (data.brand?.nameEnglish?.lowercased() != "other")
         otherBrandEnglishTF.text = data.otherEn
@@ -563,7 +596,7 @@ class AddNewProductViewController: UIViewController {
         
         selectedSizeChartImageUrl = data.uploadSizeChart
         if let url = URL(string: data.uploadSizeChart ?? "") {
-            sizeChartImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "user_ic"))
+            sizeChartImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "bannerDashed"))
         }
         
         // ---------------- SPECIFICATIONS ----------------
@@ -777,7 +810,11 @@ extension AddNewProductViewController: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoriesSectionCollectionViewCell", for: indexPath) as! CategoriesSectionCollectionViewCell
         let data = viewModel.categoriesList[indexPath.row]
-        cell.titleLabel.text = data.name
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            cell.titleLabel.text = data.nameAr
+        } else {
+            cell.titleLabel.text = data.name
+        }
         if selectedCategoriesSection == data.id {
             cell.slecedImageView.image = UIImage(named: "radioSelected")
         } else {

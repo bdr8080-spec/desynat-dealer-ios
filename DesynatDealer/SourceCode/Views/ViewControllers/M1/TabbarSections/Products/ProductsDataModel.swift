@@ -36,6 +36,7 @@ struct ProductsList: Codable {
     var productActiveStatus, avgProductRating: Int?
     let createdAt, updatedAt, stock: String?
     let category: Category?
+    let subCategory: SubCategoryDataModel?
     let brand: Brand?
   let subcategory: SubCategoryDataModel?
     let productSpecifications: [ProductSpecification]?
@@ -73,6 +74,7 @@ struct ProductsList: Codable {
         case stock, category, subcategory, brand
         case productSpecifications = "product_specifications"
         case productVariants = "product_variants"
+        case subCategory = "sub_category"
     }
 }
 
@@ -99,7 +101,7 @@ struct Brand: Codable {
 // MARK: - Category
 struct Category: Codable {
     let id: Int?
-    let name, description: String?
+    let name,nameAr, description: String?
     let image: String?
     let status: Int?
     let colorCode, createdAt, updatedAt: String?
@@ -109,6 +111,7 @@ struct Category: Codable {
         case colorCode = "color_code"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+        case nameAr = "name_ar"
     }
 }
 

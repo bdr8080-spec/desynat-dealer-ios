@@ -46,7 +46,7 @@ class HomeViewModel {
         }
         WebService.sharedInstance.sellerDashboardService(param: param) { data in
             self.dashBoardData = data
-            let text = "KD".localiz()
+            let text = "KD"//.localiz()
             self.hostVC.lblTotalRevenue.text = "\(self.dashBoardData?.totalRevenue ?? "") \(text)"
             self.hostVC.lblActiveProducts.text = "\(self.dashBoardData?.totalActiveProducts ?? 0)"
             self.hostVC.lblInActiveProducts.text = "\(self.dashBoardData?.totalInactiveProducts ?? 0)"

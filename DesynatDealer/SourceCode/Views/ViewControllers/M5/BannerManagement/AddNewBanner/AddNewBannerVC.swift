@@ -72,7 +72,7 @@ class AddNewBannerVC: UIViewController {
         guard let pricePerDay = Int(priceOnly) else { return }
         
         let totalPrice = days * pricePerDay
-        let text = "KD".localiz()
+        let text = "KD"//.localiz()
         lblTotalPrice.text = "\(totalPrice) \(text)"
     }
     
@@ -149,14 +149,35 @@ class AddNewBannerVC: UIViewController {
     }
     
     @IBAction func catgeoryAction(_ sender: UIButton) {
-        let categoryNames = categoriesList.map { $0.name ?? "" }
-        kSharedAppDelegate.dropDown(dataSource: categoryNames, anchorView: sender) { index, item in
+        let categoryNames = categoriesList.map {
+            
+            if AppLanguageManager.shared.currentLanguage == .ar {
+                return $0.nameAr ?? ""
+            } else {
+                return $0.name ?? ""
+            }
+        }
+
+        kSharedAppDelegate.dropDown(
+            dataSource: categoryNames,
+            anchorView: sender
+        ) { index, item in
+            
             let selectedCategory = self.categoriesList[index]
-            self.lblCategory.text = selectedCategory.name ?? ""
+            
+            if AppLanguageManager.shared.currentLanguage == .ar {
+                self.lblCategory.text = selectedCategory.nameAr ?? ""
+            } else {
+                self.lblCategory.text = selectedCategory.name ?? ""
+            }
+            
             self.selectedCategoryId = selectedCategory.id
             self.selectedSubCategoriesId = nil
             self.subcategoriesList.removeAll()
-            self.viewModel.getSubCategoriesListApi(categoryId: selectedCategory.id ?? 0)
+            
+            self.viewModel.getSubCategoriesListApi(
+                categoryId: selectedCategory.id ?? 0
+            )
         }
     }
     
@@ -173,11 +194,28 @@ class AddNewBannerVC: UIViewController {
             return
         }
         
-        let subCategoryNames = self.subcategoriesList.map { $0.nameEnglish ?? "" }
-        
-        kSharedAppDelegate.dropDown(dataSource: subCategoryNames, anchorView: sender) { index, item in
+        let subCategoryNames = self.subcategoriesList.map {
+            
+            if AppLanguageManager.shared.currentLanguage == .ar {
+                return $0.nameArabic ?? ""
+            } else {
+                return $0.nameEnglish ?? ""
+            }
+        }
+
+        kSharedAppDelegate.dropDown(
+            dataSource: subCategoryNames,
+            anchorView: sender
+        ) { index, item in
+            
             let selectedsubCategory = self.subcategoriesList[index]
-            self.lblSubCategory.text = selectedsubCategory.nameEnglish ?? ""
+            
+            if AppLanguageManager.shared.currentLanguage == .ar {
+                self.lblSubCategory.text = selectedsubCategory.nameArabic ?? ""
+            } else {
+                self.lblSubCategory.text = selectedsubCategory.nameEnglish ?? ""
+            }
+            
             self.selectedSubCategoriesId = selectedsubCategory.id
         }
     }
@@ -208,21 +246,69 @@ class AddNewBannerVC: UIViewController {
 
 // Date Picker
 extension AddNewBannerVC {
+//    private func setUpTextFields() {
+//        datePicker.preferredDatePickerStyle = .wheels
+//        datePicker.datePickerMode = .date
+//        datePicker.minimumDate = Date()
+//        datePicker.backgroundColor = .white
+//        
+//        let toolbar = UIToolbar()
+//        toolbar.sizeToFit()
+//        
+//        let doneButton = UIBarButtonItem(title: "Done".localiz(), style: .done, target: self, action: #selector(doneDatePicker))
+//        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+//        let cancelButton = UIBarButtonItem(title: "Cancel".localiz(), style: .plain, target: self, action: #selector(cancelDatePicker))
+//        toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+//        
+//        let textFields = [txtFromDate, txtToDate]
+//        textFields.forEach { textField in
+//            textField?.inputView = datePicker
+//            textField?.inputAccessoryView = toolbar
+//            textField?.delegate = self
+//        }
+//    }
+    
     private func setUpTextFields() {
+        
         datePicker.preferredDatePickerStyle = .wheels
         datePicker.datePickerMode = .date
         datePicker.minimumDate = Date()
         datePicker.backgroundColor = .white
         
+        // ✅ Localize month names in date picker
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            datePicker.locale = Locale(identifier: "ar")
+        } else {
+            datePicker.locale = Locale(identifier: "en_US")
+        }
+        
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         
-        let doneButton = UIBarButtonItem(title: "Done".localiz(), style: .done, target: self, action: #selector(doneDatePicker))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel".localiz(), style: .plain, target: self, action: #selector(cancelDatePicker))
+        let doneButton = UIBarButtonItem(
+            title: "Done".localiz(),
+            style: .done,
+            target: self,
+            action: #selector(doneDatePicker)
+        )
+        
+        let spaceButton = UIBarButtonItem(
+            barButtonSystemItem: .flexibleSpace,
+            target: nil,
+            action: nil
+        )
+        
+        let cancelButton = UIBarButtonItem(
+            title: "Cancel".localiz(),
+            style: .plain,
+            target: self,
+            action: #selector(cancelDatePicker)
+        )
+        
         toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         
         let textFields = [txtFromDate, txtToDate]
+        
         textFields.forEach { textField in
             textField?.inputView = datePicker
             textField?.inputAccessoryView = toolbar
@@ -297,7 +383,7 @@ extension AddNewBannerVC {
         let totalDays = days + 1   // inclusive
         
         lblTotalDays.text = "\(totalDays)"
-        let text = "KD".localiz()
+        let text = "KD"//.localiz()
         lblTotalPrice.text = "\(totalDays * pricePerDay) \(text)"
     }
     

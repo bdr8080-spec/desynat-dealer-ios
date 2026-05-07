@@ -30,7 +30,7 @@
 "5qp-KB-lgF.text" = "(1)";
 
 /* Class = "UILabel"; text = "Bust  "; ObjectID = "7UQ-4C-BWd"; */
-"7UQ-4C-BWd.text" = "Bust  ";
+"7UQ-4C-BWd.text" = "Bust";
 
 /* Class = "UILabel"; text = "If Yes, Total days for Exchangeable "; ObjectID = "7Z7-JH-bOm"; */
 "7Z7-JH-bOm.text" = "If Yes, Total days for Exchangeable ";
@@ -162,7 +162,7 @@
 "RaN-dL-AKJ.text" = "Edit";
 
 /* Class = "UILabel"; text = "Sleeve length "; ObjectID = "Rbk-LJ-aBC"; */
-"Rbk-LJ-aBC.text" = "Sleeve length ";
+"Rbk-LJ-aBC.text" = "Sleeve length";
 
 /* Class = "UILabel"; text = "Total Stocks"; ObjectID = "S8p-1p-pSy"; */
 "S8p-1p-pSy.text" = "Total Stocks";
@@ -246,7 +246,7 @@
 "h2X-zc-dek.text" = "inclusive of all taxes";
 
 /* Class = "UILabel"; text = "Shoulder "; ObjectID = "hVw-Aw-xZx"; */
-"hVw-Aw-xZx.text" = "Shoulder ";
+"hVw-Aw-xZx.text" = "Shoulder";
 
 /* Class = "UILabel"; text = "Customers Ratings"; ObjectID = "j4d-iu-eqe"; */
 "j4d-iu-eqe.text" = "Customers Ratings";

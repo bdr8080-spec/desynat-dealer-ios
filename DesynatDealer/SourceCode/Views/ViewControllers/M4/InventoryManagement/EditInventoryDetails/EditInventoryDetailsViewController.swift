@@ -100,24 +100,46 @@ class EditInventoryDetailsViewController: UIViewController {
         guard let data = data else { return }
         
         // MARK: - Basic Product info
-        if data.brand?.nameEnglish == "Other" {
-            productNameLabel.text = data.otherEn
-            titlePageLabel.text = data.otherEn
+//        if data.brand?.nameEnglish == "Other" {
+//            productNameLabel.text = data.otherEn
+//            titlePageLabel.text = data.otherEn
+//        } else {
+//            productNameLabel.text = data.brand?.nameEnglish
+//            titlePageLabel.text = data.brand?.nameEnglish
+//        }
+//        
+//        descriptionLAbel.text = data.productNameEn ?? "-"
+        
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            if data.brand?.nameEnglish == "Other".localiz() {
+                productNameLabel.text = data.otherAr
+                titlePageLabel.text = data.otherAr
+            } else {
+                productNameLabel.text = data.brand?.nameArabic
+                titlePageLabel.text = data.brand?.nameArabic
+            }
+            descriptionLAbel.text = data.productNameAr ?? "-"
+            brandCategoryLabel.text = data.category?.nameAr ?? ""
         } else {
-            productNameLabel.text = data.brand?.nameEnglish
-            titlePageLabel.text = data.brand?.nameEnglish
+            if data.brand?.nameEnglish == "Other".localiz() {
+                productNameLabel.text = data.otherEn
+                titlePageLabel.text = data.otherEn
+            } else {
+                productNameLabel.text = data.brand?.nameEnglish
+                titlePageLabel.text = data.brand?.nameEnglish
+            }
+            descriptionLAbel.text = data.productNameEn ?? "-"
+            brandCategoryLabel.text = data.category?.name ?? ""
         }
         
-        descriptionLAbel.text = data.productNameEn ?? "-"
-        brandCategoryLabel.text = data.category?.name ?? ""
         ratingCountLabel.text = " (\(data.reviewRating ?? "0"))"
         
         // Status
         if data.productActiveStatus == 1 {
-            statusLabel.text = "Active"
+            statusLabel.text = "Active".localiz()
             statusButton.setImage(UIImage(named: "toggle_on"), for: .normal)
         } else {
-            statusLabel.text = "Inactive"
+            statusLabel.text = "Inactive".localiz()
             statusButton.setImage(UIImage(named: "toggle_off"), for: .normal)
         }
         

@@ -99,38 +99,84 @@ class ListedDealsTableViewCell: UITableViewCell {
     }
 
     
+//    func friendlyStartDate(from isoDate: String) -> String? {
+//        // 1️⃣ Parse ISO date string
+//        let isoFormatter = ISO8601DateFormatter()
+//        isoFormatter.formatOptions = [.withFullDate] // yyyy-MM-dd
+//        guard let date = isoFormatter.date(from: isoDate) else { return nil }
+//        
+//        // 2️⃣ Get day, month, year components
+//        let calendar = Calendar.current
+//        let day = calendar.component(.day, from: date)
+//        let month = calendar.component(.month, from: date)
+//        let year = calendar.component(.year, from: date)
+//        
+//        // 3️⃣ Get month name
+//        let monthName = DateFormatter().monthSymbols[month - 1] // monthSymbols is 0-based
+//        
+//        // 4️⃣ Add ordinal suffix to day
+//        func ordinal(_ number: Int) -> String {
+//            let ones = number % 10
+//            let tens = (number / 10) % 10
+//            if tens == 1 { return "\(number)th" }
+//            switch ones {
+//            case 1: return "\(number)st"
+//            case 2: return "\(number)nd"
+//            case 3: return "\(number)rd"
+//            default: return "\(number)th"
+//            }
+//        }
+//        
+//        let dayWithOrdinal = ordinal(day)
+//        
+//        // 5️⃣ Combine into final string
+//        return "\(dayWithOrdinal) \(monthName) \(year)"
+//    }
+    
     func friendlyStartDate(from isoDate: String) -> String? {
-        // 1️⃣ Parse ISO date string
+        
         let isoFormatter = ISO8601DateFormatter()
-        isoFormatter.formatOptions = [.withFullDate] // yyyy-MM-dd
+        isoFormatter.formatOptions = [.withFullDate]
+        
         guard let date = isoFormatter.date(from: isoDate) else { return nil }
         
-        // 2️⃣ Get day, month, year components
         let calendar = Calendar.current
         let day = calendar.component(.day, from: date)
         let month = calendar.component(.month, from: date)
         let year = calendar.component(.year, from: date)
         
-        // 3️⃣ Get month name
-        let monthName = DateFormatter().monthSymbols[month - 1] // monthSymbols is 0-based
+        let monthFormatter = DateFormatter()
         
-        // 4️⃣ Add ordinal suffix to day
-        func ordinal(_ number: Int) -> String {
-            let ones = number % 10
-            let tens = (number / 10) % 10
-            if tens == 1 { return "\(number)th" }
-            switch ones {
-            case 1: return "\(number)st"
-            case 2: return "\(number)nd"
-            case 3: return "\(number)rd"
-            default: return "\(number)th"
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            monthFormatter.locale = Locale(identifier: "ar")
+            
+            let monthName = monthFormatter.monthSymbols[month - 1]
+            
+            // ✅ Arabic format (no ordinal)
+            return "\(day) \(monthName) \(year)"
+            
+        } else {
+            monthFormatter.locale = Locale(identifier: "en_US_POSIX")
+            
+            let monthName = monthFormatter.monthSymbols[month - 1]
+            
+            // English with ordinal
+            func ordinal(_ number: Int) -> String {
+                let ones = number % 10
+                let tens = (number / 10) % 10
+                
+                if tens == 1 { return "\(number)th" }
+                
+                switch ones {
+                case 1: return "\(number)st"
+                case 2: return "\(number)nd"
+                case 3: return "\(number)rd"
+                default: return "\(number)th"
+                }
             }
+            
+            return "\(ordinal(day)) \(monthName) \(year)"
         }
-        
-        let dayWithOrdinal = ordinal(day)
-        
-        // 5️⃣ Combine into final string
-        return "\(dayWithOrdinal) \(monthName) \(year)"
     }
     
     func categorizeDeal(from fromDateString: String,
