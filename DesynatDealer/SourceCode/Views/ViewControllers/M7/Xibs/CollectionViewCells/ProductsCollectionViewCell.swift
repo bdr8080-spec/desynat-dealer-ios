@@ -78,7 +78,7 @@ class ProductsCollectionViewCell: UICollectionViewCell {
         } else {
             mainImageView.image = UIImage(named: "")
         }
-        titleLabel.text = data?.productNameEn
+        titleLabel.text = AppLanguageManager.shared.currentLanguage == .ar ? data?.productNameAr : data?.productNameEn
         if let ratingString = data?.avgProductRating {
             ratingView.rating = Double(Int(ratingString))
             ratingLabel.text = "(\(ratingString))"
@@ -104,7 +104,8 @@ class ProductsCollectionViewCell: UICollectionViewCell {
         } else {
             mainImageView.image = UIImage(named: "")
         }
-        titleLabel.text = data?.productDetails?.productNameEn
+//        titleLabel.text =
+        titleLabel.text = AppLanguageManager.shared.currentLanguage == .ar ? data?.productDetails?.productNameAr : data?.productDetails?.productNameEn
         if let ratingString = data?.productDetails?.avgProductRating {
             ratingView.rating = Double(Int(ratingString))
             ratingLabel.text = "(\(ratingString))"

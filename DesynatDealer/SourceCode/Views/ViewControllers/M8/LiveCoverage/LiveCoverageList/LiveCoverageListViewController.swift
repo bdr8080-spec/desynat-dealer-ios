@@ -37,15 +37,37 @@ class LiveCoverageListViewController: UIViewController {
         formatter.locale = Locale(identifier: "en_US_POSIX")
         return formatter
     }()
+//    private lazy var shortDateFormatterForCalender: DateFormatter = {
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "EEE , MMM d"
+//        formatter.locale = Locale(identifier: "en_US_POSIX")
+//        return formatter
+//    }()
     private lazy var shortDateFormatterForCalender: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "EEE , MMM d"
-        formatter.locale = Locale(identifier: "en_US_POSIX")
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            formatter.locale = Locale(identifier: "ar")
+        } else {
+            formatter.locale = Locale(identifier: "en_US_POSIX")
+        }
         return formatter
     }()
+//    lazy private var monthYearFormatter: DateFormatter = {
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "MMMM yyyy"   // November 2025
+//        return formatter
+//    }()
     lazy private var monthYearFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "MMMM yyyy"   // November 2025
+        formatter.dateFormat = "MMMM yyyy"   // e.g. May 2026 or مايو ٢٠٢٦
+        
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            formatter.locale = Locale(identifier: "ar")   // Important for Arabic names
+        } else {
+            formatter.locale = Locale(identifier: "en_US_POSIX")
+        }
+        
         return formatter
     }()
     private lazy var apiDateFormatter: DateFormatter = {
@@ -57,11 +79,24 @@ class LiveCoverageListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if AppLanguageManager.shared.currentLanguage == .ar {
+                self.view.semanticContentAttribute = .forceRightToLeft
+                UIView.appearance().semanticContentAttribute = .forceRightToLeft
+            } else {
+                self.view.semanticContentAttribute = .forceLeftToRight
+                UIView.appearance().semanticContentAttribute = .forceLeftToRight
+            }
         searchTF.delegate = self
         configureCalendar()
         selectTodayDate()
         mainScrollView.delegate = self
         editButtonView.isHidden = !hasActionPermission
+        
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                self.viewCalendar.reloadData()
+                self.viewCalendar.layoutIfNeeded()
+            }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -118,51 +153,120 @@ class LiveCoverageListViewController: UIViewController {
            present(vc, animated: true)
     }
     
+//    private func editHandleMonthAndYearDatePicker() {
+//        let pickerVC = UIViewController()
+//        pickerVC.view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+//
+//        let picker = UIDatePicker()
+//        picker.datePickerMode = .date
+//        picker.preferredDatePickerStyle = .inline
+//        picker.date = viewCalendar.selectedDate ?? Date()
+//        
+//        // ✅ Disable past dates so they appear gray
+//        picker.minimumDate = Date() // today
+//        picker.maximumDate = nil
+//        
+//        picker.translatesAutoresizingMaskIntoConstraints = false
+//        picker.layer.cornerRadius = 12
+//        picker.clipsToBounds = true
+//        picker.backgroundColor = .systemBackground
+//
+//        pickerVC.view.addSubview(picker)
+//
+//        NSLayoutConstraint.activate([
+//            picker.centerXAnchor.constraint(equalTo: pickerVC.view.centerXAnchor),
+//            picker.centerYAnchor.constraint(equalTo: pickerVC.view.centerYAnchor),
+//            picker.leadingAnchor.constraint(equalTo: pickerVC.view.leadingAnchor, constant: 25),
+//            picker.trailingAnchor.constraint(equalTo: pickerVC.view.trailingAnchor, constant: -25)
+//        ])
+//
+//        let dismissView = UIView()
+//        dismissView.translatesAutoresizingMaskIntoConstraints = false
+//        pickerVC.view.insertSubview(dismissView, at: 0)
+//        NSLayoutConstraint.activate([
+//            dismissView.topAnchor.constraint(equalTo: pickerVC.view.topAnchor),
+//            dismissView.bottomAnchor.constraint(equalTo: pickerVC.view.bottomAnchor),
+//            dismissView.leadingAnchor.constraint(equalTo: pickerVC.view.leadingAnchor),
+//            dismissView.trailingAnchor.constraint(equalTo: pickerVC.view.trailingAnchor)
+//        ])
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissDatePicker))
+//        dismissView.addGestureRecognizer(tapGesture)
+//
+//        picker.addTarget(self, action: #selector(centerDatePicked(_:)), for: .valueChanged)
+//
+//        pickerVC.modalPresentationStyle = .overCurrentContext
+//        pickerVC.modalTransitionStyle = .crossDissolve
+//        present(pickerVC, animated: true)
+//
+//        self.monthYearPicker = picker
+//    }
+    
     private func editHandleMonthAndYearDatePicker() {
         let pickerVC = UIViewController()
         pickerVC.view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
-
+        
         let picker = UIDatePicker()
         picker.datePickerMode = .date
         picker.preferredDatePickerStyle = .inline
         picker.date = viewCalendar.selectedDate ?? Date()
         
-        // ✅ Disable past dates so they appear gray
-        picker.minimumDate = Date() // today
+        // ==================== ARABIC MONTHS + ENGLISH NUMBERS ====================
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            let arabicLocale = Locale(identifier: "ar")
+            
+            picker.locale = arabicLocale
+            picker.semanticContentAttribute = .forceRightToLeft
+            picker.calendar = Calendar(identifier: .gregorian)
+            
+            // Strong force for English (Western) numbers
+            picker.locale = Locale(identifier: "ar")
+            
+            pickerVC.view.semanticContentAttribute = .forceRightToLeft
+        } else {
+            picker.locale = Locale(identifier: "en_US_POSIX")
+            picker.semanticContentAttribute = .forceLeftToRight
+            pickerVC.view.semanticContentAttribute = .forceLeftToRight
+        }
+        // =====================================================================
+        
+        picker.minimumDate = Date()
         picker.maximumDate = nil
         
         picker.translatesAutoresizingMaskIntoConstraints = false
         picker.layer.cornerRadius = 12
         picker.clipsToBounds = true
         picker.backgroundColor = .systemBackground
-
+        
         pickerVC.view.addSubview(picker)
-
+        
         NSLayoutConstraint.activate([
             picker.centerXAnchor.constraint(equalTo: pickerVC.view.centerXAnchor),
             picker.centerYAnchor.constraint(equalTo: pickerVC.view.centerYAnchor),
             picker.leadingAnchor.constraint(equalTo: pickerVC.view.leadingAnchor, constant: 25),
             picker.trailingAnchor.constraint(equalTo: pickerVC.view.trailingAnchor, constant: -25)
         ])
-
+        
+        // Dismiss on tap outside
         let dismissView = UIView()
         dismissView.translatesAutoresizingMaskIntoConstraints = false
         pickerVC.view.insertSubview(dismissView, at: 0)
+        
         NSLayoutConstraint.activate([
             dismissView.topAnchor.constraint(equalTo: pickerVC.view.topAnchor),
             dismissView.bottomAnchor.constraint(equalTo: pickerVC.view.bottomAnchor),
             dismissView.leadingAnchor.constraint(equalTo: pickerVC.view.leadingAnchor),
             dismissView.trailingAnchor.constraint(equalTo: pickerVC.view.trailingAnchor)
         ])
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissDatePicker))
         dismissView.addGestureRecognizer(tapGesture)
-
+        
         picker.addTarget(self, action: #selector(centerDatePicked(_:)), for: .valueChanged)
-
+        
         pickerVC.modalPresentationStyle = .overCurrentContext
         pickerVC.modalTransitionStyle = .crossDissolve
         present(pickerVC, animated: true)
-
+        
         self.monthYearPicker = picker
     }
     
@@ -207,16 +311,54 @@ class LiveCoverageListViewController: UIViewController {
         dateLabelInCustomCalender.text = shortDateFormatterForCalender.string(from: today)
     }
     
+//    private func configureCalendar() {
+//        viewCalendar.delegate = self
+//        viewCalendar.dataSource = self
+//        viewCalendar.register(
+//            GradientCalendarCell.self,
+//            forCellReuseIdentifier: "GradientCalendarCell"
+//        )
+//        viewCalendar.appearance.selectionColor = .clear
+//        viewCalendar.appearance.titleSelectionColor = .white
+//        
+//        viewCalendar.appearance.todayColor = .clear
+//        viewCalendar.appearance.titleTodayColor = .black
+//        
+//        viewCalendar.appearance.weekdayFont = UIFont.systemFont(ofSize: 15, weight: .semibold)
+//        viewCalendar.appearance.weekdayTextColor = .black
+//        viewCalendar.appearance.headerTitleColor = .black
+//        viewCalendar.appearance.headerTitleFont = UIFont.systemFont(ofSize: 18, weight: .bold)
+//        viewCalendar.appearance.caseOptions = [.weekdayUsesSingleUpperCase]
+//        
+//        viewCalendar.appearance.headerMinimumDissolvedAlpha = 0.0
+//        viewCalendar.headerHeight = 0
+//        
+//        dateAndYearLabel.text = monthYearFormatter.string(from: viewCalendar.currentPage)
+//    }
+    
     private func configureCalendar() {
         viewCalendar.delegate = self
         viewCalendar.dataSource = self
-        viewCalendar.register(
-            GradientCalendarCell.self,
-            forCellReuseIdentifier: "GradientCalendarCell"
-        )
+        
+        // ==================== STRONG RTL FIX ====================
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            viewCalendar.locale = Locale(identifier: "ar")     // Better than "ar"
+            viewCalendar.semanticContentAttribute = .forceRightToLeft
+            viewCalendar.firstWeekday = 7                          // Sunday start for Arabic (or 6 for Monday)
+            
+            // Force direction on calendar itself
+            viewCalendar.semanticContentAttribute = .forceRightToLeft
+        } else {
+            viewCalendar.locale = Locale(identifier: "en_US_POSIX")
+            viewCalendar.semanticContentAttribute = .forceLeftToRight
+            viewCalendar.firstWeekday = 1                          // Sunday start for English
+        }
+        // ======================================================
+        
+        viewCalendar.register(GradientCalendarCell.self, forCellReuseIdentifier: "GradientCalendarCell")
+        
         viewCalendar.appearance.selectionColor = .clear
         viewCalendar.appearance.titleSelectionColor = .white
-        
         viewCalendar.appearance.todayColor = .clear
         viewCalendar.appearance.titleTodayColor = .black
         
@@ -224,12 +366,15 @@ class LiveCoverageListViewController: UIViewController {
         viewCalendar.appearance.weekdayTextColor = .black
         viewCalendar.appearance.headerTitleColor = .black
         viewCalendar.appearance.headerTitleFont = UIFont.systemFont(ofSize: 18, weight: .bold)
-        viewCalendar.appearance.caseOptions = [.weekdayUsesSingleUpperCase]
         
+        viewCalendar.appearance.caseOptions = [.weekdayUsesSingleUpperCase]
         viewCalendar.appearance.headerMinimumDissolvedAlpha = 0.0
         viewCalendar.headerHeight = 0
         
-        dateAndYearLabel.text = monthYearFormatter.string(from: viewCalendar.currentPage)
+        // Force refresh
+        viewCalendar.reloadData()
+        viewCalendar.setNeedsLayout()
+        viewCalendar.layoutIfNeeded()
     }
     
 }

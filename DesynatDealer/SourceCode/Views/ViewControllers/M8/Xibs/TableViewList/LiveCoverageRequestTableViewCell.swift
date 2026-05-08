@@ -95,37 +95,58 @@ class LiveCoverageRequestTableViewCell: UITableViewCell {
         liveRequestDateLabel.text = formatDateTime(date: data?.timeslotDetails?.date ?? "", time: data?.timeslotDetails?.from ?? "")
     }
     
-    private func formatDate(_ dateString: String?) -> String {
-        guard let dateString = dateString else { return "-" }
-        
-        let inputFormatter = DateFormatter()
-        inputFormatter.locale = Locale(identifier: "en_US_POSIX")
-        
-        // ✅ Server timezone (Kuwait)
-        inputFormatter.timeZone = TimeZone(identifier: "Asia/Kuwait")
-        inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZZZZZ"
-        
-        guard let date = inputFormatter.date(from: dateString) else {
-            return dateString
-        }
-        
-        let outputFormatter = DateFormatter()
-        outputFormatter.locale = Locale(identifier: "en_US_POSIX")
-        
-        // ✅ Local timezone
-        outputFormatter.timeZone = TimeZone.current
-        outputFormatter.dateFormat = "dd/MM/yyyy 'at' h:mm a"
-        
-        return outputFormatter.string(from: date)
-    }
+//    private func formatDate(_ dateString: String?) -> String {
+//        guard let dateString = dateString else { return "-" }
+//        
+//        let inputFormatter = DateFormatter()
+//        inputFormatter.locale = Locale(identifier: "en_US_POSIX")
+//        
+//        // ✅ Server timezone (Kuwait)
+//        inputFormatter.timeZone = TimeZone(identifier: "Asia/Kuwait")
+//        inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZZZZZ"
+//        
+//        guard let date = inputFormatter.date(from: dateString) else {
+//            return dateString
+//        }
+//        
+//        let outputFormatter = DateFormatter()
+//        outputFormatter.locale = Locale(identifier: "en_US_POSIX")
+//        
+//        // ✅ Local timezone
+//        outputFormatter.timeZone = TimeZone.current
+//        outputFormatter.dateFormat = "dd/MM/yyyy 'at' h:mm a"
+//        
+//        return outputFormatter.string(from: date)
+//    }
     
+//    func formatDateTime(date: String, time: String) -> String? {
+//        let combined = "\(date) \(time)"
+//        
+//        let inputFormatter = DateFormatter()
+//        inputFormatter.locale = Locale(identifier: "en_US_POSIX")
+//        
+//        // ✅ Server timezone (Kuwait)
+//        inputFormatter.timeZone = TimeZone(identifier: "Asia/Kuwait")
+//        inputFormatter.dateFormat = "yyyy-MM-dd hh:mm a"
+//        
+//        guard let dateObject = inputFormatter.date(from: combined) else {
+//            return nil
+//        }
+//        
+//        let outputFormatter = DateFormatter()
+//        outputFormatter.locale = Locale(identifier: "en_US_POSIX")
+//        
+//        // ✅ Convert to local timezone
+//        outputFormatter.timeZone = TimeZone.current
+//        outputFormatter.dateFormat = "dd/MM/yyyy 'at' h:mm a"
+//        
+//        return outputFormatter.string(from: dateObject)
+//    }
     func formatDateTime(date: String, time: String) -> String? {
         let combined = "\(date) \(time)"
         
         let inputFormatter = DateFormatter()
         inputFormatter.locale = Locale(identifier: "en_US_POSIX")
-        
-        // ✅ Server timezone (Kuwait)
         inputFormatter.timeZone = TimeZone(identifier: "Asia/Kuwait")
         inputFormatter.dateFormat = "yyyy-MM-dd hh:mm a"
         
@@ -134,18 +155,43 @@ class LiveCoverageRequestTableViewCell: UITableViewCell {
         }
         
         let outputFormatter = DateFormatter()
-        outputFormatter.locale = Locale(identifier: "en_US_POSIX")
-        
-        // ✅ Convert to local timezone
         outputFormatter.timeZone = TimeZone.current
-        outputFormatter.dateFormat = "dd/MM/yyyy 'at' h:mm a"
+        
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            outputFormatter.locale = Locale(identifier: "ar")
+            outputFormatter.dateFormat = "dd/MM/yyyy 'في' h:mm a"
+        } else {
+            outputFormatter.locale = Locale(identifier: "en_US_POSIX")
+            outputFormatter.dateFormat = "dd/MM/yyyy 'at' h:mm a"
+        }
         
         return outputFormatter.string(from: dateObject)
     }
     
+//    private func formatDateRequestDate(_ dateString: String?) -> String {
+//        guard let dateString = dateString else { return "-" }
+//        
+//        let inputFormatter = DateFormatter()
+//        inputFormatter.locale = Locale(identifier: "en_US_POSIX")
+//        inputFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+//        inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ"
+//        
+//        guard let date = inputFormatter.date(from: dateString) else {
+//            return dateString
+//        }
+//        
+//        let outputFormatter = DateFormatter()
+//        outputFormatter.locale = Locale(identifier: "en_US_POSIX")
+//        outputFormatter.timeZone = TimeZone.current
+//        outputFormatter.dateFormat = "dd/MM/yyyy 'at' hh:mm a"
+//        
+//        return outputFormatter.string(from: date)
+//    }
+    
     private func formatDateRequestDate(_ dateString: String?) -> String {
         guard let dateString = dateString else { return "-" }
         
+        // Input Formatter (Parse)
         let inputFormatter = DateFormatter()
         inputFormatter.locale = Locale(identifier: "en_US_POSIX")
         inputFormatter.timeZone = TimeZone(secondsFromGMT: 0)
@@ -155,29 +201,18 @@ class LiveCoverageRequestTableViewCell: UITableViewCell {
             return dateString
         }
         
+        // Output Formatter - Now Locale Aware
         let outputFormatter = DateFormatter()
-        outputFormatter.locale = Locale(identifier: "en_US_POSIX")
         outputFormatter.timeZone = TimeZone.current
-        outputFormatter.dateFormat = "dd/MM/yyyy 'at' hh:mm a"
+        
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            outputFormatter.locale = Locale(identifier: "ar")
+            outputFormatter.dateFormat = "dd/MM/yyyy 'في' hh:mm a"
+        } else {
+            outputFormatter.locale = Locale(identifier: "en_US_POSIX")
+            outputFormatter.dateFormat = "dd/MM/yyyy 'at' hh:mm a"
+        }
         
         return outputFormatter.string(from: date)
     }
-    
-//    func formatDateTime(date: String, time: String) -> String? {
-//        let combined = "\(date) \(time)"
-//        
-//        let inputFormatter = DateFormatter()
-//        inputFormatter.dateFormat = "yyyy-MM-dd hh:mm a"
-//        inputFormatter.locale = Locale(identifier: "en_US_POSIX")
-//        
-//        guard let dateObject = inputFormatter.date(from: combined) else {
-//            return nil
-//        }
-//        
-//        let outputFormatter = DateFormatter()
-//        outputFormatter.dateFormat = "dd/MM/yyyy 'at' hh:mm a"
-//        
-//        return outputFormatter.string(from: dateObject)
-//    }
-    
 }

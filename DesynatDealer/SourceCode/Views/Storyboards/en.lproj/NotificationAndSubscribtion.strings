@@ -369,7 +369,7 @@
 "mtl-mY-s5S.text" = "-";
 
 /* Class = "UITextField"; placeholder = "Enter new password "; ObjectID = "nCd-qP-s95"; */
-"nCd-qP-s95.placeholder" = "Enter new password ";
+"nCd-qP-s95.placeholder" = "Enter new password";
 
 /* Class = "UILabel"; text = "Title"; ObjectID = "nYS-rb-LHC"; */
 "nYS-rb-LHC.text" = "Title";

@@ -43,12 +43,13 @@
 "Payment Failed:" = "فشل الدفع:";
 "Documents and bank details save succesfully" = "تم حفظ المستندات والتفاصيل البنكية بنجاح";
 "OTP sent succesfully" = "تم إرسال رمز التحقق بنجاح";
-
+"Total Sold : 0" = "إجمالي المبيعات : 0";
 "no data found" = "لا توجد بيانات";
 "Orders" = "الطلبات";
 "Total Products" = "إجمالي المنتجات";
 "Leave" = "إجازة";
 "Visitor analytics" = "تحليلات الزوار";
+"Discounted %" = "الخصم %";
 "In- Active" = "غير نشط";
 " Today" = "اليوم";
 "51" = "51";
@@ -106,7 +107,7 @@
 "My Payouts" = "مدفوعاتي";
 
 "Create Password" = "إنشاء كلمة مرور";
-"Please select an option to get verified then we’ll\nsend an OTP to verify that it’s you" = "يرجى اختيار خيار للتحقق ثم سنرسل رمز OTP للتأكد من هويتك";
+"Please select an option to get verified then we’ll\nsend an OTP to verify that it’s you" = "يرجى اختيار خيار للتحقق ثم سنرسل رمز التحقق للتأكد من هويتك";
 "Reset Password" = "إعادة تعيين كلمة المرور";
 "Sign Up" = "إنشاء حساب";
 "Great! Now you can create your new password" = "رائع! يمكنك الآن إنشاء كلمة المرور الجديدة";
@@ -120,6 +121,7 @@
 "IBAN (Optional)" = "IBAN (اختياري)";
 "Location" = "الموقع";
 "Enter password" = "أدخل كلمة المرور";
+"Enter Password" = "أدخل كلمة المرور";
 "Account Type" = "نوع الحساب";
 "First Name" = "الاسم الأول";
 "Verify" = "تحقق";
@@ -147,7 +149,7 @@
 "Skip" = "تخطي";
 "IBAN" = "IBAN";
 "Address Line 1" = "العنوان سطر 1";
-"OTP Verification" = "التحقق من OTP";
+"OTP Verification" = "التحقق من رمز التحقق";
 "Account holder name" = "اسم صاحب الحساب";
 "English" = "الإنجليزية";
 "Store Email Address" = "بريد المتجر الإلكتروني";
@@ -215,7 +217,7 @@
 "Edit " = "تعديل";
 "Delete" = "حذف";
 "Add New Product" = "إضافة منتج جديد";
-
+"Products" = "المنتجات";
 "Purchase" = "شراء";
 "Month" = "شهر";
 "Years" = "سنوات";
@@ -526,7 +528,7 @@
 "Password must be at least 8 characters long and contain letters and numbers" = "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل وتحتوي على أحرف وأرقام";
 "Please enter confirm password" = "يرجى إدخال تأكيد كلمة المرور";
 "Passwords do not match" = "كلمتا المرور غير متطابقتين";
-
+"  I accept the" = "أوافق على ";
 "No photos or videos found." = "لم يتم العثور على صور أو فيديوهات";
 "You have allowed limited access to your gallery.\nPlease select more photos." = "لقد سمحت بوصول محدود إلى المعرض.\nيرجى اختيار المزيد من الصور";
 "Gallery permission denied.\nPlease allow access in Settings." = "تم رفض إذن المعرض.\nيرجى السماح بالوصول من الإعدادات";
@@ -630,6 +632,7 @@
 "Customer Details" = "تفاصيل العميل";
 "Phone :" = "الهاتف :";
 "Mail Id :" = "البريد الإلكتروني :";
+"Mail Id" = "البريد الإلكتروني";
 "Delivery Address" = "عنوان التوصيل";
 "Color" = "اللون";
 "Payment Summary" = "ملخص الدفع";
@@ -698,7 +701,7 @@
 "Change Password" = "تغيير كلمة المرور";
 "Enter old password " = "أدخل كلمة المرور القديمة ";
 "New Password" = "كلمة المرور الجديدة";
-"Enter new password " = "أدخل كلمة المرور الجديدة ";
+"Enter new password" = "أدخل كلمة المرور الجديدة";
 "Confirm Password" = "تأكيد كلمة المرور";
 "Enter password " = "أدخل كلمة المرور ";
 "Hi There 👋" = "مرحباً 👋";
@@ -802,6 +805,7 @@
 "Please upload profile image" = "يرجى تحميل صورة الملف الشخصي";
 "Please Enter First name" = "يرجى إدخال الاسم الأول";
 "Please Enter Last name" = "يرجى إدخال اسم العائلة";
+"Enter Last Name" = "أدخل اسم العائلة";
 "Please accept the Terms & Conditions to continue" = "يرجى الموافقة على الشروط والأحكام للمتابعة";
 "Please enter store name" = "يرجى إدخال اسم المتجر";
 "Please enter store address" = "يرجى إدخال عنوان المتجر";
@@ -826,7 +830,10 @@
 "Please enter store phone number" = "يرجى إدخال رقم هاتف المتجر";
 "Please choose Country" = "يرجى اختيار الدولة";
 "Please enter Affiliated Commission" = "يرجى إدخال عمولة الشراكة";
-
+"Terms & Conditions" = "الشروط والأحكام";
+"and" = "و";
+"Proof of account" = "إثبات الحساب";
+"Policies" = "السياسات";
 "Please select category" = "يرجى اختيار الفئة";
 "Please select sub-category" = "يرجى اختيار الفئة الفرعية";
 "Please select brand" = "يرجى اختيار العلامة التجارية";
@@ -877,33 +884,34 @@
 "Enter Mobile Number" = "يرجى إدخال رقم الجوال";
 "Email Id" = "البريد الإلكتروني";
 "Role" = "الدور";
-
+"Sub-Category" = "الفئة الفرعية";
 "Choose File" = "اختر ملف";
 "Camera" = "الكاميرا";
 "Gallery" = "المعرض";
-"PDF / Files" = "ملفات / PDF";
+"PDF / Files" = "قوات الدفاع الشعبي / الملفات";
 "Cancel" = "إلغاء";
 "Warning" = "تحذير";
 "You don't have camera" = "لا يوجد لديك كاميرا";
 "Ok" = "موافق";
+"Resend OTP in" = "سيتم إعادة إرسال رمز التحقق خلال";
 "Select Video" = "اختر فيديو";
 "Camera" = "الكاميرا";
 "Gallery" = "المعرض";
 "Cancel" = "إلغاء";
 "Camera not available" = "الكاميرا غير متاحة";
-
+"A verification code has been sent to" = "تم إرسال رمز التحقق إلى";
 "Personal Info" = "المعلومات الشخصية";
 "IBAN Number" = "رقم الآيبان";
 "SWIFT/BIC" = "رمز سويفت/BIC";
 "Enter SWIFT/BIC" = "يرجى إدخال رمز سويفت/BIC";
-
+"Your password must  be at least 8 characters \nand should include a combination of numbers,\nletters and special characters." = "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل \nويجب أن تحتوي على مزيج من الأرقام،\nوالحروف، والرموز الخاصة.";
 "Number of Products:" = "عدد المنتجات:";
 "Number of Videos (Reels):" = "عدد مقاطع الفيديو (ريلز):";
 "Number of Highlights:" = "عدد الهايلايت:";
 "Stories:" = "القصص:";
 "Commission:" = "العمولة:";
 "store Employees" = "موظفو المتجر";
-
+"Send new live request" = "إرسال طلب بث مباشر جديد";
 "Live Request" = "طلب مباشر";
 "Your past requests" = "طلباتك السابقة";
 "Live Coverage" = "تغطية مباشرة";
@@ -916,7 +924,7 @@
 "Write caption here..." = "اكتب التسمية هنا...";
 "Upload Reel" = "رفع ريل";
 "Add to Highlight" = "إضافة إلى الهايلايت";
-
+"Completed" = "مكتمل";
 "Duration" = "المدة";
 "Payment method" = "طريقة الدفع";
 "Eg. 299.00 KD" = "مثال: 299.00 د.ك";
@@ -988,3 +996,36 @@
 "Card" = "بطاقة";
 "Starts On" = "يبدأ في";
 "Products added" = "تمت إضافة المنتجات";
+"Total Coverages-%@" = "إجمالي التغطيات-%@";
+"Create New Password" = "إنشاء كلمة مرور جديدة";
+"Enter Confirm New Password" = "أدخل تأكيد كلمة المرور الجديدة";
+"Enter New Password" = "أدخل كلمة المرور الجديدة";
+"Enter new password" = "أدخل كلمة المرور الجديدة";
+"Enter confirm password" = "أدخل تأكيد كلمة المرور";
+"Already have an account?" = "هل لديك حساب بالفعل؟";
+"Sign in" = "تسجيل الدخول";
+"Enter Store name" = "أدخل اسم المتجر";
+"Enter Address line 1" = "أدخل عنوان السطر الأول";
+"Enter Address line 2" = "أدخل عنوان السطر الثاني";
+"Store Information" = "معلومات المتجر";
+"Create your account !" = "أنشئ حسابك !";
+"Welcome back !" = "مرحباً بعودتك !";
+"Enter Store Email Address" = "أدخل البريد الإلكتروني للمتجر";
+"Enter Store Phone Number" = "أدخل رقم هاتف المتجر";
+"Enter Bio" = "أدخل نبذة تعريفية";
+"Use Current Location" = "استخدام الموقع الحالي";
+"Upload documents & Bank details" = "رفع المستندات وتفاصيل البنك";
+"IBAN (Optional)" = "رقم الآيبان (اختياري)";
+"SWIFT/BIC (Optional)" = "رمز السويفت/البيك (اختياري)";
+"Enter IBAN" = "أدخل رقم الآيبان";
+"Enter Swift" = "أدخل رمز السويفت";
+"Enter Account holder name" = "أدخل اسم صاحب الحساب";
+"Add Address" = "إضافة عنوان";
+"Upload proof of account" = "رفع إثبات الحساب";
+"(Bank Statement or Bank Letter,PDF/JPG/PNG ≤ 5MB)" = "(كشف حساب بنكي أو خطاب بنكي، PDF/JPG/PNG حتى 5 ميجابايت)";
+"Please wait for 3-4 hrs. \n\nThank\nyou for your patience. Team Desynat App" = "يرجى الانتظار لمدة 3-4 ساعات. \n\nشكرًا\nعلى صبركم. فريق تطبيق Desynat";
+"Your account registration is under review !!" = "طلب تسجيل حسابك قيد المراجعة !!";
+"Black" = "أسود";
+"S" = "ص";
+"Write caption here..." = "اكتب التسمية هنا...";
+"My Profile (view reels)" = "ملفي الشخصي (عرض الريلز)";

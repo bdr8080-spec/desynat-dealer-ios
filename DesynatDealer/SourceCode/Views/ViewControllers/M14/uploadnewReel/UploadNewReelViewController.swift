@@ -39,6 +39,7 @@ class UploadNewReelViewController: UIViewController {
         captionView.layer.cornerRadius = 12
         captionView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         captionView.clipsToBounds = true
+        captiontxtArea.placeholderTextView = "Write caption here...".localiz()
         if isComingForEdit {
             configData()
             buttonTitleLabel.text = "Edit Reel".localiz()

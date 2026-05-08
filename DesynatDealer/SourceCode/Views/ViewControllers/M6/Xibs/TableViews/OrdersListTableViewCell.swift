@@ -54,7 +54,7 @@ class OrdersListTableViewCell: UITableViewCell {
       productImageView.image = UIImage(named: "")
     }
       if AppLanguageManager.shared.currentLanguage == .ar {
-          productDetailsLabel.text = "\(data?.productDetails?.productNameAr ?? "") (\(data?.variationDetails?.size?.name ?? ""))"
+          productDetailsLabel.text = "\(data?.productDetails?.productNameAr ?? "") (\(data?.variationDetails?.size?.nameAr ?? ""))"
       } else {
           productDetailsLabel.text = "\(data?.productDetails?.productNameEn ?? "") (\(data?.variationDetails?.size?.name ?? ""))"
       }
@@ -245,24 +245,44 @@ class OrdersListTableViewCell: UITableViewCell {
       return addressParts.joined(separator: ", ")
   }
   
-  func formatDateString(_ isoDate: String) -> String? {
-      // 1. Create ISO8601 DateFormatter
-      let isoFormatter = DateFormatter()
-      isoFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ"
-      isoFormatter.locale = Locale(identifier: "en_US_POSIX")
-      isoFormatter.timeZone = TimeZone(secondsFromGMT: 0) // Z means UTC
-      
-      // 2. Convert string to Date
-      guard let date = isoFormatter.date(from: isoDate) else { return nil }
-      
-      // 3. Format date to desired format
-      let displayFormatter = DateFormatter()
-      displayFormatter.dateFormat = "dd/MM/yyyy 'at' h:mm a" // 12-hour format
-      displayFormatter.locale = Locale(identifier: "en_US_POSIX")
-      displayFormatter.timeZone = TimeZone.current // local time
-      
-      return displayFormatter.string(from: date)
-  }
+    func formatDateString(_ isoDate: String) -> String? {
+        
+        // Parse ISO date
+        let isoFormatter = DateFormatter()
+        isoFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ"
+        isoFormatter.locale = Locale(identifier: "en_US_POSIX")
+        isoFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+        
+        guard let date = isoFormatter.date(from: isoDate) else { return nil }
+        
+        // Output formatter
+        let displayFormatter = DateFormatter()
+        displayFormatter.dateFormat = "dd/MM/yyyy 'at' h:mm a"
+        displayFormatter.timeZone = TimeZone.current
+        
+        // ✅ Localization
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            displayFormatter.locale = Locale(identifier: "ar")
+            
+            // Arabic AM/PM
+            displayFormatter.amSymbol = "ص"
+            displayFormatter.pmSymbol = "م"
+            
+        } else {
+            displayFormatter.locale = Locale(identifier: "en_US_POSIX")
+            displayFormatter.amSymbol = "AM"
+            displayFormatter.pmSymbol = "PM"
+        }
+        
+        var formattedDate = displayFormatter.string(from: date)
+        
+        // ✅ Localize "at"
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            formattedDate = formattedDate.replacingOccurrences(of: "at", with: "في")
+        }
+        
+        return formattedDate
+    }
 
   
 }

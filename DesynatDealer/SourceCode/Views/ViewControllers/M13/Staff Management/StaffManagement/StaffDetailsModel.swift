@@ -118,7 +118,7 @@ struct RoleAction: Codable {
 // MARK: - Sellermenu
 struct Sellermenu: Codable {
     var id: Int?
-    var title, route, icon, activePatterns: String?
+    var title,titleAr, route, icon, activePatterns: String?
     var parentID: String?
     var orderBy, status: Int?
     var createdAt, updatedAt: String?
@@ -131,6 +131,7 @@ struct Sellermenu: Codable {
         case status
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+        case titleAr = "title_ar"
     }
 }
 
@@ -154,7 +155,7 @@ struct SellerCategory: Codable {
 // MARK: - GetAllSellerData
 struct GetAllSellerData: Codable {
     var id: Int?
-    var title, route, icon, activePatterns: String?
+    var title,titleAr, route, icon, activePatterns: String?
     var parentID: String?
     var orderBy, status: Int?
     var createdAt, updatedAt: String?
@@ -167,6 +168,7 @@ struct GetAllSellerData: Codable {
         case status
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+        case titleAr = "title_ar"
     }
 }
 

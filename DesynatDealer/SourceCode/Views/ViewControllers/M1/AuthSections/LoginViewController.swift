@@ -59,12 +59,13 @@ class LoginViewController: UIViewController {
     
     @IBAction func btnTapCountryCode(_ sender: UIButton) {
         let countryNames = viewModel.countryList.map { country -> String in
-            let name = country.name ?? ""
+            let isArabic = AppLanguageManager.shared.currentLanguage == .ar
+            let name = isArabic ? (country.nameAr ?? country.name ?? "") : (country.name ?? "")
             let dialCode = country.dialCode ?? ""
             let flag = country.flag ?? "🇰🇼"
             return "\(flag)  \(name) (\(dialCode))"
         }
-
+        
         kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
             let selectedCountry = self.viewModel.countryList[index]
             let code = selectedCountry.dialCode ?? "+965"
@@ -72,10 +73,6 @@ class LoginViewController: UIViewController {
             self.countryCode = code
         }
     }
-    
-//    func setUpCountryCode(code:String)  {
-//        self.txtCountryCode.text = code
-//    }
 }
 
 extension LoginViewController: UITextFieldDelegate {

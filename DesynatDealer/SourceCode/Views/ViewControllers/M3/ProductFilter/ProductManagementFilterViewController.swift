@@ -83,7 +83,10 @@ class ProductManagementFilterViewController: UIViewController {
     let categoryOptions = viewModel.categoriesList.map {
       FilterOption(
         id: "\($0.id ?? 0)",
-        title: $0.name ?? "",
+//        title: $0.name ?? "",
+        title: AppLanguageManager.shared.currentLanguage == .ar
+                    ? ($0.nameAr ?? $0.name ?? "")
+                    : ($0.name ?? ""),
         isSelected: selectedCategoryIDs.contains("\($0.id ?? 0)")
       )
     }
@@ -92,7 +95,10 @@ class ProductManagementFilterViewController: UIViewController {
     let brandOptions = viewModel.brandsList.map {
       FilterOption(
         id: "\($0.id ?? 0)",
-        title: $0.nameEnglish ?? "",
+//        title: $0.nameEnglish ?? "",
+        title: AppLanguageManager.shared.currentLanguage == .ar
+                    ? ($0.nameArabic ?? $0.nameEnglish ?? "")
+                    : ($0.nameEnglish ?? ""),
         isSelected: selectedBrandIDs.contains("\($0.id ?? 0)")
       )
     }

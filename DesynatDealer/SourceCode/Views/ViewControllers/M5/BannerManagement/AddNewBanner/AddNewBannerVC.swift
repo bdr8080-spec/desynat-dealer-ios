@@ -246,28 +246,7 @@ class AddNewBannerVC: UIViewController {
 
 // Date Picker
 extension AddNewBannerVC {
-//    private func setUpTextFields() {
-//        datePicker.preferredDatePickerStyle = .wheels
-//        datePicker.datePickerMode = .date
-//        datePicker.minimumDate = Date()
-//        datePicker.backgroundColor = .white
-//        
-//        let toolbar = UIToolbar()
-//        toolbar.sizeToFit()
-//        
-//        let doneButton = UIBarButtonItem(title: "Done".localiz(), style: .done, target: self, action: #selector(doneDatePicker))
-//        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-//        let cancelButton = UIBarButtonItem(title: "Cancel".localiz(), style: .plain, target: self, action: #selector(cancelDatePicker))
-//        toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
-//        
-//        let textFields = [txtFromDate, txtToDate]
-//        textFields.forEach { textField in
-//            textField?.inputView = datePicker
-//            textField?.inputAccessoryView = toolbar
-//            textField?.delegate = self
-//        }
-//    }
-    
+
     private func setUpTextFields() {
         
         datePicker.preferredDatePickerStyle = .wheels

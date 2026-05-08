@@ -120,7 +120,13 @@ extension RefundManagementFilterViewController {
         datePicker.datePickerMode = .date
         datePicker.minimumDate = nil
         datePicker.backgroundColor = .white
-        
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            datePicker.locale = Locale(identifier: "ar")
+            datePicker.semanticContentAttribute = .forceRightToLeft
+        } else {
+            datePicker.locale = Locale(identifier: "en_US_POSIX")
+            datePicker.semanticContentAttribute = .forceLeftToRight
+        }
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         

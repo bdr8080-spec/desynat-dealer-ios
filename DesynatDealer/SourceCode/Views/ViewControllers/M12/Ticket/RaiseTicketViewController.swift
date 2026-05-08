@@ -40,13 +40,32 @@ class RaiseTicketViewController: UIViewController {
     }
     
     @IBAction func ticketTypeDidTapped(_ sender: UIButton) {
-        let ticketsName = viewModel.ticketsTypeList.map { list -> String in
-            let name = list.name ?? ""
-            return name
+//        let ticketsName = viewModel.ticketsTypeList.map { list -> String in
+//            let name = list.name ?? ""
+//            return name
+//        }
+//        kSharedAppDelegate.dropDown(dataSource: ticketsName, anchorView: sender) { index, item in
+//            let selectedTicket = self.viewModel.ticketsTypeList[index]
+//            let name = selectedTicket.name
+//            self.ticketTypeLabel.text = name
+//            self.selectedTicketTypeIndex = selectedTicket.id ?? -1
+//        }
+        
+        let ticketsName = viewModel.ticketsTypeList.map { ticket in
+            if AppLanguageManager.shared.currentLanguage == .ar {
+                return ticket.nameArabic ?? ""
+            } else {
+                return ticket.name ?? ""
+            }
         }
         kSharedAppDelegate.dropDown(dataSource: ticketsName, anchorView: sender) { index, item in
             let selectedTicket = self.viewModel.ticketsTypeList[index]
-            let name = selectedTicket.name
+            let name: String
+            if AppLanguageManager.shared.currentLanguage == .ar {
+                name = selectedTicket.nameArabic ?? ""
+            } else {
+                name = selectedTicket.name ?? ""
+            }
             self.ticketTypeLabel.text = name
             self.selectedTicketTypeIndex = selectedTicket.id ?? -1
         }

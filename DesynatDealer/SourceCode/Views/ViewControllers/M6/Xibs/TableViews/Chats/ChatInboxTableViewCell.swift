@@ -52,7 +52,7 @@ class ChatInboxTableViewCell: UITableViewCell {
             messageLabel.text = "Sent an attachment".localiz()
         } else {
             if AppLanguageManager.shared.currentLanguage == .ar {
-                messageLabel.text = data?.lastChat ?? ""
+                messageLabel.text = data?.lastChatAr ?? data?.lastChat ?? ""
             } else {
                 messageLabel.text = data?.lastChat ?? ""
             }

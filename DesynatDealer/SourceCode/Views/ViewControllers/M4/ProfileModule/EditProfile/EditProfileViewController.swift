@@ -189,12 +189,13 @@ class EditProfileViewController: UIViewController {
   }
   
   @IBAction func storePhoneCountryCodeAction(_ sender: UIButton) {
-    let countryNames = viewModel.countryList.map { country -> String in
-        let name = country.name ?? ""
-        let dialCode = country.dialCode ?? ""
-        let flag = country.flag ?? "🇰🇼"
-        return "\(flag)  \(name) (\(dialCode))"
-    }
+      let countryNames = viewModel.countryList.map { country -> String in
+          let isArabic = AppLanguageManager.shared.currentLanguage == .ar
+          let name = isArabic ? (country.nameAr ?? country.name ?? "") : (country.name ?? "")
+          let dialCode = country.dialCode ?? ""
+          let flag = country.flag ?? "🇰🇼"
+          return "\(flag)  \(name) (\(dialCode))"
+      }
 
     kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
         let selectedCountry = self.viewModel.countryList[index]
@@ -204,7 +205,14 @@ class EditProfileViewController: UIViewController {
   }
   
   @IBAction func btnTapCountry(_ sender: UIButton) {
-      let countryNames = viewModel.countryList.map { $0.name ?? ""}
+//      let countryNames = viewModel.countryList.map { $0.name ?? ""}
+      let countryNames = viewModel.countryList.map { country -> String in
+          let isArabic = AppLanguageManager.shared.currentLanguage == .ar
+          let name = isArabic ? (country.nameAr ?? country.name ?? "") : (country.name ?? "")
+//          let dialCode = country.dialCode ?? ""
+//          let flag = country.flag ?? "🇰🇼"
+          return name
+      }
       kSharedAppDelegate.dropDown(dataSource:countryNames, anchorView:sender) { index, item in
           self.contryTF.text = item
           self.countryId = self.viewModel.countryList[index].id ?? 0
@@ -244,7 +252,11 @@ class EditProfileViewController: UIViewController {
     }
     storeNameTF.text = data?.storeInfo?.storeName
     countryId = Int(data?.storeInfo?.country ?? "0") ?? 0
-    contryTF.text = data?.storeInfo?.countryInfo?.name
+      if AppLanguageManager.shared.currentLanguage == .ar {
+          contryTF.text = data?.storeInfo?.countryInfo?.nameAr
+      } else {
+          contryTF.text = data?.storeInfo?.countryInfo?.name
+      }
     storeAddressTF.text = data?.storeInfo?.storeAddress
     addressLineOneTF.text = data?.storeInfo?.addressLine1
     addressLineTwoTF.text = data?.storeInfo?.addressLine2

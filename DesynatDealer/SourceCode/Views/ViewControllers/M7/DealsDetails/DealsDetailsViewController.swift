@@ -123,10 +123,22 @@ class DealsDetailsViewController: UIViewController {
         let endDate = convertDateFormat(data.to ?? "")
         endsOn.text = "\(fromDate) - \(endDate)"
         discountPercentageLabel.text = "\(CommonUtils.formatPriceAmount(data.discount))%"
-        categoryLabel.text = data.categoryDetails?.name
+        categoryLabel.text = AppLanguageManager.shared.currentLanguage == .ar ? data.categoryDetails?.nameAr : data.categoryDetails?.name
 //        subCategoryLabel.text = data.subCategoryDetails?.nameEnglish
-        subCategoryLabel.text = data.subCategoryDetails?.compactMap({ $0.nameEnglish }).joined(separator: ", ")
-        descriptionLabel.text = data.nameEnglish
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            
+            subCategoryLabel.text = data.subCategoryDetails?
+                .compactMap({ $0.nameArabic })
+                .joined(separator: "، ")
+            
+        } else {
+            
+            subCategoryLabel.text = data.subCategoryDetails?
+                .compactMap({ $0.nameEnglish })
+                .joined(separator: ", ")
+        }
+//        descriptionLabel.text = data.nameEnglish
+        descriptionLabel.text = AppLanguageManager.shared.currentLanguage == .ar ? data.nameArabic : data.nameEnglish
         //        totalRevenueLabel.text = CommonUtils.formatPrice(data.re, currency: <#T##String#>)
         
         productsCollectionView.reloadData()
@@ -138,41 +150,93 @@ class DealsDetailsViewController: UIViewController {
             }
     }
     
-    func convertDateFormat(_ dateString: String) -> String {
-        let inputFormatter = DateFormatter()
-        inputFormatter.dateFormat = "yyyy-MM-dd"
-        inputFormatter.locale = Locale(identifier: "en_US_POSIX")
-
-        let outputFormatter = DateFormatter()
-        outputFormatter.dateFormat = "dd/MM/yyyy"
-
-        guard let date = inputFormatter.date(from: dateString) else {
-            return ""
-        }
-
-        return outputFormatter.string(from: date)
-    }
+//    func convertDateFormat(_ dateString: String) -> String {
+//        let inputFormatter = DateFormatter()
+//        inputFormatter.dateFormat = "yyyy-MM-dd"
+//        inputFormatter.locale = Locale(identifier: "en_US_POSIX")
+//
+//        let outputFormatter = DateFormatter()
+//        outputFormatter.dateFormat = "dd/MM/yyyy"
+//
+//        guard let date = inputFormatter.date(from: dateString) else {
+//            return ""
+//        }
+//
+//        return outputFormatter.string(from: date)
+//    }
+    
+//    func friendlyStartDate(from isoDate: String) -> String? {
+//        // 1️⃣ Parse ISO date string
+//        let isoFormatter = ISO8601DateFormatter()
+//        isoFormatter.formatOptions = [.withFullDate] // yyyy-MM-dd
+//        guard let date = isoFormatter.date(from: isoDate) else { return nil }
+//        
+//        // 2️⃣ Get day, month, year components
+//        let calendar = Calendar.current
+//        let day = calendar.component(.day, from: date)
+//        let month = calendar.component(.month, from: date)
+//        let year = calendar.component(.year, from: date)
+//        
+//        // 3️⃣ Get month name
+//        let monthName = DateFormatter().monthSymbols[month - 1] // monthSymbols is 0-based
+//        
+//        // 4️⃣ Add ordinal suffix to day
+//        func ordinal(_ number: Int) -> String {
+//            let ones = number % 10
+//            let tens = (number / 10) % 10
+//            if tens == 1 { return "\(number)th" }
+//            switch ones {
+//            case 1: return "\(number)st"
+//            case 2: return "\(number)nd"
+//            case 3: return "\(number)rd"
+//            default: return "\(number)th"
+//            }
+//        }
+//        
+//        let dayWithOrdinal = ordinal(day)
+//        
+//        // 5️⃣ Combine into final string
+//        return "\(dayWithOrdinal) \(monthName) \(year)"
+//    }
     
     func friendlyStartDate(from isoDate: String) -> String? {
-        // 1️⃣ Parse ISO date string
-        let isoFormatter = ISO8601DateFormatter()
-        isoFormatter.formatOptions = [.withFullDate] // yyyy-MM-dd
-        guard let date = isoFormatter.date(from: isoDate) else { return nil }
         
-        // 2️⃣ Get day, month, year components
+        // Parse ISO date
+        let isoFormatter = ISO8601DateFormatter()
+        isoFormatter.formatOptions = [.withFullDate]
+        
+        guard let date = isoFormatter.date(from: isoDate) else {
+            return nil
+        }
+        
         let calendar = Calendar.current
         let day = calendar.component(.day, from: date)
         let month = calendar.component(.month, from: date)
         let year = calendar.component(.year, from: date)
         
-        // 3️⃣ Get month name
-        let monthName = DateFormatter().monthSymbols[month - 1] // monthSymbols is 0-based
+        // ✅ Localized month name
+        let monthFormatter = DateFormatter()
         
-        // 4️⃣ Add ordinal suffix to day
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            monthFormatter.locale = Locale(identifier: "ar")
+        } else {
+            monthFormatter.locale = Locale(identifier: "en_US_POSIX")
+        }
+        
+        let monthName = monthFormatter.monthSymbols[month - 1]
+        
+        // ✅ Arabic format
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            return "\(day) \(monthName) \(year)"
+        }
+        
+        // English ordinal logic
         func ordinal(_ number: Int) -> String {
             let ones = number % 10
             let tens = (number / 10) % 10
+            
             if tens == 1 { return "\(number)th" }
+            
             switch ones {
             case 1: return "\(number)st"
             case 2: return "\(number)nd"
@@ -183,8 +247,31 @@ class DealsDetailsViewController: UIViewController {
         
         let dayWithOrdinal = ordinal(day)
         
-        // 5️⃣ Combine into final string
         return "\(dayWithOrdinal) \(monthName) \(year)"
+    }
+
+
+    func convertDateFormat(_ dateString: String) -> String {
+        
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "yyyy-MM-dd"
+        inputFormatter.locale = Locale(identifier: "en_US_POSIX")
+        
+        guard let date = inputFormatter.date(from: dateString) else {
+            return ""
+        }
+        
+        let outputFormatter = DateFormatter()
+        outputFormatter.dateFormat = "dd/MM/yyyy"
+        
+        // ✅ Arabic support
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            outputFormatter.locale = Locale(identifier: "ar")
+        } else {
+            outputFormatter.locale = Locale(identifier: "en_US_POSIX")
+        }
+        
+        return outputFormatter.string(from: date)
     }
     
 }

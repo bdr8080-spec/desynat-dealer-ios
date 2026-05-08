@@ -22,7 +22,7 @@ class SendNewLiveRequestViewModel {
             self.timeSlotsList = data
             DispatchQueue.main.async {
                 self.hostVC.timeCollectionView.reloadData()
-                self.hostVC.totalCoverageLabel.text = "Total Coverages- \(self.timeSlotsList.count)"
+                self.hostVC.totalCoverageLabel.text = String(format: "Total Coverages-%@".localiz(), "\(self.timeSlotsList.count)")//"Total Coverages- \(self.timeSlotsList.count)"
                 self.hostVC.timeCollectionView.layoutIfNeeded()
                 self.hostVC.handleHeightOfTableView()
                 self.hostVC.noDataFoundLabel.isHidden = !self.timeSlotsList.isEmpty

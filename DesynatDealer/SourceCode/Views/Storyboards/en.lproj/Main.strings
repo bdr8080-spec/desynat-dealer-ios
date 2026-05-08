@@ -129,7 +129,7 @@
 "GGS-kO-oOp.text" = "Mobile number";
 
 /* Class = "UITextField"; placeholder = "Enter IBAN "; ObjectID = "GMP-kO-9F7"; */
-"GMP-kO-9F7.placeholder" = "Enter IBAN ";
+"GMP-kO-9F7.placeholder" = "Enter IBAN";
 
 /* Class = "UILabel"; text = "Allow"; ObjectID = "GP3-4B-Hbz"; */
 "GP3-4B-Hbz.text" = "Allow";
@@ -174,7 +174,7 @@
 "MJc-Ax-He1.text" = "Arabic";
 
 /* Class = "UITextField"; placeholder = "Enter Swift "; ObjectID = "MMo-zc-9rA"; */
-"MMo-zc-9rA.placeholder" = "Enter Swift ";
+"MMo-zc-9rA.placeholder" = "Enter Swift";
 
 /* Class = "UILabel"; text = "Bank Details"; ObjectID = "N60-2G-Vdb"; */
 "N60-2G-Vdb.text" = "Bank Details";
@@ -327,7 +327,7 @@
 "bxg-9b-MAH.text" = "Bio";
 
 /* Class = "UITextField"; placeholder = "Enter  Address line 2"; ObjectID = "c0w-7S-Z6z"; */
-"c0w-7S-Z6z.placeholder" = "Enter  Address line 2";
+"c0w-7S-Z6z.placeholder" = "Enter Address line 2";
 
 /* Class = "UILabel"; text = "Total Amount"; ObjectID = "cGA-bT-fnl"; */
 "cGA-bT-fnl.text" = "Total Amount";
@@ -465,7 +465,7 @@
 "r9U-6i-8FQ.placeholder" = "Enter Store Phone Number";
 
 /* Class = "UITextField"; placeholder = "Enter  Address line 1"; ObjectID = "rQj-a9-Mzp"; */
-"rQj-a9-Mzp.placeholder" = "Enter  Address line 1";
+"rQj-a9-Mzp.placeholder" = "Enter Address line 1";
 
 /* Class = "UILabel"; text = "Owner's Documents"; ObjectID = "rqy-ua-58d"; */
 "rqy-ua-58d.text" = "Owner's Documents";

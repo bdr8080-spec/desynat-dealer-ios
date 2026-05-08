@@ -79,7 +79,8 @@ class SignupViewController: UIViewController {
     
     @IBAction func btnTapCountryCode(_ sender: UIButton) {
         let countryNames = viewModel.countryList.map { country -> String in
-            let name = country.name ?? ""
+            let isArabic = AppLanguageManager.shared.currentLanguage == .ar
+            let name = isArabic ? (country.nameAr ?? country.name ?? "") : (country.name ?? "")
             let dialCode = country.dialCode ?? ""
             let flag = country.flag ?? "🇰🇼"
             return "\(flag)  \(name) (\(dialCode))"

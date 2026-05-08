@@ -120,7 +120,8 @@ class AddNewStaffViewController: UIViewController {
     
     @IBAction func countryCodeDidTapped(_ sender: UIButton) {
         let countryNames = viewModel.countryListData.map { country -> String in
-            let name = country.name ?? ""
+            let isArabic = AppLanguageManager.shared.currentLanguage == .ar
+            let name = isArabic ? (country.nameAr ?? country.name ?? "") : (country.name ?? "")
             let dialCode = country.dialCode ?? ""
             let flag = country.flag ?? "🇰🇼"
             return "\(flag)  \(name) (\(dialCode))"
@@ -243,7 +244,11 @@ extension AddNewStaffViewController: UICollectionViewDataSource,UICollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RadioBtnCollectionViewCell", for: indexPath) as! RadioBtnCollectionViewCell
         let role = roles[indexPath.row]
-        cell.titleLbl.text = role.nameEn
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            cell.titleLbl.text = role.nameAr
+        } else {
+            cell.titleLbl.text = role.nameEn
+        }
         let isSelected = selectedRoleId == (role.id ?? 0)
         cell.updateSelectionState(isSelected: isSelected)
         return cell
@@ -275,8 +280,11 @@ extension AddNewStaffViewController: UITableViewDataSource, UITableViewDelegate 
         
         let module = viewModel.dealerSellersListData[indexPath.row]
         let moduleId = module.id ?? 0
-        
-        cell.titleView.text = module.title ?? ""
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            cell.titleView.text = module.titleAr ?? ""
+        } else {
+            cell.titleView.text = module.title ?? ""
+        }
         cell.moduleId = moduleId
         
         // Reset defaults

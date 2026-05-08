@@ -22,8 +22,7 @@ class StaffDetailsViewController: UIViewController {
     @IBOutlet weak var activeStatusbtn: UIButton!
     @IBOutlet weak var accessModuleTableView: UITableView!{
         didSet{
-            accessModuleTableView.registerCellFromNib(cellID:
-                                                        "AccessModuleTableViewCell")
+            accessModuleTableView.registerCellFromNib(cellID: "AccessModuleTableViewCell")
         }
     }
     
@@ -101,7 +100,11 @@ class StaffDetailsViewController: UIViewController {
         guard let data = viewModel.staffDetails else { return }
         
         nameLbl.text = data.firstName
-        designationLbl.text = data.sellerCategory?.nameEn
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            designationLbl.text = data.sellerCategory?.nameAr
+        } else {
+            designationLbl.text = data.sellerCategory?.nameEn
+        }
         emailLbl.text = data.email
         mobileNumberLbl.text = "\(data.countryCode ?? "")-\(data.mobile ?? "")"
         
@@ -166,7 +169,11 @@ extension StaffDetailsViewController: UITableViewDataSource, UITableViewDelegate
         let cell = tableView.dequeueReusableCell(withIdentifier: "AccessModuleTableViewCell",for: indexPath) as! AccessModuleTableViewCell
         //        let moduleId = indexPath.row + 1
         let permissionsDetails = viewModel.staffDetails?.roleAction?[indexPath.row]
-        cell.titleView.text = permissionsDetails?.sellermenu?.first?.title
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            cell.titleView.text = permissionsDetails?.sellermenu?.first?.titleAr
+        } else {
+            cell.titleView.text = permissionsDetails?.sellermenu?.first?.title
+        }
         //        cell.moduleId = moduleId
         cell.viewSelected = (permissionsDetails?.canView == 1) ? true : false
         cell.actionSelected = (permissionsDetails?.canAction == 1) ? true : false

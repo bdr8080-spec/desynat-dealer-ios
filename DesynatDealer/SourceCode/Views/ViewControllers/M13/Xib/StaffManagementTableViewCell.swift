@@ -52,7 +52,11 @@ class StaffManagementTableViewCell: UITableViewCell {
         deleteButton.isHidden = !hasActionPermission
         btnToggle.isUserInteractionEnabled = hasActionPermission
         self.nameLbl.text = data.firstName ?? ""
-        self.designationLbl.text = data.sellerCategory?.nameEn ?? ""
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            self.designationLbl.text = data.sellerCategory?.nameAr ?? ""
+        } else {
+            self.designationLbl.text = data.sellerCategory?.nameEn ?? ""
+        }
         self.mobileNumberLbl.text = "\(data.countryCode ?? "")-\(data.mobile ?? "")"
         if data.isBlock == 0 {
             btnToggle.setImage(UIImage(named: "toggle_on"), for: .normal)

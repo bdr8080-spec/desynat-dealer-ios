@@ -135,7 +135,13 @@ extension BannerFilterVC {
     datePicker.datePickerMode = .date
     datePicker.minimumDate = Date()
     datePicker.backgroundColor = .white
-    
+      if AppLanguageManager.shared.currentLanguage == .ar {
+              datePicker.locale = Locale(identifier: "ar")
+              datePicker.semanticContentAttribute = .forceRightToLeft
+          } else {
+              datePicker.locale = Locale(identifier: "en_US_POSIX")
+              datePicker.semanticContentAttribute = .forceLeftToRight
+          }
     let toolbar = UIToolbar()
     toolbar.sizeToFit()
     

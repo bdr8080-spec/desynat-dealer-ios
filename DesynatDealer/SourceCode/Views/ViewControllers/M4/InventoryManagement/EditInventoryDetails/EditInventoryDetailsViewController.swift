@@ -295,7 +295,12 @@ extension EditInventoryDetailsViewController: UICollectionViewDelegate, UICollec
         case sizeCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SizeVariantCollectionViewCell", for: indexPath) as! SizeVariantCollectionViewCell
             let size = sizesList[indexPath.row]
-            cell.titleLabel.text = size.name
+//            cell.titleLabel.text = size.name
+            if AppLanguageManager.shared.currentLanguage == .ar {
+                cell.titleLabel.text = size.nameAr
+            } else {
+                cell.titleLabel.text = size.name
+            }
             if let colorId = selectedVariant?.color?.id,
                let variant = productVariants.first(where: { $0.color?.id == colorId && $0.size?.id == size.id }) {
                 cell.titleLabel.textColor = .black

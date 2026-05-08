@@ -18,8 +18,9 @@ class SubscriptionCollectionCell: UICollectionViewCell {
     @IBOutlet weak var lblDays: CustomLabelFont!
     @IBOutlet weak var dataTableView: UITableView!
     @IBOutlet weak var btnContinue: UIButton!
-    var purchasePlan: (() -> Void)?
     
+    
+    var purchasePlan: (() -> Void)?
     private var heading: [String] = []
     private var data: [String] = []
     private var planData: GetPlansSubscriptionModel?
@@ -94,7 +95,7 @@ class SubscriptionCollectionCell: UICollectionViewCell {
         guard let plan = data else { return }
         planData = plan
         // Set top-level labels
-        lblPlanHeading.text = plan.planNameEnglish ?? "N/A".localiz()
+        lblPlanHeading.text = AppLanguageManager.shared.currentLanguage == .ar ? plan.planNameArabic ?? "N/A".localiz() : plan.planNameEnglish ?? "N/A".localiz()
         lblAmount.text = CommonUtils.formatPrice(plan.price)//"AED \(plan.price ?? 0)"
         
         let durationText: String

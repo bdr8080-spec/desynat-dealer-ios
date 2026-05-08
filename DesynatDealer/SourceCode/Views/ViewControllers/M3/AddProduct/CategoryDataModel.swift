@@ -66,7 +66,7 @@ struct BrandsListDataModel: Codable {
 // MARK: - ColorsLisDataModel
 struct ColorsLisDataModel: Codable {
     let id: Int?
-    let name, hexCode: String?
+    let name,nameAr, hexCode: String?
     let createdAt, updatedAt: String?
 
     enum CodingKeys: String, CodingKey {
@@ -74,18 +74,20 @@ struct ColorsLisDataModel: Codable {
         case hexCode = "hex_code"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+        case nameAr = "name_ar"
     }
 }
 
 // MARK: - SizeListDataModel
 struct SizeListDataModel: Codable {
     var id: Int?
-    var name, createdAt, updatedAt: String?
+    var name,nameAr, createdAt, updatedAt: String?
 
     enum CodingKeys: String, CodingKey {
         case id, name
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+        case nameAr = "name_ar"
     }
 }
 

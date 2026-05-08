@@ -8,7 +8,7 @@
 import UIKit
 
 class OTPViewController: UIViewController {
-    private lazy var viewModel = OTPViewModel(hostVC:self)
+    
     // MARK: - Outlets
     @IBOutlet weak var stepTwoImageView: CustomImageView!
     @IBOutlet weak var view1: UIView!
@@ -28,7 +28,7 @@ class OTPViewController: UIViewController {
     @IBOutlet weak var labelTimer: UILabel!
     @IBOutlet weak var phoneNumberLabel: UILabel!
     
-    
+    private lazy var viewModel = OTPViewModel(hostVC:self)
     var userId = 0
     var otpDigits = ""
     var type = 0

@@ -33,20 +33,23 @@ class ProductListTableViewCell: UITableViewCell {
             nameLabel.text = data?.productDetails?.productNameAr ?? ""
             self.materialLabel.text = data?.productDetails?.brand?.nameArabic ?? ""
             categoryLabel.text = data?.productDetails?.category?.nameAr ?? ""
+            self.sizeLabel.text = data?.variationDetails?.size?.nameAr ?? ""
+            self.colourLabel.text = data?.variationDetails?.color?.nameAr ?? ""
         } else {
             nameLabel.text = data?.productDetails?.productNameEn ?? ""
             materialLabel.text = data?.productDetails?.brand?.nameEnglish ?? ""
             categoryLabel.text = data?.productDetails?.category?.name ?? ""
+            self.sizeLabel.text = data?.variationDetails?.size?.name ?? ""
+            self.colourLabel.text = data?.variationDetails?.color?.name ?? ""
         }
         let totalPrice = (Double(data?.variationDetails?.finalPrice ?? "") ?? 0)
         * Double(data?.quantity ?? 1)
         
-        self.sizeLabel.text = data?.variationDetails?.size?.name ?? ""
-        self.colourLabel.text = data?.variationDetails?.color?.name ?? ""
+        
         
         //    self.perItemPriceLabel.text = data?.variationDetails?.finalPrice
-        self.sizeLabel.text = data?.variationDetails?.size?.name ?? ""
-        self.colourLabel.text = data?.variationDetails?.color?.name ?? ""
+//        self.sizeLabel.text = data?.variationDetails?.size?.name ?? ""
+//        self.colourLabel.text = data?.variationDetails?.color?.name ?? ""
         
         if let url = URL(string: data?.variationDetails?.variantImage?.first ?? "") {
             self.productImageView.sd_setImage(with: url,placeholderImage: UIImage(named: ""))

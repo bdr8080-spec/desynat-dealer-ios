@@ -106,7 +106,13 @@ extension SendNewLiveRequestViewController {
         datePicker.datePickerMode = .date
         datePicker.minimumDate = Date() // Prevent past dates
         datePicker.backgroundColor = .white
-        
+        if AppLanguageManager.shared.currentLanguage == .ar {
+                datePicker.locale = Locale(identifier: "ar")
+                datePicker.semanticContentAttribute = .forceRightToLeft
+            } else {
+                datePicker.locale = Locale(identifier: "en_US_POSIX")
+                datePicker.semanticContentAttribute = .forceLeftToRight
+            }
         // Toolbar
         let toolbar = UIToolbar()
         toolbar.sizeToFit()

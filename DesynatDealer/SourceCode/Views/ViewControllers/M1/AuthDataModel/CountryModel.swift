@@ -11,6 +11,7 @@
 struct CountryModel: Codable {
     let id: Int?
     let name: String?
+    let nameAr: String?
     let isoCode: String?
     let currencyName: String?
     let currencyCode: String?
@@ -32,5 +33,6 @@ struct CountryModel: Codable {
         case exchangeRateToKwd = "exchange_rate_to_kwd"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+        case nameAr = "name_ar"
     }
 }

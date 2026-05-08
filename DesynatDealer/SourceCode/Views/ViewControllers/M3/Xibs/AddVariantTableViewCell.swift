@@ -161,9 +161,13 @@ class AddVariantTableViewCell: UITableViewCell {
     // Update colorTF only if selectedColorId exists
     if let colorId = self.selectedColorId,
        let color = colorsList.first(where: { $0.id == colorId }) {
-      self.colorTF.text = color.name
+      self.colorTF.text = AppLanguageManager.shared.currentLanguage == .ar
+        ? (color.nameAr ?? color.name ?? "")
+        : (color.name ?? "")
     } else if let firstColor = colorsList.first {
-      self.colorTF.text = firstColor.name
+      self.colorTF.text = AppLanguageManager.shared.currentLanguage == .ar
+        ? (firstColor.nameAr ?? firstColor.name ?? "")
+        : (firstColor.name ?? "")
       self.selectedColorId = firstColor.id
     } else {
       self.colorTF.text = ""
@@ -171,22 +175,43 @@ class AddVariantTableViewCell: UITableViewCell {
   }
   
   
-  private func showSizeDropdown(from textField: UITextField, for indexPath: IndexPath) {
-    let sizesNames = sizesList.map { $0.name ?? "" }
-    kSharedAppDelegate.dropDown(dataSource: sizesNames, anchorView: textField) { [weak self] selectedIndex, selectedItem in
-      guard let self = self else { return }
-      let selectedSize = self.sizesList[selectedIndex]
-      if self.sizeVariants.indices.contains(indexPath.row) {
-        var updatedSizeVariant = self.sizeVariants[indexPath.row]
-        updatedSizeVariant.sizeId = selectedSize.id
-        self.sizeVariants[indexPath.row] = updatedSizeVariant
-      }
-      DispatchQueue.main.async {
-        self.sizeVariantTableView.reloadRows(at: [indexPath], with: .none)
-      }
+//  private func showSizeDropdown(from textField: UITextField, for indexPath: IndexPath) {
+//    let sizesNames = sizesList.map { $0.name ?? "" }
+//    kSharedAppDelegate.dropDown(dataSource: sizesNames, anchorView: textField) { [weak self] selectedIndex, selectedItem in
+//      guard let self = self else { return }
+//      let selectedSize = self.sizesList[selectedIndex]
+//      if self.sizeVariants.indices.contains(indexPath.row) {
+//        var updatedSizeVariant = self.sizeVariants[indexPath.row]
+//        updatedSizeVariant.sizeId = selectedSize.id
+//        self.sizeVariants[indexPath.row] = updatedSizeVariant
+//      }
+//      DispatchQueue.main.async {
+//        self.sizeVariantTableView.reloadRows(at: [indexPath], with: .none)
+//      }
+//    }
+//  }
+    
+    private func showSizeDropdown(from textField: UITextField, for indexPath: IndexPath) {
+        let isArabic = AppLanguageManager.shared.currentLanguage == .ar
+        let sizesNames = sizesList.map {
+            isArabic
+            ? ($0.nameAr ?? $0.name ?? "")
+            : ($0.name ?? "")
+        }
+        kSharedAppDelegate.dropDown(dataSource: sizesNames, anchorView: textField) { [weak self] selectedIndex, selectedItem in
+            guard let self = self else { return }
+            let selectedSize = self.sizesList[selectedIndex]
+            if self.sizeVariants.indices.contains(indexPath.row) {
+                var updatedSizeVariant = self.sizeVariants[indexPath.row]
+                updatedSizeVariant.sizeId = selectedSize.id
+                self.sizeVariants[indexPath.row] = updatedSizeVariant
+            }
+            DispatchQueue.main.async {
+                self.sizeVariantTableView.reloadRows(at: [indexPath], with: .none)
+            }
+        }
     }
-  }
-  
+
 }
 
 extension AddVariantTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -257,7 +282,9 @@ extension AddVariantTableViewCell: UITableViewDelegate, UITableViewDataSource {
     // cell.configure(with: sizeVar)
     if let sizeId = sizeVar.sizeId,
        let sizeModel = self.sizesList.first(where: { $0.id == sizeId }) {
-      cell.sizeTF.text = sizeModel.name
+      cell.sizeTF.text = AppLanguageManager.shared.currentLanguage == .ar
+        ? (sizeModel.nameAr ?? sizeModel.name ?? "")
+        : (sizeModel.name ?? "")
       cell.selectedSizeId = sizeId
     } else {
       cell.sizeTF.text = ""

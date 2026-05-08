@@ -27,7 +27,7 @@ class LiveCoverageFilterViewController: UIViewController, UITextFieldDelegate {
     private var activeTextField: UITextField?
     weak var delegate: LiveCoverageFilterDelegate?
     var appliedFilter: LiveCoverageFilterModel?
-    private var filterArray = ["Pending", "Compeleted", "Cancelled", "Rejected"]
+    private var filterArray = ["Pending", "Completed", "Cancelled", "Rejected"]
     var selcetedStatusIndex: Int = -1
     
     override func viewDidLoad() {
@@ -112,8 +112,16 @@ extension LiveCoverageFilterViewController {
     private func setUpTextFields() {
         datePicker.preferredDatePickerStyle = .wheels
         datePicker.datePickerMode = .date
-//        datePicker.minimumDate = Date()
         datePicker.backgroundColor = .white
+        
+        // ✅ IMPORTANT: localize picker
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            datePicker.locale = Locale(identifier: "ar")
+            datePicker.semanticContentAttribute = .forceRightToLeft
+        } else {
+            datePicker.locale = Locale(identifier: "en_US_POSIX")
+            datePicker.semanticContentAttribute = .forceLeftToRight
+        }
         
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
@@ -121,6 +129,7 @@ extension LiveCoverageFilterViewController {
         let doneButton = UIBarButtonItem(title: "Done".localiz(), style: .done, target: self, action: #selector(doneDatePicker))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let cancelButton = UIBarButtonItem(title: "Cancel".localiz(), style: .plain, target: self, action: #selector(cancelDatePicker))
+        
         toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         
         let textFields = [txtFromDate, txtToDate]

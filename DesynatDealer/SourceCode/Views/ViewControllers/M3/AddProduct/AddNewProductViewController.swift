@@ -631,6 +631,7 @@ class AddNewProductViewController: UIViewController {
             // ----- Update Color List -----
             if let cid = firstVariant.colorID?.toInt,
                let cname = firstVariant.color?.name,
+               let arname = firstVariant.color?.nameAr,
                let ccode = firstVariant.color?.hexCode,
                let created = firstVariant.createdAt,
                let updated = firstVariant.updatedAt {
@@ -638,6 +639,7 @@ class AddNewProductViewController: UIViewController {
                     let colorModel = ColorsLisDataModel(
                         id: cid,
                         name: cname,
+                        nameAr: arname,
                         hexCode: ccode,
                         createdAt: created,
                         updatedAt: updated
@@ -744,7 +746,9 @@ extension AddNewProductViewController: UITableViewDelegate, UITableViewDataSourc
             
             // Restore color selection
             if let color = viewModel.colorsList.first(where: { $0.id == variant.colorId }) {
-                cell.colorTF.text = color.name
+                cell.colorTF.text = AppLanguageManager.shared.currentLanguage == .ar
+                ? (color.nameAr ?? color.name ?? "")
+                : (color.name ?? "")
             } else {
                 cell.colorTF.text = ""
             }
@@ -790,13 +794,30 @@ extension AddNewProductViewController: UITableViewDelegate, UITableViewDataSourc
         }
     }
     
+//    private func showColorDropdown(from textField: UITextField, in cell: AddVariantTableViewCell) {
+//        let sizesNames = viewModel.colorsList.map { $0.name ?? "" }
+//        kSharedAppDelegate.dropDown(dataSource: sizesNames, anchorView: textField) { [weak self] index, item in
+//            guard let self = self else { return }
+//            let selectedSize = self.viewModel.colorsList[index]
+//            cell.colorTF.text = selectedSize.name
+//            cell.selectedColorId = selectedSize.id
+//        }
+//    }
+    
     private func showColorDropdown(from textField: UITextField, in cell: AddVariantTableViewCell) {
-        let sizesNames = viewModel.colorsList.map { $0.name ?? "" }
-        kSharedAppDelegate.dropDown(dataSource: sizesNames, anchorView: textField) { [weak self] index, item in
+        let isArabic = AppLanguageManager.shared.currentLanguage == .ar
+        let colorNames = viewModel.colorsList.map {
+            isArabic
+            ? ($0.nameAr ?? $0.name ?? "")
+            : ($0.name ?? "")
+        }
+        kSharedAppDelegate.dropDown(dataSource: colorNames, anchorView: textField) { [weak self] index, item in
             guard let self = self else { return }
-            let selectedSize = self.viewModel.colorsList[index]
-            cell.colorTF.text = selectedSize.name
-            cell.selectedColorId = selectedSize.id
+            let selectedColor = self.viewModel.colorsList[index]
+            cell.colorTF.text = isArabic
+                ? (selectedColor.nameAr ?? selectedColor.name ?? "")
+                : (selectedColor.name ?? "")
+            cell.selectedColorId = selectedColor.id
         }
     }
     
