@@ -94,7 +94,7 @@ class UploadDocumnetViewController: UIViewController {
                     WebService.sharedInstance.uploadImage(withParams: image) { imageURL in
                         self.imageStoreDoc1 = imageURL.url ?? ""
                         self.selectedStoreDoc1 = image
-                        print("image url--.\(self.imageStoreDoc1)")
+//                        print("image url--.\(self.imageStoreDoc1)")
                         if let url = URL(string: imageURL.url ?? "") {
                             self.storeDocImage1.sd_imageIndicator = SDWebImageActivityIndicator.gray
                             self.storeDocImage1.sd_setImage(with: url,placeholderImage: UIImage(named: "user_ic"))
@@ -108,7 +108,7 @@ class UploadDocumnetViewController: UIViewController {
                     WebService.sharedInstance.uploadImage(withParams: image) { imageURL in
                         self.imageStoreDoc2 = imageURL.url ?? ""
                         self.selectedStoreDoc2 = image
-                        print("image url--.\(self.imageStoreDoc2)")
+//                        print("image url--.\(self.imageStoreDoc2)")
                         if let url = URL(string: imageURL.url ?? "") {
                             self.storeDocImage2.sd_imageIndicator = SDWebImageActivityIndicator.gray
                             self.storeDocImage2.sd_setImage(with: url,placeholderImage: UIImage(named: "user_ic"))
@@ -140,7 +140,7 @@ class UploadDocumnetViewController: UIViewController {
                 WebService.sharedInstance.uploadImage(withParams: image) { imageURL in
                     self.imageAccountHolderDoc = imageURL.url ?? ""
                     self.selectedAccountHolderDoc = image
-                    print("image url--.\(self.imageAccountHolderDoc)")
+//                    print("image url--.\(self.imageAccountHolderDoc)")
                     if let url = URL(string: imageURL.url ?? "") {
                         self.accountHolderImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
                         self.accountHolderImageView.sd_setImage(with: url,placeholderImage: UIImage(named: "user_ic"))

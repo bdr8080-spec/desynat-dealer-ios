@@ -70,7 +70,7 @@ class MyProfileRellsViewController: UIViewController {
             try data.write(to: fileURL)
             return fileURL.absoluteString
         } catch {
-            print("Error saving image:", error.localizedDescription)
+//            print("Error saving image:", error.localizedDescription)
             return nil
         }
     }

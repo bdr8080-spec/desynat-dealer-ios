@@ -109,7 +109,7 @@ class VoiceSearchViewController: UIViewController {
             }
             
             if let error = error {
-                print("Recognition error:", error)
+//                print("Recognition error:", error)
                 DispatchQueue.main.async {
                     self.finishListening()
                 }
@@ -130,7 +130,7 @@ class VoiceSearchViewController: UIViewController {
                 self.startMicPulse()
             }
         } catch {
-            print("Failed to start audio engine: \(error)")
+//            print("Failed to start audio engine: \(error)")
             stopListening()
         }
     }
@@ -166,7 +166,7 @@ class VoiceSearchViewController: UIViewController {
     private func navigateToNextScreen() {
         let searchText = latestSpokenText
         stopListening()
-        print("Navigate with text: \(searchText)")
+//        print("Navigate with text: \(searchText)")
         dismiss(animated: true) { [weak self] in
             self?.onSearchedCompletionTxt?(searchText)
         }

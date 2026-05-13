@@ -79,28 +79,6 @@ class EventsTableViewCell: UITableViewCell {
         watchLiveButton.alpha = isLive ? 1.0 : 0.5
     }
     
-//    func isEventLive(dateString: String?, fromTime: String?, toTime: String?) -> Bool {
-//            guard let dateString = dateString,
-//                  let fromTime = fromTime,
-//                  let toTime = toTime else { return false }
-//     
-//            let formatter = DateFormatter()
-//            formatter.locale = Locale(identifier: "en_US_POSIX")
-//            formatter.dateFormat = "yyyy-MM-dd hh:mm a"  // <-- IMPORTANT (12 hr + AM/PM)
-//     
-//            let startString = "\(dateString) \(fromTime)"
-//            let endString = "\(dateString) \(toTime)"
-//     
-//            guard let startDate = formatter.date(from: startString),
-//                  let endDate = formatter.date(from: endString) else {
-//                print("Parsing failed for:", startString, endString)
-//                return false
-//            }
-//     
-//            let now = Date()
-//            return now >= startDate && now <= endDate
-//        }
-    
     func customizeChangeDateFormatZone(
         inputDate: String,
         inputFormat: String = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
@@ -146,7 +124,7 @@ class EventsTableViewCell: UITableViewCell {
 
         guard let startDate = formatter.date(from: startString),
               let endDate = formatter.date(from: endString) else {
-            print("Parsing failed:", startString, endString)
+//            print("Parsing failed:", startString, endString)
             return false
         }
 

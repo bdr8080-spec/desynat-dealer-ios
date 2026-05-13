@@ -149,7 +149,7 @@ extension MySubsciptionPlanViewController: SubscriptionCollectionCellDelegate {
     
     func didTapContinue(for plan: GetPlansSubscriptionModel) {
         // Call your purchase plan API here
-        print("User tapped continue for plan ID: \(plan.id ?? 0)")
+//        print("User tapped continue for plan ID: \(plan.id ?? 0)")
         viewModel.payAmt = plan.price ?? 0
         if let duration = plan.duration, let type = plan.durationType {
             let text = "for".localiz()

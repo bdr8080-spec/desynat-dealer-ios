@@ -334,7 +334,7 @@ extension UIViewController {
             let formattedDate = outputDateFormatter.string(from: date)
             return formattedDate
         } else {
-            print("Invalid date format")
+//            print("Invalid date format")
             return nil
         }
     }

@@ -44,13 +44,13 @@ extension LocationPermissionViewController: CLLocationManagerDelegate {
         if #available(iOS 14.0, *) {
             switch manager.authorizationStatus {
             case .authorizedAlways, .authorizedWhenInUse:
-                print("✅ Location access granted")
+//                print("✅ Location access granted")
                 locationManager.callBackGetCurrentLoc = { loc, address in
                     print("📍 User location: \(address ?? "")")
                 }
                 navigateToNextScreen()
             case .denied, .restricted:
-                print("❌ Location access denied")
+//                print("❌ Location access denied")
                 navigateToNextScreen()
             case .notDetermined:
                 print("ℹ️ Waiting for user decision…")

@@ -104,7 +104,7 @@ class SignupViewController: UIViewController {
                 WebService.sharedInstance.uploadImage(withParams: image) { imageURL in
                     self.profileImage = imageURL.url ?? ""
                     self.selectedImage = image
-                    print("image url--.\(self.profileImage)")
+//                    print("image url--.\(self.profileImage)")
                     if let url = URL(string: imageURL.url ?? "") {
                         self.profilePicImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
                         self.profilePicImageView.sd_setImage(with: url,placeholderImage: UIImage(named: "user_ic"))

@@ -116,30 +116,7 @@ class AddNewHighlightViewController: UIViewController {
     }
     
     // MARK: - Gallery Fetch
-    
-//    func fetchGalleryAssets() {
-//        let status = PHPhotoLibrary.authorizationStatus()
-//        if status == .authorized || status == .limited {
-//            let fetchOptions = PHFetchOptions()
-//            fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-//            let allAssets = PHAsset.fetchAssets(with: fetchOptions)
-//            allAssets.enumerateObjects { asset, _, _ in
-//                self.galleryAssets.append(asset)
-//            }
-//            DispatchQueue.main.async {
-//                self.contentCollectionView.reloadData()
-//            }
-//        } else if status == .notDetermined {
-//            PHPhotoLibrary.requestAuthorization { newStatus in
-//                if newStatus == .authorized || newStatus == .limited {
-//                    self.fetchGalleryAssets()
-//                }
-//            }
-//        } else {
-//            // Handle denied or restricted
-//            print("Access to photo library denied.")
-//        }
-//    }
+
     func fetchGalleryAssets() {
         let status = PHPhotoLibrary.authorizationStatus()
 

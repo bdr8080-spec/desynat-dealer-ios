@@ -352,10 +352,6 @@ extension DealsDetailsViewController: UICollectionViewDelegate, UICollectionView
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("")
-    }
-    
 }
 
 extension DealsDetailsViewController: UITextFieldDelegate {

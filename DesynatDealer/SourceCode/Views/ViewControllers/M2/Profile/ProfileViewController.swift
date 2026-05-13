@@ -103,13 +103,13 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         let vc =  StaffManagementViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
         vc.hasActionPermission = true
         self.navigationController?.pushViewController(vc, animated: true)
-      print("➡️ Navigate to Staff management")
+//      print("➡️ Navigate to Staff management")
       
     case "Subscription Plans".localiz():
         let vc = MySubsciptionPlanViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
         vc.hasActionPermission = true
         self.navigationController?.pushViewController(vc, animated: true)
-      print("➡️ Navigate to Subscription Plans")
+//      print("➡️ Navigate to Subscription Plans")
       
     case "Banner management".localiz():
         let vc = BannerManagemntVC.instantiate(fromAppStoryboard: .BannerManagement)
@@ -130,12 +130,13 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         let vc = RefundManagementViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
         vc.hasActionPermission = true
         self.navigationController?.pushViewController(vc, animated: true)
-      print("➡️ Navigate to Refund management")
+//      print("➡️ Navigate to Refund management")
       
     case "Inventory management".localiz():
       let nextVC = InventoryListViewController.instantiate(fromAppStoryboard: .InventoryAffilate)
         nextVC.hasActionPermission = true
       self.navigationController?.pushViewController(nextVC, animated: true)
+        
     case "Affiliated Commission".localiz():
       let nextVC = AffiliatedCommisionViewController.instantiate(fromAppStoryboard: .InventoryAffilate)
         nextVC.hasActionPermission = true
@@ -163,7 +164,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         vc.comingReason = .aboutUs
         vc.hasActionPermission = true
         self.navigationController?.pushViewController(vc, animated: true)
-      print("➡️ Navigate to About Us")
+//      print("➡️ Navigate to About Us")
       
     case "FAQ’S".localiz():
       let nexVC = FAQViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
@@ -174,33 +175,33 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         let vc = ChangeLanguageViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
         vc.hasActionPermission = true
         self.navigationController?.pushViewController(vc, animated: true)
-      print("➡️ Navigate to Change Language")
+//      print("➡️ Navigate to Change Language")
       
     case "Cancellation Policy".localiz():
         let vc =  CMSViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
         vc.comingReason = .cancellationPolicy
         vc.hasActionPermission = true
         self.navigationController?.pushViewController(vc, animated: true)
-      print("➡️ Navigate to Cancellation Policy")
+//      print("➡️ Navigate to Cancellation Policy")
       
     case "Exchange Policy".localiz():
         let vc =  CMSViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
         vc.comingReason = .exchangePolicy
         vc.hasActionPermission = true
         self.navigationController?.pushViewController(vc, animated: true)
-      print("➡️ Navigate to Exchange Policy")
+//      print("➡️ Navigate to Exchange Policy")
       
     case "Support".localiz():
         let vc = SupportViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
         vc.hasActionPermission = true
         self.navigationController?.pushViewController(vc, animated: true)
-      print("➡️ Navigate to Support")
+//      print("➡️ Navigate to Support")
       
     case "Settings".localiz():
         let vc = SettingViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
         vc.hasActionPermission = true
         self.navigationController?.pushViewController(vc, animated: true)
-      print("➡️ Navigate to Settings")
+//      print("➡️ Navigate to Settings")
       
     default:
       print("⚠️ Unknown option selected: \(selectedItem)")

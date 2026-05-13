@@ -76,7 +76,7 @@ extension Int {
             }
             return nil
         } catch {
-            print("Error creating regex: \(error)")
+//            print("Error creating regex: \(error)")
             return nil
         }
     }

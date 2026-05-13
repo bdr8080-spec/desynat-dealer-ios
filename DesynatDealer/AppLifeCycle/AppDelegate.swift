@@ -67,7 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         dropDown.dismissMode = .automatic
         dropDown.show()
         dropDown.selectionAction = {(index: Int, item: String) in
-            print("Selected item: \(item) at index: \(index)")
+//            print("Selected item: \(item) at index: \(index)")
             completion(index,item)
         }
     }
@@ -115,7 +115,7 @@ extension AppDelegate:UNUserNotificationCenterDelegate {
             if let error = error {
                 print("Error fetching remote instange ID: \(error)")
             } else if let result = token {
-                print("Remote instance ID token: \(result)")
+//                print("Remote instance ID token: \(result)")
                 kSharedUserDefaults.saveModelFor(key: .deviceToken, value: token)
             }
         }

@@ -67,7 +67,7 @@ extension UserDefaults {
             let decodedObject = try JSONDecoder().decode(model, from: data)
             return decodedObject
         } catch {
-            print("❌ Failed to decode model for key \(key.rawValue): \(error)")
+//            print("❌ Failed to decode model for key \(key.rawValue): \(error)")
             return nil
         }
     }

@@ -103,7 +103,7 @@ class ImagePickerManager: NSObject, UIImagePickerControllerDelegate, UINavigatio
         
         // IMAGE
         guard let image = info[.originalImage] as? UIImage else {
-            print("No image found in info: \(info)")
+//            print("No image found in info: \(info)")
             return
         }
         

@@ -200,7 +200,7 @@ class StoryViewerViewController: UIViewController {
     private func startVideoProgressObserver() {
         guard let player = player,
               player.currentItem?.status == .readyToPlay else {
-            print("❌ Video not ready yet")
+//            print("❌ Video not ready yet")
             return
         }
         
@@ -216,7 +216,7 @@ class StoryViewerViewController: UIViewController {
             self?.updateVideoProgress(time: time)
         }
         
-        print("✅ Video observer started")
+//        print("✅ Video observer started")
     }
     
     private func removeVideoTimeObserver() {
@@ -357,7 +357,7 @@ class StoryViewerViewController: UIViewController {
             
             switch player.timeControlStatus {
             case .playing:
-                print("✅ Video playing - starting progress")
+//                print("✅ Video playing - starting progress")
                 player.isMuted = false
                 
                 // ✅ CRITICAL: Start observer NOW (video ready)
@@ -1090,36 +1090,6 @@ class StoryViewerViewController: UIViewController {
         player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.new, .initial], context: nil)
         player?.play()
     }
-    //    override func observeValue(forKeyPath keyPath: String?,
-    //                              of object: Any?,
-    //                              change: [NSKeyValueChangeKey : Any]?,
-    //                              context: UnsafeMutableRawPointer?) {
-    //
-    //        if keyPath == "timeControlStatus",
-    //           let player = object as? AVPlayer {
-    //
-    //            switch player.timeControlStatus {
-    //            case .playing:
-    //                print("✅ Video started playing")
-    //                self.onCompletion?()
-    //            case .waitingToPlayAtSpecifiedRate:
-    //                print("⏳ Buffering...")
-    //
-    //            case .paused:
-    //                print("⏸ Paused")
-    //
-    //            @unknown default:
-    //                break
-    //            }
-    //        }
-    //    }
-    //    deinit {
-    //        player?.removeObserver(self, forKeyPath: "timeControlStatus")
-    //    }
-    //    @objc private func videoDidFinishPlaying() {
-    //        NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: nil)
-    //        goToNextStory()
-    //    }
     
     // MARK: - Lifecycle
     override func viewWillDisappear(_ animated: Bool) {

@@ -426,7 +426,7 @@ extension LiveCoverageListViewController: UITableViewDelegate, UITableViewDataSo
             let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
             vc.comingReason = .liveRequest
             vc.callBackDismiss = {
-                print("Success dismissed")
+//                print("Success dismissed")
                 self.viewModel.currentPage = 1
                 self.viewModel.hasMoreData = true
                 self.viewModel.getAllLiveCoverageRequest()

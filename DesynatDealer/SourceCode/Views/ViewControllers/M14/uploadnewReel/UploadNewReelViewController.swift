@@ -77,14 +77,14 @@ class UploadNewReelViewController: UIViewController {
 //            let data = try Data(contentsOf: url)
 
             // 🔥 Print video size in MB/KB/Bytes
-            let bytes = data.count
-            let kb = Double(bytes) / 1024.0
-            let mb = kb / 1024.0
-
-            print("Video Size:")
-            print("➡ Bytes: \(bytes)")
-            print("➡ KB: \(String(format: "%.2f", kb)) KB")
-            print("➡ MB: \(String(format: "%.2f", mb)) MB")
+//            let bytes = data.count
+//            let kb = Double(bytes) / 1024.0
+//            let mb = kb / 1024.0
+//
+//            print("Video Size:")
+//            print("➡ Bytes: \(bytes)")
+//            print("➡ KB: \(String(format: "%.2f", kb)) KB")
+//            print("➡ MB: \(String(format: "%.2f", mb)) MB")
         }
         
         // ✅ Edit without changing media
@@ -178,7 +178,7 @@ class UploadNewReelViewController: UIViewController {
             try data.write(to: fileURL)
             return fileURL.absoluteString
         } catch {
-            print("Error saving image:", error.localizedDescription)
+//            print("Error saving image:", error.localizedDescription)
             return nil
         }
     }
@@ -207,14 +207,14 @@ extension UploadNewReelViewController {
                     let data = try Data(contentsOf: url)
 
                     // 🔥 Print video size in MB/KB/Bytes
-                    let bytes = data.count
-                    let kb = Double(bytes) / 1024.0
-                    let mb = kb / 1024.0
-
-                    print("Video Size:")
-                    print("➡ Bytes: \(bytes)")
-                    print("➡ KB: \(String(format: "%.2f", kb)) KB")
-                    print("➡ MB: \(String(format: "%.2f", mb)) MB")
+//                    let bytes = data.count
+//                    let kb = Double(bytes) / 1024.0
+//                    let mb = kb / 1024.0
+//
+//                    print("Video Size:")
+//                    print("➡ Bytes: \(bytes)")
+//                    print("➡ KB: \(String(format: "%.2f", kb)) KB")
+//                    print("➡ MB: \(String(format: "%.2f", mb)) MB")
                     self.selectedMediaData = data
                     self.isImageSelected = false
                     videoURL = url
@@ -230,43 +230,6 @@ extension UploadNewReelViewController {
                     print("Video error:", error)
                 }
             }
-//            if let url = url {
-//                // COMPRESS BEFORE LOADING DATA
-//                self.compressVideo(inputURL: url) { compressedURL in
-//                    guard let compressedURL = compressedURL else { return }
-//
-//                    do {
-//                        let data = try Data(contentsOf: compressedURL)
-//
-//                        // Print size
-//                        let bytes = data.count
-//                        let kb = Double(bytes) / 1024.0
-//                        let mb = kb / 1024.0
-//                        print("Compressed Video Size:")
-//                        print("➡ Bytes: \(bytes)")
-//                        print("➡ KB: \(String(format: "%.2f", kb)) KB")
-//                        print("➡ MB: \(String(format: "%.2f", mb)) MB")
-//
-//                        self.selectedMediaData = data
-//                        self.isImageSelected = false
-//                        self.videoURL = compressedURL
-//                        self.playVideoButton.isHidden = false
-//                        
-//                        // Thumbnail
-//                        CommonUtils.generateThumbnail(url: compressedURL) { thumbNailImage in
-//                            self.imageView.image = thumbNailImage ?? UIImage(named: "video_placeholder")
-//
-//                            guard let data = thumbNailImage?.jpegData(compressionQuality: 0.25) else { return }
-//                            self.viewModel.uploadMediaForGettingThumbnailImageUrl(fileData: data, isImage: true)
-//                        }
-//
-//                    } catch {
-//                        print("Video error:", error)
-//                    }
-//                }
-//
-//                return // avoid running IMAGE code
-//            }
             
             // IMAGE
             else {

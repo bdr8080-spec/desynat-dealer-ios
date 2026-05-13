@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24765" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24743"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -36,7 +36,7 @@
                                 <color key="textColor" name="darkBrown"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="product" translatesAutoresizingMaskIntoConstraints="NO" id="4Eh-bS-1wv" customClass="CustomImageView" customModule="DesynatDealer" customModuleProvider="target">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4Eh-bS-1wv" customClass="CustomImageView" customModule="DesynatDealer" customModuleProvider="target">
                                 <rect key="frame" x="15" y="27" width="82" height="82"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="82" id="3FH-kX-JrN"/>
@@ -233,7 +233,6 @@
     <resources>
         <image name="emptyStar" width="32" height="32"/>
         <image name="filledStar" width="32" height="32"/>
-        <image name="product" width="82" height="82"/>
         <image name="toggle_on" width="40" height="22"/>
         <namedColor name="darkBrown">
             <color red="0.43137254901960786" green="0.27058823529411763" blue="0.15294117647058825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -189,7 +189,7 @@ fileprivate extension UIView {
             }
         case let btn as UIButton:
             if let text = btn.attributedTitle(for: .normal) {
-                printInConsole("Butttone Attributed :- \(text.string)")
+//                printInConsole("Butttone Attributed :- \(text.string)")
                 let mutable = NSMutableAttributedString(string: text.string.localiz())
                 text.enumerateAttributes(in: NSRange(location: 0, length: text.length), options: []) { attrs, range, _ in
                     let safeRange = NSRange(location: 0, length: min(range.length, mutable.length))

@@ -45,7 +45,7 @@ class JoinAnotherDelaerViewController: UIViewController {
             
             // ... host setup
         } else {
-            print("👀 Start as AUDIENCE")
+//            print("👀 Start as AUDIENCE")
             agoraKit.setClientRole(.audience)
             btnSwitch.isHidden = true
             btnGoLive.isHidden = true
@@ -64,7 +64,7 @@ class JoinAnotherDelaerViewController: UIViewController {
     
     // MARK: - Agora Setup
     private func setupAgora() {
-        print("🚀 Agora Init")
+//        print("🚀 Agora Init")
         agoraKit = AgoraRtcEngineKit.sharedEngine(withAppId: appID, delegate: self)
         agoraKit.setChannelProfile(.liveBroadcasting)
         agoraKit.enableVideo()
@@ -72,28 +72,28 @@ class JoinAnotherDelaerViewController: UIViewController {
     }
     
     private func joinChannel() {
-        print("🔗 Joining: \(channelName) | uid: \(uid)")
+//        print("🔗 Joining: \(channelName) | uid: \(uid)")
         agoraKit.joinChannel(byToken: token, channelId: channelName, info: nil, uid: uid) { channel, uid, elapsed in
             print("✅ Joined: \(channel) | uid: \(uid)")
         }
     }
     
     private func leaveChannel() {
-        print("❌ Leaving channel")
+//        print("❌ Leaving channel")
         agoraKit.leaveChannel(nil)
     }
     
     // MARK: - VIDEO SETUP
     private func clearVideoView() {
         guard let view = videoView else {
-            print("❌ videoView is nil")
+//            print("❌ videoView is nil")
             return
         }
         view.subviews.forEach { $0.removeFromSuperview() }
     }
     
     private func setupLocalVideo() {
-        print("🎥 Local FULL SCREEN")
+//        print("🎥 Local FULL SCREEN")
         clearVideoView()
         let canvas = AgoraRtcVideoCanvas()
         canvas.uid = uid
@@ -104,7 +104,7 @@ class JoinAnotherDelaerViewController: UIViewController {
     }
     
     private func setupRemoteVideo(uid: UInt) {
-        print("📺 Remote FULL SCREEN: \(uid)")
+//        print("📺 Remote FULL SCREEN: \(uid)")
         clearVideoView()
         let canvas = AgoraRtcVideoCanvas()
         canvas.uid = uid
@@ -114,7 +114,7 @@ class JoinAnotherDelaerViewController: UIViewController {
     }
     
     private func cleanupAgora() {
-        print("🧹 Cleanup Agora")
+//        print("🧹 Cleanup Agora")
         agoraKit.stopPreview()
         agoraKit.leaveChannel(nil)
         AgoraRtcEngineKit.destroy()
@@ -124,20 +124,20 @@ class JoinAnotherDelaerViewController: UIViewController {
     @IBAction func btnOptions(_ sender: UIButton) {
         switch sender.tag {
         case 1:
-            print("🔄 Switch Camera")
+//            print("🔄 Switch Camera")
             agoraKit.switchCamera()
         case 2:
-            print("🎬 Toggle Live")
+//            print("🎬 Toggle Live")
             isHost.toggle()
             clearVideoView()
             if isHost {
-                print("🎥 HOST MODE")
+//                print("🎥 HOST MODE")
                 agoraKit.setClientRole(.broadcaster)
                 agoraKit.enableLocalVideo(true)
                 setupLocalVideo()
                 btnGoLive.setTitle("Stop", for: .normal)
             } else {
-                print("👀 AUDIENCE MODE")
+//                print("👀 AUDIENCE MODE")
                 agoraKit.setClientRole(.audience)
                 agoraKit.stopPreview()
                 btnGoLive.setTitle("Go Live", for: .normal)
@@ -148,10 +148,10 @@ class JoinAnotherDelaerViewController: UIViewController {
             // Mute ALL remote audio streams (host's audio)
             agoraKit.muteAllRemoteAudioStreams(isMuted)
 //            btnMute.setTitle(isMuted ? "Unmute Stream" : "Mute Stream", for: .normal)
-            print("🔇 Stream \(isMuted ? "muted" : "unmuted")")
+//            print("🔇 Stream \(isMuted ? "muted" : "unmuted")")
             lblLive.text = isMuted ? "Unmute" : "Mute"
         case 4:
-            print("📴 End Stream")
+//            print("📴 End Stream")
             leaveChannel()
             dismiss(animated: false)
         default:
@@ -162,7 +162,7 @@ class JoinAnotherDelaerViewController: UIViewController {
             let urlString = "https://api.agora.io/dev/v1/channel/user/\(appID)/\(channelName)"
      
             guard let url = URL(string: urlString) else {
-                print("❌ Invalid URL")
+//                print("❌ Invalid URL")
                 return
             }
      
@@ -173,26 +173,26 @@ class JoinAnotherDelaerViewController: UIViewController {
             URLSession.shared.dataTask(with: request) { data, response, error in
                 
                 if let data = data {
-                    print("🔍 RAW RESPONSE STRING:")
-                    print(String(data: data, encoding: .utf8) ?? "Unable to decode")
+//                    print("🔍 RAW RESPONSE STRING:")
+//                    print(String(data: data, encoding: .utf8) ?? "Unable to decode")
                 }
      
                 if let error = error {
-                    print("❌ Error:", error.localizedDescription)
+//                    print("❌ Error:", error.localizedDescription)
                     return
                 }
      
                 guard let data = data,
                       let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-                    print("❌ JSON parse failed")
+//                    print("❌ JSON parse failed")
                     return
                 }
      
-                print("📌 Parsed JSON:", json)
+//                print("📌 Parsed JSON:", json)
      
                 // FIX: Read values inside "data" dictionary
                 guard let dataObj = json["data"] as? [String: Any] else {
-                    print("❌ 'data' object missing")
+//                    print("❌ 'data' object missing")
                     return
                 }
      
@@ -204,7 +204,7 @@ class JoinAnotherDelaerViewController: UIViewController {
      
                 DispatchQueue.main.async {
                     self.lblUserCount.text = "Viewers: \(total)"
-                    print("👥 TOTAL users: \(total) | Broadcasters: \(broadcasters) | Audience: \(audienceTotal)")
+//                    print("👥 TOTAL users: \(total) | Broadcasters: \(broadcasters) | Audience: \(audienceTotal)")
                 }
      
             }.resume()
@@ -225,7 +225,7 @@ class JoinAnotherDelaerViewController: UIViewController {
 extension JoinAnotherDelaerViewController: AgoraRtcEngineDelegate {
     
     func rtcEngine(_ engine: AgoraRtcEngineKit, didJoinedOfUid uid: UInt, elapsed: Int) {
-        print("👤 Remote Joined: \(uid)")
+//        print("👤 Remote Joined: \(uid)")
         if !isHost {
             DispatchQueue.main.async {
                 self.lblWaiting.isHidden = true
@@ -237,7 +237,7 @@ extension JoinAnotherDelaerViewController: AgoraRtcEngineDelegate {
     }
     
     func rtcEngine(_ engine: AgoraRtcEngineKit, didOfflineOfUid uid: UInt, reason: AgoraUserOfflineReason) {
-        print("🚪 Remote Left: \(uid)")
+//        print("🚪 Remote Left: \(uid)")
         DispatchQueue.main.async {
             self.lblWaiting.isHidden = false
             self.vierwerCountView.isHidden = true

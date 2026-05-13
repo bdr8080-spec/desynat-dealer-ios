@@ -30,7 +30,7 @@ class NotificationPermissionViewController: UIViewController {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
             DispatchQueue.main.async {
                 if granted {
-                    print("Permission granted")
+//                    print("Permission granted")
                     UIApplication.shared.registerForRemoteNotifications()
                 }
                 self.navigateBack()

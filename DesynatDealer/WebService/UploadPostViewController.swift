@@ -21,21 +21,6 @@ class UploadPostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if let videoURL = videoURL {
-            
-//            CommonUtils.generateThumbnail(url: videoURL) { [weak self] image in
-//                DispatchQueue.main.async {
-//                    guard let self = self, let image = image else { return }
-//                    
-//                    self.imageView.image = image
-//                    self.playButton.isHidden = false
-////                    self.thumbnailImage = self.saveImageAndGetURLString(image) ?? ""
-////                    print("============",self.thumbnailImage,"===================")
-//                    if let imageData = image.jpegData(compressionQuality: 0.7) {
-//                        self.viewModel.uploadMedia(fileData: imageData, isImage: true)
-//                    }
-//                }
-//            }
-            
             guard let data = selectedImage?.jpegData(compressionQuality: 0.25) else { return }
             self.viewModel.uploadMediaForGettingThumbnailImageUrl(fileData: data, isImage: true)
             self.imageView.image = selectedImage
@@ -92,7 +77,7 @@ class UploadPostViewController: UIViewController {
             try data.write(to: fileURL)
             return fileURL.absoluteString   // ✅ URL string
         } catch {
-            print("Error saving image:", error)
+//            print("Error saving image:", error)
             return nil
         }
     }
@@ -107,7 +92,7 @@ class UploadPostViewController: UIViewController {
         
         guard let exportSession = AVAssetExportSession(asset: avAsset,
                                                        presetName: AVAssetExportPresetMediumQuality) else {
-            print("Compression failed")
+//            print("Compression failed")
             return
         }
         

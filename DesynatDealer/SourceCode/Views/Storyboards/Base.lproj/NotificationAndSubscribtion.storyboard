@@ -92,7 +92,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="no product found" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uer-K4-NO4">
-                                <rect key="frame" x="126.33333333333333" y="439.66666666666669" width="140.33333333333343" height="22.666666666666686"/>
+                                <rect key="frame" x="126.33333333333333" y="439.66666666666669" width="140.33333333333337" height="22.666666666666686"/>
                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -1093,7 +1093,7 @@
                                 <cells/>
                             </collectionView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="no product found" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UCs-fx-6p8">
-                                <rect key="frame" x="126.33333333333333" y="439.66666666666669" width="140.33333333333343" height="22.666666666666686"/>
+                                <rect key="frame" x="126.33333333333333" y="439.66666666666669" width="140.33333333333337" height="22.666666666666686"/>
                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -3721,7 +3721,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jbb-3P-YjL">
                                 <rect key="frame" x="0.0" y="173" width="393" height="100"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="product" translatesAutoresizingMaskIntoConstraints="NO" id="jGT-Bz-qLF" customClass="CustomImageView" customModule="DesynatDealer" customModuleProvider="target">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jGT-Bz-qLF" customClass="CustomImageView" customModule="DesynatDealer" customModuleProvider="target">
                                         <rect key="frame" x="24" y="12" width="60" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="60" id="GGG-32-Gz4"/>
@@ -4042,7 +4042,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NI7-91-1gU" customClass="CustomLabelFont" customModule="DesynatUser">
-                                                <rect key="frame" x="40" y="14.333333333333345" width="261" height="19.666666666666664"/>
+                                                <rect key="frame" x="40" y="14.333333333333345" width="261" height="19.666666666666671"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -4093,7 +4093,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="57R-dN-C7g" customClass="CustomLabelFont" customModule="DesynatUser">
-                                                <rect key="frame" x="40" y="14.333333333333345" width="261" height="19.666666666666664"/>
+                                                <rect key="frame" x="40" y="14.333333333333345" width="261" height="19.666666666666671"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -4526,7 +4526,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In-app notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FBO-uD-XfD" customClass="CustomLabelFont" customModule="DesynatUser">
-                                                <rect key="frame" x="40" y="14.333333333333345" width="253" height="19.666666666666664"/>
+                                                <rect key="frame" x="40" y="14.333333333333345" width="253" height="19.666666666666671"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -5204,7 +5204,6 @@
         <image name="nextRight" width="32" height="32"/>
         <image name="plus" width="64" height="64"/>
         <image name="previousLeft" width="32" height="32"/>
-        <image name="product" width="82" height="82"/>
         <image name="profile" width="40" height="40"/>
         <image name="pushNotifications" width="28" height="28"/>
         <image name="radioSelected" width="20" height="20"/>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24765" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24743"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -26,7 +26,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aF0-J6-9fH">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="136"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bannerImg" translatesAutoresizingMaskIntoConstraints="NO" id="5aM-Uv-sbD">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5aM-Uv-sbD">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="136"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="136" id="CYo-jr-UKs"/>
@@ -74,7 +74,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="51y-40-DYQ">
-                                        <rect key="frame" x="0.0" y="163.33333333333334" width="320" height="24.333333333333343"/>
+                                        <rect key="frame" x="0.0" y="163.33333333333334" width="320" height="31.333333333333343"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ssf-bK-tEW" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
                                                 <rect key="frame" x="12" y="10" width="77" height="14.333333333333336"/>
@@ -86,7 +86,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="400 KD" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9O7-OO-HE3" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
-                                                <rect key="frame" x="262.66666666666669" y="10" width="45.333333333333314" height="14.333333333333336"/>
+                                                <rect key="frame" x="262.66666666666669" y="9.9999999999999982" width="45.333333333333314" height="21.333333333333329"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -106,7 +106,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z2y-na-hNj">
-                                        <rect key="frame" x="0.0" y="187.66666666666666" width="320" height="34"/>
+                                        <rect key="frame" x="0.0" y="194.66666666666666" width="320" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Requested On" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GnN-y2-3GG" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
                                                 <rect key="frame" x="12" y="10" width="82" height="14.333333333333336"/>
@@ -118,7 +118,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21/09/2025 at 10:15 AM" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qzX-aS-HJl" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
-                                                <rect key="frame" x="150.66666666666663" y="10" width="157.33333333333337" height="24"/>
+                                                <rect key="frame" x="150.66666666666663" y="10" width="157.33333333333337" height="40"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -138,7 +138,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LeA-Iq-YTE">
-                                        <rect key="frame" x="0.0" y="221.66666666666666" width="320" height="49.999999999999972"/>
+                                        <rect key="frame" x="0.0" y="244.66666666666663" width="320" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5kb-HO-btX" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
                                                 <rect key="frame" x="12" y="10" width="37.666666666666664" height="14.333333333333336"/>
@@ -170,7 +170,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eKM-Aq-eoD">
-                                        <rect key="frame" x="0.0" y="271.66666666666669" width="320" height="71"/>
+                                        <rect key="frame" x="0.0" y="294.66666666666669" width="320" height="71"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WDg-9O-L2T" customClass="CustomButton" customModule="DesynatDealer" customModuleProvider="target">
                                                 <rect key="frame" x="45" y="13" width="230" height="38"/>
@@ -201,7 +201,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AQu-6w-kCz">
-                                        <rect key="frame" x="0.0" y="342.66666666666669" width="320" height="50"/>
+                                        <rect key="frame" x="0.0" y="365.66666666666669" width="320" height="27"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rejected on" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3gb-rB-Xzz" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
                                                 <rect key="frame" x="12" y="10" width="68.666666666666671" height="14.333333333333336"/>
@@ -213,7 +213,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21/09/2025 at 10:15 AM" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f7d-nY-A2E" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
-                                                <rect key="frame" x="150.66666666666663" y="10" width="157.33333333333337" height="40"/>
+                                                <rect key="frame" x="150.66666666666663" y="10" width="157.33333333333337" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -312,7 +312,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="bannerImg" width="343" height="136"/>
         <image name="btnGradient" width="343" height="38"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -50,7 +50,7 @@ class SendNewLiveRequestCollectionViewCell: UICollectionViewCell {
         inputFormatter.timeZone = TimeZone(identifier: "Asia/Kuwait")
         
         guard let date = inputFormatter.date(from: inputDate) else {
-            print("❌ Parse failed: \(inputDate)")
+//            print("❌ Parse failed: \(inputDate)")
             return ""
         }
         

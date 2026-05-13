@@ -323,7 +323,7 @@ extension AddNewStaffViewController: UITableViewDataSource, UITableViewDelegate 
         }
         
         tableView.reloadRows(at: [indexPath], with: .none)
-        print("moduleSelctedData => \(moduleSelctedData)")
+//        print("moduleSelctedData => \(moduleSelctedData)")
     }
     
     func updateSelection(moduleId: Int, viewSelected: Bool, actionSelected: Bool) {

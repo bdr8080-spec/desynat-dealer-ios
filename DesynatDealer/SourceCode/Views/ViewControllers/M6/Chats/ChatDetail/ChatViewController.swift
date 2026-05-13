@@ -174,7 +174,7 @@ class ChatViewController: UIViewController {
             totalAmountLabel.text = CommonUtils.formatPriceStringInput(quotationData?.totalAmount)
             switch actiontype {
             case "0":
-                print("just normal chat")
+//                print("just normal chat")
                 if let customDetails = quotationData?.customDetails,
                    !customDetails.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
                    customDetails.lowercased() != "null" {

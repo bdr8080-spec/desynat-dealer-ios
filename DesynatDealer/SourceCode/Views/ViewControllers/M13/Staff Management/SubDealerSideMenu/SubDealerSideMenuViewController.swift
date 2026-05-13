@@ -149,7 +149,7 @@ extension SubDealerSideMenuViewController: UITableViewDelegate, UITableViewDataS
             let vc = RefundManagementViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
             vc.hasActionPermission = hasPermission
             self.navigationController?.pushViewController(vc, animated: true)
-            print("➡️ Navigate to Refund management")
+//            print("➡️ Navigate to Refund management")
             
         case 3: //Inventory management (Done)
             let nextVC = InventoryListViewController.instantiate(fromAppStoryboard: .InventoryAffilate)

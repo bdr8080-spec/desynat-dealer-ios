@@ -81,7 +81,7 @@ extension SocialLoginManager: ASAuthorizationControllerDelegate, ASAuthorization
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        print("Sign in with Apple failed: \(error.localizedDescription)")
+//        print("Sign in with Apple failed: \(error.localizedDescription)")
         self.appleSignUpStatus?(nil, error)
     }
     

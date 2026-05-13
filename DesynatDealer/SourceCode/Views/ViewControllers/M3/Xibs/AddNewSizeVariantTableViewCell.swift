@@ -105,14 +105,14 @@ class AddNewSizeVariantTableViewCell: UITableViewCell {
     sizeVariant.shoulder     = shoulderTF.text ?? ""
     sizeVariant.sleeveLength = sleeveLengthTF.text ?? ""
     sizeVariant.length       = lengthTF.text ?? ""
-    print("------ SAVED SIZE DATA ------")
-    print("Size: \(sizeVariant.sizeId)")
-    print("Actual Price: \(sizeVariant.actualPrice)")
-    print("Final Price: \(sizeVariant.finalPrice)")
-    print("Discount: \(sizeVariant.discountValue)")
-    print("Total Stocks: \(sizeVariant.totalStock)")
-    print("SKU Limit: \(sizeVariant.sku)")
-    print("--------------------------------")
+//    print("------ SAVED SIZE DATA ------")
+//    print("Size: \(sizeVariant.sizeId)")
+//    print("Actual Price: \(sizeVariant.actualPrice)")
+//    print("Final Price: \(sizeVariant.finalPrice)")
+//    print("Discount: \(sizeVariant.discountValue)")
+//    print("Total Stocks: \(sizeVariant.totalStock)")
+//    print("SKU Limit: \(sizeVariant.sku)")
+//    print("--------------------------------")
   }
   
   
@@ -338,7 +338,7 @@ extension AddNewSizeVariantTableViewCell: UITextFieldDelegate {
     
     if textField == actualPriceTF {
       let newText = updatedText.trimmingCharacters(in: .whitespacesAndNewlines)
-      print("Updated text:", newText)
+//      print("Updated text:", newText)
       
       // Allow empty
       if newText.isEmpty {
@@ -365,7 +365,7 @@ extension AddNewSizeVariantTableViewCell: UITextFieldDelegate {
       }
       
       let discount = Double(discountPriceTF.text ?? "0") ?? 0
-      print("Discount:", discount)
+//      print("Discount:", discount)
       
       var finalPrice: Double = actualPrice
       

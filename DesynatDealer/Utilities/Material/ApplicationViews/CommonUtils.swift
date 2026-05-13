@@ -464,74 +464,11 @@ class CommonUtils {
         dropDown.selectedTextColor = selectedColor
         dropDown.bottomOffset = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
         dropDown.dismissMode = .automatic
-        // Customize cell configuration for text alignment
-        //            dropDown.customCellConfiguration = { (index: Int, item: String, cell: DropDownCell) in
-        //                if kSharedUserDefaults.getValue(Key: .language) == "ar" {
-        //                    cell.optionLabel.textAlignment = .right // Align text to the right for Arabic
-        //                } else {
-        //                    cell.optionLabel.textAlignment = .left // Align text to the left for English
-        //                }
-        //            }
         dropDown.show()
         dropDown.selectionAction = {(index: Int, item: String) in
             completion(index,item)
         }
     }
-    
-    //    static func openPicker(controller:UIViewController, callBack:@escaping ((String,String,String) -> Void)) {
-    //        let picker = ADCountryPicker(style: .grouped)
-    //        picker.searchBarBackgroundColor = .white
-    //        picker.showCallingCodes = true
-    //        picker.didSelectCountryWithCallingCodeClosure = { name,code, callingCodes in
-    //            picker.dismiss(animated: true)
-    //            callBack(name,code, callingCodes)
-    //        }
-    //        let pickerNavigationController = UINavigationController(rootViewController: picker)
-    //        controller.present(pickerNavigationController, animated: true, completion: nil)
-    //    }
-    
-    //    static func getThumbnailImage(forUrl url: URL?, completion:@escaping(UIImage?)->()) {
-    //        let asset: AVAsset = AVAsset(url: url)
-    //        let imageGenerator = AVAssetImageGenerator(asset: asset)
-    //        imageGenerator.appliesPreferredTrackTransform = true
-    //        do {
-    //            let thumbnailImage = try imageGenerator.copyCGImage(at: CMTimeMake(value: 1, timescale: 60) ,
-    //                                                                actualTime: nil)
-    //            completion(UIImage(cgImage: thumbnailImage))
-    //        } catch _ {
-    //            completion(nil)
-    //        }
-    //    }
-    
-    //    static func generateThumbnail(url: URL, completion: @escaping (UIImage?) -> Void) {
-    //        let asset = AVAsset(url: url)
-    //        let imageGenerator = AVAssetImageGenerator(asset: asset)
-    //        imageGenerator.appliesPreferredTrackTransform = true
-    //        imageGenerator.requestedTimeToleranceBefore = .zero
-    //        imageGenerator.requestedTimeToleranceAfter = .zero
-    //
-    //        // ── Most important change ──
-    //        let secondsToTry: Double = 1.5     // ← try 1.0, 1.5, 2.0, 3.0 — pick what looks best for your videos
-    //        let time = CMTime(seconds: secondsToTry, preferredTimescale: 600)
-    //
-    //        DispatchQueue.global(qos: .userInitiated).async {
-    //            do {
-    //                let cgImage = try imageGenerator.copyCGImage(at: time, actualTime: nil)
-    //                let thumbnail = UIImage(cgImage: cgImage)
-    //
-    //                DispatchQueue.main.async {
-    //                    completion(thumbnail)
-    //                }
-    //            } catch {
-    //                print("Thumbnail generation failed at \(secondsToTry)s → \(error)")
-    //
-    //                // Fallback: try at 0.5s or just show placeholder
-    //                DispatchQueue.main.async {
-    //                    completion(UIImage(named: "placeholder"))
-    //                }
-    //            }
-    //        }
-    //    }
     
     static func getCode(dialCode:String) -> String {
         guard let path = Bundle.main.path(forResource: "CallingCodes", ofType: "plist") else {return ""}

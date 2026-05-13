@@ -102,11 +102,10 @@ class AddVariantTableViewCell: UITableViewCell {
     // Update final variant
     variant.sizeVariants = cleanedSizes
     
-    print("------ SAVED VARIANT SIZES ------")
-    for (i, s) in cleanedSizes.enumerated() {
-      print("SIZE \(i + 1) → id: \(s.sizeId ?? 0), qty: \(s.totalStock), price: \(s.actualPrice)")
-    }
-    print("--------------------------------")
+//    for (i, s) in cleanedSizes.enumerated() {
+//      print("SIZE \(i + 1) → id: \(s.sizeId ?? 0), qty: \(s.totalStock), price: \(s.actualPrice)")
+//    }
+//    print("--------------------------------")
   }
   
   private func registerCell() {
@@ -226,7 +225,6 @@ extension AddVariantTableViewCell: UICollectionViewDelegate, UICollectionViewDat
     cell.mainImageView.clipsToBounds = true
       cell.stackView.isHidden = true
     if indexPath.item == 0 {
-        //        cell.mainImageView.image = UIImage(named: "uploadProductImage")
       cell.mainImageView.image = UIImage(named: "dashedBorder")
         cell.stackView.isHidden = false
     } else {
@@ -234,7 +232,6 @@ extension AddVariantTableViewCell: UICollectionViewDelegate, UICollectionViewDat
       if realIndex < images.count {
         cell.mainImageView.image = images[realIndex]
       } else {
-//        cell.mainImageView.image = UIImage(named: "uploadProductImage")
           cell.mainImageView.image = UIImage(named: "dashedBorder")
             cell.stackView.isHidden = false
       }

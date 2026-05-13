@@ -86,7 +86,7 @@ class HomeViewController: UIViewController {
             UIImage(named: savedStatus == 1 ? "toggle_on" : "toggle_off"),
             for: .normal
         )
-        busyOnOffLabel.text = savedStatus == 1 ? "Busy/On".localiz() : "Busy/Off".localiz()
+        busyOnOffLabel.text = savedStatus == 1 ? "Open".localiz() : "Busy".localiz()
         viewModel.getUserProfile()
         viewModel.getCountOfNotificationRequest()
         viewModel.getAdminStory()
@@ -126,12 +126,13 @@ class HomeViewController: UIViewController {
             guard let self = self else { return }
             if success {
                 if let status = viewModel.storeAvailabilityModel?.storeAvailability {
+//                    busyOnOffLabel.text = savedStatus == 1 ? "Busy".localiz() : "Open".localiz()
                     if status == 1 {
-                        busyOnOffLabel.text = "Busy/On".localiz()
+                        busyOnOffLabel.text = "Open".localiz()
                         btnToggle.setImage(UIImage(named: "toggle_on"), for: .normal)
                         CommonUtils.showToast(message: "Store has been activated Successfully".localiz())
                     } else {
-                        busyOnOffLabel.text = "Busy/Off".localiz()
+                        busyOnOffLabel.text = "Busy".localiz()
                         btnToggle.setImage(UIImage(named: "toggle_off"), for: .normal)
                         CommonUtils.showToast(message: "Store has been Deactivated Successfully".localiz())
                     }

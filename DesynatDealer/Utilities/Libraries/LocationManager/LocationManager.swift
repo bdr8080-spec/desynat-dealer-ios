@@ -12,7 +12,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
     private let locationManager = CLLocationManager()
     static let sharedInstance = LocationManager()
-    
     var location: CLLocationCoordinate2D?
     var currentLocation = ""
     var callBackGetCurrentLoc: ((_ location: CLLocationCoordinate2D, _ add: String?) -> ())?
@@ -32,30 +31,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     func requestAuthorization() {
         locationManager.requestWhenInUseAuthorization()
     }
-    
-//    func startUpdatingLocation() {
-//        if #available(iOS 14.0, *) {
-//            switch locationManager.authorizationStatus {
-//            case .notDetermined:
-//                locationManager.requestWhenInUseAuthorization()
-//            case .authorizedWhenInUse, .authorizedAlways:
-//                locationManager.startUpdatingLocation()
-//            case .denied, .restricted:
-//                print("❌ Location permission denied")
-//            @unknown default:
-//                break
-//            }
-//        } else {
-//            switch CLLocationManager.authorizationStatus() {
-//            case .notDetermined:
-//                locationManager.requestWhenInUseAuthorization()
-//            case .authorizedWhenInUse, .authorizedAlways:
-//                locationManager.startUpdatingLocation()
-//            default:
-//                break
-//            }
-//        }
-//    }
     
     func startUpdatingLocation() {
         locationManager.delegate = self

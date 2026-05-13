@@ -513,14 +513,14 @@ final class NetworkManager {
                         let compressedURL = self.compressVideoSync(inputURL: url) ?? url
                         
                         // PRINT COMPRESSED SIZE
-                        if let size = try? Data(contentsOf: compressedURL).count {
-                            let kb = Double(size) / 1024.0
-                            let mb = kb / 1024.0
-                            print("📉 Compressed Video Size:")
-                            print("➡ Bytes: \(size)")
-                            print("➡ KB: \(String(format: "%.2f", kb)) KB")
-                            print("➡ MB: \(String(format: "%.2f", mb)) MB")
-                        }
+//                        if let size = try? Data(contentsOf: compressedURL).count {
+//                            let kb = Double(size) / 1024.0
+//                            let mb = kb / 1024.0
+//                            print("📉 Compressed Video Size:")
+//                            print("➡ Bytes: \(size)")
+//                            print("➡ KB: \(String(format: "%.2f", kb)) KB")
+//                            print("➡ MB: \(String(format: "%.2f", mb)) MB")
+//                        }
                         
                         multipartFormData.append(
                             compressedURL,
@@ -544,14 +544,14 @@ final class NetworkManager {
                         let compressedURL = self.compressVideoSync(inputURL: tempURL) ?? tempURL
                         
                         // PRINT COMPRESSED SIZE
-                        if let size = try? Data(contentsOf: compressedURL).count {
-                            let kb = Double(size) / 1024.0
-                            let mb = kb / 1024.0
-                            print("📉 Compressed Video Size:")
-                            print("➡ Bytes: \(size)")
-                            print("➡ KB: \(String(format: "%.2f", kb)) KB")
-                            print("➡ MB: \(String(format: "%.2f", mb)) MB")
-                        }
+//                        if let size = try? Data(contentsOf: compressedURL).count {
+//                            let kb = Double(size) / 1024.0
+//                            let mb = kb / 1024.0
+//                            print("📉 Compressed Video Size:")
+//                            print("➡ Bytes: \(size)")
+//                            print("➡ KB: \(String(format: "%.2f", kb)) KB")
+//                            print("➡ MB: \(String(format: "%.2f", mb)) MB")
+//                        }
                         
                         multipartFormData.append(
                             compressedURL,

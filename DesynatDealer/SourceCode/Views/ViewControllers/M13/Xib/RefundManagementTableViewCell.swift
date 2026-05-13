@@ -74,30 +74,6 @@ class RefundManagementTableViewCell: UITableViewCell {
         return outputFormatter.string(from: date)
     }
     
-//    func customizeChangeDateFormatZone(
-//        inputDate: String,
-//        inputFormat: String = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'",
-//        outputFormat: String = "dd/MM/yyyy 'at' hh:mm a"
-//    ) -> String {
-//
-//        let inputFormatter = DateFormatter()
-//        inputFormatter.dateFormat = inputFormat
-//        inputFormatter.locale = Locale(identifier: "en_US_POSIX")
-//        inputFormatter.timeZone = TimeZone(secondsFromGMT: 0)   // interpret input as UTC
-//
-//        guard let date = inputFormatter.date(from: inputDate) else {
-//            print("❌ Parse failed: \(inputDate)")
-//            return ""
-//        }
-//
-//        let outputFormatter = DateFormatter()
-//        outputFormatter.dateFormat = outputFormat
-//        outputFormatter.locale = Locale(identifier: "en_US_POSIX")
-//        outputFormatter.timeZone = TimeZone(identifier: "Asia/Kuwait")   // always Kuwait time
-//
-//        return outputFormatter.string(from: date)
-//    }
-    
     func customizeChangeDateFormatZone(
         inputDate: String,
         inputFormat: String = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'"
