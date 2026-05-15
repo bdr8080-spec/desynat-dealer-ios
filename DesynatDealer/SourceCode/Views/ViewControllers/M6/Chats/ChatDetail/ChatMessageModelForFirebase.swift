@@ -37,14 +37,14 @@ struct Chat: Equatable, Codable {
         return formatter.date(from: times)
     }
     
-    //    func localizedMessage() -> String {
-    //            switch AppLanguage.current {
-    //            case .arabic:
-    //                return messageAr ?? message ?? ""
-    //            case .english:
-    //                return message ?? ""
-    //            }
-    //        }
+//        func localizedMessage() -> String {
+//                switch AppLanguage.current {
+//                case .arabic:
+//                    return messageAr ?? message ?? ""
+//                case .english:
+//                    return message ?? ""
+//                }
+//            }
     
     func localizedMessage() -> String {
         if AppLanguageManager.shared.currentLanguage == .ar {

@@ -8,26 +8,26 @@
 
 import Foundation
 
-enum AppLanguage {
-    case english
-    case arabic
+//enum AppLanguage {
+//    case english
+//    case arabic
+//
+//    static var current: AppLanguage {
+//        let lang = UserDefaults.standard.string(forKey: "AppLanguage") ?? "en"
+//        return lang == "ar" ? .arabic : .english
+//    }
+//}
 
-    static var current: AppLanguage {
-        let lang = UserDefaults.standard.string(forKey: "AppLanguage") ?? "en"
-        return lang == "ar" ? .arabic : .english
-    }
-}
-
-class LanguageManager {
-
-    static var currentLanguageCode: String {
-        return UserDefaults.standard.string(forKey: "AppLanguage") ?? "en"
-    }
-
-    static var isArabic: Bool {
-        return currentLanguageCode == "ar"
-    }
-}
+//class LanguageManager {
+//
+//    static var currentLanguageCode: String {
+//        return UserDefaults.standard.string(forKey: "AppLanguage") ?? "en"
+//    }
+//
+//    static var isArabic: Bool {
+//        return currentLanguageCode == "ar"
+//    }
+//}
 
 
 class TranslationService {

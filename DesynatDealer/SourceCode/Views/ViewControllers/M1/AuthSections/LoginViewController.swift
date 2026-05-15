@@ -8,17 +8,18 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-    private lazy var viewModel = LoginViewModel(loginHostVC: self)
+    
     @IBOutlet weak var emailMobileImageView: UIImageView!
     @IBOutlet weak var txtFieldLeading: NSLayoutConstraint!
     @IBOutlet weak var viewCountryCode: UIView!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var txtCountryCode: UILabel!
-//    var countryCode: String = LocationManager.sharedInstance.getCurrentLocationCode().dialCode
+    
     var countryCode: String = "+965"
     var type = 0
-
+    private lazy var viewModel = LoginViewModel(loginHostVC: self)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         txtCountryCode.text = countryCode

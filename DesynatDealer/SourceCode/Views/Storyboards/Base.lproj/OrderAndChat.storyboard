@@ -4388,8 +4388,8 @@ Apartment, Kuwait</string>
         <image name="couponApplied" width="24" height="24"/>
         <image name="cross" width="18" height="19.333333969116211"/>
         <image name="downVector" width="17.666666030883789" height="9.6666669845581055"/>
-        <image name="emptyStar" width="32" height="32"/>
-        <image name="filledStar" width="32" height="32"/>
+        <image name="emptyStar" width="10" height="10"/>
+        <image name="filledStar" width="10" height="10"/>
         <image name="filter" width="50.333332061767578" height="40.666667938232422"/>
         <image name="leftVector" width="9.6666669845581055" height="17.666666030883789"/>
         <image name="orderBag" width="30" height="30"/>
