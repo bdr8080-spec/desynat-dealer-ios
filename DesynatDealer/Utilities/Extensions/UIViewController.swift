@@ -408,6 +408,7 @@ extension UIViewController {
         // OK Button (Navigate)
         alert.addAction(UIAlertAction(title: "OK".localiz(), style: .default, handler: { _ in
             let vc = MySubsciptionPlanViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+            vc.hasActionPermission = true
             self.navigationController?.pushViewController(vc, animated: true)
         }))
 
