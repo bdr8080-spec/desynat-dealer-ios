@@ -85,6 +85,11 @@ class StaffDetailsViewController: UIViewController {
                 self.viewModel.staffDetails?.isBlock = current == 0 ? 1 : 0
                 DispatchQueue.main.async {
                     self.updateStatusUI()
+                    let msg = current == 1
+                    ? "Staff has been active successfully".localiz()
+                    : "Staff has been inactive successfully".localiz()
+                    
+                    CommonUtils.showToast(message: msg)
                 }
             }
         }
@@ -153,7 +158,7 @@ class StaffDetailsViewController: UIViewController {
     private func updateStatusUI() {
         let isBlocked = (viewModel.staffDetails?.isBlock ?? 0) == 1
         isActiveLbl.text = isBlocked ? "Inactive".localiz() : "Active".localiz()
-        isActiveLbl.text = isBlocked ? "Inactive".localiz() : "Active".localiz()
+//        isActiveLbl.text = isBlocked ? "Inactive".localiz() : "Active".localiz()
         isActiveLbl.textColor = isBlocked ? UIColor(hex: "E80B26") : UIColor(hex: "1A900D")
         activeStatusbtn.setImage(isBlocked ? .toggleOff : .toggleOn, for: .normal)
     }

@@ -312,7 +312,7 @@
 "eo0-7g-lcU.placeholder" = "Type here...";
 
 /* Class = "UILabel"; text = "no deals found"; ObjectID = "etM-nK-D3s"; */
-"etM-nK-D3s.text" = "no deals found";
+"etM-nK-D3s.text" = "No deals found";
 
 /* Class = "UILabel"; text = "Discount"; ObjectID = "fJV-LZ-kJs"; */
 "fJV-LZ-kJs.text" = "Discount";

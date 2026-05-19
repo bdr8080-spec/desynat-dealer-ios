@@ -264,7 +264,7 @@
 "gFA-C0-50G.text" = "Clear";
 
 /* Class = "UILabel"; text = "no data found"; ObjectID = "gq7-Xa-7fQ"; */
-"gq7-Xa-7fQ.text" = "no data found";
+"gq7-Xa-7fQ.text" = "No data found";
 
 /* Class = "UILabel"; text = "Live Coverage"; ObjectID = "hFc-NU-9Ve"; */
 "hFc-NU-9Ve.text" = "Live Coverage";
@@ -285,7 +285,7 @@
 "lLw-SQ-kEu.text" = "Account Type";
 
 /* Class = "UILabel"; text = "no data found"; ObjectID = "mK6-OU-bnL"; */
-"mK6-OU-bnL.text" = "no data found";
+"mK6-OU-bnL.text" = "No data found";
 
 /* Class = "UITextField"; placeholder = "To // //"; ObjectID = "mWa-e9-AfO"; */
 "mWa-e9-AfO.placeholder" = "To // //";
@@ -369,7 +369,7 @@
 "wBR-Lv-8fx.text" = "Front";
 
 /* Class = "UILabel"; text = "no request found"; ObjectID = "wNR-f9-1bl"; */
-"wNR-f9-1bl.text" = "no request found";
+"wNR-f9-1bl.text" = "No request found";
 
 /* Class = "UILabel"; text = "Upload Reel"; ObjectID = "wb6-hH-Q3P"; */
 "wb6-hH-Q3P.text" = "Upload Reel";

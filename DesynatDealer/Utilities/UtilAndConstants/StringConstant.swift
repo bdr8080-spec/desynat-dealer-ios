@@ -36,7 +36,7 @@ enum AlertConstant: String {
     case EnterEmail                 = " Please Enter Email Address"
     case EnterMobileNumber          = "Please Enter Mobile Number"
     case EnterValidEmailAddress     = " Please Enter Valid Email Address"
-    case validMobileNumber          = "Please enter valid mobile number"
+    case validMobileNumber          = "Mobile number must be between 7 and 15 digits"
     case EnterValidEmailorMobile    = "Please Enter Valid Email ID or Mobile Number"
     case EnterPassword              = "Please enter password"
     case InvalidPasswordFormat      = "Password must be at least 8 characters long, include 1 uppercase, 1 lowercase, and 1 special character"

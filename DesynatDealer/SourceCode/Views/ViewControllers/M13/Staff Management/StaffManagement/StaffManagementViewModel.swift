@@ -16,7 +16,7 @@ class StaffManagementViewModel {
     var isLoading = false
     var hasMoreData = true
     let limit = 10
-    var appliedFilter = RefundManagementFilterModel()
+    var appliedFilter = StaffListFilterModel()
     init(hostVC: StaffManagementViewController) {
         self.hostVC = hostVC
     }
@@ -60,9 +60,13 @@ class StaffManagementViewModel {
             params["to_date"] = formatted
         }
         
-        if let status = filter.refundStatus,
-           status.rawValue > -1 {
-            params["filter"] = status.rawValue + 1
+        if let roleId = filter.roleId {//,
+//           status.rawValue > -1 {
+            params["role_filter"] = roleId
+        }
+        
+        if let status = filter.activeStatus {
+            params["status_filter"] = status
         }
         
         WebService.sharedInstance.getAllStaffListService(param: params) { data in

@@ -30,6 +30,7 @@ class DealsDetailsViewController: UIViewController {
             productsCollectionView.registerCellFromNib(cellID: "ProductsCollectionViewCell")
         }
     }
+    @IBOutlet weak var productsTitleLabel: UILabel!
     
     private lazy var viewModel = DealsDetailsViewModel(hostVC: self)
     var tabType: DealsListedType = .listedDeals
@@ -99,10 +100,13 @@ class DealsDetailsViewController: UIViewController {
         switch tabType {
         case .listedDeals:
             addToDealsView.isHidden = !hasActionPermission
+            productsTitleLabel.text = "Select Product".localiz()
         case .enrolled:
             addMoreProdutsView.isHidden = !hasActionPermission
+            productsTitleLabel.text = "Products".localiz()
         case .expired:
             totalRevenueView.isHidden = false
+            productsTitleLabel.text = "Products".localiz()
         }
     }
     

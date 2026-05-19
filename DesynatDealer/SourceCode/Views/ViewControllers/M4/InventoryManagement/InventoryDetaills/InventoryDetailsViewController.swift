@@ -138,9 +138,11 @@ class InventoryDetailsViewController: UIViewController {
         // Status
         if data.productActiveStatus == 1 {
             statusLabel.text = "Active".localiz()
+            statusLabel.textColor = UIColor(hex: "1A900D")
             statusButton.setImage(UIImage(named: "toggle_on"), for: .normal)
         } else {
             statusLabel.text = "Inactive".localiz()
+            statusLabel.textColor = UIColor(hex: "E80B26")
             statusButton.setImage(UIImage(named: "toggle_off"), for: .normal)
         }
         
@@ -202,7 +204,7 @@ class InventoryDetailsViewController: UIViewController {
             productImageCollectionView.setContentOffset(CGPoint.zero, animated: false)
             productImageCollectionView.reloadData()
         }
-//        let text = "KD".localiz()
+        //        let text = "KD".localiz()
         finalPriceLabel.text = CommonUtils.formatPriceStringInput(variant.finalPrice ?? "0")
         CommonUtils.setStrikethrough(label: actualPriceLAbel, text: CommonUtils.formatPriceStringInput(variant.actualPrice ?? "0"))
         
@@ -266,7 +268,7 @@ extension InventoryDetailsViewController: UICollectionViewDelegate, UICollection
         case sizeCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SizeVariantCollectionViewCell", for: indexPath) as! SizeVariantCollectionViewCell
             let size = sizesList[indexPath.row]
-//            cell.titleLabel.text = size.name
+            //            cell.titleLabel.text = size.name
             if AppLanguageManager.shared.currentLanguage == .ar {
                 cell.titleLabel.text = size.nameAr
             } else {

@@ -385,7 +385,7 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M2x-Oi-jdc">
-                                <rect key="frame" x="0.0" y="173" width="393" height="611"/>
+                                <rect key="frame" x="0.0" y="173" width="393" height="611.00000000000045"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kfP-nh-a6T">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="2246.6666666666665"/>
@@ -1443,6 +1443,11 @@
                                                                 <rect key="frame" x="20" y="5" width="292" height="35"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                 <textInputTraits key="textInputTraits"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                                        <color key="value" white="0.025551155820000001" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
                                                             </textField>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="downVector" translatesAutoresizingMaskIntoConstraints="NO" id="QLG-lL-bMZ">
                                                                 <rect key="frame" x="317" y="18.333333333333485" width="16" height="8"/>
@@ -3310,7 +3315,7 @@ Apartment, Kuwait</string>
                                             <outlet property="delegate" destination="ZmN-LO-pa6" id="CFF-pX-b4r"/>
                                         </connections>
                                     </tableView>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="no deals found" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="etM-nK-D3s">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No deals found" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="etM-nK-D3s">
                                         <rect key="frame" x="0.0" y="543" width="345" height="200"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="200" id="78G-rZ-Ks9"/>
@@ -3899,6 +3904,7 @@ Apartment, Kuwait</string>
                         <outlet property="mainImageView" destination="CH3-NS-7OQ" id="eze-WX-1a7"/>
                         <outlet property="noDataFound" destination="L2P-dk-Xmo" id="ELA-Om-mbs"/>
                         <outlet property="productsCollectionView" destination="mwc-Xf-3R4" id="1cl-nv-Xpa"/>
+                        <outlet property="productsTitleLabel" destination="mmn-tn-MXT" id="gRq-qI-gj7"/>
                         <outlet property="searchTF" destination="JYP-Li-zD1" id="5kv-qn-EpI"/>
                         <outlet property="startsOnLabel" destination="TRg-bX-udv" id="2Ij-VK-bQT"/>
                         <outlet property="subCategoryLabel" destination="Ras-Hm-DZE" id="eFn-TE-4IL"/>
@@ -4013,7 +4019,7 @@ Apartment, Kuwait</string>
                                 </connections>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="no product found" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eb1-fN-1gY">
-                                <rect key="frame" x="126.33333333333333" y="439.66666666666669" width="140.33333333333343" height="22.666666666666686"/>
+                                <rect key="frame" x="126.33333333333333" y="439.66666666666669" width="140.33333333333337" height="22.666666666666686"/>
                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -4411,10 +4417,10 @@ Apartment, Kuwait</string>
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

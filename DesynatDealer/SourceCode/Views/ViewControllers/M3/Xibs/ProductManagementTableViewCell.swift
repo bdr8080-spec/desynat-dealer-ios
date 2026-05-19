@@ -92,9 +92,11 @@ class ProductManagementTableViewCell: UITableViewCell {
                                                   discountValue: data.productVariants?.first?.discountValue)
         if data.productActiveStatus == 1 {
             statusLabel.text = "Active".localiz()
+            statusLabel.textColor = UIColor(hex: "1A900D")
             statusButton.setImage(UIImage(named: "toggle_on"), for: .normal)
         } else {
             statusLabel.text = "Inactive".localiz()
+            statusLabel.textColor = UIColor(hex: "E80B26")
             statusButton.setImage(UIImage(named: "toggle_off"), for: .normal)
         }
         let text2 = "Added on -".localiz()

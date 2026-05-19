@@ -156,46 +156,34 @@ extension DealsListFilterViewController {
     }
 }
 
-//extension DealsListFilterViewController: UITextFieldDelegate {
-//    func textFieldDidBeginEditing(_ textField: UITextField) {
-//        activeTextField = textField
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "dd/MM/yyyy"
-//        if textField == toTextField {
-//            if let fromText = fromTextField.text,
-//               let fromDate = formatter.date(from: fromText) {
-//                datePicker.minimumDate = fromDate
-//            } else {
-//                datePicker.minimumDate = nil
-//            }
-//        }
-//        if textField == fromTextField {
-//            datePicker.minimumDate = nil
-//        }
-//    }
-//}
-
 extension DealsListFilterViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        activeTextField = textField
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd/MM/yyyy"
-
-        if textField == toTextField {
-            // To Date cannot be earlier than From Date
-            if let fromText = fromTextField.text,
-               let fromDate = formatter.date(from: fromText) {
+            activeTextField = textField
+            
+            let formatter = DateFormatter()
+            formatter.dateFormat = "dd/MM/yyyy"
+            
+            if textField == toTextField {
+                
+                // ✅ First select From Date
+                guard let fromText = fromTextField.text,
+                      !fromText.isEmpty,
+                      let fromDate = formatter.date(from: fromText) else {
+                    
+                    view.endEditing(true)
+                    
+                    showAlert(msg: "Please select From Date first".localiz())
+                    return
+                }
+                
+                // ✅ To Date should not be less than From Date
                 datePicker.minimumDate = fromDate
-            } else {
-                datePicker.minimumDate = nil // No restriction if From Date not set
+            }
+            
+            if textField == fromTextField {
+                datePicker.minimumDate = nil
             }
         }
-
-        if textField == fromTextField {
-            // Allow past dates for From Date
-            datePicker.minimumDate = nil
-        }
-    }
 }
 
 struct DealListFilterModel {

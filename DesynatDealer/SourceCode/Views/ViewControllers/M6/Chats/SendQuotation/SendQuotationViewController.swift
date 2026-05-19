@@ -49,17 +49,30 @@ class SendQuotationViewController: UIViewController {
     private func setupTextFieldValidation() {
         let textFields = [itemPriceTF, shippingFeesTF, taxTF]
         textFields.forEach {
-            $0?.keyboardType = .numberPad
+//            $0?.keyboardType = .numberPad
             $0?.delegate = self
             $0?.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         }
     }
     
+//    private func calculateTotalAmount() {
+//        let itemPrice = Double(itemPriceTF.text ?? "") ?? 0
+//        let quantity = Double(viewModel.itemQuantity) ?? 1
+//        let total = (itemPrice * quantity)
+//        totalAmountTF.text = CommonUtils.formatPriceWithoutKd(total)
+//    }
+    
     private func calculateTotalAmount() {
+
         let itemPrice = Double(itemPriceTF.text ?? "") ?? 0
         let quantity = Double(viewModel.itemQuantity) ?? 1
-        let total = (itemPrice * quantity)
-        totalAmountTF.text = CommonUtils.formatPriceWithoutKd(total)
+
+        let total = itemPrice * quantity
+
+        totalAmountTF.text = NumberFormatter.localizedString(
+            from: NSNumber(value: total),
+            number: .decimal
+        )
     }
     
     func handleNavigationAfterSuccess() {
@@ -100,26 +113,78 @@ class SendQuotationViewController: UIViewController {
 }
 
 extension SendQuotationViewController: UITextFieldDelegate {
+
+//    func textField(
+//        _ textField: UITextField,
+//        shouldChangeCharactersIn range: NSRange,
+//        replacementString string: String
+//    ) -> Bool {
+//        
+//        // Allow delete
+//        if string.isEmpty {
+//            return true
+//        }
+//        
+//        // Allow only numbers
+//        if !CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: string)) {
+//            return false
+//        }
+//        
+//        let currentText = textField.text ?? ""
+//        let updatedText = (currentText as NSString).replacingCharacters(in: range, with: string)
+//        
+//        // ❌ Prevent starting with 0
+//        if updatedText.count == 1 && updatedText == "0" {
+//            return false
+//        }
+//        
+//        // Max 7 digits
+//        return updatedText.count <= 7
+//    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        calculateTotalAmount()
+    }
+    
     func textField(
         _ textField: UITextField,
         shouldChangeCharactersIn range: NSRange,
         replacementString string: String
     ) -> Bool {
-        
-        // Allow only numbers
-        if !string.isEmpty && !CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: string)) {
+
+        if string.isEmpty {
+            return true
+        }
+
+        let currentText = textField.text ?? ""
+
+        let updatedText = (currentText as NSString)
+            .replacingCharacters(in: range, with: string)
+
+        let allowedCharacters = CharacterSet(charactersIn: "0123456789.")
+
+        if string.rangeOfCharacter(from: allowedCharacters.inverted) != nil {
             return false
         }
-        
-        // Max 7 digits
-        let currentText = textField.text ?? ""
-        let updatedText = (currentText as NSString).replacingCharacters(in: range, with: string)
-        
+
+        // Only one decimal allowed
+        if updatedText.components(separatedBy: ".").count > 2 {
+            return false
+        }
+
+        // Prevent single starting 0
+        if updatedText == "0" {
+            return false
+        }
+
+        // Allow 0.x
+        if updatedText.hasPrefix("0"),
+           updatedText.count > 1,
+           !updatedText.hasPrefix("0.") {
+            return false
+        }
+
         return updatedText.count <= 7
-    }
-    
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        calculateTotalAmount()
     }
 }
 

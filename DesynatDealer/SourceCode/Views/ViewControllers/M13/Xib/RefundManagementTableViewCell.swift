@@ -49,7 +49,7 @@ class RefundManagementTableViewCell: UITableViewCell {
         let paymentMethod = data?.order?.paymentMethod ?? "1"
         switch paymentMethod {
         case "1":
-            paymentModeLbl.text = "Online".localiz()
+            paymentModeLbl.text = "Card".localiz()
         case "2":
             paymentModeLbl.text = "Wallet".localiz()
         default:

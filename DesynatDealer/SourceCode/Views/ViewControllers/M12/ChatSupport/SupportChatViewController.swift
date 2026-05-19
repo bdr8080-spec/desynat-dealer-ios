@@ -21,7 +21,7 @@ class SupportChatViewController: UIViewController, WKNavigationDelegate {
         if let savedUser: User = kSharedUserDefaults.retrieveModelFor(key: .user, model: User.self) {
             loadTidioHTML(user: savedUser)
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             CommonUtils.showHud(show: false)
         }
     }

@@ -3,7 +3,7 @@
 "0Dl-V2-SwM.text" = "Details";
 
 /* Class = "UILabel"; text = "no data found"; ObjectID = "0Pd-iK-M9F"; */
-"0Pd-iK-M9F.text" = "no data found";
+"0Pd-iK-M9F.text" = "No data found";
 
 /* Class = "UITextField"; placeholder = "Enter password "; ObjectID = "0Wv-VW-2C1"; */
 "0Wv-VW-2C1.placeholder" = "Enter password ";
@@ -93,7 +93,7 @@
 "CeB-2M-GVk.text" = "Details";
 
 /* Class = "UILabel"; text = "no data found"; ObjectID = "Cej-WR-beQ"; */
-"Cej-WR-beQ.text" = "no data found";
+"Cej-WR-beQ.text" = "No data found";
 
 /* Class = "UILabel"; text = "In Arabic"; ObjectID = "Cxa-ZV-HGj"; */
 "Cxa-ZV-HGj.text" = "In Arabic";
@@ -147,7 +147,7 @@
 "Hxq-8f-Rc0.placeholder" = "Enter email id";
 
 /* Class = "UILabel"; text = "Total Revenue Generated"; ObjectID = "Idq-mZ-I2L"; */
-"Idq-mZ-I2L.text" = "Total Revenue Generated";
+"Idq-mZ-I2L.text" = "Total Refunds";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Ivd-YL-RZd"; */
 "Ivd-YL-RZd.normalTitle" = "Button";
@@ -399,7 +399,7 @@
 "t37-2r-tF9.text" = "Ahmed Farhan";
 
 /* Class = "UILabel"; text = "Upload Image"; ObjectID = "u2b-La-L7G"; */
-"u2b-La-L7G.text" = "Upload Image";
+"u2b-La-L7G.text" = "Upload Profile Images";
 
 /* Class = "UILabel"; text = "no product found"; ObjectID = "uer-K4-NO4"; */
 "uer-K4-NO4.text" = "no product found";
@@ -447,7 +447,7 @@
 "zH7-0u-DmD.text" = "In English";
 
 /* Class = "UILabel"; text = "no data found"; ObjectID = "zPC-9A-Zbq"; */
-"zPC-9A-Zbq.text" = "no data found";
+"zPC-9A-Zbq.text" = "No data found";
 
 /* Class = "UILabel"; text = "Upgrade Plan"; ObjectID = "zfr-8j-UxT"; */
 "zfr-8j-UxT.text" = "Upgrade Plan";

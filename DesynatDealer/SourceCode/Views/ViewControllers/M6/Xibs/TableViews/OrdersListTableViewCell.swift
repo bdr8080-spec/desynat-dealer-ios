@@ -75,7 +75,7 @@ class OrdersListTableViewCell: UITableViewCell {
           }
         case "1": //Pending
             statusLabel.text = "Confirmed".localiz()
-          statusLabel.textColor = UIColor(hex: "#FF5F1B")
+          statusLabel.textColor = UIColor(hex: "#16B364")
             
             if data?.assignStatus == "1" || data?.rEApprove == "1" {
                 statusLabel.text = "On The Way".localiz()
@@ -148,7 +148,7 @@ class OrdersListTableViewCell: UITableViewCell {
           }
         case "1": //Pending
             statusLabel.text = "Confirmed".localiz()
-          statusLabel.textColor = UIColor(hex: "#FF5F1B")
+          statusLabel.textColor = UIColor(hex: "#16B364")
             
             if data?.assignStatus == "1" || data?.rEApprove == "1" {
                 statusLabel.text = "On The Way".localiz()

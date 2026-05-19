@@ -38,16 +38,20 @@ class SubDealerSideMenuViewModel {
         WebService.sharedInstance.getSingleStaffDetailService(param, completion: { [weak self] response in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                self.userProfile = response
-                self.populateData(data: response)
-                if response.roleAction?.first?.menuID == 1 {
-                    kSharedUserDefaults.setSubAdminUserHasDashboardAccess(hasDashboardAccess: true)
-                    if response.roleAction?.first?.menuID == 1 && response.roleAction?.first?.canAction == 1 {
-                        kSharedUserDefaults.setSubAdminActionDashboardAccess(hasActionDashboardAccess: true)
+                if response.isBlock == 1 {
+                    kSharedSceneDelegate.navigateToLoginVC()
+                } else {
+                    self.userProfile = response
+                    self.populateData(data: response)
+                    if response.roleAction?.first?.menuID == 1 {
+                        kSharedUserDefaults.setSubAdminUserHasDashboardAccess(hasDashboardAccess: true)
+                        if response.roleAction?.first?.menuID == 1 && response.roleAction?.first?.canAction == 1 {
+                            kSharedUserDefaults.setSubAdminActionDashboardAccess(hasActionDashboardAccess: true)
+                        }
+                    } else if response.roleAction?.first?.menuID != 1 {
+                        kSharedUserDefaults.setSubAdminUserHasDashboardAccess(hasDashboardAccess: false)
+                        kSharedUserDefaults.setSubAdminActionDashboardAccess(hasActionDashboardAccess: false)
                     }
-                } else if response.roleAction?.first?.menuID != 1 {
-                    kSharedUserDefaults.setSubAdminUserHasDashboardAccess(hasDashboardAccess: false)
-                    kSharedUserDefaults.setSubAdminActionDashboardAccess(hasActionDashboardAccess: false)
                 }
             }
         })

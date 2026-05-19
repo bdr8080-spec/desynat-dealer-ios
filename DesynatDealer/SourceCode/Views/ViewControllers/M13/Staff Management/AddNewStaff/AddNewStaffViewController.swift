@@ -32,7 +32,7 @@ class AddNewStaffViewController: UIViewController {
     @IBOutlet weak var addNewStaffView: CustomView!
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var fullNameInArabicTF: UITextField!
+    @IBOutlet weak var fullNameInArabicTF: ArabicTextField!
     @IBOutlet weak var fullNameInEnglishTF: UITextField!
     @IBOutlet weak var countryCodeTF: UITextField!
     @IBOutlet weak var emailTF: UITextField!

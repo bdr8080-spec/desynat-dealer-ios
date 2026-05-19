@@ -73,8 +73,15 @@ class SupportViewController: UIViewController {
         let vc = RaiseTicketViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
         vc.isTicketRaised = { [weak self] in
             guard let self else { return }
-            viewModel.currentPage = 1
-            viewModel.getAllTicketListRequest()
+            DispatchQueue.main.async { [self] in
+                let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
+                vc.comingReason = .ticketRaised
+                vc.callBackDismiss = {
+                    self.viewModel.currentPage = 1
+                    self.viewModel.getAllTicketListRequest()
+                }
+                self.navigationController?.present(vc, animated: true)
+            }
         }
         self.present(vc, animated: true)
     }

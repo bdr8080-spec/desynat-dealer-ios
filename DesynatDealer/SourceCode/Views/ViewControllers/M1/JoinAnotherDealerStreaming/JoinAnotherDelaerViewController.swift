@@ -250,14 +250,6 @@ extension JoinAnotherDelaerViewController: AgoraRtcEngineDelegate {
         }
     }
     
-//    func rtcEngine(_ engine: AgoraRtcEngineKit, reportRtcStats stats: AgoraChannelStats) {
-//            let totalUsers = Int(stats.userCount)
-//            DispatchQueue.main.async {
-//                self.lblUserCount.text = "Total Users: \(totalUsers)"
-//                print("👥 Total users in channel: \(totalUsers)")  // Optional log
-//            }
-//        }
-    
     func rtcEngine(_ engine: AgoraRtcEngineKit, didOccurError errorCode: AgoraErrorCode) {
         print("❌ Agora Error: \(errorCode.rawValue)")
         self.lblWaiting.isHidden = false

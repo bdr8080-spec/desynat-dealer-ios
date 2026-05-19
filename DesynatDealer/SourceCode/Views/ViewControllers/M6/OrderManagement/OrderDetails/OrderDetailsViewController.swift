@@ -161,7 +161,7 @@ class OrderDetailsViewController: UIViewController {
         let formattedDate = formatDateString(data.order?.updatedAt ?? "") ?? ""
         dateAndTimeLabel.text = formattedDate
         if data.orderType == "1" {
-            orderTypeLabel.text = "Normal".localiz()
+            orderTypeLabel.text = "Normal Order".localiz()
             customDetailsView.isHidden = true
             customOrderView.isHidden = true
         } else {
@@ -173,6 +173,7 @@ class OrderDetailsViewController: UIViewController {
         userNameLabel.text = data.order?.userDetails?.fullName
         phoneumberLabel.text = "\(data.order?.userDetails?.countryCode ?? "") \(data.order?.userDetails?.mobile ?? "")"
         emailIdLabel.text = data.order?.userDetails?.email
+        transcationIdLabel.text = "#\(data.order?.transactionID ?? "0")"
         if let imageUrlString = data.order?.userDetails?.profileImage,
            let url = URL(string: imageUrlString) {
             userProfileImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
@@ -193,10 +194,10 @@ class OrderDetailsViewController: UIViewController {
         let paymentMethod = data.order?.paymentMethod ?? "1"
         switch paymentMethod {
         case "1":
-            paidByLabel.text = "Online".localiz()
+            paidByLabel.text = "By Card".localiz()
             transactionStackView.isHidden = false
         case "2":
-            paidByLabel.text = "Wallet".localiz()
+            paidByLabel.text = "By Wallet".localiz()
             transactionStackView.isHidden = false
         default:
             paidByLabel.text = "Via COD".localiz()
@@ -330,7 +331,7 @@ class OrderDetailsViewController: UIViewController {
                     
                 case "1": //Pending
                     orderStatusLabel.text = "Confirmed".localiz()
-                    orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
+                    orderStatusLabel.textColor = UIColor(hex: "#16B364")
                     updateStatusView.isHidden = !hasActionPermission
                     statusView.isHidden = !hasActionPermission
                     
@@ -454,7 +455,7 @@ class OrderDetailsViewController: UIViewController {
                     }
                 case "1": //Pending
                     orderStatusLabel.text = "Confirmed".localiz()
-                    orderStatusLabel.textColor = UIColor(hex: "#FF5F1B")
+                    orderStatusLabel.textColor = UIColor(hex: "#16B364")
                     updateStatusView.isHidden = !hasActionPermission
                     statusView.isHidden = !hasActionPermission
                     

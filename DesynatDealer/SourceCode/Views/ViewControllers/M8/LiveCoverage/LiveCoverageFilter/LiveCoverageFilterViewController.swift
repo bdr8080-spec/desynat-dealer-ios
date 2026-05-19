@@ -28,6 +28,7 @@ class LiveCoverageFilterViewController: UIViewController, UITextFieldDelegate {
     weak var delegate: LiveCoverageFilterDelegate?
     var appliedFilter: LiveCoverageFilterModel?
     private var filterArray = ["Pending", "Completed", "Cancelled", "Rejected"]
+    
     var selcetedStatusIndex: Int = -1
     
     override func viewDidLoad() {

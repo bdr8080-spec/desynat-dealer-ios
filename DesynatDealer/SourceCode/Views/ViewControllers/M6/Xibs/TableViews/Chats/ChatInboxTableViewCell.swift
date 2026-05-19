@@ -37,7 +37,7 @@ class ChatInboxTableViewCell: UITableViewCell {
             userProfileImageView.image = UIImage(named: "userProfile")
         }
         usernameLabel.text = data?.userDetails?.fullName
-        timeLabel.text = formattedChatTime(from: data?.updatedAt ?? "")
+        timeLabel.text = data?.lastChatTime ?? formattedChatTime(from: data?.updatedAt ?? "")
         let messageType = data?.type ?? "1"
         let msgType = data?.messageType ?? "0"
         let unreadMesageCount = data?.unreadCount ?? 0
@@ -72,6 +72,11 @@ class ChatInboxTableViewCell: UITableViewCell {
                 messageTypeLabel.textColor = UIColor(hex: "#172B85") // dark blue
                 messageTypeStatusView.backgroundColor = UIColor(hex: "#172B85")?.withAlphaComponent(0.08)
                 
+            case "4": // Rejected
+                messageTypeLabel.text = "Quotation Rejected".localiz()
+                messageTypeLabel.textColor = UIColor(hex: "E80B26") // dark red
+                messageTypeStatusView.backgroundColor = UIColor(hex: "#E80B26")?.withAlphaComponent(0.08)
+                
             case "5":
                 messageTypeLabel.text = "Quotation Accepted".localiz()
                 messageTypeLabel.textColor = UIColor(hex: "#16B364") // green
@@ -87,47 +92,6 @@ class ChatInboxTableViewCell: UITableViewCell {
             }
         }
     }
-    
-//    func formattedChatTime(from isoString: String) -> String {
-//        
-//        // Parse ISO string
-//        let isoFormatter = ISO8601DateFormatter()
-//        isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-//        
-//        guard let date = isoFormatter.date(from: isoString) else {
-//            return ""
-//        }
-//        
-//        let calendar = Calendar.current
-//        //      let now = Date()
-//        
-//        // Time formatter
-//        let timeFormatter = DateFormatter()
-//        timeFormatter.locale = Locale.current
-//        timeFormatter.timeZone = .current
-//        timeFormatter.dateFormat = "h:mm a"
-//        
-//        // Date formatter (fallback)
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.locale = Locale.current
-//        dateFormatter.timeZone = .current
-//        dateFormatter.dateFormat = "dd/MM/yy, h:mm a"
-//        
-//        // Today
-//        if calendar.isDateInToday(date) {
-//            let text = "Today".localiz()
-//            return "\(text) \(timeFormatter.string(from: date))"
-//        }
-//        
-//        // Yesterday
-//        if calendar.isDateInYesterday(date) {
-//            let text = "Yesterday".localiz()
-//            return "\(text) \(timeFormatter.string(from: date))"
-//        }
-//        
-//        // Older dates
-//        return dateFormatter.string(from: date)
-//    }
     
     func formattedChatTime(from isoString: String) -> String {
         

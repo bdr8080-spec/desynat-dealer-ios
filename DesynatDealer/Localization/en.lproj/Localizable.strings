@@ -315,7 +315,7 @@
 "To" = "To";
 "Banner position" = "Banner Position";
 "-" = "-";
-"From // //" = "From (DD/MM/YYYY)";
+//"From // //" = "From (DD/MM/YYYY)";
 "Active" = "Active";
 "Confirmed" = "Confirmed";
 "Filter by Date" = "Filter by Date";
@@ -336,7 +336,7 @@
 "Pending" = "Pending";
 "Banner Management" = "Banner Management";
 "Select banner position" = "Select Banner Position";
-"From // //" = "From (DD/MM/YYYY)";
+//"From // //" = "From (DD/MM/YYYY)";
 "Button" = "Button";
 "Select Category" = "Select Category";
 "Total Days" = "Total Days";
@@ -474,7 +474,7 @@
 "Search" = "Search";
 "-" = "-";
 "Type here..." = "Type here...";
-"no deals found" = "no deals found";
+"No deals found" = "No deals found";
 "Discount" = "Discount";
 "Requested on" = "Requested on";
 "Customer Rating" = "Customer Rating";
@@ -523,7 +523,7 @@
 "Confirm & Send " = "Confirm & Send ";
 
 "Details" = "Details";
-"no data found" = "no data found";
+"No data found" = "No data found";
 "Enter password " = "Enter password ";
 "Save" = "Save";
 "Ticket Id" = "Ticket Id";
@@ -697,7 +697,7 @@
 "Send Request" = "Send Request";
 "IBAN" = "IBAN";
 "Clear" = "Clear";
-"no data found" = "no data found";
+"No data found" = "No data found";
 "Live Coverage" = "Live Coverage";
 "Submit" = "Submit";
 "Address Line 1" = "Address Line 1";
@@ -712,7 +712,7 @@
 "Enter SWIFT/BIC" = "Enter SWIFT/BIC";
 "View Profile" = "View Profile";
 "Apply" = "Apply";
-"no request found" = "no request found";
+"No request found" = "No request found";
 "Upload Reel" = "Upload Reel";
 "First Name" = "First Name";
 "no slots found" = "no slots found";
@@ -768,3 +768,18 @@
 "Upload proof of account" = "Upload proof of account";
 "(Bank Statement or Bank Letter,PDF/JPG/PNG ≤ 5MB)" = "(Bank Statement or Bank Letter,PDF/JPG/PNG ≤ 5MB)";
 "Please wait for 3-4 hrs. \n\nThank\nyou for your patience. Team Desynat App" = "Please wait for 3-4 hrs. \n\nThank\nyou for your patience. Team Desynat App";
+"Upload Profile Images" = "Upload Profile Images";
+"Mobile number must be between 6 and 15 digits" = "Mobile number must be between 6 and 15 digits";
+"Staff is added\nsuccessfully" = "Staff is added\nsuccessfully";
+"Staff is updated successfully" = "Staff is updated successfully";
+"Staff has been active successfully" = "Staff has been active successfully";
+"Staff has been inactive successfully" = "Staff has been inactive successfully";
+"Total Refunds" = "Total Refunds";
+"In Progress" = "In Progress";
+"Ticket is raised\nsuccessfully" = "Ticket is raised\nsuccessfully";
+"Please select From Date first" = "Please select From Date first";
+"Normal Order" = "Normal Order";
+"By Card" = "By Card";
+"By Wallet" = "By Wallet";
+"Via COD" = "Via COD";
+"Quotation Rejected" = "Quotation Rejected";

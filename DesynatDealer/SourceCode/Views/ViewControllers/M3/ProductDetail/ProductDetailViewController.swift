@@ -174,6 +174,17 @@ class ProductDetailViewController: UIViewController {
         self.navigationController?.present(nextVC, animated: true)
     }
     
+    @IBAction func shareDidTapped(_ sender: Any) {
+//        ShareUtility.shareProduct(
+//            image: cell.mainImageView.image,
+//            imageURL: data.productVariants?.first?.variantImage?.first,
+//            title: data.productNameEn ?? "",
+//            description: data.descriptionEn ?? "",
+//            link: "https://desynat.com/api/user/product/detail-page/\(data.id ?? 0)",
+//            from: self
+//        )
+    }
+    
     func configData(data: ProductsList) {
         // MARK: - Basic Product info
         if AppLanguageManager.shared.currentLanguage == .ar {
@@ -230,9 +241,11 @@ class ProductDetailViewController: UIViewController {
         // Status
         if data.productActiveStatus == 1 {
             statusLabel.text = "Active".localiz()
+            statusLabel.textColor = UIColor(hex: "1A900D")
             statusButton.setImage(UIImage(named: "toggle_on"), for: .normal)
         } else {
             statusLabel.text = "Inactive".localiz()
+            statusLabel.textColor = UIColor(hex: "E80B26")
             statusButton.setImage(UIImage(named: "toggle_off"), for: .normal)
         }
         
@@ -244,7 +257,7 @@ class ProductDetailViewController: UIViewController {
         ratingReviewALlowedLabel.text = data.reviewRating == "1" ? "Yes".localiz() : "No".localiz()
         let text1 = "days".localiz()
         returnAllowedLAbel.text = data.productReturn == "1" ? "\(data.returnDays ?? "") \(text1)" : "No".localiz()
-        exchnageAllowedLAbel.text = data.productExchangable == "1" ? "\(data.exchangableDays ?? "") \(text)" : "No".localiz()
+        exchnageAllowedLAbel.text = data.productExchangable == "1" ? "\(data.exchangableDays ?? "") \(text1)" : "No".localiz()
         
         // In configData
         productVariants = data.productVariants ?? []

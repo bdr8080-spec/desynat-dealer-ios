@@ -174,7 +174,6 @@ class ChatViewController: UIViewController {
             totalAmountLabel.text = CommonUtils.formatPriceStringInput(quotationData?.totalAmount)
             switch actiontype {
             case "0":
-//                print("just normal chat")
                 if let customDetails = quotationData?.customDetails,
                    !customDetails.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
                    customDetails.lowercased() != "null" {
@@ -196,6 +195,11 @@ class ChatViewController: UIViewController {
                 viewRequestButonOutlet.isHidden = false
                 priceDetailsView.isHidden = false
                 sendQuotationButtonLabel.text = "Modify Quotation".localiz()
+            case "4": //Reject quotation by user
+                productDetailsView.isHidden = true
+                viewRequestButonOutlet.isHidden = false
+                priceDetailsView.isHidden = false
+                sendQuotationView.isHidden = true
             case "5":
                 productTableView.isHidden = false
                 requetsStackView.isHidden = false
@@ -296,7 +300,11 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.lblStatus.isHidden = false
                 cell.lblStatus.text = "Pending".localiz()
                 cell.lblStatus.textColor = UIColor(hexString: "#FF5F1B")
-            } else if actionType == "5" {
+            } else if actionType == "4" {
+                cell.lblStatus.isHidden = false
+                cell.lblStatus.text = "Rejected".localiz()
+                cell.lblStatus.textColor = UIColor(hex: "E80B26")
+            }else if actionType == "5" {
                 cell.lblStatus.isHidden = false
                 cell.lblStatus.text = "Accepted".localiz()
                 cell.lblStatus.textColor = UIColor(hexString: "#68CA44")

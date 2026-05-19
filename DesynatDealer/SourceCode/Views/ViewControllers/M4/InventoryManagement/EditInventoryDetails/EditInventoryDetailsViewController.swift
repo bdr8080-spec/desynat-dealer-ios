@@ -100,16 +100,6 @@ class EditInventoryDetailsViewController: UIViewController {
         guard let data = data else { return }
         
         // MARK: - Basic Product info
-//        if data.brand?.nameEnglish == "Other" {
-//            productNameLabel.text = data.otherEn
-//            titlePageLabel.text = data.otherEn
-//        } else {
-//            productNameLabel.text = data.brand?.nameEnglish
-//            titlePageLabel.text = data.brand?.nameEnglish
-//        }
-//        
-//        descriptionLAbel.text = data.productNameEn ?? "-"
-        
         if AppLanguageManager.shared.currentLanguage == .ar {
             if data.brand?.nameEnglish == "Other".localiz() {
                 productNameLabel.text = data.otherAr
@@ -137,9 +127,11 @@ class EditInventoryDetailsViewController: UIViewController {
         // Status
         if data.productActiveStatus == 1 {
             statusLabel.text = "Active".localiz()
+            statusLabel.textColor = UIColor(hex: "1A900D")
             statusButton.setImage(UIImage(named: "toggle_on"), for: .normal)
         } else {
             statusLabel.text = "Inactive".localiz()
+            statusLabel.textColor = UIColor(hex: "E80B26")
             statusButton.setImage(UIImage(named: "toggle_off"), for: .normal)
         }
         

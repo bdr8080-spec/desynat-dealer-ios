@@ -132,16 +132,20 @@ class HomeViewModel {
         WebService.sharedInstance.getSingleStaffDetailService(param, completion: { [weak self] response in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                if let storeImageUrl = response.profilePic,
-                   let url = URL(string: storeImageUrl) {
-                    self.hostVC.userProfileImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-                    self.hostVC.userProfileImageView.sd_imageIndicator?.startAnimatingIndicator()
-                    self.hostVC.userProfileImageView.sd_setImage(with: url, placeholderImage: .userProfile)
-                }
-                if response.roleAction?.first?.menuID == 1 && response.roleAction?.first?.canAction == 1 {
-                    self.hostVC.btnToggle.isUserInteractionEnabled = true
+                if response.isBlock == 1 {
+                    kSharedSceneDelegate.navigateToLoginVC()
                 } else {
-                    self.hostVC.btnToggle.isUserInteractionEnabled = false
+                    if let storeImageUrl = response.profilePic,
+                       let url = URL(string: storeImageUrl) {
+                        self.hostVC.userProfileImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                        self.hostVC.userProfileImageView.sd_imageIndicator?.startAnimatingIndicator()
+                        self.hostVC.userProfileImageView.sd_setImage(with: url, placeholderImage: .userProfile)
+                    }
+                    if response.roleAction?.first?.menuID == 1 && response.roleAction?.first?.canAction == 1 {
+                        self.hostVC.btnToggle.isUserInteractionEnabled = true
+                    } else {
+                        self.hostVC.btnToggle.isUserInteractionEnabled = false
+                    }
                 }
             }
         })

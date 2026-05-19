@@ -170,15 +170,33 @@ fileprivate extension UIView {
             txtf.text = txtf.text?.localiz()
             txtf.placeholder = txtf.placeholder?.localiz()
             txtf.textAlignment = txtf.textAlignment == .center ? .center : AppLanguageManager.shared.isRightToLeft ? .right : .left
+//        case let lbl as UILabel:
+//            lbl.text = lbl.text?.localiz()
+//            lbl.textAlignment = lbl.textAlignment == .center ? .center : AppLanguageManager.shared.isRightToLeft ? .right : .left
+//            if let text = lbl.attributedText {
+//                let mutable = NSMutableAttributedString(string: text.string.localiz())
+//                text.enumerateAttributes(in: NSRange(location: 0, length: text.length), options: []) { attrs, range, _ in
+//                    let safeRange = NSRange(location: 0, length: min(range.length, mutable.length))
+//                    mutable.addAttributes(attrs, range: safeRange)
+//                }
+//                lbl.attributedText = mutable
+//            }
         case let lbl as UILabel:
             lbl.text = lbl.text?.localiz()
-            lbl.textAlignment = lbl.textAlignment == .center ? .center : AppLanguageManager.shared.isRightToLeft ? .right : .left
+            
+            if AppLanguageManager.shared.isRightToLeft {
+                lbl.textAlignment = lbl.textAlignment == .center ? .center : .right
+            }
+            
             if let text = lbl.attributedText {
                 let mutable = NSMutableAttributedString(string: text.string.localiz())
+                
                 text.enumerateAttributes(in: NSRange(location: 0, length: text.length), options: []) { attrs, range, _ in
-                    let safeRange = NSRange(location: 0, length: min(range.length, mutable.length))
+                    let safeRange = NSRange(location: range.location,
+                                            length: min(range.length, mutable.length - range.location))
                     mutable.addAttributes(attrs, range: safeRange)
                 }
+                
                 lbl.attributedText = mutable
             }
         case let img as UIImageView:

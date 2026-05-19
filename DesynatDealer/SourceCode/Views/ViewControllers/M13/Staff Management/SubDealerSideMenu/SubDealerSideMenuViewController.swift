@@ -27,7 +27,6 @@ class SubDealerSideMenuViewController: UIViewController {
         return viewModel.userProfile?.roleAction?
             .filter {
                 let id = $0.sellermenu?.first?.id ?? 0
-//                return ![1, 2, 6, 8].contains(id)
                 return ![1].contains(id)
             } ?? []
     }

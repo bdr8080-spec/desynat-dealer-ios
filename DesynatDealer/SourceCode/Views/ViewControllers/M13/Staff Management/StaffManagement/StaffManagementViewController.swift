@@ -44,34 +44,59 @@ class StaffManagementViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    @IBAction func filterDidTapped(_ sender: Any) {
+        let vc = StaffManagementFilterViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+        
+        vc.selectedFilter = viewModel.appliedFilter
+        
+        vc.onApplyFilter = { [weak self] filter in
+            guard let self = self else { return }
+            
+            self.viewModel.appliedFilter = filter
+            self.viewModel.currentPage = 1
+            self.viewModel.hasMoreData = true
+            self.viewModel.getAllStaffList()
+        }
+        
+        vc.onClearFilter = { [weak self] in
+            guard let self = self else { return }
+            
+            self.viewModel.appliedFilter = StaffListFilterModel()
+            self.viewModel.currentPage = 1
+            self.viewModel.hasMoreData = true
+            self.viewModel.getAllStaffList()
+        }
+        navigationController?.present(vc, animated: false)
+    }
+    
     private func toggleReasonStatus(at indexPath: IndexPath) {
+        
+        let selectedStaff = viewModel.staffList[indexPath.row]
+        let params: [String: Any] = ["id": selectedStaff.id ?? 0]
+        
+        viewModel.updateActiveStatus(param: params) { [weak self] success in
+            guard let self = self else { return }
             
-            let selectedStaff = viewModel.staffList[indexPath.row]
-            let params: [String: Any] = ["id": selectedStaff.id ?? 0]
-            
-            viewModel.updateActiveStatus(param: params) { [weak self] success in
-                guard let self = self else { return }
+            if success {
                 
-                if success {
+                // Update main array data source
+                let currentStatus = self.viewModel.staffList[indexPath.row].isBlock ?? 0
+                self.viewModel.staffList[indexPath.row].isBlock = currentStatus == 0 ? 1 : 0
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadRows(at: [indexPath], with: .none)
                     
-                    // Update main array data source
-                    let currentStatus = self.viewModel.staffList[indexPath.row].isBlock ?? 0
-                    self.viewModel.staffList[indexPath.row].isBlock = currentStatus == 0 ? 1 : 0
+                    let updatedStatus = self.viewModel.staffList[indexPath.row].isBlock ?? 0
                     
-                    DispatchQueue.main.async {
-                        self.tableView.reloadRows(at: [indexPath], with: .none)
-                        
-                        let updatedStatus = self.viewModel.staffList[indexPath.row].isBlock ?? 0
-                        
-                        let msg = updatedStatus == 0
-                        ? "Staff has been unblocked successfully".localiz()
-                        : "Staff has been blocked successfully".localiz()
-                        
-                        CommonUtils.showToast(message: msg)
-                    }
+                    let msg = updatedStatus == 0
+                    ? "Staff has been active successfully".localiz()
+                    : "Staff has been inactive successfully".localiz()
+                    
+                    CommonUtils.showToast(message: msg)
                 }
             }
-        }}
+        }
+    }}
 
 extension StaffManagementViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -83,8 +108,8 @@ extension StaffManagementViewController: UITableViewDelegate, UITableViewDataSou
         let cell: StaffManagementTableViewCell = tableView.dequeueReusableCell(withIdentifier: "StaffManagementTableViewCell", for: indexPath) as! StaffManagementTableViewCell
         cell.cellSetup(viewModel.staffList[indexPath.row], hasActionPermission: hasActionPermission)
         cell.isStatusToggled = { [weak self] in
-                    self?.toggleReasonStatus(at: indexPath)
-                }
+            self?.toggleReasonStatus(at: indexPath)
+        }
         cell.isEditTapped = { [weak self] in
             guard let self = self else { return }
             let vc = StaffDetailsViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
@@ -116,12 +141,12 @@ extension StaffManagementViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if !hasActionPermission {
-            let vc = StaffDetailsViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
-            vc.staffID = viewModel.staffList[indexPath.row].id
-            vc.hasActionPermission = hasActionPermission
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
+        //        if !hasActionPermission {
+        let vc = StaffDetailsViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+        vc.staffID = viewModel.staffList[indexPath.row].id
+        vc.hasActionPermission = hasActionPermission
+        self.navigationController?.pushViewController(vc, animated: true)
+        //        }
         
     }
     

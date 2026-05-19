@@ -736,7 +736,7 @@
 "Set Commission % for affiliated  customer" = "تحديد نسبة العمولة للعميل التابع";
 "Enrolled" = "مشترك";
 "Listed Deals" = "العروض المدرجة";
-"no deals found" = "لا توجد عروض";
+"No deals found" = "لا توجد عروض";
 "Contact" = "اتصل بنا";
 "Ticket Management" = "إدارة التذاكر";
 "Chat on Whatsapp" = "الدردشة عبر واتساب";
@@ -959,7 +959,7 @@
 "No Chat found" = "لم يتم العثور على محادثات";
 "no deals found" = "لم يتم العثور على عروض";
 "no product found" = "لم يتم العثور على منتجات";
-"no request found" = "لم يتم العثور على طلبات";
+"No request found" = "لم يتم العثور على طلبات";
 "no slots found" = "لم يتم العثور على مواعيد";
 "Document" = "مستند";
 
@@ -1029,3 +1029,18 @@
 "S" = "ص";
 "Write caption here..." = "اكتب التسمية هنا...";
 "My Profile (view reels)" = "ملفي الشخصي (عرض الريلز)";
+"Upload Profile Images" = "تحميل صور الملف الشخصي";
+"Mobile number must be between 6 and 15 digits" = "يجب أن يكون رقم الجوال بين 6 و15 رقمًا";
+"Staff is added\nsuccessfully" = "تمت إضافة الموظف\nبنجاح";
+"Staff is updated successfully" = "تم تحديث بيانات الموظف بنجاح";
+"Staff has been active successfully" = "تم تفعيل الموظف بنجاح";
+"Staff has been inactive successfully" = "تم تعطيل الموظف بنجاح";
+"Total Refunds" = "إجمالي المبالغ المستردة";
+"In Progress" = "قيد التنفيذ";
+"Ticket is raised\nsuccessfully" = "تم إنشاء التذكرة\nبنجاح";
+"Select Product" = "اختر المنتج";
+"Please select From Date first" = "يرجى تحديد تاريخ البداية أولاً";
+"Normal Order" = "طلب عادي";
+"By Card" = "عن طريق البطاقة";
+"By Wallet" = "عن طريق المحفظة";
+"Quotation Rejected" = "تم رفض عرض السعر";
