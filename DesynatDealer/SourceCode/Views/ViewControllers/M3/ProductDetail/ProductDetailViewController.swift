@@ -175,14 +175,18 @@ class ProductDetailViewController: UIViewController {
     }
     
     @IBAction func shareDidTapped(_ sender: Any) {
-//        ShareUtility.shareProduct(
-//            image: cell.mainImageView.image,
-//            imageURL: data.productVariants?.first?.variantImage?.first,
-//            title: data.productNameEn ?? "",
-//            description: data.descriptionEn ?? "",
-//            link: "https://desynat.com/api/user/product/detail-page/\(data.id ?? 0)",
-//            from: self
-//        )
+        var selectedImage: UIImage?
+        if let visibleCell = productImageCollectionView.visibleCells.first as? ProductDetailImageCollectionViewCell {
+            selectedImage = visibleCell.mainImageView.image
+        }
+        ShareUtility.shareProduct(
+            image: selectedImage,
+            imageURL: viewModel.productDetails?.productVariants?.first?.variantImage?.first,
+            title: viewModel.productDetails?.productNameEn ?? "",
+            description: viewModel.productDetails?.descriptionEn ?? "",
+            link: "https://desynat.com/api/user/product/detail-page/\(viewModel.productDetails?.id ?? 0)",
+            from: self
+        )
     }
     
     func configData(data: ProductsList) {
@@ -322,6 +326,7 @@ class ProductDetailViewController: UIViewController {
         } ?? []
         specificationTableView.reloadData()
         specificationTableViewHieghtConstraint.constant = specificationTableView.contentSize.height
+        
     }
     
     func updateVariantUI(updateImages: Bool = true) {
@@ -343,7 +348,7 @@ class ProductDetailViewController: UIViewController {
         //    } else {
         //      discountPriceALbel.text = "\(variant.discountValue ?? "") KD Off"
         //    }
-//        let text = "KD".localiz()
+        //        let text = "KD".localiz()
         finalPriceLabel.text = CommonUtils.formatPriceStringInput(variant.finalPrice ?? "0")
         CommonUtils.setStrikethrough(label: actualPriceLAbel, text: CommonUtils.formatPriceStringInput(variant.actualPrice ?? "0"))
         
@@ -380,7 +385,7 @@ class ProductDetailViewController: UIViewController {
             sizeCollectionView.reloadData()
         }
     }
-
+    
     func convertDate(_ input: String) -> String {
         let inputFormatter = DateFormatter()
         inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ"
@@ -562,7 +567,7 @@ extension ProductDetailViewController: UITableViewDataSource, UITableViewDelegat
         case specificationTableView:
             return speifcationArray.count
         case ratingsTableView:
-            return 2
+            return viewModel.productDetails?.review?.count ?? 0
         default:
             return 0
         }
@@ -577,6 +582,8 @@ extension ProductDetailViewController: UITableViewDataSource, UITableViewDelegat
             return cell
         case ratingsTableView:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProductRatingTableViewCell", for: indexPath) as! ProductRatingTableViewCell
+            let data = viewModel.productDetails?.review?[indexPath.row]
+            cell.configData(data: data)
             return cell
         default:
             return UITableViewCell()
@@ -595,5 +602,4 @@ extension ProductDetailViewController: UITableViewDataSource, UITableViewDelegat
             return UITableView.automaticDimension
         }
     }
-    
 }

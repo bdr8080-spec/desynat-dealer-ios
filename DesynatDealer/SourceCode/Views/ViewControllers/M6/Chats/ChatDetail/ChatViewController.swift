@@ -58,11 +58,23 @@ class ChatViewController: UIViewController {
         viewModel.delegate = self
         IQKeyboardManager.shared.disabledDistanceHandlingClasses = [ChatViewController.self]
         viewModel.readChatMessagesRequest()
-        self.viewModel.callBackRefresh = {
+//        self.viewModel.callBackRefresh = {
+//            self.handleUIUpdate()
+//            self.baseScrollView.setNeedsDisplay()
+//        }
+        self.viewModel.callBackRefresh = { [weak self] in
+            guard let self = self else { return }
             self.handleUIUpdate()
-            self.baseScrollView.setNeedsDisplay()
+            self.baseScrollView.layoutIfNeeded()
+            self.chatTableView.layoutIfNeeded()
+            self.scrollToBottom(animated: false)  // initial load without animation
         }
     }
+    
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        scrollToBottom(animated: false)
+//    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -268,6 +280,15 @@ class ChatViewController: UIViewController {
         }
     }
     
+//    func getNewMsgHanlder(msg: Chat) {
+//        self.chatList.append(msg)
+//        DispatchQueue.main.async {
+//            self.chatTableView.reloadData()
+//            self.updateNoChatUI()
+//            self.scrollToBottom()
+//        }
+//    }
+    
     func getNewMsgHanlder(msg: Chat) {
         self.chatList.append(msg)
         DispatchQueue.main.async {
@@ -343,23 +364,53 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+//    func scrollToBottom(animated: Bool = true) {
+//        DispatchQueue.main.async {
+//            let contentHeight = self.baseScrollView.contentSize.height
+//            let scrollViewHeight = self.baseScrollView.bounds.height
+//            let bottomInset = self.baseScrollView.contentInset.bottom
+//            let yOffset = max(0, contentHeight - scrollViewHeight + bottomInset)
+//            self.baseScrollView.setContentOffset(CGPoint(x: 0, y: yOffset), animated: animated)
+//        }
+//    }
+    
     func scrollToBottom(animated: Bool = true) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            guard let self = self else { return }
+            
+            // Force layout pass so contentSize is updated
+            self.baseScrollView.layoutIfNeeded()
+            self.chatTableView.layoutIfNeeded()
+            
             let contentHeight = self.baseScrollView.contentSize.height
             let scrollViewHeight = self.baseScrollView.bounds.height
             let bottomInset = self.baseScrollView.contentInset.bottom
-            let yOffset = max(0, contentHeight - scrollViewHeight + bottomInset)
-            self.baseScrollView.setContentOffset(CGPoint(x: 0, y: yOffset), animated: animated)
+            
+            let targetOffsetY = max(0, contentHeight - scrollViewHeight + bottomInset)
+            
+            self.baseScrollView.setContentOffset(
+                CGPoint(x: 0, y: targetOffsetY),
+                animated: animated
+            )
         }
     }
 }
 
 extension ChatViewController : ChatViewModelDelegate {
     
+//    func getAllMsg(list: [Chat]) {
+//        chatList = list
+//        chatTableView.reloadData()
+//        updateNoChatUI()
+//        scrollToBottom()
+//    }
+    
     func getAllMsg(list: [Chat]) {
         chatList = list
         chatTableView.reloadData()
         updateNoChatUI()
+        
+        // Small delay + layoutIfNeeded
         scrollToBottom()
     }
 }

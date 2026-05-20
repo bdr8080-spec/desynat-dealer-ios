@@ -51,7 +51,7 @@ class RefundManagementViewModel {
         
         if let status = filter.refundStatus,
            status.rawValue > -1 {
-            params["filter"] = status.rawValue + 1
+            params["filter"] = status.rawValue
         }
         
         WebService.sharedInstance.getRefundManagementRequest(param: params) { data in

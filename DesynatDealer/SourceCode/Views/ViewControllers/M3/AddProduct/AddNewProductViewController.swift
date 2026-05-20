@@ -37,11 +37,11 @@ class AddNewProductViewController: UIViewController {
     @IBOutlet weak var selectedBrandTF: UITextField!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var otherBrandEnglishTF: UITextField!
-    @IBOutlet weak var otherBrandArabicTF: UITextField!
+    @IBOutlet weak var otherBrandArabicTF: ArabicTextField!
     @IBOutlet weak var producNameEngTF: UITextField!
-    @IBOutlet weak var productNameArabicTF: UITextField!
+    @IBOutlet weak var productNameArabicTF: ArabicTextField!
     @IBOutlet weak var descriptionEngTextView: UITextView!
-    @IBOutlet weak var descriptionArabicTextView: UITextView!
+    @IBOutlet weak var descriptionArabicTextView: ArabicTextView!
     @IBOutlet weak var minCartQuantityTF: UITextField!
     @IBOutlet weak var maxCartQuantityTF: UITextField!
     @IBOutlet weak var totalDaysReturningTF: UITextField!

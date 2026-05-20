@@ -21,16 +21,14 @@ class ProfileViewController: UIViewController {
   @IBOutlet weak var lblAppVersion: UILabel!
   
   private var sideMenuData: [SideMenuModel] = [
-    SideMenuModel(title: "Inventory management", image: "inventory"),
-    SideMenuModel(title: "Affiliated Commission", image: "affiliated"),
-    SideMenuModel(title: "Banner management", image: "bannerMan"),
-    SideMenuModel(title: "Deals management", image: "dealsMan"),
-    SideMenuModel(title: "Live Coverage request", image: "liveCoverage"),
-    SideMenuModel(title: "Support", image: "support"),
-    SideMenuModel(title: "Refund management", image: "refundMan"),
-    
     SideMenuModel(title: "Staff management", image: "staffMan"),
     SideMenuModel(title: "Subscription Plans", image: "subscriptionPlan"),
+    SideMenuModel(title: "Banner management", image: "bannerMan"),
+    SideMenuModel(title: "Live Coverage request", image: "liveCoverage"),
+    SideMenuModel(title: "Deals management", image: "dealsMan"),
+    SideMenuModel(title: "Refund management", image: "refundMan"),
+    SideMenuModel(title: "Inventory management", image: "inventory"),
+    SideMenuModel(title: "Affiliated Commission", image: "affiliated"),
     SideMenuModel(title: "Terms & Condition", image: "termsCond"),
     SideMenuModel(title: "Return Policy", image: "returnPolicy"),
     SideMenuModel(title: "About Us", image: "aboutUS"),
@@ -38,7 +36,10 @@ class ProfileViewController: UIViewController {
     SideMenuModel(title: "Change Language", image: "chnageLangugae"),
     SideMenuModel(title: "Cancellation Policy", image: "cancellationPolicy"),
     SideMenuModel(title: "Exchange Policy", image: "exchnage"),
-    SideMenuModel(title: "Settings", image: "settings")]
+    SideMenuModel(title: "Support", image: "support"),
+    SideMenuModel(title: "Settings", image: "settings")
+  ]
+    
   
   private lazy var viewModel = ProfileViewModel(hostVC: self)
   

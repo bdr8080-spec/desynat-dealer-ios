@@ -360,7 +360,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="f1q-7w-OSV">
-                                                                <rect key="frame" x="0.0" y="63.333333333333364" width="325" height="19.66666666666665"/>
+                                                                <rect key="frame" x="0.0" y="63.333333333333364" width="325" height="19.666666666666664"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hip" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5me-1C-es8">
                                                                         <rect key="frame" x="0.0" y="0.0" width="157.66666666666666" height="19.666666666666668"/>
@@ -1072,7 +1072,7 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mFp-sb-DPS">
-                                <rect key="frame" x="0.0" y="183" width="393" height="601"/>
+                                <rect key="frame" x="0.0" y="183" width="393" height="600.99999999999955"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bpa-XX-MZG">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="2264.3333333333335"/>
@@ -1345,7 +1345,7 @@
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ppX-MY-341" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="25" width="165" height="50"/>
                                                                         <subviews>
-                                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Brand name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1ui-Go-Mip">
+                                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Brand name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1ui-Go-Mip" customClass="ArabicTextField" customModule="DesynatDealer" customModuleProvider="target">
                                                                                 <rect key="frame" x="20" y="5" width="130" height="40"/>
                                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                                 <textInputTraits key="textInputTraits"/>
@@ -1460,7 +1460,7 @@
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wpk-Vh-oX1" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="25" width="165" height="50"/>
                                                                         <subviews>
-                                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Product Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YkR-Kp-D11">
+                                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Product Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YkR-Kp-D11" customClass="ArabicTextField" customModule="DesynatDealer" customModuleProvider="target">
                                                                                 <rect key="frame" x="20" y="5" width="130" height="40"/>
                                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                                 <textInputTraits key="textInputTraits"/>
@@ -1587,7 +1587,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1i2-FN-JX7" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
                                                                 <rect key="frame" x="24" y="18" width="345" height="82"/>
                                                                 <subviews>
-                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Wt2-pc-8X0">
+                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Wt2-pc-8X0" customClass="ArabicTextView" customModule="DesynatDealer" customModuleProvider="target">
                                                                         <rect key="frame" x="20" y="5" width="305" height="72"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                         <color key="textColor" systemColor="labelColor"/>
@@ -2688,7 +2688,7 @@
                         <outlet property="addSpecificationButtonOutlet" destination="ZNJ-Vx-dJB" id="X5W-PZ-Zhq"/>
                         <outlet property="cancelView" destination="Ylx-LP-do2" id="gcv-hV-M3g"/>
                         <outlet property="categoriesCollectionView" destination="rUi-6t-hlR" id="H4J-0k-Bq0"/>
-                        <outlet property="descriptionArabicTextView" destination="Wt2-pc-8X0" id="7Sq-ME-u8u"/>
+                        <outlet property="descriptionArabicTextView" destination="Wt2-pc-8X0" id="SUl-ic-8tE"/>
                         <outlet property="descriptionEngTextView" destination="vDr-gj-0AQ" id="Fee-yn-ZT8"/>
                         <outlet property="exchagableDaysView" destination="1tN-m7-qMh" id="nBb-cG-SSy"/>
                         <outlet property="exchangableTF" destination="4s7-ty-gC5" id="pod-RU-8gu"/>
@@ -2703,11 +2703,11 @@
                         <outlet property="noREadyToShip" destination="JBj-zl-hfW" id="qOm-2E-lP7"/>
                         <outlet property="noRatingAllowed" destination="oxA-8J-QIO" id="vMs-5a-bnq"/>
                         <outlet property="noproductReturnButton" destination="bo9-fv-1ZI" id="F1O-Dj-7pj"/>
-                        <outlet property="otherBrandArabicTF" destination="1ui-Go-Mip" id="vZc-8Z-bEM"/>
+                        <outlet property="otherBrandArabicTF" destination="1ui-Go-Mip" id="Aiq-b8-JZX"/>
                         <outlet property="otherBrandEnglishTF" destination="QQQ-sw-fS5" id="MUW-Lp-ytQ"/>
                         <outlet property="otherStackView" destination="bjA-73-dfI" id="xp2-Od-U2D"/>
                         <outlet property="producNameEngTF" destination="KSJ-wI-Ew6" id="yGV-bu-V7i"/>
-                        <outlet property="productNameArabicTF" destination="YkR-Kp-D11" id="ax6-ra-5fp"/>
+                        <outlet property="productNameArabicTF" destination="YkR-Kp-D11" id="z8V-oY-7V8"/>
                         <outlet property="returnDayTF" destination="RRu-EJ-cic" id="TNn-Mk-7tW"/>
                         <outlet property="returningDaysView" destination="xqr-BH-3D5" id="auI-qW-Nhp"/>
                         <outlet property="selectedBrandTF" destination="ZbP-4O-Gdn" id="Edj-pC-OHa"/>

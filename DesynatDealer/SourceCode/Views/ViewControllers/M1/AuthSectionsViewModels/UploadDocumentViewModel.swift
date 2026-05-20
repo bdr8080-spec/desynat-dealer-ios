@@ -34,8 +34,12 @@ class UploadDocumentViewModel: NSObject {
             errorMessage = .UploadStoreDoc2
         } else if iban.isEmpty {
             errorMessage = .EnterIBAN
+        } else if !iban.isValidIBAN() {
+            errorMessage = .EnterValidIBAN
         } else if swiftCode.isEmpty {
             errorMessage = .EnterSWIFT
+        } else if !swiftCode.isValidIBAN() {
+            errorMessage = .EnterValidSwift
         } else if bankName.isEmpty {
             errorMessage = .EnterBankName
         } else if accountHolder.isEmpty {
@@ -44,13 +48,6 @@ class UploadDocumentViewModel: NSObject {
             errorMessage = .UploadAccountHolderImage
         }
         
-        // MARK: - Validate Account Selection
-//        if errorMessage == .none {
-//            if hostVC.personalAccountImage.image == nil && hostVC.businessAccountImage.image == nil {
-//                errorMessage = .SelectAccountType
-//            }
-//        }
-
         // MARK: - Show Alert if Needed
         if errorMessage != .none {
             hostVC.showAlert(msg: errorMessage.rawValue.localiz())
@@ -62,14 +59,9 @@ class UploadDocumentViewModel: NSObject {
     
     //Mark:->UploadDocumentApi
     func uploadDocumentApi(){
-        let owenerDocument:[String] = [
-            hostVC.imageOwnerDoc1,hostVC.imageOwnerDoc2
-        ]
         
-        let storeDocument:[String] = [
-            hostVC.imageStoreDoc1,hostVC.imageStoreDoc2
-        ]
-        
+        let owenerDocument:[String] = [hostVC.imageOwnerDoc1,hostVC.imageOwnerDoc2]
+        let storeDocument:[String] = [hostVC.imageStoreDoc1,hostVC.imageStoreDoc2]
         
         let param:[String:Any] = [
             APIKeys.userId:hostVC.userId,
@@ -80,8 +72,7 @@ class UploadDocumentViewModel: NSObject {
             APIKeys.swift:hostVC.swiftTextField.text ?? "",
             APIKeys.bankName:hostVC.bankNameTextField.text ?? "",
             APIKeys.accountHolderName:hostVC.accountHolderTextField.text ?? "",
-            APIKeys.uploadProof:hostVC.imageAccountHolderDoc
-        ]
+            APIKeys.uploadProof:hostVC.imageAccountHolderDoc]
         WebService.sharedInstance.uploadDocumentService(withParams:param) { user in
             let vc = SummaryViewController.instantiate(fromAppStoryboard: .Main)
             vc.userId = user.userID ?? ""

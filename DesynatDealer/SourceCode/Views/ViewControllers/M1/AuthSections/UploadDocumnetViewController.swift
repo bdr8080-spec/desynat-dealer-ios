@@ -179,24 +179,102 @@ extension UploadDocumnetViewController: UITextFieldDelegate {
             return string.rangeOfCharacter(from: allowedCharacterSet.inverted) == nil
         }
 
+//        if textField == ibanTextField {
+//            if string == " " {
+//                return false
+//            }
+//            if newText.count > 20 {
+//                return false
+//            }
+//            return true
+//        }
+//
+//        if textField == swiftTextField {
+//            if string == " " {
+//                return false
+//            }
+//            return true
+//        }
+        
         if textField == ibanTextField {
-            if string == " " {
+
+            let uppercasedString = string.uppercased()
+
+            let updatedText = (currentText as NSString)
+                .replacingCharacters(in: range, with: uppercasedString)
+
+            // No spaces
+            if uppercasedString.contains(" ") {
                 return false
             }
-            if newText.count > 20 {
+
+            // Only A-Z and 0-9
+            let regex = "^[A-Z0-9]*$"
+
+            if !NSPredicate(format: "SELF MATCHES %@", regex)
+                .evaluate(with: uppercasedString) {
                 return false
             }
-            return true
+
+            // Max length
+            if updatedText.count > 34 {
+                return false
+            }
+
+            // First 2 chars must be letters
+            if updatedText.count <= 2 {
+
+                let firstTwoRegex = "^[A-Z]*$"
+
+                if !NSPredicate(format: "SELF MATCHES %@", firstTwoRegex)
+                    .evaluate(with: uppercasedString) {
+                    return false
+                }
+            }
+
+            textField.text = updatedText.uppercased()
+
+            return false
         }
 
         if textField == swiftTextField {
-            if string == " " {
+
+            let uppercasedString = string.uppercased()
+
+            let updatedText = (currentText as NSString)
+                .replacingCharacters(in: range, with: uppercasedString)
+
+            // No spaces
+            if uppercasedString.contains(" ") {
                 return false
             }
-            return true
-        }
 
-        if newText.trimmingCharacters(in: .whitespaces).isEmpty && !newText.isEmpty {
+            // Only A-Z and 0-9
+            let regex = "^[A-Z0-9]*$"
+
+            if !NSPredicate(format: "SELF MATCHES %@", regex)
+                .evaluate(with: uppercasedString) {
+                return false
+            }
+
+            // Max length
+            if updatedText.count > 11 {
+                return false
+            }
+
+            // First 6 chars letters only
+            if updatedText.count <= 6 {
+
+                let firstSixRegex = "^[A-Z]*$"
+
+                if !NSPredicate(format: "SELF MATCHES %@", firstSixRegex)
+                    .evaluate(with: uppercasedString) {
+                    return false
+                }
+            }
+
+            textField.text = updatedText.uppercased()
+
             return false
         }
 

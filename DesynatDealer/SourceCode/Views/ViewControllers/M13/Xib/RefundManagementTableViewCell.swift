@@ -8,7 +8,7 @@
 import UIKit
 
 class RefundManagementTableViewCell: UITableViewCell {
-
+    
     //MARK: IBOutlet
     
     @IBOutlet weak var orderDateTimeLbl: UILabel!
@@ -22,28 +22,22 @@ class RefundManagementTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     func configData(data: RefundManagementList?) {
         let orderedOn = customizeChangeDateFormatZone(
             inputDate: data?.createdAt ?? "",
-            inputFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"//,
-//            outputFormat: "dd/MM/yyyy 'at' hh:mm a"
-        )
+            inputFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
         orderDateTimeLbl.text = orderedOn
         customerNameLbl.text = data?.order?.deliveryDetails?.name
         refundIdLbl.text = "#\(data?.id ?? 0)"
         totalAmountLbl.text = CommonUtils.formatPriceStringInput(data?.order?.totalAmount)
         let affiliateCommission = Double(data?.affiliateCommission ?? "0") ?? 0
         let adminCommission = Double(data?.adminCommission ?? "0") ?? 0
-
         let totalCommission = affiliateCommission + adminCommission
         totalCommisionLbl.text = CommonUtils.formatPrice(totalCommission)
         let paymentMethod = data?.order?.paymentMethod ?? "1"
@@ -78,31 +72,31 @@ class RefundManagementTableViewCell: UITableViewCell {
         inputDate: String,
         inputFormat: String = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'"
     ) -> String {
-
+        
         let inputFormatter = DateFormatter()
         inputFormatter.dateFormat = inputFormat
         inputFormatter.locale = Locale(identifier: "en_US_POSIX")
         inputFormatter.timeZone = TimeZone(secondsFromGMT: 0)
-
+        
         guard let date = inputFormatter.date(from: inputDate) else {
             print("❌ Parse failed: \(inputDate)")
             return ""
         }
-
+        
         let outputFormatter = DateFormatter()
         outputFormatter.locale = Locale(identifier: AppLanguageManager.shared.currentLanguage == .ar ? "ar" : "en_US_POSIX")
         outputFormatter.timeZone = TimeZone(identifier: "Asia/Kuwait")
-
+        
         if AppLanguageManager.shared.currentLanguage == .ar {
             // Arabic format
             outputFormatter.dateFormat = "dd/MM/yyyy hh:mm a"
             var result = outputFormatter.string(from: date)
-
+            
             // Replace AM/PM with Arabic equivalents
             result = result
                 .replacingOccurrences(of: "AM", with: "ص")
                 .replacingOccurrences(of: "PM", with: "م")
-
+            
             return result
         } else {
             // English format

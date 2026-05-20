@@ -135,7 +135,7 @@
 "+965" = "+965";
 "Bank Name" = "Bank Name";
 "Skip" = "Skip";
-"Please wait for 3-4 hrs. \n\nThank\nyou for your patience. Team Desynat App" = "Please wait for 3-4 hrs. \n\nThank\nyou for your patience. Team Desynat App";
+"Please wait for 3-4 hrs. \n\nThankyou\nfor your patience. Team Desynat App" = "Please wait for 3-4 hrs. \n\nThankyou\nfor your patience. Team Desynat App";
 "IBAN" = "IBAN";
 "Address Line 1" = "Address Line 1";
 "Location Permission" = "Location Permission";
@@ -783,3 +783,8 @@
 "By Wallet" = "By Wallet";
 "Via COD" = "Via COD";
 "Quotation Rejected" = "Quotation Rejected";
+"SWIFT/BIC" = "SWIFT/BIC";
+"IBAN" = "IBAN";
+"Enter SWIFT/BIC" = "Enter SWIFT/BIC";
+"Please enter valid IBAN" = "Please enter valid IBAN";
+"Please enter valid SWIFT/BIC" = "Please enter valid SWIFT/BIC";

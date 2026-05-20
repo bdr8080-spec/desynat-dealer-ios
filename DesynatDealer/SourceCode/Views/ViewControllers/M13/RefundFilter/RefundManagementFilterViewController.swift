@@ -21,19 +21,18 @@ class RefundManagementFilterViewController: UIViewController {
     @IBOutlet weak var toTextField: UITextField!
     @IBOutlet weak var fromTextField: UITextField!
     
-    let datePicker = UIDatePicker()
     private var activeTextField: UITextField?
-    var selectedFilter = RefundManagementFilterModel()
-    var onApplyFilter: ((RefundManagementFilterModel) -> Void)?
-    var onClearFilter: (() -> Void)?
-    
-    private var filtersOptions = ["Cancelled", "Return", "Exchange"]
+    private var filtersOptions = ["Cancelled", "Return"]
     private var selectedIndex: Int = -1
     private let statusMapping: [ReturnStatus] = [
         .cancelled,
-        .returned,
-        .exchange
+        .returned//,
+//        .exchange
     ]
+    let datePicker = UIDatePicker()
+    var selectedFilter = RefundManagementFilterModel()
+    var onApplyFilter: ((RefundManagementFilterModel) -> Void)?
+    var onClearFilter: (() -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,7 +107,11 @@ extension RefundManagementFilterViewController:  UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedIndex = indexPath.row
+        if selectedIndex == indexPath.row {
+            selectedIndex = -1
+        } else {
+            selectedIndex = indexPath.row
+        }
         filtersTableView.reloadData()
     }
     

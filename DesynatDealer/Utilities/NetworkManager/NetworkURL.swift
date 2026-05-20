@@ -34,8 +34,8 @@ enum NetworkEndPoint: String {
     case resendOtp                    = "/api/seller/resend_otp"
     case getPlans                     = "/api/seller/all-plans"
     case purchasePlan                 = "/api/seller/create-subcription-plan-buy"
-    case subcriptionPlan                 = "/api/seller/payment-subcription-plan"
-    case uploadWithResolutionPromotional    = "/api/uploadWithResolutionPromotional"
+    case subcriptionPlan              = "/api/seller/payment-subcription-plan"
+    case uploadWithResolutionPromotional = "/api/uploadWithResolutionPromotional"
     // M3
     case updateStoreStatus            = "/api/seller/store_on_off"
     case getCategoryList              = "/api/seller/category"

@@ -12,7 +12,7 @@ struct ProductsListDataModel: Codable {
     let allProductCount, activeProductCount, inactiveProductCount: Int?
     var allProductData, activeProduct: [ProductsList]?
     var inactiveProduct: [ProductsList]?
-
+    
     enum CodingKeys: String, CodingKey {
         case allProductCount = "all_product_count"
         case activeProductCount = "active_product_count"
@@ -38,10 +38,11 @@ struct ProductsList: Codable {
     let category: Category?
     let subCategory: SubCategoryDataModel?
     let brand: Brand?
-  let subcategory: SubCategoryDataModel?
+    let subcategory: SubCategoryDataModel?
     let productSpecifications: [ProductSpecification]?
     let productVariants: [ProductVariant]?
-
+    let review: [Review]?
+    
     enum CodingKeys: String, CodingKey {
         case id
         case sellerID = "seller_id"
@@ -75,6 +76,7 @@ struct ProductsList: Codable {
         case productSpecifications = "product_specifications"
         case productVariants = "product_variants"
         case subCategory = "sub_category"
+        case review
     }
 }
 
@@ -86,7 +88,7 @@ struct Brand: Codable {
     let status: Int?
     let createdAt, updatedAt: String?
     let categoryID: Int?
-
+    
     enum CodingKeys: String, CodingKey {
         case id
         case nameEnglish = "name_english"
@@ -105,7 +107,7 @@ struct Category: Codable {
     let image: String?
     let status: Int?
     let colorCode, createdAt, updatedAt: String?
-
+    
     enum CodingKeys: String, CodingKey {
         case id, name, description, image, status
         case colorCode = "color_code"
@@ -120,7 +122,7 @@ struct ProductSpecification: Codable {
     let id: Int?
     let productID, nameEn, featureEn, nameAr: String?
     let featureAr, createdAt, updatedAt: String?
-
+    
     enum CodingKeys: String, CodingKey {
         case id
         case productID = "product_id"
@@ -144,8 +146,8 @@ struct ProductVariant: Codable {
     let discountType, discountValue, finalPrice, status: String?
     let createdAt, updatedAt: String?
     let color: ColorsLisDataModel?
-  let size :SizeListDataModel?
-
+    let size :SizeListDataModel?
+    
     enum CodingKeys: String, CodingKey {
         case id
         case productID = "product_id"
@@ -166,10 +168,39 @@ struct ProductVariant: Codable {
         case createdAt = "created_at"
         case updatedAt = "updated_at"
         case color
-      case size
+        case size
     }
 }
 
+// MARK: - Review
+struct Review: Codable {
+  let id, userID, orderID, orderdetailsID: Int?
+  let productID: Int?
+  let productRating, productReview: String?
+  let productImage: [String]?
+  let storeID: Int?
+  let storeRating, storeReview, storeImage, createdAt: String?
+  let updatedAt: String?
+  let userDetails: UserDetails?
+  
+  enum CodingKeys: String, CodingKey {
+    case id
+    case userID = "user_id"
+    case orderID = "order_id"
+    case orderdetailsID = "orderdetails_id"
+    case productID = "product_id"
+    case productRating = "product_rating"
+    case productReview = "product_review"
+    case productImage = "product_image"
+    case storeID = "store_id"
+    case storeRating = "store_rating"
+    case storeReview = "store_review"
+    case storeImage = "store_image"
+    case createdAt = "created_at"
+    case updatedAt = "updated_at"
+    case userDetails = "user_details"
+  }
+}
 
 struct AppliedFilter {
     var categoryIDs: [String] = []

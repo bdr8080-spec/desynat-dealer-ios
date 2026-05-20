@@ -34,6 +34,10 @@ class ChatEnquiryViewModel {
         }
     }
     
+    func removeChatObserver() {
+        self.chatReference?.removeAllObservers()
+    }
+    
     func readChatMessagesRequest() {
         let param: [String: Any] = ["unique_id": chatDetailsUniqueId]
         WebService.sharedInstance.markAllchatThread(param: param) { [weak self] response in

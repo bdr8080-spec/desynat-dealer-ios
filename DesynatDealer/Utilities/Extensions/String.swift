@@ -39,22 +39,21 @@ extension String {
     }
     
     func isValidPhoneNumber() -> Bool {
-        // Remove all non-digit characters
         let digitsOnly = self.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
-        
-        // Check if digit count is between 7 and 15
         return digitsOnly.count >= 7 && digitsOnly.count <= 15
     }
     
-    //    func isPhoneNumber() -> Bool {
-    //        if self.isStringEmpty() {
-    //            return false
-    //        }
-    //        let phoneRegex = "^\\d{10}$"
-    //        let phoneText = NSPredicate(format: "SELF MATCHES %@", phoneRegex)
-    //        let isValid = phoneText.evaluate(with: self) as Bool
-    //        return isValid
-    //    }
+    func isValidIBAN() -> Bool {
+        let trimmedText = self.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        let ibanRegex = "^[A-Z]{2}[A-Z0-9]{13,32}$"
+        return NSPredicate(format: "SELF MATCHES %@", ibanRegex) .evaluate(with: trimmedText)
+    }
+    
+//    func isValidSwift() -> Bool {
+//        let trimmedText = self.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+//        let swiftRegex = "^[A-Z]{4}[A-Z]{2}[A-Z0-9]{2}([A-Z0-9]{3})?$"
+//        return NSPredicate(format: "SELF MATCHES %@", swiftRegex) .evaluate(with: trimmedText)
+//    }
     
     func isStringEmpty() -> Bool {
         return self.stringByTrimmingWhiteSpace().count == 0 ? true : false

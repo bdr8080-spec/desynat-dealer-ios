@@ -47,8 +47,8 @@ enum ReturnSelectedTabType: Int {
 
 enum ReturnStatus: Int {
     case cancelled = 1
-    case returned  = 2
-    case exchange    = 3
+    case returned = 2
+//    case exchange = 3
 }
 
 

@@ -110,7 +110,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CbZ-hd-AQc" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="25" width="226.33333333333334" height="50"/>
                                                         <subviews>
-                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Fabric" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1bE-sp-UZW">
+                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Fabric" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1bE-sp-UZW" customClass="ArabicTextField" customModule="DesynatDealer" customModuleProvider="target">
                                                                 <rect key="frame" x="20" y="5" width="191.33333333333334" height="40"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                 <textInputTraits key="textInputTraits"/>
@@ -231,7 +231,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EZX-T9-V84" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="25" width="226.33333333333334" height="50"/>
                                                         <subviews>
-                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Woolen" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="45S-W6-OCE">
+                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Woolen" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="45S-W6-OCE" customClass="ArabicTextField" customModule="DesynatDealer" customModuleProvider="target">
                                                                 <rect key="frame" x="20" y="5" width="191.33333333333334" height="40"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                 <textInputTraits key="textInputTraits"/>
@@ -407,9 +407,9 @@
             <connections>
                 <outlet property="addNewView" destination="qgt-8p-97z" id="8FM-y9-xUi"/>
                 <outlet property="addRemoveStackView" destination="Peb-Uf-UkF" id="bvt-lS-oYM"/>
-                <outlet property="featuresARTF" destination="45S-W6-OCE" id="ohq-Zz-9Ls"/>
+                <outlet property="featuresARTF" destination="45S-W6-OCE" id="hjS-6q-W8S"/>
                 <outlet property="featuresEngTF" destination="5UJ-bX-KXU" id="NQP-hq-ogp"/>
-                <outlet property="nameARTF" destination="1bE-sp-UZW" id="YUM-DX-ZfJ"/>
+                <outlet property="nameARTF" destination="1bE-sp-UZW" id="Crg-9q-r32"/>
                 <outlet property="nameEngTF" destination="NmL-YZ-IoX" id="qbf-IO-c8q"/>
                 <outlet property="removeButton" destination="xCn-KW-155" id="Yqc-if-J9C"/>
             </connections>

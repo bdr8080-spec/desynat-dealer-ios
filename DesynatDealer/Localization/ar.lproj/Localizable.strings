@@ -1023,7 +1023,7 @@
 "Add Address" = "إضافة عنوان";
 "Upload proof of account" = "رفع إثبات الحساب";
 "(Bank Statement or Bank Letter,PDF/JPG/PNG ≤ 5MB)" = "(كشف حساب بنكي أو خطاب بنكي، PDF/JPG/PNG حتى 5 ميجابايت)";
-"Please wait for 3-4 hrs. \n\nThank\nyou for your patience. Team Desynat App" = "يرجى الانتظار لمدة 3-4 ساعات. \n\nشكرًا\nعلى صبركم. فريق تطبيق Desynat";
+"Please wait for 3-4 hrs. \n\nThankyou\nfor your patience. Team Desynat App" = "يرجى الانتظار لمدة 3-4 ساعات. \n\nشكرًا\nعلى صبركم. فريق تطبيق Desynat";
 "Your account registration is under review !!" = "طلب تسجيل حسابك قيد المراجعة !!";
 "Black" = "أسود";
 "S" = "ص";
@@ -1044,3 +1044,8 @@
 "By Card" = "عن طريق البطاقة";
 "By Wallet" = "عن طريق المحفظة";
 "Quotation Rejected" = "تم رفض عرض السعر";
+"SWIFT/BIC" = "رمز السويفت";
+"IBAN" = "رقم الآيبان";
+"Enter SWIFT/BIC" = "أدخل رمز السويفت";
+"Please enter valid IBAN" = "يرجى إدخال رقم آيبان صحيح";
+"Please enter valid SWIFT/BIC" = "يرجى إدخال رمز سويفت صحيح";

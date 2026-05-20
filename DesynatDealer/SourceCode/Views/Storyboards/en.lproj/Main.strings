@@ -45,7 +45,7 @@
 "5Zm-nZ-JlF.text" = "Sign In";
 
 /* Class = "UILabel"; text = "IBAN (Optional)"; ObjectID = "5dg-Aw-bqS"; */
-"5dg-Aw-bqS.text" = "IBAN (Optional)";
+"5dg-Aw-bqS.text" = "IBAN";
 
 /* Class = "UILabel"; text = "Location"; ObjectID = "6L2-tP-dLd"; */
 "6L2-tP-dLd.text" = "Location";
@@ -174,7 +174,7 @@
 "MJc-Ax-He1.text" = "Arabic";
 
 /* Class = "UITextField"; placeholder = "Enter Swift "; ObjectID = "MMo-zc-9rA"; */
-"MMo-zc-9rA.placeholder" = "Enter Swift";
+"MMo-zc-9rA.placeholder" = "Enter SWIFT/BIC";
 
 /* Class = "UILabel"; text = "Bank Details"; ObjectID = "N60-2G-Vdb"; */
 "N60-2G-Vdb.text" = "Bank Details";
@@ -249,7 +249,7 @@
 "Vsw-zr-hoq.normalTitle" = "Skip";
 
 /* Class = "UILabel"; text = "Please wait for 3-4 hrs. \n\nThank\nyou for your patience. Team Desynat App"; ObjectID = "WI5-XM-2fF"; */
-"WI5-XM-2fF.text" = "Please wait for 3-4 hrs. \n\nThank\nyou for your patience. Team Desynat App";
+"WI5-XM-2fF.text" = "Please wait for 3-4 hrs. \n\nThankyou\nfor your patience. Team Desynat App";
 
 /* Class = "UILabel"; text = "IBAN"; ObjectID = "WKS-qt-vMh"; */
 "WKS-qt-vMh.text" = "IBAN";
@@ -452,8 +452,8 @@
 /* Class = "UILabel"; text = "Forgot Password"; ObjectID = "q7m-PV-avw"; */
 "q7m-PV-avw.text" = "Forgot Password";
 
-/* Class = "UILabel"; text = "SWIFT/BIC (Optional)"; ObjectID = "qd9-ZA-Kuz"; */
-"qd9-ZA-Kuz.text" = "SWIFT/BIC (Optional)";
+/* Class = "UILabel"; text = "SWIFT/BIC"; ObjectID = "qd9-ZA-Kuz"; */
+"qd9-ZA-Kuz.text" = "SWIFT/BIC";
 
 /* Class = "UIButton"; normalTitle = "Deny"; ObjectID = "qoI-cH-DTW"; */
 "qoI-cH-DTW.normalTitle" = "Deny";

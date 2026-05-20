@@ -9,7 +9,7 @@ import UIKit
 import SDWebImage
 
 class StoreInformationViewController: UIViewController {
-    private lazy var viewModel = StoreInformationViewModel(hostVC:self)
+    
     @IBOutlet weak var uploadStoreImageView: CustomImageView!
     @IBOutlet weak var storeNameTextField: UITextField!
     @IBOutlet weak var storeAddressTextField: UITextField!
@@ -21,6 +21,7 @@ class StoreInformationViewController: UIViewController {
     @IBOutlet weak var txtCountry: UITextField!
     @IBOutlet weak var txtCountryCode: UITextField!
     
+    private lazy var viewModel = StoreInformationViewModel(hostVC:self)
     var userId = 0
     var selectedStoreInformationImage = ""
     var countryId = 0
@@ -48,38 +49,76 @@ class StoreInformationViewController: UIViewController {
     }
     
     @IBAction func addressDidTapped(_ sender: Any) {
+//        let vc = LocationViewController.instantiate(fromAppStoryboard: .Main)
+//        vc.locationCallBack = { [weak self] address, locality, city, state, country, pincode, lat, long in
+//            guard let self = self else { return }
+//            let safeAddress = address.isEmpty ? "" : address
+//            let safeLocality = locality.isEmpty ? "" : locality
+//            let safeCity = city.isEmpty ? "" : city
+//            let safeState = state.isEmpty ? "" : state
+//            let safeCountry = country.isEmpty ? "" : country
+//            let safePincode = pincode.isEmpty ? "" : pincode
+//            self.storeAddressTextField.text = safeAddress
+//            self.addressLineOneTextField.text = safeLocality
+//            var components: [String] = []
+//            
+//            if !safeCity.isEmpty {
+//                components.append(safeCity)
+//            }
+//            if !safeState.isEmpty {
+//                components.append(safeState)
+//            }
+//            
+//            var address = components.joined(separator: ", ")
+//            
+//            if !safePincode.isEmpty {
+//                address += " - \(safePincode)"
+//            }
+//            self.addressLineTwoTextField.text = address
+//            self.lat = lat
+//            self.long = long
+//        }
+//        self.navigationController?.pushViewController(vc, animated: true)
+        
         let vc = LocationViewController.instantiate(fromAppStoryboard: .Main)
-           vc.locationCallBack = { [weak self] address, locality, city, state, country, pincode, lat, long in
-               guard let self = self else { return }
-               let safeAddress = address.isEmpty ? "" : address
-               let safeLocality = locality.isEmpty ? "" : locality
-               let safeCity = city.isEmpty ? "" : city
-               let safeState = state.isEmpty ? "" : state
-               let safeCountry = country.isEmpty ? "" : country
-               let safePincode = pincode.isEmpty ? "" : pincode
-               self.storeAddressTextField.text = safeAddress
-               self.addressLineOneTextField.text = safeLocality
-               var components: [String] = []
-
-               if !safeCity.isEmpty {
-                   components.append(safeCity)
-               }
-               if !safeState.isEmpty {
-                   components.append(safeState)
-               }
-
-               var address = components.joined(separator: ", ")
-
-               if !safePincode.isEmpty {
-                   address += " - \(safePincode)"
-               }
-               self.addressLineTwoTextField.text = address
-               self.lat = lat
-               self.long = long
-           }
-           self.navigationController?.pushViewController(vc, animated: true)
+        vc.preSelectedLat = self.lat   // your saved lat
+        vc.preSelectedLng = self.long  // your saved long
+        vc.locationCallBack = { [weak self] address, locality, city, state, country, pincode, lat, long in
+            guard let self = self else { return }
+            
+            // Make fallback-safe variables
+            let safeLocality = locality.isEmpty ? address : locality        // fallback to full address
+            let safeCity = city.isEmpty ? locality.isEmpty ? address : locality : city
+            let safeState = state.isEmpty ? city.isEmpty ? locality.isEmpty ? address : locality : city : state
+            let safePincode = pincode.isEmpty ? "" : pincode
+            
+            // Field 1 — Address Line One
+            self.addressLineOneTextField.text = safeLocality
+            
+            // Field 2 — Address Line Two (city + state + pincode)
+            var components: [String] = []
+            
+            if !safeCity.isEmpty { components.append(safeCity) }
+            if !safeState.isEmpty { components.append(safeState) }
+            
+            var addressLine2 = components.joined(separator: ", ")
+            if !safePincode.isEmpty { addressLine2 += " - \(safePincode)" }
+            
+            // Last fallback if line2 becomes empty
+            if addressLine2.isEmpty { addressLine2 = address }
+            
+            self.addressLineTwoTextField.text = addressLine2
+            
+            // City & State fields
+//            self.cityTF.text = safeCity.isEmpty ? address : safeCity
+//            self.stateTF.text = safeState.isEmpty ? safeCity.isEmpty ? address : safeCity : safeState
+            
+            // Coordinates
+            self.lat = lat
+            self.long = long
         }
-
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     
     @IBAction func btnTapCountry(_ sender: UIButton) {
         let countryNames = viewModel.countryList.map { $0.name ?? ""}
@@ -87,6 +126,15 @@ class StoreInformationViewController: UIViewController {
             self.txtCountry.text = item
             let selectedCountryId = self.viewModel.countryList[index]
             self.countryId = selectedCountryId.id ?? 0
+            
+            // Clear address fields
+            self.storeAddressTextField.text = ""
+            self.addressLineOneTextField.text = ""
+            self.addressLineTwoTextField.text = ""
+            
+            // Reset coordinates
+            self.lat = 0.0
+            self.long = 0.0
         }
     }
     
@@ -112,7 +160,6 @@ class StoreInformationViewController: UIViewController {
             let flag = country.flag ?? "🇰🇼"
             return "\(flag)  \(name) (\(dialCode))"
         }
-
         kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
             let selectedCountry = self.viewModel.countryList[index]
             let code = selectedCountry.dialCode ?? "+965"
@@ -130,7 +177,7 @@ class StoreInformationViewController: UIViewController {
         }
         return ""
     }
-
+    
     private func extractCountry(from address: String) -> String {
         // Extracts the last component (usually country)
         let components = address.components(separatedBy: ",").map { $0.trimmingCharacters(in: .whitespaces) }

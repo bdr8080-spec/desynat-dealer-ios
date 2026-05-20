@@ -70,6 +70,8 @@ enum AlertConstant: String {
     case EnterStorePhoneNumber      = "Please enter store phone number"
     case EnterCountry               = "Please choose Country"
     case EnterComission             = "Please enter Affiliated Commission"
+    case EnterValidSwift            = "Please enter valid SWIFT/BIC"
+    case EnterValidIBAN             = "Please enter valid IBAN"
     
     
     case selectCategory             = "Please select category"
