@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Cosmos
 
 class ProductDetailViewController: UIViewController {
     
@@ -56,7 +57,7 @@ class ProductDetailViewController: UIViewController {
             productImageCollectionView.registerCellFromNib(cellID: "ProductDetailImageCollectionViewCell")
         }
     }
-    
+    @IBOutlet weak var ratingView: CosmosView!
     @IBOutlet weak var buttonActionStackView: UIStackView!
     @IBOutlet weak var colorsCollectionView: UICollectionView! {
         didSet {
@@ -84,7 +85,9 @@ class ProductDetailViewController: UIViewController {
     @IBOutlet weak var lblReviewRatingTitle: UILabel!
     @IBOutlet weak var lblIsItAffTitle: UILabel!
     @IBOutlet weak var lblSpecificationTitle: UILabel!
+    @IBOutlet weak var noRatingFoundLabel: UILabel!
     @IBOutlet weak var sizeGuideButton: UIButton!
+    @IBOutlet weak var viewAllButtonOutlet: UIButton!
     
     private var selectedColourIndex = 0
     private var selectedSizeIndex = 0
@@ -189,6 +192,12 @@ class ProductDetailViewController: UIViewController {
         )
     }
     
+    @IBAction func viewAllRatingDidTapped(_ sender: Any) {
+        let nextVC = AllCustomersRatingsViewController.instantiate(fromAppStoryboard: .Product)
+        nextVC.ratingReview = viewModel.productDetails?.review
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
     func configData(data: ProductsList) {
         // MARK: - Basic Product info
         if AppLanguageManager.shared.currentLanguage == .ar {
@@ -222,6 +231,7 @@ class ProductDetailViewController: UIViewController {
         //"\(data.brand?.nameEnglish ?? "")  (\(data.category?.name ?? ""))"
         ratingCountLabel.text = " (\(data.reviewRating ?? "0"))"
         sizeChartUrl = data.uploadSizeChart
+        ratingView.rating = data.productRating ?? 0
         let categoryName = data.category?.name ?? "Women"
         if categoryName == "Women" {
             womenDetailsView.isHidden = false
@@ -319,8 +329,12 @@ class ProductDetailViewController: UIViewController {
         
         // MARK: Rating Section Reload
         ratingsTableView.reloadData()
+        ratingsTableView.layoutIfNeeded()
+        //        ratingTableViewHeightConstriant.constant = ratingsTableView.contentSize.height
+        let ratingCount = viewModel.productDetails?.review?.count ?? 0
+        noRatingFoundLabel.isHidden = ratingCount > 0
+        viewAllButtonOutlet.isHidden = ratingCount == 0
         ratingTableViewHeightConstriant.constant = ratingsTableView.contentSize.height
-        
         speifcationArray = data.productSpecifications?.compactMap {
             "● \($0.nameEn ?? "") - \($0.featureEn ?? "")"
         } ?? []
@@ -567,7 +581,9 @@ extension ProductDetailViewController: UITableViewDataSource, UITableViewDelegat
         case specificationTableView:
             return speifcationArray.count
         case ratingsTableView:
-            return viewModel.productDetails?.review?.count ?? 0
+            //            return viewModel.productDetails?.review?.count ?? 0
+            let totalRatings = viewModel.productDetails?.review?.count ?? 0
+            return min(totalRatings, 2)
         default:
             return 0
         }

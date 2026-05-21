@@ -15,7 +15,7 @@ struct SummaryModel: Codable {
     let email: String?
     let password: String?
     let acceptTerms, otp, otpVerify: String?
-//    let deviceType: String?
+    //    let deviceType: String?
     let deviceToken: String?
     let adminVerify, storeInformation, bankInformation: String?
     let createdAt, updatedAt: String?
@@ -23,7 +23,7 @@ struct SummaryModel: Codable {
     let ownerDocument: [Document]?
     let storeDocument: [Document]?
     let sellerBankDetails: SellerBankDetails?
-
+    
     enum CodingKeys: String, CodingKey {
         case id
         case profilePic = "profile_pic"
@@ -34,7 +34,7 @@ struct SummaryModel: Codable {
         case acceptTerms = "accept_terms"
         case otp
         case otpVerify = "otp_verify"
-//        case deviceType = "device_type"
+        //        case deviceType = "device_type"
         case deviceToken = "device_token"
         case adminVerify = "admin_verify"
         case storeInformation = "store_information"
@@ -56,7 +56,7 @@ struct Document: Codable {
     let documentPath: String?
     let status: String?
     let createdAt, updatedAt: String?
-
+    
     enum CodingKeys: String, CodingKey {
         case id
         case sellerID = "seller_id"
@@ -77,7 +77,7 @@ struct SellerBankDetails: Codable {
     let bankName, accountHolderName: String?
     let uploadProof: String?
     let createdAt, updatedAt: String?
-
+    
     enum CodingKeys: String, CodingKey {
         case id
         case userID = "user_id"
@@ -103,8 +103,9 @@ struct StoreInfo: Codable {
     let latitude: String? // JSON key: "let" (reserved word in Swift)
     let long: String?
     let createdAt, updatedAt: String?
-  let countryInfo: CountryInfo?
-
+    let storeRating: Double?
+    let countryInfo: CountryInfo?
+    
     enum CodingKeys: String, CodingKey {
         case id
         case sellerID = "seller_id"
@@ -122,7 +123,8 @@ struct StoreInfo: Codable {
         case createdAt = "created_at"
         case updatedAt = "updated_at"
         case countryCode = "country_code"
-      case countryInfo = "country_info"
+        case countryInfo = "country_info"
+        case storeRating = "store_rating"
     }
 }
 
@@ -134,7 +136,7 @@ struct CountryInfo: Codable {
     let currencySymbol, dialCode, flag: String?
     let flag1: String?
     let exchangeRateToKwd, createdAt, updatedAt: String?
-
+    
     enum CodingKeys: String, CodingKey {
         case id, name
         case isoCode = "iso_code"

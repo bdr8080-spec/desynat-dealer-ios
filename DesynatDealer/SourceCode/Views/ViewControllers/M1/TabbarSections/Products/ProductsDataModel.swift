@@ -34,6 +34,7 @@ struct ProductsList: Codable {
     let readyToShip, cashOnDelivery: String?
     let uploadSizeChart: String?
     var productActiveStatus, avgProductRating: Int?
+    var productRating: Double?
     let createdAt, updatedAt, stock: String?
     let category: Category?
     let subCategory: SubCategoryDataModel?
@@ -61,6 +62,7 @@ struct ProductsList: Codable {
         case productReturn = "product_return"
         case returnDays = "return_days"
         case avgProductRating = "avg_product_rating"
+        case productRating = "product_rating"
         case productExchangable = "product_exchangable"
         case exchangableDays = "exchangable_days"
         case reviewRating = "review_rating"

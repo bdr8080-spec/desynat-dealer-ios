@@ -7,9 +7,11 @@
 
 import UIKit
 import SDWebImage
+import Cosmos
 
 class DelearProfileViewController: UIViewController {
     
+    @IBOutlet weak var ratingView: CosmosView!
     @IBOutlet weak var qrImageView: CustomImageView!
     @IBOutlet weak var viewStoriesBtn: UIButton!
     @IBOutlet weak var bandDetailsView: CustomView!
@@ -67,11 +69,11 @@ class DelearProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.resetPagination()           // ← Add this line
-            
-            viewModel.getUserProfile()
-            viewModel.getMyHighLights()
-            viewModel.getMyReelsRequest()
-            viewModel.getSelfStory()
+        
+        viewModel.getUserProfile()
+        viewModel.getMyHighLights()
+        viewModel.getMyReelsRequest()
+        viewModel.getSelfStory()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -166,7 +168,7 @@ class DelearProfileViewController: UIViewController {
         storeEmailLabel.text = data?.storeInfo?.storeMailID
         storeAddressLabel.text = "\(data?.storeInfo?.storeAddress ?? "") \(data?.storeInfo?.addressLine1 ?? "") \(data?.storeInfo?.addressLine2 ?? "")"
         bioLabel.text = data?.storeInfo?.bio
-        
+        ratingView.rating = data?.storeInfo?.storeRating ?? 0
         if let storeImageUrl = data?.ownerDocument?.first?.documentPath,
            let url = URL(string: storeImageUrl) {
             fronOwnerImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
@@ -347,6 +349,4 @@ extension DelearProfileViewController: UICollectionViewDelegate, UICollectionVie
     }
     
 }
-//
-//channel_id60
-//38971227
+

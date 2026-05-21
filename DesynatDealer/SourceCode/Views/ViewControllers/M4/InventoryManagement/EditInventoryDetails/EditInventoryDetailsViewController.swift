@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import Cosmos
 
 class EditInventoryDetailsViewController: UIViewController {
     
+    @IBOutlet weak var ratingView: CosmosView!
     @IBOutlet weak var priceSeparatorLabel: UILabel!
     @IBOutlet weak var titlePageLabel: UILabel!
     @IBOutlet weak var skuLimitTF: UITextField!
@@ -122,6 +124,7 @@ class EditInventoryDetailsViewController: UIViewController {
             brandCategoryLabel.text = data.category?.name ?? ""
         }
         
+        ratingView.rating = data.productRating ?? 0
         ratingCountLabel.text = " (\(data.reviewRating ?? "0"))"
         
         // Status

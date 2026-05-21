@@ -59,6 +59,7 @@ struct SellerProfileDataModel: Codable {
         case qrSellerUrl
         case notification
         case appNotification = "app_notification"
+        
     }
 }
 

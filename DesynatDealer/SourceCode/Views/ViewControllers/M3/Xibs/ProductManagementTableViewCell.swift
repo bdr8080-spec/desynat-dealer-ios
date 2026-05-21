@@ -7,9 +7,11 @@
 
 import UIKit
 import SDWebImage
+import Cosmos
 
 class ProductManagementTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var ratingView: CosmosView!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var productNameLabel: UILabel!
     @IBOutlet weak var stockLabel: UILabel!
@@ -55,6 +57,7 @@ class ProductManagementTableViewCell: UITableViewCell {
         }
         self.coloursList = colorsArray
         colorsCollectionView.reloadData()
+        ratingView.rating = data.productRating ?? 0
         if AppLanguageManager.shared.currentLanguage == .ar {
             if data.brand?.nameEnglish == "Other" {
                 productNameLabel.text = data.otherAr
