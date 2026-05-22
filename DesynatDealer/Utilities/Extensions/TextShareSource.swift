@@ -89,7 +89,7 @@ final class ShareUtility {
         let cleanLink = fullyDecoded(link)
         
         let shareText = "\(cleanTitle)\n\n\(cleanDescription)\n\n\(cleanLink)"
-//        print("DEBUG SHARE TEXT:\n\(shareText)") // Debug
+        //        print("DEBUG SHARE TEXT:\n\(shareText)") // Debug
         
         if let image = image {
             presentShare(image: image, text: shareText, from: viewController)
