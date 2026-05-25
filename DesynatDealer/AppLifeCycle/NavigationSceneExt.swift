@@ -33,8 +33,9 @@ extension SceneDelegate {
     }
 
     // Navigate to Home Vc
-    public func navigateToDealerHomeVc() {
+    public func navigateToDealerHomeVc(selectedIndex: Int = 0) {
         let vc = TabBarVC.instantiate(fromAppStoryboard: .Home)
+        vc.initialTabIndex = selectedIndex
         navigateTo(vc: vc)
     }
     

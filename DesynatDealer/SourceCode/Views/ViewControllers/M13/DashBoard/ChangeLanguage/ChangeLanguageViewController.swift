@@ -8,7 +8,7 @@
 import UIKit
 
 class ChangeLanguageViewController: UIViewController {
-
+    
     // MARK: - IBOutlet's
     @IBOutlet weak var arabicView: CustomView!
     @IBOutlet weak var englishView: CustomView!
@@ -82,11 +82,7 @@ class ChangeLanguageViewController: UIViewController {
     }
     
     @IBAction func backDidTapped(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        //        self.navigationController?.popViewController(animated: true)
+        kSharedSceneDelegate.navigateToDealerHomeVc(selectedIndex: 0)
     }
 }
-
-//enum ComingReasonAtChangeLanguageScreen {
-//    case fromNormalUserDashboard
-//}
-
