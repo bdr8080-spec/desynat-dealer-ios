@@ -46,11 +46,12 @@ enum ReturnSelectedTabType: Int {
 }
 
 enum ReturnStatus: Int {
-    case cancelled = 1
+    case notDelivered = 1
     case returned = 2
+    case cancelled = 3
+    
 //    case exchange = 3
 }
-
 
 struct RefundManagementFilterModel {
     var refundStatus: ReturnStatus?

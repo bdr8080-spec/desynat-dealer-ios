@@ -80,18 +80,31 @@ class StoreInformationViewController: UIViewController {
 //        }
 //        self.navigationController?.pushViewController(vc, animated: true)
         
+        
+        
+        
+        
         let vc = LocationViewController.instantiate(fromAppStoryboard: .Main)
         vc.preSelectedLat = self.lat   // your saved lat
         vc.preSelectedLng = self.long  // your saved long
         vc.locationCallBack = { [weak self] address, locality, city, state, country, pincode, lat, long in
             guard let self = self else { return }
-            
+//            let safeAddress = address.isEmpty ? "" : address
+            let addressComponents = [
+                    locality,
+                    city,
+                    state,
+                    pincode,
+                    country
+                ].filter { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
+            let fullAddress = addressComponents.joined(separator: ", ")
+
             // Make fallback-safe variables
             let safeLocality = locality.isEmpty ? address : locality        // fallback to full address
             let safeCity = city.isEmpty ? locality.isEmpty ? address : locality : city
             let safeState = state.isEmpty ? city.isEmpty ? locality.isEmpty ? address : locality : city : state
             let safePincode = pincode.isEmpty ? "" : pincode
-            
+            self.storeAddressTextField.text = fullAddress
             // Field 1 — Address Line One
             self.addressLineOneTextField.text = safeLocality
             

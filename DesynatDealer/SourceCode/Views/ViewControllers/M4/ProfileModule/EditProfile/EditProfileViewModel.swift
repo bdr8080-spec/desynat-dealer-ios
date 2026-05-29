@@ -44,12 +44,12 @@ class EditProfileViewModel {
         //      errorMessage = .EnterSWIFT
         if iban.isEmpty {
             errorMessage = .EnterIBAN
-        } else if !iban.isValidIBAN() {
-            errorMessage = .EnterValidIBAN
+//        } else if !iban.isValidIBAN() {
+//            errorMessage = .EnterValidIBAN
         } else if swiftCode.isEmpty {
             errorMessage = .EnterSWIFT
-        } else if !swiftCode.isValidIBAN() {
-            errorMessage = .EnterValidSwift
+//        } else if !swiftCode.isValidIBAN() {
+//            errorMessage = .EnterValidSwift
         }else if bankName.isEmpty {
             errorMessage = .EnterBankName
         } else if accountHolder.isEmpty {

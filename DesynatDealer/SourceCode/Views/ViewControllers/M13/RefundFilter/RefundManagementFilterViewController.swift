@@ -22,12 +22,13 @@ class RefundManagementFilterViewController: UIViewController {
     @IBOutlet weak var fromTextField: UITextField!
     
     private var activeTextField: UITextField?
-    private var filtersOptions = ["Cancelled", "Return"]
+    private var filtersOptions = ["Not delivered", "Return", "Cancel"]
     private var selectedIndex: Int = -1
+    
     private let statusMapping: [ReturnStatus] = [
+        .notDelivered,
+        .returned,
         .cancelled,
-        .returned//,
-//        .exchange
     ]
     let datePicker = UIDatePicker()
     var selectedFilter = RefundManagementFilterModel()
