@@ -65,7 +65,7 @@ extension NetworkError : LocalizedError {
 }
 
 struct BaseResponse<T: Decodable>: Decodable {
-    var data: T
+    var data: T?
     var code:HTTPStatusCode?
     var success: Bool?
     var message: String?

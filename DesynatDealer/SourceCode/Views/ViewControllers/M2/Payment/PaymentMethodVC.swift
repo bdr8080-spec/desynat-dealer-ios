@@ -144,18 +144,53 @@ extension PaymentMethodVC {
         }
     }
     
-    func completePlanPurchase(transactionId: String, paymentStatus:Int, onlineTransactionId: String) {
+//    func completePlanPurchase(transactionId: String, paymentStatus:Int, onlineTransactionId: String) {
+//        let params: [String: Any] = [
+//            "transaction_id": transactionId,
+//            "payment_status": paymentStatus,
+//            "online_transaction_id": onlineTransactionId
+//        ]
+//        
+//        WebService.sharedInstance.completePurchasePlansListService(param: params) { result in
+//            DispatchQueue.main.async {
+//                //                                self.stopLoading()
+//                let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
+//                vc.comingReason = .planPurchased
+//                vc.callBackDismiss = {
+//                    if self.paymentFrom == .mySubscriptionPlan {
+//                        self.navigationController?.popViewController(animated: true)
+//                    } else {
+//                        kSharedSceneDelegate.navigateToDealerHomeVc()
+//                    }
+//                }
+//                self.present(vc, animated: true)
+//            }
+//        }
+//    }
+    
+    func completePlanPurchase(transactionId: String,
+                              paymentStatus: Int,
+                              onlineTransactionId: String) {
+        
         let params: [String: Any] = [
             "transaction_id": transactionId,
             "payment_status": paymentStatus,
             "online_transaction_id": onlineTransactionId
         ]
         
-        WebService.sharedInstance.completePurchasePlansListService(param: params) { result in
+        WebService.sharedInstance.completePurchasePlansListService(param: params) { user, error in
+            
             DispatchQueue.main.async {
-                //                                self.stopLoading()
+                
+                if let error = error {
+//                    self.showAlert(msg: error)
+                    CommonUtils.showToast(message: error)
+                    return
+                }
+                
                 let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
                 vc.comingReason = .planPurchased
+                
                 vc.callBackDismiss = {
                     if self.paymentFrom == .mySubscriptionPlan {
                         self.navigationController?.popViewController(animated: true)
@@ -163,6 +198,7 @@ extension PaymentMethodVC {
                         kSharedSceneDelegate.navigateToDealerHomeVc()
                     }
                 }
+                
                 self.present(vc, animated: true)
             }
         }

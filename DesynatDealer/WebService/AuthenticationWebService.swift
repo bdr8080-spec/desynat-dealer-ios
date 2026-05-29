@@ -298,18 +298,46 @@ extension WebService {
         }
     }
     
-    func completePurchasePlansListService(param: [String: Any], completion:@escaping (_ user:PurchasePlanDataModel)-> Void) {
+//    func completePurchasePlansListService(param: [String: Any], completion:@escaping (_ user:PurchasePlanDataModel)-> Void) {
+//        CommonUtils.showHud(show: true)
+//        NetworkManager.shared.request(withAPI:.endpoint(.subcriptionPlan), requestMethod: .post, requestParams: param, requestModel:PurchasePlanDataModel.self) { result, code in
+//            CommonUtils.showHud(show: false)
+//            self.evaluateWebServiceResponse(response: result) { response, message,error in
+//                guard let user = response else {
+//                    if let error {
+//                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+//                    }
+//                    return
+//                }
+//                completion(user)
+//            }
+//        }
+//    }
+    
+    func completePurchasePlansListService(
+        param: [String: Any],
+        completion: @escaping (_ user: PurchasePlanDataModel?, _ error: String?) -> Void
+    ) {
+        
         CommonUtils.showHud(show: true)
-        NetworkManager.shared.request(withAPI:.endpoint(.subcriptionPlan), requestMethod: .post, requestParams: param, requestModel:PurchasePlanDataModel.self) { result, code in
+        
+        NetworkManager.shared.request(
+            withAPI: .endpoint(.subcriptionPlan),
+            requestMethod: .post,
+            requestParams: param,
+            requestModel: PurchasePlanDataModel.self
+        ) { result, code in
+            
             CommonUtils.showHud(show: false)
-            self.evaluateWebServiceResponse(response: result) { response, message,error in
+            
+            self.evaluateWebServiceResponse(response: result) { response, message, error in
+                
                 guard let user = response else {
-                    if let error {
-                        UIApplication.shared.topViewController()?.showAlert(msg: error)
-                    }
+                    completion(nil, error ?? message ?? "Something went wrong")
                     return
                 }
-                completion(user)
+                
+                completion(user, nil)
             }
         }
     }
