@@ -22,8 +22,8 @@ class StoryViewerViewController: UIViewController {
     var usersStory: [Story] = []
     var currentStoryIndex = 0
     
-//    let leftTapView = UIView()
-//    let rightTapView = UIView()
+    //    let leftTapView = UIView()
+    //    let rightTapView = UIView()
     private var videoTimeObserver: Any?
     var player: AVPlayer?
     var playerLayer: AVPlayerLayer?
@@ -61,7 +61,7 @@ class StoryViewerViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         tapGesture.cancelsTouchesInView = false
         storiesCollectionView.addGestureRecognizer(tapGesture)
-//        setupTapViews()
+        //        setupTapViews()
     }
     @objc private func handleTap(_ gesture: UITapGestureRecognizer) {
         let location = gesture.location(in: storiesCollectionView)
@@ -119,8 +119,9 @@ class StoryViewerViewController: UIViewController {
     private func configureAndStartCurrentStory() {
         guard let story = usersStory[safe: currentStoryIndex] else { return }
         if comingFor == .forSelfHighlight {
-                highlightTitleLabel.text = viewModel.sellerHighlight[safe: currentStoryIndex]?.title ?? ""
-            }
+            highlightTitleLabel.text = viewModel.sellerHighlight[safe: currentStoryIndex]?.title ?? ""
+        }
+        markCurrentStoryAsSeen()
         uploadedTimeView.isHidden = false
         uploadedTimeLabel.text = ContentUpladedTimeDuration(from: story.uploadedTime ?? "")
         // Get the NOW visible cell (after scroll completes)
@@ -200,7 +201,7 @@ class StoryViewerViewController: UIViewController {
     private func startVideoProgressObserver() {
         guard let player = player,
               player.currentItem?.status == .readyToPlay else {
-//            print("❌ Video not ready yet")
+            //            print("❌ Video not ready yet")
             return
         }
         
@@ -216,7 +217,7 @@ class StoryViewerViewController: UIViewController {
             self?.updateVideoProgress(time: time)
         }
         
-//        print("✅ Video observer started")
+        //        print("✅ Video observer started")
     }
     
     private func removeVideoTimeObserver() {
@@ -255,31 +256,31 @@ class StoryViewerViewController: UIViewController {
     }
     
     private func ContentUpladedTimeDuration(from isoString: String) -> String {
-
+        
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-
+        
         guard let date = formatter.date(from: isoString) else { return "" }
-
+        
         let secondsAgo = Int(Date().timeIntervalSince(date))
-
+        
         if secondsAgo < 60 {
             let text = "sec ago".localiz()
             return secondsAgo == 1 ? "1 sec ago".localiz() : "\(secondsAgo) \(text)"
         }
-
+        
         let minutes = secondsAgo / 60
         if minutes < 60 {
             let text = "min ago".localiz()
             return minutes == 1 ? "1 min ago".localiz() : "\(minutes) \(text)"
         }
-
+        
         let hours = minutes / 60
         if hours < 24 {
             let text = "hr ago".localiz()
             return hours == 1 ? "1 hr ago".localiz() : "\(hours) \(text)"
         }
-
+        
         let days = hours / 24
         if days == 1 { return "Yesterday".localiz() }
         let text = "days ago".localiz()
@@ -357,7 +358,7 @@ class StoryViewerViewController: UIViewController {
             
             switch player.timeControlStatus {
             case .playing:
-//                print("✅ Video playing - starting progress")
+                //                print("✅ Video playing - starting progress")
                 player.isMuted = false
                 
                 // ✅ CRITICAL: Start observer NOW (video ready)
@@ -413,16 +414,45 @@ class StoryViewerViewController: UIViewController {
                 )
             }
             
+//            DispatchQueue.main.async {
+//                
+//                if self.usersStory.isEmpty {
+//                    self.dismiss(animated: true)
+//                    return
+//                }
+//                
+//                self.storiesCollectionView.reloadData()
+//                self.topSliderCollectionView.reloadData()
+//                
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+//                    self.startCurrentStory()
+//                }
+//            }
+            
             DispatchQueue.main.async {
-                
                 if self.usersStory.isEmpty {
                     self.dismiss(animated: true)
                     return
                 }
-                
+
+                // Open first unseen story
+                if let firstUnseenIndex = self.viewModel.sellerStories.firstIndex(where: {
+                    $0.isSeen == 0
+                }) {
+                    self.currentStoryIndex = firstUnseenIndex
+                } else {
+                    // All stories already seen
+                    self.currentStoryIndex = 0
+                }
+
+                // Mark previous stories as already seen in slider
+                for i in 0..<self.currentStoryIndex {
+                    self.seenStories.insert(i)
+                }
+
                 self.storiesCollectionView.reloadData()
                 self.topSliderCollectionView.reloadData()
-                
+
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     self.startCurrentStory()
                 }
@@ -493,46 +523,69 @@ class StoryViewerViewController: UIViewController {
                 )
             }
             
+//            DispatchQueue.main.async {
+//                if self.usersStory.isEmpty {
+//                    self.dismiss(animated: true)
+//                    return
+//                }
+//                
+//                self.storiesCollectionView.reloadData()
+//                self.topSliderCollectionView.reloadData()
+//                
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+//                    self.startCurrentStory()
+//                }
+//            }
+            
+            
             DispatchQueue.main.async {
                 if self.usersStory.isEmpty {
                     self.dismiss(animated: true)
                     return
                 }
-                
+
+                // Open first unseen story
+                if let firstUnseenIndex = self.viewModel.adminStories.firstIndex(where: {
+                    $0.isSeen == 0
+                }) {
+                    self.currentStoryIndex = firstUnseenIndex
+                } else {
+                    // All stories already seen
+                    self.currentStoryIndex = 0
+                }
+
+                // Mark previous stories as already seen in slider
+                for i in 0..<self.currentStoryIndex {
+                    self.seenStories.insert(i)
+                }
+
                 self.storiesCollectionView.reloadData()
                 self.topSliderCollectionView.reloadData()
-                
+
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     self.startCurrentStory()
                 }
             }
         }
     }
-//    private func setupTapViews() {
-//        
-//        leftTapView.backgroundColor = .clear
-//        rightTapView.backgroundColor = .clear
-//        
-//        view.addSubview(leftTapView)
-//        view.addSubview(rightTapView)
-//        
-//        leftTapView.translatesAutoresizingMaskIntoConstraints = false
-//        rightTapView.translatesAutoresizingMaskIntoConstraints = false
-//        
-//        NSLayoutConstraint.activate([
-//            // Left half
-//            leftTapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            leftTapView.topAnchor.constraint(equalTo: view.topAnchor),
-//            leftTapView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-//            leftTapView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
-//            
-//            // Right half
-//            rightTapView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            rightTapView.topAnchor.constraint(equalTo: view.topAnchor),
-//            rightTapView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-//            rightTapView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
-//        ])
-//    }
+    
+    private func markCurrentStoryAsSeen() {
+        switch comingFor {
+        case .forAdminStory:
+            guard currentStoryIndex < viewModel.adminStories.count else {
+                return
+            }
+            viewModel.seeStoryService(storyId: viewModel.adminStories[currentStoryIndex].id ?? 0)
+        case .forSelfStory:
+            guard currentStoryIndex < viewModel.sellerStories.count else {
+                return
+            }
+            viewModel.seeStoryService(storyId: viewModel.sellerStories[currentStoryIndex].id ?? 0)
+        default:
+            print("")
+        }
+    }
+    
     private func setupCollectionViews() {
         // Register Cells
         storiesCollectionView.register(UINib(nibName: "StorieDetailsCollectionViewCell", bundle: nil),forCellWithReuseIdentifier: "StorieDetailsCollectionViewCell")
@@ -1303,8 +1356,8 @@ extension StoryViewerViewController: UICollectionViewDelegate, UICollectionViewD
         if let indexPath = storiesCollectionView.indexPathForItem(at: centerPoint) {
             currentStoryIndex = indexPath.item
             if comingFor == .forSelfHighlight {
-                        highlightTitleLabel.text = viewModel.sellerHighlight[safe: currentStoryIndex]?.title ?? ""
-                    }
+                highlightTitleLabel.text = viewModel.sellerHighlight[safe: currentStoryIndex]?.title ?? ""
+            }
             resetSliderForBackwardNavigation()
             configureAndStartCurrentStory()
         }
@@ -1312,30 +1365,30 @@ extension StoryViewerViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-//        if collectionView == topSliderCollectionView {
-//            let totalItems = CGFloat(usersStory.count)
-//            let spacing: CGFloat = 6.0
-//            let totalSpacing = spacing * (totalItems - 1)
-//            
-//            // Dynamic width: Equally divide available width
-//            let availableWidth = view.bounds.width - totalSpacing
-//            let itemWidth = availableWidth / totalItems
-//            
-//            return CGSize(width: max(itemWidth, 20), height: 4)
-//        }
+        //        if collectionView == topSliderCollectionView {
+        //            let totalItems = CGFloat(usersStory.count)
+        //            let spacing: CGFloat = 6.0
+        //            let totalSpacing = spacing * (totalItems - 1)
+        //
+        //            // Dynamic width: Equally divide available width
+        //            let availableWidth = view.bounds.width - totalSpacing
+        //            let itemWidth = availableWidth / totalItems
+        //
+        //            return CGSize(width: max(itemWidth, 20), height: 4)
+        //        }
         
         if collectionView == topSliderCollectionView {
             
             let totalItems = CGFloat(usersStory.count)
             let spacing: CGFloat = 6.0
             let totalSpacing = spacing * (totalItems - 1)
-
+            
             let totalWidth = collectionView.bounds.width
             let availableWidth = totalWidth - totalSpacing
-
+            
             var itemWidth = availableWidth / totalItems
             itemWidth = floor(itemWidth * UIScreen.main.scale) / UIScreen.main.scale  // ← FIX
-
+            
             return CGSize(width: itemWidth, height: 4)
         }
         

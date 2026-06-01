@@ -131,6 +131,35 @@ class DelearProfileViewController: UIViewController {
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
+    func updateStoryUI() {
+        let stories = viewModel.sellerStories // ?? []
+        
+        // No stories uploaded
+        guard !stories.isEmpty else {
+            viewStoriesBtn.setImage(UIImage(named: ""), for: .normal)
+            viewStoriesBtn.layer.borderWidth = 0
+            viewStoriesBtn.isUserInteractionEnabled = false
+            return
+        }
+        
+        viewStoriesBtn.isUserInteractionEnabled = true
+        
+        let hasUnseenStory = stories.contains { $0.isSeen == 0 }
+        
+        if hasUnseenStory {
+            // Show border for unseen stories
+            viewStoriesBtn.setImage(nil, for: .normal)
+            viewStoriesBtn.layer.borderWidth = 3
+            viewStoriesBtn.layer.borderColor = UIColor.accent.cgColor
+            viewStoriesBtn.layer.cornerRadius = viewStoriesBtn.frame.width / 2
+            viewStoriesBtn.clipsToBounds = true
+        } else {
+            // All stories seen
+            viewStoriesBtn.layer.borderWidth = 0
+            viewStoriesBtn.setImage(.gradientBorder, for: .normal)
+        }
+    }
+    
     
     func populateData() {
         let data = viewModel.userProfile

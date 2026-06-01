@@ -61,6 +61,7 @@ struct SellerHighlightsModel: Codable {
     let title: String?
     let status: Int?
     let createdAt, updatedAt: String?
+    let isSeen: Int?
 
     enum CodingKeys: String, CodingKey {
         case id, type
@@ -68,5 +69,6 @@ struct SellerHighlightsModel: Codable {
         case file, status, title
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+        case isSeen = "is_seen"
     }
 }

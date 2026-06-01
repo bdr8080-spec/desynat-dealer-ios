@@ -48,6 +48,16 @@ class StoryViewerViewModel {
             completion(true)
         }
     }
+    
+    func seeStoryService(storyId: Int) {
+        let savedUser = kSharedUserDefaults.retrieveModelFor(key: .user, model: User.self)
+        let param: [String:Any] = ["story_id": storyId,
+                                   "type": 2, //1-user,2-seller,3-admin
+                                   "user_id": savedUser?.id ?? 0]
+        WebService.sharedInstance.seeStoryListService(param: param) { success in
+            print("Stopry viewed")
+        }
+    }
 }
 
 enum ComingReasonAtStoryViewer {

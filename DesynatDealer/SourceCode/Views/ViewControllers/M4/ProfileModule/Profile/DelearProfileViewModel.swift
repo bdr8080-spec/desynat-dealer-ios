@@ -19,7 +19,7 @@ class DelearProfileViewModel {
     var highlightPage: Int = 1
     var highlightLoading = false
     var highlightHasMore = true
-//    var sellerStories: [SellerHighlightsModel] = []
+    var sellerStories: [SellerHighlightsModel] = []
     
     // REELS PAGINATION
     var reelsList: [GetMyReelsList]?
@@ -48,18 +48,19 @@ class DelearProfileViewModel {
 //        let param: [String: Any] = ["limit": 5, "page" : 1]
        
         WebService.sharedInstance.getSellerStoryService() { list in
-//            self.sellerStories = list
-            let dataCount = list.count
-            if dataCount > 0 {
-//                self.hostVC.userProfileImageView.borderWidth = 3
-                self.hostVC.viewStoriesBtn.setImage(.gradientBorder, for: .normal)
-                self.hostVC.viewStoriesBtn.isUserInteractionEnabled = true
-            }else {
-//                self.hostVC.userProfileImageView.borderWidth = 0
-                self.hostVC.viewStoriesBtn.setImage(UIImage(named: ""), for: .normal)
-                self.hostVC.viewStoriesBtn.isUserInteractionEnabled = false
-//                false
-            }
+            self.sellerStories = list
+            self.hostVC.updateStoryUI()
+//            let dataCount = list.count
+//            if dataCount > 0 {
+////                self.hostVC.userProfileImageView.borderWidth = 3
+//                self.hostVC.viewStoriesBtn.setImage(.gradientBorder, for: .normal)
+//                self.hostVC.viewStoriesBtn.isUserInteractionEnabled = true
+//            }else {
+////                self.hostVC.userProfileImageView.borderWidth = 0
+//                self.hostVC.viewStoriesBtn.setImage(UIImage(named: ""), for: .normal)
+//                self.hostVC.viewStoriesBtn.isUserInteractionEnabled = false
+////                false
+//            }
             
         }
     }
