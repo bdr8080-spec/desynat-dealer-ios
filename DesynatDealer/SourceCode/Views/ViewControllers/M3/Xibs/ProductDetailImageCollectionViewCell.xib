@@ -40,29 +40,42 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CQg-1Y-2uw">
                         <rect key="frame" x="0.0" y="0.0" width="233" height="270"/>
                     </imageView>
+                    <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uCt-ZX-dYy">
+                        <rect key="frame" x="96.666666666666671" y="115" width="40.000000000000014" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="2e3-O3-gBF"/>
+                            <constraint firstAttribute="width" constant="40" id="Vib-ZG-XnR"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" image="play"/>
+                    </button>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstItem="CQg-1Y-2uw" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="3z0-wI-tkD"/>
                 <constraint firstItem="lMn-97-ZZ0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="EAE-ay-WUy"/>
+                <constraint firstItem="uCt-ZX-dYy" firstAttribute="centerY" secondItem="CQg-1Y-2uw" secondAttribute="centerY" id="FTs-l6-2pA"/>
                 <constraint firstItem="lMn-97-ZZ0" firstAttribute="top" relation="greaterThanOrEqual" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="FaV-xF-yES"/>
                 <constraint firstItem="CQg-1Y-2uw" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="G3O-uv-fd1"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="lMn-97-ZZ0" secondAttribute="trailing" constant="10" id="IFs-oG-aRL"/>
                 <constraint firstItem="lMn-97-ZZ0" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="LOI-W6-fzW"/>
                 <constraint firstAttribute="bottom" secondItem="CQg-1Y-2uw" secondAttribute="bottom" id="NlP-9W-8hO"/>
                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="lMn-97-ZZ0" secondAttribute="bottom" constant="10" id="Nqd-u9-GDk"/>
+                <constraint firstItem="uCt-ZX-dYy" firstAttribute="centerX" secondItem="CQg-1Y-2uw" secondAttribute="centerX" id="TYv-vP-Xs1"/>
                 <constraint firstAttribute="trailing" secondItem="CQg-1Y-2uw" secondAttribute="trailing" id="eAE-eV-4th"/>
                 <constraint firstItem="lMn-97-ZZ0" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="y4g-E5-fhh"/>
             </constraints>
             <size key="customSize" width="233" height="270"/>
             <connections>
                 <outlet property="mainImageView" destination="CQg-1Y-2uw" id="ToU-Lr-DE4"/>
+                <outlet property="playButton" destination="uCt-ZX-dYy" id="drq-A5-1h3"/>
                 <outlet property="stackView" destination="lMn-97-ZZ0" id="6Dk-SZ-5aH"/>
             </connections>
             <point key="canvasLocation" x="133.58778625954199" y="66.197183098591552"/>
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="play" width="24" height="24"/>
         <image name="upload" width="49" height="49"/>
     </resources>
 </document>

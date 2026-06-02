@@ -18,9 +18,11 @@ class ImagePickerHelper: NSObject {
     
     private override init() {
     }
-    
+    private var isMediaPickerMode = false
     static var shared : ImagePickerHelper = ImagePickerHelper()
     var picker = UIImagePickerController()
+    typealias PickerMedia = ((UIImage?, URL?, Bool) -> Void)?
+    var pickerMediaCallBack: PickerMedia = nil
     
     //MARK: - Action Sheet
     
@@ -42,49 +44,145 @@ class ImagePickerHelper: NSObject {
         
     }
     
-    // MARK: Public Method
-    
-    /**
-     
-     * Public Method for showing ImagePicker Controlller simply get Image
-     * Get Image Object
-     */
-    
-//    func showPickerController(onlyImagePicker: Bool? = false, _ handler:PickerImage) {
+//    func showMediaPicker(_ handler: PickerMedia) {
+//        self.showActionSheet(
+//            withTitle: "Choose Option".localiz(),
+//            withAlertMessage: nil,
+//            withOptions: [
+//                "Take Photo".localiz(),
+//                "Open Gallery".localiz()
+//            ]
+//        ) { selectedIndex in
 //
-//        self.showActionSheet(withTitle: "Choose Option", withAlertMessage: nil, withOptions: ["Take Picture", "Open Gallery"]){ ( _ selectedIndex: Int) in
+//            switch selectedIndex {
+//
+//            case OpenMediaType.camera.rawValue:
+//
+//                self.checkCameraPermission { granted in
+//                    if granted {
+//                        self.showMediaCamera(handler)
+//                    } else {
+//                        self.showCameraPermissionAlert()
+//                    }
+//                }
+//
+//            case OpenMediaType.photoLibrary.rawValue:
+//
+//                self.openMediaGallery(handler)
+//
+//            default:
+//                break
+//            }
+//        }
+//
+//        pickerMediaCallBack = handler
+//    }
+    
+    func showMediaPicker(_ handler: PickerMedia) {
+
+        isMediaPickerMode = true
+        pickerMediaCallBack = handler
+
+        self.showActionSheet(
+            withTitle: "Choose Option".localiz(),
+            withAlertMessage: nil,
+            withOptions: [
+                "Take Photo".localiz(),
+                "Open Gallery".localiz()
+            ]
+        ) { selectedIndex in
+
+            switch selectedIndex {
+            case OpenMediaType.camera.rawValue:
+                self.showMediaCamera(handler)
+
+            case OpenMediaType.photoLibrary.rawValue:
+                self.openMediaGallery(handler)
+
+            default:
+                break
+            }
+        }
+    }
+    
+    func showMediaCamera(_ handler: PickerMedia = nil) {
+
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+
+            picker.delegate = self
+            picker.sourceType = .camera
+            picker.mediaTypes = ["public.image", "public.movie"]
+            picker.videoQuality = .typeHigh
+
+            presetImagePicker(pickerVC: picker)
+        }
+
+        pickerMediaCallBack = handler
+    }
+    
+    func openMediaGallery(_ handler: PickerMedia = nil) {
+
+        picker.delegate = self
+        picker.sourceType = .photoLibrary
+        picker.mediaTypes = ["public.image", "public.movie"]
+
+        presetImagePicker(pickerVC: picker)
+
+        pickerMediaCallBack = handler
+    }
+
+//    func showPickerController(onlyImagePicker: Bool? = false, _ handler: PickerImage) {
+//        self.showActionSheet(withTitle: "Choose Option".localiz(), withAlertMessage: nil, withOptions: ["Take Picture".localiz(), "Open Gallery".localiz()]) { (selectedIndex: Int) in
 //            switch selectedIndex {
 //            case OpenMediaType.camera.rawValue:
-//                self.showCamera(handler)
+//                self.checkCameraPermission { (granted) in
+//                    if granted {
+//                        self.showCamera(handler)
+//                    } else {
+//                        self.showCameraPermissionAlert()
+//                    }
+//                }
 //            case OpenMediaType.photoLibrary.rawValue:
 //                self.openGallery(onlyImagePicker: onlyImagePicker!, handler: handler)
 //            default:
 //                break
 //            }
 //        }
-//
+//        
 //        pickerCallBack = handler
 //    }
+    
+    func showPickerController(
+        onlyImagePicker: Bool? = false,
+        _ handler: PickerImage
+    ) {
 
-    func showPickerController(onlyImagePicker: Bool? = false, _ handler: PickerImage) {
-        self.showActionSheet(withTitle: "Choose Option".localiz(), withAlertMessage: nil, withOptions: ["Take Picture".localiz(), "Open Gallery".localiz()]) { (selectedIndex: Int) in
+        isMediaPickerMode = false
+        pickerCallBack = handler
+
+        self.showActionSheet(
+            withTitle: "Choose Option".localiz(),
+            withAlertMessage: nil,
+            withOptions: [
+                "Take Picture".localiz(),
+                "Open Gallery".localiz()
+            ]
+        ) { selectedIndex in
+
             switch selectedIndex {
             case OpenMediaType.camera.rawValue:
-                self.checkCameraPermission { (granted) in
-                    if granted {
-                        self.showCamera(handler)
-                    } else {
-                        self.showCameraPermissionAlert()
-                    }
-                }
+                self.showCamera(handler)
+
             case OpenMediaType.photoLibrary.rawValue:
-                self.openGallery(onlyImagePicker: onlyImagePicker!, handler: handler)
+                self.openGallery(
+                    onlyImagePicker: onlyImagePicker ?? false,
+                    handler: handler
+                )
+
             default:
                 break
             }
         }
-        
-        pickerCallBack = handler
     }
 
     private func checkCameraPermission(completion: @escaping (Bool) -> Void) {
@@ -176,16 +274,53 @@ class ImagePickerHelper: NSObject {
 
 // MARK: - Picker Delegate
 extension ImagePickerHelper : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey  : Any]) {
-        
-        guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else { return }
-        guard let url = info[UIImagePickerController.InfoKey.imageURL] as? URL else {
-            pickerCallBack?(image,"Camera_Image.jpg")
+//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey  : Any]) {
+//        
+//        guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else { return }
+//        guard let url = info[UIImagePickerController.InfoKey.imageURL] as? URL else {
+//            pickerCallBack?(image,"Camera_Image.jpg")
+//            dismissViewController()
+//            return
+//        }
+//        pickerCallBack?(image,url.lastPathComponent)
+//        dismissViewController()
+//    }
+    
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]
+    ) {
+
+        if isMediaPickerMode {
+
+            if let videoURL = info[.mediaURL] as? URL {
+                pickerMediaCallBack?(nil, videoURL, true)
+                dismissViewController()
+                return
+            }
+
+            if let image = info[.editedImage] as? UIImage ??
+                           info[.originalImage] as? UIImage {
+
+                pickerMediaCallBack?(image, nil, false)
+                dismissViewController()
+                return
+            }
+
+        } else {
+
+            guard let image = info[.editedImage] as? UIImage ??
+                              info[.originalImage] as? UIImage else {
+                dismissViewController()
+                return
+            }
+
+            let imageName = (info[.imageURL] as? URL)?.lastPathComponent
+                            ?? "Camera_Image.jpg"
+
+            pickerCallBack?(image, imageName)
             dismissViewController()
-            return
         }
-        pickerCallBack?(image,url.lastPathComponent)
-        dismissViewController()
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

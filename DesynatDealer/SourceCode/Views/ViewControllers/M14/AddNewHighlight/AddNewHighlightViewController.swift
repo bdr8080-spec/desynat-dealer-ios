@@ -330,33 +330,6 @@ extension AddNewHighlightViewController: UICollectionViewDelegate, UICollectionV
             }
         }
     }
-
-//    private func handleSelectedVideoAsset(_ asset: PHAsset) {
-//        
-//        let options = PHVideoRequestOptions()
-//        options.deliveryMode = .highQualityFormat
-//        
-//        PHImageManager.default().requestAVAsset(forVideo: asset, options: options) { [weak self] avAsset, _, _ in
-//            
-//            guard let self = self,
-//                  let urlAsset = avAsset as? AVURLAsset else { return }
-//            
-//            let videoURL = urlAsset.url
-//            
-//            // Generate thumbnail for display
-//            CommonUtils.generateThumbnail(url: videoURL) { [weak self] thumbNailImage in
-//                guard let self = self else { return }
-//                
-//                DispatchQueue.main.async {
-//                    // Store video URL for later compression/upload
-//                    self.videoURL = videoURL
-//                    guard let data = thumbNailImage?.jpegData(compressionQuality: 0.25) else { return }
-//                    self.viewModel.uploadMediaForGettingThumbnailImageUrl(fileData: data, isImage: true)
-//                    self.isImageSelected = false
-//                }
-//            }
-//        }
-//    }
     
     private func handleSelectedVideoAsset(_ asset: PHAsset) {
         
@@ -422,34 +395,6 @@ extension AddNewHighlightViewController: UICollectionViewDelegate, UICollectionV
             }
         }
     }
-//    private func handleVideoAsset(_ asset: PHAsset) {
-//        
-//        let options = PHVideoRequestOptions()
-//        options.deliveryMode = .highQualityFormat
-//        
-//        PHImageManager.default().requestAVAsset(forVideo: asset, options: options) { [weak self] avAsset, _, _ in
-//            
-//            guard let self = self,
-//                  let urlAsset = avAsset as? AVURLAsset else { return }
-//            
-//            let videoURL = urlAsset.url
-//            let data = try Data(contentsOf: videoURL)
-//            self.isImageSelected = false
-//            self.selectedVideoData = data
-//            self.selectedImageData = nil
-//            self.videoURL = videoURL
-//            // ✅ Generate thumbnail
-//            CommonUtils.generateThumbnail(url: videoURL) { thumbnail in
-//                DispatchQueue.main.async {
-//                    let vc = UploadPostViewController.instantiate(fromAppStoryboard: .Profile)
-//                    vc.selectedImage = thumbnail
-//                    vc.videoURL = videoURL
-//                    self.navigationController?.pushViewController(vc, animated: true)
-//                }
-//            }
-//        }
-//    }
-    
     
     private func handleVideoAsset(_ asset: PHAsset) {
         

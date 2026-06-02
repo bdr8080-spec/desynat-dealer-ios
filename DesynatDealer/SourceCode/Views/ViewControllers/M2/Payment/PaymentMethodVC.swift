@@ -180,7 +180,7 @@ extension PaymentMethodVC {
         
         WebService.sharedInstance.completePurchasePlansListService(param: params) { user, error in
             
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { 
                 
                 if let error = error {
 //                    self.showAlert(msg: error)

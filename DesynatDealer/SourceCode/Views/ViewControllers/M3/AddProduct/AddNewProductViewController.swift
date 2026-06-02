@@ -871,20 +871,86 @@ extension AddNewProductViewController: AddSpecificationCellDelegate, AddVariantC
     }
     
     
+//    func addImageTapped(from cell: AddVariantTableViewCell, at index: Int) {
+//        ImagePickerHelper.shared.showPickerController { [weak cell] image, imageName in
+//            guard let image = image, let cell = cell else { return }
+//            WebService.sharedInstance.uploadImage(withParams: image) { imageURL in
+//                DispatchQueue.main.async {
+//                    let insertIndex = cell.images.count
+//                    cell.images.append(image)
+//                    cell.imageURLs.append(imageURL.url ?? "")
+//                    let newItemIndexPath = IndexPath(item: insertIndex + 1, section: 0) // +1 because 0 is placeholder
+//                    cell.imagesCollectionView.performBatchUpdates({
+//                        cell.imagesCollectionView.insertItems(at: [newItemIndexPath])
+//                    }, completion: nil)
+//                    
+//                    cell.scrollToLastItem()
+//                }
+//            }
+//        }
+//    }
+    
     func addImageTapped(from cell: AddVariantTableViewCell, at index: Int) {
-        ImagePickerHelper.shared.showPickerController { [weak cell] image, imageName in
-            guard let image = image, let cell = cell else { return }
-            WebService.sharedInstance.uploadImage(withParams: image) { imageURL in
-                DispatchQueue.main.async {
-                    let insertIndex = cell.images.count
-                    cell.images.append(image)
-                    cell.imageURLs.append(imageURL.url ?? "")
-                    let newItemIndexPath = IndexPath(item: insertIndex + 1, section: 0) // +1 because 0 is placeholder
-                    cell.imagesCollectionView.performBatchUpdates({
-                        cell.imagesCollectionView.insertItems(at: [newItemIndexPath])
-                    }, completion: nil)
-                    
-                    cell.scrollToLastItem()
+        ImagePickerHelper.shared.showMediaPicker { [weak cell] image, videoURL, isVideo in
+            guard let cell = cell else { return }
+            if isVideo {
+                guard let videoURL = videoURL,
+                      let videoData = try? Data(contentsOf: videoURL) else {
+                    return
+                }
+                let uploadItem = MultipartUpload(
+                    fileName: "file",
+                    file: videoData,
+                    mimeType: .Video
+                )
+                WebService.sharedInstance.uploadVideoAndImage(withParams: uploadItem) { url, msg, code in
+                    CommonUtils.generateThumbnail(url: videoURL) { thumbnail in
+                        DispatchQueue.main.async {
+                            guard let thumbnail = thumbnail else { return }
+                            let insertIndex = cell.images.count
+                            cell.images.append(thumbnail)
+                            cell.imageURLs.append(url)
+
+                            cell.mediaTypes.append("video")
+                            cell.localVideoURLs.append(videoURL)
+                            let indexPath = IndexPath(
+                                item: insertIndex + 1,
+                                section: 0
+                            )
+                            cell.imagesCollectionView.performBatchUpdates({
+                                cell.imagesCollectionView.insertItems(at: [indexPath])
+                            })
+                            cell.scrollToLastItem()
+                        }
+                    }
+                }
+            } else {
+                guard let image = image,
+                      let imageData = image.jpegData(compressionQuality: 0.7) else {
+                    return
+                }
+                let uploadItem = MultipartUpload(
+                    fileName: "file",
+                    file: imageData,
+                    mimeType: .image
+                )
+                WebService.sharedInstance.uploadVideoAndImage(withParams: uploadItem) { url, msg, code in
+                    DispatchQueue.main.async {
+                        let insertIndex = cell.images.count
+                        cell.images.append(image)
+                        cell.imageURLs.append(url)
+
+                        cell.mediaTypes.append("image")
+                        cell.localVideoURLs.append(nil)
+                        let indexPath = IndexPath(
+                            item: insertIndex + 1,
+                            section: 0
+                        )
+                        cell.imagesCollectionView.performBatchUpdates({
+                            cell.imagesCollectionView.insertItems(at: [indexPath])
+                        })
+                        cell.scrollToLastItem()
+                    }
                 }
             }
         }

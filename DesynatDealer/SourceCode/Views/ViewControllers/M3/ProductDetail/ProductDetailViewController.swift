@@ -7,6 +7,8 @@
 
 import UIKit
 import Cosmos
+import AVFoundation
+import AVKit
 
 class ProductDetailViewController: UIViewController {
     
@@ -440,7 +442,8 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
             
             // Show images of the selected variant
             if let images = selectedVariant?.variantImage, images.count > indexPath.row {
-                cell.configData(variantImageUrl: images[indexPath.row])
+//                cell.configData(variantImageUrl: images[indexPath.row])
+                cell.configure(mediaURL: images[indexPath.row])
             }
             return cell
         case colorsCollectionView:
@@ -449,7 +452,7 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
             if selectedColourIndex == indexPath.row {
                 cell.borderView.layer.borderColor = UIColor.darkBrown.cgColor
             } else {
-                cell.borderView.layer.borderColor = UIColor.white.cgColor
+                cell.borderView.layer.borderColor = UIColor.lightGray.cgColor
             }
             return cell
         case sizeCollectionView:
@@ -488,12 +491,33 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch collectionView {
         case productImageCollectionView:
-            guard let images = selectedVariant?.variantImage else { return }
-            let vc = FullscreenGalleryViewController()
-            vc.images = images
-            vc.startIndex = indexPath.row
-            vc.modalPresentationStyle = .fullScreen
-            present(vc, animated: true)
+//            guard let images = selectedVariant?.variantImage else { return }
+//            let vc = FullscreenGalleryViewController()
+//            vc.images = images
+//            vc.startIndex = indexPath.row
+//            vc.modalPresentationStyle = .fullScreen
+//            present(vc, animated: true)
+            
+            
+            guard let mediaItems = selectedVariant?.variantImage else { return }
+                    let selectedUrl = mediaItems[indexPath.row]
+                    guard let url = URL(string: selectedUrl) else { return }
+                    let videoExtensions = ["mp4", "mov", "m4v", "avi"]
+                    if videoExtensions.contains(url.pathExtension.lowercased()) {
+                        let player = AVPlayer(url: url)
+                        let playerVC = AVPlayerViewController()
+                        playerVC.player = player
+                        present(playerVC, animated: true) {
+                            player.play()
+                        }
+                    } else {
+                        let vc = FullscreenGalleryViewController()
+                        vc.images = mediaItems
+                        vc.startIndex = indexPath.row
+                        vc.modalPresentationStyle = .fullScreen
+                        present(vc, animated: true)
+                    }
+
         case colorsCollectionView:
             selectedColourIndex = indexPath.row
             let selectedColorId = coloursList[indexPath.row].id
@@ -555,9 +579,11 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
         case productImageCollectionView:
             return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
         case colorsCollectionView:
-            return CGSize(width: 54, height: 45)
+//            return CGSize(width: 54, height: 45)
+            return CGSize(width: 45, height: 35)
         case sizeCollectionView:
-            return CGSize(width: 55, height: 42)
+//            return CGSize(width: 55, height: 42)
+            return CGSize(width: 45, height: 35)
         default:
             return CGSize(width: 0, height: 0)
         }

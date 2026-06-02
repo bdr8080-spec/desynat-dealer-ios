@@ -9,36 +9,39 @@ import Foundation
 import UIKit
 
 enum ComingReasonAtAddToProduct {
-  case forAddingProduct
-  case forEditProduct
+    case forAddingProduct
+    case forEditProduct
 }
 
 struct Variant {
-  var images: [UIImage] = []
-  var imageURLs: [String] = []
-  var colorId: Int? = -1
-  var sizeVariants: [SizeVariant] = [SizeVariant()]
+    var images: [UIImage] = []
+    var imageURLs: [String] = []
+    var colorId: Int? = -1
+    // NEW
+    var mediaTypes: [String] = []
+    var localVideoURLs: [URL?] = []
+    var sizeVariants: [SizeVariant] = [SizeVariant()]
 }
 
 struct SizeVariant {
-  var sizeId: Int? = -1
-  var bust: String = ""
-  var waist: String = ""
-  var hip: String = ""
-  var shoulder: String = ""
-  var sleeveLength: String = ""
-  var length: String = ""
-  var totalStock: String = ""
-  var sku: String = ""
-  var actualPrice: String = ""
-  var discountTypeIsPercentage: Bool = true
-  var discountValue: String = ""
-  var finalPrice: String = ""
+    var sizeId: Int? = -1
+    var bust: String = ""
+    var waist: String = ""
+    var hip: String = ""
+    var shoulder: String = ""
+    var sleeveLength: String = ""
+    var length: String = ""
+    var totalStock: String = ""
+    var sku: String = ""
+    var actualPrice: String = ""
+    var discountTypeIsPercentage: Bool = true
+    var discountValue: String = ""
+    var finalPrice: String = ""
 }
 
 struct Spefication {
-  var product_spe_en: String = ""
-  var product_spe_feature_en: String = ""
-  var product_spe_ar: String = ""
-  var product_spe_feature_ar: String = ""
+    var product_spe_en: String = ""
+    var product_spe_feature_en: String = ""
+    var product_spe_ar: String = ""
+    var product_spe_feature_ar: String = ""
 }
