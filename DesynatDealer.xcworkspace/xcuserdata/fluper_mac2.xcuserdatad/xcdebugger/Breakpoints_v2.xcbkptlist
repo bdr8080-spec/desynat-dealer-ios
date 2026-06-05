@@ -34,36 +34,6 @@
             endingLineNumber = "341"
             landmarkName = "uploadSizeChartDidTapped(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "006701B3-06DB-4D46-966C-73EFBE08600C - a848576ebca8785"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.UIImage&gt;, Swift.String) -&gt; () in DesynatDealer.AddNewProductViewController.uploadSizeChartDidTapped(Any) -&gt; ()"
-                  moduleName = "DesynatDealer.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fluper_mac2/Documents/RakhiWorkspace/desynat-dealer-ios/DesynatDealer/SourceCode/Views/ViewControllers/M3/AddProduct/AddNewProductViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "341"
-                  endingLineNumber = "341">
-               </Location>
-               <Location
-                  uuid = "006701B3-06DB-4D46-966C-73EFBE08600C - 649c493b3d22aadf"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (DesynatDealer.UploadImageModel) -&gt; () in closure #1 (Swift.Optional&lt;__C.UIImage&gt;, Swift.String) -&gt; () in DesynatDealer.AddNewProductViewController.uploadSizeChartDidTapped(Any) -&gt; ()"
-                  moduleName = "DesynatDealer.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fluper_mac2/Documents/RakhiWorkspace/desynat-dealer-ios/DesynatDealer/SourceCode/Views/ViewControllers/M3/AddProduct/AddNewProductViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "342"
-                  endingLineNumber = "342">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
