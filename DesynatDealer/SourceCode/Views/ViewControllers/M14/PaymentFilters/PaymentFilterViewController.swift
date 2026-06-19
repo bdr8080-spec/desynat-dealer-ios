@@ -19,6 +19,7 @@ class PaymentFilterViewController: UIViewController {
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var toTextField: UITextField!
     @IBOutlet weak var fromTextField: UITextField!
+    @IBOutlet weak var buttonActionStackView: UIStackView!
     
     let datePicker = UIDatePicker()
     private var activeTextField: UITextField?
@@ -37,6 +38,7 @@ class PaymentFilterViewController: UIViewController {
         super.viewDidLoad()
         handleUISetup()
         applyPreselectedData()
+        buttonActionStackView.semanticContentAttribute = .forceLeftToRight
     }
     
     

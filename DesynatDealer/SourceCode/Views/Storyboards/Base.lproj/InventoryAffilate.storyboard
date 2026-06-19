@@ -1838,6 +1838,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="buttonActionStackView" destination="P6b-iz-v8i" id="sEf-UZ-Ymy"/>
                         <outlet property="filterTableView" destination="jo8-6p-va7" id="U4K-nK-aZK"/>
                         <outlet property="headerView" destination="IqX-bi-RqS" id="6El-mM-bdU"/>
                     </connections>

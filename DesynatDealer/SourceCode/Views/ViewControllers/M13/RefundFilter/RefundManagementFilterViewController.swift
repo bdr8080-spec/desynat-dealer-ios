@@ -9,6 +9,7 @@ import UIKit
 
 class RefundManagementFilterViewController: UIViewController {
     
+    @IBOutlet weak var buttonAcionStackView: UIStackView!
     @IBOutlet weak var filtersTableView: UITableView! {
         didSet{
             filtersTableView.dataSource = self
@@ -39,8 +40,8 @@ class RefundManagementFilterViewController: UIViewController {
         super.viewDidLoad()
         handleUISetup()
         applyPreselectedData()
+        buttonAcionStackView.semanticContentAttribute = .forceLeftToRight
     }
-    
     
     // MARK: - Navigation
     

@@ -9,6 +9,7 @@ import UIKit
 
 class DealsListFilterViewController: UIViewController {
     
+    @IBOutlet weak var buttonAcionStackView: UIStackView!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var toTextField: UITextField!
     @IBOutlet weak var fromTextField: UITextField!
@@ -23,6 +24,7 @@ class DealsListFilterViewController: UIViewController {
         super.viewDidLoad()
         handleUISetup()
         applyPreselectedData()
+        buttonAcionStackView.semanticContentAttribute = .forceLeftToRight
     }
     
     @IBAction func dismissDidTapped(_ sender: Any) {
@@ -88,31 +90,6 @@ extension DealsListFilterViewController {
         fromTextField.delegate = self
         toTextField.delegate = self
     }
-    
-//    @objc private func doneDatePicker() {
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "dd/MM/yyyy"
-//        
-//        if activeTextField == fromTextField {
-//            fromTextField.text = formatter.string(from: datePicker.date)
-//            if let toText = toTextField.text,
-//               let toDate = formatter.date(from: toText),
-//               toDate < datePicker.date {
-//                toTextField.text = ""
-//            }
-//        }
-//        
-//        else if activeTextField == toTextField {
-//            if let fromText = fromTextField.text,
-//               let fromDate = formatter.date(from: fromText),
-//               datePicker.date < fromDate {
-//                showValidationAlert()
-//                return
-//            }
-//            toTextField.text = formatter.string(from: datePicker.date)
-//        }
-//        view.endEditing(true)
-//    }
     
     @objc private func doneDatePicker() {
         let formatter = DateFormatter()

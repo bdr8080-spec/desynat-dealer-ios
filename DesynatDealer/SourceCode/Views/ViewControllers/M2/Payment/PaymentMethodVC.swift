@@ -53,7 +53,7 @@ class PaymentMethodVC: UIViewController {
     }
     
     @IBAction func btnSelectPaymentMethod(_ sender: Any) {
-        let supplierId = String(Int.random(in: 1000...9999))
+//        let supplierId = String(Int.random(in: 1000...9999))
         cardSelectionImageView.image = UIImage(named: "radioSelected")
         isCardIsSlecteed = true
         selectedPaymentMethodID = nil
@@ -61,7 +61,7 @@ class PaymentMethodVC: UIViewController {
             creditDebitCardPayment(
                 invoiceValue: Decimal(payAmount),
                 orderId: transactionIds ?? "",
-                supplierId: supplierId
+//                supplierId: supplierId
             ) { [weak self] response, invoiceId, error in
                 guard let self = self else { return }
                 if let err = error {
@@ -81,7 +81,7 @@ class PaymentMethodVC: UIViewController {
         if isCardIsSlecteed {
             switch paymentFrom {
             case .plan, .mySubscriptionPlan :
-                let supplierId = String(Int.random(in: 1000...9999))
+//                let supplierId = String(Int.random(in: 1000...9999))
                 cardSelectionImageView.image = UIImage(named: "radioSelected")
                 isCardIsSlecteed = true
                 selectedPaymentMethodID = nil
@@ -89,7 +89,7 @@ class PaymentMethodVC: UIViewController {
                     creditDebitCardPayment(
                         invoiceValue: Decimal(payAmount),
                         orderId: transactionIds ?? "",
-                        supplierId: supplierId
+//                        supplierId: supplierId
                     ) { [weak self] response, invoiceId, error in
                         guard let self = self else { return }
                         if let err = error {
@@ -100,11 +100,11 @@ class PaymentMethodVC: UIViewController {
 //                }
                 
             case .banner:
-                let supplierId = String(Int.random(in: 1000...9999))
+//                let supplierId = String(Int.random(in: 1000...9999))
                 creditDebitCardPayment(
                     invoiceValue: Decimal(payAmount),
                     orderId: transactionIds ?? "",
-                    supplierId: supplierId
+//                    supplierId: supplierId
                 ) { [weak self] response, invoiceId, error in
                     guard let self = self else { return }
                     if let err = error {
@@ -144,53 +144,22 @@ extension PaymentMethodVC {
         }
     }
     
-//    func completePlanPurchase(transactionId: String, paymentStatus:Int, onlineTransactionId: String) {
-//        let params: [String: Any] = [
-//            "transaction_id": transactionId,
-//            "payment_status": paymentStatus,
-//            "online_transaction_id": onlineTransactionId
-//        ]
-//        
-//        WebService.sharedInstance.completePurchasePlansListService(param: params) { result in
-//            DispatchQueue.main.async {
-//                //                                self.stopLoading()
-//                let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
-//                vc.comingReason = .planPurchased
-//                vc.callBackDismiss = {
-//                    if self.paymentFrom == .mySubscriptionPlan {
-//                        self.navigationController?.popViewController(animated: true)
-//                    } else {
-//                        kSharedSceneDelegate.navigateToDealerHomeVc()
-//                    }
-//                }
-//                self.present(vc, animated: true)
-//            }
-//        }
-//    }
-    
     func completePlanPurchase(transactionId: String,
                               paymentStatus: Int,
                               onlineTransactionId: String) {
-        
         let params: [String: Any] = [
             "transaction_id": transactionId,
             "payment_status": paymentStatus,
-            "online_transaction_id": onlineTransactionId
-        ]
-        
+            "online_transaction_id": onlineTransactionId]
         WebService.sharedInstance.completePurchasePlansListService(param: params) { user, error in
-            
-            DispatchQueue.main.async { 
-                
+            DispatchQueue.main.async {
                 if let error = error {
 //                    self.showAlert(msg: error)
                     CommonUtils.showToast(message: error)
                     return
                 }
-                
                 let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
                 vc.comingReason = .planPurchased
-                
                 vc.callBackDismiss = {
                     if self.paymentFrom == .mySubscriptionPlan {
                         self.navigationController?.popViewController(animated: true)
@@ -198,7 +167,6 @@ extension PaymentMethodVC {
                         kSharedSceneDelegate.navigateToDealerHomeVc()
                     }
                 }
-                
                 self.present(vc, animated: true)
             }
         }
@@ -206,14 +174,14 @@ extension PaymentMethodVC {
     
     func creditDebitCardPayment(invoiceValue: Decimal,
                                 orderId: String,
-                                supplierId: String?,
+//                                supplierId: String?,
                                 completion: @escaping (MFPaymentStatusResponse?, String?, Error?) -> Void) {
-        let supplierId = Int.random(in: 1000...9999)
+//        let supplierId = Int.random(in: 1000...9999)
         let request = MFExecutePaymentRequest(invoiceValue: invoiceValue, paymentMethod: 2)
         request.customerReference = orderId
         
-        let supplier = MFSupplier(supplierCode: supplierId, invoiceShare: invoiceValue)
-        request.suppliers = [supplier]
+//        let supplier = MFSupplier(supplierCode: supplierId, invoiceShare: invoiceValue)
+//        request.suppliers = [supplier]
         request.displayCurrencyIso = .kuwait_KWD
         MFPaymentRequest.shared.executePayment(request: request, apiLanguage: .english) { result, invoiceId in
             switch result {
@@ -241,11 +209,11 @@ extension PaymentMethodVC {
         let invoiceValue = Decimal(payAmount)
         let request = MFExecutePaymentRequest(invoiceValue: invoiceValue)
         request.customerReference = self.transactionIds ?? ""
-        let supplierId = Int.random(in: 1000...9999)
-        let supplier = MFSupplier(
-            supplierCode: supplierId, invoiceShare: invoiceValue
-        )
-        request.suppliers = [supplier]
+//        let supplierId = Int.random(in: 1000...9999)
+//        let supplier = MFSupplier(
+//            supplierCode: supplierId, invoiceShare: invoiceValue
+//        )
+//        request.suppliers = [supplier]
         
         viewPayment.pay(request, .english) { [weak self] response, invoiceId in
             guard let self = self else { return }
@@ -324,7 +292,6 @@ extension PaymentMethodVC {
                 }
             case .failure(let error):
                 print(error)
-                //self?.showToast(error)
             }
         }
     }

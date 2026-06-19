@@ -2001,6 +2001,7 @@ you will be notified once your banner is approved on the desynat platform</strin
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="buttonActionStackView" destination="sKJ-vn-1B2" id="CeV-3G-R7h"/>
                         <outlet property="headerView" destination="430-GF-kgq" id="1sx-Dm-G8X"/>
                         <outlet property="img1" destination="R44-JM-b24" id="0qa-Xy-PFG"/>
                         <outlet property="img2" destination="pgj-Lx-yqO" id="P9g-P1-JM9"/>

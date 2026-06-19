@@ -21,6 +21,7 @@ class JoinAnotherDelaerViewController: UIViewController {
     @IBOutlet weak var muteView: UIView!
     @IBOutlet weak var lblUserCount: UILabel!
     @IBOutlet weak var vierwerCountView: CustomView!
+    @IBOutlet weak var buttonActionStackView: UIStackView!
     
     // MARK: - Agora
     var agoraKit: AgoraRtcEngineKit!
@@ -56,6 +57,7 @@ class JoinAnotherDelaerViewController: UIViewController {
         }
         joinChannel()
         startUserCountTimer()
+        buttonActionStackView.semanticContentAttribute = .forceLeftToRight
     }
     
     deinit {

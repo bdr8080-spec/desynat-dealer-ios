@@ -43,6 +43,7 @@ class AddNewStaffViewController: UIViewController {
     @IBOutlet weak var accessModierView: UIView!
     @IBOutlet weak var extraSpaceView: UIView!
     @IBOutlet weak var btnChngImg: CustomButton!
+    @IBOutlet weak var buttonActionStackView: UIStackView!
     
     // MARK: - Variable
     var selectedRoleId: Int = -1
@@ -70,6 +71,7 @@ class AddNewStaffViewController: UIViewController {
             self.accessModuleTableView.reloadData()
             self.configData()
         }
+        buttonActionStackView.semanticContentAttribute = .forceLeftToRight
     }
     
     override func viewWillLayoutSubviews() {

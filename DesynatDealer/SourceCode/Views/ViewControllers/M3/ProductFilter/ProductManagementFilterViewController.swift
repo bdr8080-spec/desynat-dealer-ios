@@ -8,199 +8,194 @@
 import UIKit
 
 class ProductManagementFilterViewController: UIViewController {
-  
-  @IBOutlet weak var headerView: UIView!
-  @IBOutlet weak var filterTableView: UITableView!
-  
-  
-  lazy var viewModel = FilterManagementViewModel(hostVC: self)
-  var selectedCategoryIDs: [String] = []
-  var selectedBrandIDs: [String] = []
-  var onFilterApplied: ((_ categoryIDs: [String], _ brandIDs: [String]) -> Void)?
-  var filtersOptions: [FilterSection] = []
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    registerXib()
-    setupUI()
-    prepareFilters()
-  }
-  
-  @IBAction func applyDidTapped(_ sender: Any) {
-    let categoryIDs = filtersOptions[0].options
-      .filter { $0.isSelected }
-      .map { $0.id }
     
-    let brandIDs = filtersOptions[1].options
-      .filter { $0.isSelected }
-      .map { $0.id }
+    @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var filterTableView: UITableView!
+    @IBOutlet weak var buttonActionStackView: UIStackView!
     
-    onFilterApplied?(categoryIDs, brandIDs)
-    dismiss(animated: true)
-  }
-  
-  @IBAction func crossDidTapped(_ sender: Any) {
-    self.dismiss(animated: true)
-  }
-  
-  @IBAction func clearDidTapped(_ sender: Any) {
-    selectedCategoryIDs.removeAll()
+    lazy var viewModel = FilterManagementViewModel(hostVC: self)
+    var selectedCategoryIDs: [String] = []
+    var selectedBrandIDs: [String] = []
+    var onFilterApplied: ((_ categoryIDs: [String], _ brandIDs: [String]) -> Void)?
+    var filtersOptions: [FilterSection] = []
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        registerXib()
+        setupUI()
+        prepareFilters()
+        buttonActionStackView.semanticContentAttribute = .forceLeftToRight
+    }
+    
+    @IBAction func applyDidTapped(_ sender: Any) {
+        let categoryIDs = filtersOptions[0].options
+            .filter { $0.isSelected }
+            .map { $0.id }
+        
+        let brandIDs = filtersOptions[1].options
+            .filter { $0.isSelected }
+            .map { $0.id }
+        
+        onFilterApplied?(categoryIDs, brandIDs)
+        dismiss(animated: true)
+    }
+    
+    @IBAction func crossDidTapped(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
+    
+    @IBAction func clearDidTapped(_ sender: Any) {
+        selectedCategoryIDs.removeAll()
         selectedBrandIDs.removeAll()
         prepareFilters()
         onFilterApplied?([], [])
         dismiss(animated: true)
-  }
-  
-  func setupUI() {
-    headerView.layer.cornerRadius = 32
-    headerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-    headerView.clipsToBounds = true
-  }
-  
-  // MARK: - Load API Data
-//  func loadFilterData() {
-//    let group = DispatchGroup()
-//    
-//    group.enter()
-//    viewModel.getCategoriesListApi {
-//      group.leave()
-//    }
-//    
-//    group.enter()
-//    viewModel.getBrandListApi {
-//      group.leave()
-//    }
-//    
-//    group.notify(queue: .main) {
-//      self.prepareFilters()
-//    }
-//  }
-  
-  // MARK: - Prepare Filter List
-  func prepareFilters() {
-    
-    // CATEGORY - Single selection
-    let categoryOptions = viewModel.categoriesList.map {
-      FilterOption(
-        id: "\($0.id ?? 0)",
-//        title: $0.name ?? "",
-        title: AppLanguageManager.shared.currentLanguage == .ar
-                    ? ($0.nameAr ?? $0.name ?? "")
-                    : ($0.name ?? ""),
-        isSelected: selectedCategoryIDs.contains("\($0.id ?? 0)")
-      )
     }
     
-    // BRAND - Multiple selection
-    let brandOptions = viewModel.brandsList.map {
-      FilterOption(
-        id: "\($0.id ?? 0)",
-//        title: $0.nameEnglish ?? "",
-        title: AppLanguageManager.shared.currentLanguage == .ar
-                    ? ($0.nameArabic ?? $0.nameEnglish ?? "")
-                    : ($0.nameEnglish ?? ""),
-        isSelected: selectedBrandIDs.contains("\($0.id ?? 0)")
-      )
+    func setupUI() {
+        headerView.layer.cornerRadius = 32
+        headerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        headerView.clipsToBounds = true
     }
     
-    filtersOptions = [
-        FilterSection(header: "Filter by Category".localiz(), options: categoryOptions),
-        FilterSection(header: "Filter by Brand".localiz(), options: brandOptions)
-    ]
+    // MARK: - Load API Data
+    //  func loadFilterData() {
+    //    let group = DispatchGroup()
+    //
+    //    group.enter()
+    //    viewModel.getCategoriesListApi {
+    //      group.leave()
+    //    }
+    //
+    //    group.enter()
+    //    viewModel.getBrandListApi {
+    //      group.leave()
+    //    }
+    //
+    //    group.notify(queue: .main) {
+    //      self.prepareFilters()
+    //    }
+    //  }
     
-    filterTableView.reloadData()
-  }
-  
-  
-  func registerXib() {
-    filterTableView.delegate = self
-    filterTableView.dataSource = self
+    // MARK: - Prepare Filter List
+    func prepareFilters() {
+        
+        // CATEGORY - Single selection
+        let categoryOptions = viewModel.categoriesList.map {
+            FilterOption(
+                id: "\($0.id ?? 0)",
+                //        title: $0.name ?? "",
+                title: AppLanguageManager.shared.currentLanguage == .ar
+                ? ($0.nameAr ?? $0.name ?? "")
+                : ($0.name ?? ""),
+                isSelected: selectedCategoryIDs.contains("\($0.id ?? 0)")
+            )
+        }
+        
+        // BRAND - Multiple selection
+        let brandOptions = viewModel.brandsList.map {
+            FilterOption(
+                id: "\($0.id ?? 0)",
+                //        title: $0.nameEnglish ?? "",
+                title: AppLanguageManager.shared.currentLanguage == .ar
+                ? ($0.nameArabic ?? $0.nameEnglish ?? "")
+                : ($0.nameEnglish ?? ""),
+                isSelected: selectedBrandIDs.contains("\($0.id ?? 0)")
+            )
+        }
+        
+        filtersOptions = [
+            FilterSection(header: "Filter by Category".localiz(), options: categoryOptions),
+            FilterSection(header: "Filter by Brand".localiz(), options: brandOptions)
+        ]
+        
+        filterTableView.reloadData()
+    }
     
-    filterTableView.registerCellFromNib(cellID: "FilterOptionsTableViewCell")
     
-    // Correct header registration
-    filterTableView.register(
-      UINib(nibName: "FilterHeaderTableViewCell", bundle: nil),
-      forHeaderFooterViewReuseIdentifier: "FilterHeaderTableViewCell"
-    )
+    func registerXib() {
+        filterTableView.delegate = self
+        filterTableView.dataSource = self
+        
+        filterTableView.registerCellFromNib(cellID: "FilterOptionsTableViewCell")
+        
+        // Correct header registration
+        filterTableView.register(
+            UINib(nibName: "FilterHeaderTableViewCell", bundle: nil),
+            forHeaderFooterViewReuseIdentifier: "FilterHeaderTableViewCell"
+        )
+        
+        filterTableView.estimatedRowHeight = 0
+        filterTableView.estimatedSectionHeaderHeight = 0
+        filterTableView.estimatedSectionFooterHeight = 0
+        filterTableView.showsVerticalScrollIndicator = false
+        
+        headerView.layer.cornerRadius = 32
+        headerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        headerView.clipsToBounds = true
+    }
     
-    filterTableView.estimatedRowHeight = 0
-    filterTableView.estimatedSectionHeaderHeight = 0
-    filterTableView.estimatedSectionFooterHeight = 0
-    filterTableView.showsVerticalScrollIndicator = false
-    
-    headerView.layer.cornerRadius = 32
-    headerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-    headerView.clipsToBounds = true
-  }
-  
-  
-  
 }
 
 extension ProductManagementFilterViewController: UITableViewDelegate, UITableViewDataSource {
-  
-  func numberOfSections(in tableView: UITableView) -> Int {
-    return filtersOptions.count
-  }
-  
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return filtersOptions[section].options.count
-  }
-  
-  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "FilterHeaderTableViewCell") as! FilterHeaderTableViewCell
-    header.titleLabel.text = filtersOptions[section].header
-    return header
-  }
-  
-  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    30
-  }
-  func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-    0.01
-  }
-  
-  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return UITableView.automaticDimension
-  }
-  
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(
-      withIdentifier: "FilterOptionsTableViewCell",
-      for: indexPath
-    ) as! FilterOptionsTableViewCell
     
-    let option = filtersOptions[indexPath.section].options[indexPath.row]
-    cell.titleLabel.text = option.title
-    cell.selectedImageView.image = UIImage(
-      named: option.isSelected ? option.selectedImage : option.unselectedImage
-    )
-    
-    return cell
-  }
-  
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
-    // CATEGORY SECTION (single selection)
-    if indexPath.section == 0 {
-      
-      for i in 0..<filtersOptions[0].options.count {
-        filtersOptions[0].options[i].isSelected = (i == indexPath.row)
-      }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return filtersOptions.count
     }
     
-    // BRAND SECTION (multi selection)
-    else if indexPath.section == 1 {
-      
-      filtersOptions[1].options[indexPath.row].isSelected.toggle()
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return filtersOptions[section].options.count
     }
     
-    tableView.reloadSections(IndexSet(integer: indexPath.section), with: .none)
-  }
-  
-  
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "FilterHeaderTableViewCell") as! FilterHeaderTableViewCell
+        header.titleLabel.text = filtersOptions[section].header
+        return header
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        30
+    }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        0.01
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: "FilterOptionsTableViewCell",
+            for: indexPath
+        ) as! FilterOptionsTableViewCell
+        
+        let option = filtersOptions[indexPath.section].options[indexPath.row]
+        cell.titleLabel.text = option.title
+        cell.selectedImageView.image = UIImage(
+            named: option.isSelected ? option.selectedImage : option.unselectedImage
+        )
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // CATEGORY SECTION (single selection)
+        if indexPath.section == 0 {
+            
+            for i in 0..<filtersOptions[0].options.count {
+                filtersOptions[0].options[i].isSelected = (i == indexPath.row)
+            }
+        }
+        
+        // BRAND SECTION (multi selection)
+        else if indexPath.section == 1 {
+            
+            filtersOptions[1].options[indexPath.row].isSelected.toggle()
+        }
+        
+        tableView.reloadSections(IndexSet(integer: indexPath.section), with: .none)
+    }
+    
 }
-
-
-

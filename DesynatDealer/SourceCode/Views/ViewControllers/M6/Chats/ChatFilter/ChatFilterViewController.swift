@@ -15,6 +15,7 @@ class ChatFilterViewController: UIViewController {
         }
     }
     @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var buttonAcionStackView: UIStackView!
     
     var selectedFilter = ChatInboxListFilterModel()
     var onApplyFilter: ((ChatInboxListFilterModel) -> Void)?
@@ -27,6 +28,7 @@ class ChatFilterViewController: UIViewController {
         super.viewDidLoad()
         handleUISetup()
         applyPreselectedData()
+        buttonAcionStackView.semanticContentAttribute = .forceLeftToRight
     }
     
     @IBAction func dismissDidTapped(_ sender: Any) {

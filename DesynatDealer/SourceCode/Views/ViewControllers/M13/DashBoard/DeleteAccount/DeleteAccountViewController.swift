@@ -8,14 +8,17 @@
 import UIKit
 
 class DeleteAccountViewController: UIViewController {
-
+    
+    @IBOutlet weak var buttonAcionStackView: UIStackView!
+    
     var onYesTapped: (()-> Void)?
-   // var comingUserRole: UserRoleType = .normalUser
+    // var comingUserRole: UserRoleType = .normalUser
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        buttonAcionStackView.semanticContentAttribute = .forceLeftToRight
     }
-
+    
     @IBAction func yesDidTapped(_ sender: Any) {
         onYesTapped?()
         self.dismiss(animated: true)

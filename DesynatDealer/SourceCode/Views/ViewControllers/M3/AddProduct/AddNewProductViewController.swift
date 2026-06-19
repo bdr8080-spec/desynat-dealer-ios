@@ -64,6 +64,7 @@ class AddNewProductViewController: UIViewController {
     @IBOutlet weak var sizeChartImageView: CustomImageView!
     @IBOutlet weak var lblSelectCatTitle: UILabel!
     @IBOutlet weak var lblSubCAteTitle: UILabel!
+    @IBOutlet weak var buttonActionStackView: UIStackView!
     
     private lazy var viewModel = AddNewProductViewModel(hostVC: self)
     var comingReason: ComingReasonAtAddToProduct = .forAddingProduct
@@ -139,6 +140,7 @@ class AddNewProductViewController: UIViewController {
         variantTableView.rowHeight = UITableView.automaticDimension
         variantTableView.estimatedRowHeight = 200
         variantTableView.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
+        buttonActionStackView.semanticContentAttribute = .forceLeftToRight
     }
     
     deinit {

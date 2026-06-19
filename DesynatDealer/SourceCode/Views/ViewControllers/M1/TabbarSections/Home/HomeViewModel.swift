@@ -112,6 +112,12 @@ class HomeViewModel {
                 hostVC.userProfileImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 hostVC.userProfileImageView.sd_imageIndicator?.startAnimatingIndicator()
                 hostVC.userProfileImageView.sd_setImage(with: url, placeholderImage: .userProfile)
+                let storeStatus = response.storeInfo?.storeAvailability ?? 0
+                hostVC.btnToggle.setImage(
+                    UIImage(named: storeStatus == 1 ? "toggle_on" : "toggle_off"),
+                    for: .normal
+                )
+                hostVC.busyOnOffLabel.text = storeStatus == 1 ? "Open".localiz() : "Busy".localiz()
             }
             
         }
@@ -140,6 +146,12 @@ class HomeViewModel {
                         self.hostVC.userProfileImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
                         self.hostVC.userProfileImageView.sd_imageIndicator?.startAnimatingIndicator()
                         self.hostVC.userProfileImageView.sd_setImage(with: url, placeholderImage: .userProfile)
+                        let savedStatus = UserDefaults.standard.getIntFor(key: .storeAvailabilityStatus) ?? 0
+                        self.hostVC.btnToggle.setImage(
+                            UIImage(named: savedStatus == 1 ? "toggle_on" : "toggle_off"),
+                            for: .normal
+                        )
+                        self.hostVC.busyOnOffLabel.text = savedStatus == 1 ? "Open".localiz() : "Busy".localiz()
                     }
                     if response.roleAction?.first?.menuID == 1 && response.roleAction?.first?.canAction == 1 {
                         self.hostVC.btnToggle.isUserInteractionEnabled = true

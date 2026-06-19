@@ -22,6 +22,7 @@ class LiveCoverageFilterViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var txtFromDate: UITextField!
     @IBOutlet weak var txtToDate: UITextField!
     @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var buttonAcionStackView: UIStackView!
     
     let datePicker = UIDatePicker()
     private var activeTextField: UITextField?
@@ -36,6 +37,7 @@ class LiveCoverageFilterViewController: UIViewController, UITextFieldDelegate {
         setUpTextFields()
         setupUI()
         restoreAppliedFilter()
+        buttonAcionStackView.semanticContentAttribute = .forceLeftToRight
     }
     
     private func restoreAppliedFilter() {

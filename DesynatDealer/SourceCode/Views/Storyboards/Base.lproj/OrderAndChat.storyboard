@@ -319,6 +319,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="buttonActionStackView" destination="b1I-2y-4MK" id="J3a-GL-Ahx"/>
                         <outlet property="filtersTableView" destination="TGr-IE-fCR" id="xeS-me-CYb"/>
                         <outlet property="fromTextField" destination="7RK-g4-Oha" id="zbJ-eP-eg4"/>
                         <outlet property="headerView" destination="eYF-bQ-2Mn" id="MaR-xC-eXg"/>
@@ -3038,6 +3039,7 @@ Apartment, Kuwait</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="buttonAcionStackView" destination="FHU-mL-f9U" id="6Xf-OH-4Ns"/>
                         <outlet property="filtersTableView" destination="nsr-WS-rpB" id="Rev-pJ-IiN"/>
                         <outlet property="headerView" destination="iQ4-Du-EEM" id="DnN-bF-2aX"/>
                     </connections>
@@ -4377,6 +4379,7 @@ Apartment, Kuwait</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="buttonAcionStackView" destination="ft3-Lo-8ue" id="Orv-eW-vO7"/>
                         <outlet property="fromTextField" destination="SFj-d4-jj4" id="J5P-gN-xnB"/>
                         <outlet property="headerView" destination="Crh-Nc-XMC" id="Ubv-ic-cNU"/>
                         <outlet property="toTextField" destination="vyR-W2-sXo" id="bGp-zF-9Lh"/>

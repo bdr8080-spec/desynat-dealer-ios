@@ -8,6 +8,7 @@
 import UIKit
 import AVFoundation
 import AVKit
+
 class UploadPostViewController: UIViewController {
     
     @IBOutlet weak var imageView: CustomImageView!

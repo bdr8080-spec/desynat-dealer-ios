@@ -81,12 +81,12 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let savedStatus = UserDefaults.standard.getIntFor(key: .storeAvailabilityStatus) ?? 0
-        btnToggle.setImage(
-            UIImage(named: savedStatus == 1 ? "toggle_on" : "toggle_off"),
-            for: .normal
-        )
-        busyOnOffLabel.text = savedStatus == 1 ? "Open".localiz() : "Busy".localiz()
+//        let savedStatus = UserDefaults.standard.getIntFor(key: .storeAvailabilityStatus) ?? 0
+//        btnToggle.setImage(
+//            UIImage(named: savedStatus == 1 ? "toggle_on" : "toggle_off"),
+//            for: .normal
+//        )
+//        busyOnOffLabel.text = savedStatus == 1 ? "Open".localiz() : "Busy".localiz()
         viewModel.getUserProfile()
         viewModel.getCountOfNotificationRequest()
         viewModel.getAdminStory()

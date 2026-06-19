@@ -1089,7 +1089,7 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mFp-sb-DPS">
-                                <rect key="frame" x="0.0" y="183" width="393" height="600.99999999999955"/>
+                                <rect key="frame" x="0.0" y="183" width="393" height="601"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bpa-XX-MZG">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="2264.3333333333335"/>
@@ -2703,6 +2703,7 @@
                     <connections>
                         <outlet property="addButtonLabel" destination="Fij-Lj-we5" id="JUY-b8-40P"/>
                         <outlet property="addSpecificationButtonOutlet" destination="ZNJ-Vx-dJB" id="X5W-PZ-Zhq"/>
+                        <outlet property="buttonActionStackView" destination="4q2-ky-uJQ" id="PJn-gn-3eU"/>
                         <outlet property="cancelView" destination="Ylx-LP-do2" id="gcv-hV-M3g"/>
                         <outlet property="categoriesCollectionView" destination="rUi-6t-hlR" id="H4J-0k-Bq0"/>
                         <outlet property="descriptionArabicTextView" destination="Wt2-pc-8X0" id="SUl-ic-8tE"/>
@@ -2922,6 +2923,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="buttonActionStackView" destination="YXE-Uu-YI7" id="rPb-MK-tYS"/>
                         <outlet property="filterTableView" destination="ExB-KI-IKE" id="Pkf-5g-IY6"/>
                         <outlet property="headerView" destination="3Rd-pr-I7t" id="eOp-bN-GaN"/>
                     </connections>

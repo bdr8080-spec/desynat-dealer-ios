@@ -105,6 +105,7 @@ struct StoreInfo: Codable {
     let createdAt, updatedAt: String?
     let storeRating: Double?
     let countryInfo: CountryInfo?
+    let storeAvailability: Int?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -125,6 +126,7 @@ struct StoreInfo: Codable {
         case countryCode = "country_code"
         case countryInfo = "country_info"
         case storeRating = "store_rating"
+        case storeAvailability = "Store_Availability"
     }
 }
 
