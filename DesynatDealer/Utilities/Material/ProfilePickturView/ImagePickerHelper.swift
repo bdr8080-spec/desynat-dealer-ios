@@ -44,40 +44,6 @@ class ImagePickerHelper: NSObject {
         
     }
     
-//    func showMediaPicker(_ handler: PickerMedia) {
-//        self.showActionSheet(
-//            withTitle: "Choose Option".localiz(),
-//            withAlertMessage: nil,
-//            withOptions: [
-//                "Take Photo".localiz(),
-//                "Open Gallery".localiz()
-//            ]
-//        ) { selectedIndex in
-//
-//            switch selectedIndex {
-//
-//            case OpenMediaType.camera.rawValue:
-//
-//                self.checkCameraPermission { granted in
-//                    if granted {
-//                        self.showMediaCamera(handler)
-//                    } else {
-//                        self.showCameraPermissionAlert()
-//                    }
-//                }
-//
-//            case OpenMediaType.photoLibrary.rawValue:
-//
-//                self.openMediaGallery(handler)
-//
-//            default:
-//                break
-//            }
-//        }
-//
-//        pickerMediaCallBack = handler
-//    }
-    
     func showMediaPicker(_ handler: PickerMedia) {
 
         isMediaPickerMode = true
@@ -130,27 +96,6 @@ class ImagePickerHelper: NSObject {
 
         pickerMediaCallBack = handler
     }
-
-//    func showPickerController(onlyImagePicker: Bool? = false, _ handler: PickerImage) {
-//        self.showActionSheet(withTitle: "Choose Option".localiz(), withAlertMessage: nil, withOptions: ["Take Picture".localiz(), "Open Gallery".localiz()]) { (selectedIndex: Int) in
-//            switch selectedIndex {
-//            case OpenMediaType.camera.rawValue:
-//                self.checkCameraPermission { (granted) in
-//                    if granted {
-//                        self.showCamera(handler)
-//                    } else {
-//                        self.showCameraPermissionAlert()
-//                    }
-//                }
-//            case OpenMediaType.photoLibrary.rawValue:
-//                self.openGallery(onlyImagePicker: onlyImagePicker!, handler: handler)
-//            default:
-//                break
-//            }
-//        }
-//        
-//        pickerCallBack = handler
-//    }
     
     func showPickerController(
         onlyImagePicker: Bool? = false,

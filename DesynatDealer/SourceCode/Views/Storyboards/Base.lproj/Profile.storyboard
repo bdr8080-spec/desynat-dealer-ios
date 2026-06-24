@@ -5566,7 +5566,7 @@
         <image name="calendar" width="22" height="22"/>
         <image name="country" width="20.333333969116211" height="31"/>
         <image name="cross" width="18" height="19.333333969116211"/>
-        <image name="dashedBorder" width="164" height="120"/>
+        <image name="dashedBorder" width="165" height="120"/>
         <image name="delete" width="24" height="24"/>
         <image name="downVector" width="17.666666030883789" height="9.6666669845581055"/>
         <image name="down_arrow" width="20" height="20"/>

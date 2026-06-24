@@ -1050,3 +1050,4 @@
 "Enter SWIFT/BIC" = "أدخل رمز السويفت";
 "Please enter valid IBAN" = "يرجى إدخال رقم آيبان صحيح";
 "Please enter valid SWIFT/BIC" = "يرجى إدخال رمز سويفت صحيح";
+"Please add at least one image for each variant" = "يرجى إضافة صورة واحدة على الأقل لكل متغير";

@@ -80,6 +80,19 @@ class AddVariantTableViewCell: UITableViewCell {
         delegate?.innerTableViewHeightChanged(from: self)
     }
     
+    func configureMediaTypes() {
+        mediaTypes.removeAll()
+        localVideoURLs.removeAll()
+        for urlString in imageURLs {
+            let ext = URL(string: urlString)?
+                .pathExtension
+                .lowercased() ?? ""
+            let isVideo = ["mp4", "mov", "m4v", "avi", "3gp"].contains(ext)
+            mediaTypes.append(isVideo ? "video" : "image")
+            localVideoURLs.append(nil)
+        }
+    }
+    
     func saveVariantData() {
         
         variant.colorId = selectedColorId
@@ -218,19 +231,6 @@ extension AddVariantTableViewCell: UICollectionViewDelegate, UICollectionViewDat
         cell.mainImageView.contentMode = .scaleAspectFill
         cell.mainImageView.clipsToBounds = true
         cell.stackView.isHidden = true
-//        if indexPath.item == 0 {
-//            cell.mainImageView.image = UIImage(named: "dashedBorder")
-//            cell.stackView.isHidden = false
-//        } else {
-//            let realIndex = indexPath.item - 1
-//            if realIndex < images.count {
-//                cell.mainImageView.image = images[realIndex]
-//            } else {
-//                cell.mainImageView.image = UIImage(named: "dashedBorder")
-//                cell.stackView.isHidden = false
-//            }
-//        }
-        
         if indexPath.item == 0 {
             cell.mainImageView.image = UIImage(named: "dashedBorder")
             cell.stackView.isHidden = false
@@ -239,6 +239,7 @@ extension AddVariantTableViewCell: UICollectionViewDelegate, UICollectionViewDat
             let realIndex = indexPath.item - 1
             if realIndex < images.count {
                 cell.mainImageView.image = images[realIndex]
+                
                 if realIndex < mediaTypes.count {
                     cell.playButton.isHidden = mediaTypes[realIndex] != "video"
                 } else {
@@ -253,28 +254,43 @@ extension AddVariantTableViewCell: UICollectionViewDelegate, UICollectionViewDat
         return cell
     }
     
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        if indexPath.item == 0 {
-//            delegate?.addImageTapped(from: self, at: images.count)
-//        }
-//    }
-    
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
         if indexPath.item == 0 {
             delegate?.addImageTapped(from: self, at: images.count)
             return
         }
+//        let realIndex = indexPath.item - 1
+//        guard realIndex < mediaTypes.count else { return }
+//        if mediaTypes[realIndex] == "video" {
+//            guard let videoURL = localVideoURLs[realIndex] else { return }
+//            let player = AVPlayer(url: videoURL)
+//            let playerVC = AVPlayerViewController()
+//            playerVC.player = player
+//            UIApplication.shared.topViewController()?.present(playerVC,animated: true) {
+//                player.play()
+//            }
+//        }
+        
         let realIndex = indexPath.item - 1
-        guard realIndex < mediaTypes.count else { return }
-        if mediaTypes[realIndex] == "video" {
-            guard let videoURL = localVideoURLs[realIndex] else { return }
-            let player = AVPlayer(url: videoURL)
+        guard realIndex < imageURLs.count else { return }
+        let urlString = imageURLs[realIndex]
+        let ext = URL(string: urlString)?.pathExtension.lowercased() ?? ""
+        let videoExtensions = ["mp4", "mov", "m4v", "avi", "3gp"]
+        if videoExtensions.contains(ext) {
+            guard let url = URL(string: urlString) else { return }
+            let player = AVPlayer(url: url)
             let playerVC = AVPlayerViewController()
             playerVC.player = player
-            UIApplication.shared.topViewController()?.present(playerVC,animated: true) {
+            UIApplication.shared.topViewController()?.present(playerVC, animated: true) {
                 player.play()
             }
+        } else {
+            let vc = FullscreenGalleryViewController()
+            vc.images = imageURLs
+            vc.startIndex = realIndex
+            vc.modalPresentationStyle = .fullScreen
+            UIApplication.shared.topViewController()?.present(vc, animated: true)
         }
     }
     
@@ -430,6 +446,15 @@ extension AddVariantTableViewCell {
         
         // Variant level checks
         if imageURLs.isEmpty { return "Please upload image".localiz() }
+        let hasImage = imageURLs.contains { imageUrl in
+            let ext = URL(string: imageUrl)?.pathExtension.lowercased() ?? ""
+            return ["jpg", "jpeg", "png", "webp", "heic", "heif"].contains(ext)
+        }
+
+        if !hasImage {
+            return "Please add at least one image for each variant".localiz()
+        }
+        
         if isEmpty(colorTF.text) { return "Please select colour".localiz() }
         
         // SIZE LEVEL VALIDATION

@@ -358,7 +358,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="f1q-7w-OSV">
-                                                                <rect key="frame" x="0.0" y="63.333333333333364" width="325" height="19.66666666666665"/>
+                                                                <rect key="frame" x="0.0" y="63.333333333333364" width="325" height="19.666666666666664"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hip" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5me-1C-es8">
                                                                         <rect key="frame" x="0.0" y="0.0" width="157.66666666666666" height="19.666666666666668"/>
@@ -983,6 +983,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="actionsStacksView" destination="oCf-Sd-RmC" id="0Lr-Mb-eoO"/>
                         <outlet property="actualPriceLAbel" destination="Nuo-pC-0UK" id="FkO-Th-VCy"/>
                         <outlet property="addToBagView" destination="HB5-Mi-Eer" id="WKb-Lh-Eo7"/>
                         <outlet property="addedOnLabel" destination="Fm3-TR-3MB" id="TnK-9Q-JTN"/>

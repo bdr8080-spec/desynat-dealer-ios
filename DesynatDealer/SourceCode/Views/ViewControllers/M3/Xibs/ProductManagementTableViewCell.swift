@@ -85,6 +85,24 @@ class ProductManagementTableViewCell: UITableViewCell {
             productImageView.image = UIImage(named: "")
         }
         
+//        if let mediaArray = data.productVariants?.first?.variantImage {
+//            let imageURLString = mediaArray.first { item in
+//                let ext = URL(string: item)?.pathExtension.lowercased() ?? ""
+//                return ["jpg", "jpeg", "png", "webp", "heic", "heif"].contains(ext)
+//            }
+//            if let imageURLString,
+//               let url = URL(string: imageURLString) {
+//                productImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+//                productImageView.sd_imageIndicator?.startAnimatingIndicator()
+//                productImageView.sd_setImage(
+//                    with: url,
+//                    placeholderImage: UIImage(named: "")
+//                )
+//            } else {
+//                productImageView.image = UIImage(named: "")
+//            }
+//        }
+        
         ratingLabel.text = "(\(data.reviewRating ?? "0"))"
         //      let text1 = "KD".localiz()
         orifinalPriceLabel.text = CommonUtils.formatPriceStringInput(data.productVariants?.first?.finalPrice ?? "")

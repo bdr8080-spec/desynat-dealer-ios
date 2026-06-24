@@ -7,6 +7,8 @@
 
 import UIKit
 import SDWebImage
+import AVFoundation
+import AVKit
 
 class AddNewProductViewController: UIViewController {
     
@@ -243,15 +245,15 @@ class AddNewProductViewController: UIViewController {
     }
     
     @IBAction func subCatgeoryAction(_ sender: UIButton) {
-//        let subCategoryNames = viewModel.subcategoriesList.map { subcategories -> String in
-//            let list = subcategories.nameEnglish ?? ""
-//            return "\(list)"
-//        }
-//        kSharedAppDelegate.dropDown(dataSource: subCategoryNames, anchorView: sender) { index, item in
-//            let selectedsubCategory = self.viewModel.subcategoriesList[index]
-//            self.subCatgeoryTF.text = selectedsubCategory.nameEnglish ?? ""
-//            self.selectedSubCategoriesId = selectedsubCategory.id
-//        }
+        //        let subCategoryNames = viewModel.subcategoriesList.map { subcategories -> String in
+        //            let list = subcategories.nameEnglish ?? ""
+        //            return "\(list)"
+        //        }
+        //        kSharedAppDelegate.dropDown(dataSource: subCategoryNames, anchorView: sender) { index, item in
+        //            let selectedsubCategory = self.viewModel.subcategoriesList[index]
+        //            self.subCatgeoryTF.text = selectedsubCategory.nameEnglish ?? ""
+        //            self.selectedSubCategoriesId = selectedsubCategory.id
+        //        }
         
         let subCategoryNames = viewModel.subcategoriesList.map { subcategories -> String in
             if AppLanguageManager.shared.currentLanguage == .ar {
@@ -491,7 +493,15 @@ class AddNewProductViewController: UIViewController {
             
             // IMAGES
             let images = variant.imageURLs // Already array of URLs
-            
+            //            let hasImage = images.contains { imageUrl in
+            //                let ext = URL(string: imageUrl)?.pathExtension.lowercased() ?? ""
+            //                return ["jpg", "jpeg", "png", "webp", "heic", "heif"].contains(ext)
+            //            }
+            //
+            //            if !hasImage {
+            //                showAlert(msg: "Please add at least one image for each variant".localiz())
+            //                return []
+            //            }
             // PRODUCT VARIATIONS (sizes)
             var variationArray: [[String: Any]] = []
             
@@ -745,7 +755,7 @@ extension AddNewProductViewController: UITableViewDelegate, UITableViewDataSourc
             cell.selectedColorId = variant.colorId
             cell.images = variant.images
             cell.imageURLs = variant.imageURLs
-            
+            cell.configureMediaTypes()
             // Restore color selection
             if let color = viewModel.colorsList.first(where: { $0.id == variant.colorId }) {
                 cell.colorTF.text = AppLanguageManager.shared.currentLanguage == .ar
@@ -755,35 +765,42 @@ extension AddNewProductViewController: UITableViewDelegate, UITableViewDataSourc
                 cell.colorTF.text = ""
             }
             
-            // Load images
             for (index, urlString) in variant.imageURLs.enumerated() {
-                guard let url = URL(string: urlString) else { continue }
-                
-                SDWebImageManager.shared.loadImage(
-                    with: url,
-                    options: [.highPriority, .retryFailed],
-                    progress: nil
-                ) { [weak cell] (image, _, _, _, _, _) in
-                    guard let cell = cell, let image = image, index < cell.images.count else { return }
-                    cell.images[index] = image
-                    DispatchQueue.main.async { cell.reloadImageItem(at: index) }
+                let ext = URL(string: urlString)?.pathExtension.lowercased() ?? ""
+                let isVideo = ["mp4", "mov", "m4v", "avi", "3gp"].contains(ext)
+                if isVideo {
+                    guard let videoURL = URL(string: urlString) else { continue }
+                    CommonUtils.generateThumbnail(url: videoURL) { [weak cell] thumbnail in
+                        guard let cell = cell,
+                              let thumbnail = thumbnail,
+                              index < cell.images.count else { return }
+                        DispatchQueue.main.async {
+                            cell.images[index] = thumbnail
+                            cell.reloadImageItem(at: index)
+                        }
+                    }
+                } else {
+                    guard let url = URL(string: urlString) else { continue }
+                    SDWebImageManager.shared.loadImage(with: url, options: [.highPriority, .retryFailed], progress: nil) { [weak cell] image, _, _, _, _, _ in
+                        guard let cell = cell, let image = image, index < cell.images.count else { return }
+                        DispatchQueue.main.async {
+                            cell.images[index] = image
+                            cell.reloadImageItem(at: index)
+                        }
+                    }
                 }
             }
-            
             // Reload collection once
             DispatchQueue.main.async {
                 cell.imagesCollectionView.reloadData()
             }
-            
             cell.isWomenIsSelected = self.isWomenCategory
             cell.sizesList = viewModel.sizesList
-            
             // Variant update callback
             cell.onVariantUpdated = { [weak self] updatedVariant in
                 guard let self = self else { return }
                 self.variantArray[indexPath.row] = updatedVariant
             }
-            
             // Color picker button
             cell.onColorButtonTap = { [weak self, weak cell] in
                 guard let self = self, let cell = cell else { return }
@@ -796,15 +813,38 @@ extension AddNewProductViewController: UITableViewDelegate, UITableViewDataSourc
         }
     }
     
-//    private func showColorDropdown(from textField: UITextField, in cell: AddVariantTableViewCell) {
-//        let sizesNames = viewModel.colorsList.map { $0.name ?? "" }
-//        kSharedAppDelegate.dropDown(dataSource: sizesNames, anchorView: textField) { [weak self] index, item in
-//            guard let self = self else { return }
-//            let selectedSize = self.viewModel.colorsList[index]
-//            cell.colorTF.text = selectedSize.name
-//            cell.selectedColorId = selectedSize.id
-//        }
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch tableView {
+        case variantTableView:
+            let variant = variantArray[indexPath.row]
+
+            guard let mediaUrlString = variant.imageURLs.first,
+                  let url = URL(string: mediaUrlString) else { return }
+
+            let ext = url.pathExtension.lowercased()
+            let videoExtensions = ["mp4", "mov", "m4v", "avi", "3gp"]
+
+            if videoExtensions.contains(ext) {
+                let player = AVPlayer(url: url)
+                let playerVC = AVPlayerViewController()
+                playerVC.player = player
+
+                present(playerVC, animated: true) {
+                    player.play()
+                }
+            } else {
+                let vc = FullscreenGalleryViewController()
+                vc.images = variant.imageURLs
+                vc.startIndex = 0
+                vc.modalPresentationStyle = .fullScreen
+
+                present(vc, animated: true)
+            }
+
+        default:
+            break
+        }
+    }
     
     private func showColorDropdown(from textField: UITextField, in cell: AddVariantTableViewCell) {
         let isArabic = AppLanguageManager.shared.currentLanguage == .ar
@@ -817,8 +857,8 @@ extension AddNewProductViewController: UITableViewDelegate, UITableViewDataSourc
             guard let self = self else { return }
             let selectedColor = self.viewModel.colorsList[index]
             cell.colorTF.text = isArabic
-                ? (selectedColor.nameAr ?? selectedColor.name ?? "")
-                : (selectedColor.name ?? "")
+            ? (selectedColor.nameAr ?? selectedColor.name ?? "")
+            : (selectedColor.name ?? "")
             cell.selectedColorId = selectedColor.id
         }
     }
@@ -872,39 +912,21 @@ extension AddNewProductViewController: AddSpecificationCellDelegate, AddVariantC
         }
     }
     
-    
-//    func addImageTapped(from cell: AddVariantTableViewCell, at index: Int) {
-//        ImagePickerHelper.shared.showPickerController { [weak cell] image, imageName in
-//            guard let image = image, let cell = cell else { return }
-//            WebService.sharedInstance.uploadImage(withParams: image) { imageURL in
-//                DispatchQueue.main.async {
-//                    let insertIndex = cell.images.count
-//                    cell.images.append(image)
-//                    cell.imageURLs.append(imageURL.url ?? "")
-//                    let newItemIndexPath = IndexPath(item: insertIndex + 1, section: 0) // +1 because 0 is placeholder
-//                    cell.imagesCollectionView.performBatchUpdates({
-//                        cell.imagesCollectionView.insertItems(at: [newItemIndexPath])
-//                    }, completion: nil)
-//                    
-//                    cell.scrollToLastItem()
-//                }
-//            }
-//        }
-//    }
-    
     func addImageTapped(from cell: AddVariantTableViewCell, at index: Int) {
         ImagePickerHelper.shared.showMediaPicker { [weak cell] image, videoURL, isVideo in
             guard let cell = cell else { return }
+            if cell.imageURLs.isEmpty && isVideo {
+                DispatchQueue.main.async {
+                    self.showAlert(msg: "Please upload a product image first".localiz())
+                }
+                return
+            }
             if isVideo {
                 guard let videoURL = videoURL,
                       let videoData = try? Data(contentsOf: videoURL) else {
                     return
                 }
-                let uploadItem = MultipartUpload(
-                    fileName: "file",
-                    file: videoData,
-                    mimeType: .Video
-                )
+                let uploadItem = MultipartUpload(fileName: "file",file: videoData,mimeType: .Video)
                 WebService.sharedInstance.uploadVideoAndImage(withParams: uploadItem) { url, msg, code in
                     CommonUtils.generateThumbnail(url: videoURL) { thumbnail in
                         DispatchQueue.main.async {
@@ -912,13 +934,9 @@ extension AddNewProductViewController: AddSpecificationCellDelegate, AddVariantC
                             let insertIndex = cell.images.count
                             cell.images.append(thumbnail)
                             cell.imageURLs.append(url)
-
                             cell.mediaTypes.append("video")
                             cell.localVideoURLs.append(videoURL)
-                            let indexPath = IndexPath(
-                                item: insertIndex + 1,
-                                section: 0
-                            )
+                            let indexPath = IndexPath(item: insertIndex + 1, section: 0)
                             cell.imagesCollectionView.performBatchUpdates({
                                 cell.imagesCollectionView.insertItems(at: [indexPath])
                             })
@@ -931,23 +949,15 @@ extension AddNewProductViewController: AddSpecificationCellDelegate, AddVariantC
                       let imageData = image.jpegData(compressionQuality: 0.7) else {
                     return
                 }
-                let uploadItem = MultipartUpload(
-                    fileName: "file",
-                    file: imageData,
-                    mimeType: .image
-                )
+                let uploadItem = MultipartUpload(fileName: "file", file: imageData, mimeType: .image)
                 WebService.sharedInstance.uploadVideoAndImage(withParams: uploadItem) { url, msg, code in
                     DispatchQueue.main.async {
                         let insertIndex = cell.images.count
                         cell.images.append(image)
                         cell.imageURLs.append(url)
-
                         cell.mediaTypes.append("image")
                         cell.localVideoURLs.append(nil)
-                        let indexPath = IndexPath(
-                            item: insertIndex + 1,
-                            section: 0
-                        )
+                        let indexPath = IndexPath(item: insertIndex + 1,section: 0)
                         cell.imagesCollectionView.performBatchUpdates({
                             cell.imagesCollectionView.insertItems(at: [indexPath])
                         })

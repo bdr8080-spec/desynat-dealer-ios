@@ -90,6 +90,7 @@ class ProductDetailViewController: UIViewController {
     @IBOutlet weak var noRatingFoundLabel: UILabel!
     @IBOutlet weak var sizeGuideButton: UIButton!
     @IBOutlet weak var viewAllButtonOutlet: UIButton!
+    @IBOutlet weak var actionsStacksView: UIStackView!
     
     private var selectedColourIndex = 0
     private var selectedSizeIndex = 0
@@ -111,6 +112,7 @@ class ProductDetailViewController: UIViewController {
         buttonActionStackView.isHidden = !hasActionPermission
         statusButton.isUserInteractionEnabled = hasActionPermission
         sizeGuideButton.setTitle("Size Guide".localiz(), for: .normal)
+        actionsStacksView.semanticContentAttribute = .forceLeftToRight
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -125,7 +127,6 @@ class ProductDetailViewController: UIViewController {
             self.ratingTableViewHeightConstriant.constant = self.ratingsTableView.contentSize.height
         }
     }
-    
     
     @IBAction func backDidTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
