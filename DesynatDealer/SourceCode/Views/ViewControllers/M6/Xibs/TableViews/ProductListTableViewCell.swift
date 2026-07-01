@@ -33,7 +33,7 @@ class ProductListTableViewCell: UITableViewCell {
             nameLabel.text = data?.productDetails?.productNameAr ?? ""
             self.materialLabel.text = data?.productDetails?.brand?.nameArabic ?? ""
             categoryLabel.text = data?.productDetails?.category?.nameAr ?? ""
-            self.sizeLabel.text = data?.variationDetails?.size?.nameAr ?? ""
+            self.sizeLabel.text = data?.variationDetails?.size?.name ?? ""
             self.colourLabel.text = data?.variationDetails?.color?.nameAr ?? ""
         } else {
             nameLabel.text = data?.productDetails?.productNameEn ?? ""

@@ -36,8 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         confrigNotification(application: application)
         UIScrollView.appearance().showsVerticalScrollIndicator = false
         UIScrollView.appearance().showsHorizontalScrollIndicator = false
-        // My Fahtoorah Payment Gateway
-//        MFSettings.shared.configure(token: "SK_KWT_vVZlnnAqu8jRByOWaRPNId4ShzEDNt256dvnjebuyzo52dXjAfRx2ixW5umjWSUx", country: .kuwait, environment: MFEnvironment.test)
         MFSettings.shared.configure(token: "SK_KWT_Xn6nYzfdgF3Lz7TKhrGLhruKiBT5OgesD080ZIJohon0q0CEqCRrwdAsV0qICIsx", country: .kuwait, environment: .live)
         let them = MFTheme(navigationTintColor: .white, navigationBarTintColor: .lightGray, navigationTitle: "Payment", cancelButtonTitle: "Cancel")
         MFSettings.shared.setTheme(theme: them)
@@ -68,7 +66,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         dropDown.dismissMode = .automatic
         dropDown.show()
         dropDown.selectionAction = {(index: Int, item: String) in
-//            print("Selected item: \(item) at index: \(index)")
             completion(index,item)
         }
     }
@@ -116,7 +113,7 @@ extension AppDelegate:UNUserNotificationCenterDelegate {
             if let error = error {
                 print("Error fetching remote instange ID: \(error)")
             } else if let result = token {
-//                print("Remote instance ID token: \(result)")
+                print("Remote instance ID token: \(result)")
                 kSharedUserDefaults.saveModelFor(key: .deviceToken, value: token)
             }
         }

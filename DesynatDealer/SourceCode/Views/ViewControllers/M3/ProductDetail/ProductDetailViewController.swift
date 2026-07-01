@@ -459,11 +459,11 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
         case sizeCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SizeVariantCollectionViewCell", for: indexPath) as! SizeVariantCollectionViewCell
             let size = sizesList[indexPath.row]
-            if AppLanguageManager.shared.currentLanguage == .ar {
-                cell.titleLabel.text = size.nameAr
-            } else {
+//            if AppLanguageManager.shared.currentLanguage == .ar {
+//                cell.titleLabel.text = size.nameAr
+//            } else {
                 cell.titleLabel.text = size.name
-            }
+//            }
             
             // Get variant for selected color + this size
             if let colorId = selectedVariant?.color?.id,

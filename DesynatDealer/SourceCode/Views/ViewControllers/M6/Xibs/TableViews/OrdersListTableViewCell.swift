@@ -54,7 +54,7 @@ class OrdersListTableViewCell: UITableViewCell {
       productImageView.image = UIImage(named: "")
     }
       if AppLanguageManager.shared.currentLanguage == .ar {
-          productDetailsLabel.text = "\(data?.productDetails?.productNameAr ?? "") (\(data?.variationDetails?.size?.nameAr ?? ""))"
+          productDetailsLabel.text = "\(data?.productDetails?.productNameAr ?? "") (\(data?.variationDetails?.size?.name ?? ""))"
       } else {
           productDetailsLabel.text = "\(data?.productDetails?.productNameEn ?? "") (\(data?.variationDetails?.size?.name ?? ""))"
       }

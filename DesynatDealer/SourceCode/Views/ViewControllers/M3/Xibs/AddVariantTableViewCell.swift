@@ -329,7 +329,7 @@ extension AddVariantTableViewCell: UITableViewDelegate, UITableViewDataSource {
         if let sizeId = sizeVar.sizeId,
            let sizeModel = self.sizesList.first(where: { $0.id == sizeId }) {
             cell.sizeTF.text = AppLanguageManager.shared.currentLanguage == .ar
-            ? (sizeModel.nameAr ?? sizeModel.name ?? "")
+            ? (sizeModel.name ?? sizeModel.name ?? "")
             : (sizeModel.name ?? "")
             cell.selectedSizeId = sizeId
         } else {
