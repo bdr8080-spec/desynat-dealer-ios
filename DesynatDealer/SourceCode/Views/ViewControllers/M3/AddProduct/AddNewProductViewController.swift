@@ -67,6 +67,7 @@ class AddNewProductViewController: UIViewController {
     @IBOutlet weak var lblSelectCatTitle: UILabel!
     @IBOutlet weak var lblSubCAteTitle: UILabel!
     @IBOutlet weak var buttonActionStackView: UIStackView!
+    @IBOutlet weak var deliveryTimeTF: UITextField!
     
     private lazy var viewModel = AddNewProductViewModel(hostVC: self)
     var comingReason: ComingReasonAtAddToProduct = .forAddingProduct
@@ -75,6 +76,7 @@ class AddNewProductViewController: UIViewController {
     var colorsList: [ColorsLisDataModel] = []
     var productId: Int? = 0
     var selectedSubCategoriesId: Int? = -1
+    var selectedExpectedTimeId: Int? = -1
     var selectedBrandId: Int? = -1
     var selectedSizeChartImageUrl: String? = ""
     var isWomenCategory: Bool = false {
@@ -137,6 +139,7 @@ class AddNewProductViewController: UIViewController {
         viewModel.getBrandListApi()
         viewModel.getColoursListApi()
         viewModel.getSizeListApi()
+        viewModel.getDeliveryTimeListApi()
         initialSetup()
         setupTextViewPlaceholder()
         variantTableView.rowHeight = UITableView.automaticDimension
@@ -245,16 +248,6 @@ class AddNewProductViewController: UIViewController {
     }
     
     @IBAction func subCatgeoryAction(_ sender: UIButton) {
-        //        let subCategoryNames = viewModel.subcategoriesList.map { subcategories -> String in
-        //            let list = subcategories.nameEnglish ?? ""
-        //            return "\(list)"
-        //        }
-        //        kSharedAppDelegate.dropDown(dataSource: subCategoryNames, anchorView: sender) { index, item in
-        //            let selectedsubCategory = self.viewModel.subcategoriesList[index]
-        //            self.subCatgeoryTF.text = selectedsubCategory.nameEnglish ?? ""
-        //            self.selectedSubCategoriesId = selectedsubCategory.id
-        //        }
-        
         let subCategoryNames = viewModel.subcategoriesList.map { subcategories -> String in
             if AppLanguageManager.shared.currentLanguage == .ar {
                 return subcategories.nameArabic ?? ""
@@ -357,6 +350,25 @@ class AddNewProductViewController: UIViewController {
         self.showConfirmationAlert(msg: "Are you sure you want to delete this product?".localiz()){ [weak self] in
             guard let self = self else { return }
             viewModel.deleteProductDetailsService()
+        }
+    }
+    
+    @IBAction func deliveryTimeDidTapped(_ sender: UIButton) {
+        let selectedExpectedTimeList = viewModel.deliveryTimeArray.map { selectedExpectedTime -> String in
+            if AppLanguageManager.shared.currentLanguage == .ar {
+                return selectedExpectedTime.nameAr ?? ""
+            } else {
+                return selectedExpectedTime.name ?? ""
+            }
+        }
+        kSharedAppDelegate.dropDown(dataSource: selectedExpectedTimeList, anchorView: sender) { index, item in
+            let selectedTime = self.viewModel.deliveryTimeArray[index]
+            if AppLanguageManager.shared.currentLanguage == .ar {
+                self.deliveryTimeTF.text = selectedTime.nameAr ?? ""
+            } else {
+                self.deliveryTimeTF.text = selectedTime.name ?? ""
+            }
+            self.selectedExpectedTimeId = selectedTime.id
         }
     }
     
@@ -570,12 +582,15 @@ class AddNewProductViewController: UIViewController {
         categoriesCollectionView.reloadData()
         
         selectedSubCategoriesId = Int(data.subcategoryID ?? "0")
+        selectedExpectedTimeId = data.deliveryTimeId ?? 0
         if AppLanguageManager.shared.currentLanguage == .ar {
             subCatgeoryTF.text = data.subcategory?.nameArabic
             selectedBrandTF.text = data.brand?.nameArabic
+            deliveryTimeTF.text = data.deliveryTime?.nameAr
         } else {
             subCatgeoryTF.text = data.subcategory?.nameEnglish
             selectedBrandTF.text = data.brand?.nameEnglish
+            deliveryTimeTF.text = data.deliveryTime?.name
         }
         
         selectedBrandId = Int(data.brandID ?? "0")

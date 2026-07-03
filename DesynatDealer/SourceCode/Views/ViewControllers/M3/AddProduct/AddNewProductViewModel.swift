@@ -16,6 +16,7 @@ class AddNewProductViewModel: NSObject {
     var colorsList: [ColorsLisDataModel] = []
     var sizesList: [SizeListDataModel] = []
     var variantArray: [Variant] = [Variant()]
+    var deliveryTimeArray: [ExpectedDeliveryTimeDataModel] = []
     
     init(hostVC: AddNewProductViewController) {
         self.hostVC = hostVC
@@ -34,6 +35,12 @@ class AddNewProductViewModel: NSObject {
         let param: [String :Any] = ["category_id": self.hostVC.selectedCategoriesSection ?? ""]
         WebService.sharedInstance.getSubCategoriesService(param: param) { [self] list in
             self.subcategoriesList = list
+        }
+    }
+    
+    func getDeliveryTimeListApi(){
+        WebService.sharedInstance.getDeliveryTimeService() { [self] list in
+            self.deliveryTimeArray = list
         }
     }
     
@@ -62,6 +69,7 @@ class AddNewProductViewModel: NSObject {
         let categoryId = hostVC.selectedCategoriesSection ?? -1
         let subcategoryId = hostVC.selectedSubCategoriesId ?? -1
         let brandId = hostVC.selectedBrandId ?? -1
+        let expectedDeliveryTime = hostVC.selectedExpectedTimeId ?? -1
         
         let otherBrandEn = hostVC.otherBrandEnglishTF.text?.trimmed() ?? ""
         let otherBrandAr = hostVC.otherBrandArabicTF.text?.trimmed() ?? ""
@@ -76,6 +84,7 @@ class AddNewProductViewModel: NSObject {
         let exchangeDays = hostVC.exchangableTF.text?.trimmed() ?? ""
         
         let selectedBrand = brandsList.first { $0.id == brandId }
+        let selectedDeliveryTime = deliveryTimeArray.first { $0.id == expectedDeliveryTime }
         let isOtherBrand = selectedBrand?.nameEnglish?.lowercased() == "other"
         
         if categoryId == -1 {
@@ -96,8 +105,9 @@ class AddNewProductViewModel: NSObject {
             errorMessage = .descriptionEnEmpty
         } else if descriptionAr.isEmpty || descriptionAr == "Write Here".localiz() {
             errorMessage = .descriptionArEmpty
-        }
-        else if hostVC.prepareSpecificationData() == nil {
+        } else if expectedDeliveryTime == -1 {
+            errorMessage = .selectExpectedDeliverytime
+        } else if hostVC.prepareSpecificationData() == nil {
             hostVC.showAlert(msg: "Please fill all required fields for each specification".localiz())
             return false
         }
@@ -218,7 +228,8 @@ class AddNewProductViewModel: NSObject {
             "customized_product": hostVC.isCustomizationAllowed.toAPI,
             "ready_to_ship": hostVC.isReadyToShip.toAPI,
             "cash_on_delivery": hostVC.isCashOnDeliveryAllowed.toAPI,
-            "upload_size_chart": hostVC.selectedSizeChartImageUrl ?? ""]
+            "upload_size_chart": hostVC.selectedSizeChartImageUrl ?? "",
+            "delivery_time_id": hostVC.selectedExpectedTimeId ?? ""]
         
         // Add specification data
         params["product_spe_en"] = specificationData["product_spe_en"]
@@ -285,6 +296,7 @@ class AddNewProductViewModel: NSObject {
             "ready_to_ship": hostVC.isCustomizationAllowed.toAPI,
             "cash_on_delivery": hostVC.isCashOnDeliveryAllowed.toAPI,
             "upload_size_chart": hostVC.selectedSizeChartImageUrl ?? "",
+            "delivery_time_id": hostVC.selectedExpectedTimeId ?? ""
         ]
         // specification
         params["product_spe_en"] = specificationData["product_spe_en"]

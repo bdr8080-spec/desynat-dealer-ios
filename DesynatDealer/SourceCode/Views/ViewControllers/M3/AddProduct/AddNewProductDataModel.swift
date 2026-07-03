@@ -45,3 +45,18 @@ struct Spefication {
     var product_spe_ar: String = ""
     var product_spe_feature_ar: String = ""
 }
+
+// MARK: - ExpectedDeliveryTimeDataModel
+struct ExpectedDeliveryTimeDataModel: Codable {
+    let id: Int?
+    let name, nameAr, status, createdAt: String?
+    let updatedAt: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id, name
+        case nameAr = "name_ar"
+        case status
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+    }
+}

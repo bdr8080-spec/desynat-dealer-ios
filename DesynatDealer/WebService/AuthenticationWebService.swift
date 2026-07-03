@@ -408,6 +408,23 @@ extension WebService {
         }
     }
     
+    func getDeliveryTimeService(completion:@escaping (_ user:[ExpectedDeliveryTimeDataModel])-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.deliveryTimeList), requestMethod: .get, requestModel:[ExpectedDeliveryTimeDataModel].self) { result, code in
+            
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
     func getBrandService(completion:@escaping (_ user: [BrandsListDataModel])-> Void) {
         CommonUtils.showHud(show: true)
         NetworkManager.shared.request(withAPI:.endpoint(.getBrandsList), requestMethod: .get, requestModel:[BrandsListDataModel].self) { result, code in

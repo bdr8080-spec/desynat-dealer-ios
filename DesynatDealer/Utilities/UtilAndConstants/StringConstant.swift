@@ -77,6 +77,7 @@ enum AlertConstant: String {
     case selectCategory             = "Please select category"
     case selectSubCategory          = "Please select sub-category"
     case selectBrand                = "Please select brand"
+    case selectExpectedDeliverytime = "Please select expected delivery time"
     case otherBrandEnEmpty          = "Please enter other brand name in english"
     case otherBrandArEmpty          = "Please enter other brand name in arabic"
     case productNameEnEmpty         = "Please enter product name in english"

@@ -25,7 +25,7 @@ struct ProductsListDataModel: Codable {
 
 // MARK: - ProductsList
 struct ProductsList: Codable {
-    let id: Int?
+    let id, deliveryTimeId: Int?
     let storeID,sellerID, categoryID, subcategoryID: String?
     let brandID, otherEn, otherAr, productNameEn: String?
     let productNameAr, descriptionEn, descriptionAr, minCardQuantity: String?
@@ -43,6 +43,7 @@ struct ProductsList: Codable {
     let productSpecifications: [ProductSpecification]?
     let productVariants: [ProductVariant]?
     let review: [Review]?
+    let deliveryTime: ExpectedDeliveryTimeDataModel?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -78,6 +79,8 @@ struct ProductsList: Codable {
         case productSpecifications = "product_specifications"
         case productVariants = "product_variants"
         case subCategory = "sub_category"
+        case deliveryTimeId = "delivery_time_id"
+        case deliveryTime = "delivery_time"
         case review
     }
 }
