@@ -113,10 +113,6 @@ class ProductDetailViewController: UIViewController {
         statusButton.isUserInteractionEnabled = hasActionPermission
         sizeGuideButton.setTitle("Size Guide".localiz(), for: .normal)
         actionsStacksView.semanticContentAttribute = .forceLeftToRight
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         viewModel.getProductDetailsService()
     }
     
@@ -143,6 +139,9 @@ class ProductDetailViewController: UIViewController {
         let nextVC = AddNewProductViewController.instantiate(fromAppStoryboard: .Product)
         nextVC.comingReason = .forEditProduct
         nextVC.productId = productId
+        nextVC.isEditingDone = { [weak self] in
+            self?.viewModel.getProductDetailsService()
+        }
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
@@ -443,7 +442,7 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
             
             // Show images of the selected variant
             if let images = selectedVariant?.variantImage, images.count > indexPath.row {
-//                cell.configData(variantImageUrl: images[indexPath.row])
+                //                cell.configData(variantImageUrl: images[indexPath.row])
                 cell.configure(mediaURL: images[indexPath.row])
             }
             return cell
@@ -459,13 +458,7 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
         case sizeCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SizeVariantCollectionViewCell", for: indexPath) as! SizeVariantCollectionViewCell
             let size = sizesList[indexPath.row]
-//            if AppLanguageManager.shared.currentLanguage == .ar {
-//                cell.titleLabel.text = size.nameAr
-//            } else {
-                cell.titleLabel.text = size.name
-//            }
-            
-            // Get variant for selected color + this size
+            cell.titleLabel.text = size.name
             if let colorId = selectedVariant?.color?.id,
                let variant = productVariants.first(where: { $0.color?.id == colorId && $0.size?.id == size.id }) {
                 
@@ -492,33 +485,33 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch collectionView {
         case productImageCollectionView:
-//            guard let images = selectedVariant?.variantImage else { return }
-//            let vc = FullscreenGalleryViewController()
-//            vc.images = images
-//            vc.startIndex = indexPath.row
-//            vc.modalPresentationStyle = .fullScreen
-//            present(vc, animated: true)
+            //            guard let images = selectedVariant?.variantImage else { return }
+            //            let vc = FullscreenGalleryViewController()
+            //            vc.images = images
+            //            vc.startIndex = indexPath.row
+            //            vc.modalPresentationStyle = .fullScreen
+            //            present(vc, animated: true)
             
             
             guard let mediaItems = selectedVariant?.variantImage else { return }
-                    let selectedUrl = mediaItems[indexPath.row]
-                    guard let url = URL(string: selectedUrl) else { return }
-                    let videoExtensions = ["mp4", "mov", "m4v", "avi"]
-                    if videoExtensions.contains(url.pathExtension.lowercased()) {
-                        let player = AVPlayer(url: url)
-                        let playerVC = AVPlayerViewController()
-                        playerVC.player = player
-                        present(playerVC, animated: true) {
-                            player.play()
-                        }
-                    } else {
-                        let vc = FullscreenGalleryViewController()
-                        vc.images = mediaItems
-                        vc.startIndex = indexPath.row
-                        vc.modalPresentationStyle = .fullScreen
-                        present(vc, animated: true)
-                    }
-
+            let selectedUrl = mediaItems[indexPath.row]
+            guard let url = URL(string: selectedUrl) else { return }
+            let videoExtensions = ["mp4", "mov", "m4v", "avi"]
+            if videoExtensions.contains(url.pathExtension.lowercased()) {
+                let player = AVPlayer(url: url)
+                let playerVC = AVPlayerViewController()
+                playerVC.player = player
+                present(playerVC, animated: true) {
+                    player.play()
+                }
+            } else {
+                let vc = FullscreenGalleryViewController()
+                vc.images = mediaItems
+                vc.startIndex = indexPath.row
+                vc.modalPresentationStyle = .fullScreen
+                present(vc, animated: true)
+            }
+            
         case colorsCollectionView:
             selectedColourIndex = indexPath.row
             let selectedColorId = coloursList[indexPath.row].id
@@ -580,10 +573,10 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
         case productImageCollectionView:
             return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
         case colorsCollectionView:
-//            return CGSize(width: 54, height: 45)
+            //            return CGSize(width: 54, height: 45)
             return CGSize(width: 45, height: 35)
         case sizeCollectionView:
-//            return CGSize(width: 55, height: 42)
+            //            return CGSize(width: 55, height: 42)
             return CGSize(width: 45, height: 35)
         default:
             return CGSize(width: 0, height: 0)

@@ -70,6 +70,7 @@ class EditInventoryDetailsViewModel {
       WebService.sharedInstance.updateInventoryDetails(param: param){ response in
         DispatchQueue.main.async {
             CommonUtils.showToast(message: "Inventory updated succesfully".localiz())
+            self.hostVC?.onEditingDone?()
           self.hostVC?.navigationController?.popToViewController(ofClass: InventoryListViewController.self, animated: true)
         }
       }

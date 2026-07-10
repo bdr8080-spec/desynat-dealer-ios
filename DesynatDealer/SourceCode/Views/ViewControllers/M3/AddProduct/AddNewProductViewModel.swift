@@ -309,6 +309,7 @@ class AddNewProductViewModel: NSObject {
             CommonUtils.showToast(message: "Product is updated successfully".localiz())
             DispatchQueue.main.async { [weak self] in
                 guard let self else { return }
+                self.hostVC.isEditingDone?()
                 self.hostVC.navigationController?.popViewController(animated: true)
             }
         }

@@ -61,10 +61,6 @@ class InventoryDetailsViewController: UIViewController {
         super.viewDidLoad()
         statusButton.isUserInteractionEnabled = hasActionPermission
         editInvertoryView.isHidden = !hasActionPermission
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         viewModel.getProductDetailsService()
     }
     
@@ -82,13 +78,11 @@ class InventoryDetailsViewController: UIViewController {
     @IBAction func editDidTapped(_ sender: Any) {
         let nextVC = EditInventoryDetailsViewController.instantiate(fromAppStoryboard: .InventoryAffilate)
         nextVC.productId = viewModel.productDetails?.id ?? 0
-        
-        // Pass the entire product details
         nextVC.viewModel.productDetails = viewModel.productDetails
-        
-        // MOST IMPORTANT — Pass the currently selected variant
         nextVC.selectedVariant = self.selectedVariant
-        
+        nextVC.onEditingDone = { [weak self] in
+            self?.viewModel.getProductDetailsService()
+        }
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     

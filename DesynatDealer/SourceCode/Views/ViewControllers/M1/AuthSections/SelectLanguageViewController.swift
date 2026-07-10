@@ -87,8 +87,11 @@ class SelectLanguageViewController: UIViewController {
     @IBAction func btnTapContinue(_ sender: Any) {
         AppLanguageManager.shared.setLanguage(language: selectedLanguage)
         if comingFirstTime {
-            let vc = WelcomeScreenViewController.instantiate(fromAppStoryboard: .Main)
+//            let vc = WelcomeScreenViewController.instantiate(fromAppStoryboard: .Main)
+//            self.navigationController?.pushViewController(vc, animated: true)
+            let vc = LoginViewController.instantiate(fromAppStoryboard: .Main)
             self.navigationController?.pushViewController(vc, animated: true)
+            UserDefaults.standard.setValue("true", forKey: "isOnBoardingChecked")
         } else {
             kSharedSceneDelegate.navigateToLoginVC()
         }

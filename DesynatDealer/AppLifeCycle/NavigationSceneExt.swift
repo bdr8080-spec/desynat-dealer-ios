@@ -11,10 +11,10 @@ import UIKit
 
 extension SceneDelegate {
     
-    public func navigateToWelcomeScreen() {
-        let vc = WelcomeScreenViewController.instantiate(fromAppStoryboard: .Main)
-        navigateTo(vc: vc)
-    }
+//    public func navigateToWelcomeScreen() {
+//        let vc = WelcomeScreenViewController.instantiate(fromAppStoryboard: .Main)
+//        navigateTo(vc: vc)
+//    }
     
     public func navigateToSelectLanguage() {
         let vc = SelectLanguageViewController.instantiate(fromAppStoryboard:.Main)

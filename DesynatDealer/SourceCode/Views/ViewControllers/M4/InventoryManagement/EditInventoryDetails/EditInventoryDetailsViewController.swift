@@ -54,6 +54,7 @@ class EditInventoryDetailsViewController: UIViewController {
     var coloursList: [ColorsLisDataModel] = []
     var sizesList: [SizeListDataModel] = []
     var selectedVariant: ProductVariant?
+    var onEditingDone: (() -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()

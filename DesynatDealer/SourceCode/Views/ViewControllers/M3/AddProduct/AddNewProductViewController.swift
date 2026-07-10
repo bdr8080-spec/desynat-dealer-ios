@@ -70,6 +70,7 @@ class AddNewProductViewController: UIViewController {
     @IBOutlet weak var deliveryTimeTF: UITextField!
     
     private lazy var viewModel = AddNewProductViewModel(hostVC: self)
+    var isEditingDone: (() -> Void)?
     var comingReason: ComingReasonAtAddToProduct = .forAddingProduct
     var specifications: [Spefication] = [Spefication()]
     var variantArray: [Variant] = [Variant()]
