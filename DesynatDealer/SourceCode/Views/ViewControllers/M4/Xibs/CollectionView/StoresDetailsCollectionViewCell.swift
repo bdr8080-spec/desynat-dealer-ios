@@ -19,10 +19,8 @@ class StoresDetailsCollectionViewCell: UICollectionViewCell {
     }
     
     func configData(data: GetHighLightsList?){
-//        let dict = self.viewModel.highlightList?[indexPath.row]
-
-        let fileString = data?.file ?? ""
-        let thumbnailString = data?.thumbnail ?? ""
+        let fileString = data?.highlights?.first?.file ?? ""
+        let thumbnailString = data?.highlights?.first?.thumbnail ?? ""
 
         // Detect video
         let isVideo = fileString.lowercased().contains(".mp4")

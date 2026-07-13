@@ -39,11 +39,17 @@ struct GetHighLightsDataModel: Codable {
 
 // MARK: - GetHighLightsList
 struct GetHighLightsList: Codable {
+    let title: String?
+    let highlights: [HighlightList]?
+}
+
+// MARK: - HighlightList
+struct HighlightList: Codable {
     let id, type, sellerID: Int?
     let file: String?
     let title: String?
-    let thumbnail:String?
     let status: Int?
+    let thumbnail: String?
     let createdAt, updatedAt: String?
 
     enum CodingKeys: String, CodingKey {
@@ -54,7 +60,6 @@ struct GetHighLightsList: Codable {
         case updatedAt = "updated_at"
     }
 }
-
 
 // MARK: - GetMyReelsDataModel
 struct GetMyReelsDataModel: Codable {

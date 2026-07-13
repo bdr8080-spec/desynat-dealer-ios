@@ -12,7 +12,7 @@ class StoryViewerViewModel {
     
     var adminStories: [SellerHighlightsModel] = []
     var sellerStories: [SellerHighlightsModel] = []
-    var sellerHighlight: [GetHighLightsList] = []
+    var sellerHighlight: [HighlightList] = []
     
     func getAdminStory(completion: @escaping () -> Void) {
         WebService.sharedInstance.getAdminStoryService() { list in
@@ -24,13 +24,6 @@ class StoryViewerViewModel {
     func getSelfStory(completion: @escaping () -> Void) {
         WebService.sharedInstance.getSellerStoryService() { list in
             self.sellerStories = list
-            completion()
-        }
-    }
-    
-    func getSelfHighlight(completion: @escaping () -> Void) {
-        WebService.sharedInstance.getMyAllHighLights() { list in
-            self.sellerHighlight = list
             completion()
         }
     }

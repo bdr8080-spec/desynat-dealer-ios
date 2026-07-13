@@ -351,6 +351,7 @@ extension DelearProfileViewController: UICollectionViewDelegate, UICollectionVie
         case storiesCollectionView:
             let nextVC = StoryViewerViewController.instantiate(fromAppStoryboard: .Profile)
             nextVC.comingFor = .forSelfHighlight
+            nextVC.viewModel.sellerHighlight = viewModel.highlightList?[indexPath.row].highlights ?? []
             self.navigationController?.pushViewController(nextVC, animated: true)
         default:
             print("Uplaod new reels")
