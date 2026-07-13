@@ -124,6 +124,7 @@ class AddNewBannerVM: NSObject {
         
         WebService.sharedInstance.addBanners(param: params) { data in
             let vc = AddBannerSuccessVC.instantiate(fromAppStoryboard: .BannerManagement)
+            vc.comingReason = .forBanner
             vc.dismissCallBack = {
                 self.hostVC.onBannerAdded?()
                 self.hostVC.navigationController?.popViewController(animated: true)

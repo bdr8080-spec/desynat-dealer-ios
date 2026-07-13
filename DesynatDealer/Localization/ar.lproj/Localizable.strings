@@ -1052,3 +1052,7 @@
 "Please enter valid SWIFT/BIC" = "يرجى إدخال رمز سويفت صحيح";
 "Please add at least one image for each variant" = "يرجى إضافة صورة واحدة على الأقل لكل متغير";
 "Please select expected delivery time" = "يرجى اختيار وقت التسليم المتوقع";
+"Your story request has been successfully submitted for verification.\n\nOur team is currently reviewing your details. Please allow 3–4 hours for the verification process to be completed.\n\nYou will be notified once your story is approved on the Desynat platform." = "تم إرسال طلب قصتك بنجاح للتحقق!\n\nيقوم فريقنا حالياً بمراجعة التفاصيل الخاصة بك، يرجى السماح لمدة 3-4 ساعات لإكمال عملية التحقق.\n\nسيتم إشعارك بمجرد الموافقة على قصتك ونشرها على منصة ديزاينات.";
+"Please select date" = "يرجى اختيار التاريخ";
+"Send Request" = "إرسال الطلب";
+"Post on Profile" = "النشر على الملف الشخصي";
