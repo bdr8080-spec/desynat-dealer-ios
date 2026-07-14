@@ -18,6 +18,7 @@ class UploadPostViewController: UIViewController {
     var videoURL: URL?
     var thumbnailImage: String?
     lazy var viewModel = UploadStoryViewModel(hostVc: self)
+    var comingReason: ComingReasonAtPromoteStory = .fromProfile
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +50,7 @@ class UploadPostViewController: UIViewController {
 //        }
         
         let nextVC = PromoteStoryViewController.instantiate(fromAppStoryboard: .BannerManagement)
+        nextVC.comingReason = comingReason
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     

@@ -9,6 +9,8 @@ import UIKit
 
 class PromoteStoryViewController: UIViewController {
     
+    @IBOutlet weak var deysnatButtonOutlet: UIButton!
+    @IBOutlet weak var profileButtonOutlet: UIButton!
     @IBOutlet weak var lblTotalPrice: CustomLabelFont!
     @IBOutlet weak var postOnProfileButton: CustomButton!
     @IBOutlet weak var desynatRadioContentView: CustomView!
@@ -19,17 +21,31 @@ class PromoteStoryViewController: UIViewController {
     @IBOutlet weak var txtFromDate: UITextField!
     
     private lazy var viewModel = PromoteStoryViewModel(hostVC: self)
+    private var activeTextField: UITextField?
     var profileRadioIsOn: Bool = true
     let datePicker = UIDatePicker()
-    private var activeTextField: UITextField?
     var perDayPrice: Double = 499
+    var comingReason: ComingReasonAtPromoteStory = .fromProfile
     
     override func viewDidLoad() {
         super.viewDidLoad()
         desynatRadioContentView.borderColor = UIColor.black.withAlphaComponent(0.1)
-        promotioDetailsView.isHidden = true
         lblTotalPrice.text = perDayPrice.description
         setUpTextFields()
+        switch comingReason {
+        case .fromStoryManagement:
+            profileContentView.isHidden = true
+            promotioDetailsView.isHidden = false
+            profileButtonOutlet.isUserInteractionEnabled = false
+            deysnatButtonOutlet.isUserInteractionEnabled = false
+            desynatRadioImageView.image = .radioSelected
+            profileRadioIsOn = false
+        case .fromProfile:
+            profileContentView.isHidden = false
+            promotioDetailsView.isHidden = true
+            profileButtonOutlet.isUserInteractionEnabled = true
+            deysnatButtonOutlet.isUserInteractionEnabled = true
+        }
     }
     
     @IBAction func profileStoryDidTapped(_ sender: Any) {
@@ -68,7 +84,12 @@ class PromoteStoryViewController: UIViewController {
             let vc = AddBannerSuccessVC.instantiate(fromAppStoryboard: .BannerManagement)
             vc.comingReason = .forStory
             vc.dismissCallBack = {
-                self.navigationController?.popToViewController(ofClass: DelearProfileViewController.self)
+                switch self.comingReason {
+                case .fromStoryManagement:
+                    self.navigationController?.popToViewController(ofClass: StoryManagementListViewController.self)
+                case .fromProfile:
+                    self.navigationController?.popToViewController(ofClass: DelearProfileViewController.self)
+                }
             }
             self.navigationController?.present(vc, animated: true)
         }
@@ -136,11 +157,11 @@ extension PromoteStoryViewController {
         }
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM/yyyy"
-        guard let startDate = formatter.date(from: fromText) else {
+//        guard let startDate = formatter.date(from: fromText) else {
             lblTotalPrice.text = "0 KD".localiz()
-            return
-        }
-        let text = "KD"
+//            return
+//        }
+//        let text = "KD"
         //        lblTotalPrice.text = "\(totalDays * pricePerDay) \(text)"
     }
     
@@ -156,4 +177,9 @@ extension PromoteStoryViewController: UITextFieldDelegate {
         datePicker.minimumDate = Date()
     }
     
+}
+
+enum ComingReasonAtPromoteStory {
+    case fromStoryManagement
+    case fromProfile
 }

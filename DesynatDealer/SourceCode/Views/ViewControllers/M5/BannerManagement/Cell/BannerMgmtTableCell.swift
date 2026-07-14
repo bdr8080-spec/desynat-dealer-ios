@@ -42,9 +42,7 @@ class BannerMgmtTableCell: UITableViewCell {
         } else {
           imgBanner.image = UIImage(named: "")
         }
-        
         lblRequestedId.text = data.orderID ?? "Nil".localiz()
-//        let text = "KD".localiz()
         lblTotalAmount.text = CommonUtils.formatPriceStringInput(data.price ?? "0")
         lblRequestedOn.text = formatDate(data.createdAt)
         
@@ -74,13 +72,6 @@ class BannerMgmtTableCell: UITableViewCell {
                 viewRejectReason.isHidden = true
                 
             case "1":
-//                lblStatus.text = "Active"
-//                lblStatus.textColor = UIColor(hex: "#C4A176")
-//                viewBtnPay.isHidden = true
-//                viewRejectDate.isHidden = true
-//                viewRejectReason.isHidden = true
-              
-              
               let today = Calendar.current.startOfDay(for: Date())
                       let startDate = apiDate(data.startDate)
                       let endDate = apiDate(data.endDate)

@@ -9,6 +9,7 @@ enum PayFrom {
     case plan
     case banner
     case mySubscriptionPlan
+    case storyManagementPayment
 }
 
 import UIKit
@@ -36,16 +37,7 @@ class PaymentMethodVC: UIViewController {
         super.viewDidLoad()
         isCardIsSlecteed = true
         lblMonth.text = durationOfPlan
-//        let text = "KD".localiz()
-        switch paymentFrom {
-        case .plan:
-            lblTotalAmt.text = CommonUtils.formatPrice(payAmount)
-        case .banner:
-            lblTotalAmt.text = CommonUtils.formatPrice(payAmount)
-         case .mySubscriptionPlan:
-          lblTotalAmt.text = CommonUtils.formatPrice(payAmount)
-        }
-        
+        lblTotalAmt.text = CommonUtils.formatPrice(payAmount)
     }
     
     @IBAction func btnBack(_ sender: Any) {
@@ -53,15 +45,13 @@ class PaymentMethodVC: UIViewController {
     }
     
     @IBAction func btnSelectPaymentMethod(_ sender: Any) {
-//        let supplierId = String(Int.random(in: 1000...9999))
         cardSelectionImageView.image = UIImage(named: "radioSelected")
         isCardIsSlecteed = true
         selectedPaymentMethodID = nil
         if paymentFrom == .plan || paymentFrom == .mySubscriptionPlan {
             creditDebitCardPayment(
                 invoiceValue: Decimal(payAmount),
-                orderId: transactionIds ?? "",
-//                supplierId: supplierId
+                orderId: transactionIds ?? ""
             ) { [weak self] response, invoiceId, error in
                 guard let self = self else { return }
                 if let err = error {
@@ -77,34 +67,27 @@ class PaymentMethodVC: UIViewController {
             showAlert(msg: "Please select a payment option".localiz())
             return
         }
-        
         if isCardIsSlecteed {
             switch paymentFrom {
             case .plan, .mySubscriptionPlan :
-//                let supplierId = String(Int.random(in: 1000...9999))
                 cardSelectionImageView.image = UIImage(named: "radioSelected")
                 isCardIsSlecteed = true
                 selectedPaymentMethodID = nil
-//                if paymentFrom == .plan {
-                    creditDebitCardPayment(
-                        invoiceValue: Decimal(payAmount),
-                        orderId: transactionIds ?? "",
-//                        supplierId: supplierId
-                    ) { [weak self] response, invoiceId, error in
-                        guard let self = self else { return }
-                        if let err = error {
-                            self.showAlert(msg: err.localizedDescription)
-                            return
-                        }
+                creditDebitCardPayment(
+                    invoiceValue: Decimal(payAmount),
+                    orderId: transactionIds ?? ""
+                ) { [weak self] response, invoiceId, error in
+                    guard let self = self else { return }
+                    if let err = error {
+                        self.showAlert(msg: err.localizedDescription)
+                        return
                     }
-//                }
+                }
                 
-            case .banner:
-//                let supplierId = String(Int.random(in: 1000...9999))
+            case .banner, .storyManagementPayment:
                 creditDebitCardPayment(
                     invoiceValue: Decimal(payAmount),
                     orderId: transactionIds ?? "",
-//                    supplierId: supplierId
                 ) { [weak self] response, invoiceId, error in
                     guard let self = self else { return }
                     if let err = error {
@@ -113,7 +96,6 @@ class PaymentMethodVC: UIViewController {
                     }
                 }
             }
-            
         }
     }
     
@@ -144,6 +126,24 @@ extension PaymentMethodVC {
         }
     }
     
+    func storyPayment(transactionId: String, paymentStatus: Int, order_id: String) {
+        let params: [String: Any] = [
+            "order_id": order_id,
+            "payment_status": paymentStatus,
+            "transaction_id": transactionId
+        ]
+//        WebService.sharedInstance.bannerPayment(param: params) { result in
+            DispatchQueue.main.async {
+                let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
+                vc.comingReason = .storyPlanPurchased
+                vc.callBackDismiss = {
+                    self.navigationController?.popToViewController(ofClass: BannerManagemntVC.self, animated: true)
+                }
+                self.present(vc, animated: true)
+            }
+//        }
+    }
+    
     func completePlanPurchase(transactionId: String,
                               paymentStatus: Int,
                               onlineTransactionId: String) {
@@ -154,7 +154,7 @@ extension PaymentMethodVC {
         WebService.sharedInstance.completePurchasePlansListService(param: params) { user, error in
             DispatchQueue.main.async {
                 if let error = error {
-//                    self.showAlert(msg: error)
+                    //                    self.showAlert(msg: error)
                     CommonUtils.showToast(message: error)
                     return
                 }
@@ -174,14 +174,9 @@ extension PaymentMethodVC {
     
     func creditDebitCardPayment(invoiceValue: Decimal,
                                 orderId: String,
-//                                supplierId: String?,
                                 completion: @escaping (MFPaymentStatusResponse?, String?, Error?) -> Void) {
-//        let supplierId = Int.random(in: 1000...9999)
         let request = MFExecutePaymentRequest(invoiceValue: invoiceValue, paymentMethod: 2)
         request.customerReference = orderId
-        
-//        let supplier = MFSupplier(supplierCode: supplierId, invoiceShare: invoiceValue)
-//        request.suppliers = [supplier]
         request.displayCurrencyIso = .kuwait_KWD
         MFPaymentRequest.shared.executePayment(request: request, apiLanguage: .english) { result, invoiceId in
             switch result {
@@ -209,15 +204,8 @@ extension PaymentMethodVC {
         let invoiceValue = Decimal(payAmount)
         let request = MFExecutePaymentRequest(invoiceValue: invoiceValue)
         request.customerReference = self.transactionIds ?? ""
-//        let supplierId = Int.random(in: 1000...9999)
-//        let supplier = MFSupplier(
-//            supplierCode: supplierId, invoiceShare: invoiceValue
-//        )
-//        request.suppliers = [supplier]
-        
         viewPayment.pay(request, .english) { [weak self] response, invoiceId in
             guard let self = self else { return }
-            
             switch response {
             case .success(let paymentStatus):
                 print("Payment successful with invoiceId: \(invoiceId ?? "N/A")")
@@ -247,38 +235,26 @@ extension PaymentMethodVC {
                 completePlanPurchase(transactionId: self.transactionIds ?? "", paymentStatus: 1, onlineTransactionId: transactionID)
             case .banner:
                 bannerPayment(transactionId: transactionID, paymentStatus: 1, order_id: self.transactionIds ?? "")
+            case .storyManagementPayment:
+                storyPayment(transactionId: transactionID, paymentStatus: 1, order_id: self.transactionIds ?? "")
             }
         }
     }
     
     func cardPay() {
         var configure = MFCardConfigureBuilder.default
-        // but you can create yours
-        // set placeholders
         configure.setPlaceholder(MFCardPlaceholder(cardHolderNamePlaceholder: "Name".localiz(), cardNumberPlaceholder: "Number".localiz(), expiryDatePlaceholder: "MM / YY".localiz(), cvvPlaceholder: "CVV".localiz()))
-        // set labels
         configure.setLabel(MFCardLabel(cardHolderNameLabel: "Card holder name".localiz(), cardNumberLabel: "Card number".localiz(), expiryDateLabel: "MM / YY".localiz(), cvvLabel: "CVV".localiz(), showLabels: true, fontWeight: .normal))
-        // set theme
         let theme = MFCardTheme(inputColor: .black, labelColor: .black, errorColor: .red, borderColor: .black)
-        theme.language = .english // select .arabic for rtl vie
+        theme.language = .english
         configure.setTheme(theme)
-        // set height and margin of card inputs
         configure.setCardInput(MFCardInput(inputHeight: 32, inputMargin: 15))
-        
-        // set labels and texts font size
         configure.setFontSize(15)
-        // set border width
         configure.setBorderWidth(1)
-        // set border radius for input fields
         configure.setBorderRadius(8)
-        // set the display of card icons
         configure.setHideCardIcon(false)
-        // set Font Family
         configure.setFontFamily(.timesNewRoman)
-        // set box shadow
         configure.setBoxShadow(MFBoxShadow(hOffset: 0, vOffset: 0, blur: 0, spread: 0, color: .gray))
-        
-        // create the new configure and assigned to payment card view
         viewPayment.configure = configure.build()
         cardPayInitiation()
     }

@@ -22,11 +22,14 @@ class AddNewStoryViewController: UIViewController {
     var galleryAssets: [PHAsset] = []
     let imagePicker = ImagePickerManager()
     var thumbnailImage: String?
+    var onStoryAdded: (()-> Void)?
+    var comingReason: ComingReasonAtPromoteStory = .fromProfile
     
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchGalleryAssets()
     }
+    
     // MARK: - Navigation
     @IBAction func backBtnTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
@@ -171,54 +174,41 @@ extension AddNewStoryViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     private func handleImageAsset(_ asset: PHAsset) {
-        
         let options = PHImageRequestOptions()
         options.isSynchronous = false
         options.deliveryMode = .highQualityFormat
-        
         PHImageManager.default().requestImage(
             for: asset,
             targetSize: CGSize(width: 1080, height: 1080),
             contentMode: .aspectFill,
             options: options
         ) { [weak self] image, _ in
-            
             guard let self = self,
                   let image = image else { return }
-            
             DispatchQueue.main.async {
                 let vc = UploadPostViewController.instantiate(fromAppStoryboard: .Profile)
-                vc.selectedImage = image   // ✅ pass image
+                vc.selectedImage = image
+                vc.comingReason = self.comingReason
                 self.navigationController?.pushViewController(vc, animated: true)
             }
         }
     }
     private func handleVideoAsset(_ asset: PHAsset) {
-        
         let options = PHVideoRequestOptions()
         options.deliveryMode = .highQualityFormat
-        
         PHImageManager.default().requestAVAsset(forVideo: asset, options: options) { [weak self] avAsset, _, _ in
-            
             guard let self = self,
                   let urlAsset = avAsset as? AVURLAsset else { return }
-            
             let videoURL = urlAsset.url
-            
-            // Generate thumbnail
             CommonUtils.generateThumbnail(url: videoURL) { thumbnail in
-//                guard let self = self else { return }
-                
                  DispatchQueue.main.async {
                     guard let data = thumbnail?.jpegData(compressionQuality: 0.25) else { return }
                     self.uploadMediaForGettingThumbnailImageUrl(fileData: data, isImage: true) {
                         DispatchQueue.main.async {
                             let vc = UploadPostViewController.instantiate(fromAppStoryboard: .Profile)
                             vc.selectedImage = thumbnail
-                            
-                            //self.thumbnailImage = self.saveImageAndGetURLString(thumbnail)
-                            vc.videoURL = videoURL   // 🔥🔥 MOST IMPORTANT LINE
-                            
+                            vc.comingReason = self.comingReason
+                            vc.videoURL = videoURL
                             self.navigationController?.pushViewController(vc, animated: true)
                         }
                     }
@@ -237,20 +227,14 @@ extension AddNewStoryViewController: UIImagePickerControllerDelegate, UINavigati
 
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-
         picker.dismiss(animated: true)
-
-        // ✅ IMAGE CASE
         if let image = info[.originalImage] as? UIImage {
-
             let vc = UploadPostViewController.instantiate(fromAppStoryboard: .Profile)
             vc.selectedImage = image
+            vc.comingReason = self.comingReason
             self.navigationController?.pushViewController(vc, animated: true)
         }
-
-        // ✅ VIDEO CASE (🔥 FIX HERE)
         else if let videoURL = info[.mediaURL] as? URL {
-
             CommonUtils.generateThumbnail(url: videoURL) { thumbnail in
                 guard let data = thumbnail?.jpegData(compressionQuality: 0.25) else { return }
                 self.uploadMediaForGettingThumbnailImageUrl(fileData: data, isImage: true) {
@@ -258,8 +242,8 @@ extension AddNewStoryViewController: UIImagePickerControllerDelegate, UINavigati
                         DispatchQueue.main.async {
                             let vc = UploadPostViewController.instantiate(fromAppStoryboard: .Profile)
                             vc.selectedImage = thumbnail
-                            vc.videoURL = videoURL   // ✅ IMPORTANT
-                            
+                            vc.videoURL = videoURL
+                            vc.comingReason = self.comingReason
                             self.navigationController?.pushViewController(vc, animated: true)
                         }
                     }

@@ -48,6 +48,8 @@ class RegisterationSuccessViewController: UIViewController {
             descriptionLabel.text = "Staff is added\nsuccessfully".localiz()
         case .ticketRaised:
             descriptionLabel.text = "Ticket is raised\nsuccessfully".localiz()
+        case .storyPlanPurchased:
+            descriptionLabel.text = "Plan purchased successfully!".localiz()
         }
     }
     
@@ -65,4 +67,5 @@ enum ComingReasonAtRegisterationSuccess {
     case liveRequest
     case staffAdded
     case ticketRaised
+    case storyPlanPurchased
 }

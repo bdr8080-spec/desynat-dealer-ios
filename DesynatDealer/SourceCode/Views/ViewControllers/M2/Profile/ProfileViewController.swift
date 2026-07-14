@@ -23,6 +23,7 @@ class ProfileViewController: UIViewController {
   private var sideMenuData: [SideMenuModel] = [
     SideMenuModel(title: "Staff management", image: "staffMan"),
     SideMenuModel(title: "Subscription Plans", image: "subscriptionPlan"),
+    SideMenuModel(title: "Story management", image: "bannerMan"),
     SideMenuModel(title: "Banner management", image: "bannerMan"),
     SideMenuModel(title: "Live Coverage request", image: "liveCoverage"),
     SideMenuModel(title: "Deals management", image: "dealsMan"),
@@ -45,6 +46,7 @@ class ProfileViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+      
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -111,6 +113,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         vc.hasActionPermission = true
         self.navigationController?.pushViewController(vc, animated: true)
 //      print("➡️ Navigate to Subscription Plans")
+        
+    case "Story management".localiz():
+        let vc = StoryManagementListViewController.instantiate(fromAppStoryboard: .BannerManagement)
+        vc.hasActionPermission = true
+        self.navigationController?.pushViewController(vc, animated: true)
       
     case "Banner management".localiz():
         let vc = BannerManagemntVC.instantiate(fromAppStoryboard: .BannerManagement)
