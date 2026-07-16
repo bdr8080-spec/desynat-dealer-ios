@@ -100,7 +100,7 @@
 "Filter by Date" = "تصفية حسب التاريخ";
 "Button" = "زر";
 " Total Order Conversion" = "تحويل إجمالي الطلبات";
-" This Month" = "هذا الشهر";
+"This Month" = "هذا الشهر";
 "No Result found " = "لم يتم العثور على نتائج";
 "No live events available" = "لا توجد أحداث مباشرة";
 "Filter" = "تصفية";
@@ -202,6 +202,7 @@
 "Busy/On" = "مشغول/متصل";
 "This Month" = "هذا الشهر";
 "This Week" = "هذا الأسبوع";
+"This week" = "هذا الأسبوع";
 "Today" = "اليوم";
 "Total Customer visits" = "إجمالي زيارات العملاء";
 "Total Order Conversation" = "إجمالي تحويل الطلبات";
@@ -623,7 +624,7 @@
 "Payment Mode" = "طريقة الدفع";
 "   This Month" = "   هذا الشهر";
 "   This week" = "   هذا الأسبوع";
-"   Today" = "   اليوم";
+"Today" = "اليوم" ;
 "  Total Order Conversion" = " إجمالي تحويل الطلبات";
 "  Total Customer visits" = " إجمالي زيارات العملاء";
 
@@ -1057,3 +1058,4 @@
 "Send Request" = "إرسال الطلب";
 "Post on Profile" = "النشر على الملف الشخصي";
 "Story Management" = "إدارة القصص";
+"This Year" = "هذا العام";

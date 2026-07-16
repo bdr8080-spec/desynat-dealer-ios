@@ -20,6 +20,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var btnToday: UIButton!
     @IBOutlet weak var btnThisWeek: UIButton!
     @IBOutlet weak var btnThisMonth: UIButton!
+    @IBOutlet weak var btnThisYear: UIButton!
     @IBOutlet weak var lblTotalRevenue: CustomLabelFont!
     @IBOutlet weak var lblTotalProducts: CustomLabelFont!
     @IBOutlet weak var lblActiveProducts: CustomLabelFont!
@@ -44,9 +45,10 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var messageCountView: CustomView!
     @IBOutlet weak var unreadMessageCountLabel: UILabel!
     
+    
     private let datePicker = UIDatePicker()
     private var activeTextField: UITextField?
-    private var dateButtons: [UIButton] { [btnToday, btnThisWeek, btnThisMonth]}
+    private var dateButtons: [UIButton] { [btnToday, btnThisWeek, btnThisMonth, btnThisYear]}
     private var statsButtons: [UIButton] { [btnTotalOrderConversion, btnTotalCustomerVisits]}
     private var lineChartView = LineChartView()
     private lazy var viewModel = HomeViewModel(hostVC: self)
@@ -70,9 +72,10 @@ class HomeViewController: UIViewController {
         setUpTextFields()
         setUpButtons()
         setUpChart()
-        btnToday.setTitle("   Today".localiz(), for: .normal)
-        btnThisWeek.setTitle("   This week".localiz(), for: .normal)
-        btnThisMonth.setTitle("   This Month".localiz(), for: .normal)
+        btnToday.setTitle("Today".localiz(), for: .normal)
+        btnThisWeek.setTitle("This week".localiz(), for: .normal)
+        btnThisMonth.setTitle("This Month".localiz(), for: .normal)
+        btnThisYear.setTitle("This Year".localiz(), for: .normal)
         txtChooseToDate.placeholder = "To   //  //".localiz()
         txtVisitorToDate.placeholder = "To   //  //".localiz()
         txtChooseFromDate.placeholder = "From   //  //".localiz()

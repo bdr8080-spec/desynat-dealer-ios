@@ -12,7 +12,7 @@
 "Leave" = "Leave";
 "Visitor analytics" = "Visitor analytics";
 "In- Active" = "In- Active";
-" Today" = " Today";
+"Today" = "Today";
 "Total Sold : 0" = "Total Sold : 0";
 "51" = "51";
 "120" = "120";
@@ -42,7 +42,7 @@
 " Total Customer visits" = " Total Customer visits";
 "Viewers: 1" = "Viewers: 1";
 "Ongoing" = "Ongoing";
-" This week" = " This week";
+"This week" = "This week";
 "Total Revenue" = "Total Revenue";
 "Apply" = "Apply";
 "Product Management" = "Product Management";
@@ -62,7 +62,7 @@
 "Filter by Date" = "Filter by Date";
 "Button" = "Button";
 " Total Order Conversion" = " Total Order Conversion";
-" This Month" = " This Month";
+"This Month" = "This Month";
 "No Result found " = "No Result found ";
 "No live events available" = "No live events available";
 "Filter" = "Filter";
@@ -798,3 +798,4 @@
 "Send Request" = "Send Request";
 "Post on Profile" = "Post on Profile";
 "Story Management" = "Story Management";
+"This Year" = "This Year";
