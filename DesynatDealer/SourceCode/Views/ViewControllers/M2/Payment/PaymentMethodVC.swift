@@ -32,6 +32,7 @@ class PaymentMethodVC: UIViewController {
     var paymentCompleted: Bool = false
     var isCardIsSlecteed: Bool = false
     var selectedPaymentMethodID: Int? = nil
+    var storyId: Int? = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,7 +70,7 @@ class PaymentMethodVC: UIViewController {
         }
         if isCardIsSlecteed {
             switch paymentFrom {
-            case .plan, .mySubscriptionPlan :
+            case .plan, .mySubscriptionPlan:
                 cardSelectionImageView.image = UIImage(named: "radioSelected")
                 isCardIsSlecteed = true
                 selectedPaymentMethodID = nil
@@ -126,13 +127,12 @@ extension PaymentMethodVC {
         }
     }
     
-    func storyPayment(transactionId: String, paymentStatus: Int, order_id: String) {
+    func storyPayment(transactionId: String) {
         let params: [String: Any] = [
-            "order_id": order_id,
-            "payment_status": paymentStatus,
+            "story_id": storyId ?? "",
             "transaction_id": transactionId
         ]
-//        WebService.sharedInstance.bannerPayment(param: params) { result in
+        WebService.sharedInstance.storyRequestPayment(param: params) { result in
             DispatchQueue.main.async {
                 let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
                 vc.comingReason = .storyPlanPurchased
@@ -141,7 +141,7 @@ extension PaymentMethodVC {
                 }
                 self.present(vc, animated: true)
             }
-//        }
+        }
     }
     
     func completePlanPurchase(transactionId: String,
@@ -236,7 +236,7 @@ extension PaymentMethodVC {
             case .banner:
                 bannerPayment(transactionId: transactionID, paymentStatus: 1, order_id: self.transactionIds ?? "")
             case .storyManagementPayment:
-                storyPayment(transactionId: transactionID, paymentStatus: 1, order_id: self.transactionIds ?? "")
+                storyPayment(transactionId: transactionID)
             }
         }
     }

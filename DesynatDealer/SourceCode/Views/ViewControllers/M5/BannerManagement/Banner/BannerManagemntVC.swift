@@ -92,6 +92,7 @@ extension BannerManagemntVC: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension BannerManagemntVC: UITextFieldDelegate {
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
         searchWorkItem?.cancel()
@@ -107,6 +108,7 @@ extension BannerManagemntVC: UITextFieldDelegate {
 }
 
 extension BannerManagemntVC: BannerFilterDelegate {
+    
     func didApplyFilter(_ filter: BannerFilterModel) {
         viewModel.appliedFilter = filter
         viewModel.getAllBanners()

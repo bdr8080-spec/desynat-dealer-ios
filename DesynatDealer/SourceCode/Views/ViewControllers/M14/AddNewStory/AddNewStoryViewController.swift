@@ -24,6 +24,7 @@ class AddNewStoryViewController: UIViewController {
     var thumbnailImage: String?
     var onStoryAdded: (()-> Void)?
     var comingReason: ComingReasonAtPromoteStory = .fromProfile
+    var countryId: Int = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()

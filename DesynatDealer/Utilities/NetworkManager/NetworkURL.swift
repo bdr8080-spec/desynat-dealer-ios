@@ -152,6 +152,10 @@ enum NetworkEndPoint: String {
     case seeStory            = "/api/see_story"
     case deliveryTimeList    = "/api/delivery_times"
     
+    
+    case getSellerStoryPrice  = "/api/seller/get_seller_story_price"
+    case completeStoryPayment = "/api/seller/complete_story_payment"
+    
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"
     }

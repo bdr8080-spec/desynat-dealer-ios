@@ -24,6 +24,7 @@ class StoryManagementListViewController: UIViewController {
     private var searchWorkItem: DispatchWorkItem?
     var bannerData: [BannerModel] = []
     var hasActionPermission: Bool = false
+    var countryId: Int = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +51,7 @@ class StoryManagementListViewController: UIViewController {
     @IBAction func btnAddStory(_ sender: Any) {
         let vc = AddNewStoryViewController.instantiate(fromAppStoryboard: .Profile)
         vc.comingReason = .fromStoryManagement
+        vc.countryId = countryId
         vc.onStoryAdded = {
             self.viewModel.getAllStories()
         }
@@ -58,6 +60,7 @@ class StoryManagementListViewController: UIViewController {
 }
 
 extension StoryManagementListViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return bannerData.count
     }
@@ -68,6 +71,7 @@ extension StoryManagementListViewController: UITableViewDelegate, UITableViewDat
         cell.configure(with: banner, hasActionPermission: hasActionPermission)
         cell.onPayTap = {
             let vc = PaymentMethodVC.instantiate(fromAppStoryboard: .Main)
+            vc.storyId = banner.id ?? 0
             vc.paymentFrom = .storyManagementPayment
             vc.transactionIds = banner.orderID ?? ""
             vc.payAmount = Double(banner.price ?? "") ?? 0
@@ -86,6 +90,7 @@ extension StoryManagementListViewController: UITableViewDelegate, UITableViewDat
 }
 
 extension StoryManagementListViewController: UITextFieldDelegate {
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
         searchWorkItem?.cancel()

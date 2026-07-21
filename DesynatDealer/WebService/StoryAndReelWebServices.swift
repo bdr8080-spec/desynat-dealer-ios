@@ -42,6 +42,22 @@ extension WebService {
         }
     }
     
+    func getStoryPriceServices(param: [String :Any], completion:@escaping (_ user: PromotionPriceDataModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.getSellerStoryPrice), requestMethod: .get, requestParams: param, requestModel: PromotionPriceDataModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
     func addNewHeightlightServices(param: [String :Any], completion:@escaping (_ user: EmptyModel)-> Void) {
         CommonUtils.showHud(show: true)
         NetworkManager.shared.request(withAPI:.endpoint(.addNewHighlights), requestMethod: .post, requestParams: param, requestModel: EmptyModel.self) { result, code in

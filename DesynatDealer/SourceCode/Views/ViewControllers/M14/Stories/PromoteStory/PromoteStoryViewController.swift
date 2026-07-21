@@ -24,14 +24,18 @@ class PromoteStoryViewController: UIViewController {
     private var activeTextField: UITextField?
     var profileRadioIsOn: Bool = true
     let datePicker = UIDatePicker()
-    var perDayPrice: Double = 499
+    var perDayPrice: String? = ""
     var comingReason: ComingReasonAtPromoteStory = .fromProfile
+    var thumbnailImage: String?
+    var imageUrl: String = ""
+    var selectedApiDate: String = ""
+    var countryId: Int = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
         desynatRadioContentView.borderColor = UIColor.black.withAlphaComponent(0.1)
-        lblTotalPrice.text = perDayPrice.description
         setUpTextFields()
+        viewModel.getStoryPriceServices()
         switch comingReason {
         case .fromStoryManagement:
             profileContentView.isHidden = true
@@ -74,24 +78,14 @@ class PromoteStoryViewController: UIViewController {
     
     @IBAction func postOnProfileDidTapped(_ sender: Any) {
         if profileRadioIsOn {
-            self.navigationController?.popToViewController(ofClass: DelearProfileViewController.self)
+            viewModel.uploadStories(imageUrl: imageUrl, isPromotional: false)
         } else {
             let date = txtFromDate.text?.trimmed() ?? ""
             if date.isEmpty {
                 showAlert(msg: "Please select date".localiz())
                 return
             }
-            let vc = AddBannerSuccessVC.instantiate(fromAppStoryboard: .BannerManagement)
-            vc.comingReason = .forStory
-            vc.dismissCallBack = {
-                switch self.comingReason {
-                case .fromStoryManagement:
-                    self.navigationController?.popToViewController(ofClass: StoryManagementListViewController.self)
-                case .fromProfile:
-                    self.navigationController?.popToViewController(ofClass: DelearProfileViewController.self)
-                }
-            }
-            self.navigationController?.present(vc, animated: true)
+            viewModel.uploadStories(imageUrl: imageUrl, isPromotional: true)
         }
     }
 }
@@ -110,23 +104,9 @@ extension PromoteStoryViewController {
         }
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(
-            title: "Done".localiz(),
-            style: .done,
-            target: self,
-            action: #selector(doneDatePicker)
-        )
-        let spaceButton = UIBarButtonItem(
-            barButtonSystemItem: .flexibleSpace,
-            target: nil,
-            action: nil
-        )
-        let cancelButton = UIBarButtonItem(
-            title: "Cancel".localiz(),
-            style: .plain,
-            target: self,
-            action: #selector(cancelDatePicker)
-        )
+        let doneButton = UIBarButtonItem(title: "Done".localiz(), style: .done, target: self, action: #selector(doneDatePicker))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel".localiz(), style: .plain, target: self, action: #selector(cancelDatePicker))
         toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         let textFields = [txtFromDate]
         textFields.forEach { textField in
@@ -137,32 +117,19 @@ extension PromoteStoryViewController {
     }
     
     @objc private func doneDatePicker() {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd/MM/yyyy"
         guard let activeTextField = activeTextField else { return }
         let selectedDate = datePicker.date
-        activeTextField.text = formatter.string(from: selectedDate)
+        let displayFormatter = DateFormatter()
+        displayFormatter.dateFormat = "dd/MM/yyyy"
+        activeTextField.text = displayFormatter.string(from: selectedDate)
+        let apiFormatter = DateFormatter()
+        apiFormatter.dateFormat = "yyyy-MM-dd"
+        selectedApiDate = apiFormatter.string(from: selectedDate)
         view.endEditing(true)
-        calculateTotalDays()
     }
     
     @objc private func cancelDatePicker() {
         view.endEditing(true)
-    }
-    
-    func calculateTotalDays() {
-        guard let fromText = txtFromDate.text, !fromText.isEmpty else {
-            lblTotalPrice.text = "0 KD".localiz()
-            return
-        }
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd/MM/yyyy"
-//        guard let startDate = formatter.date(from: fromText) else {
-            lblTotalPrice.text = "0 KD".localiz()
-//            return
-//        }
-//        let text = "KD"
-        //        lblTotalPrice.text = "\(totalDays * pricePerDay) \(text)"
     }
     
 }

@@ -117,6 +117,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     case "Story management".localiz():
         let vc = StoryManagementListViewController.instantiate(fromAppStoryboard: .BannerManagement)
         vc.hasActionPermission = true
+        vc.countryId = viewModel.userProfile?.storeInfo?.countryInfo?.id ?? 1
         self.navigationController?.pushViewController(vc, animated: true)
       
     case "Banner management".localiz():

@@ -41,17 +41,13 @@ class UploadPostViewController: UIViewController {
     }
     
     @IBAction func postBtnDidTapped(_ sender: Any) {
-//        if let image = selectedImage, videoURL == nil {
-//            if let imageData = image.jpegData(compressionQuality: 0.7) {
-//                viewModel.uploadMedia(fileData: imageData, isImage: true)
-//            }
-//        } else if let videoURL = videoURL {
-//            compressAndUploadVideo(videoURL: videoURL)
-//        }
-        
-        let nextVC = PromoteStoryViewController.instantiate(fromAppStoryboard: .BannerManagement)
-        nextVC.comingReason = comingReason
-        self.navigationController?.pushViewController(nextVC, animated: true)
+        if let image = selectedImage, videoURL == nil {
+            if let imageData = image.jpegData(compressionQuality: 0.7) {
+                viewModel.uploadMedia(fileData: imageData, isImage: true)
+            }
+        } else if let videoURL = videoURL {
+            compressAndUploadVideo(videoURL: videoURL)
+        }
     }
     
     @IBAction func playBtnOfVideo(_ sender: Any) {
@@ -61,15 +57,14 @@ class UploadPostViewController: UIViewController {
     
     @objc func playVideo() {
         guard let url = videoURL else { return }
-        
         let player = AVPlayer(url: url)
         let vc = AVPlayerViewController()
         vc.player = player
-        
         present(vc, animated: true) {
             player.play()
         }
     }
+    
     func saveImageAndGetURLString(_ image: UIImage) -> String? {
         guard let data = image.jpegData(compressionQuality: 0.7) else {
             return nil
@@ -89,6 +84,7 @@ class UploadPostViewController: UIViewController {
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(tap)
     }
+    
     func compressAndUploadVideo(videoURL: URL) {
         let avAsset = AVURLAsset(url: videoURL)
         guard let exportSession = AVAssetExportSession(asset: avAsset,

@@ -2391,7 +2391,7 @@ you will be notified once your banner is approved on the desynat platform</strin
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jOz-NP-RK0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="156" y="682"/>
+            <point key="canvasLocation" x="176" y="682"/>
         </scene>
         <!--Story Management List View Controller-->
         <scene sceneID="b35-zc-WA9">

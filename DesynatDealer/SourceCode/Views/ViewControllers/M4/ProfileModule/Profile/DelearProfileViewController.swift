@@ -122,6 +122,7 @@ class DelearProfileViewController: UIViewController {
     
     @IBAction func addNewStoryDidTapped(_ sender: Any) {
         let vc = AddNewStoryViewController.instantiate(fromAppStoryboard: .Profile)
+        vc.countryId = viewModel.userProfile?.storeInfo?.countryInfo?.id ?? 1
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

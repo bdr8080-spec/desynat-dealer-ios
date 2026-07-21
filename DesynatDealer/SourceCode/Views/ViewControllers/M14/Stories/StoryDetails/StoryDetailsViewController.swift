@@ -122,6 +122,7 @@ class StoryDetailsViewController: UIViewController {
     
     @IBAction func btnPay(_ sender: Any) {
         let vc = PaymentMethodVC.instantiate(fromAppStoryboard: .Main)
+        vc.storyId = banners?.id ?? 0
         vc.paymentFrom = .storyManagementPayment
         vc.transactionIds = banners?.orderID ?? ""
         vc.payAmount = Double(banners?.price ?? "") ?? 0
