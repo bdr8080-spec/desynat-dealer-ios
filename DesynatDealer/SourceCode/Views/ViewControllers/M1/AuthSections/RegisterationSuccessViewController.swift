@@ -49,7 +49,7 @@ class RegisterationSuccessViewController: UIViewController {
         case .ticketRaised:
             descriptionLabel.text = "Ticket is raised\nsuccessfully".localiz()
         case .storyPlanPurchased:
-            descriptionLabel.text = "Plan purchased successfully!".localiz()
+            descriptionLabel.text = "Payment is done successfully!".localiz()
         }
     }
     

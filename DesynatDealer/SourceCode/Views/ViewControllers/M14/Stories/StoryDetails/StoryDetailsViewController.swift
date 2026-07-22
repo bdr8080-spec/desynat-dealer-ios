@@ -10,6 +10,10 @@ import SDWebImage
 
 class StoryDetailsViewController: UIViewController {
     
+    @IBOutlet weak var rejectedReasonLabel: CustomLabelFont!
+    @IBOutlet weak var rejectedReasonView: UIView!
+    @IBOutlet weak var rejectedDateLabel: CustomLabelFont!
+    @IBOutlet weak var rejectedDateView: UIView!
     @IBOutlet weak var imgBanner: UIImageView!
     @IBOutlet weak var lblRequestedId: CustomLabelFont!
     @IBOutlet weak var lblRequestedDate: CustomLabelFont!
@@ -18,7 +22,7 @@ class StoryDetailsViewController: UIViewController {
     @IBOutlet weak var lblTotalPrice: CustomLabelFont!
     @IBOutlet weak var viewBtnPay: CustomButton!
     
-    var banners: BannerModel?
+    var story: StoryRequestList?
     var hasActionPermission: Bool = false
     
     override func viewDidLoad() {
@@ -34,8 +38,8 @@ class StoryDetailsViewController: UIViewController {
     }
     
     func setData() {
-        let data = banners
-        if let imgUrl = data?.uploadBanner, let url = URL(string: imgUrl) {
+        let data = story
+        if let imgUrl = data?.file, let url = URL(string: imgUrl) {
             imgBanner.sd_imageIndicator = SDWebImageActivityIndicator.gray
             imgBanner.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
         } else {
@@ -43,8 +47,10 @@ class StoryDetailsViewController: UIViewController {
         }
         imgBanner.enableFullscreenZoom()
         
-        lblRequestedId.text = data?.orderID ?? "Nil".localiz()
+        lblRequestedId.text = "#\(data?.id ?? 0)"
         lblRequestedDate.text = formatBannerDate(data?.createdAt)
+        rejectedDateLabel.text = formatBannerDate(data?.updatedAt)
+        rejectedReasonLabel.text = data?.rejectReason ?? "Nil".localiz()
         
         let adminStatus = data?.adminVerify ?? ""
         let paymentStatus = data?.paymentStatus ?? ""
@@ -55,14 +61,16 @@ class StoryDetailsViewController: UIViewController {
             lblRequestedStatus.text = "Pending".localiz()
             lblRequestedStatus.textColor = UIColor(hex: "#E28F12")
             viewBtnPay.isHidden = true
-            
+            rejectedReasonView.isHidden = true
+            rejectedDateView.isHidden = true
         case "1": //Approved
             switch paymentStatus {
             case "0":
                 lblRequestedStatus.text = "Confirmed".localiz()
                 lblRequestedStatus.textColor = UIColor(hex: "#68CA44")
                 viewBtnPay.isHidden = !hasActionPermission
-                
+                rejectedReasonView.isHidden = true
+                rejectedDateView.isHidden = true
             case "1":
                 let today = Calendar.current.startOfDay(for: Date())
                 let startDate = apiDate(data?.startDate)
@@ -93,12 +101,14 @@ class StoryDetailsViewController: UIViewController {
                 }
                 
                 viewBtnPay.isHidden = true
-                
+                rejectedReasonView.isHidden = true
+                rejectedDateView.isHidden = true
             case "2":
                 lblRequestedStatus.text = "Rejected".localiz()
                 lblRequestedStatus.textColor = UIColor(hex: "#D53B36")
                 viewBtnPay.isHidden = true
-                
+                rejectedReasonView.isHidden = false
+                rejectedDateView.isHidden = false
             default:
                 return
             }
@@ -107,13 +117,14 @@ class StoryDetailsViewController: UIViewController {
             lblRequestedStatus.text = "Rejected".localiz()
             lblRequestedStatus.textColor = UIColor(hex: "#D53B36")
             viewBtnPay.isHidden = true
-            
+            rejectedReasonView.isHidden = false
+            rejectedDateView.isHidden = false
         default:
             return
         }
 
         lblFromDate.text = formatDate(data?.startDate)
-        lblTotalPrice.text = CommonUtils.formatPriceStringInput(data?.price ?? "0")
+        lblTotalPrice.text = CommonUtils.formatPriceStringInput(data?.amount ?? "0")
     }
     
     @IBAction func btnBack(_ sender: Any) {
@@ -122,10 +133,10 @@ class StoryDetailsViewController: UIViewController {
     
     @IBAction func btnPay(_ sender: Any) {
         let vc = PaymentMethodVC.instantiate(fromAppStoryboard: .Main)
-        vc.storyId = banners?.id ?? 0
+        vc.storyId = story?.id ?? 0
         vc.paymentFrom = .storyManagementPayment
-        vc.transactionIds = banners?.orderID ?? ""
-        vc.payAmount = Double(banners?.price ?? "") ?? 0
+//        vc.transactionIds = story?.orderID ?? ""
+        vc.payAmount = Double(story?.amount ?? "") ?? 0
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

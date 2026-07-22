@@ -137,7 +137,7 @@ extension PaymentMethodVC {
                 let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
                 vc.comingReason = .storyPlanPurchased
                 vc.callBackDismiss = {
-                    self.navigationController?.popToViewController(ofClass: BannerManagemntVC.self, animated: true)
+                    self.navigationController?.popToViewController(ofClass: StoryManagementListViewController.self, animated: true)
                 }
                 self.present(vc, animated: true)
             }

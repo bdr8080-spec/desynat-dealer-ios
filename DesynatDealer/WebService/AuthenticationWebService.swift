@@ -812,6 +812,22 @@ extension WebService {
         }
     }
     
+    func getMyStoriesRequests(param: [String :Any], completion:@escaping (_ user: StoryRequestListDataModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.getMyStoriesRequests), requestMethod: .get, requestParams: param, requestModel: StoryRequestListDataModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
     func addBanners(param: [String :Any], completion:@escaping (_ user: BannerModel)-> Void) {
         CommonUtils.showHud(show: true)
         NetworkManager.shared.request(withAPI:.endpoint(.addBanner), requestMethod: .post, requestParams: param, requestModel: BannerModel.self) { result, code in

@@ -880,7 +880,7 @@
 "Send Request" = "إرسال الطلب";
 "SELECT PAYMENT METHOD" = "اختر طريقة الدفع";
 "Credit/ Debit Card" = "بطاقة ائتمان / خصم";
-
+"Story management" = "إدارة القصص";
 "Enter Full name" = "يرجى إدخال الاسم الكامل";
 "Enter email id" = "يرجى إدخال البريد الإلكتروني";
 "Enter Mobile Number" = "يرجى إدخال رقم الجوال";
@@ -1059,3 +1059,14 @@
 "Post on Profile" = "النشر على الملف الشخصي";
 "Story Management" = "إدارة القصص";
 "This Year" = "هذا العام";
+"Payment is done successfully!" = "تمت عملية الدفع بنجاح!";
+"Date Selected" = "التاريخ المحدد";
+"Post" = "منشور";
+"Promote Story" = "ترويج القصة";
+"Profile Story" = "قصة الملف الشخصي";
+"Free" = "مجاني";
+"Visible on your profile" = "مرئية في ملفك الشخصي";
+"Featured on Desyat Home" = "مميزة على الصفحة الرئيسية لـ Desyat";
+"Paid" = "مدفوع";
+"Reach more users" = "الوصول إلى المزيد من المستخدمين";
+"Thank you for your patience \nTEAM DESNYAT " = "شكرًا لصبركم\nفريق DESNYAT";

@@ -34,17 +34,18 @@ class StoryManagementTableViewCell: UITableViewCell {
         imgBanner.layer.masksToBounds = true
     }
     
-    func configure(with data: BannerModel, hasActionPermission: Bool) {
-        if let imageUrlString = data.uploadBanner, let url = URL(string: imageUrlString) {
+    func configure(with data: StoryRequestList, hasActionPermission: Bool) {
+        if let imageUrlString = data.file, let url = URL(string: imageUrlString) {
             imgBanner.sd_imageIndicator = SDWebImageActivityIndicator.gray
             imgBanner.sd_imageIndicator?.startAnimatingIndicator()
             imgBanner.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
         } else {
             imgBanner.image = UIImage(named: "")
         }
-        lblRequestedId.text = data.orderID ?? "Nil".localiz()
-        lblTotalAmount.text = CommonUtils.formatPriceStringInput(data.price ?? "0")
+        lblRequestedId.text = "#\(data.id?.description ?? "Nil".localiz())"
+        lblTotalAmount.text = CommonUtils.formatPriceStringInput(data.amount ?? "0")
         lblRequestedOn.text = formatDate(data.createdAt)
+        lblRejectedOn.text = formatDate(data.updatedAt)
         viewBtnPay.isHidden = true
         viewRejectDate.isHidden = true
         viewRejectReason.isHidden = true
@@ -98,7 +99,7 @@ class StoryManagementTableViewCell: UITableViewCell {
                 viewRejectDate.isHidden = false
                 viewRejectReason.isHidden = false
                 //lblRejectedOn.text = data.re
-                lblRejectReason.text = data.cancelledReason ?? "Nil".localiz()
+                lblRejectReason.text = data.rejectReason ?? "Nil".localiz()
             default:
                 return
             }
@@ -108,7 +109,7 @@ class StoryManagementTableViewCell: UITableViewCell {
             viewBtnPay.isHidden = true
             viewRejectDate.isHidden = false
             viewRejectReason.isHidden = false
-            lblRejectReason.text = data.cancelledReason ?? "Nil".localiz()
+            lblRejectReason.text = data.rejectReason ?? "Nil".localiz()
         default:
             return
         }

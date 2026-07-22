@@ -13,7 +13,7 @@ import SDWebImage
 class UploadNewReelViewController: UIViewController {
     
     // MARK: - IBOutlet
-    @IBOutlet weak var imageView: CustomImageView!
+    @IBOutlet weak var imageView: DashedBorderImageView!
     @IBOutlet weak var captiontxtArea: UITextView!
     @IBOutlet weak var captionView: UIView!
     @IBOutlet weak var playVideoButton: UIButton!

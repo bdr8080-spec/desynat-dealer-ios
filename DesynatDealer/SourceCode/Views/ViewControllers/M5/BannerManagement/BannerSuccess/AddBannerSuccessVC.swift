@@ -9,6 +9,7 @@ import UIKit
 
 class AddBannerSuccessVC: UIViewController {
     
+    @IBOutlet weak var thankYouForYourPatienceLabel: CustomLabelFont!
     @IBOutlet weak var descriptionLabel: CustomLabelFont!
     
     var comingReason: ComingReasonAtAddBannerSuccess = .forBanner
@@ -16,6 +17,7 @@ class AddBannerSuccessVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        thankYouForYourPatienceLabel.text = "Thank you for your patience \nTEAM DESNYAT ".localiz()
         switch comingReason {
         case .forBanner:
             descriptionLabel.text = "Your banner request has been successfully submitted for verification !\n\nOur team is currently reviewing your details please allow 3-4 hour for the verification process to be completed.\n\nyou will be notified once your banner is approved on the desynat platform".localiz()

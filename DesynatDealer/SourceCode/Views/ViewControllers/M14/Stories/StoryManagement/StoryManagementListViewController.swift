@@ -7,8 +7,6 @@
 
 import UIKit
 
-import UIKit
-
 class StoryManagementListViewController: UIViewController {
 
     @IBOutlet weak var txtSearch: UITextField!
@@ -22,7 +20,6 @@ class StoryManagementListViewController: UIViewController {
     
     lazy private var viewModel = StoryManagementListViewModel(hostVC: self)
     private var searchWorkItem: DispatchWorkItem?
-    var bannerData: [BannerModel] = []
     var hasActionPermission: Bool = false
     var countryId: Int = 1
     
@@ -34,7 +31,8 @@ class StoryManagementListViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    viewModel.getAllStories()
+      viewModel.resetPagination()
+          viewModel.getAllStoriesList()
   }
     
     @IBAction func btnBack(_ sender: Any) {
@@ -53,7 +51,7 @@ class StoryManagementListViewController: UIViewController {
         vc.comingReason = .fromStoryManagement
         vc.countryId = countryId
         vc.onStoryAdded = {
-            self.viewModel.getAllStories()
+            self.viewModel.getAllStoriesList()
         }
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -62,19 +60,18 @@ class StoryManagementListViewController: UIViewController {
 extension StoryManagementListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return bannerData.count
+        return viewModel.storiesList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StoryManagementTableViewCell", for: indexPath) as! StoryManagementTableViewCell
-        let banner = bannerData[indexPath.row]
-        cell.configure(with: banner, hasActionPermission: hasActionPermission)
+        let story = viewModel.storiesList[indexPath.row]
+        cell.configure(with: story, hasActionPermission: hasActionPermission)
         cell.onPayTap = {
             let vc = PaymentMethodVC.instantiate(fromAppStoryboard: .Main)
-            vc.storyId = banner.id ?? 0
+            vc.storyId = story.id ?? 0
             vc.paymentFrom = .storyManagementPayment
-            vc.transactionIds = banner.orderID ?? ""
-            vc.payAmount = Double(banner.price ?? "") ?? 0
+            vc.payAmount = Double(story.amount ?? "") ?? 0
             self.navigationController?.pushViewController(vc, animated: true)
         }
         return cell
@@ -82,9 +79,24 @@ extension StoryManagementListViewController: UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = StoryDetailsViewController.instantiate(fromAppStoryboard: .BannerManagement)
-        vc.banners = bannerData[indexPath.row]
+        vc.story = viewModel.storiesList[indexPath.row]
         vc.hasActionPermission  = hasActionPermission
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let frameHeight = scrollView.frame.height
+        if offsetY > contentHeight - frameHeight - 100 {
+            viewModel.getAllStoriesList()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == viewModel.storiesList.count - 1 {
+            viewModel.getAllStoriesList()
+        }
     }
     
 }
@@ -96,8 +108,10 @@ extension StoryManagementListViewController: UITextFieldDelegate {
         searchWorkItem?.cancel()
         let workItem = DispatchWorkItem { [weak self] in
             guard let self = self else { return }
+
             self.viewModel.searchText = currentText
-            viewModel.getAllStories()
+            self.viewModel.resetPagination()
+            self.viewModel.getAllStoriesList()
         }
         searchWorkItem = workItem
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: workItem)
@@ -106,13 +120,16 @@ extension StoryManagementListViewController: UITextFieldDelegate {
 }
 
 extension StoryManagementListViewController: BannerFilterDelegate {
+    
     func didApplyFilter(_ filter: BannerFilterModel) {
         viewModel.appliedFilter = filter
-        viewModel.getAllStories()
+            viewModel.resetPagination()
+            viewModel.getAllStoriesList()
     }
 
     func didClearFilter() {
         viewModel.appliedFilter = nil
-        viewModel.getAllStories()
+            viewModel.resetPagination()
+            viewModel.getAllStoriesList()
     }
 }

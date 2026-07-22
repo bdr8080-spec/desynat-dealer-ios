@@ -974,6 +974,7 @@ you will be notified once your banner is approved on the desynat platform</strin
                     </view>
                     <connections>
                         <outlet property="descriptionLabel" destination="qdm-D6-MLX" id="ooj-UE-K3A"/>
+                        <outlet property="thankYouForYourPatienceLabel" destination="9jq-Bz-O37" id="KTc-pK-LGB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NKq-aW-DOT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2609,16 +2610,16 @@ you will be notified once your banner is approved on the desynat platform</strin
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="538"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="YWE-dg-Ffo">
-                                                <rect key="frame" x="0.0" y="0.0" width="393" height="422"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="393" height="528.33333333333337"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="djW-kv-ZXg">
-                                                        <rect key="frame" x="0.0" y="0.0" width="393" height="276"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="393" height="382.33333333333331"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jzm-5x-56M" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
-                                                                <rect key="frame" x="16" y="20" width="361" height="256"/>
+                                                                <rect key="frame" x="16" y="20" width="361" height="362.33333333333331"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="dh5-Jp-Qkg">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="361" height="256"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="361" height="362.33333333333331"/>
                                                                         <subviews>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IBt-2h-qUN">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="361" height="136"/>
@@ -2639,10 +2640,10 @@ you will be notified once your banner is approved on the desynat platform</strin
                                                                                 </constraints>
                                                                             </view>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hzu-dB-6ry">
-                                                                                <rect key="frame" x="0.0" y="136" width="361" height="40"/>
+                                                                                <rect key="frame" x="0.0" y="136" width="361" height="30"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Request Id" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YlT-tc-UDy" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
-                                                                                        <rect key="frame" x="12" y="13" width="62" height="14.333333333333336"/>
+                                                                                        <rect key="frame" x="12" y="5" width="62" height="25"/>
                                                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                                         <nil key="highlightedColor"/>
@@ -2651,7 +2652,7 @@ you will be notified once your banner is approved on the desynat platform</strin
                                                                                         </userDefinedRuntimeAttributes>
                                                                                     </label>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mft-Tg-jZA" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
-                                                                                        <rect key="frame" x="343" y="13" width="6" height="27"/>
+                                                                                        <rect key="frame" x="343" y="5" width="6" height="25"/>
                                                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <nil key="highlightedColor"/>
@@ -2663,19 +2664,20 @@ you will be notified once your banner is approved on the desynat platform</strin
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                 <constraints>
                                                                                     <constraint firstItem="mft-Tg-jZA" firstAttribute="top" secondItem="YlT-tc-UDy" secondAttribute="top" id="EOb-qw-7fs"/>
-                                                                                    <constraint firstItem="YlT-tc-UDy" firstAttribute="top" secondItem="Hzu-dB-6ry" secondAttribute="top" constant="13" id="LVs-4j-FJd"/>
+                                                                                    <constraint firstAttribute="bottom" secondItem="YlT-tc-UDy" secondAttribute="bottom" id="ESg-o0-jSm"/>
+                                                                                    <constraint firstItem="YlT-tc-UDy" firstAttribute="top" secondItem="Hzu-dB-6ry" secondAttribute="top" constant="5" id="LVs-4j-FJd"/>
                                                                                     <constraint firstAttribute="trailing" secondItem="mft-Tg-jZA" secondAttribute="trailing" constant="12" id="WnB-Ri-uBd"/>
                                                                                     <constraint firstItem="mft-Tg-jZA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YlT-tc-UDy" secondAttribute="trailing" constant="10" id="kxA-g1-K43"/>
                                                                                     <constraint firstItem="YlT-tc-UDy" firstAttribute="leading" secondItem="Hzu-dB-6ry" secondAttribute="leading" constant="12" id="kzr-kT-fax"/>
-                                                                                    <constraint firstAttribute="height" constant="40" id="luJ-tS-Et7"/>
+                                                                                    <constraint firstAttribute="height" constant="30" id="luJ-tS-Et7"/>
                                                                                     <constraint firstAttribute="bottom" secondItem="mft-Tg-jZA" secondAttribute="bottom" id="o76-lD-V3s"/>
                                                                                 </constraints>
                                                                             </view>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ihe-pe-Ge4">
-                                                                                <rect key="frame" x="0.0" y="176" width="361" height="40"/>
+                                                                                <rect key="frame" x="0.0" y="166" width="361" height="30"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Requested On" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r8X-KL-lsI" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
-                                                                                        <rect key="frame" x="12" y="10" width="82" height="14.333333333333336"/>
+                                                                                        <rect key="frame" x="12" y="5" width="82" height="25"/>
                                                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                                         <nil key="highlightedColor"/>
@@ -2684,7 +2686,7 @@ you will be notified once your banner is approved on the desynat platform</strin
                                                                                         </userDefinedRuntimeAttributes>
                                                                                     </label>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CcP-qG-aVG" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
-                                                                                        <rect key="frame" x="342.33333333333331" y="10" width="6.6666666666666856" height="30"/>
+                                                                                        <rect key="frame" x="342.33333333333331" y="5" width="6.6666666666666856" height="25"/>
                                                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <nil key="highlightedColor"/>
@@ -2695,20 +2697,21 @@ you will be notified once your banner is approved on the desynat platform</strin
                                                                                 </subviews>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                 <constraints>
-                                                                                    <constraint firstItem="r8X-KL-lsI" firstAttribute="top" secondItem="ihe-pe-Ge4" secondAttribute="top" constant="10" id="34q-O5-rkx"/>
+                                                                                    <constraint firstItem="r8X-KL-lsI" firstAttribute="top" secondItem="ihe-pe-Ge4" secondAttribute="top" constant="5" id="34q-O5-rkx"/>
                                                                                     <constraint firstAttribute="bottom" secondItem="CcP-qG-aVG" secondAttribute="bottom" id="8do-tx-6bd"/>
                                                                                     <constraint firstAttribute="trailing" secondItem="CcP-qG-aVG" secondAttribute="trailing" constant="12" id="AHL-nG-0JQ"/>
                                                                                     <constraint firstItem="CcP-qG-aVG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="r8X-KL-lsI" secondAttribute="trailing" constant="10" id="AUk-a0-wQT"/>
-                                                                                    <constraint firstAttribute="height" constant="40" id="ExP-Ya-BM7"/>
+                                                                                    <constraint firstAttribute="bottom" secondItem="r8X-KL-lsI" secondAttribute="bottom" id="Dfs-e5-Aer"/>
+                                                                                    <constraint firstAttribute="height" constant="30" id="ExP-Ya-BM7"/>
                                                                                     <constraint firstItem="r8X-KL-lsI" firstAttribute="leading" secondItem="ihe-pe-Ge4" secondAttribute="leading" constant="12" id="HqM-DB-zRo"/>
                                                                                     <constraint firstItem="CcP-qG-aVG" firstAttribute="top" secondItem="r8X-KL-lsI" secondAttribute="top" id="Y8W-B6-RdQ"/>
                                                                                 </constraints>
                                                                             </view>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x2R-rG-70s">
-                                                                                <rect key="frame" x="0.0" y="216" width="361" height="40"/>
+                                                                                <rect key="frame" x="0.0" y="196" width="361" height="30"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JnA-iV-QRY" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
-                                                                                        <rect key="frame" x="12" y="10" width="37.666666666666664" height="14.333333333333336"/>
+                                                                                        <rect key="frame" x="12" y="5" width="37.666666666666664" height="25"/>
                                                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                                         <nil key="highlightedColor"/>
@@ -2717,7 +2720,7 @@ you will be notified once your banner is approved on the desynat platform</strin
                                                                                         </userDefinedRuntimeAttributes>
                                                                                     </label>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qDv-gS-jmf" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
-                                                                                        <rect key="frame" x="342.33333333333331" y="10" width="6.6666666666666856" height="14"/>
+                                                                                        <rect key="frame" x="342.33333333333331" y="5" width="6.6666666666666856" height="25"/>
                                                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                                                         <color key="textColor" red="0.40784313729999999" green="0.79215686269999996" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
                                                                                         <nil key="highlightedColor"/>
@@ -2730,11 +2733,79 @@ you will be notified once your banner is approved on the desynat platform</strin
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="trailing" secondItem="qDv-gS-jmf" secondAttribute="trailing" constant="12" id="4f2-gN-G2p"/>
                                                                                     <constraint firstItem="qDv-gS-jmf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="JnA-iV-QRY" secondAttribute="trailing" constant="10" id="7Md-wj-wfB"/>
-                                                                                    <constraint firstAttribute="height" constant="40" id="Ene-2p-pfg"/>
+                                                                                    <constraint firstAttribute="height" constant="30" id="Ene-2p-pfg"/>
                                                                                     <constraint firstItem="JnA-iV-QRY" firstAttribute="leading" secondItem="x2R-rG-70s" secondAttribute="leading" constant="12" id="cm1-7x-Sza"/>
-                                                                                    <constraint firstItem="JnA-iV-QRY" firstAttribute="top" secondItem="x2R-rG-70s" secondAttribute="top" constant="10" id="js4-3A-2gz"/>
-                                                                                    <constraint firstAttribute="bottom" secondItem="qDv-gS-jmf" secondAttribute="bottom" constant="16" id="q3A-eA-AAr"/>
+                                                                                    <constraint firstItem="JnA-iV-QRY" firstAttribute="top" secondItem="x2R-rG-70s" secondAttribute="top" constant="5" id="js4-3A-2gz"/>
+                                                                                    <constraint firstAttribute="bottom" secondItem="qDv-gS-jmf" secondAttribute="bottom" id="q3A-eA-AAr"/>
                                                                                     <constraint firstItem="qDv-gS-jmf" firstAttribute="top" secondItem="JnA-iV-QRY" secondAttribute="top" id="twe-pg-aG0"/>
+                                                                                    <constraint firstAttribute="bottom" secondItem="JnA-iV-QRY" secondAttribute="bottom" id="wKy-QN-GBk"/>
+                                                                                </constraints>
+                                                                            </view>
+                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Joc-JZ-NXS">
+                                                                                <rect key="frame" x="0.0" y="226" width="361" height="30"/>
+                                                                                <subviews>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rejected on" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9nA-GX-f5Y" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
+                                                                                        <rect key="frame" x="12" y="5" width="68.666666666666671" height="25"/>
+                                                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                                                        <nil key="highlightedColor"/>
+                                                                                        <userDefinedRuntimeAttributes>
+                                                                                            <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
+                                                                                        </userDefinedRuntimeAttributes>
+                                                                                    </label>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21/09/2025 at 10:15 AM" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rJh-o1-zHS" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
+                                                                                        <rect key="frame" x="191.66666666666663" y="5" width="157.33333333333337" height="25"/>
+                                                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                        <nil key="highlightedColor"/>
+                                                                                        <userDefinedRuntimeAttributes>
+                                                                                            <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
+                                                                                        </userDefinedRuntimeAttributes>
+                                                                                    </label>
+                                                                                </subviews>
+                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                <constraints>
+                                                                                    <constraint firstItem="9nA-GX-f5Y" firstAttribute="leading" secondItem="Joc-JZ-NXS" secondAttribute="leading" constant="12" id="7Ni-uh-n7T"/>
+                                                                                    <constraint firstAttribute="height" constant="30" id="AwQ-So-87T"/>
+                                                                                    <constraint firstAttribute="bottom" secondItem="rJh-o1-zHS" secondAttribute="bottom" id="Dg2-7Z-xV2"/>
+                                                                                    <constraint firstItem="rJh-o1-zHS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9nA-GX-f5Y" secondAttribute="trailing" constant="10" id="enZ-CB-4su"/>
+                                                                                    <constraint firstAttribute="trailing" secondItem="rJh-o1-zHS" secondAttribute="trailing" constant="12" id="hFn-vQ-t6H"/>
+                                                                                    <constraint firstItem="rJh-o1-zHS" firstAttribute="top" secondItem="9nA-GX-f5Y" secondAttribute="top" id="o3z-qk-zcL"/>
+                                                                                    <constraint firstAttribute="bottom" secondItem="9nA-GX-f5Y" secondAttribute="bottom" id="urQ-Dg-PZb"/>
+                                                                                    <constraint firstItem="9nA-GX-f5Y" firstAttribute="top" secondItem="Joc-JZ-NXS" secondAttribute="top" constant="5" id="ytK-2e-ndq"/>
+                                                                                </constraints>
+                                                                            </view>
+                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J6N-Y9-bzV">
+                                                                                <rect key="frame" x="0.0" y="256" width="361" height="106.33333333333331"/>
+                                                                                <subviews>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rejected Reason" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WhE-vv-pyG" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
+                                                                                        <rect key="frame" x="12" y="17" width="96.666666666666671" height="14.333333333333336"/>
+                                                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                        <nil key="highlightedColor"/>
+                                                                                        <userDefinedRuntimeAttributes>
+                                                                                            <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
+                                                                                        </userDefinedRuntimeAttributes>
+                                                                                    </label>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZbP-wc-r0W" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
+                                                                                        <rect key="frame" x="12" y="38.333333333333314" width="337" height="56"/>
+                                                                                        <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</string>
+                                                                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                                                        <nil key="highlightedColor"/>
+                                                                                        <userDefinedRuntimeAttributes>
+                                                                                            <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
+                                                                                        </userDefinedRuntimeAttributes>
+                                                                                    </label>
+                                                                                </subviews>
+                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                <constraints>
+                                                                                    <constraint firstItem="ZbP-wc-r0W" firstAttribute="top" secondItem="WhE-vv-pyG" secondAttribute="bottom" constant="7" id="97T-DZ-D6W"/>
+                                                                                    <constraint firstAttribute="trailing" secondItem="ZbP-wc-r0W" secondAttribute="trailing" constant="12" id="AyW-t2-zKQ"/>
+                                                                                    <constraint firstItem="ZbP-wc-r0W" firstAttribute="leading" secondItem="J6N-Y9-bzV" secondAttribute="leading" constant="12" id="KPn-eR-vlo"/>
+                                                                                    <constraint firstAttribute="bottom" secondItem="ZbP-wc-r0W" secondAttribute="bottom" constant="12" id="QO7-2P-ld9"/>
+                                                                                    <constraint firstItem="WhE-vv-pyG" firstAttribute="top" secondItem="J6N-Y9-bzV" secondAttribute="top" constant="17" id="S36-OD-dZi"/>
+                                                                                    <constraint firstItem="WhE-vv-pyG" firstAttribute="leading" secondItem="J6N-Y9-bzV" secondAttribute="leading" constant="12" id="xZF-Tx-0R6"/>
                                                                                 </constraints>
                                                                             </view>
                                                                         </subviews>
@@ -2769,7 +2840,7 @@ you will be notified once your banner is approved on the desynat platform</strin
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d7Q-hj-o7v">
-                                                        <rect key="frame" x="0.0" y="276" width="393" height="73"/>
+                                                        <rect key="frame" x="0.0" y="382.33333333333337" width="393" height="73"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f23-d9-m8k" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
                                                                 <rect key="frame" x="16" y="28" width="361" height="45"/>
@@ -2824,7 +2895,7 @@ you will be notified once your banner is approved on the desynat platform</strin
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n17-FE-8dv">
-                                                        <rect key="frame" x="0.0" y="349" width="393" height="73"/>
+                                                        <rect key="frame" x="0.0" y="455.33333333333337" width="393" height="73"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yvl-gU-cJ1" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
                                                                 <rect key="frame" x="16" y="28" width="361" height="45"/>
@@ -2941,6 +3012,10 @@ you will be notified once your banner is approved on the desynat platform</strin
                         <outlet property="lblRequestedId" destination="mft-Tg-jZA" id="H5b-KA-xoE"/>
                         <outlet property="lblRequestedStatus" destination="qDv-gS-jmf" id="Ngb-Ru-TDo"/>
                         <outlet property="lblTotalPrice" destination="Yn9-Mi-xQK" id="cmA-2m-Qns"/>
+                        <outlet property="rejectedDateLabel" destination="rJh-o1-zHS" id="59s-BZ-wjD"/>
+                        <outlet property="rejectedDateView" destination="Joc-JZ-NXS" id="QzB-fb-n0a"/>
+                        <outlet property="rejectedReasonLabel" destination="ZbP-wc-r0W" id="jj7-Ui-utX"/>
+                        <outlet property="rejectedReasonView" destination="J6N-Y9-bzV" id="5V9-nv-U6b"/>
                         <outlet property="viewBtnPay" destination="1SG-kC-xKM" id="bQB-5y-hsV"/>
                     </connections>
                 </viewController>
@@ -2973,7 +3048,7 @@ you will be notified once your banner is approved on the desynat platform</strin
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
