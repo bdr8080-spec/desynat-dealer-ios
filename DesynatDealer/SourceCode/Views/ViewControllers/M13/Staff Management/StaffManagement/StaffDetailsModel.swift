@@ -56,6 +56,8 @@ struct StaffDetails: Codable {
     var sellerCategory: SellerCategory?
     var roleAction: [RoleAction]?
     var status:String?
+    var storeInfo: StoreInfo?
+    var countryDetails: CountryInfo?
     
     enum CodingKeys: String, CodingKey {
         case id, type
@@ -89,6 +91,8 @@ struct StaffDetails: Codable {
         case sellerCategory = "seller_category"
         case roleAction = "role__action"
         case unhashedPassword = "save_password"
+        case countryDetails = "country_details"
+        case storeInfo = "store_info"
         case status
     }
 }

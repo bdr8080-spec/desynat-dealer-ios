@@ -62,10 +62,7 @@ class SubscriptionCollectionCell: UICollectionViewCell {
     }
     
     private func setupUI() {
-//        gradientImageView.layer.cornerRadius = 20
-//        gradientImageView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
-//        gradientImageView.layer.masksToBounds = true
-//        
+
         mainContentView.layer.shadowColor = UIColor.black.cgColor
         mainContentView.layer.shadowOpacity = 0.2
         mainContentView.layer.shadowOffset = CGSize(width: 0, height: 2)
@@ -114,7 +111,8 @@ class SubscriptionCollectionCell: UICollectionViewCell {
             "Number of Highlights:",
             "Stories:",
             "\(plan.noOfEmployee ?? 0) \(text)",
-            "Commission:"
+            "Commission:",
+            "Show in Suggested Stores:"
         ]
         
         // Handle "Stories" — show "Open" if 0, otherwise "Close"
@@ -132,7 +130,8 @@ class SubscriptionCollectionCell: UICollectionViewCell {
             "\(plan.noOfHighlights ?? 0)",
             storiesStatus,
             "",
-            "\(plan.commissionPercentage ?? 0)%"
+            "\(plan.commissionPercentage ?? 0)%",
+            "\(plan.isRecommendedStore ?? "0" == "1" ? "Yes".localiz() : "No".localiz())"
         ]
         
         applyGradientToHeading()

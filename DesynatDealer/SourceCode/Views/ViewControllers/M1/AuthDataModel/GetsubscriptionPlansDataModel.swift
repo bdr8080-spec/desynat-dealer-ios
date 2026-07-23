@@ -10,7 +10,7 @@ import Foundation
 // MARK: - GetPlansSubscriptionModel
 struct GetPlansSubscriptionModel: Codable {
     let id, countryID: Int?
-    let planNameEnglish, planNameArabic: String?
+    let planNameEnglish, planNameArabic, isRecommendedStore: String?
     let duration, durationType, noOfVideos, noOfProducts: Int?
     let noOfHighlights, noOfEmployee, stories: Int?
     let commission, commissionPercentage, status: Int?
@@ -33,6 +33,7 @@ struct GetPlansSubscriptionModel: Codable {
         case status
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+        case isRecommendedStore = "is_recommended_store"
     }
 }
 

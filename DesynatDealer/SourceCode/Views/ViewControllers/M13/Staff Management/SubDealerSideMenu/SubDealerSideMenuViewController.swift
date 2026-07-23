@@ -101,17 +101,48 @@ extension SubDealerSideMenuViewController: UITableViewDelegate, UITableViewDataS
 //            vc.hasActionPermission = hasPermission
 //            vc.comingFromTabbar = false
 //            self.navigationController?.pushViewController(vc, animated: true)
+       
+            
+    
+            
+        
+            
+//        case 21: //"Change Language":
+//            let vc = ChangeLanguageViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+//            vc.hasActionPermission = hasPermission
+//            self.navigationController?.pushViewController(vc, animated: true)
+            
         case 2: //Products management (Done)
             let vc =  ProductsViewController.instantiate(fromAppStoryboard: .Home)
             vc.hasActionPermission = hasPermission
             vc.comingFromTabbar = false
             self.navigationController?.pushViewController(vc, animated: true)
             
-        case 6: // Order management
+        case 3: // Order management
             let vc =  OrdersViewController.instantiate(fromAppStoryboard: .Home)
             vc.hasActionPermission = hasPermission
             vc.comingFromTabbar = false
             self.navigationController?.pushViewController(vc, animated: true)
+            
+        case 4: //Staff management (Done)
+            let vc =  StaffManagementViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+            vc.hasActionPermission = hasPermission
+            self.navigationController?.pushViewController(vc, animated: true)
+        
+        case 5: //Subscription Plans (Done)
+            let vc = MySubsciptionPlanViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+            vc.hasActionPermission = hasPermission
+            self.navigationController?.pushViewController(vc, animated: true)
+            
+        case 6: //Banner management (Done)
+            let vc = BannerManagemntVC.instantiate(fromAppStoryboard: .BannerManagement)
+            vc.hasActionPermission = hasPermission
+            self.navigationController?.pushViewController(vc, animated: true)
+       
+        case 7: //Live Coverage request (Done)
+            let nextVC = LiveCoverageListViewController.instantiate(fromAppStoryboard: .Profile)
+            nextVC.hasActionPermission = hasPermission
+            self.navigationController?.pushViewController(nextVC, animated: true)
             
         case 8: // Live management
             let vc =  ShowsViewController.instantiate(fromAppStoryboard: .Home)
@@ -119,75 +150,54 @@ extension SubDealerSideMenuViewController: UITableViewDelegate, UITableViewDataS
             vc.comingFromTabbar = false
             self.navigationController?.pushViewController(vc, animated: true)
             
-        case 12: //Staff management (Done)
-            let vc =  StaffManagementViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
-            vc.hasActionPermission = hasPermission
-            self.navigationController?.pushViewController(vc, animated: true)
-            
-        case 10: //Subscription Plans (Done)
-            let vc = MySubsciptionPlanViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
-            vc.hasActionPermission = hasPermission
-            self.navigationController?.pushViewController(vc, animated: true)
-            
-        case 5: //Banner management (Done)
-            let vc = BannerManagemntVC.instantiate(fromAppStoryboard: .BannerManagement)
-            vc.hasActionPermission = hasPermission
-            self.navigationController?.pushViewController(vc, animated: true)
-            
-        case 9: //Live Coverage request (Done)
-            let nextVC = LiveCoverageListViewController.instantiate(fromAppStoryboard: .Profile)
-            nextVC.hasActionPermission = hasPermission
-            self.navigationController?.pushViewController(nextVC, animated: true)
-            
-        case 7: //Deals management (Done)
+        case 9: //Deals management (Done)
             let vc = DealListedViewController.instantiate(fromAppStoryboard: .OrderAndChat)
             vc.hasActionPermission = hasPermission
             self.navigationController?.pushViewController(vc, animated: true)
             
-        case 19: //Refund management (Done)
-            let vc = RefundManagementViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
-            vc.hasActionPermission = hasPermission
-            self.navigationController?.pushViewController(vc, animated: true)
-//            print("➡️ Navigate to Refund management")
+        case 10: //Refund management (Done)
+                    let vc = RefundManagementViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+                    vc.hasActionPermission = hasPermission
+                    self.navigationController?.pushViewController(vc, animated: true)
             
-        case 3: //Inventory management (Done)
+        case 11: //Inventory management (Done)
             let nextVC = InventoryListViewController.instantiate(fromAppStoryboard: .InventoryAffilate)
             nextVC.hasActionPermission = hasPermission
             self.navigationController?.pushViewController(nextVC, animated: true)
             
-        case 4: //Affiliated Commission (Done)
+        case 12: //Affiliated Commission (Done)
             let nextVC = AffiliatedCommisionViewController.instantiate(fromAppStoryboard: .InventoryAffilate)
             nextVC.commissionValue = viewModel.userProfile?.affilateCommission
             nextVC.hasActionPermission = hasPermission
             self.navigationController?.pushViewController(nextVC, animated: true)
             
-        case 13: //Terms & Condition (Done)
+        case 13: //Support & Ticket (Done)
+            let vc = SupportViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
+            vc.hasActionPermission = hasPermission
+            self.navigationController?.pushViewController(vc, animated: true)
+            
+        case 14: //Terms & Condition (Done)
             let vc =  CMSViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
             vc.comingReason = .termsAndConditions
             vc.hasActionPermission = hasPermission
             self.navigationController?.pushViewController(vc, animated: true)
             
-        case 16: //Return Policy (Done)
+        case 15: //Return Policy (Done)
             let vc =  CMSViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
             vc.comingReason = .returnPolicy
             vc.hasActionPermission = hasPermission
             self.navigationController?.pushViewController(vc, animated: true)
             
-        case 14: //About Us (Done)
+        case 16: //About Us (Done)
             let vc =  CMSViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
             vc.comingReason = .aboutUs
             vc.hasActionPermission = hasPermission
             self.navigationController?.pushViewController(vc, animated: true)
             
-        case 15: //FAQ’S (Done)
+        case 17: //FAQ’S (Done)
             let nextVC = FAQViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
             nextVC.hasActionPermission = hasPermission
             self.navigationController?.pushViewController(nextVC, animated: true)
-            
-        case 21: //"Change Language":
-            let vc = ChangeLanguageViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
-            vc.hasActionPermission = hasPermission
-            self.navigationController?.pushViewController(vc, animated: true)
             
         case 18: //Cancellation Policy (Done)
             let vc =  CMSViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
@@ -195,14 +205,9 @@ extension SubDealerSideMenuViewController: UITableViewDelegate, UITableViewDataS
             vc.hasActionPermission = hasPermission
             self.navigationController?.pushViewController(vc, animated: true)
             
-        case 17: //Exchange Policy (Done)
+        case 19: //Exchange Policy (Done)
             let vc =  CMSViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
             vc.comingReason = .exchangePolicy
-            vc.hasActionPermission = hasPermission
-            self.navigationController?.pushViewController(vc, animated: true)
-            
-        case 11: //Support (Done)
-            let vc = SupportViewController.instantiate(fromAppStoryboard: .NotificationAndSubscribtion)
             vc.hasActionPermission = hasPermission
             self.navigationController?.pushViewController(vc, animated: true)
             
@@ -211,6 +216,12 @@ extension SubDealerSideMenuViewController: UITableViewDelegate, UITableViewDataS
             vc.hasActionPermission = hasPermission
             self.navigationController?.pushViewController(vc, animated: true)
             
+        case 21:
+            let vc = StoryManagementListViewController.instantiate(fromAppStoryboard: .BannerManagement)
+            vc.hasActionPermission = hasPermission
+            vc.countryId = viewModel.userProfile?.storeInfo?.countryInfo?.id ?? 1
+//            vc.countryId = viewModel.userProfile?.countryDetails?.id ?? 1
+            self.navigationController?.pushViewController(vc, animated: true)
         default:
             print("⚠️ Unknown option selected: \(selectedItem ?? 0)")
         }

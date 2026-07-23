@@ -198,7 +198,7 @@
 "VXv-J6-5Gh.text" = "Bank Details";
 
 /* Class = "UILabel"; text = "Post"; ObjectID = "VbX-Ed-AA6"; */
-"VbX-Ed-AA6.text" = "Post";
+"VbX-Ed-AA6.text" = "Continue to Promote";
 
 /* Class = "UILabel"; text = "Lorem"; ObjectID = "Via-7d-VX9"; */
 "Via-7d-VX9.text" = "Lorem";
@@ -360,7 +360,7 @@
 "vIo-fm-ijn.text" = "Apply";
 
 /* Class = "UILabel"; text = "Add Story"; ObjectID = "vqo-M4-Uvx"; */
-"vqo-M4-Uvx.text" = "Add Story";
+"vqo-M4-Uvx.text" = "Promote Story";
 
 /* Class = "UILabel"; text = "Back"; ObjectID = "vzA-xf-0Ta"; */
 "vzA-xf-0Ta.text" = "Back";
