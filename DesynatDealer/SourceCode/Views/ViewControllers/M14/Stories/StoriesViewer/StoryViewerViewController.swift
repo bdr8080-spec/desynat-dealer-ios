@@ -39,6 +39,8 @@ class StoryViewerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
+        topSliderCollectionView.semanticContentAttribute = .forceLeftToRight
+        storiesCollectionView.semanticContentAttribute = .forceLeftToRight
         setupCollectionViews()
         switch comingFor {
         case .forAdminStory:

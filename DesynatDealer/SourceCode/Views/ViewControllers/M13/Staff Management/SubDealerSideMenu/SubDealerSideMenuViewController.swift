@@ -219,7 +219,7 @@ extension SubDealerSideMenuViewController: UITableViewDelegate, UITableViewDataS
         case 21:
             let vc = StoryManagementListViewController.instantiate(fromAppStoryboard: .BannerManagement)
             vc.hasActionPermission = hasPermission
-            vc.countryId = viewModel.userProfile?.storeInfo?.countryInfo?.id ?? 1
+            vc.countryId = Int(viewModel.userProfile?.storeInfo?.country ?? "1") ?? 1
 //            vc.countryId = viewModel.userProfile?.countryDetails?.id ?? 1
             self.navigationController?.pushViewController(vc, animated: true)
         default:

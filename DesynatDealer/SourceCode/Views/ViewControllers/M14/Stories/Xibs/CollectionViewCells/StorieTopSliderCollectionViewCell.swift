@@ -18,6 +18,7 @@ class StorieTopSliderCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setupUI()
+        progressBackgroundView.semanticContentAttribute = .forceLeftToRight
     }
     
     private func setupUI() {

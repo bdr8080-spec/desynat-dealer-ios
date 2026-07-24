@@ -56,7 +56,7 @@ struct StaffDetails: Codable {
     var sellerCategory: SellerCategory?
     var roleAction: [RoleAction]?
     var status:String?
-    var storeInfo: StoreInfo?
+    var storeInfo: SellerStoreInfo?
     var countryDetails: CountryInfo?
     
     enum CodingKeys: String, CodingKey {
@@ -92,8 +92,49 @@ struct StaffDetails: Codable {
         case roleAction = "role__action"
         case unhashedPassword = "save_password"
         case countryDetails = "country_details"
-        case storeInfo = "store_info"
+        case storeInfo = "seller_store_info"
         case status
+    }
+}
+
+// MARK: - SellerStoreInfo
+struct SellerStoreInfo: Codable {
+    let id: Int?
+    let sellerID: Int?
+    let storeImage: String?
+    let storeName: String?
+    let country: String?
+    let storeAddress: String?
+    let addressLine1: String?
+    let addressLine2: String?
+    let storePhone: String?
+    let countryCode: String?
+    let storeMailID: String?
+    let storeAvailability: Int?
+    let bio: String?
+    let sellerStoreInfoLet: String?
+    let long: String?
+    let createdAt: String?
+    let updatedAt: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case sellerID = "seller_id"
+        case storeImage = "store_image"
+        case storeName = "store_name"
+        case country = "country"
+        case storeAddress = "store_address"
+        case addressLine1 = "address_line1"
+        case addressLine2 = "address_line2"
+        case storePhone = "store_phone"
+        case countryCode = "country_code"
+        case storeMailID = "store_mail_id"
+        case storeAvailability = "Store_Availability"
+        case bio = "bio"
+        case sellerStoreInfoLet = "let"
+        case long = "long"
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
     }
 }
 
