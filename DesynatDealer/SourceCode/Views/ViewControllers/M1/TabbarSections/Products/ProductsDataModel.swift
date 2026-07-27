@@ -183,8 +183,9 @@ struct Review: Codable {
   let productID: Int?
   let productRating, productReview: String?
   let productImage: [String]?
+//  let storeImage: [String]?
   let storeID: Int?
-  let storeRating, storeReview, storeImage, createdAt: String?
+  let storeRating, storeReview, createdAt: String?
   let updatedAt: String?
   let userDetails: UserDetails?
   
@@ -200,7 +201,7 @@ struct Review: Codable {
     case storeID = "store_id"
     case storeRating = "store_rating"
     case storeReview = "store_review"
-    case storeImage = "store_image"
+//    case storeImage = "store_image"
     case createdAt = "created_at"
     case updatedAt = "updated_at"
     case userDetails = "user_details"
