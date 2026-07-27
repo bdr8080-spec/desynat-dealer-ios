@@ -377,11 +377,12 @@ struct UserRatingReviewProvide: Codable {
     let productID: Int?
     let productRating: String?
     let productReview: String?
-    let productImage: String?
+    let productImage: [String]?
+    let storeImage: [String]?
     let storeID: Int?
     let storeRating: String?
     let storeReview: String?
-    let storeImage, createdAt, updatedAt: String?
+    let createdAt, updatedAt: String?
     
     enum CodingKeys: String, CodingKey {
         case id

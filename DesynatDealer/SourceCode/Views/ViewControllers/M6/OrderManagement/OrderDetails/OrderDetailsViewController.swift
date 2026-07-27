@@ -571,11 +571,11 @@ class OrderDetailsViewController: UIViewController {
         let userRatingDone = data.userRatingReviewProvide
         guard let ratingData = userRatingDone else { return }
         customerRatingDetailsView.isHidden = false
-        if let storeurl = URL(string: userRatingDone?.storeImage ?? "") {
+        if let storeurl = URL(string: userRatingDone?.storeImage?.first ?? "") {
             self.storeRatingattachmentImageView.sd_setImage(with: storeurl,placeholderImage: UIImage(named: ""))
         }
         
-        if let productUrl = URL(string: userRatingDone?.productImage ?? "") {
+        if let productUrl = URL(string: userRatingDone?.productImage?.first ?? "") {
             self.productAttackemntImageView.sd_setImage(with: productUrl,placeholderImage: UIImage(named: ""))
         }
         /// ✅ PRODUCT RATING CHECK
@@ -587,48 +587,38 @@ class OrderDetailsViewController: UIViewController {
             self.customerReviewDetailsLabel.text = productReview
             self.customerRatingView.rating = productRatingValue
         }
-        
         if !productReview.isEmpty {
             self.reviewStackView.isHidden = false
         } else {
             self.reviewStackView.isHidden = true
         }
-        
-        /// ✅ store RATING CHECK
         let storeReview = ratingData.storeReview ?? ""
         let StoreRatingValue = Double(ratingData.storeRating ?? "") ?? 0
-        
         if !storeReview.isEmpty || StoreRatingValue > 0 {
             self.storeReviewsStackView.isHidden = false
             self.storeReviewDescriptonLabel.text = storeReview
             self.storeRatingCosmisView.rating = StoreRatingValue
         }
-        
         if !storeReview.isEmpty {
             self.storeReviewsStackView.isHidden = false
         } else {
             self.storeReviewsStackView.isHidden = true
         }
-        
-        if let productImage = userRatingDone?.productImage,
+        if let productImage = userRatingDone?.productImage?.first,
            !productImage.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
            productImage.lowercased() != "null" {
             productattachmentView.isHidden = false
         } else {
             productattachmentView.isHidden = true
         }
-        
-        if let storeImage = userRatingDone?.storeImage,
+        if let storeImage = userRatingDone?.storeImage?.first,
            !storeImage.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
            storeImage.lowercased() != "null" {
             storeAttachmentView.isHidden = false
         } else {
             storeAttachmentView.isHidden = true
         }
-        
     }
-    
-    
 }
 
 extension OrderDetailsViewController: UITableViewDelegate, UITableViewDataSource {
