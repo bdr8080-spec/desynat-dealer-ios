@@ -16,7 +16,7 @@ class SelectLanguageViewController: UIViewController {
     @IBOutlet weak var lblDesclaimer: UILabel!
     
     var comingFirstTime: Bool = true
-    var selectedLanguage: Languages = .en
+    var selectedLanguage: Languages = .ar
     
     override func viewDidLoad() {
         super.viewDidLoad()
