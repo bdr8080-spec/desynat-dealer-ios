@@ -3,8 +3,8 @@ import Foundation
 let kisOnBoardingChecked = "isOnBoardingChecked"
 
 enum BaseURL {
-    static let development  =   "https://desynat.com.kw/"//"http://157.241.119.72"
-    static let release      = "https://desynat.com.kw/"//"http://157.241.119.72"
+    static let development  =   "https://desynat.com.kw"//"http://157.241.119.72"
+    static let release      = "https://desynat.com.kw"//"http://157.241.119.72"
     
     static func value() -> String {
         switch BuildConfiguration.shared.environment {
