@@ -23,8 +23,8 @@ class PaymentFilterViewController: UIViewController {
     
     let datePicker = UIDatePicker()
     private var activeTextField: UITextField?
-    var selectedFilter = PaymentManagementFilterModel()
-    var onApplyFilter: ((PaymentManagementFilterModel) -> Void)?
+    var selectedFilter = PayoutFilterModel()
+    var onApplyFilter: ((PayoutFilterModel) -> Void)?
     var onClearFilter: (() -> Void)?
     
     private var filtersOptions = ["In Wallet", "Online", "COD"]
@@ -54,15 +54,15 @@ class PaymentFilterViewController: UIViewController {
     }
     
     @IBAction func applyDidTapped(_ sender: Any) {
-        var filter = PaymentManagementFilterModel()
+        var filter = PayoutFilterModel()
         
         filter.fromDate = fromTextField.text?.isEmpty == false ? fromTextField.text : nil
         filter.toDate   = toTextField.text?.isEmpty == false ? toTextField.text : nil
         
         if selectedIndex >= 0 && selectedIndex < statusMapping.count {
-            filter.refundStatus = statusMapping[selectedIndex]
+            filter.statusId = statusMapping[selectedIndex].rawValue
         } else {
-            filter.refundStatus = nil
+            filter.statusId = nil
         }
         
         onApplyFilter?(filter)
@@ -79,13 +79,16 @@ class PaymentFilterViewController: UIViewController {
         // Preselect date fields
         fromTextField.text = selectedFilter.fromDate
         toTextField.text = selectedFilter.toDate
-        if let status = selectedFilter.refundStatus,
-           let index = statusMapping.firstIndex(of: status) {
-            selectedIndex = index
+
+        // Preselect status
+        if let statusId = selectedFilter.statusId {
+            selectedIndex = statusMapping.firstIndex {
+                $0.rawValue == statusId
+            } ?? -1
         } else {
             selectedIndex = -1
         }
-        
+
         filtersTableView.reloadData()
     }
     

@@ -8,7 +8,7 @@
 import UIKit
 
 class PaymentsViewController: UIViewController {
-
+    
     // MARK: - IBOutlet's
     @IBOutlet weak var allTransactionButton: CustomButton!
     @IBOutlet weak var allTrasnactionLabel: UILabel!
@@ -35,7 +35,7 @@ class PaymentsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         searchTF.delegate = self
-        viewModel.getWalletHistory()
+        viewModel.getAllTransactionList()
         backButton.isHidden = comingFromTabbar
     }
     
@@ -50,8 +50,8 @@ class PaymentsViewController: UIViewController {
         allTrasnactionLabel.textColor = UIColor.white
         selectedPayments = .allTrasanctions
         paymentHistoryTableview.reloadData()
-//        myPlanTableView.isHidden = true
-//        noDataFoundLabel.isHidden = true
+        noDataFoundLabel.isHidden = true
+        viewModel.getAllTransactionList()
     }
     
     @IBAction func myPayoutDidTapped(_ sender: Any) {
@@ -61,50 +61,75 @@ class PaymentsViewController: UIViewController {
         myPayoutLabel.textColor = UIColor.white
         selectedPayments = .myPayouts
         paymentHistoryTableview.reloadData()
-//        myPlanTableView.isHidden = false
-//        noDataFoundLabel.isHidden = false
-//        viewModel.resetAndFetchMyPlans()
+        noDataFoundLabel.isHidden = false
+        viewModel.getAllMyPayoutList()
     }
     
     @IBAction func filterDidTapped(_ sender: Any) {
         let vc = PaymentFilterViewController.instantiate(fromAppStoryboard: .Home)
-//        vc.selectedFilter = viewModel.appliedFilter
-//        vc.onApplyFilter = { [weak self] filter in
-//            guard let self = self else { return }
-//            self.viewModel.appliedFilter = filter
-//            self.viewModel.currentPage = 1
-//            self.viewModel.hasMoreData = true
-//            self.viewModel.getAllRefundManagementRequest()
-//        }
-//        vc.onClearFilter = { [weak self] in
-//            guard let self = self else { return }
-//            self.viewModel.appliedFilter = RefundManagementFilterModel()
-//            self.viewModel.currentPage = 1
-//            self.viewModel.hasMoreData = true
-//            self.viewModel.getAllRefundManagementRequest()
-//        }
+        vc.selectedFilter = viewModel.appliedFilter
+        vc.onApplyFilter = { [weak self] filter in
+            guard let self = self else { return }
+            self.viewModel.appliedFilter = filter
+            self.viewModel.currentPage = 1
+            self.viewModel.hasMoreData = true
+            if selectedPayments == .allTrasanctions {
+                self.viewModel.getAllTransactionList()
+            } else {
+                self.viewModel.getAllMyPayoutList()
+            }
+        }
+        vc.onClearFilter = { [weak self] in
+            guard let self = self else { return }
+            self.viewModel.appliedFilter = PayoutFilterModel()
+            self.viewModel.currentPage = 1
+            self.viewModel.hasMoreData = true
+            if selectedPayments == .allTrasanctions {
+                self.viewModel.getAllTransactionList()
+            } else {
+                self.viewModel.getAllMyPayoutList()
+            }
+        }
         navigationController?.present(vc, animated: false)
     }
     
     @IBAction func exportTapped(_ sender: Any) {
-        var csv = "Name,Email,Phone,Country,Joined On,Wallet Balance,Status\n"
-//                for user in viewModel.usersListData {
-//                    let name = user.fullName ?? ""
-//                    let email = user.email ?? ""
-//                    let phone = "\(user.countryCode ?? "")-\(user.mobile ?? "")"
-//                    let country = user.countryInfo?.name ?? ""
-//                    let joined = user.createdAt ?? ""
-//                    let wallet = user.walletInfo?.amount ?? "0"
-//                    let status = user.status == "1" ? "Active" : "Blocked"
-//                    let row = "\(name),\(email),\(phone),\(country),\(joined),\(wallet),\(status)\n"
-//                    csv.append(row)
-//                }
-                CSVExporter.exportCSV(fileName: "User Management", csvString: csv, vc: self)
-         
+        if selectedPayments == .allTrasanctions {
+            var csv = "Transaction ID, Date & Time, Order Id, Total Amount, Total Commission, Payment Mode\n"
+            for data in viewModel.transactionListData {
+                let transactionID = data.transactionID ?? ""
+                let transactionDate = data.transactionDate ?? ""
+//                let customerName = data.customerName ?? ""
+                let orderID = data.orderID ?? 0
+                let amount = data.amount ?? ""
+                let totalCommission = data.totalCommission ?? "0"
+                let transactionLabel = data.transactionLabel ?? "Card"
+                let row = "\(transactionID),\(transactionDate),\(orderID),\(amount),\(totalCommission),\(transactionLabel)\n"
+                csv.append(row)
+            }
+            CSVExporter.exportCSV(fileName: "All Transactions", csvString: csv, vc: self)
+        } else {
+            var csv = "Transaction ID, Date & Time, From Date, To Date, Total Commission, Amount\n"
+            for data in viewModel.myPayoutListData {
+                let transactionID = data.transactionID ?? ""
+                let transactionDate = data.payoutDate ?? ""
+                let fromDate = data.fromDate ?? ""
+                let toDate = data.toDate ?? ""
+                let amount = data.amount ?? "0"
+                let totalCommission = data.totalCommission ?? ""
+                let row = "\(transactionID),\(transactionDate),\(fromDate),\(toDate),\(amount),\(totalCommission)\n"
+                csv.append(row)
+            }
+            CSVExporter.exportCSV(fileName: "My Payouts", csvString: csv, vc: self)
+        }
     }
     
     @IBAction func refreshDidTapped(_ sender: Any) {
-        viewModel.getWalletHistory()
+        if selectedPayments == .allTrasanctions {
+            viewModel.getAllTransactionList()
+        } else {
+            viewModel.getAllMyPayoutList()
+        }
     }
 }
 
@@ -112,21 +137,24 @@ class PaymentsViewController: UIViewController {
 extension PaymentsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5//viewModel.paymentListData?.orders?.data?.count ?? 0
+        if selectedPayments == .allTrasanctions {
+            return viewModel.transactionListData.count
+        } else {
+            return viewModel.myPayoutListData.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch selectedPayments {
         case .allTrasanctions:
             let cell = tableView.dequeueReusableCell(withIdentifier: "PaymentsHistoryTableViewCell", for: indexPath) as! PaymentsHistoryTableViewCell
-//            let data = viewModel.paymentListData?.orders?.data?[indexPath.row]
-            cell.configData()
+            let data = viewModel.transactionListData[indexPath.row]
+            cell.configAllTransactionData(data: data)
             return cell
         case .myPayouts:
             let cell = tableView.dequeueReusableCell(withIdentifier: "MyPayoutsTableViewCell", for: indexPath) as! MyPayoutsTableViewCell
-//            let data = viewModel.paymentListData?.orders?.data?[indexPath.row]
-//            cell.configData(data: data)
-            cell.configData()
+            let data = viewModel.myPayoutListData[indexPath.row]
+            cell.configMyPayoutData(data: data)
             return cell
         }
         
@@ -142,7 +170,11 @@ extension PaymentsViewController: UITextFieldDelegate {
         let workItem = DispatchWorkItem { [weak self] in
             guard let self = self else { return }
             self.viewModel.searchText = currentText
-            viewModel.getWalletHistory()
+            if selectedPayments == .allTrasanctions {
+                viewModel.getAllTransactionList()
+            } else {
+                viewModel.getAllMyPayoutList()
+            }
         }
         viewModel.searchWorkItem = workItem
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: workItem)

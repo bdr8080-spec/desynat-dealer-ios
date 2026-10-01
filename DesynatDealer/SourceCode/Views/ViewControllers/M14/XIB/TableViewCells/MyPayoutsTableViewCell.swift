@@ -24,47 +24,27 @@ class MyPayoutsTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func configData() {
-        transactionIdLabel.text = "#923"//"#\(data?.id ?? 0)"
-        payoutReceivedLabel.text = formatDate("2024-08-21T07:30:00.000000Z")
-//        myEarningLabel.text = CommonUtils.formatPriceStringInput(data?.affiliateCommission)
-//        purchasedLabel.text = data?.userDetails?.fullName
-//        productNameLabel.text = data?.productDetails?.productNameEn
-//        categoryNameLabel.text = data?.productDetails?.category?.name
-//        quantityLabel.text = "\(data?.quantity ?? 0)"
-//        totalAmountLabel.text = CommonUtils.formatPriceStringInput(data?.amount)
-//        purchasedOnLabel.text = formatDate(data?.createdAt ?? "")
-//        configureStatus(with: data)
+    func configMyPayoutData(data: MyPayoutDataList?) {
+        transactionIdLabel.text = "#\(data?.transactionID ?? "")"
+        payoutReceivedLabel.text = formatDate(data?.payoutDate ?? "")
+        totalAmountReceivedLabel.text = CommonUtils.formatPriceStringInput(data?.amount)
+        totalCommissionLabel.text = CommonUtils.formatPriceStringInput(data?.totalCommission)
     }
     
-    func formatDate(_ isoDate: String) -> String {
-        
+    func formatDate(_ dateString: String) -> String {
         let inputFormatter = DateFormatter()
-        inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'"
-        inputFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+        inputFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         inputFormatter.locale = Locale(identifier: "en_US_POSIX")
-        
-        guard let date = inputFormatter.date(from: isoDate) else {
-            return ""
-        }
-        
+
         let outputFormatter = DateFormatter()
-        outputFormatter.timeZone = TimeZone.current
-        
-        // ✅ Localize month + AM/PM + digits
-        if AppLanguageManager.shared.currentLanguage == .ar {
-            outputFormatter.locale = Locale(identifier: "ar")
-        } else {
-            outputFormatter.locale = Locale(identifier: "en_US_POSIX")
+        outputFormatter.dateFormat = "dd/MM/yyyy 'at' hh:mm a"
+        outputFormatter.locale = Locale(identifier: "en_US_POSIX")
+
+        guard let date = inputFormatter.date(from: dateString) else {
+            return dateString
         }
-        
-        outputFormatter.dateFormat = "dd MMM yyyy 'at' hh:mm a"
-        
-        let localizedAt = "at".localiz()
-        
-        return outputFormatter
-            .string(from: date)
-            .replacingOccurrences(of: "at", with: localizedAt)
+
+        return outputFormatter.string(from: date)
     }
     
 }

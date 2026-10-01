@@ -3310,7 +3310,7 @@ the event</string>
                         <outlet property="backButton" destination="423-Lf-V3W" id="rS5-g8-hec"/>
                         <outlet property="myPayoutButton" destination="o7e-5H-wiY" id="Smy-5h-hmr"/>
                         <outlet property="myPayoutLabel" destination="zp7-z0-Fa9" id="0TP-M3-Qi3"/>
-                        <outlet property="noDataFoundLabel" destination="01K-q4-hNz" id="xwB-JL-HCI"/>
+                        <outlet property="noDataFoundLabel" destination="01K-q4-hNz" id="FaV-sm-NvQ"/>
                         <outlet property="paymentHistoryTableview" destination="c73-j2-tsg" id="W7N-jN-H2V"/>
                         <outlet property="searchTF" destination="nYw-Tf-H7i" id="Pgv-iQ-nQ9"/>
                         <outlet property="totalRevenuwAmountLabel" destination="ERM-08-OeS" id="2t9-Pi-8DI"/>

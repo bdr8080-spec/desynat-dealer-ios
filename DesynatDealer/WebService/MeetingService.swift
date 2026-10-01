@@ -57,5 +57,37 @@ extension WebService{
             }
         }
     }
+    
+    func getAllTransactionsServices(param: [String: Any], completion:@escaping (_ user: AllTransactionPayoutModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.getAllTransactions), requestMethod: .get, requestParams: param, requestModel: AllTransactionPayoutModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func getAllMyPayoutsServices(param: [String: Any], completion:@escaping (_ user: MyPayoutDataModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.myPayoutList), requestMethod: .get, requestParams: param, requestModel: MyPayoutDataModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
 }
 

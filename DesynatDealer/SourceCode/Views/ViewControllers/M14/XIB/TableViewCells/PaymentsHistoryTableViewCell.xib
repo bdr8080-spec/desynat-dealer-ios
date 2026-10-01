@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ERw-4o-sa0" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
-                        <rect key="frame" x="24" y="0.0" width="333" height="198.66666666666666"/>
+                        <rect key="frame" x="24" y="0.0" width="333" height="175.66666666666666"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dgq-qX-waI" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="333" height="63.666666666666664"/>
@@ -95,10 +95,10 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="qw2-vx-TCW">
-                                <rect key="frame" x="15" y="73.666666666666686" width="303" height="110"/>
+                                <rect key="frame" x="15" y="73.666666666666671" width="303" height="87.000000000000014"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="VQh-PA-V7U">
-                                        <rect key="frame" x="0.0" y="0.0" width="303" height="18"/>
+                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="VQh-PA-V7U">
+                                        <rect key="frame" x="0.0" y="-18.000000000000007" width="303" height="18"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Customer Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BH1-1L-1rd" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="144" height="18"/>
@@ -124,7 +124,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="B4v-O5-oEM">
-                                        <rect key="frame" x="0.0" y="23" width="303" height="18"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="303" height="18"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order Id" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MIT-pV-kf2" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="144" height="18"/>
@@ -150,7 +150,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="yHg-mt-JDU">
-                                        <rect key="frame" x="0.0" y="46" width="303" height="18"/>
+                                        <rect key="frame" x="0.0" y="23" width="303" height="18"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Amount" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PWK-cf-m4r" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="144" height="18"/>
@@ -176,7 +176,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="v1Q-wf-a5x">
-                                        <rect key="frame" x="0.0" y="68.999999999999986" width="303" height="18"/>
+                                        <rect key="frame" x="0.0" y="46" width="303" height="18"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total commission" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7TH-gu-Hdo" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="144" height="18"/>
@@ -202,7 +202,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="tLk-eu-ZBE">
-                                        <rect key="frame" x="0.0" y="91.999999999999986" width="303" height="18"/>
+                                        <rect key="frame" x="0.0" y="68.999999999999986" width="303" height="18"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payment Mode" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ule-UY-umw" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="144" height="18"/>
