@@ -90,9 +90,9 @@ struct TransactionsPayoutList: Codable {
 struct MyPayoutDataModel: Codable {
     let currencyCode: String?
     let currencySymbol: String?
-    let totalRevenue: String?
-    let totalCommission: String?
     let totalEarning: String?
+    let totalCommission: String?
+//    let totalEarning: String?
     let totalPaid: String?
     let pendingAmount: String?
     let lastPayout: String?
@@ -102,9 +102,9 @@ struct MyPayoutDataModel: Codable {
     enum CodingKeys: String, CodingKey {
         case currencyCode = "currency_code"
         case currencySymbol = "currency_symbol"
-        case totalRevenue = "total_revenue"
-        case totalCommission = "total_commission"
         case totalEarning = "total_earning"
+        case totalCommission = "total_commission"
+//        case totalEarning = "total_earning"
         case totalPaid = "total_paid"
         case pendingAmount = "pending_amount"
         case lastPayout = "last_payout"
