@@ -9,6 +9,7 @@ import UIKit
 
 class PaymentsHistoryTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var totalCommissionStackView: UIStackView!
     @IBOutlet weak var transactionIdLabel: CustomLabelFont!
     @IBOutlet weak var dateAndTimeLabel: CustomLabelFont!
     @IBOutlet weak var customerNameLabel: CustomLabelFont!
@@ -33,6 +34,13 @@ class PaymentsHistoryTableViewCell: UITableViewCell {
         orderIdLabel.text = "#\(data?.orderID ?? 0)"
         totalAmountLabel.text = CommonUtils.formatPriceStringInput(data?.amount)
         totalComissionLabel.text = CommonUtils.formatPriceStringInput(data?.totalCommission)
+        if let totalCommission = data?.totalCommission,
+           let commissionValue = Double(totalCommission),
+           commissionValue > 0 {
+            totalCommissionStackView.isHidden = false
+        } else {
+            totalCommissionStackView.isHidden = true
+        }
     }
     
     func formatDate(_ dateString: String) -> String {

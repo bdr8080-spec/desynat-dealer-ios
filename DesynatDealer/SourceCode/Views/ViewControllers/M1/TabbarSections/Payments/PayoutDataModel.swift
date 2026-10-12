@@ -80,7 +80,7 @@ struct TransactionsPayoutList: Codable {
         case amount = "amount"
         case transactionDate = "transaction_date"
         case customerName = "customer_name"
-        case totalCommission = "total_commission"
+        case totalCommission = "commission"
     }
 }
 
