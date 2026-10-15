@@ -9,6 +9,7 @@ import UIKit
 
 class MyPayoutsTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var totalCommissionStackView: UIStackView!
     @IBOutlet weak var fromLabel: CustomLabelFont!
     @IBOutlet weak var toLabel: CustomLabelFont!
     @IBOutlet weak var transactionIdLabel: CustomLabelFont!
@@ -32,7 +33,13 @@ class MyPayoutsTableViewCell: UITableViewCell {
         totalAmountReceivedLabel.text = CommonUtils.formatPriceStringInput(data?.amount)
         totalCommissionLabel.text = CommonUtils.formatPriceStringInput(data?.totalCommission)
         
-        
+        if let totalCommission = data?.totalCommission,
+           let commissionValue = Double(totalCommission),
+           commissionValue > 0 {
+            totalCommissionStackView.isHidden = false
+        } else {
+            totalCommissionStackView.isHidden = true
+        }
     }
     
     func formatDateTime(_ dateString: String) -> String {

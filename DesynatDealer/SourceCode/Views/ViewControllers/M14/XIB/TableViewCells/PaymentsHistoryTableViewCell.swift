@@ -31,6 +31,17 @@ class PaymentsHistoryTableViewCell: UITableViewCell {
         transactionIdLabel.text = "#\(data?.transactionID ?? "")"
         dateAndTimeLabel.text = formatDate(data?.transactionDate ?? "")
         paymentModeLabel.text = data?.transactionLabel
+
+        let paymentMethod = data?.paymentMethod ?? "1"
+        switch paymentMethod {
+        case "1":
+            paymentModeLabel.text = "Online".localiz()
+        case "2":
+            paymentModeLabel.text = "Wallet".localiz()
+        default:
+            paymentModeLabel.text = "COD".localiz()
+        }
+        
         orderIdLabel.text = "#\(data?.orderID ?? 0)"
         totalAmountLabel.text = CommonUtils.formatPriceStringInput(data?.amount)
         totalComissionLabel.text = CommonUtils.formatPriceStringInput(data?.totalCommission)

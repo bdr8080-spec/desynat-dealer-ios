@@ -62,6 +62,7 @@ struct TransactionsPayoutList: Codable {
     let id: Int?
     let transactionType: Int?
     let transactionLabel: String?
+    let paymentMethod: String?
     let referenceID: String?
     let orderID: Int?
     let transactionID: String?
@@ -81,6 +82,7 @@ struct TransactionsPayoutList: Codable {
         case transactionDate = "transaction_date"
         case customerName = "customer_name"
         case totalCommission = "commission"
+        case paymentMethod = "payment_method"
     }
 }
 

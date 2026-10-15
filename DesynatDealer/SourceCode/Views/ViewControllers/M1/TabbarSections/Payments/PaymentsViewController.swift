@@ -19,528 +19,211 @@ class PaymentsViewController: UIViewController {
     @IBOutlet weak var searchTF: UITextField!
     @IBOutlet weak var totalRevenuwAmountLabel: CustomLabelFont!
     @IBOutlet weak var backButton: RTLButton!
-
     @IBOutlet weak var paymentHistoryTableview: UITableView! {
-
         didSet {
-
-            paymentHistoryTableview.registerCellFromNib(
-                cellID: "PaymentsHistoryTableViewCell"
-            )
-
-            paymentHistoryTableview.registerCellFromNib(
-                cellID: "MyPayoutsTableViewCell"
-            )
+            paymentHistoryTableview.registerCellFromNib(cellID: "PaymentsHistoryTableViewCell")
+            paymentHistoryTableview.registerCellFromNib(cellID: "MyPayoutsTableViewCell")
         }
     }
 
     // MARK: - Properties
 
-    private lazy var viewModel = PaymentsViewModel(
-        hostVC: self
-    )
-
+    private lazy var viewModel = PaymentsViewModel(hostVC: self)
     var selectedPayments: SelectedTab = .allTrasanctions
-
     var hasActionPermission: Bool = true
-
     var comingFromTabbar: Bool = true
+
+    private var isTransactionsTab: Bool { selectedPayments == .allTrasanctions }
 
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         searchTF.delegate = self
-
+        searchTF.returnKeyType = .search
+        searchTF.addTarget(self, action: #selector(searchTextChanged), for: .editingChanged)
+        paymentHistoryTableview.keyboardDismissMode = .onDrag
         backButton.isHidden = comingFromTabbar
-
         noDataFoundLabel.isHidden = true
-
-        setupInitialTab()
-
+        updateTabUI()
         viewModel.getAllTransactionList(reset: true)
     }
 
-    // MARK: - Initial Tab
+    // MARK: - Tabs
 
-    private func setupInitialTab() {
-
-        allTransactionButton.setImage(
-            UIImage(named: "btnGradient"),
-            for: .normal
-        )
-
-        allTrasnactionLabel.textColor = .white
-
-        myPayoutButton.setImage(
-            UIImage(named: ""),
-            for: .normal
-        )
-
-        myPayoutLabel.textColor = .black
+    private func updateTabUI() {
+        let t = isTransactionsTab
+        allTransactionButton.setImage(t ? UIImage(named: "btnGradient") : nil, for: .normal)
+        allTrasnactionLabel.textColor = t ? .white : .black
+        myPayoutButton.setImage(t ? nil : UIImage(named: "btnGradient"), for: .normal)
+        myPayoutLabel.textColor = t ? .black : .white
+        totalRevenuwAmountLabel.text = t ? viewModel.totalTransactionEarning : viewModel.totalMyPayoutEarning
     }
 
-    // MARK: - Back
+    private func switchTab(to tab: SelectedTab) {
+        viewModel.searchWorkItem?.cancel()
+        selectedPayments = tab
+        // each tab keeps its own search text, so the visible list always matches the field
+        searchTF.text = isTransactionsTab ? viewModel.transactionSearchText : viewModel.payoutSearchText
+        updateTabUI()
+        paymentHistoryTableview.reloadData()
+        let isEmpty = isTransactionsTab ? viewModel.transactionListData.isEmpty : viewModel.myPayoutListData.isEmpty
+        noDataFoundLabel.isHidden = !isEmpty
+        if isEmpty { reloadCurrentTab() }
+    }
+
+    private func reloadCurrentTab() {
+        if isTransactionsTab {
+            viewModel.getAllTransactionList(reset: true)
+        } else {
+            viewModel.getAllMyPayoutList(reset: true)
+        }
+    }
+
+    // MARK: - Actions
 
     @IBAction func backDidTapped(_ sender: Any) {
-
-        navigationController?.popViewController(
-            animated: true
-        )
+        viewModel.searchWorkItem?.cancel()
+        navigationController?.popViewController(animated: true)
     }
 
-    // MARK: - All Transactions
-
-    @IBAction func allTransactionButtonDidTapped(
-        _ sender: Any
-    ) {
-
-        // Cancel previous search
-        viewModel.searchWorkItem?.cancel()
-
-        selectedPayments = .allTrasanctions
-
-        // Clear search UI
-        searchTF.text = ""
-
-        // Clear only transaction search
-        viewModel.transactionSearchText = ""
-
-        totalRevenuwAmountLabel.text = viewModel.totalTransactionEarning
-
-        // Button UI
-
-        myPayoutButton.setImage(
-            UIImage(named: ""),
-            for: .normal
-        )
-
-        myPayoutLabel.textColor = .black
-
-        allTransactionButton.setImage(
-            UIImage(named: "btnGradient"),
-            for: .normal
-        )
-
-        allTrasnactionLabel.textColor = .white
-
-        paymentHistoryTableview.reloadData()
-
-        // Show correct no-data state
-        noDataFoundLabel.isHidden =
-            !viewModel.transactionListData.isEmpty
-
-        // Load only if needed
-        if viewModel.transactionListData.isEmpty {
-
-            viewModel.getAllTransactionList(
-                reset: true
-            )
-        }
+    @IBAction func allTransactionButtonDidTapped(_ sender: Any) {
+        guard !isTransactionsTab else { return }
+        switchTab(to: .allTrasanctions)
     }
 
-    // MARK: - My Payouts
+    @IBAction func myPayoutDidTapped(_ sender: Any) {
+        guard isTransactionsTab else { return }
+        switchTab(to: .myPayouts)
+    }
 
-    @IBAction func myPayoutDidTapped(
-        _ sender: Any
-    ) {
+    // MARK: - Search
 
-        // Cancel previous search
+    @objc private func searchTextChanged() {
         viewModel.searchWorkItem?.cancel()
+        let text = (searchTF.text ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+        let isTransactions = isTransactionsTab
+        let current = isTransactions ? viewModel.transactionSearchText : viewModel.payoutSearchText
+        guard text != current else { return }   // nothing changed, no API call
 
-        selectedPayments = .myPayouts
-
-        // Clear search UI
-        searchTF.text = ""
-
-        // Clear only payout search
-        viewModel.payoutSearchText = ""
-
-        totalRevenuwAmountLabel.text = viewModel.totalMyPayoutEarning
-
-        // Button UI
-
-        allTransactionButton.setImage(
-            UIImage(named: ""),
-            for: .normal
-        )
-
-        allTrasnactionLabel.textColor = .black
-
-        myPayoutButton.setImage(
-            UIImage(named: "btnGradient"),
-            for: .normal
-        )
-
-        myPayoutLabel.textColor = .white
-
-        paymentHistoryTableview.reloadData()
-
-        // Show correct no-data state
-        noDataFoundLabel.isHidden =
-            !viewModel.myPayoutListData.isEmpty
-
-        // Load only if needed
-        if viewModel.myPayoutListData.isEmpty {
-
-            viewModel.getAllMyPayoutList(
-                reset: true
-            )
+        let workItem = DispatchWorkItem { [weak self] in
+            guard let self else { return }
+            if isTransactions {
+                self.viewModel.transactionSearchText = text
+                self.viewModel.getAllTransactionList(reset: true)
+            } else {
+                self.viewModel.payoutSearchText = text
+                self.viewModel.getAllMyPayoutList(reset: true)
+            }
         }
+        viewModel.searchWorkItem = workItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: workItem)
     }
 
     // MARK: - Filter
 
-    @IBAction func filterDidTapped(
-        _ sender: Any
-    ) {
+    @IBAction func filterDidTapped(_ sender: Any) {
+        let vc = PaymentFilterViewController.instantiate(fromAppStoryboard: .Home)
+        // give the filter of the CURRENT tab only
+        vc.selectedPayments = selectedPayments
+        vc.selectedFilter = isTransactionsTab ? viewModel.transactionFilter : viewModel.payoutFilter
+        vc.onApplyFilter = { [weak self] filter in self?.applyFilter(filter) }
+        vc.onClearFilter = { [weak self] in self?.applyFilter(PayoutFilterModel()) }
+        navigationController?.present(vc, animated: false)
+    }
 
-        let vc = PaymentFilterViewController.instantiate(
-            fromAppStoryboard: .Home
-        )
-
-        // Give filter of CURRENT tab only
-
-        if selectedPayments == .allTrasanctions {
-
-            vc.selectedFilter =
-                viewModel.transactionFilter
-
+    private func applyFilter(_ filter: PayoutFilterModel) {
+        viewModel.searchWorkItem?.cancel()
+        if isTransactionsTab {
+            viewModel.transactionFilter = filter
+            viewModel.getAllTransactionList(reset: true)
         } else {
-
-            vc.selectedFilter =
-                viewModel.payoutFilter
+            viewModel.payoutFilter = filter
+            viewModel.getAllMyPayoutList(reset: true)
         }
-
-        // Apply Filter
-
-        vc.onApplyFilter = { [weak self] filter in
-
-            guard let self = self else {
-                return
-            }
-
-            if self.selectedPayments == .allTrasanctions {
-
-                self.viewModel.transactionFilter = filter
-
-                self.viewModel.getAllTransactionList(
-                    reset: true
-                )
-
-            } else {
-
-                self.viewModel.payoutFilter = filter
-
-                self.viewModel.getAllMyPayoutList(
-                    reset: true
-                )
-            }
-        }
-
-        // Clear Filter
-
-        vc.onClearFilter = { [weak self] in
-
-            guard let self = self else {
-                return
-            }
-
-            if self.selectedPayments == .allTrasanctions {
-
-                self.viewModel.transactionFilter =
-                    PayoutFilterModel()
-
-                self.viewModel.getAllTransactionList(
-                    reset: true
-                )
-
-            } else {
-
-                self.viewModel.payoutFilter =
-                    PayoutFilterModel()
-
-                self.viewModel.getAllMyPayoutList(
-                    reset: true
-                )
-            }
-        }
-
-        navigationController?.present(
-            vc,
-            animated: false
-        )
     }
 
     // MARK: - Export
 
-    @IBAction func exportTapped(
-        _ sender: Any
-    ) {
-
-        if selectedPayments == .allTrasanctions {
-
-            var csv =
-                "Transaction ID, Date & Time, Order Id, Total Amount, Total Commission, Payment Mode\n"
-
+    @IBAction func exportTapped(_ sender: Any) {
+        if isTransactionsTab {
+            var csv = "Transaction ID, Date & Time, Order Id, Total Amount, Total Commission, Payment Mode\n"
             for data in viewModel.transactionListData {
-
-                let transactionID =
-                    data.transactionID ?? ""
-
-                let transactionDate =
-                    data.transactionDate ?? ""
-
-                let orderID =
-                    data.orderID ?? 0
-
-                let amount =
-                    data.amount ?? ""
-
-                let totalCommission =
-                    data.totalCommission ?? "0"
-
-                let transactionLabel =
-                    data.transactionLabel ?? "Card"
-
-                let row =
-                    "\(transactionID),\(transactionDate),\(orderID),\(amount),\(totalCommission),\(transactionLabel)\n"
-
-                csv.append(row)
+                csv.append("\(data.transactionID ?? ""),\(data.transactionDate ?? ""),\(data.orderID ?? 0),\(data.amount ?? ""),\(data.totalCommission ?? "0"),\(data.transactionLabel ?? "Card")\n")
             }
-
-            CSVExporter.exportCSV(
-                fileName: "All Transactions",
-                csvString: csv,
-                vc: self
-            )
-
+            CSVExporter.exportCSV(fileName: "All Transactions", csvString: csv, vc: self)
         } else {
-
-            var csv =
-                "Transaction ID, Date & Time, From Date, To Date, Total Commission, Amount\n"
-
+            var csv = "Transaction ID, Date & Time, From Date, To Date, Total Commission, Amount\n"
             for data in viewModel.myPayoutListData {
-
-                let transactionID =
-                    data.transactionID ?? ""
-
-                let transactionDate =
-                    data.payoutDate ?? ""
-
-                let fromDate =
-                    data.fromDate ?? ""
-
-                let toDate =
-                    data.toDate ?? ""
-
-                let amount =
-                    data.amount ?? "0"
-
-                let totalCommission =
-                    data.totalCommission ?? ""
-
-                let row =
-                    "\(transactionID),\(transactionDate),\(fromDate),\(toDate),\(totalCommission),\(amount)\n"
-
-                csv.append(row)
+                csv.append("\(data.transactionID ?? ""),\(data.payoutDate ?? ""),\(data.fromDate ?? ""),\(data.toDate ?? ""),\(data.totalCommission ?? ""),\(data.amount ?? "0")\n")
             }
-
-            CSVExporter.exportCSV(
-                fileName: "My Payouts",
-                csvString: csv,
-                vc: self
-            )
+            CSVExporter.exportCSV(fileName: "My Payouts", csvString: csv, vc: self)
         }
     }
 
     // MARK: - Refresh
 
-    @IBAction func refreshDidTapped(
-        _ sender: Any
-    ) {
-
-        // Cancel search
+    @IBAction func refreshDidTapped(_ sender: Any) {
         viewModel.searchWorkItem?.cancel()
-
         searchTF.text = ""
-
-        if selectedPayments == .allTrasanctions {
-
+        if isTransactionsTab {
             viewModel.transactionSearchText = ""
-
-            viewModel.getAllTransactionList(
-                reset: true
-            )
-
         } else {
-
             viewModel.payoutSearchText = ""
-
-            viewModel.getAllMyPayoutList(
-                reset: true
-            )
         }
+        reloadCurrentTab()
     }
 }
 
-extension PaymentsViewController:
-    UITableViewDataSource,
-    UITableViewDelegate {
+// MARK: - Table
 
-    func tableView(
-        _ tableView: UITableView,
-        numberOfRowsInSection section: Int
-    ) -> Int {
+extension PaymentsViewController: UITableViewDataSource, UITableViewDelegate {
 
-        if selectedPayments == .allTrasanctions {
-
-            return viewModel.transactionListData.count
-
-        } else {
-
-            return viewModel.myPayoutListData.count
-        }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        isTransactionsTab ? viewModel.transactionListData.count : viewModel.myPayoutListData.count
     }
 
-    func tableView(
-        _ tableView: UITableView,
-        cellForRowAt indexPath: IndexPath
-    ) -> UITableViewCell {
-
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch selectedPayments {
-
         case .allTrasanctions:
-
-            let cell =
-                tableView.dequeueReusableCell(
-                    withIdentifier: "PaymentsHistoryTableViewCell",
-                    for: indexPath
-                ) as! PaymentsHistoryTableViewCell
-
-            let data =
-                viewModel.transactionListData[indexPath.row]
-
-            cell.configAllTransactionData(
-                data: data
-            )
-
+            guard viewModel.transactionListData.indices.contains(indexPath.row),
+                  let cell = tableView.dequeueReusableCell(withIdentifier: "PaymentsHistoryTableViewCell", for: indexPath) as? PaymentsHistoryTableViewCell else {
+                return UITableViewCell()
+            }
+            cell.configAllTransactionData(data: viewModel.transactionListData[indexPath.row])
             return cell
 
         case .myPayouts:
-
-            let cell =
-                tableView.dequeueReusableCell(
-                    withIdentifier: "MyPayoutsTableViewCell",
-                    for: indexPath
-                ) as! MyPayoutsTableViewCell
-
-            let data =
-                viewModel.myPayoutListData[indexPath.row]
-
-            cell.configMyPayoutData(
-                data: data
-            )
-
+            guard viewModel.myPayoutListData.indices.contains(indexPath.row),
+                  let cell = tableView.dequeueReusableCell(withIdentifier: "MyPayoutsTableViewCell", for: indexPath) as? MyPayoutsTableViewCell else {
+                return UITableViewCell()
+            }
+            cell.configMyPayoutData(data: viewModel.myPayoutListData[indexPath.row])
             return cell
         }
     }
 
     // MARK: - Pagination
 
-    func tableView(
-        _ tableView: UITableView,
-        willDisplay cell: UITableViewCell,
-        forRowAt indexPath: IndexPath
-    ) {
-
-        if selectedPayments == .allTrasanctions {
-
-            let count =
-                viewModel.transactionListData.count
-
-            guard count > 0 else {
-                return
-            }
-
-            if indexPath.row == count - 1 {
-
-                viewModel.getAllTransactionList()
-            }
-
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let count = isTransactionsTab ? viewModel.transactionListData.count : viewModel.myPayoutListData.count
+        guard count > 0, indexPath.row >= count - 3 else { return }
+        if isTransactionsTab {
+            viewModel.getAllTransactionList()
         } else {
-
-            let count =
-                viewModel.myPayoutListData.count
-
-            guard count > 0 else {
-                return
-            }
-
-            if indexPath.row == count - 1 {
-
-                viewModel.getAllMyPayoutList()
-            }
+            viewModel.getAllMyPayoutList()
         }
     }
 }
 
+// MARK: - Text field
+
 extension PaymentsViewController: UITextFieldDelegate {
-
-    func textField(
-        _ textField: UITextField,
-        shouldChangeCharactersIn range: NSRange,
-        replacementString string: String
-    ) -> Bool {
-
-        let currentText =
-            (textField.text as NSString?)?
-            .replacingCharacters(
-                in: range,
-                with: string
-            ) ?? ""
-
-        // Cancel previous search request
-        viewModel.searchWorkItem?.cancel()
-
-        let workItem = DispatchWorkItem { [weak self] in
-
-            guard let self = self else {
-                return
-            }
-
-            if self.selectedPayments == .allTrasanctions {
-
-                self.viewModel.transactionSearchText =
-                    currentText
-
-                self.viewModel.getAllTransactionList(
-                    reset: true
-                )
-
-            } else {
-
-                self.viewModel.payoutSearchText =
-                    currentText
-
-                self.viewModel.getAllMyPayoutList(
-                    reset: true
-                )
-            }
-        }
-
-        viewModel.searchWorkItem = workItem
-
-        DispatchQueue.main.asyncAfter(
-            deadline: .now() + 0.5,
-            execute: workItem
-        )
-
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
         return true
     }
 }
-
 
 enum SelectedTab {
     case allTrasanctions
