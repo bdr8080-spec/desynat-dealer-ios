@@ -130,6 +130,36 @@
             endingLineNumber = "84"
             landmarkName = "request(withAPI:requestMethod:requestParams:encoding:requestModel:completion:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "89C4C2BD-62A9-4A3B-8EE6-EC282EBBA815 - c2f82f64a73a7b79"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Optional&lt;DesynatDealer.ErrorResponse&gt;) -&gt; () in closure #2 @Sendable (Alamofire.DataResponse&lt;DesynatDealer.BaseResponse&lt;&#x3c4;_0_0&gt;, Alamofire.AFError&gt;) -&gt; () in DesynatDealer.NetworkManager.request&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(withAPI: DesynatDealer.NetworkURL, requestMethod: Alamofire.HTTPMethod, requestParams: Swift.Optional&lt;Swift.Dictionary&lt;Swift.String, Any&gt;&gt;, encoding: Swift.Optional&lt;Alamofire.ParameterEncoding&gt;, requestModel: &#x3c4;_0_0.Type, completion: (Swift.Result&lt;DesynatDealer.BaseResponse&lt;&#x3c4;_0_0&gt;, DesynatDealer.NetworkError&gt;, Swift.Optional&lt;DesynatDealer.HTTPStatusCode&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "DesynatDealer.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shailendrasingh/Documents/Fluper%20Workspace/desynat-dealer-ios/DesynatDealer/Utilities/NetworkManager/NetworkManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85">
+               </Location>
+               <Location
+                  uuid = "89C4C2BD-62A9-4A3B-8EE6-EC282EBBA815 - 45224a274bd1452c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #2 (Swift.Optional&lt;DesynatDealer.ErrorResponse&gt;) -&gt; () in closure #2 @Sendable (Alamofire.DataResponse&lt;DesynatDealer.BaseResponse&lt;&#x3c4;_0_0&gt;, Alamofire.AFError&gt;) -&gt; () in DesynatDealer.NetworkManager.request&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(withAPI: DesynatDealer.NetworkURL, requestMethod: Alamofire.HTTPMethod, requestParams: Swift.Optional&lt;Swift.Dictionary&lt;Swift.String, Any&gt;&gt;, encoding: Swift.Optional&lt;Alamofire.ParameterEncoding&gt;, requestModel: &#x3c4;_0_0.Type, completion: (Swift.Result&lt;DesynatDealer.BaseResponse&lt;&#x3c4;_0_0&gt;, DesynatDealer.NetworkError&gt;, Swift.Optional&lt;DesynatDealer.HTTPStatusCode&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "DesynatDealer.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shailendrasingh/Documents/Fluper%20Workspace/desynat-dealer-ios/DesynatDealer/Utilities/NetworkManager/NetworkManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "86"
+                  endingLineNumber = "86">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

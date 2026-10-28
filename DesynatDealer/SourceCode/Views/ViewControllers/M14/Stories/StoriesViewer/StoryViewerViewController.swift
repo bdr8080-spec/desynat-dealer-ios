@@ -133,7 +133,7 @@ class StoryViewerViewController: UIViewController {
             .first else { return }
         cell.mainImageView.image = nil
         cell.mainImageView.layer.sublayers?.removeAll()
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         configureCell(cell, with: story) { [weak self] in
             guard let self = self else { return }
             self.resetSliderForBackwardNavigation()
@@ -285,7 +285,7 @@ class StoryViewerViewController: UIViewController {
                 DispatchQueue.main.async { completion() }
                 return
             }
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             DispatchQueue.main.async {
                 cell.mainImageView.image = image
                 completion()
@@ -313,7 +313,7 @@ class StoryViewerViewController: UIViewController {
             name: .AVPlayerItemDidPlayToEndTime,
             object: player?.currentItem
         )
-        CommonUtils.showHud(show: false)
+        Shimmer.shared.show(show: false)
         player?.play()
     }
     

@@ -15,14 +15,14 @@ class SupportChatViewController: UIViewController, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         setupWebView()
         
         if let savedUser: User = kSharedUserDefaults.retrieveModelFor(key: .user, model: User.self) {
             loadTidioHTML(user: savedUser)
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
         }
     }
     
